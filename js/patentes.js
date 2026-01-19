@@ -1,89 +1,139 @@
 /* =========================================================
-   SISTEMA DE PATENTES (RANKS ESTILO DOTA 2)
+   SISTEMA DE PATENTES (RANKS – ESTILO DOTA 2)
    ---------------------------------------------------------
-   - Cada nível do aluno corresponde a UMA imagem
-   - NÃO exibimos nome do rank, apenas a imagem
-   - Total: 41 níveis (0 a 40)
+   ✔ Cada nível do aluno corresponde a UMA imagem
+   ✔ Não exibimos nome do rank, apenas a imagem
+   ✔ Total: 41 níveis (0 a 40)
+   ✔ Compatível com Cloudflare Pages (Linux / case-sensitive)
    ========================================================= */
 
-// Lista ordenada de imagens por nível
-// A posição no array = nível do aluno
+
+/* =========================================================
+   LISTA DE IMAGENS DAS PATENTES
+   ---------------------------------------------------------
+   - A posição no array = nível do aluno
+   - O nome do arquivo DEVE bater exatamente com o GitHub
+   - Atenção a MAIÚSCULAS e minúsculas (case-sensitive)
+   ========================================================= */
+
 const ranks = [
-  "seasonalRank0-0.png", // nível 0
 
-  // Rank 1 (níveis 1 a 5)
-  "seasonalRank1-1.png",
-  "seasonalRank1-2.png",
-  "seasonalRank1-3.png",
-  "seasonalRank1-4.png",
-  "seasonalRank1-5.png",
+  /* =========================
+     NÍVEL 0 (INICIANTE)
+     ========================= */
+  "SeasonalRank0-0.png",
 
-  // Rank 2 (6 a 10)
-  "seasonalRank2-1.png",
-  "seasonalRank2-2.png",
-  "seasonalRank2-3.png",
-  "seasonalRank2-4.png",
-  "seasonalRank2-5.png",
 
-  // Rank 3 (11 a 15)
-  "seasonalRank3-1.png",
-  "seasonalRank3-2.png",
-  "seasonalRank3-3.png",
-  "seasonalRank3-4.png",
-  "seasonalRank3-5.png",
+  /* =========================
+     RANK 1 (níveis 1 a 5)
+     ========================= */
+  "SeasonalRank1-1.png", // nível 1
+  "SeasonalRank1-2.png", // nível 2
+  "SeasonalRank1-3.png", // nível 3
+  "SeasonalRank1-4.png", // nível 4
+  "SeasonalRank1-5.png", // nível 5
 
-  // Rank 4 (16 a 20)
-  "seasonalRank4-1.png",
-  "seasonalRank4-2.png",
-  "seasonalRank4-3.png",
-  "seasonalRank4-4.png",
-  "seasonalRank4-5.png",
 
-  // Rank 5 (21 a 25)
-  "seasonalRank5-1.png",
-  "seasonalRank5-2.png",
-  "seasonalRank5-3.png",
-  "seasonalRank5-4.png",
-  "seasonalRank5-5.png",
+  /* =========================
+     RANK 2 (níveis 6 a 10)
+     ========================= */
+  "SeasonalRank2-1.png", // nível 6
+  "SeasonalRank2-2.png", // nível 7
+  "SeasonalRank2-3.png", // nível 8
+  "SeasonalRank2-4.png", // nível 9
+  "SeasonalRank2-5.png", // nível 10
 
-  // Rank 6 (26 a 30)
-  "seasonalRank6-1.png",
-  "seasonalRank6-2.png",
-  "seasonalRank6-3.png",
-  "seasonalRank6-4.png",
-  "seasonalRank6-5.png",
 
-  // Rank 7 (31 a 35)
-  "seasonalRank7-1.png",
-  "seasonalRank7-2.png",
-  "seasonalRank7-3.png",
-  "seasonalRank7-4.png",
-  "seasonalRank7-5.png",
+  /* =========================
+     RANK 3 (níveis 11 a 15)
+     ========================= */
+  "SeasonalRank3-1.png", // nível 11
+  "SeasonalRank3-2.png", // nível 12
+  "SeasonalRank3-3.png", // nível 13
+  "SeasonalRank3-4.png", // nível 14
+  "SeasonalRank3-5.png", // nível 15
 
-  // TOP (36 a 40)
-  "seasonalRankTop0.png",
-  "seasonalRankTop1.png",
-  "seasonalRankTop2.png",
-  "seasonalRankTop3.png",
-  "seasonalRankTop4.png"
+
+  /* =========================
+     RANK 4 (níveis 16 a 20)
+     ========================= */
+  "SeasonalRank4-1.png", // nível 16
+  "SeasonalRank4-2.png", // nível 17
+  "SeasonalRank4-3.png", // nível 18
+  "SeasonalRank4-4.png", // nível 19
+  "SeasonalRank4-5.png", // nível 20
+
+
+  /* =========================
+     RANK 5 (níveis 21 a 25)
+     ========================= */
+  "SeasonalRank5-1.png", // nível 21
+  "SeasonalRank5-2.png", // nível 22
+  "SeasonalRank5-3.png", // nível 23
+  "SeasonalRank5-4.png", // nível 24
+  "SeasonalRank5-5.png", // nível 25
+
+
+  /* =========================
+     RANK 6 (níveis 26 a 30)
+     ========================= */
+  "SeasonalRank6-1.png", // nível 26
+  "SeasonalRank6-2.png", // nível 27
+  "SeasonalRank6-3.png", // nível 28
+  "SeasonalRank6-4.png", // nível 29
+  "SeasonalRank6-5.png", // nível 30
+
+
+  /* =========================
+     RANK 7 (níveis 31 a 35)
+     ========================= */
+  "SeasonalRank7-1.png", // nível 31
+  "SeasonalRank7-2.png", // nível 32
+  "SeasonalRank7-3.png", // nível 33
+  "SeasonalRank7-4.png", // nível 34
+  "SeasonalRank7-5.png", // nível 35
+
+
+  /* =========================
+     TOP RANK (níveis 36 a 40)
+     ========================= */
+  "SeasonalRankTop0.png", // nível 36
+  "SeasonalRankTop1.png", // nível 37
+  "SeasonalRankTop2.png", // nível 38
+  "SeasonalRankTop3.png", // nível 39
+  "SeasonalRankTop4.png"  // nível 40
 ];
+
 
 /* =========================================================
    FUNÇÃO PRINCIPAL
    ---------------------------------------------------------
    Recebe o nível do usuário e devolve:
-   - o caminho correto da imagem da patente
+   ✔ Caminho ABSOLUTO da imagem da patente
+   ✔ Sempre retorna um índice válido
+   ✔ Nunca quebra o sistema
    ========================================================= */
+
 export function obterPatentePorNivel(nivel) {
 
-  // Garante que o nível não seja negativo
+  /* -----------------------------------------
+     Garante que o nível não seja negativo
+     ----------------------------------------- */
   const nivelSeguro = Math.max(0, nivel);
 
-  // Se passar do último nível, fixa no último rank
+
+  /* -----------------------------------------
+     Impede ultrapassar o último rank
+     ----------------------------------------- */
   const indice = Math.min(nivelSeguro, ranks.length - 1);
 
+
+  /* -----------------------------------------
+     Retorno padronizado
+     - Caminho absoluto (começa com /)
+     - Compatível com Cloudflare Pages
+     ----------------------------------------- */
   return {
-    imagem: `assets/ranks/${ranks[indice]}`
+    imagem: `/assets/ranks/${ranks[indice]}`
   };
 }
-
