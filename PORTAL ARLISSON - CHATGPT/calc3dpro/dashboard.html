@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard • Calc3D Pro</title>
+
+<style>
+:root{
+  --azul:#2563eb;--escuro:#020617;--cinza:#64748b;--cinza-claro:#e5e7eb;
+  --bg:#f1f5f9;--card:#ffffff;--verde:#16a34a;--vermelho:#dc2626;--amarelo:#fde68a;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--escuro)}
+header{background:#fff;padding:18px 36px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--cinza-claro)}
+.brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:600;color:var(--azul)}
+.brand img{height:36px}
+header button{background:none;border:none;cursor:pointer;font-size:14px;color:var(--cinza)}
+.container{max-width:1200px;margin:40px auto;background:var(--card);padding:50px;border-radius:18px;box-shadow:0 25px 55px rgba(0,0,0,.08)}
+h2{text-align:center;color:var(--azul);margin-bottom:40px}
+label{font-weight:600;font-size:14px}
+input,select,textarea{
+  width:100%;padding:12px;border-radius:10px;border:1px solid var(--cinza-claro);
+  margin-top:6px;font-size:14px
+}
+textarea{resize:vertical}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.item-card{background:#f8fafc;border:1px solid var(--cinza-claro);border-radius:14px;padding:20px;margin-bottom:20px}
+.custos{margin-top:10px;font-size:14px;line-height:1.7;color:#374151}
+.item-acoes{margin-top:14px;display:flex;justify-content:space-between;align-items:center}
+.item-acoes strong{font-size:18px;color:var(--verde)}
+.item-acoes button{border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.btn-editar{background:#e5e7eb}
+.btn-remover{background:var(--vermelho);color:#fff}
+.botoes{display:flex;gap:18px;margin-top:30px}
+.botoes button{flex:1;padding:16px;border:none;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer}
+.btn-add{background:#e5e7eb}
+.btn-orcamento{background:var(--azul);color:#fff}
+.small{font-size:12px;color:#6b7280}
+.header-acoes{display:flex;gap:12px;}
+.btn-header{padding:10px 16px;border-radius:10px;border:1px solid var(--cinza-claro);background:#fff;font-size:14px;font-weight:600;
+cursor:pointer;display:flex;align-items:center;gap:6px;color:#020617;}
+.btn-header:hover{background:#f1f5f9;}
+.btn-header.sair{color:var(--vermelho);border-color:#fecaca;}
+.btn-header.sair:hover{background:#fee2e2;}
+/* ================================ */
+/* BOTÕES DO HISTÓRICO DE ORÇAMENTOS */
+/* ================================ */
+
+.historico-acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-historico {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.btn-historico-abrir {
+  background: #e5e7eb;
+  color: #020617;
+}
+
+.btn-historico-apagar {
+  background: var(--vermelho);
+  color: #fff;
+}
+
+.btn-historico-abrir:hover {
+  background: #d1d5db;
+}
+
+.btn-historico-apagar:hover {
+  background: #b91c1c;
+}
+
+/* ======================= */
+/* HEADER - AÇÕES / STATUS */
+/* ======================= */
+
+.header-acoes {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.status-indicador {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+}
+
+
+/* ======================================= */
+/* ALTERAÇÃO 1 — quebra inteligente texto  */
+/* ======================================= */
+.descricao-quebra{
+  white-space:pre-wrap;
+  word-break:break-word;
+  overflow-wrap:break-word;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 FIREBASE + FIRESTORE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, serverTimestamp }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCs6AGz_yGwLwbMuWQLMkUv0-IJZ84IT2M",
+  authDomain: "calculadora---3d.firebaseapp.com",
+  projectId: "calculadora---3d",
+  storageBucket: "calculadora---3d.firebasestorage.app",
+  messagingSenderId: "53725959441",
+  appId: "1:53725959441:web:2f83316aa37380da0aa8b0"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    location.href = "login.html";
+    return;
+  }
+
+  // 🔽 BUSCAR DADOS DA MINHA CONTA
+  const ref = doc(db, "users", user.uid, "profile", "dados");
+  const snap = await getDoc(ref);
+
+  if (snap.exists()) {
+    const d = snap.data();
+
+    // Empresa
+    if (d.empresa) empresa.value = d.empresa;
+    if (d.telefone) telefoneEmpresa.value = d.telefone;
+
+    // Configurações padrão
+    if (d.maquina) maquina.value = d.maquina;
+    if (d.kwh) kwh.value = d.kwh;
+    if (d.lucro) lucro.value = d.lucro;
+  }
+});
+
+
+window.salvarNoFirestore = async dados => {
+  const user = auth.currentUser;
+  if(!user) return;
+  await addDoc(collection(db,"users",user.uid,"orcamentos"),{
+    ...dados,
+    criadoEm: serverTimestamp()
+  });
+};
+</script>
+
+<header>
+  <div class="brand">
+    <img src="assets/img/logo.png">
+    <span>Calc3D Pro</span>
+  </div>
+  <div class="header-acoes">
+  <button class="btn-header" onclick="location.href='minha-conta.html'">
+    👤 Minha conta
+  </button>
+    <button class="btn-header sair" onclick="logout()">
+    🚪 Sair
+  </button>
+  <span id="status" class="status-indicador"></span>
+  </div>
+
+</div>
+</header>
+
+<div class="container">
+<h2>Orçamento de Impressão 3D</h2>
+
+<div class="grid-2">
+  <div><label>Empresa</label><input id="empresa" placeholder="Ex: Impressões 3D João"></div>
+  <div><label>Telefone da empresa</label><input id="telefoneEmpresa"type="text"inputmode="numeric"placeholder="(00) 00000-0000"></div>
+
+  <div><label>Cliente</label><input id="cliente" placeholder="Nome do cliente"></div>
+  <div><label>Telefone do cliente</label><input id="telefoneCliente"type="text"inputmode="numeric"placeholder="(00) 00000-0000"></div>
+</div>
+
+<div class="grid-2" style="margin-top:16px">
+  <div><label>Prazo de entrega (dias)</label><input id="prazoEntrega" type="number" min="0" placeholder="Ex: 5"></div>
+    <div>
+    <label>Forma de pagamento</label>
+    <select id="formaPagamento" onchange="atualizarPagamento()">
+      <option value="">Selecione</option>
+      <option value="pix">Pix</option>
+      <option value="cartao">Cartão de crédito</option>
+      <option value="transferencia">Transferência</option>
+    </select>
+  </div>
+</div>
+
+<div id="campoPix" style="margin-top:16px;display:none">
+  <label>Chave Pix</label>
+  <input id="chavePix" placeholder="CPF, telefone, e-mail ou chave aleatória">
+</div>
+
+<div id="campoCartao" style="margin-top:16px;display:none">
+  <label>Parcelamento máximo</label>
+  <select id="parcelas" onchange="previewParcelas()">
+    <option value="1">1x (à vista)</option>
+    <option value="2">2x</option>
+    <option value="3">3x</option>
+    <option value="4">4x</option>
+    <option value="5">5x</option>
+    <option value="6">6x</option>
+    <option value="10">10x</option>
+    <option value="12">12x</option>
+  </select>
+  <div id="previewCartao" class="small"></div>
+</div>
+<div id="campoTransferencia" style="margin-top:16px; display:none">
+  <label>Dados para transferência</label>
+
+  <div class="grid-2" style="margin-top:8px">
+    <div>
+      <input
+        id="banco"
+        placeholder="Banco (ex: Itaú, BB, Caixa)"
+      >
+    </div>
+
+    <div>
+      <input
+        id="agencia"
+        placeholder="Agência"
+      >
+    </div>
+
+    <div>
+      <input
+        id="conta"
+        placeholder="Conta"
+      >
+    </div>
+
+    <div>
+      <select id="tipoConta">
+        <option value="">Tipo de conta</option>
+        <option value="corrente">Conta corrente</option>
+        <option value="poupanca">Conta poupança</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="margin-top:8px">
+    <input
+      id="favorecido"
+      placeholder="Nome do favorecido"
+    >
+  </div>
+</div>
+
+
+<hr style="margin:40px 0">
+
+<label>Descrição do produto</label>
+<textarea id="descricao" placeholder="Ex: Suporte de celular articulado em PLA preto"></textarea>
+
+<div class="grid-3">
+  <div>
+    <label>Material</label>
+    <select id="material"><option>Selecione</option>option value="">Selecione</option><option>PLA</option><option>PETG</option><option>ABS</option></select>
+  </div>
+  <div><label>Peso (g)</label><input id="peso" type="number" placeholder="120"></div>
+  <div><label>Tempo (h)</label><input id="tempo" type="number" step="0.01" min="0" placeholder="3,5"></div>
+</div>
+
+<div class="grid-4" style="margin-top:16px">
+<div><label>Filamento (R$/kg)</label><input id="filamento" type="number" min="0" placeholder="Ex: 100"></div>
+  <div><label>Máquina (R$/h)</label><input id="maquina" type="number" min="0" step="0.01" placeholder="Ex: 3"></div>
+  <div><label>Potência (W)</label><input id="potencia" type="number" min="0" step="1" placeholder="Ex: 350"></div>
+  <div><label>kWh (R$)</label><input id="kwh" type="number" min="0" placeholder="0,5"></div>
+</div>
+
+<div class="grid-4" style="margin-top:16px">
+  <div><label>Mão de obra (R$)</label><input id="maoObra" type="number" min="0" placeholder="10"></div>
+  <div><label>Acessórios (R$)</label><input id="acessorios" type="number" min="0" placeholder="0"></div>
+  <div><label>Perda (%)</label><input id="perda" type="number" min="0" placeholder="10"></div>
+  <div><label>Lucro (%)</label><input id="lucro" type="number" min="0" placeholder="30"></div>
+</div>
+
+<div class="botoes">
+  <button id="btnSalvarItem" class="btn-add" onclick="salvarItem()">Adicionar item</button>
+</div>
+
+<hr style="margin:40px 0">
+<div id="listaItens"></div>
+<hr style="margin:40px 0">
+
+<h3>Histórico de orçamentos</h3>
+<div id="historico"></div>
+<div class="botoes">
+  <button class="btn-orcamento" onclick="gerarOrcamento()">Gerar orçamento</button>
+</div>
+</div>
+
+<script>
+function formatarReal(v){return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
+let itens=[];let editando=null;
+const taxasCartao={1:0,2:0.03,3:0.045,4:0.06,5:0.075,6:0.09,10:0.13,12:0.15};
+
+function atualizarPagamento(){
+  campoPix.style.display =
+    formaPagamento.value === "pix" ? "block" : "none";
+
+  campoCartao.style.display =
+    formaPagamento.value === "cartao" ? "block" : "none";
+
+  campoTransferencia.style.display =
+    formaPagamento.value === "transferencia" ? "block" : "none";
+
+  previewParcelas();
+}
+function totalAtual(){return itens.reduce((s,i)=>s+i.precoFinal,0);}
+function previewParcelas(){
+  if(formaPagamento.value!=="cartao"){previewCartao.textContent="";return;}
+  const p=+parcelas.value||1,t=taxasCartao[p]||0,total=totalAtual();
+  if(!total) return;
+  previewCartao.textContent=`Taxa ${(t*100).toFixed(1)}% • ${p}x de ${formatarReal((total*(1+t))/p)}`;
+}
+function atualizarBotao(){
+  btnSalvarItem.textContent=editando===null?"Adicionar item":"Salvar alteração";
+  btnSalvarItem.style.background=editando===null?"#e5e7eb":"var(--amarelo)";
+}
+function calcularItem(){
+  const cm = (numero(filamento.value) / 1000) * numero(peso.value);
+  const cmaq = numero(tempo.value) * numero(maquina.value);
+  const ce =
+    (numero(potencia.value) / 1000) *
+    numero(tempo.value) *
+    numero(kwh.value);
+
+  const base =
+    cm +
+    cmaq +
+    ce +
+    numero(maoObra.value) +
+    numero(acessorios.value);
+
+  const perdaV = base * (numero(perda.value) / 100);
+  const sub = base + perdaV;
+  const lucroV = sub * (numero(lucro.value) / 100);
+
+  return {
+    descricao: descricao.value,
+    material: material.value,
+    peso: numero(peso.value),
+    tempo: numero(tempo.value),
+    custos: {
+      material: cm,
+      maquina: cmaq,
+      energia: ce,
+      maoObra: numero(maoObra.value),
+      acessorios: numero(acessorios.value),
+      perda: perdaV,
+      lucro: lucroV
+    },
+    precoFinal: sub + lucroV
+  };
+}
+
+function salvarItem(){
+  const it=calcularItem(); if(!it.descricao) return;
+  editando===null?itens.push(it):itens[editando]=it;
+  editando=null;descricao.value=peso.value=tempo.value="";
+  atualizarBotao();render();previewParcelas();
+}
+function editarItem(i){
+  const it=itens[i];
+  descricao.value=it.descricao;material.value=it.material;peso.value=it.peso;tempo.value=it.tempo;
+  editando=i;atualizarBotao();window.scrollTo({top:0,behavior:"smooth"});
+}
+function removerItem(i){itens.splice(i,1);render();previewParcelas();}
+function render(){
+  listaItens.innerHTML="";
+  itens.forEach((it,i)=>{
+    listaItens.innerHTML+=`
+    <div class="item-card">
+      <strong class="descricao-quebra">${it.descricao}</strong><br> <!-- ALTERAÇÃO -->
+      ${it.material} • ${it.peso} g • ${it.tempo} h
+      <div class="custos">
+        Material: ${formatarReal(it.custos.material)}<br>
+        Máquina: ${formatarReal(it.custos.maquina)}<br>
+        Energia: ${formatarReal(it.custos.energia)}<br>
+        Mão de obra: ${formatarReal(it.custos.maoObra)}<br>
+        Acessórios: ${formatarReal(it.custos.acessorios)}<br>
+        Perda: ${formatarReal(it.custos.perda)}<br>
+        Lucro: ${formatarReal(it.custos.lucro)}
+      </div>
+      <div class="item-acoes">
+        <strong>Total: ${formatarReal(it.precoFinal)}</strong>
+        <div>
+          <button class="btn-editar" onclick="editarItem(${i})">Editar</button>
+          <button class="btn-remover" onclick="removerItem(${i})">Remover</button>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+/* ======================================= */
+/* ALTERAÇÃO 2 — máscara de telefone        */
+/* ======================================= */
+function mascaraTelefone(el){
+  el.addEventListener("input",e=>{
+    e.target.value=e.target.value
+      .replace(/\D/g,"")
+      .replace(/^(\d{2})(\d)/,"($1) $2")
+      .replace(/(\d{5})(\d)/,"$1-$2")
+      .replace(/(-\d{4})\d+$/,"$1");
+  });
+}
+function numero(v) {
+  const n = parseFloat(String(v).replace(",", "."));
+  return isNaN(n) || n < 0 ? 0 : n;
+}
+
+function apenasNumerosInteiros(el) {
+  el.addEventListener("input", e => {
+    e.target.value = e.target.value.replace(/\D/g, "");
+  });
+}
+apenasNumerosInteiros(agencia);
+apenasNumerosInteiros(conta);
+
+
+
+mascaraTelefone(telefoneEmpresa); // ALTERAÇÃO
+mascaraTelefone(telefoneCliente); // ALTERAÇÃO
+
+function gerarOrcamento(){
+  const total=totalAtual();
+  let pagamento = { tipo: formaPagamento.value };
+
+if (pagamento.tipo === "pix") {
+  pagamento.chavePix = chavePix.value || "";
+}
+
+if (pagamento.tipo === "transferencia") {
+  pagamento.transferencia = {
+    banco: banco.value || "",
+    agencia: agencia.value || "",
+    conta: conta.value || "",
+    tipoConta: tipoConta.value || "",
+    favorecido: favorecido.value || ""
+  };
+}
+  if(pagamento.tipo==="pix") pagamento.chavePix=chavePix.value||"";
+  if(pagamento.tipo==="cartao"){
+    const p=+parcelas.value||1,t=taxasCartao[p]||0;
+    pagamento={tipo:"cartao",parcelas:p,taxa:t,totalComTaxa:total*(1+t),valorParcela:(total*(1+t))/p};
+  }
+  const dados={empresa:empresa.value,telefoneEmpresa:telefoneEmpresa.value,cliente:cliente.value,
+    telefoneCliente:telefoneCliente.value,prazoEntrega:prazoEntrega.value,pagamento,itens};
+  localStorage.setItem("orcamento",JSON.stringify(dados));
+  salvarNoFirestore(dados);
+
+function salvarHistorico(dados) {
+  const historico = JSON.parse(localStorage.getItem("historicoOrcamentos")) || [];
+
+  historico.unshift({
+    id: Date.now(),
+    data: new Date().toLocaleDateString("pt-BR"),
+    cliente: dados.cliente || "—",
+    total: totalAtual(),
+    dados
+  });
+
+  localStorage.setItem("historicoOrcamentos", JSON.stringify(historico));
+}
+salvarHistorico(dados);
+
+  location.href="orcamento.html";
+}
+const modoEdicao=localStorage.getItem("modoEdicao");
+const dadosEd=JSON.parse(localStorage.getItem("orcamento"));
+if (modoEdicao === "true" && dadosEd) {
+
+  // Dados principais
+  empresa.value = dadosEd.empresa || "";
+  telefoneEmpresa.value = dadosEd.telefoneEmpresa || "";
+  cliente.value = dadosEd.cliente || "";
+  telefoneCliente.value = dadosEd.telefoneCliente || "";
+  prazoEntrega.value = dadosEd.prazoEntrega || "";
+
+  // Forma de pagamento
+  formaPagamento.value = dadosEd.pagamento?.tipo || "";
+  atualizarPagamento();
+
+  // PIX
+  if (dadosEd.pagamento?.tipo === "pix") {
+    chavePix.value = dadosEd.pagamento.chavePix || "";
+  }
+
+  // CARTÃO
+  if (dadosEd.pagamento?.tipo === "cartao") {
+    parcelas.value = dadosEd.pagamento.parcelas || "1";
+    previewParcelas();
+  }
+
+  // TRANSFERÊNCIA
+  if (dadosEd.pagamento?.tipo === "transferencia") {
+    banco.value = dadosEd.pagamento.transferencia?.banco || "";
+    agencia.value = dadosEd.pagamento.transferencia?.agencia || "";
+    conta.value = dadosEd.pagamento.transferencia?.conta || "";
+    tipoConta.value = dadosEd.pagamento.transferencia?.tipoConta || "";
+    favorecido.value = dadosEd.pagamento.transferencia?.favorecido || "";
+  }
+
+  // Itens
+  itens = dadosEd.itens || [];
+  render();
+  previewParcelas();
+
+  localStorage.removeItem("modoEdicao");
+}
+
+function renderHistorico() {
+  const box = document.getElementById("historico");
+  const historico = JSON.parse(localStorage.getItem("historicoOrcamentos")) || [];
+
+  if (!historico.length) {
+    box.innerHTML = "<small>Nenhum orçamento salvo ainda.</small>";
+    return;
+  }
+
+  box.innerHTML = historico.map(h => `
+  <div class="item-card">
+    <strong>${h.data}</strong><br>
+    Cliente: ${h.cliente}<br>
+    Total: ${formatarReal(h.total)}
+
+    <div class="historico-acoes">
+      <button class="btn-historico btn-historico-abrir"
+        onclick="abrirHistorico(${h.id})">
+        Abrir
+      </button>
+
+      <button class="btn-historico btn-historico-apagar"
+        onclick="apagarHistorico(${h.id})">
+        Apagar
+      </button>
+    </div>
+  </div>
+`).join("");
+}
+
+function abrirHistorico(id) {
+  const historico = JSON.parse(localStorage.getItem("historicoOrcamentos")) || [];
+  const h = historico.find(o => o.id === id);
+  if (!h) return;
+
+  localStorage.setItem("orcamento", JSON.stringify(h.dados));
+  localStorage.setItem("modoEdicao", "true");
+  location.href = "dashboard.html";
+}
+
+function apagarHistorico(id) {
+  const historico = JSON.parse(localStorage.getItem("historicoOrcamentos")) || [];
+  const novo = historico.filter(o => o.id !== id);
+  localStorage.setItem("historicoOrcamentos", JSON.stringify(novo));
+  renderHistorico();
+}
+
+renderHistorico();
+
+function atualizarStatus() {
+  const el = document.getElementById("status");
+
+  if (navigator.onLine) {
+    el.textContent = "🟢 Online";
+    el.style.color = "#16a34a";
+  } else {
+    el.textContent = "🔴 Offline";
+    el.style.color = "#dc2626";
+  }
+}
+
+window.addEventListener("online", atualizarStatus);
+window.addEventListener("offline", atualizarStatus);
+
+atualizarStatus();
+</script>
+
+</body>
+</html>

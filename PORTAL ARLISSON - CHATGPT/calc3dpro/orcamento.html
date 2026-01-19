@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Orçamento • Calc3D Pro</title>
+
+<style>
+:root {
+  --azul:#2563eb;
+  --cinza:#64748b;
+  --cinza-claro:#e5e7eb;
+}
+
+body{
+  margin:0;
+  background:#e5e7eb;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:#111827;
+}
+
+/* HEADER */
+header{
+  background:#fff;
+  padding:18px 36px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--cinza-claro);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:18px;
+  font-weight:600;
+  color:var(--azul);
+}
+.brand img{height:36px}
+.header-acoes{display:flex;gap:12px}
+
+/* DROPDOWN */
+.dropdown{position:relative}
+.dropdown-toggle{
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  background:var(--azul);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+.dropdown-menu{
+  position:absolute;
+  top:110%;
+  right:0;
+  min-width:220px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  padding:8px;
+  display:none;
+  z-index:1000;
+}
+.dropdown-menu button{
+  width:100%;
+  background:none;
+  border:none;
+  padding:12px;
+  cursor:pointer;
+  text-align:left;
+}
+
+/* FOLHA */
+.folha{
+  max-width:900px;
+  margin:30px auto;
+  background:#fff;
+  padding:50px 60px;
+  border-radius:6px;
+}
+
+/* TOPO */
+.topo{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:2px solid var(--cinza-claro);
+  padding-bottom:20px;
+}
+.topo h1{margin:0;font-size:22px;color:var(--azul)}
+.topo small{color:#6b7280;font-size:14px}
+.meta{text-align:right;font-size:15px}
+
+/* BLOCO */
+.bloco{margin-top:25px;font-size:15px}
+
+/* TABELA */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:30px;
+}
+th{
+  background:#f1f5f9;
+  padding:12px;
+  font-size:14px;
+  border-bottom:2px solid var(--cinza-claro);
+  text-align:left;
+}
+td{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+  font-size:14px;
+
+  /* 🔧 CORREÇÃO: QUEBRA DE LINHA */
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;
+}
+
+/* coluna da descrição */
+.descricao-produto{
+  max-width:380px;
+}
+
+.center{text-align:center}
+.right{text-align:right}
+
+/* TOTAL */
+.total{
+  margin-top:30px;
+  display:flex;
+  justify-content:flex-end;
+}
+.total .final{
+  background:var(--azul);
+  color:#fff;
+  padding:14px 18px;
+  font-size:20px;
+  font-weight:700;
+  border-radius:6px;
+}
+
+/* TEXTO */
+.texto{
+  margin-top:30px;
+  font-size:14px;
+  line-height:1.7;
+}
+.agradecimento{
+  margin-top:30px;
+  text-align:center;
+  font-style:italic;
+  color:#374151;
+}
+
+@media print {
+
+  body {
+    background: #fff;
+    margin: 0;
+  }
+
+  header {
+    display: none;
+  }
+
+  .folha {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+}
+
+@page {
+  size: A4;
+  margin: 15mm;
+}
+
+@media print {
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+}
+
+@media print {
+
+  .total .final {
+    background: none !important;
+    color: #000 !important;
+    border: 2px solid #000;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 12px 16px;
+  }
+
+}
+
+.rodape-enterprise {
+  margin-top: 50px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.rodape-enterprise .linha {
+  border-top: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.rodape-conteudo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.rodape-bloco {
+  line-height: 1.6;
+}
+
+.rodape-bloco.right {
+  text-align: right;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 FIREBASE AUTH (IGUAL AO DASHBOARD) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCs6AGz_yGwLwbMuWQLMkUv0-IJZ84IT2M",
+  authDomain: "calculadora---3d.firebaseapp.com",
+  projectId: "calculadora---3d",
+  storageBucket: "calculadora---3d.firebasestorage.app",
+  messagingSenderId: "53725959441",
+  appId: "1:53725959441:web:2f83316aa37380da0aa8b0"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, user => {
+  if (!user) location.href = "login.html";
+  window.logout=()=>signOut(auth).then(()=>location.href="login.html");
+});
+</script>
+
+<header>
+  <div class="brand">
+    <img src="assets/img/logo.png">
+    <span>Calc3D Pro</span>
+  </div>
+
+  <div class="header-acoes">
+    <div class="dropdown">
+      <button class="dropdown-toggle" onclick="toggle()">⚡ Ações</button>
+      <div id="menu" class="dropdown-menu">
+        <button onclick="window.print()">🖨️ Imprimir / PDF</button>
+        <button onclick="enviarWhatsApp()">📲 Enviar por WhatsApp</button>
+        <button onclick="editarOrcamento()">✏️ Editar orçamento</button>
+        <button onclick="novoOrcamento()">🧾 Novo orçamento</button>
+        <button onclick="location.href='minha-conta.html'">👤 Minha conta</button>
+        <button onclick="logout()">🚪 Sair</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="folha">
+
+  <div class="topo">
+    <div>
+      <h1 id="empresa"></h1>
+      <br>
+      📱 <span id="telefoneEmpresa"></span>
+    </div>
+    <div class="meta">
+      <div><strong>Data:</strong> <span id="data"></span></div>
+    </div>
+  </div>
+
+  <div class="bloco">
+    <strong>Cliente:</strong> <span id="cliente"></span><br>
+    <strong>Contato:</strong> <span id="telefoneCliente"></span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Descrição do produto</th>
+        <th>Material</th>
+        <th class="center">Peso (g)</th>
+        <th class="right">Valor</th>
+      </tr>
+    </thead>
+    <tbody id="listaItens"></tbody>
+  </table>
+
+  <div class="total">
+    <div class="final">
+      VALOR TOTAL: <span id="valorTotal"></span>
+    </div>
+  </div>
+
+  <div class="texto" id="boxPagamento"></div>
+
+  <div class="texto">
+    <strong>Prazo de produção:</strong> até <span id="prazoEntrega"></span> dias úteis, contados a partir da aprovação do cliente e da confirmação do pagamento<br>
+        <strong>Observações:</strong><br>
+    • A produção será iniciada somente após a aprovação, pelo cliente, do modelo, medidas, cores, material e acabamento, bem como após a confirmação do pagamento. Após essa etapa, não serão aceitas alterações.<br>
+    • Produto fabricado por impressão 3D, sujeito a marcas naturais das camadas do processo.<br>
+    • Produto personalizado sob encomenda. Não se aplica o art. 49 do Código de Defesa do Consumidor (direito de arrependimento), salvo em caso de defeito de fabricação.
+  </div>
+
+  <div class="agradecimento">
+    Agradecemos a preferência!<br><br>
+    <strong id="empresaRodape"></strong>
+  </div>
+<div class="rodape-enterprise">
+  <div class="linha"></div>
+
+  <div class="rodape-conteudo">
+    <div class="rodape-bloco">
+      <strong id="empresaRodape"></strong><br>
+      Impressão 3D • Produtos Personalizados
+    </div>
+
+    <div class="rodape-bloco">
+      📞 <span id="telefoneEmpresaRodape"></span><br>
+      📅 Orçamento válido por 10 dias
+    </div>
+
+    <div class="rodape-bloco right">
+      Documento gerado por<br>
+      <strong>Calc3D Pro</strong>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function formatarReal(v){
+  return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+const dados = JSON.parse(localStorage.getItem("orcamento"));
+if(!dados) location.href="dashboard.html";
+
+empresa.textContent = dados.empresa;
+empresaRodape.textContent = dados.empresa;
+telefoneEmpresaRodape.textContent = dados.telefoneEmpresa;
+telefoneEmpresa.textContent = dados.telefoneEmpresa;
+cliente.textContent = dados.cliente;
+telefoneCliente.textContent = dados.telefoneCliente;
+prazoEntrega.textContent = dados.prazoEntrega || "—";
+data.textContent = new Date().toLocaleDateString("pt-BR");
+
+let somaTotal = 0;
+listaItens.innerHTML = "";
+
+dados.itens.forEach((item,i)=>{
+  somaTotal += item.precoFinal;
+  listaItens.innerHTML += `
+    <tr>
+      <td>${String(i+1).padStart(2,"0")}</td>
+      <td class="descricao-produto">${item.descricao}</td>
+      <td>${item.material}</td>
+      <td class="center">${item.peso}</td>
+      <td class="right">${formatarReal(item.precoFinal)}</td>
+    </tr>`;
+});
+
+valorTotal.textContent = formatarReal(somaTotal);
+
+/* PAGAMENTO */
+let pagamentoHTML = `<strong>Forma de pagamento:</strong> `;
+
+if(dados.pagamento.tipo==="pix"){
+  pagamentoHTML += `Pix<br><strong>Chave Pix:</strong> ${dados.pagamento.chavePix}`;
+}
+if(dados.pagamento.tipo==="cartao"){
+  pagamentoHTML += `
+    Cartão de crédito<br>
+    <strong>Parcelamento:</strong> ${dados.pagamento.parcelas}x de ${formatarReal(dados.pagamento.valorParcela)}<br>
+    <strong>Total com taxas:</strong> ${formatarReal(dados.pagamento.totalComTaxa)}<br>
+    <small>Taxa aplicada: ${(dados.pagamento.taxa*100).toFixed(1)}%</small>
+  `;
+}
+if(dados.pagamento.tipo==="transferencia"){
+  pagamentoHTML += `Transferência bancária`;
+}
+if (dados.pagamento.tipo === "transferencia") {
+  const t = dados.pagamento.transferencia || {};
+
+  pagamentoHTML += `<br>
+    <strong>Banco:</strong> ${t.banco || "—"}<br>
+    <strong>Agência:</strong> ${t.agencia || "—"}<br>
+    <strong>Conta:</strong> ${t.conta || "—"}<br>
+    <strong>Tipo de conta:</strong> ${
+      t.tipoConta === "corrente"
+        ? "Conta corrente"
+        : t.tipoConta === "poupanca"
+        ? "Conta poupança"
+        : "—"
+    }<br>
+    ${
+      t.favorecido
+        ? `<strong>Favorecido:</strong> ${t.favorecido}<br>`
+        : ""
+    }
+  `;
+}
+
+boxPagamento.innerHTML = pagamentoHTML;
+
+function toggle(){
+  menu.style.display = menu.style.display==="block"?"none":"block";
+}
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".dropdown")) menu.style.display="none";
+});
+function editarOrcamento(){
+  localStorage.setItem("modoEdicao","true");
+  location.href="dashboard.html";
+}
+function novoOrcamento(){
+  localStorage.removeItem("orcamento");
+  location.href="dashboard.html";
+}
+function enviarWhatsApp(){
+  const itensMsg = dados.itens.map((i,idx)=>
+    `${idx+1}) ${i.descricao} - ${formatarReal(i.precoFinal)}`
+  ).join("\n");
+
+  const msg = `
+Olá ${dados.cliente} 👋
+
+Segue seu orçamento de impressão 3D:
+
+${itensMsg}
+
+💰 Total: ${formatarReal(somaTotal)}
+⏱ Prazo: ${dados.prazoEntrega} dias
+
+${dados.empresa}
+📞 ${dados.telefoneEmpresa}
+  `.trim();
+
+  const url = "https://wa.me/55" +
+    dados.telefoneCliente.replace(/\D/g,"") +
+    "?text=" + encodeURIComponent(msg);
+
+  window.open(url,"_blank");
+}
+</script>
+
+</body>
+</html>
