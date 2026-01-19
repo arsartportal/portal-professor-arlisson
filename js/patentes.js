@@ -83,6 +83,7 @@ export function obterPatentePorNivel(nivel) {
   const indice = Math.min(nivelSeguro, ranks.length - 1);
 
   return {
-    imagem: `/assets/ranks/${ranks[indice]}`
+    imagem: `assets/ranks/${ranks[indice]}`
   };
 }
+
