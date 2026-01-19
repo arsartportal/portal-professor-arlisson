@@ -1,0 +1,1727 @@
+/* =========================================
+   CORES DOS CARDS POR TEMA
+   ========================================= */
+
+/* TEMA CLARO */
+body[data-theme="light"] {
+  --card-bg: #ffffff;
+  --card-text: #333;
+  --card-border: #ddd;
+}
+
+/* TEMA ESCURO */
+body[data-theme="dark"] {
+  --card-bg: #111827;
+  --card-text: #e5e7eb;
+  --card-border: #1e293b;
+}
+
+
+/* =========================================
+   CONTROLE DE TEMA (USA data-theme DO BODY)
+   NÃO MUDA VISUAL, SÓ CONTROLA
+   ========================================= */
+
+/* TEMA CLARO (visual atual) */
+body[data-theme="light"] {
+  background: #f2f2f2;
+  color: #333;
+}
+
+/* TEMA ESCURO */
+body[data-theme="dark"] {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+/* =========================================
+   VARIÁVEIS PARA CARDS LOCKED
+   ========================================= */
+
+/* TEMA CLARO (discreto, como já estava) */
+body[data-theme="light"] {
+  --locked-bg: #f5f5f5;
+  --locked-text: #999;
+  --locked-border: #ddd;
+}
+
+/* TEMA ESCURO (visual gamer) */
+body[data-theme="dark"] {
+  --locked-bg: linear-gradient(
+    135deg,
+    #020617,
+    #0f172a
+  );
+  --locked-text: #64748b;
+  --locked-border: #1e293b;
+}
+
+body[data-theme="dark"] .card.locked {
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.03),
+    inset 0 0 25px rgba(0,0,0,.6);
+}
+
+/* =========================================
+   TÍTULO PRINCIPAL DO PORTAL (CORRIGIDO)
+   ========================================= */
+
+.portal-title {
+  margin: 0;
+  text-align: center;
+  line-height: 1.15;
+}
+
+/* Linha "Portal" — discreta, mas legível */
+.portal-brand {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* Linha principal */
+.portal-name {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* ===== CORES POR TEMA ===== */
+
+/* MODO CLARO */
+body[data-theme="light"] .portal-brand {
+  color: #555;
+}
+
+body[data-theme="light"] .portal-name {
+  color: #1f2937;
+}
+
+/* MODO ESCURO */
+body[data-theme="dark"] .portal-brand {
+  color: #9ca3af; /* cinza claro, visível */
+}
+
+body[data-theme="dark"] .portal-name {
+  color: #f8fafc; /* quase branco */
+}
+
+
+
+/* =================================================
+   1. RESET GLOBAL
+================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =================================================
+   2. VARIÁVEIS DO SISTEMA (DESIGN SYSTEM)
+================================================= */
+:root {
+  --bg-main: #f4f6f8;
+  --bg-card: #ffffff;
+  --bg-header: #0f172a;
+
+  --primary: #1e293b;
+  --accent: #2563eb;
+
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+
+  --border-light: #e5e7eb;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  --shadow-sm: 0 4px 10px rgba(0,0,0,0.05);
+  --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+
+  --transition: all .25s ease;
+}
+
+/* =================================================
+   3. BODY – BASE DO SITE
+================================================= */
+body {
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  letter-spacing: 0.1px;
+
+  min-height: 100vh;
+  padding-bottom: 36px; /* espaço da barra de status */
+}
+
+/* =================================================
+   4. LINKS
+================================================= */
+a {
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+/* =================================================
+   5. HEADER / TOPO
+================================================= */
+.topo {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  align-items: center;
+
+  padding: 20px 28px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.topo-esquerda h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.topo-esquerda h1::before {
+  content: "🎓";
+}
+
+.subtitulo-header {
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+.topo-centro {
+  text-align: center;
+  font-weight: 600;
+}
+
+.topo-direita {
+  text-align: right;
+  font-size: 12px;
+  color: #cbd5f5;
+}
+
+.topo-direita button {
+  margin-top: 6px;
+  padding: 7px 14px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.topo-direita button:hover {
+  background: #1d4ed8;
+}
+
+/* =================================================
+   6. GRID DE CARDS
+================================================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+  padding: 25px;
+}
+
+/* =================================================
+   7. CARD PADRÃO
+================================================= */
+.card {
+  position: relative;
+  background: var(--bg-card);
+  padding: 28px;
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 18px;
+
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =================================================
+   8. CARD PROFESSOR – ATALHO SIMPLES
+================================================= */
+.card-prof {
+  background: linear-gradient(135deg, #f0f6ff, #ffffff);
+  border: 1px solid #2563eb;
+}
+
+/* =================================================
+   9. CARD PROFESSOR – PAINEL ADMIN COMPLETO
+================================================= */
+.card-prof.admin {
+  position: relative;
+  padding-top: 52px;
+  text-align: left;
+  box-shadow: 0 14px 35px rgba(37,99,235,0.15);
+}
+
+.card-prof.admin::before {
+  content: "Painel do Professor";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 18px;
+
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.card-prof.admin::after {
+  content: "ADMIN";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 10px;
+  background: #020617;
+  color: #93c5fd;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* =================================================
+   10. LOGIN
+================================================= */
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  animation: loginFade .8s ease-out both;
+}
+
+.login-box {
+  background: white;
+  padding: 36px;
+  width: 320px;
+  text-align: center;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+
+  animation: boxEnter .7s cubic-bezier(.25,.8,.25,1) both;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  transition: all .25s ease;
+}
+
+.login-box input:focus {
+  transform: scale(1.015);
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.login-box button:hover {
+  transform: translateY(-2px);
+}
+
+#erro {
+  color: #dc2626;
+  margin-top: 10px;
+  animation: shake .4s ease;
+}
+
+/* =================================================
+   11. PÁGINAS INTERNAS (FÍSICA, MATEMÁTICA…)
+================================================= */
+main {
+  padding: 30px;
+}
+
+main h1,
+main h2 {
+  margin-bottom: 15px;
+}
+
+main ul {
+  margin-left: 20px;
+}
+
+main a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* =================================================
+   12. DARK MODE (CORRIGIDO)
+================================================= */
+body.dark {
+  background: #0b1120;
+  color: #e5e7eb;
+}
+
+body.dark .card {
+  background: #020617;
+  border-color: #1e293b;
+  color: #e5e7eb;
+}
+
+body.dark .card-prof {
+  background: linear-gradient(135deg, #020617, #020617);
+}
+
+body.dark .card::before {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+body.dark a {
+  color: #93c5fd;
+}
+
+/* =================================================
+   13. BARRA DE STATUS INFERIOR
+================================================= */
+body::after {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: #020617;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  z-index: 10;
+}
+
+body::before {
+  content: "🟢 Sistema online • Todos os serviços operando normalmente";
+  position: fixed;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #cbd5f5;
+  z-index: 11;
+}
+
+/* =================================================
+   14. ANIMAÇÕES
+================================================= */
+@keyframes loginFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes boxEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+/* =================================================
+   15. RESPONSIVO
+================================================= */
+@media (max-width: 600px) {
+  .topo {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 10px;
+  }
+
+  body::before {
+    font-size: 11px;
+  }
+}
+/* =================================================
+   PATCH v2.1 — ACABAMENTO ENTERPRISE
+================================================= */
+
+/* ===== 1. BRILHO / PROFUNDIDADE DOS BOTÕES ===== */
+button {
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+}
+
+button:hover {
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.35),
+    0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+button:active {
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+/* ===== 2. FAIXA SUPERIOR DOS CARDS (ARREDONDADA) ===== */
+.card::before {
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+/* ===== 3. CORREÇÃO DO PAINEL DO PROFESSOR ===== */
+.card-prof.admin {
+  overflow: hidden; /* IMPEDE VAZAMENTO */
+}
+
+/* Faixa do painel acompanha os cantos */
+.card-prof.admin::before {
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+/* ===== 4. DARK MODE – MANTÉM O GLOW ===== */
+body.dark button {
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.35);
+}
+
+body.dark button:hover {
+  box-shadow:
+    0 10px 28px rgba(59, 130, 246, 0.45),
+    0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+/* =================================================
+   PATCH v2.2 — BOTÕES, CARDS E TRANSIÇÕES UNIFICADAS
+================================================= */
+
+/* ===== 1. TODOS OS ELEMENTOS CLICÁVEIS ===== */
+button,
+.card,
+.card-prof {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease,
+    border-color 0.35s ease;
+}
+
+/* ===== 2. BRILHO PARA CARDS (COMPORTAMENTO DE BOTÃO) ===== */
+.card:hover,
+.card-prof:hover {
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.25),
+    0 0 0 2px rgba(37, 99, 235, 0.12);
+  transform: translateY(-4px);
+}
+
+/* ===== 3. ESTADO ATIVO (CLICK) ===== */
+.card:active,
+.card-prof:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.2);
+}
+
+/* ===== 4. DARK MODE — BRILHO CONSISTENTE ===== */
+body.dark .card:hover,
+body.dark .card-prof:hover {
+  box-shadow:
+    0 14px 34px rgba(59, 130, 246, 0.35),
+    0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* ===== 5. TRANSIÇÃO GLOBAL DO TEMA ===== */
+body,
+.topo,
+.card,
+.card-prof,
+button,
+main {
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+/* =================================================
+   PATCH v2.3 — NORMALIZAÇÃO DE ELEVATION & TRANSIÇÃO
+================================================= */
+
+/* ===== 1. VARIÁVEIS DE INTERAÇÃO (ÚNICA FONTE) ===== */
+:root {
+  --elevation-base: 0 6px 16px rgba(0,0,0,0.08);
+  --elevation-hover: 0 16px 36px rgba(37, 99, 235, 0.28);
+  --elevation-hover-dark: 0 18px 40px rgba(59, 130, 246, 0.38);
+
+  --ui-transition: 0.35s cubic-bezier(.25,.8,.25,1);
+}
+
+/* ===== 2. BASE IGUAL PARA TODOS OS CLICÁVEIS ===== */
+button,
+.card,
+.card-prof {
+  box-shadow: var(--elevation-base);
+  transition:
+    background-color var(--ui-transition),
+    color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition),
+    border-color var(--ui-transition);
+}
+
+/* ===== 3. HOVER PADRÃO (TODOS IGUAIS) ===== */
+button:hover,
+.card:hover,
+.card-prof:hover {
+  box-shadow: var(--elevation-hover);
+  transform: translateY(-4px);
+}
+
+/* ===== 4. ESTADO ATIVO ===== */
+button:active,
+.card:active,
+.card-prof:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.22);
+}
+
+/* ===== 5. DARK MODE — MESMA CURVA, MESMO TEMPO ===== */
+body.dark button:hover,
+body.dark .card:hover,
+body.dark .card-prof:hover {
+  box-shadow: var(--elevation-hover-dark);
+}
+
+/* ===== 6. REMOVE DIFERENÇA VISUAL DO ADMIN ===== */
+.card-prof.admin {
+  box-shadow: var(--elevation-base);
+}
+
+/* =================================================
+   LOGIN — TELA INSTITUCIONAL (NÃO GENÉRICA)
+================================================= */
+
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  width: 900px;
+  max-width: 95%;
+  min-height: 520px;
+
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* ===== LADO INSTITUCIONAL ===== */
+.login-brand {
+  padding: 50px 45px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+.login-brand h1 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.login-slogan {
+  font-size: 14px;
+  color: #cbd5f5;
+  margin-bottom: 30px;
+}
+
+.login-features {
+  list-style: none;
+  font-size: 14px;
+}
+
+.login-features li {
+  margin-bottom: 12px;
+}
+
+/* ===== PAINEL DE LOGIN ===== */
+.login-panel {
+  padding: 50px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-panel h2 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.login-info {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+/* FORMULÁRIO */
+.login-form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+}
+
+/* ERRO */
+#erro {
+  margin-top: 12px;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* RODAPÉ DO LOGIN */
+.login-footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* =================================================
+   RESPONSIVO — LOGIN
+================================================= */
+@media (max-width: 768px) {
+  .login-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .login-brand {
+    text-align: center;
+  }
+}
+/* =================================================
+   LOGIN PRIME — IDENTIDADE INSTITUCIONAL
+================================================= */
+
+/* FUNDO MAIS SOFISTICADO */
+.login-brand {
+  background:
+    linear-gradient(
+      160deg,
+      #020617 0%,
+      #0f172a 45%,
+      #1e293b 100%
+    );
+  position: relative;
+}
+
+/* OVERLAY SUTIL PARA PROFUNDIDADE */
+.login-brand::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,255,255,0.06),
+      transparent 60%
+    );
+  pointer-events: none;
+}
+
+/* TÍTULO PRINCIPAL */
+.login-brand h1 {
+  font-size: 34px;            /* MAIS PRESENÇA */
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+/* SUBTÍTULO */
+.login-slogan {
+  font-size: 17px;
+  font-weight: 400;
+  color: #e0e7ff;
+  margin-bottom: 36px;
+  max-width: 420px;
+}
+
+/* LISTA DE BENEFÍCIOS */
+.login-features {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.login-features li {
+  margin-bottom: 14px;
+  color: #c7d2fe;
+}
+
+/* DESTAQUE VISUAL NOS ÍCONES */
+.login-features li::marker {
+  font-size: 16px;
+}
+/* =================================================
+   LOGIN PRIME v2 — ACABAMENTO DE PRODUTO
+================================================= */
+
+/* ===== 1. LINHA INSTITUCIONAL DE DESTAQUE ===== */
+.login-brand h1::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin-top: 14px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #60a5fa,
+    #2563eb
+  );
+}
+
+/* ===== 2. BADGE EDUCACIONAL ===== */
+.login-brand::before {
+  content: "Ambiente Educacional";
+  position: absolute;
+  top: 28px;
+  right: 28px;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+
+  color: #e0e7ff;
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+}
+
+/* ===== 3. RITMO VERTICAL (RESPIRAÇÃO) ===== */
+.login-brand h1 {
+  margin-bottom: 18px;
+}
+
+.login-slogan {
+  margin-bottom: 42px;
+}
+
+/* ===== 4. MICRO BRILHO DIRECIONAL ===== */
+.login-brand {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset -1px 0 0 rgba(255,255,255,0.04);
+}
+/* =================================================
+   LOGIN PRIME v3 — DESTAQUE SUTIL E ELEGANTE
+================================================= */
+
+/* REMOVE O BADGE (GARANTIA) */
+.login-brand::before {
+  content: none;
+}
+
+/* FAIXA LATERAL DE DESTAQUE */
+.login-brand {
+  position: relative;
+}
+
+/* LINHA DE COR INSTITUCIONAL */
+.login-brand::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    #60a5fa,
+    #2563eb
+  );
+}
+
+/* TÍTULO COM MAIS CONTRASTE */
+.login-brand h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+/* SUBTÍTULO MAIS LEGÍVEL */
+.login-slogan {
+  color: #dbeafe;
+}
+
+/* LISTA COM TOM UM POUCO MAIS CLARO */
+.login-features li {
+  color: #e0e7ff;
+}
+/* =================================================
+   LOGIN PRIME v4 — LINHA ESTREITA + ANIMAÇÃO SUTIL
+================================================= */
+
+/* GARANTE CONTEXTO */
+.login-brand {
+  position: relative;
+  overflow: hidden;
+}
+
+/* LINHA LATERAL ESTREITA */
+.login-brand::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 3px;               /* MAIS ESTREITA */
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    #60a5fa,
+    #2563eb,
+    #60a5fa
+  );
+
+  animation: loginAccentMove 6s ease-in-out infinite;
+}
+
+/* ANIMAÇÃO SUAVE (QUASE IMPERCEPTÍVEL) */
+@keyframes loginAccentMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* TÍTULO COM LEVE GLOW CONTROLADO */
+.login-brand h1 {
+  text-shadow:
+    0 2px 10px rgba(0,0,0,0.35),
+    0 0 20px rgba(96,165,250,0.25);
+}
+
+/* SUBTÍTULO MAIS RESPIRADO */
+.login-slogan {
+  max-width: 420px;
+}
+/* =================================================
+   LOGIN PRIME v5 — LINHA ULTRA FINA (1px)
+================================================= */
+
+.login-brand::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 1px;               /* ULTRA FINA */
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(96,165,250,0.9),
+    rgba(37,99,235,1),
+    rgba(96,165,250,0.9)
+  );
+
+  animation: loginAccentMove 6s ease-in-out infinite;
+}
+
+/* =================================================
+   HUD DE XP — ESTILO GAME
+================================================= */
+
+.hud-xp {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  margin: 20px;
+  background: linear-gradient(135deg, #020617, #393939);
+  border-radius: 14px;
+  color: #e5e7eb;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+/* BLOCO DE NÍVEL */
+.hud-nivel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.hud-label {
+  font-size: 11px;
+  color: #93c5fd;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#hud-nivel-valor {
+  font-size: 28px;
+  font-weight: 700;
+  color: #60a5fa;
+}
+
+/* BARRA DE XP */
+.hud-barra {
+  flex: 1;
+}
+
+/* TEXTO DE XP */
+.hud-xp-texto {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #cbd5f5;
+}
+
+/* FUNDO DA BARRA */
+.hud-progresso {
+  width: 100%;
+  height: 14px;
+  background: #020617;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+}
+
+/* PARTE PREENCHIDA */
+#hud-progresso-preenchido {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  border-radius: 20px;
+  transition: width .4s ease;
+}
+
+/* =================================================
+   HEADER / HUD
+================================================= */
+
+.header-hud {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #e5e7eb;
+}
+
+/* CENTRO */
+.header-centro {
+  text-align: center;
+}
+
+.header-centro h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.header-centro p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* DIREITA */
+.header-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.perfil-tag {
+  font-size: 13px;
+  background: #020617;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+}
+
+.header-botoes {
+  display: flex;
+  gap: 8px;
+}
+
+.header-botoes button {
+  background: #1e40af;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cards-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.card.admin {
+  border: 2px dashed #2563eb;
+  background: #eff6ff;
+}
+
+/* =========================================
+   BOAS-VINDAS DO USUÁRIO
+========================================= */
+
+.welcome-user {
+  margin-bottom: 30px;
+}
+
+.welcome-user h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.welcome-user h2 span {
+  color: var(--accent-color); /* azul do portal */
+}
+
+
+
+.cards-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.card.admin {
+  border: 2px dashed rgba(96, 165, 250, 0.5);
+  background: rgba(30, 58, 138, 0.25);
+}
+
+.patente-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#patente-icone {
+  font-size: 22px;
+}
+
+#patente-nome {
+  letter-spacing: .3px;
+}
+
+/* ==========================
+   HUD DO USUÁRIO
+   ========================== */
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  padding: 20px 30px;
+  margin: 30px auto;
+  max-width: 1100px;
+
+  background: linear-gradient(135deg, #0a1020, #111c33);
+  border-radius: 14px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ==========================
+   PATENTE
+   ========================== */
+.hud-patente img {
+  width: 90px;
+  height: auto;
+}
+
+/* ==========================
+   INFO (NÍVEL + XP)
+   ========================== */
+.hud-info {
+  flex: 1;
+}
+
+.hud-nivel {
+  font-size: 18px;
+  font-weight: bold;
+  color: #7fb2ff;
+}
+
+.hud-nivel .label {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-right: 6px;
+}
+
+/* ==========================
+   XP
+   ========================== */
+.hud-xp {
+  margin-top: 8px;
+}
+
+#xp-texto {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.xp-barra {
+  margin-top: 6px;
+  width: 100%;
+  height: 10px;
+
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#xp-preenchimento {
+  height: 100%;
+  width: 0%;
+
+  background: linear-gradient(90deg, #4da3ff, #6fb6ff);
+  border-radius: 10px;
+
+  transition: width 0.4s ease;
+}
+
+/* ==========================
+   HUD COMPACTO (ESTILO GAME)
+   ========================== */
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 14px 20px;
+  margin: 20px auto;
+
+  max-width: 900px;
+
+  background: linear-gradient(135deg, #0a1020, #111c33);
+  border-radius: 12px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* ==========================
+   PATENTE
+   ========================== */
+.hud-patente img {
+  width: 60px;       /* 🔽 menor */
+  height: auto;
+  display: block;
+}
+
+/* ==========================
+   INFO
+   ========================== */
+.hud-info {
+  flex: 1;
+}
+
+/* Linha superior */
+.hud-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+
+  font-weight: 600;
+  color: #7fb2ff;
+}
+
+.hud-label {
+  font-size: 11px;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+/* ==========================
+   XP
+   ========================== */
+.hud-xp {
+  margin-top: 4px;
+}
+
+#xp-texto {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.xp-barra {
+  margin-top: 4px;
+  width: 100%;
+  height: 8px;      /* 🔽 mais fina */
+
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#xp-preenchimento {
+  height: 100%;
+  width: 0%;
+
+  background: linear-gradient(90deg, #4da3ff, #6fb6ff);
+  border-radius: 8px;
+
+  transition: width 0.3s ease;
+}
+
+/* ===============================
+   HUD DO JOGADOR (COMPACTO)
+================================ */
+
+.hud-jogador {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  max-width: 520px;
+  padding: 10px 14px;
+
+  background: linear-gradient(135deg, #0b1220, #0f1c33);
+  border-radius: 12px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* Patente */
+.hud-patente {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+/* Bloco de info */
+.hud-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Nível */
+.hud-nivel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ecbff;
+}
+
+/* XP */
+.hud-xp small {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* Barra de XP */
+.xp-barra {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#xp-preenchimento {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+/* ==========================
+   HEADER PRINCIPAL
+========================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 24px;
+  gap: 24px;
+}
+
+/* ==========================
+   HUD (PATENTE + XP)
+========================== */
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: linear-gradient(135deg, #0b1220, #0f1b3a);
+  padding: 10px 14px;
+  border-radius: 14px;
+
+  min-width: 260px;
+}
+
+/* ÍCONE DA PATENTE */
+.hud-patente img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+/* INFO DO HUD */
+.hud-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* NÍVEL */
+.hud-nivel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #7da9ff;
+}
+
+/* XP */
+.hud-xp {
+  font-size: 12px;
+  color: #dbe4ff;
+}
+
+.xp-barra {
+  width: 160px;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#xp-preenchimento {
+  height: 100%;
+  background: linear-gradient(90deg, #4da3ff, #7cc7ff);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ==========================
+   TÍTULO CENTRAL
+========================== */
+.header-centro {
+  flex: 1;
+  text-align: center;
+}
+
+.header-centro h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.header-centro p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* ==========================
+   AÇÕES À DIREITA
+========================== */
+.header-direita {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* ==========================
+   MINI HUD (ESTILO GAME)
+========================== */
+.mini-hud {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #0b1220, #0f1b3a);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+
+  cursor: default;
+}
+
+/* ÍCONE DA PATENTE */
+.mini-patente {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* BARRA DE XP */
+.mini-xp {
+  width: 90px;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.mini-xp #xp-preenchimento {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #4da3ff, #7cc7ff);
+  transition: width 0.4s ease;
+}
+
+/* ==========================
+   TOOLTIP (INFO NO HOVER)
+========================== */
+.mini-tooltip {
+  position: absolute;
+  top: 120%;
+  left: 0;
+
+  background: #0b1220;
+  color: #e6ecff;
+
+  padding: 8px 10px;
+  border-radius: 10px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: all 0.2s ease;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* MOSTRA TOOLTIP */
+.mini-hud:hover .mini-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================
+   MINI HUD BASE
+========================== */
+.mini-hud {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #0b1220, #0f1b3a);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* ==========================
+   PATENTE PEQUENA
+========================== */
+.mini-patente {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* ==========================
+   XP COMPACTO
+========================== */
+.mini-xp {
+  width: 90px;
+  height: 6px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.mini-xp #xp-preenchimento {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #4da3ff, #7cc7ff);
+  transition: width 0.4s ease;
+}
+
+/* ==========================
+   PAINEL EXPANDIDO (HOVER)
+========================== */
+.mini-detalhes {
+  position: absolute;
+  top: 110%;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #0b1220;
+  padding: 10px 14px;
+  border-radius: 14px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+}
+
+/* PATENTE GRANDE */
+.patente-grande {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+/* TEXTO */
+.info-texto {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #e6ecff;
+}
+
+/* ==========================
+   EFEITOS AO PASSAR O MOUSE
+========================== */
+.mini-hud:hover {
+  padding: 8px 14px;
+}
+
+.mini-hud:hover .mini-patente {
+  transform: scale(1.15);
+}
+
+.mini-hud:hover .mini-xp {
+  height: 8px;
+}
+
+.mini-hud:hover .mini-detalhes {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================
+   LARGURA DINÂMICA DO MINI HUD
+========================== */
+
+/* Estado normal (compacto) */
+.mini-hud {
+  width: 150px;               /* largura base */
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+/* Ao passar o mouse */
+.mini-hud:hover {
+  width: 150px;               /* 🔥 largura expandida */
+  padding: 8px 14px;
+}
+
+/* ==========================
+   AJUSTE DO TEXTO DE XP
+========================== */
+.mini-tooltip,
+.info-texto,
+#xp-texto {
+  white-space: nowrap;        /* impede quebra de linha */
+}
+
+.card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+}
+
+.card.locked {
+  background: var(--locked-bg);
+  color: var(--locked-text);
+  border: 1px dashed var(--locked-border);
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+

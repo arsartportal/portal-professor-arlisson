@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Área do Professor</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-esquerda">
+    <h1>Área do Professor</h1>
+    <p class="subtitulo subtitulo-header">
+      Painel administrativo
+    </p>
+  </div>
+
+  <div class="topo-direita">
+    <button onclick="window.location.href='home.html'">Voltar</button>
+  </div>
+</header>
+
+<main>
+
+  <div id="acesso-negado" class="aviso">
+    <h3>🔒 Acesso restrito</h3>
+    <p>Esta área é exclusiva do professor.</p>
+  </div>
+
+  <div id="painel-professor" style="display:none;">
+
+    <div class="aviso">
+  <h3>📂 Gerenciar Materiais</h3>
+
+  <p>Edite os materiais diretamente nas planilhas:</p>
+
+  <a href="https://docs.google.com/spreadsheets/d/1e65xYqtAR3LUrO2cIlAtFq9qDWWIMUA29Gds_vOkqHo/edit?gid=0#gid=0" target="_blank">
+    📄 Abrir planilha de Materiais
+  </a>
+
+  <br><br>
+
+  <a href="https://docs.google.com/spreadsheets/d/1FkA6WImhRq_D_d3SaI_TVgICAZFHw1NRNUa3Aes6SOQ/edit?gid=0#gid=0" target="_blank">
+    📢 Abrir planilha de Avisos
+  </a>
+
+  <br><br>
+  <a href="https://docs.google.com/spreadsheets/d/1MlBiztACWlO6758r0Q5HwQ8_f7Kg9rsr9gx_3Etqo-c/edit?gid=0#gid=0" target="_blank">
+    📘 Abrir planilha de Glossário
+  </a>
+</div>
+
+  </div>
+<div id="lista-avisos-prof"></div>
+
+</main>
+
+
+<script src="js/login.js"></script>
+<script src="js/professor.js"></script>
+<script src="js/avisos-sheets.js"></script>
+</body>
+</html>

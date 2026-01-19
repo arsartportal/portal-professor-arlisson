@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Portal do Professor Arlisson • Acesso</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="login-body">
+
+  <!-- CONTAINER GERAL -->
+  <div class="login-wrapper">
+
+    <!-- LADO INSTITUCIONAL -->
+    <section class="login-brand">
+      <h1>Portal do Professor Arlisson</h1>
+      <p class="login-slogan">
+        Física e Matemática • Ensino Médio e EJA
+      </p>
+
+      <ul class="login-features">
+        <li>📘 Conteúdos organizados por disciplina</li>
+        <li>📚 Glossário didático</li>
+        <li>📢 Avisos e materiais atualizados</li>
+      </ul>
+    </section>
+
+    <!-- LADO LOGIN -->
+    <section class="login-panel">
+
+      <h2>Acesso do Aluno</h2>
+      <p class="login-info">
+        Utilize o usuário e senha fornecidos em sala.
+      </p>
+
+      <div class="login-form">
+        <input
+          type="text"
+          id="usuario"
+          placeholder="Usuário"
+          autocomplete="username"
+        >
+
+        <input
+          type="password"
+          id="senha"
+          placeholder="Senha"
+          autocomplete="current-password"
+        >
+
+        <button type="button" onclick="login()">
+          Entrar no Portal
+        </button>
+
+        <p id="erro"></p>
+      </div>
+
+      <p class="login-footer">
+        © 2026 • Portal do Professor Arlisson
+      </p>
+
+    </section>
+
+  </div>
+
+  <script type="module" src="js/login2.js"></script>
+
+</body>
+</html>

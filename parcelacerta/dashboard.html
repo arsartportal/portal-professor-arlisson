@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>ParcelaCerta • Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>ParcelaCerta</h1>
+  <p>Seu empréstimo, sem surpresas.</p>
+</header>
+
+<div class="container">
+
+  <!-- RESUMO -->
+  <div class="grid">
+    <div class="card">
+      <h3>Total Emprestado</h3>
+      <div class="valor" id="totalEmprestado">R$ 0,00</div>
+    </div>
+
+    <div class="card">
+      <h3>Total Pago</h3>
+      <div class="valor verde" id="totalPago">R$ 0,00</div>
+    </div>
+
+    <div class="card">
+      <h3>Saldo Devedor</h3>
+      <div class="valor vermelho" id="saldoDevedor">R$ 0,00</div>
+    </div>
+
+    <div class="card">
+      <h3>Parcelas Quitadas</h3>
+      <div class="valor" id="parcelasQuitadas">0 / 0</div>
+    </div>
+  </div>
+
+  <!-- EMPRÉSTIMOS -->
+  <div class="card" style="margin-top:30px">
+    <h3>Empréstimos Ativos</h3>
+
+    <div class="emprestimo">
+      <strong id="tituloEmprestimo">Empréstimo</strong>
+      <span id="detalhesEmprestimo">
+        Valor • Taxa • Parcelas • Tipo
+      </span>
+    </div>
+
+    <a href="novo-emprestimo.html" class="btn">Novo Empréstimo</a>
+  </div>
+
+  <!-- GRÁFICOS -->
+<div class="grid" style="margin-top:30px">
+
+  <div class="card">
+    <h3>Evolução do Saldo Devedor</h3>
+    <canvas id="graficoSaldo" height="200"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Juros × Amortização</h3>
+    <canvas id="graficoJuros" height="200"></canvas>
+  </div>
+
+</div>
+
+
+</div>
+
+
+<!-- Chart.js (global) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- App principal -->
+<script type="module" src="js/app.js"></script>
+
+
+
+<footer>
+  ParcelaCerta © 2026 • Controle profissional de empréstimos
+</footer>
+
+
+<script type="module" src="js/auth.js"></script>
+
+
+
+</body>
+</html>
