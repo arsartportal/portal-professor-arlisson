@@ -207,8 +207,17 @@ function criarCardTrilha(trilha) {
      - Conceder XP
   --------------------------------------------------- */
   card.addEventListener("click", () => {
-    alert(`Abrir trilha: ${trilha.titulo}`);
-  });
+
+  // Verificação de segurança
+  if (!trilha.rota || typeof trilha.rota !== "string") {
+    console.warn("Trilha sem rota válida:", trilha);
+    return;
+  }
+
+  // Navegação para a página da trilha
+  window.location.href = trilha.rota;
+
+});
 
   // Insere no DOM
   container.appendChild(card);
