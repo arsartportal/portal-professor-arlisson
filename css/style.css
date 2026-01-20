@@ -1936,3 +1936,74 @@ body {
   font-style: italic;
 }
 
+/* =====================================
+   LEVEL UP – OVERLAY GLOBAL (FIX)
+===================================== */
+
+#levelup-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.4s ease;
+}
+
+/* Estado visível */
+#levelup-overlay.ativo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Caixa */
+.levelup-box {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
+
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+
+  animation: levelup-pop 0.6s ease-out,
+             levelup-glow 1.5s ease-in-out infinite;
+}
+
+.levelup-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.levelup-level {
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Animações */
+@keyframes levelup-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes levelup-glow {
+  0%   { box-shadow: 0 0 20px rgba(255,255,255,.4); }
+  50%  { box-shadow: 0 0 40px rgba(255,255,255,.8); }
+  100% { box-shadow: 0 0 20px rgba(255,255,255,.4); }
+}

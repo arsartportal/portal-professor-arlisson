@@ -103,7 +103,30 @@
 <script src="../js/checkpoints.js"></script>
 <script src="../js/cinematica.js"></script>
 <script src="../js/gamificacao.js"></script>
-<script src="../js/cinematica-ui.js"></script>
+<script type="module" src="../js/cinematica-ui.js"></script>
+<script type="module">
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { app } from "../js/firebase.js";
 
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+
+    const ref = doc(db, "usuarios", user.uid);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) return;
+
+    const xpReal = snap.data().xp || 0;
+
+    // 🔥 SINCRONIZA XP VISUAL COM XP REAL
+    if (window.sincronizarXPVisual) {
+      window.sincronizarXPVisual(xpReal);
+    }
+  });
+</script>
 </body>
 </html>

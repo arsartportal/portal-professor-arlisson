@@ -129,9 +129,62 @@ function sair() {
 <script type="module" src="js/perfil.js"></script>
 <script src="js/tema.js"></script>
 <script type="module" src="js/hud.js"></script>
-
+<script src="js/gamificacao.js"></script>
 <!-- JS ESPECÍFICO DA FÍSICA -->
 <script type="module" src="js/fisica.js"></script>
 
+
+<!-- =========================
+     LEVEL UP OVERLAY
+========================== -->
+<div id="levelup-overlay">
+  <div class="levelup-box">
+    <div class="levelup-title">LEVEL UP</div>
+    <div class="levelup-level">
+      Nível <span id="levelup-nivel">0</span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { adicionarXP } from "./js/xp.js";
+
+  // XP por entrar no módulo Física (1x por dia)
+  adicionarXP(100, "Acesso à Física");
+</script>
+
+<script type="module">
+  import { adicionarXP } from "./js/xp.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { app } from "./js/firebase.js";
+
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+
+    // 🔍 Verifica se veio de um checkpoint
+    const raw = localStorage.getItem("checkpointConcluido");
+    if (!raw) return;
+
+    const evento = JSON.parse(raw);
+
+    // Segurança básica
+    if (!evento.trilha || !evento.xp) return;
+
+    // 🔥 XP REAL (Firestore)
+    await adicionarXP(evento.xp, `checkpoint_${evento.trilha}`);
+
+    // 🔥 XP VISUAL + LEVEL UP
+    if (window.adicionarXPVisual) {
+      window.adicionarXPVisual(evento.xp);
+    }
+
+    // 🧹 Limpa evento (anti-duplicação)
+    localStorage.removeItem("checkpointConcluido");
+  });
+</script>
 </body>
 </html>

@@ -1,46 +1,61 @@
-// ===============================
-// UI do Checkpoint – Cinemática
-// ===============================
+/* =====================================================
+   CINEMATICA-UI.JS
+   -----------------------------------------------------
+   Responsabilidade:
+   - Validar checkpoint da Cinemática
+   - Registrar conclusão local
+   - Redirecionar para Física
+===================================================== */
 
-// Botão de finalizar
-const btnFinalizar = document.getElementById("finalizarCheckpoint");
+document.addEventListener("DOMContentLoaded", () => {
 
-// Função que coleta as respostas do aluno
-function coletarRespostas() {
-  const respostas = [];
+  const botao = document.getElementById("finalizarCheckpoint");
+  if (!botao) return;
 
-  checkpointCinematica.questoes.forEach((_, index) => {
-    const marcada = document.querySelector(
-      `input[name="q${index}"]:checked`
+  botao.addEventListener("click", () => {
+
+    const respostasCorretas = ["1", "1", "2"];
+
+    const respostasAluno = [
+      document.querySelector('input[name="q0"]:checked')?.value,
+      document.querySelector('input[name="q1"]:checked')?.value,
+      document.querySelector('input[name="q2"]:checked')?.value
+    ];
+
+    if (respostasAluno.includes(undefined)) {
+      alert("Responda todas as questões antes de finalizar.");
+      return;
+    }
+
+    let acertos = 0;
+    respostasAluno.forEach((r, i) => {
+      if (r === respostasCorretas[i]) acertos++;
+    });
+
+    if (acertos < 2) {
+      alert(`Você acertou ${acertos}/3. Revise o conteúdo.`);
+      return;
+    }
+
+    alert("Checkpoint concluído! Você será redirecionado.");
+
+    /* =====================================
+       REGISTRA EVENTO PARA A PÁGINA FÍSICA
+    ===================================== */
+    localStorage.setItem(
+      "checkpointConcluido",
+      JSON.stringify({
+        trilha: "cinematica",
+        xp: 50,
+        timestamp: Date.now()
+      })
     );
 
-    // Se não marcou nada, salva -1
-    respostas.push(marcada ? parseInt(marcada.value) : -1);
+    /* =====================================
+       REDIRECIONA
+    ===================================== */
+    window.location.href = "../fisica.html";
+
   });
 
-  return respostas;
-}
-
-// Evento do botão
-btnFinalizar.addEventListener("click", () => {
-  const respostasAluno = coletarRespostas();
-
-  // Corrige usando a função global
-  const resultado = corrigirCheckpoint(
-    checkpointCinematica,
-    respostasAluno
-  );
-
-  // Feedback ao aluno
-  if (resultado.aprovado) {
-    adicionarXP(resultado.xp); // função da gamificação
-    liberarProximoCard();      // função do seu fluxo
-    mostrarFeedback(
-      `✅ Checkpoint concluído! +${resultado.xp} XP`
-    );
-  } else {
-    mostrarFeedback(
-      "❌ Você não atingiu o mínimo de acertos. Revise o conteúdo e tente novamente."
-    );
-  }
 });
