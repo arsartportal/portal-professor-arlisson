@@ -108,6 +108,100 @@ body[data-theme="dark"] .portal-name {
   color: #f8fafc; /* quase branco */
 }
 
+/* ===========================
+   PATCH NOTES – ÁREA DO PROFESSOR
+   =========================== */
+
+.patch-notes {
+  margin: 40px auto;
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.patch-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #222;
+}
+
+.patch-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Versão */
+.patch-version {
+  margin-top: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Cabeçalho clicável */
+.patch-version summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  background: #f7f7f7;
+  display: grid;
+  grid-template-columns: 90px 140px 1fr;
+  gap: 12px;
+  align-items: center;
+  font-weight: 600;
+  list-style: none;
+}
+
+.patch-version summary::-webkit-details-marker {
+  display: none;
+}
+
+.patch-version summary:hover {
+  background: #f0f0f0;
+}
+
+/* Tags */
+.patch-version .version {
+  background: #222;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.patch-version .date {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.patch-version .title {
+  font-size: 0.95rem;
+  color: #111;
+}
+
+/* Conteúdo */
+.patch-content {
+  padding: 18px 22px;
+}
+
+.patch-content h4 {
+  margin: 16px 0 6px;
+  font-size: 1rem;
+  color: #222;
+}
+
+.patch-content ul {
+  margin: 0 0 10px 18px;
+}
+
+.patch-content li {
+  margin-bottom: 6px;
+  color: #444;
+}
+
+
 
 
 /* =================================================
@@ -1723,5 +1817,122 @@ body.dark .card-prof:hover {
   border: 1px dashed var(--locked-border);
   opacity: 0.75;
   cursor: not-allowed;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0e0e11;
+  color: #eaeaf0;
+}
+
+/* HEADER */
+.topo {
+  background: linear-gradient(90deg, #1f1f2e, #111);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtitulo {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hud img {
+  width: 48px;
+}
+
+/* CONTEÚDO */
+.conteudo-fisica {
+  padding: 30px;
+}
+
+.conteudo-fisica h2 {
+  margin-bottom: 20px;
+}
+
+/* TRILHAS */
+.trilhas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.trilha-card {
+  background: #1a1a24;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.trilha-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 120, 255, 0.3);
+}
+
+.trilha-card h3 {
+  margin-top: 0;
+}
+
+/* PROGRESSO */
+.progresso {
+  margin: 15px 0;
+}
+
+.barra {
+  background: #333;
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.barra-preenchida {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  height: 100%;
+}
+
+.xp-info {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* BOTÕES */
+.trilha-card button {
+  width: 100%;
+  padding: 10px;
+  background: #0072ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.trilha-card button:hover {
+  background: #005ad6;
+}
+
+/* ESTADOS */
+.trilha-card.bloqueada {
+  opacity: 0.4;
+}
+
+.trilha-card.bloqueada button {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.em-breve {
+  color: #888;
+  font-style: italic;
 }
 

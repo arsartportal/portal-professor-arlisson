@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Estilos do HEADER -->
+  <link rel="stylesheet" href="css/header.css">
+</head>
+
+<body data-theme="light">
+
+  <!-- ==========================
+       HEADER / HUD DO PORTAL
+       ========================== -->
+  <header class="header">
+
+    <!-- ==========================
+         MINI HUD DO USUÁRIO
+         ========================== -->
+    <div class="mini-hud">
+
+      <img
+        id="patente-img"
+        class="mini-patente"
+        src=""
+        alt="Patente do usuário"
+      />
+
+      <div class="mini-xp">
+        <div id="xp-preenchimento"></div>
+      </div>
+
+      <!-- HUD EXPANDIDO (HOVER) -->
+      <div class="mini-detalhes">
+
+        <img
+          id="patente-img-detalhe"
+          class="patente-grande"
+          src=""
+          alt="Patente detalhada"
+        />
+
+        <div class="info-texto">
+          <strong>
+            Nível <span id="nivel-usuario">0</span>
+          </strong>
+          <span id="xp-texto">XP 0 / 100</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================
+         TÍTULO E SUBTÍTULO
+         ========================== -->
+    <div class="header-centro">
+
+      <h1 class="portal-title">
+        <span class="portal-brand">Portal</span>
+        <span class="portal-name">Professor Arlisson</span>
+      </h1>
+
+      <p class="portal-subtitle">
+        Materiais de Física e Matemática • Ensino Médio e EJA (2026)
+      </p>
+
+    </div>
+
+    <!-- ==========================
+         AÇÕES DO USUÁRIO
+         ========================== -->
+    <div class="header-direita">
+
+      <div class="header-botoes">
+        <button id="toggle-tema" title="Alternar tema">🌙</button>
+        <button onclick="sair()" title="Sair do sistema">Sair</button>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- ==========================
+       SCRIPT DO HEADER
+       ========================== -->
+  <script>
+    const btnTema = document.getElementById("toggle-tema");
+
+    if (btnTema) {
+      btnTema.addEventListener("click", () => {
+        const temaAtual =
+          document.body.getAttribute("data-theme") || "light";
+
+        const novoTema =
+          temaAtual === "dark" ? "light" : "dark";
+
+        document.body.setAttribute("data-theme", novoTema);
+      });
+    }
+
+    function sair() {
+      localStorage.clear();
+
+      if (window.firebase && firebase.auth) {
+        firebase.auth().signOut().finally(() => {
+          window.location.href = "index.html";
+        });
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+  </script>
+
+  <script src="js/header.js"></script>
+<script type="module" src="js/auth-guard.js"></script>
+<script type="module" src="js/perfil.js"></script>
+
+</body>
+</html>

@@ -1,17 +1,23 @@
+/* =================================================
+   TEMA.JS — TOGGLE DARK / LIGHT
+   ================================================= */
+
+const btnTema = document.getElementById("toggle-tema");
+
 /*
-  CONTROLE DE TEMA
-  ----------------
-  Troca entre light e dark
-  sem quebrar absolutamente nada,
-  pois todo o CSS usa variáveis.
+  Só adiciona o evento SE o botão existir.
+  Isso permite usar o mesmo tema.js
+  em TODAS as páginas do portal.
 */
+if (btnTema) {
+  btnTema.addEventListener("click", () => {
 
-const btnTheme = document.getElementById("toggleTheme");
+    const temaAtual =
+      document.body.getAttribute("data-theme") || "light";
 
-btnTheme.addEventListener("click", () => {
-  const atual = document.body.getAttribute("data-theme");
-  document.body.setAttribute(
-    "data-theme",
-    atual === "dark" ? "light" : "dark"
-  );
-});
+    const novoTema =
+      temaAtual === "dark" ? "light" : "dark";
+
+    document.body.setAttribute("data-theme", novoTema);
+  });
+}

@@ -1,0 +1,146 @@
+/* =====================================================
+   FISICA.CSS
+   -----------------------------------------------------
+   ⚠️ ATENÇÃO:
+   - TODO estilo é escopado em:
+     main[data-modulo="fisica"]
+   - Nada aqui pode afetar header, HUD ou outras páginas
+===================================================== */
+
+
+/* =====================================================
+   ÁREA GERAL DO MÓDULO FÍSICA
+===================================================== */
+
+main[data-modulo="fisica"] {
+  padding: 24px;
+}
+
+
+/* =====================================================
+   SEÇÃO: TRILHAS
+===================================================== */
+
+main[data-modulo="fisica"] .trilhas {
+  margin-top: 30px;
+}
+
+main[data-modulo="fisica"] .trilhas h3 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+
+/* =====================================================
+   GRID DE TRILHAS
+===================================================== */
+
+main[data-modulo="fisica"] .cards-trilhas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+
+/* =====================================================
+   CARD DE TRILHA
+===================================================== */
+
+main[data-modulo="fisica"] .trilha-card {
+  background: var(--card-bg, #ffffff);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+main[data-modulo="fisica"] .trilha-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+
+/* =====================================================
+   CONTEÚDO DO CARD
+===================================================== */
+
+main[data-modulo="fisica"] .trilha-serie {
+  font-size: 0.8rem;
+  opacity: 0.65;
+  margin-bottom: 6px;
+}
+
+main[data-modulo="fisica"] .trilha-titulo {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+main[data-modulo="fisica"] .trilha-desc {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+
+/* =====================================================
+   DARK MODE (SEM QUEBRAR O GLOBAL)
+===================================================== */
+
+body[data-theme="dark"] main[data-modulo="fisica"] .trilha-card {
+  background: #1e1e1e;
+}
+
+body[data-theme="dark"] main[data-modulo="fisica"] .trilha-desc {
+  opacity: 0.9;
+}
+
+/* =====================================================
+   CORES POR SÉRIE (TRILHAS)
+===================================================== */
+
+/* ---------- 1º ANO ---------- */
+main[data-modulo="fisica"] .trilha-card[data-serie="1ano"] {
+  border-left: 6px solid #2563eb; /* azul */
+}
+
+/* ---------- 2º ANO ---------- */
+main[data-modulo="fisica"] .trilha-card[data-serie="2ano"] {
+  border-left: 6px solid #16a34a; /* verde */
+}
+
+/* ---------- 3º ANO ---------- */
+main[data-modulo="fisica"] .trilha-card[data-serie="3ano"] {
+  border-left: 6px solid #7c3aed; /* roxo */
+}
+
+
+/* =====================================================
+   AJUSTES VISUAIS (OPCIONAL, MAS BONITO)
+===================================================== */
+
+main[data-modulo="fisica"] .trilha-card {
+  position: relative;
+  padding-left: 18px; /* espaço para a borda */
+}
+
+
+/* =====================================================
+   DARK MODE (mantém contraste)
+===================================================== */
+
+body[data-theme="dark"] main[data-modulo="fisica"]
+.trilha-card[data-serie="1ano"] {
+  border-left-color: #60a5fa;
+}
+
+body[data-theme="dark"] main[data-modulo="fisica"]
+.trilha-card[data-serie="2ano"] {
+  border-left-color: #4ade80;
+}
+
+body[data-theme="dark"] main[data-modulo="fisica"]
+.trilha-card[data-serie="3ano"] {
+  border-left-color: #c4b5fd;
+}

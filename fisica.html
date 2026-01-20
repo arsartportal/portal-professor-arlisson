@@ -1,88 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Física</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
 
-<header>
-  <h1>Física</h1>
-  <a href="home.html">⬅ Voltar</a>
+<head>
+  <!-- =========================
+       META / CONFIGURAÇÕES
+  ========================== -->
+  <meta charset="UTF-8">
+  <title>Portal do Professor Arlisson • Física</title>
+
+    <!-- Estilo global do portal -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Estilo específico do módulo Física -->
+<link rel="stylesheet" href="css/fisica.css">
+</head>
+
+<!-- 
+  data-theme controla o modo claro/escuro
+-->
+<body data-theme="light">
+
+<!-- =========================
+     HEADER / HUD SUPERIOR
+========================== -->
+<header class="header">
+
+  <!-- MINI HUD DO USUÁRIO -->
+  <div class="mini-hud">
+
+    <img
+      id="patente-img"
+      class="mini-patente"
+      src=""
+      alt="Patente do usuário"
+    />
+
+    <div class="mini-xp">
+      <div id="xp-preenchimento"></div>
+    </div>
+
+    <div class="mini-detalhes">
+
+      <img
+        id="patente-img-detalhe"
+        class="patente-grande"
+        src=""
+        alt="Patente detalhada"
+      />
+
+      <div class="info-texto">
+        <strong>Nível <span id="nivel-usuario">0</span></strong>
+        <span id="xp-texto">XP 0 / 100</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TÍTULO CENTRAL -->
+  <div class="header-centro">
+    <h1 class="portal-title">
+      <span class="portal-brand">Portal</span>
+      <span class="portal-name">Professor Arlisson</span>
+    </h1>
+    <p>Materiais de Física e Matemática • Ensino Médio e EJA (2026)</p>
+  </div>
+
+  <!-- AÇÕES -->
+  <div class="header-direita">
+    <div class="header-botoes">
+      <button id="toggle-tema" title="Alternar tema">🌙</button>
+      <button onclick="sair()">Sair</button>
+    </div>
+  </div>
 
 </header>
 
-<main>
-</script>
+<!-- =========================
+     CONTEÚDO PRINCIPAL
+========================== -->
+<main data-modulo="fisica">
 
+  <!-- TÍTULO DO MÓDULO -->
+  <section class="welcome-user">
+    <h2>
+      📘 Física —
+      <span id="nome-usuario">Aluno</span>, bora aprender? ⚡
+    </h2>
+  </section>
 
-<h2>📂 Materiais</h2>
-<div id="lista-materiais"></div>
+  <!-- AQUI ENTRARÃO:
+       • Conteúdos
+       • Listas
+       • Vídeos
+       • PDFs
+       • Exercícios
+  -->
 
-  <div class="turma-conteudo" data-turma="1ano">
-    <h2>Conteúdo – 1º Ano</h2>
-    <ul>
-      <li><a href="#">Movimento Uniforme</a></li>
-      <li><a href="#">Movimento Variado</a></li>
-      <li><a href="#">Leis de Newton</a></li>
-    </ul>
-  </div>
+  <section class="trilhas">
+  <h3>📚 Trilhas de Aprendizagem</h3>
 
-  <div class="turma-conteudo" data-turma="2ano">
-    <h2>Conteúdo – 2º Ano</h2>
-    <ul>
-      <li><a href="#">Termologia</a></li>
-      <li><a href="#">Calorimetria</a></li>
-    </ul>
-  </div>
-
-  <div class="turma-conteudo" data-turma="3ano">
-    <h2>Conteúdo – 3º Ano</h2>
-    <ul>
-      <li><a href="#">Eletrostática</a></li>
-      <li><a href="#">Eletrodinâmica</a></li>
-    </ul>
-  </div>
-
-  <div class="turma-conteudo" data-turma="eja">
-    <h2>Conteúdo – EJA</h2>
-    <ul>
-      <li><a href="#">Grandezas físicas</a></li>
-      <li><a href="#">Noções de movimento</a></li>
-    </ul>
-  </div>
-
-  <div class="turma-conteudo" data-turma="gakinha">
-    <h2>Conteúdo – </h2>
-    <ul>
-      <li><a href="#">Amo tu muitão</a></li>
-      <li><a href="#">cara de pão</a></li>
-    </ul>
-  </div>
-
+  <!-- Aqui o JS vai inserir os cards -->
+  <div id="lista-trilhas" class="cards-trilhas"></div>
+</section>
 
 </main>
-<script type="module" src="../js/fisica.js"></script>
-<script src="js/login2.js"></script>
-<script src="js/conteudos.js"></script>
 
+<!-- =========================
+     SCRIPT: LOGOUT
+========================== -->
 <script>
-  console.log("SCRIPT INLINE RODANDO");
+function sair() {
+  localStorage.clear();
 
-  const turma = localStorage.getItem("turma");
-  console.log("turma:", turma);
-
-  document.querySelectorAll(".turma-conteudo").forEach(bloco => {
-    console.log("bloco:", bloco.dataset.turma);
-
-    if (bloco.dataset.turma !== turma) {
-      bloco.style.display = "none";
-    }
-  });
+  if (window.firebase && firebase.auth) {
+    firebase.auth().signOut().finally(() => {
+      window.location.href = "index.html";
+    });
+  } else {
+    window.location.href = "index.html";
+  }
+}
 </script>
-<script src="js/materiais-sheets.js"></script>
 
+<!-- =========================
+     SCRIPTS DO SISTEMA
+========================== -->
+<script type="module" src="js/auth-guard.js"></script>
+<script type="module" src="js/perfil.js"></script>
+<script src="js/tema.js"></script>
+<script type="module" src="js/hud.js"></script>
+
+<!-- JS ESPECÍFICO DA FÍSICA -->
+<script type="module" src="js/fisica.js"></script>
 
 </body>
 </html>

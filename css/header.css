@@ -1,0 +1,199 @@
+/* =========================================================
+   VARIÁVEIS DE TEMA
+   ========================================================= */
+:root {
+  --header-bg: #ffffff;
+  --header-text: #222;
+
+  --hud-bg: #f8f9fa;
+  --hud-border: rgba(0, 0, 0, 0.08);
+
+  --btn-border: rgba(0, 0, 0, 0.25);
+  --btn-hover: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --header-bg: #1e1e1e;
+  --header-text: #f2f2f2;
+
+  --hud-bg: #2a2a2a;
+  --hud-border: rgba(255, 255, 255, 0.12);
+
+  --btn-border: rgba(255, 255, 255, 0.35);
+  --btn-hover: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================================
+   HEADER (CONTAINER PRINCIPAL)
+   ========================================================= */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 24px;
+  background: var(--header-bg);
+  color: var(--header-text);
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 100;
+}
+
+/* =========================================================
+   MINI HUD (PATENTE + XP)
+   ========================================================= */
+.mini-hud {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Patente pequena */
+.mini-patente {
+  width: 36px;
+  height: 36px;
+}
+
+/* Barra de XP (compacta) */
+.mini-xp {
+  width: 80px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .mini-xp {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+#xp-preenchimento {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00e0ff, #00ff9c);
+  transition: width 0.3s ease;
+}
+
+/* =========================================================
+   HUD EXPANDIDO (HOVER)
+   ========================================================= */
+.mini-detalhes {
+  position: absolute;
+  top: 48px;
+  left: 0;
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px;
+  width: 170px;
+
+  background: var(--hud-bg);
+  border: 1px solid var(--hud-border);
+  border-radius: 12px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Ativação no hover */
+.mini-hud:hover .mini-detalhes {
+  display: flex;
+}
+
+/* Patente grande */
+.patente-grande {
+  width: 64px;
+  height: 64px;
+}
+
+/* Texto do HUD */
+.info-texto {
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.info-texto strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   TÍTULO E SUBTÍTULO DO PORTAL
+   ========================================================= */
+.header-centro {
+  text-align: center;
+}
+
+.portal-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.portal-brand {
+  opacity: 0.7;
+}
+
+.portal-name {
+  font-weight: 700;
+}
+
+.portal-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   AÇÕES DO USUÁRIO (BOTÕES)
+   ========================================================= */
+.header-direita {
+  display: flex;
+  align-items: center;
+}
+
+.header-botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.header-botoes button {
+  background: transparent;
+  border: 1px solid var(--btn-border);
+  color: inherit;
+
+  padding: 6px 12px;
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.header-botoes button:hover {
+  background: var(--btn-hover);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   RESPONSIVIDADE BÁSICA
+   ========================================================= */
+@media (max-width: 768px) {
+  .portal-subtitle {
+    display: none;
+  }
+
+  .mini-xp {
+    width: 60px;
+  }
+
+  .portal-title {
+    font-size: 1.2rem;
+  }
+}
