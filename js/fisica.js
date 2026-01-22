@@ -42,6 +42,11 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+import {
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
 
 /* =====================================================
    INICIALIZAÇÃO DOS SERVIÇOS
@@ -98,7 +103,10 @@ async function carregarPerfilETrilhas(uid) {
 
     const usuario = userSnap.data();
 
-    // 🔽 Busca trilhas conforme perfil
+    // 🔥 SOMA XP PENDENTE AQUI
+    await contabilizarXPPendente(uid);
+
+    // 🔽 Depois carrega as trilhas
     await carregarTrilhas(usuario);
 
   } catch (erro) {
@@ -245,5 +253,57 @@ function formatarSerie(serie) {
 
     default:
       return "";
+  }
+}
+
+/* =====================================================
+   SOMA XP DOS CHECKPOINTS CONCLUÍDOS
+===================================================== */
+
+async function contabilizarXPPendente(uid) {
+
+  try {
+
+    const userRef = doc(db, "usuarios", uid);
+    const progressRef = collection(userRef, "progress");
+
+    const snap = await getDocs(progressRef);
+
+    let xpTotal = 0;
+
+    for (const docSnap of snap.docs) {
+
+      const data = docSnap.data();
+
+      if (data.concluido === true && data.xpContabilizado !== true) {
+
+        xpTotal += data.xp || 0;
+
+        // marca como já contabilizado
+        await updateDoc(docSnap.ref, {
+          xpContabilizado: true
+        });
+      }
+    }
+
+    if (xpTotal > 0) {
+
+      await updateDoc(userRef, {
+        xp: increment(xpTotal)
+      });
+
+       console.log("🔥 XP somado:", xpTotal);
+
+       // 🔥 DISPARA LEVEL UP
+  if (window.adicionarXPVisual) {
+    window.adicionarXPVisual(xpTotal);
+  }
+}
+    
+
+    
+
+  } catch (erro) {
+    console.error("Erro ao contabilizar XP:", erro);
   }
 }

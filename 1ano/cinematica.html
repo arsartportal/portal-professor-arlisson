@@ -1,132 +1,157 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/trilhas.css">
-
   <meta charset="UTF-8">
-  <title>Cinemática</title>
+  <title>Cinemática • Portal do Professor Arlisson</title>
 
+  <!-- Estilos globais do portal -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Estilo específico da aula -->
+  <link rel="stylesheet" href="../css/cinematica.css">
 </head>
+
 <body>
 
-<section class="conteudo-card">
+<!-- =====================================================
+     CONTEÚDO PRINCIPAL
+===================================================== -->
+<section class="aula">
 
-  <h2>Cinemática</h2>
-  <p class="descricao-card">
-    Movimento, velocidade, aceleração e gráficos
-  </p>
+  <!-- ================= TÍTULO ================= -->
+  <header class="topo">
+    <h1>🎯 Cinemática</h1>
+    <p class="subtitulo">
+      Movimento, velocidade, aceleração e gráficos
+    </p>
+  </header>
 
-  <h3>O que você vai entender</h3>
-  <p>
-    Como descrever o movimento de um corpo usando ideias básicas da Cinemática,
-    interpretando movimento, velocidade, aceleração e gráficos, sem uso de fórmulas.
-  </p>
+  <!-- ================= CONCEITOS ================= -->
+  <div class="bloco">
 
-  <h3>Ideia central</h3>
-  <p>
-    A Cinemática estuda o movimento sem se preocupar com suas causas.
-    Ela permite descrever como um corpo se move a partir da observação
-    e da interpretação correta das situações.
-  </p>
+    <h2>📘 Movimento</h2>
+    <p>
+      Um corpo está em movimento quando sua posição muda em relação
+      a um referencial ao longo do tempo.
+    </p>
 
-  <h3>Movimento</h3>
-  <p>
-    Um corpo está em movimento quando muda de posição em relação a um referencial.
-    Movimento e repouso são relativos, pois dependem de quem observa.
-  </p>
+    <h2>🚀 Velocidade</h2>
+    <p>
+      Velocidade indica quanto a posição varia em função do tempo.
+    </p>
 
-  <h3>Velocidade</h3>
-  <p>
-    A velocidade indica como o movimento acontece.
-    Um corpo pode ter velocidade constante sem estar acelerado.
-  </p>
+    <h2>⚡ Aceleração</h2>
+    <p>
+      Aceleração representa a variação da velocidade ao longo do tempo.
+      Sempre que a velocidade muda, há aceleração.
+    </p>
 
-  <h3>Aceleração</h3>
-  <p>
-    A aceleração ocorre quando há mudança na velocidade,
-    seja no valor, seja na direção do movimento.
-    Frear e fazer curvas também são exemplos de aceleração.
-  </p>
+  </div>
 
-  <h3>Gráficos</h3>
-  <p>
-    Gráficos ajudam a interpretar o movimento.
-    No ENEM, entender o significado do gráfico é mais importante
-    do que calcular valores numéricos.
-  </p>
+  <div class="bloco lab">
 
-  <h3>Erros comuns (ENEM)</h3>
-  <ul>
-    <li>Confundir velocidade com aceleração</li>
-    <li>Achar que movimento é absoluto</li>
-    <li>Ignorar o papel dos gráficos</li>
-  </ul>
+  <h2>🧪 Laboratório de Cinemática</h2>
 
-  <!-- CHECKPOINT INTERATIVO -->
-  <h3>Checkpoint conceitual</h3>
+  <div class="lab-grid">
 
-  <form id="checkpoint">
+    <!-- =======================
+         COLUNA ESQUERDA
+    ======================== -->
+    <div>
 
-    <p>1. Um corpo pode estar em repouso e em movimento ao mesmo tempo?</p>
-    <label><input type="radio" name="q0" value="0"> <span>Não</span></label><br>
-    <label><input type="radio" name="q0" value="1"> <span>Sim, dependendo do referencial</span></label><br>
-    <label><input type="radio" name="q0" value="2"> <span>Sim, se estiver acelerado</span></label><br>
-    <label><input type="radio" name="q0" value="3"> <span>Apenas se estiver em curva</span></label>
+      <h3>🚗 Movimento</h3>
 
-    <hr>
+      <div class="simulacao">
+        <div id="carro">🚗</div>
+      </div>
 
-    <p>2. Um carro com velocidade constante pode estar acelerado?</p>
-    <label><input type="radio" name="q1" value="0"> <span>Nunca</span></label><br>
-    <label><input type="radio" name="q1" value="1"> <span>Sim, se mudar de direção</span></label><br>
-    <label><input type="radio" name="q1" value="2"> <span>Apenas se for rápido</span></label><br>
-    <label><input type="radio" name="q1" value="3"> <span>Apenas se frear</span></label>
+      <div class="controles">
 
-    <hr>
+        <label>Velocidade (m/s)</label>
 
-    <p>3. Em um gráfico velocidade × tempo, uma linha inclinada indica:</p>
-    <label><input type="radio" name="q2" value="0"> <span>Repouso</span></label><br>
-    <label><input type="radio" name="q2" value="1"> <span>Velocidade constante</span></label><br>
-    <label><input type="radio" name="q2" value="2"> <span>Aceleração</span></label><br>
-    <label><input type="radio" name="q2" value="3"> <span>Posição constante</span></label>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="2"
+          oninput="ajustarVelocidade(this.value)"
+        >
 
-  </form>
+        <span id="velTxt">2 m/s</span>
 
-  <button id="finalizarCheckpoint">
-    Finalizar Checkpoint
-  </button>
+        <div class="botoes">
+          <button onclick="acelerar()">⚡ Acelerar</button>
+          <button onclick="frear()">🛑 Frear</button>
+          <button onclick="pausar()">⏸ Pausar</button>
+          <button onclick="resetar()">🔄 Resetar</button>
+        </div>
+
+        <div class="painel-dados">
+  <div>⏱ Tempo: <span id="tempoTxt">0.0</span> s</div>
+  <div>🚀 Velocidade: <span id="velAtualTxt">2.0</span> m/s</div>
+  <div>⚡ Aceleração: <span id="accTxt">0.0</span> m/s²</div>
+</div>
+      </div>
+
+    </div>
+
+    <!-- =======================
+         COLUNA DIREITA
+    ======================== -->
+    <div>
+
+      <h3>📊 Gráficos</h3>
+
+      <div class="grafico-box">
+        <strong>Posição × Tempo</strong>
+        <canvas id="grafPos" width="420" height="220"></canvas>
+      </div>
+
+      <div class="grafico-box">
+        <strong>Velocidade × Tempo</strong>
+        <canvas id="grafVel" width="420" height="220"></canvas>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+  <!-- ================= CHECKPOINT ================= -->
+  <div class="bloco checkpoint">
+
+    <h2>🏁 Checkpoint Final</h2>
+
+    <p>
+      Um carro passa de <strong>10 m/s</strong> para
+      <strong>30 m/s</strong> em <strong>10 s</strong>.
+      A aceleração vale:
+    </p>
+
+    <div class="botoes">
+      <button onclick="checkpoint(1)">1 m/s²</button>
+      <button onclick="checkpoint(2)">2 m/s²</button>
+      <button onclick="checkpoint(3)">3 m/s²</button>
+    </div>
+
+    <p id="msgFinal"></p>
+
+  </div>
 
 </section>
 
-<!-- SCRIPTS -->
-<script src="../js/checkpoints.js"></script>
-<script src="../js/cinematica.js"></script>
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<!-- Proteção de rota -->
+<script type="module" src="../js/auth-guard.js"></script>
+
+<!-- Lógica da simulação -->
+<script type="module" src="../js/cinematica.js"></script>
+
+<!-- Sistema de XP -->
 <script src="../js/gamificacao.js"></script>
-<script type="module" src="../js/cinematica-ui.js"></script>
-<script type="module">
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-  import { app } from "../js/firebase.js";
 
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) return;
-
-    const ref = doc(db, "usuarios", user.uid);
-    const snap = await getDoc(ref);
-
-    if (!snap.exists()) return;
-
-    const xpReal = snap.data().xp || 0;
-
-    // 🔥 SINCRONIZA XP VISUAL COM XP REAL
-    if (window.sincronizarXPVisual) {
-      window.sincronizarXPVisual(xpReal);
-    }
-  });
-</script>
 </body>
 </html>

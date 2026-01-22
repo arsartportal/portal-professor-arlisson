@@ -1,0 +1,229 @@
+/* =================================================
+   BASE
+================================================= */
+
+body {
+  background: radial-gradient(circle at top, #111, #000);
+  color: #eee;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.aula {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.sub {
+  opacity: .8;
+  margin-bottom: 30px;
+}
+
+/* =================================================
+   BLOCOS
+================================================= */
+
+.bloco {
+  background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 45px;
+  box-shadow: 0 0 25px rgba(0,0,0,.7);
+}
+
+.bloco h2 {
+  color: #00eaff;
+}
+
+/* =================================================
+   CONCEITOS
+================================================= */
+
+.conceito-box {
+  background: rgba(0, 234, 255, 0.12);
+  border-left: 4px solid #00eaff;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+/* =================================================
+   LABORATÓRIO
+================================================= */
+
+.lab {
+  border: 3px solid #00eaff;
+  box-shadow: 0 0 30px rgba(0,234,255,.4);
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* =================================================
+   SIMULAÇÃO
+================================================= */
+
+.simulacao {
+  height: 90px;
+  background: linear-gradient(#333, #222);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.simulacao::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    #fff 0,
+    #fff 20px,
+    transparent 20px,
+    transparent 40px
+  );
+}
+
+#carro {
+  position: absolute;
+  font-size: 48px;
+  top: 18px;
+  left: 0;
+  user-select: none;
+}
+
+/* =================================================
+   CONTROLES
+================================================= */
+
+.controles {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.controle label {
+  font-weight: bold;
+  color: #00eaff;
+}
+
+.botoes {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  background: #111;
+  color: #fff;
+  border: 2px solid #00eaff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+button:hover {
+  background: #00eaff;
+  color: #000;
+}
+
+/* =================================================
+   GRÁFICOS
+================================================= */
+
+.grafico-box {
+  background: #0b0b0b;
+  padding: 15px;
+  border-radius: 12px;
+  border: 2px solid #00eaff;
+  margin-bottom: 20px;
+}
+
+canvas {
+  width: 100%;
+  background: #111;
+  border-radius: 8px;
+}
+
+/* =================================================
+   RESPONSIVO
+================================================= */
+
+@media (max-width: 900px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================================================
+   CHECKPOINT — DESTAQUE DOURADO
+================================================= */
+
+.checkpoint {
+  border: 3px solid gold;
+  border-radius: 22px;
+  box-shadow:
+    0 0 15px rgba(255, 215, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.35);
+  position: relative;
+}
+
+/* brilho animado sutil */
+.checkpoint::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  animation: brilhoCheckpoint 2.5s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes brilhoCheckpoint {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+/* botões dourados no checkpoint */
+.checkpoint button {
+  border-color: gold;
+}
+
+.checkpoint button:hover {
+  background: gold;
+  color: #000;
+}
+
+/* =================================================
+   PAINEL DE DADOS — CINEMÁTICA
+================================================= */
+
+.painel-dados {
+  margin-top: 15px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(0, 234, 255, 0.12);
+  border: 2px solid #00eaff;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #e6faff;
+  box-shadow: 0 0 15px rgba(0,234,255,.35);
+}
+
+.painel-dados span {
+  font-weight: bold;
+  color: #00eaff;
+}

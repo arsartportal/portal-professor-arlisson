@@ -1,5 +1,8 @@
 /* =====================================================
-   XP.JS — SISTEMA DE XP (LOGIN + DIÁRIO)
+   XP.JS — SISTEMA DEFINITIVO DE XP
+   - Suporta excesso de XP
+   - Level up infinito
+   - Compatível com HUD e animações
 ===================================================== */
 
 import {
@@ -21,63 +24,74 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 /* =====================================================
-   1️⃣ XP IMEDIATO (LOGIN)
-   Usado quando o usuário JÁ está autenticado
+   CONFIGURAÇÃO DE XP
 ===================================================== */
-export async function adicionarXPImediato(valor, acao) {
 
-  const user = auth.currentUser;
-  if (!user) return;
+function limiteXP(nivel) {
+  return 100 + nivel * 100;
+}
 
-  const hoje = new Date().toISOString().slice(0, 10);
-  const ref = doc(db, "usuarios", user.uid);
+/* =====================================================
+   PROCESSA XP
+===================================================== */
+
+async function processarXP(uid, ganhoXP) {
+
+  const ref = doc(db, "usuarios", uid);
   const snap = await getDoc(ref);
 
   if (!snap.exists()) return;
 
   const dados = snap.data();
-  const xpDiario = dados.xpDiario || {};
 
-  // Já ganhou hoje?
-  if (xpDiario[acao] === hoje) return;
+let xp = typeof dados.xp === "number" ? dados.xp : 0;
+let nivel = typeof dados.nivel === "number" ? dados.nivel : 0;
 
-  const novoXP = (dados.xp || 0) + valor;
-  const novoNivel = Math.floor(novoXP / 100);
+  xp += ganhoXP;
+
+  let limite = limiteXP(nivel);
+  let subiuNivel = false;
+
+  while (xp >= limite) {
+    xp -= limite;
+    nivel++;
+    limite = limiteXP(nivel);
+    subiuNivel = true;
+  }
 
   await updateDoc(ref, {
-    xp: increment(valor),
-    nivel: novoNivel,
-    [`xpDiario.${acao}`]: hoje
+    xp,
+    nivel
   });
+
+  return {
+    xp,
+    nivel,
+    limite,
+    subiuNivel
+  };
 }
 
 /* =====================================================
-   2️⃣ XP POR PÁGINA (AGUARDA AUTH)
+   XP IMEDIATO
 ===================================================== */
-export function adicionarXP(valor, acao) {
 
-  const hoje = new Date().toISOString().slice(0, 10);
+export async function adicionarXPImediato(valor) {
+
+  const user = auth.currentUser;
+  if (!user) return;
+
+  return processarXP(user.uid, valor);
+}
+
+/* =====================================================
+   XP COM AUTH (páginas)
+===================================================== */
+
+export function adicionarXP(valor) {
 
   onAuthStateChanged(auth, async (user) => {
-
     if (!user) return;
-
-    const ref = doc(db, "usuarios", user.uid);
-    const snap = await getDoc(ref);
-    if (!snap.exists()) return;
-
-    const dados = snap.data();
-    const xpDiario = dados.xpDiario || {};
-
-    if (xpDiario[acao] === hoje) return;
-
-    const novoXP = (dados.xp || 0) + valor;
-    const novoNivel = Math.floor(novoXP / 100);
-
-    await updateDoc(ref, {
-      xp: increment(valor),
-      nivel: novoNivel,
-      [`xpDiario.${acao}`]: hoje
-    });
+    await processarXP(user.uid, valor);
   });
 }
