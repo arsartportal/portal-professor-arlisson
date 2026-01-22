@@ -1,33 +1,26 @@
 /* =====================================================
-   XP.JS — SISTEMA DEFINITIVO DE XP
-   - Suporta excesso de XP
-   - Level up infinito
-   - Compatível com HUD e animações
+   XP.JS — SISTEMA DEFINITIVO DE XP (ESTÁVEL)
 ===================================================== */
 
 import {
-  getFirestore,
   doc,
   getDoc,
-  updateDoc,
-  increment
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
-  getAuth,
-  onAuthStateChanged
+  getAuth
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
-import { app } from "./firebase.js";
+import { app, db } from "./firebase.js";
 
-const db = getFirestore(app);
 const auth = getAuth(app);
 
 /* =====================================================
    CONFIGURAÇÃO DE XP
 ===================================================== */
 
-function limiteXP(nivel) {
+export function limiteXP(nivel) {
   return 100 + nivel * 100;
 }
 
@@ -42,10 +35,7 @@ async function processarXP(uid, ganhoXP) {
 
   if (!snap.exists()) return;
 
-  const dados = snap.data();
-
-let xp = typeof dados.xp === "number" ? dados.xp : 0;
-let nivel = typeof dados.nivel === "number" ? dados.nivel : 0;
+  let { xp = 0, nivel = 0 } = snap.data();
 
   xp += ganhoXP;
 
@@ -59,39 +49,18 @@ let nivel = typeof dados.nivel === "number" ? dados.nivel : 0;
     subiuNivel = true;
   }
 
-  await updateDoc(ref, {
-    xp,
-    nivel
-  });
+  await updateDoc(ref, { xp, nivel });
 
-  return {
-    xp,
-    nivel,
-    limite,
-    subiuNivel
-  };
+  return { xp, nivel, limite, subiuNivel };
 }
 
 /* =====================================================
-   XP IMEDIATO
+   API PÚBLICA
 ===================================================== */
 
-export async function adicionarXPImediato(valor) {
-
+export async function ganharXP(valor) {
   const user = auth.currentUser;
   if (!user) return;
 
   return processarXP(user.uid, valor);
-}
-
-/* =====================================================
-   XP COM AUTH (páginas)
-===================================================== */
-
-export function adicionarXP(valor) {
-
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) return;
-    await processarXP(user.uid, valor);
-  });
 }

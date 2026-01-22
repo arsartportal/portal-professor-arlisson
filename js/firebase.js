@@ -14,14 +14,18 @@
 import { initializeApp } from
 "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-/* Configuração do projeto Firebase
-   Esses dados identificam APENAS o projeto */
+import { getFirestore } from
+"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+/* Configuração do projeto Firebase */
 export const firebaseConfig = {
   apiKey: "AIzaSyBQ8EQ5ftRwCGWK3maT9Vj53fOI5PR-C2c",
   authDomain: "portal-professor-arlisson.firebaseapp.com",
   projectId: "portal-professor-arlisson"
 };
 
-/* Inicializa o Firebase
-   Esse app será reutilizado nos outros arquivos */
+/* Inicializa o Firebase */
 export const app = initializeApp(firebaseConfig);
+
+/* 🔥 EXPORTA O FIRESTORE */
+export const db = getFirestore(app);

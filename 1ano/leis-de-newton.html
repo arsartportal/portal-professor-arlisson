@@ -2,62 +2,150 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Leis de Newton</title>
+  <title>Leis de Newton • Portal do Professor Arlisson</title>
+
+  <!-- Estilos globais -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Estilo específico -->
+  <link rel="stylesheet" href="../css/leis-de-newton.css">
 </head>
+
 <body>
 
-<section class="conteudo-card">
+<section class="aula">
 
-  <h2>Leis de Newton</h2>
-  <p class="descricao-card">
-    Força, massa, inércia e aplicações
-  </p>
+  <!-- ================= TÍTULO ================= -->
+  <header class="topo">
+    <h1>⚖️ Leis de Newton</h1>
+    <p class="subtitulo">
+      Força, massa e aceleração: relações de proporcionalidade
+    </p>
+  </header>
 
-  <h3>O que você vai entender</h3>
-  <p>
-    Como as Leis de Newton explicam a relação entre força, massa e movimento
-    em situações do cotidiano.
-  </p>
+  <!-- ================= CONCEITOS ================= -->
+<div class="bloco">
 
-  <h3>Força</h3>
-  <p>
-    Força é uma interação capaz de alterar o movimento ou deformar um corpo.
-    Nem toda força gera movimento visível.
-  </p>
+  <h2>📘 Leis de Newton — visão rápida</h2>
 
-  <h3>Inércia</h3>
-  <p>
-    A inércia é a tendência de um corpo manter seu estado de repouso
-    ou de movimento uniforme.
-  </p>
+  <div class="conceitos-grid">
 
-  <h3>Massa</h3>
-  <p>
-    A massa está relacionada à inércia.
-    Quanto maior a massa, maior a resistência a mudanças no movimento.
-  </p>
+    <div class="conceito-card">
+      <h3>1ª Lei — Inércia</h3>
+      <p>
+        Um corpo mantém seu estado de repouso ou movimento
+        quando a <strong>força resultante é zero</strong>.
+      </p>
+    </div>
 
-  <h3>Ação e reação</h3>
-  <p>
-    As forças surgem aos pares e atuam em corpos diferentes,
-    com mesma intensidade e sentidos opostos.
-  </p>
+    <div class="conceito-card destaque">
+      <h3>2ª Lei — Força e aceleração</h3>
+      <p>
+        A aceleração depende da força e da massa:
+        <strong>a = F / m</strong>.
+      </p>
+    </div>
 
-  <h3>Aplicações</h3>
-  <ul>
-    <li>Cinto de segurança</li>
-    <li>Freios de veículos</li>
-    <li>Esportes</li>
-  </ul>
+    <div class="conceito-card">
+      <h3>3ª Lei — Ação e reação</h3>
+      <p>
+        As forças surgem em pares de mesma intensidade
+        e sentidos opostos, em corpos diferentes.
+      </p>
+    </div>
 
-  <h3>Checkpoint conceitual</h3>
-  <ol>
-    <li>Por que passageiros se deslocam para frente quando um ônibus freia?</li>
-    <li>Qual a relação entre massa e inércia?</li>
-    <li>Por que ação e reação não se anulam?</li>
-  </ol>
+  </div>
+
+</div>
+
+  <!-- ================= LABORATÓRIO ================= -->
+  <div class="bloco lab">
+
+    <h2>🧪 Laboratório de Proporcionalidade</h2>
+
+    <p class="sub">
+      Observe como o tamanho dos ícones muda quando você altera a força ou a massa.
+    </p>
+
+    <div class="lab-grid">
+
+      <!-- CONTROLES -->
+      <div class="controles">
+
+        <label>Força aplicada (N)</label>
+        <input type="range" min="1" max="20" value="10"
+               oninput="ajustarForca(this.value)">
+        <span id="forcaTxt">10 N</span>
+
+        <label>Massa do corpo (kg)</label>
+        <input type="range" min="1" max="10" value="2"
+               oninput="ajustarMassa(this.value)">
+        <span id="massaTxt">2 kg</span>
+
+        <label>Aceleração (m/s²)</label>
+        <input type="range" min="0.5" max="10"step="0.5" value="5"
+               oninput="ajustarAceleracao(this.value)"
+>       <span id="accTxt">5 m/s²</span>
+
+      </div>
+
+      <!-- VISUAL -->
+      <div class="visual">
+
+        <div class="icone-box">
+          <div id="iconeForca" class="icone">🧲</div>
+          <span>Força (F)</span>
+        </div>
+
+        <div class="icone-box">
+          <div id="iconeMassa" class="icone">📦</div>
+          <span>Massa (m)</span>
+        </div>
+
+        <div class="icone-box destaque">
+          <div id="iconeAcc" class="icone">⚡</div>
+          <span>Aceleração (a)</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LEGENDA -->
+    <div class="painel-dados">
+      <p>🔹 Quando a <strong>força aumenta</strong>, a <strong>aceleração aumenta</strong>.</p>
+      <p>🔹 Quando a <strong>massa aumenta</strong>, a <strong>aceleração diminui</strong>.</p>
+    </div>
+
+  </div>
+
+  <!-- ================= CHECKPOINT ================= -->
+  <div class="bloco checkpoint">
+
+    <h2>🏁 Checkpoint Final</h2>
+
+    <p>
+      Se a força aplicada em um corpo <strong>dobra</strong> e a massa permanece constante,
+      o que acontece com a aceleração?
+    </p>
+
+    <div class="botoes">
+      <button onclick="checkpoint(1)">Diminui</button>
+      <button onclick="checkpoint(2)">Permanece igual</button>
+      <button onclick="checkpoint(3)">Dobra</button>
+    </div>
+
+    <p id="msgFinal"></p>
+
+  </div>
 
 </section>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script type="module" src="../js/auth-guard.js"></script>
+<script type="module" src="../js/leis-de-newton.js"></script>
+<script src="../js/gamificacao.js"></script>
 
 </body>
 </html>
