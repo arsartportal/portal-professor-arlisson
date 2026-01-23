@@ -1,0 +1,57 @@
+/* Container geral */
+.conquistas-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* Grid de badges */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card do badge */
+.badge-card {
+  background: #111;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+}
+
+.badge-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Ícone do badge */
+.badge-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Nome do módulo */
+.badge-nome {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Data de conclusão */
+.badge-data {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+/* Estado vazio */
+.sem-conquistas {
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Utilitário */
+.hidden {
+  display: none;
+}

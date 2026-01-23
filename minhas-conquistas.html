@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minhas Conquistas</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico das conquistas -->
+  <link rel="stylesheet" href="/css/conquistas.css" />
+</head>
+
+<body>
+
+  <!-- HEADER PADRÃO -->
+  <header class="header">
+    <h1>🏅 Minhas Conquistas</h1>
+    <p>Acompanhe os módulos que você já concluiu.</p>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conquistas-container">
+
+    <!-- Mensagem caso não tenha conquistas -->
+    <div id="sem-conquistas" class="sem-conquistas hidden">
+      <p>😕 Você ainda não concluiu nenhum módulo.</p>
+    </div>
+
+    <!-- Lista de badges -->
+    <div id="lista-badges" class="badges-grid"></div>
+
+  </main>
+
+  <!-- JS da página -->
+  <script type="module" src="/js/minhas-conquistas.js"></script>
+</body>
+</html>
