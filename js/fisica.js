@@ -39,6 +39,10 @@ import {
   increment
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+import { setDoc } from
+"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+
 /* =====================================================
    INICIALIZAÇÃO DOS SERVIÇOS
 ===================================================== */
@@ -248,9 +252,21 @@ async function carregarSubniveisIntroducao(cardElement) {
     getDoc(progressRef)
   ]);
 
-  if (!progressSnap.exists()) return;
+  
+  let progress;
 
-  const progress = progressSnap.data();
+if (!progressSnap.exists()) {
+  // 🔥 Cria progresso inicial para aluno novo
+  progress = {
+    nivelAtual: 1,
+    concluidos: [],
+    finalizado: false
+  };
+
+  await setDoc(progressRef, progress);
+} else {
+  progress = progressSnap.data();
+}
 
   // ⚠️ AQUI É cardElement (não card)
   const container = cardElement.querySelector(".subniveis");
