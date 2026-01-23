@@ -146,43 +146,46 @@ function sair() {
   </div>
 </div>
 
-<script type="module">
-  import { adicionarXP } from "./js/xp.js";
-
-  // XP por entrar no módulo Física (1x por dia)
-  adicionarXP(100, "Acesso à Física");
-</script>
 
 <script type="module">
-  import { adicionarXP } from "./js/xp.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } 
+    from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+  import { 
+    getFirestore, 
+    doc, 
+    updateDoc, 
+    increment 
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
   import { app } from "./js/firebase.js";
 
   const auth = getAuth(app);
-  const db = getFirestore(app);
+  const db   = getFirestore(app);
 
   onAuthStateChanged(auth, async (user) => {
     if (!user) return;
 
-    // 🔍 Verifica se veio de um checkpoint
     const raw = localStorage.getItem("checkpointConcluido");
     if (!raw) return;
 
     const evento = JSON.parse(raw);
 
-    // Segurança básica
     if (!evento.trilha || !evento.xp) return;
 
-    // 🔥 XP REAL (Firestore)
-    await adicionarXP(evento.xp, `checkpoint_${evento.trilha}`);
+    const userRef = doc(db, "usuarios", user.uid);
 
-    // 🔥 XP VISUAL + LEVEL UP
+    // 🔥 XP REAL (Firestore)
+    await updateDoc(userRef, {
+      xp: increment(evento.xp)
+    });
+
+    // 🔥 XP VISUAL
     if (window.adicionarXPVisual) {
       window.adicionarXPVisual(evento.xp);
     }
 
-    // 🧹 Limpa evento (anti-duplicação)
+    // 🧹 Anti-duplicação
     localStorage.removeItem("checkpointConcluido");
   });
 </script>

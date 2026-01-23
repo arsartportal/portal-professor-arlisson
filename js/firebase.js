@@ -1,18 +1,12 @@
 /* =====================================================
    FIREBASE.JS
-   -----------------------------------------------------
-   Responsável por:
-   - Conectar o site ao Firebase
-   - Evitar repetir configuração em vários arquivos
-   - Servir como base para Auth e Firestore
-
-   NÃO faz:
-   - Login
-   - Controle de permissões
 ===================================================== */
 
 import { initializeApp } from
 "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
+import { getAuth } from
+"https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 import { getFirestore } from
 "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
@@ -27,5 +21,8 @@ export const firebaseConfig = {
 /* Inicializa o Firebase */
 export const app = initializeApp(firebaseConfig);
 
-/* 🔥 EXPORTA O FIRESTORE */
+/* 🔐 AUTH */
+export const auth = getAuth(app);
+
+/* 🔥 FIRESTORE */
 export const db = getFirestore(app);

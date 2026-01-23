@@ -1,27 +1,22 @@
 console.log("fisica.js carregado");
 
 /* =====================================================
-   FISICA.JS
+   FISICA.JS — PORTAL DO PROFESSOR ARLISSON
    -----------------------------------------------------
-   Módulo: Física
    Responsabilidades:
    - Autenticar usuário
    - Ler perfil (professor x aluno)
    - Buscar trilhas no Firestore
-   - Criar cards dinamicamente na página
+   - Criar cards dinamicamente
+   - Renderizar subníveis (Introdução à Física)
+   - Controlar XP pendente
 
-   Regras:
-   - Professor vê TODAS as trilhas
-   - Aluno vê APENAS trilhas da sua turma
-
-   Observação:
-   - Segurança REAL está nas regras do Firestore
-   - Este JS apenas consome os dados permitidos
+   Arquitetura:
+   Firestore → JS → DOM
 ===================================================== */
 
-
 /* =====================================================
-   IMPORTAÇÕES FIREBASE
+   IMPORTAÇÕES FIREBASE (ÚNICAS)
 ===================================================== */
 
 // 🔐 Auth
@@ -39,14 +34,10 @@ import {
   orderBy,
   getDocs,
   doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-import {
+  getDoc,
   updateDoc,
   increment
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
 
 /* =====================================================
    INICIALIZAÇÃO DOS SERVIÇOS
@@ -55,9 +46,16 @@ import {
 const auth = getAuth();
 const db   = getFirestore();
 
-// Container dos cards (inicializado após DOM pronto)
+// Container onde os cards serão inseridos
 let container = null;
 
+/* =====================================================
+   CONSTANTES DE MÓDULO
+===================================================== */
+
+const INTRO_TRILHA_ID = "G56QgC9ZBCN5rgF1ceZL";
+const PROGRESS_INTRO  = "introducao_fisica_1ano";
+const BASE_INTRO_ROTA = "1ano";
 
 /* =====================================================
    INICIALIZAÇÃO SEGURA (DOM + AUTH)
@@ -65,15 +63,13 @@ let container = null;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 🎯 Âncora onde os cards serão inseridos
   container = document.getElementById("lista-trilhas");
 
   if (!container) {
-    console.warn("Container #lista-trilhas não encontrado no DOM.");
+    console.warn("Container #lista-trilhas não encontrado.");
     return;
   }
 
-  // 🔐 Observa estado de login
   onAuthStateChanged(auth, (user) => {
     if (!user) {
       window.location.href = "index.html";
@@ -85,35 +81,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
 /* =====================================================
    CARREGA PERFIL DO USUÁRIO
 ===================================================== */
 
 async function carregarPerfilETrilhas(uid) {
-
   try {
     const userRef  = doc(db, "usuarios", uid);
     const userSnap = await getDoc(userRef);
 
     if (!userSnap.exists()) {
-      console.warn("Documento do usuário não encontrado.");
+      console.warn("Usuário não encontrado.");
       return;
     }
 
     const usuario = userSnap.data();
 
-    // 🔥 SOMA XP PENDENTE AQUI
+    // 🔥 Soma XP pendente antes de mostrar trilhas
     await contabilizarXPPendente(uid);
 
-    // 🔽 Depois carrega as trilhas
+    // 🔽 Renderiza trilhas
     await carregarTrilhas(usuario);
 
   } catch (erro) {
     console.error("Erro ao carregar perfil:", erro);
   }
 }
-
 
 /* =====================================================
    BUSCA TRILHAS NO FIRESTORE
@@ -123,54 +116,43 @@ async function carregarTrilhas(usuario) {
 
   let consulta;
 
-  /* ---------------------------------------------------
-     PROFESSOR
-     - Vê TODAS as trilhas
-     - Ordenadas por série e ordem pedagógica
-  --------------------------------------------------- */
+  // 👨‍🏫 PROFESSOR
   if (usuario.tipo === "professor") {
-
     consulta = query(
       collection(db, "trilhas_fisica"),
       where("ativo", "==", true),
       orderBy("serie"),
       orderBy("ordem")
     );
-
   }
-  /* ---------------------------------------------------
-     ALUNO
-     - Vê apenas trilhas da sua turma
-     - Ordenadas por ordem pedagógica
-  --------------------------------------------------- */
+  // 🎓 ALUNO
   else {
-
     consulta = query(
       collection(db, "trilhas_fisica"),
       where("ativo", "==", true),
       where("serie", "==", usuario.turma),
       orderBy("ordem")
     );
-
   }
 
   try {
     const snapshot = await getDocs(consulta);
 
-    // Limpa antes de renderizar
     container.innerHTML = "";
 
     if (snapshot.empty) {
       container.innerHTML = `
         <p style="opacity:.6">
           Nenhuma trilha disponível para sua turma.
-        </p>
-      `;
+        </p>`;
       return;
     }
 
-    snapshot.forEach((doc) => {
-      criarCardTrilha(doc.data());
+    snapshot.forEach((docSnap) => {
+      criarCardTrilha({
+        id: docSnap.id,
+        ...docSnap.data()
+      });
     });
 
   } catch (erro) {
@@ -178,21 +160,16 @@ async function carregarTrilhas(usuario) {
   }
 }
 
-
 /* =====================================================
    CRIAÇÃO DO CARD DE TRILHA
 ===================================================== */
 
 function criarCardTrilha(trilha) {
 
-  // Card principal
   const card = document.createElement("div");
   card.className = "trilha-card";
+  card.dataset.serie = trilha.serie;
 
-  // Marca a série (usado no CSS para cores)
-  card.dataset.serie = trilha.serie; // 1ano | 2ano | 3ano
-
-  // Conteúdo interno
   card.innerHTML = `
     <div class="trilha-serie">
       ${formatarSerie(trilha.serie)}
@@ -205,54 +182,129 @@ function criarCardTrilha(trilha) {
     <div class="trilha-desc">
       ${trilha.descricao || ""}
     </div>
+
+    <!-- SUBNÍVEIS (Introdução à Física) -->
+    <div class="subniveis hidden"></div>
   `;
 
-  /* ---------------------------------------------------
-     EVENTO DE CLIQUE
-     Futuro:
-     - Abrir página da trilha
-     - Registrar acesso
-     - Conceder XP
-  --------------------------------------------------- */
-  card.addEventListener("click", () => {
+  // 🔥 EVENTO DE CLIQUE (ESSENCIAL)
+  card.addEventListener("click", async (event) => {
 
-  // Verificação de segurança
-  if (!trilha.rota || typeof trilha.rota !== "string") {
-    console.warn("Trilha sem rota válida:", trilha);
-    return;
-  }
+    event.stopPropagation();
 
-  // Navegação para a página da trilha
-  window.location.href = trilha.rota;
+    // 👉 INTRODUÇÃO À FÍSICA = abre/fecha subníveis
+    if (trilha.id === INTRO_TRILHA_ID) {
 
-});
+      const sub = card.querySelector(".subniveis");
 
-  // Insere no DOM
+      // Toggle
+      if (!sub.classList.contains("hidden")) {
+        sub.classList.add("hidden");
+        return;
+      }
+
+      await carregarSubniveisIntroducao(card);
+      return;
+    }
+
+    // 👉 OUTRAS TRILHAS = navegação normal
+    if (!trilha.rota || typeof trilha.rota !== "string") {
+      console.warn("Trilha sem rota válida:", trilha);
+      return;
+    }
+
+    window.location.href = trilha.rota;
+  });
+
   container.appendChild(card);
 }
 
+/* =====================================================
+   RENDERIZA SUBNÍVEIS — INTRODUÇÃO À FÍSICA
+===================================================== */
+
+async function carregarSubniveisIntroducao(cardElement) {
+
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const niveisRef = collection(
+    db,
+    "trilhas_fisica",
+    INTRO_TRILHA_ID,
+    "niveis"
+  );
+
+  const progressRef = doc(
+    db,
+    "usuarios",
+    user.uid,
+    "progress",
+    PROGRESS_INTRO
+  );
+
+  const [niveisSnap, progressSnap] = await Promise.all([
+    getDocs(niveisRef),
+    getDoc(progressRef)
+  ]);
+
+  if (!progressSnap.exists()) return;
+
+  const progress = progressSnap.data();
+
+  // ⚠️ AQUI É cardElement (não card)
+  const container = cardElement.querySelector(".subniveis");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const niveis = niveisSnap.docs
+    .map(d => ({ id: d.id, ...d.data() }))
+    .sort((a, b) => a.ordem - b.ordem);
+
+  niveis.forEach((nivel) => {
+
+    const sub = document.createElement("div");
+    sub.className = "subcard-nivel";
+
+    // ✔ CONCLUÍDO
+    if (progress.concluidos.includes(nivel.id)) {
+      sub.classList.add("concluido");
+      sub.textContent = `✔ ${nivel.titulo}`;
+    }
+    // ▶ LIBERADO
+    else if (nivel.ordem <= progress.nivelAtual) {
+  sub.classList.add("liberado");
+  sub.textContent = `▶ ${nivel.titulo}`;
+
+  const rota = `${BASE_INTRO_ROTA}/introducao-fisica-1-${nivel.ordem}.html`;
+
+  sub.onclick = () => {
+    window.location.href = rota;
+  };
+}
+    // 🔒 BLOQUEADO
+    else {
+      sub.classList.add("bloqueado");
+      sub.textContent = `🔒 ${nivel.titulo}`;
+    }
+
+    container.appendChild(sub);
+  });
+
+  container.classList.remove("hidden");
+}
 
 /* =====================================================
    FUNÇÕES AUXILIARES
 ===================================================== */
 
-/**
- * Converte o código da série em texto amigável
- */
 function formatarSerie(serie) {
-
   switch (serie) {
-    case "1ano":
-      return "1º Ano do Ensino Médio";
-
-    case "2ano":
-      return "2º Ano do Ensino Médio";
-
-    case "3ano":
-      return "3º Ano do Ensino Médio";
-
-    default:
-      return "";
+    case "1ano": return "1º Ano do Ensino Médio";
+    case "2ano": return "2º Ano do Ensino Médio";
+    case "3ano": return "3º Ano do Ensino Médio";
+    default: return "";
   }
 }
 
@@ -263,45 +315,28 @@ function formatarSerie(serie) {
 async function contabilizarXPPendente(uid) {
 
   try {
-
     const userRef = doc(db, "usuarios", uid);
     const progressRef = collection(userRef, "progress");
 
     const snap = await getDocs(progressRef);
-
     let xpTotal = 0;
 
     for (const docSnap of snap.docs) {
-
       const data = docSnap.data();
 
       if (data.concluido === true && data.xpContabilizado !== true) {
-
         xpTotal += data.xp || 0;
-
-        // marca como já contabilizado
-        await updateDoc(docSnap.ref, {
-          xpContabilizado: true
-        });
+        await updateDoc(docSnap.ref, { xpContabilizado: true });
       }
     }
 
     if (xpTotal > 0) {
+      await updateDoc(userRef, { xp: increment(xpTotal) });
 
-      await updateDoc(userRef, {
-        xp: increment(xpTotal)
-      });
-
-       console.log("🔥 XP somado:", xpTotal);
-
-       // 🔥 DISPARA LEVEL UP
-  if (window.adicionarXPVisual) {
-    window.adicionarXPVisual(xpTotal);
-  }
-}
-    
-
-    
+      if (window.adicionarXPVisual) {
+        window.adicionarXPVisual(xpTotal);
+      }
+    }
 
   } catch (erro) {
     console.error("Erro ao contabilizar XP:", erro);

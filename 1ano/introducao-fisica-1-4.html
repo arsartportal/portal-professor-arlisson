@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Física — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="../css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔰 Introdução à Física</h1>
+      <p>
+        Antes de estudar movimento, forças e energia, é fundamental
+        entender o que a Física estuda e como ela observa o mundo.
+      </p>
+    </section>
+
+    <!-- ===============================
+     NÍVEL 1.4 — MOVIMENTO, REPOUSO E REFERENCIAL
+================================ -->
+<section class="nivel-conteudo" id="nivel-1-4">
+
+  <h2>📘 Nível 1.4 — Movimento, Repouso e Referencial</h2>
+
+  <!-- BLOCO 1 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 O que é movimento?</h3>
+    <p>
+      Um corpo está em <strong>movimento</strong> quando sua posição
+      muda ao longo do tempo em relação a um <strong>referencial</strong>.
+    </p>
+    <p>
+      Movimento não depende apenas de estar “andando”, mas de
+      <strong>comparação</strong>.
+    </p>
+  </article>
+
+  <!-- BLOCO 2 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 O que é repouso?</h3>
+    <p>
+      Um corpo está em <strong>repouso</strong> quando sua posição
+      não muda em relação a um referencial escolhido.
+    </p>
+    <p>
+      Importante: repouso e movimento são conceitos
+      <strong>relativos</strong>.
+    </p>
+  </article>
+
+  <!-- BLOCO 3 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 O que é referencial?</h3>
+    <p>
+      O <strong>referencial</strong> é o ponto ou corpo usado como base
+      para observar o movimento.
+    </p>
+    <p>
+      Sem referencial, não é possível dizer se algo está em movimento
+      ou em repouso.
+    </p>
+  </article>
+
+  <!-- BLOCO 4 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Exemplo clássico</h3>
+    <p>
+      Um passageiro sentado dentro de um ônibus:
+    </p>
+    <ul>
+      <li>Está em repouso em relação ao ônibus</li>
+      <li>Está em movimento em relação à rua</li>
+    </ul>
+    <p>
+      O estado (movimento ou repouso) depende do referencial escolhido.
+    </p>
+  </article>
+
+  <!-- BLOCO 5 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Por que isso é importante?</h3>
+    <p>
+      Esses conceitos são a base da <strong>Cinemática</strong>,
+      área da Física que estuda o movimento.
+    </p>
+  </article>
+
+  <!-- RESUMO -->
+  <article class="bloco-resumo">
+    <h3>🧠 Resumo do Nível</h3>
+    <ul>
+      <li>Movimento é mudança de posição no tempo</li>
+      <li>Repouso é posição constante</li>
+      <li>Tudo depende do referencial</li>
+      <li>Movimento e repouso são relativos</li>
+    </ul>
+  </article>
+
+</section>
+
+
+<!-- ===============================
+     CHECKPOINT — NÍVEL 1.4
+================================ -->
+<section class="checkpoint">
+
+  <h3>✅ Checkpoint — Movimento e Referencial</h3>
+
+  <!-- Q1 -->
+  <div class="questao">
+    <p><strong>1)</strong> Quando um corpo está em movimento?</p>
+    <label><input type="radio" name="q1" value="a"> Quando está andando</label>
+    <label><input type="radio" name="q1" value="b"> Quando muda de posição em relação a um referencial</label>
+    <label><input type="radio" name="q1" value="c"> Quando está acelerado</label>
+  </div>
+
+  <!-- Q2 -->
+  <div class="questao">
+    <p><strong>2)</strong> O que é um referencial?</p>
+    <label><input type="radio" name="q2" value="a"> Um instrumento de medida</label>
+    <label><input type="radio" name="q2" value="b"> Um ponto usado para observar o movimento</label>
+    <label><input type="radio" name="q2" value="c"> Uma unidade de medida</label>
+  </div>
+
+  <!-- Q3 -->
+  <div class="questao">
+    <p><strong>3)</strong> Um passageiro sentado no ônibus está:</p>
+    <label><input type="radio" name="q3" value="a"> Em repouso em qualquer situação</label>
+    <label><input type="radio" name="q3" value="b"> Sempre em movimento</label>
+    <label><input type="radio" name="q3" value="c"> Em repouso ou movimento, dependendo do referencial</label>
+  </div>
+
+  <button class="btn-checkpoint" onclick="verificarCheckpointNivel14()">
+    Verificar respostas
+  </button>
+
+  <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+</section>
+
+<!-- BOTÃO (bloqueado) -->
+  <button
+    class="btn-concluir"
+    disabled
+    style="opacity:0.5"
+    onclick="concluirNivel('nivel_1_4')">
+    ✅ Concluir Nível 1.4
+  </button>
+
+<div id="nivel-concluido-modal" class="modal hidden">
+
+  <div class="modal-conteudo">
+    <h3>✅ Nível concluído!</h3>
+<p class="modal-subtitulo">
+  Você avançou na trilha de Introdução à Física.
+</p>
+
+    <div class="modal-acoes">
+  <button class="btn-primario" onclick="irParaProximoNivel()">
+    ➡️ Próximo nível
+  </button>
+
+  <button class="btn-secundario" onclick="voltarParaFisica()">
+    🧭 Trilha de Física
+  </button>
+</div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="../js/introducao-fisica.js"></script>
+
+</body>
+</html>

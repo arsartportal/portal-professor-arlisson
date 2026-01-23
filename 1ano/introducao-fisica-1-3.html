@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Física — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="../css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔰 Introdução à Física</h1>
+      <p>
+        Antes de estudar movimento, forças e energia, é fundamental
+        entender o que a Física estuda e como ela observa o mundo.
+      </p>
+    </section>
+
+    <!-- ===============================
+     NÍVEL 1.3 — MEDIDAS, UNIDADES E ERROS
+================================ -->
+<section class="nivel-conteudo" id="nivel-1-3">
+
+  <h2>📘 Nível 1.3 — Medidas, Unidades e Erros</h2>
+
+  <!-- BLOCO 1 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Medir é comparar</h3>
+    <p>
+      Medir uma grandeza significa <strong>compará-la com um padrão</strong>.
+    </p>
+    <p>
+      Quando dizemos que algo mede 2 metros, estamos comparando esse comprimento
+      com o padrão chamado metro.
+    </p>
+  </article>
+
+  <!-- BLOCO 2 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Unidades de medida</h3>
+    <p>
+      As <strong>unidades</strong> são os padrões usados para medir.
+    </p>
+
+    <ul>
+      <li>Comprimento → metro (m)</li>
+      <li>Tempo → segundo (s)</li>
+      <li>Massa → quilograma (kg)</li>
+      <li>Temperatura → grau Celsius (°C)</li>
+    </ul>
+
+    <p>
+      Usar unidades padronizadas permite que pessoas diferentes
+      compreendam a mesma medida.
+    </p>
+  </article>
+
+  <!-- BLOCO 3 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Medidas não são perfeitas</h3>
+    <p>
+      Nenhuma medida é absolutamente exata.
+      Toda medida possui um <strong>erro de medida</strong>.
+    </p>
+    <p>
+      O erro não significa que a medida está errada,
+      mas que existe uma <strong>aproximação</strong>.
+    </p>
+  </article>
+
+  <!-- BLOCO 4 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Exemplos de erro de medida</h3>
+    <ul>
+      <li>Duas pessoas medem o mesmo objeto e obtêm valores ligeiramente diferentes</li>
+      <li>Um cronômetro é acionado com atraso</li>
+      <li>Um instrumento não é perfeitamente calibrado</li>
+    </ul>
+  </article>
+
+  <!-- BLOCO 5 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Por que entender erros é importante?</h3>
+    <p>
+      Entender erros de medida ajuda a:
+    </p>
+    <ul>
+      <li>Interpretar resultados corretamente</li>
+      <li>Evitar conclusões erradas</li>
+      <li>Comparar medições</li>
+    </ul>
+  </article>
+
+  <!-- RESUMO -->
+  <article class="bloco-resumo">
+    <h3>🧠 Resumo do Nível</h3>
+    <ul>
+      <li>Medir é comparar com um padrão</li>
+      <li>Unidades padronizam as medições</li>
+      <li>Toda medida possui erro</li>
+      <li>Erro não significa medida errada</li>
+    </ul>
+  </article>
+
+</section>
+
+
+<!-- ===============================
+     CHECKPOINT — NÍVEL 1.3
+================================ -->
+<section class="checkpoint">
+
+  <h3>✅ Checkpoint — Medidas e Erros</h3>
+
+  <!-- Q1 -->
+  <div class="questao">
+    <p><strong>1)</strong> O que significa medir uma grandeza?</p>
+    <label><input type="radio" name="q1" value="a"> Adivinhar um valor</label>
+    <label><input type="radio" name="q1" value="b"> Comparar com um padrão</label>
+    <label><input type="radio" name="q1" value="c"> Usar uma fórmula</label>
+  </div>
+
+  <!-- Q2 -->
+  <div class="questao">
+    <p><strong>2)</strong> Qual é uma unidade de tempo?</p>
+    <label><input type="radio" name="q2" value="a"> Metro</label>
+    <label><input type="radio" name="q2" value="b"> Quilograma</label>
+    <label><input type="radio" name="q2" value="c"> Segundo</label>
+  </div>
+
+  <!-- Q3 -->
+  <div class="questao">
+    <p><strong>3)</strong> O que significa erro de medida?</p>
+    <label><input type="radio" name="q3" value="a"> A medida está errada</label>
+    <label><input type="radio" name="q3" value="b"> Existe aproximação na medida</label>
+    <label><input type="radio" name="q3" value="c"> O instrumento quebrou</label>
+  </div>
+
+  <button class="btn-checkpoint" onclick="verificarCheckpointNivel13()">
+    Verificar respostas
+  </button>
+
+  <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+</section>
+
+<!-- BOTÃO (bloqueado inicialmente) -->
+  <button
+    class="btn-concluir"
+    disabled
+    style="opacity:0.5"
+    onclick="concluirNivel('nivel_1_3')">
+    ✅ Concluir Nível 1.3
+  </button>
+
+<div id="nivel-concluido-modal" class="modal hidden">
+
+  <div class="modal-conteudo">
+    <h3>✅ Nível concluído!</h3>
+<p class="modal-subtitulo">
+  Você avançou na trilha de Introdução à Física.
+</p>
+
+    <div class="modal-acoes">
+  <button class="btn-primario" onclick="irParaProximoNivel()">
+    ➡️ Próximo nível
+  </button>
+
+  <button class="btn-secundario" onclick="voltarParaFisica()">
+    🧭 Trilha de Física
+  </button>
+</div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="../js/introducao-fisica.js"></script>
+
+</body>
+</html>
