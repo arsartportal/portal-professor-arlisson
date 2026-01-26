@@ -194,7 +194,7 @@ async function carregarSubniveis(uid, card, trilha) {
 
       el.onclick = () => {
         window.location.href =
-          `${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
+          `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
       };
     }
     else {
@@ -246,3 +246,4 @@ function formatarSerie(serie) {
   if (serie === "3ano") return "3º Ano do Ensino Médio";
   return "";
 }
+
