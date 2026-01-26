@@ -18,7 +18,13 @@
 
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 
 /* =========================================================

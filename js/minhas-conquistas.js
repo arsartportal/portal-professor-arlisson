@@ -1,22 +1,29 @@
-// Autenticação Firebase
-import { auth } from "./firebase-auth.js";
+/* =====================================================
+   MINHAS CONQUISTAS — PORTAL DO PROFESSOR
+===================================================== */
 
-// Firestore
-import { db } from "./firebase-db.js";
-import { doc, getDoc } from "firebase/firestore";
+// Firebase (PADRÃO DO PROJETO)
+import { auth, db } from "./firebase.js";
+
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 // Elementos da página
 const listaBadges = document.getElementById("lista-badges");
 const semConquistas = document.getElementById("sem-conquistas");
 
-// Observa o estado de login
-auth.onAuthStateChanged(async (user) => {
+/* =====================================================
+   AUTENTICAÇÃO + PROTEÇÃO
+===================================================== */
+onAuthStateChanged(auth, async (user) => {
 
-  /* =====================================================
-     PROTEÇÃO DA PÁGINA
-     ===================================================== */
   if (!user) {
-    // Usuário não logado → redireciona
     window.location.href = "/login.html";
     return;
   }
@@ -45,7 +52,7 @@ auth.onAuthStateChanged(async (user) => {
      RENDERIZAÇÃO DOS BADGES
      ===================================================== */
   valores
-    // ordena do mais recente para o mais antigo
+    // mais recente primeiro
     .sort((a, b) =>
       (b.concluidoEm?.seconds || 0) -
       (a.concluidoEm?.seconds || 0)

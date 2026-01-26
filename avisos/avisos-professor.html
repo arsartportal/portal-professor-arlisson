@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Avisos | Professor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="avisos.css">
+</head>
+
+<body>
+
+<header class="topo">
+  <div class="topo-esquerda">
+    <h1>📢 Avisos</h1>
+    <p class="subtitulo">Painel do Professor</p>
+  </div>
+
+  <div class="topo-direita">
+    <button onclick="location.href='../dashboard.html'">⬅ Voltar</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ================= FORMULÁRIO ================= -->
+  <section class="card">
+    <h2>Criar aviso</h2>
+
+    <form id="form-aviso">
+
+      <label for="titulo">Título</label>
+      <input id="titulo" required>
+
+      <label for="mensagem">Mensagem</label>
+      <textarea id="mensagem" rows="4" required></textarea>
+
+      <label for="tipo">Tipo do aviso</label>
+      <select id="tipo" required>
+        <option value="informativo">Informativo</option>
+        <option value="alerta">Alerta</option>
+        <option value="urgente">Urgente</option>
+      </select>
+
+      <label for="visibilidade">Visibilidade</label>
+      <select id="visibilidade" required>
+        <option value="alunos">Alunos</option>
+        <option value="professores">Professores</option>
+        <option value="todos">Todos</option>
+      </select>
+
+      <label class="linha">
+        <input type="checkbox" id="fixado">
+        Fixar no topo
+      </label>
+
+      <button type="submit">Publicar aviso</button>
+    </form>
+  </section>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="preview">
+    <h3>Preview</h3>
+    <div id="preview-aviso"></div>
+  </section>
+
+  <!-- ================= LISTA ================= -->
+  <section class="lista-professor">
+    <h3>Avisos publicados</h3>
+    <div id="lista-avisos-prof"></div>
+  </section>
+
+</main>
+
+<!-- Firebase -->
+<script type="module" src="../js/firebase.js"></script>
+
+<!-- Autenticação -->
+<script type="module" src="../js/login2.js"></script>
+
+<!-- Lógica dos avisos -->
+<script type="module" src="./avisos-professor.js"></script>
+
+</body>
+</html>

@@ -2125,3 +2125,31 @@ body {
 .trilha-card[data-serie="3ano"] {
   border-left-color: #8b5cf6;
 }
+
+.card-avisos-home {
+  text-align: left;
+}
+
+#avisos-home-lista {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+.aviso-home-item {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.aviso-home-item.importante strong {
+  color: #dc2626;
+}
+
+.aviso-home-item:last-child {
+  border-bottom: none;
+}
+
+.ver-mais {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+}

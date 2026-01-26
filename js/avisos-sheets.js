@@ -1,39 +1,55 @@
+/* =====================================================
+   AVISOS — GOOGLE SHEETS (CSV)
+   Portal do Professor Arlisson
+   -----------------------------------------------------
+   Requisitos:
+   - login2.js já executado
+   - localStorage.turma definido
+   - HTML com <div id="lista-avisos"></div>
+===================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const lista = document.getElementById("lista-avisos");
   const turma = localStorage.getItem("turma");
+  const turmaHeader = document.getElementById("turma");
 
-  if (!lista || !turma) return;
+  if (!lista) return;
+
+  if (!turma) {
+    lista.innerHTML = "<p>⚠️ Turma não identificada.</p>";
+    return;
+  }
+
+  // Mostra a turma no topo (opcional, mas bonito)
+  if (turmaHeader) {
+    turmaHeader.textContent = `Turma: ${turma.toUpperCase()}`;
+  }
 
   const URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5mAaIaCxCxFQTC6ryx3TnPNii-MAqKucwIuL5udgAul-vFf4kY1V8_Cr1tBztlBP5gV1jEjjffAnC/pub?output=csv";
 
   fetch(URL)
     .then(res => res.text())
-    .then(texto => {
+    .then(csv => {
 
-      const separador = texto.includes(";") ? ";" : ",";
-      const linhas = texto.trim().split("\n").slice(1);
+      const separador = csv.includes(";") ? ";" : ",";
+      const linhas = csv.trim().split("\n").slice(1);
 
-      let avisos = [];
+      const avisos = [];
 
       linhas.forEach(linha => {
-        const col = linha.split(separador);
-        if (col.length < 6) return;
+        const colunas = linha.split(separador);
+        if (colunas.length < 6) return;
 
-        const titulo = col[1].trim();
-        const textoAviso = col[2].trim();
-        const turmaAviso = col[3].trim();
-        const data = col[4].trim();
-        const importante = col[5].trim().toLowerCase();
+        const turmaAviso = colunas[3].trim();
+        if (turmaAviso !== turma) return;
 
-        if (turmaAviso === turma) {
-          avisos.push({
-            titulo,
-            texto: textoAviso,
-            data,
-            importante
-          });
-        }
+        avisos.push({
+          titulo: colunas[1].trim(),
+          texto: colunas[2].trim(),
+          data: colunas[4].trim(),
+          importante: colunas[5].trim().toLowerCase() === "sim"
+        });
       });
 
       if (avisos.length === 0) {
@@ -41,35 +57,48 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // 🔽 ORDENA POR DATA (mais recente primeiro)
+      // Ordena por data (mais recente primeiro)
       avisos.sort((a, b) => new Date(b.data) - new Date(a.data));
 
-      avisos.forEach(a => {
-        const div = document.createElement("div");
-        div.className = "aviso";
-
-        if (a.importante === "sim") {
-          div.classList.add("aviso-importante");
-        }
-
-        div.innerHTML = `
-          <h3>${a.titulo}</h3>
-          <small>📅 ${formatarData(a.data)}</small>
-          <p>${a.texto}</p>
-        `;
-
-        lista.appendChild(div);
+      avisos.forEach(aviso => {
+        lista.appendChild(criarAviso(aviso));
       });
     })
     .catch(err => {
-      console.error(err);
+      console.error("Erro ao carregar avisos:", err);
       lista.innerHTML = "<p>⚠️ Erro ao carregar avisos.</p>";
     });
-
 });
 
-/* ===== FUNÇÃO DE DATA ===== */
+/* =====================================================
+   CRIA CARD DE AVISO (SEGURO)
+===================================================== */
+function criarAviso(aviso) {
+  const div = document.createElement("div");
+  div.classList.add("aviso");
+
+  if (aviso.importante) {
+    div.classList.add("aviso-importante");
+  }
+
+  const titulo = document.createElement("h3");
+  titulo.textContent = aviso.titulo;
+
+  const data = document.createElement("small");
+  data.textContent = `📅 ${formatarData(aviso.data)}`;
+
+  const texto = document.createElement("p");
+  texto.textContent = aviso.texto;
+
+  div.append(titulo, data, texto);
+  return div;
+}
+
+/* =====================================================
+   FORMATA DATA (YYYY-MM-DD → DD/MM/YYYY)
+===================================================== */
 function formatarData(dataISO) {
+  if (!dataISO || !dataISO.includes("-")) return dataISO;
   const [ano, mes, dia] = dataISO.split("-");
   return `${dia}/${mes}/${ano}`;
 }

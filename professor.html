@@ -69,7 +69,60 @@
       </span>
     </div>
 
-    <!-- Versão atual -->
+    <!-- ===================================================
+     VERSÃO v1.4.0
+     =================================================== -->
+<details class="patch-version" open>
+
+  <summary>
+    <span class="version">v1.4.0</span>
+    <span class="date">22 de Janeiro / 2026</span>
+    <span class="title">Conquistas, Estabilidade e Infra</span>
+  </summary>
+
+  <div class="patch-content">
+
+    <h4>🏅 Gamificação (NOVO)</h4>
+    <ul>
+      <li>Sistema de conquistas por módulo (1 badge por módulo)</li>
+      <li>Persistência de badges no Firestore</li>
+      <li>Registro automático da data de conclusão</li>
+      <li>Página <strong>Minhas Conquistas</strong> integrada ao portal</li>
+      <li>Proteção da página por autenticação</li>
+    </ul>
+
+    <h4>🚀 Infraestrutura</h4>
+    <ul>
+      <li>Integração definitiva do domínio <strong>exatas.site</strong> ao Cloudflare Pages</li>
+      <li>Eliminação de divergências entre pages.dev e domínio customizado</li>
+      <li>Padronização de caminhos absolutos (/css, /js)</li>
+      <li>Correção de fallback automático para páginas inexistentes</li>
+    </ul>
+
+    <h4>🛠️ Arquitetura</h4>
+    <ul>
+      <li>Correção da geração dinâmica de rotas das aulas</li>
+      <li>Alinhamento entre arquivos reais e URLs geradas via JS</li>
+      <li>Separação clara entre perfil de usuário e progresso pedagógico</li>
+    </ul>
+
+    <h4>🔐 Segurança</h4>
+    <ul>
+      <li>Revisão completa das regras do Firestore</li>
+      <li>Proteção da coleção <code>progressos</code> por UID</li>
+      <li>Usuário acessa apenas seus próprios dados</li>
+    </ul>
+
+    <h4>🐞 Correções</h4>
+    <ul>
+      <li>Correção de erros de MIME (CSS/JS servidos como HTML)</li>
+      <li>Correção de acessos a páginas inexistentes</li>
+      <li>Remoção de inconsistências entre ambiente local e produção</li>
+    </ul>
+
+  </div>
+</details>
+
     <details class="patch-version" open>
 
       <summary>
