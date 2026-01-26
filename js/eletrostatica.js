@@ -139,50 +139,53 @@ function avaliarCheckpoint(gabarito, ultimo = false) {
    GABARITOS — AJUSTE AQUI CONFORME O HTML
 ===================================================== */
 
-/* 🔹 NÍVEL 3.1 — Introdução à Eletrostática */
+/* ---------- NÍVEL 3.1 ---------- */
 window.verificarCheckpoint = () =>
   avaliarCheckpoint({
-    q1: "a", // 👈 ajuste conforme a questão
-    q2: "b",
-    q3: "c"
+    q1: "b", // Fenômenos elétricos
+    q2: "b", // Elas se atraem (cargas opostas)
+    q3: "c"  // Condução térmica (NÃO é eletrização)
   });
 
-/* 🔹 NÍVEL 3.2 — Carga Elétrica */
+/* ---------- NÍVEL 3.2 ---------- */
 window.verificarCheckpointNivel32 = () =>
   avaliarCheckpoint({
-    q1: "b",
-    q2: "a",
-    q3: "c"
+    q1: "c", // Atrito, contato e indução
+    q2: "a", // Atrito
+    q3: "b"  // Indução
   });
 
-/* 🔹 NÍVEL 3.3 — Processos de Eletrização */
+
+/* ---------- NÍVEL 3.3 ---------- */
 window.verificarCheckpointNivel33 = () =>
   avaliarCheckpoint({
-    q1: "c",
-    q2: "b",
-    q3: "a"
+    q1: "b", // A carga elétrica se conserva
+    q2: "b", // Soma algébrica das cargas
+    q3: "c"  // Não é criada nem destruída
   });
 
-/* 🔹 NÍVEL 3.4 — Campo Elétrico */
+
+/* ---------- NÍVEL 3.4 — CAMPO ELÉTRICO ---------- */
 window.verificarCheckpointNivel34 = () =>
   avaliarCheckpoint({
-    q1: "a",
-    q2: "c",
-    q3: "b"
+    q1: "b", // Região de influência elétrica
+    q2: "b", // Carga de prova positiva
+    q3: "c"  // Linhas saem da positiva e chegam na negativa
   });
 
-/* 🔹 NÍVEL 3.5 — Potencial Elétrico */
+
+/* ---------- NÍVEL 3.5 - Lei de Coulomb ---------- */
 window.verificarCheckpointNivel35 = () =>
   avaliarCheckpoint({
-    q1: "b",
-    q2: "c",
-    q3: "a"
+    q1: "a", // A força elétrica entre cargas
+    q2: "b", // Inversamente proporcional ao quadrado da distância
+    q3: "c"  // Das cargas e da distância
   });
 
-/* 🔹 NÍVEL 3.6 — Capacitores (FINAL) */
+/* ---------- NÍVEL 3.6 (FINAL) ---------- */
 window.verificarCheckpointNivel36 = () =>
   avaliarCheckpoint({
-    q1: "c",
-    q2: "b",
-    q3: "a"
+    q1: "b", // Energia potencial elétrica por carga
+    q2: "b", // Volt (V)
+    q3: "c"  // Trabalho da força elétrica
   }, true);
