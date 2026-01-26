@@ -1866,23 +1866,6 @@ body {
   gap: 20px;
 }
 
-.trilha-card {
-  background: #1a1a24;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.6);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.trilha-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(0, 120, 255, 0.3);
-}
-
-.trilha-card h3 {
-  margin-top: 0;
-}
-
 /* PROGRESSO */
 .progresso {
   margin: 15px 0;
@@ -2018,22 +2001,127 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* =========================================
+   GRID DE TRILHAS
+========================================= */
 
-.trilha-card {
-  opacity: 1 !important;
-  visibility: visible !important;
-  position: relative !important;
-  display: block;
-  transform: none;
+#lista-trilhas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.trilha-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.10);
+}
+
+.trilha-serie {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+  opacity: .85;
+}
+
+.trilha-titulo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.trilha-desc {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.subniveis {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subniveis.hidden {
+  display: none;
+}
+
+.subcard-nivel {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  background: #f9fafb;
+}
+
+/* estados */
+.subcard-nivel.liberado {
+  background: #ecfeff;
+  color: #0369a1;
+  cursor: pointer;
+}
+
+.subcard-nivel.concluido {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.subcard-nivel.bloqueado {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+.conteudo-fisica {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.titulo-trilhas {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 24px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#lista-trilhas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
 }
 
 .trilha-card {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+
+  border-left: 6px solid transparent;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  cursor: pointer;
+
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.trilha-card.show {
-  opacity: 1;
-  transform: translateY(0);
+.trilha-card[data-serie="1ano"] {
+  border-left-color: #3b82f6;
+}
+
+.trilha-card[data-serie="2ano"] {
+  border-left-color: #22c55e;
+}
+
+.trilha-card[data-serie="3ano"] {
+  border-left-color: #8b5cf6;
 }

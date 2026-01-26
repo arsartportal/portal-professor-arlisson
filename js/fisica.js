@@ -1,4 +1,3 @@
-console.log("fisica.js carregado");
 
 /* =====================================================
    FISICA.JS — PORTAL DO PROFESSOR ARLISSON
@@ -83,7 +82,7 @@ async function carregarTrilhas(uid) {
   if (!userSnap.exists()) return;
 
   const usuario = userSnap.data();
-  console.log("USUÁRIO:", usuario);
+  
 
   const consulta = usuario.tipo === "professor"
     ? query(
@@ -100,23 +99,72 @@ async function carregarTrilhas(uid) {
       );
 
   const snap = await getDocs(consulta);
-  console.log("TRILHAS ENCONTRADAS:", snap.size);
+  
+ listaTrilhas.innerHTML = "";
 
-  listaTrilhas.innerHTML = "";
+// 🔹 Se for PROFESSOR → agrupa por série
+if (usuario.tipo === "professor") {
 
+  const grupos = {
+    "1ano": criarGrupoSerie("1ano", "📘 1º Ano do Ensino Médio"),
+    "2ano": criarGrupoSerie("2ano", "📗 2º Ano do Ensino Médio"),
+    "3ano": criarGrupoSerie("3ano", "📕 3º Ano do Ensino Médio")
+  };
+
+  // adiciona os grupos na ordem correta
+  Object.values(grupos).forEach(grupo => {
+    listaTrilhas.appendChild(grupo);
+  });
+
+  // distribui as trilhas dentro do grupo correto
+  snap.forEach(docSnap => {
+    const trilha = { id: docSnap.id, ...docSnap.data() };
+
+    if (grupos[trilha.serie]) {
+      const destino = grupos[trilha.serie].querySelector(".cards-trilhas");
+      criarCardTrilha(uid, trilha, destino);
+    }
+  });
+
+}
+
+// 🔹 Se for ALUNO → comportamento normal
+else {
   snap.forEach(docSnap => {
     criarCardTrilha(uid, { id: docSnap.id, ...docSnap.data() });
   });
 }
+}
+
+
+/* =====================================================
+   GRUPO DE SÉRIE (APENAS PARA PROFESSOR)
+===================================================== */
+
+function criarGrupoSerie(serie, titulo) {
+  const section = document.createElement("section");
+  section.className = "grupo-serie";
+  section.dataset.serie = serie;
+
+  section.innerHTML = `
+    <h4 class="titulo-serie">${titulo}</h4>
+    <div class="cards-trilhas"></div>
+  `;
+
+  return section;
+}
+
 
 /* =====================================================
    CARD DE TRILHA
 ===================================================== */
 
-function criarCardTrilha(uid, trilha) {
+function criarCardTrilha(uid, trilha, destino = listaTrilhas) {
 
   const card = document.createElement("div");
   card.className = "trilha-card";
+  card.dataset.serie = trilha.serie; // 👈 ESSENCIAL
+// 🔥 ESTA LINHA RESOLVE TUDO
 
   card.innerHTML = `
     <div class="trilha-serie">${formatarSerie(trilha.serie)}</div>
@@ -149,7 +197,7 @@ function criarCardTrilha(uid, trilha) {
     }
   });
 
-  listaTrilhas.appendChild(card);
+  destino.appendChild(card);
 }
 
 /* =====================================================

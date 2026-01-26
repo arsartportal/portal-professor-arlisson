@@ -112,7 +112,7 @@ main[data-modulo="fisica"] .trilha-card[data-serie="2ano"] {
 
 /* ---------- 3º ANO ---------- */
 main[data-modulo="fisica"] .trilha-card[data-serie="3ano"] {
-  border-left: 6px solid #7c3aed; /* roxo */
+  border-left: 6px solid #ed210f; /* roxo */
 }
 
 
@@ -199,4 +199,36 @@ body[data-theme="dark"] main[data-modulo="fisica"]
 
 .btn-voltar:hover {
   opacity: 0.9;
+}
+
+main[data-modulo="fisica"] .trilhas {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* espaço entre título e cards */
+}
+
+main[data-modulo="fisica"] .cards-trilhas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+
+  width: 100%;
+  margin: 0;          /* 🔥 impede deslocamento */
+  padding: 0;
+}
+
+main[data-modulo="fisica"] {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grupo-serie {
+  margin-bottom: 40px;
+}
+
+.titulo-serie {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
 }
