@@ -2,7 +2,7 @@ console.log("fisica.js carregado");
 
 /* =====================================================
    FISICA.JS — PORTAL DO PROFESSOR ARLISSON
-   Trilhas + Subníveis + Progresso
+   Trilhas • Subníveis • Progresso • XP
 ===================================================== */
 
 /* =====================================================
@@ -10,8 +10,10 @@ console.log("fisica.js carregado");
 ===================================================== */
 
 // 🔐 Auth
-import { getAuth, onAuthStateChanged } from
-  "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 // 🔥 Firestore
 import {
@@ -35,18 +37,18 @@ import {
 const auth = getAuth();
 const db   = getFirestore();
 
-let container = null;
+let listaTrilhas = null;
 
 /* =====================================================
-   DOM + AUTH
+   DOM + AUTENTICAÇÃO
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  container = document.getElementById("lista-trilhas");
+  listaTrilhas = document.getElementById("lista-trilhas");
 
-  if (!container) {
-    console.warn("Container #lista-trilhas não encontrado.");
+  if (!listaTrilhas) {
+    console.error("ERRO CRÍTICO: #lista-trilhas não encontrado no HTML.");
     return;
   }
 
@@ -55,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "index.html";
       return;
     }
+
     carregarPerfilETrilhas(user.uid);
   });
 
@@ -70,12 +73,12 @@ async function carregarPerfilETrilhas(uid) {
 }
 
 /* =====================================================
-   BUSCA TRILHAS
+   BUSCAR TRILHAS NO FIRESTORE
 ===================================================== */
 
 async function carregarTrilhas(uid) {
 
-  const userRef = doc(db, "usuarios", uid);
+  const userRef  = doc(db, "usuarios", uid);
   const userSnap = await getDoc(userRef);
   if (!userSnap.exists()) return;
 
@@ -99,7 +102,7 @@ async function carregarTrilhas(uid) {
   const snap = await getDocs(consulta);
   console.log("TRILHAS ENCONTRADAS:", snap.size);
 
-  container.innerHTML = "";
+  listaTrilhas.innerHTML = "";
 
   snap.forEach(docSnap => {
     criarCardTrilha(uid, { id: docSnap.id, ...docSnap.data() });
@@ -130,6 +133,7 @@ function criarCardTrilha(uid, trilha) {
 
       const sub = card.querySelector(".subniveis");
 
+      // Toggle abrir/fechar
       if (!sub.classList.contains("hidden")) {
         sub.classList.add("hidden");
         return;
@@ -139,22 +143,28 @@ function criarCardTrilha(uid, trilha) {
       return;
     }
 
-    // 🔹 Trilhas SEM subníveis
-    if (trilha.rota) {
+    // 🔹 Trilhas SEM subníveis → navegação direta
+    if (trilha.rota && typeof trilha.rota === "string") {
       window.location.href = trilha.rota;
     }
   });
 
-  container.appendChild(card);
+  listaTrilhas.appendChild(card);
 }
 
 /* =====================================================
-   SUBNÍVEIS
+   SUBNÍVEIS + PROGRESSO
 ===================================================== */
 
 async function carregarSubniveis(uid, card, trilha) {
 
-  const niveisRef = collection(db, "trilhas_fisica", trilha.id, "niveis");
+  // 🔒 Proteção contra trilha mal configurada
+  if (!trilha.progressId || !trilha.baseRota || !trilha.slug) {
+    console.error("Trilha mal configurada:", trilha);
+    return;
+  }
+
+  const niveisRef   = collection(db, "trilhas_fisica", trilha.id, "niveis");
   const progressRef = doc(db, "usuarios", uid, "progress", trilha.progressId);
 
   const [niveisSnap, progressSnap] = await Promise.all([
@@ -162,16 +172,21 @@ async function carregarSubniveis(uid, card, trilha) {
     getDoc(progressRef)
   ]);
 
-  let progress = progressSnap.exists()
-    ? progressSnap.data()
-    : { nivelAtual: 1, concluidos: [], finalizado: false };
+  let progress;
 
   if (!progressSnap.exists()) {
+    progress = {
+      nivelAtual: 1,
+      concluidos: [],
+      finalizado: false
+    };
     await setDoc(progressRef, progress);
+  } else {
+    progress = progressSnap.data();
   }
 
-  const container = card.querySelector(".subniveis");
-  container.innerHTML = "";
+  const subContainer = card.querySelector(".subniveis");
+  subContainer.innerHTML = "";
 
   const niveis = niveisSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
@@ -182,28 +197,34 @@ async function carregarSubniveis(uid, card, trilha) {
     const el = document.createElement("div");
     el.className = "subcard-nivel";
 
+    // ✔ Concluído
     if (progress.concluidos.includes(nivel.id)) {
       el.classList.add("concluido");
       el.textContent = `✔ ${nivel.titulo}`;
     }
+
+    // ▶ Liberado
     else if (nivel.ordem <= progress.nivelAtual) {
       el.classList.add("liberado");
       el.textContent = `▶ ${nivel.titulo}`;
 
-      el.onclick = () => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
         window.location.href =
           `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
-      };
+      });
     }
+
+    // 🔒 Bloqueado
     else {
       el.classList.add("bloqueado");
       el.textContent = `🔒 ${nivel.titulo}`;
     }
 
-    container.appendChild(el);
+    subContainer.appendChild(el);
   });
 
-  container.classList.remove("hidden");
+  subContainer.classList.remove("hidden");
 }
 
 /* =====================================================
@@ -212,7 +233,7 @@ async function carregarSubniveis(uid, card, trilha) {
 
 async function contabilizarXPPendente(uid) {
 
-  const userRef = doc(db, "usuarios", uid);
+  const userRef     = doc(db, "usuarios", uid);
   const progressRef = collection(userRef, "progress");
 
   const snap = await getDocs(progressRef);
@@ -228,6 +249,7 @@ async function contabilizarXPPendente(uid) {
 
   if (total > 0) {
     await updateDoc(userRef, { xp: increment(total) });
+
     if (window.adicionarXPVisual) {
       window.adicionarXPVisual(total);
     }
@@ -235,7 +257,7 @@ async function contabilizarXPPendente(uid) {
 }
 
 /* =====================================================
-   UTIL
+   UTILIDADES
 ===================================================== */
 
 function formatarSerie(serie) {
