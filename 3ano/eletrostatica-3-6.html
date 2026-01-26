@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — Capacitores</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        Neste nível, vamos estudar os capacitores, dispositivos
+        capazes de armazenar cargas elétricas e energia.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.6 — CAPACITORES
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-6">
+
+      <h2>📘 Nível 3.6 — Capacitores</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é um capacitor?</h3>
+        <p>
+          Um <strong>capacitor</strong> é um dispositivo capaz de
+          <strong>armazenar cargas elétricas</strong> e energia elétrica.
+        </p>
+        <p>
+          Ele é formado, em geral, por duas placas condutoras
+          separadas por um material isolante.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Capacitância</h3>
+        <p>
+          A <strong>capacitância</strong> mede a capacidade de um capacitor
+          de armazenar carga elétrica.
+        </p>
+        <p>
+          Ela depende da geometria das placas e do material isolante.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Unidade de medida</h3>
+        <p>
+          A unidade de capacitância no Sistema Internacional é o
+          <strong>farad (F)</strong>.
+        </p>
+        <p>
+          Na prática, utilizam-se submúltiplos como microfarad (µF)
+          e nanofarad (nF).
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Energia armazenada</h3>
+        <p>
+          Um capacitor armazena <strong>energia elétrica</strong>
+          quando está carregado.
+        </p>
+        <p>
+          Essa energia pode ser utilizada em diversos circuitos
+          eletrônicos.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Capacitores no cotidiano</h3>
+        <ul>
+          <li>📱 Aparelhos eletrônicos</li>
+          <li>💡 Fontes de alimentação</li>
+          <li>📺 Televisores e rádios</li>
+          <li>⚡ Circuitos elétricos em geral</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Capacitores armazenam carga elétrica</li>
+          <li>Capacitância mede essa capacidade</li>
+          <li>A unidade de capacitância é o farad</li>
+          <li>Capacitores são essenciais em circuitos eletrônicos</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.6
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> Qual é a função de um capacitor?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Produzir corrente elétrica
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Armazenar cargas elétricas
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Medir tensão elétrica
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> O que é capacitância?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Energia elétrica armazenada
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Capacidade de armazenar carga elétrica
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Intensidade de corrente
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual é a unidade de capacitância?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Volt
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Coulomb
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Farad
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel36()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_3_6')">
+          ✅ Concluir Nível 3.6
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>🎓 Trilha concluída!</h3>
+        <p class="modal-subtitulo">
+          Você concluiu a trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            🏁 Finalizar trilha
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>

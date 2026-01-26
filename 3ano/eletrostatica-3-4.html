@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — Campo Elétrico</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        Neste nível, vamos estudar o conceito de campo elétrico
+        e como ele descreve a interação entre cargas.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.4 — CAMPO ELÉTRICO
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-4">
+
+      <h2>📘 Nível 3.4 — Campo Elétrico</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é campo elétrico?</h3>
+        <p>
+          O <strong>campo elétrico</strong> é uma região do espaço
+          ao redor de uma carga elétrica onde outra carga
+          sofre a ação de uma força.
+        </p>
+        <p>
+          Ele permite descrever interações elétricas
+          <strong>sem contato direto</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Origem do campo elétrico</h3>
+        <p>
+          Toda carga elétrica cria ao seu redor um campo elétrico.
+        </p>
+        <p>
+          Cargas positivas geram campos que apontam para fora,
+          enquanto cargas negativas geram campos apontando para dentro.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Linhas de campo elétrico</h3>
+        <p>
+          As <strong>linhas de campo</strong> são representações
+          gráficas do campo elétrico.
+        </p>
+        <p>
+          Quanto mais próximas as linhas, maior é a intensidade
+          do campo elétrico naquela região.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Intensidade do campo elétrico</h3>
+        <p>
+          A intensidade do campo elétrico é definida como a
+          força elétrica exercida por unidade de carga.
+        </p>
+        <p>
+          Ela é representada pela grandeza <strong>E</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Campo elétrico no cotidiano</h3>
+        <ul>
+          <li>⚡ Funcionamento de capacitores</li>
+          <li>📡 Transmissão de sinais elétricos</li>
+          <li>🧲 Descargas elétricas na atmosfera</li>
+          <li>📱 Dispositivos eletrônicos</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Campo elétrico é a região de influência da carga</li>
+          <li>Ele permite interação sem contato</li>
+          <li>Linhas de campo representam sua intensidade</li>
+          <li>É uma grandeza fundamental da Eletrostática</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.4
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que é campo elétrico?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Energia térmica
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Região de influência de uma carga
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Tipo de matéria
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> O que indicam as linhas de campo?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Massa da carga
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Intensidade do campo elétrico
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Temperatura
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> O campo elétrico permite interação:</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Apenas com contato
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Apenas em sólidos
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Sem contato direto
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel34()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_3_4')">
+          ✅ Concluir Nível 3.4
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>

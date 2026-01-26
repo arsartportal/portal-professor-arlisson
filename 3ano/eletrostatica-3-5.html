@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — Potencial Elétrico</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        Neste nível, vamos estudar o conceito de potencial elétrico
+        e sua relação com o campo elétrico.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.5 — POTENCIAL ELÉTRICO
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-5">
+
+      <h2>📘 Nível 3.5 — Potencial Elétrico</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é potencial elétrico?</h3>
+        <p>
+          O <strong>potencial elétrico</strong> é uma grandeza que indica
+          a <strong>energia potencial elétrica</strong> associada
+          a uma carga elétrica em determinado ponto do espaço.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Energia potencial elétrica</h3>
+        <p>
+          Quando uma carga está sob a ação de um campo elétrico,
+          ela possui energia potencial elétrica.
+        </p>
+        <p>
+          Essa energia depende da posição da carga no campo.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Diferença de potencial (ddp)</h3>
+        <p>
+          A <strong>diferença de potencial</strong>, também chamada de
+          <strong>tensão elétrica</strong>, indica a variação do potencial
+          elétrico entre dois pontos.
+        </p>
+        <p>
+          É ela que permite o movimento das cargas elétricas.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Unidade de medida</h3>
+        <p>
+          A unidade de medida do potencial elétrico no Sistema Internacional
+          é o <strong>volt (V)</strong>.
+        </p>
+        <p>
+          1 volt corresponde a 1 joule por coulomb.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Potencial elétrico no cotidiano</h3>
+        <ul>
+          <li>🔋 Pilhas e baterias</li>
+          <li>🔌 Tomadas elétricas</li>
+          <li>📱 Funcionamento de aparelhos eletrônicos</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Potencial elétrico está ligado à energia potencial elétrica</li>
+          <li>A ddp permite o movimento das cargas</li>
+          <li>A unidade do potencial elétrico é o volt</li>
+          <li>É um conceito central da Eletrostática</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.5
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que o potencial elétrico representa?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Energia térmica
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Energia potencial elétrica por carga
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Intensidade de corrente
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> O que é diferença de potencial?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Massa da carga
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Variação do potencial elétrico
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Campo magnético
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual é a unidade do potencial elétrico?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Ampère
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Coulomb
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Volt
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel35()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_3_5')">
+          ✅ Concluir Nível 3.5
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>
