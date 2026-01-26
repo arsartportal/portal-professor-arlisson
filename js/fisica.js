@@ -2,12 +2,7 @@ console.log("fisica.js carregado");
 
 /* =====================================================
    FISICA.JS — PORTAL DO PROFESSOR ARLISSON
-   -----------------------------------------------------
-   ✔ Autenticação
-   ✔ Busca de trilhas
-   ✔ Trilhas com e sem subníveis
-   ✔ Progresso salvo no Firestore
-   ✔ XP pendente
+   Trilhas + Subníveis + Progresso
 ===================================================== */
 
 /* =====================================================
@@ -15,10 +10,8 @@ console.log("fisica.js carregado");
 ===================================================== */
 
 // 🔐 Auth
-import {
-  getAuth,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 // 🔥 Firestore
 import {
@@ -45,7 +38,7 @@ const db   = getFirestore();
 let container = null;
 
 /* =====================================================
-   START SEGURO (DOM + AUTH)
+   DOM + AUTH
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -62,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "index.html";
       return;
     }
-
     carregarPerfilETrilhas(user.uid);
   });
 
@@ -73,12 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
 ===================================================== */
 
 async function carregarPerfilETrilhas(uid) {
-  try {
-    await contabilizarXPPendente(uid);
-    await carregarTrilhas(uid);
-  } catch (erro) {
-    console.error("Erro ao carregar perfil:", erro);
-  }
+  await contabilizarXPPendente(uid);
+  await carregarTrilhas(uid);
 }
 
 /* =====================================================
@@ -87,7 +75,7 @@ async function carregarPerfilETrilhas(uid) {
 
 async function carregarTrilhas(uid) {
 
-  const userRef  = doc(db, "usuarios", uid);
+  const userRef = doc(db, "usuarios", uid);
   const userSnap = await getDoc(userRef);
   if (!userSnap.exists()) return;
 
@@ -126,7 +114,6 @@ function criarCardTrilha(uid, trilha) {
 
   const card = document.createElement("div");
   card.className = "trilha-card";
-  card.dataset.serie = trilha.serie;
 
   card.innerHTML = `
     <div class="trilha-serie">${formatarSerie(trilha.serie)}</div>
@@ -135,20 +122,14 @@ function criarCardTrilha(uid, trilha) {
     <div class="subniveis hidden"></div>
   `;
 
-  // ✅ GARANTE QUE O CARD FIQUE VISÍVEL
-  requestAnimationFrame(() => {
-    card.classList.add("show");
-  });
-
   card.addEventListener("click", async (e) => {
     e.stopPropagation();
 
-    // ▶ Trilhas com subníveis (Introdução, Termologia, etc.)
+    // 🔹 Trilhas COM subníveis
     if (trilha.temSubniveis === true) {
 
       const sub = card.querySelector(".subniveis");
 
-      // toggle
       if (!sub.classList.contains("hidden")) {
         sub.classList.add("hidden");
         return;
@@ -158,8 +139,8 @@ function criarCardTrilha(uid, trilha) {
       return;
     }
 
-    // ▶ Trilhas sem subníveis (navegação direta)
-    if (trilha.rota && typeof trilha.rota === "string") {
+    // 🔹 Trilhas SEM subníveis
+    if (trilha.rota) {
       window.location.href = trilha.rota;
     }
   });
@@ -168,7 +149,7 @@ function criarCardTrilha(uid, trilha) {
 }
 
 /* =====================================================
-   SUBNÍVEIS (GENÉRICO)
+   SUBNÍVEIS
 ===================================================== */
 
 async function carregarSubniveis(uid, card, trilha) {
@@ -181,22 +162,16 @@ async function carregarSubniveis(uid, card, trilha) {
     getDoc(progressRef)
   ]);
 
-  let progress;
+  let progress = progressSnap.exists()
+    ? progressSnap.data()
+    : { nivelAtual: 1, concluidos: [], finalizado: false };
 
-  // 🔹 Cria progresso inicial se não existir
   if (!progressSnap.exists()) {
-    progress = {
-      nivelAtual: 1,
-      concluidos: [],
-      finalizado: false
-    };
     await setDoc(progressRef, progress);
-  } else {
-    progress = progressSnap.data();
   }
 
-  const containerSub = card.querySelector(".subniveis");
-  containerSub.innerHTML = "";
+  const container = card.querySelector(".subniveis");
+  container.innerHTML = "";
 
   const niveis = niveisSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
@@ -207,12 +182,10 @@ async function carregarSubniveis(uid, card, trilha) {
     const el = document.createElement("div");
     el.className = "subcard-nivel";
 
-    // ✔ CONCLUÍDO
     if (progress.concluidos.includes(nivel.id)) {
       el.classList.add("concluido");
       el.textContent = `✔ ${nivel.titulo}`;
     }
-    // ▶ LIBERADO
     else if (nivel.ordem <= progress.nivelAtual) {
       el.classList.add("liberado");
       el.textContent = `▶ ${nivel.titulo}`;
@@ -222,16 +195,15 @@ async function carregarSubniveis(uid, card, trilha) {
           `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
       };
     }
-    // 🔒 BLOQUEADO
     else {
       el.classList.add("bloqueado");
       el.textContent = `🔒 ${nivel.titulo}`;
     }
 
-    containerSub.appendChild(el);
+    container.appendChild(el);
   });
 
-  containerSub.classList.remove("hidden");
+  container.classList.remove("hidden");
 }
 
 /* =====================================================
@@ -248,7 +220,6 @@ async function contabilizarXPPendente(uid) {
 
   for (const d of snap.docs) {
     const data = d.data();
-
     if (data.concluido === true && data.xpContabilizado !== true) {
       total += data.xp || 0;
       await updateDoc(d.ref, { xpContabilizado: true });
@@ -257,7 +228,6 @@ async function contabilizarXPPendente(uid) {
 
   if (total > 0) {
     await updateDoc(userRef, { xp: increment(total) });
-
     if (window.adicionarXPVisual) {
       window.adicionarXPVisual(total);
     }
