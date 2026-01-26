@@ -142,7 +142,7 @@ function avaliarCheckpoint(gabarito, ultimo = false) {
 /* ---------- NÍVEL 3.1 ---------- */
 window.verificarCheckpoint = () =>
   avaliarCheckpoint({
-    q1: "b", // Fenômenos elétricos
+    q1: "b", // Cargas elétricas em repouso
     q2: "b", // Elas se atraem (cargas opostas)
     q3: "c"  // Condução térmica (NÃO é eletrização)
   });
@@ -150,27 +150,27 @@ window.verificarCheckpoint = () =>
 /* ---------- NÍVEL 3.2 ---------- */
 window.verificarCheckpointNivel32 = () =>
   avaliarCheckpoint({
-    q1: "c", // Atrito, contato e indução
-    q2: "a", // Atrito
-    q3: "b"  // Indução
+    q1: "b", // Propriedade física da matéria
+    q2: "a", // Elas se repelem
+    q3: "c"  // Coulomb
   });
 
 
 /* ---------- NÍVEL 3.3 ---------- */
 window.verificarCheckpointNivel33 = () =>
   avaliarCheckpoint({
-    q1: "b", // A carga elétrica se conserva
-    q2: "b", // Soma algébrica das cargas
-    q3: "c"  // Não é criada nem destruída
+    q1: "b", // Transferência de elétrons
+    q2: "c", // Indução
+    q3: "b"  // Conservação da carga elétrica
   });
 
 
 /* ---------- NÍVEL 3.4 — CAMPO ELÉTRICO ---------- */
 window.verificarCheckpointNivel34 = () =>
   avaliarCheckpoint({
-    q1: "b", // Região de influência elétrica
-    q2: "b", // Carga de prova positiva
-    q3: "c"  // Linhas saem da positiva e chegam na negativa
+    q1: "b", // Região de influência de uma carga
+    q2: "b", // Intensidade do campo elétrico
+    q3: "c"  // Sem contato direto
   });
 
 
@@ -186,6 +186,6 @@ window.verificarCheckpointNivel35 = () =>
 window.verificarCheckpointNivel36 = () =>
   avaliarCheckpoint({
     q1: "b", // Energia potencial elétrica por carga
-    q2: "b", // Volt (V)
-    q3: "c"  // Trabalho da força elétrica
+    q2: "b", // Variação do potencial elétrico
+    q3: "c"  // Volt
   }, true);
