@@ -2018,3 +2018,22 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.trilha-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  display: block;
+  transform: none;
+}
+
+.trilha-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.trilha-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -2,6 +2,12 @@ console.log("fisica.js carregado");
 
 /* =====================================================
    FISICA.JS — PORTAL DO PROFESSOR ARLISSON
+   -----------------------------------------------------
+   ✔ Autenticação
+   ✔ Busca de trilhas
+   ✔ Trilhas com e sem subníveis
+   ✔ Progresso salvo no Firestore
+   ✔ XP pendente
 ===================================================== */
 
 /* =====================================================
@@ -39,7 +45,7 @@ const db   = getFirestore();
 let container = null;
 
 /* =====================================================
-   INICIALIZAÇÃO SEGURA (DOM + AUTH)
+   START SEGURO (DOM + AUTH)
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -56,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "index.html";
       return;
     }
+
     carregarPerfilETrilhas(user.uid);
   });
 
@@ -69,8 +76,8 @@ async function carregarPerfilETrilhas(uid) {
   try {
     await contabilizarXPPendente(uid);
     await carregarTrilhas(uid);
-  } catch (e) {
-    console.error("Erro ao carregar perfil:", e);
+  } catch (erro) {
+    console.error("Erro ao carregar perfil:", erro);
   }
 }
 
@@ -80,11 +87,12 @@ async function carregarPerfilETrilhas(uid) {
 
 async function carregarTrilhas(uid) {
 
-  const userRef = doc(db, "usuarios", uid);
+  const userRef  = doc(db, "usuarios", uid);
   const userSnap = await getDoc(userRef);
   if (!userSnap.exists()) return;
 
   const usuario = userSnap.data();
+  console.log("USUÁRIO:", usuario);
 
   const consulta = usuario.tipo === "professor"
     ? query(
@@ -101,6 +109,7 @@ async function carregarTrilhas(uid) {
       );
 
   const snap = await getDocs(consulta);
+  console.log("TRILHAS ENCONTRADAS:", snap.size);
 
   container.innerHTML = "";
 
@@ -126,12 +135,20 @@ function criarCardTrilha(uid, trilha) {
     <div class="subniveis hidden"></div>
   `;
 
+  // ✅ GARANTE QUE O CARD FIQUE VISÍVEL
+  requestAnimationFrame(() => {
+    card.classList.add("show");
+  });
+
   card.addEventListener("click", async (e) => {
     e.stopPropagation();
 
+    // ▶ Trilhas com subníveis (Introdução, Termologia, etc.)
     if (trilha.temSubniveis === true) {
 
       const sub = card.querySelector(".subniveis");
+
+      // toggle
       if (!sub.classList.contains("hidden")) {
         sub.classList.add("hidden");
         return;
@@ -141,7 +158,8 @@ function criarCardTrilha(uid, trilha) {
       return;
     }
 
-    if (trilha.rota) {
+    // ▶ Trilhas sem subníveis (navegação direta)
+    if (trilha.rota && typeof trilha.rota === "string") {
       window.location.href = trilha.rota;
     }
   });
@@ -165,15 +183,20 @@ async function carregarSubniveis(uid, card, trilha) {
 
   let progress;
 
+  // 🔹 Cria progresso inicial se não existir
   if (!progressSnap.exists()) {
-    progress = { nivelAtual: 1, concluidos: [], finalizado: false };
+    progress = {
+      nivelAtual: 1,
+      concluidos: [],
+      finalizado: false
+    };
     await setDoc(progressRef, progress);
   } else {
     progress = progressSnap.data();
   }
 
-  const container = card.querySelector(".subniveis");
-  container.innerHTML = "";
+  const containerSub = card.querySelector(".subniveis");
+  containerSub.innerHTML = "";
 
   const niveis = niveisSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
@@ -184,10 +207,12 @@ async function carregarSubniveis(uid, card, trilha) {
     const el = document.createElement("div");
     el.className = "subcard-nivel";
 
+    // ✔ CONCLUÍDO
     if (progress.concluidos.includes(nivel.id)) {
       el.classList.add("concluido");
       el.textContent = `✔ ${nivel.titulo}`;
     }
+    // ▶ LIBERADO
     else if (nivel.ordem <= progress.nivelAtual) {
       el.classList.add("liberado");
       el.textContent = `▶ ${nivel.titulo}`;
@@ -197,15 +222,16 @@ async function carregarSubniveis(uid, card, trilha) {
           `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
       };
     }
+    // 🔒 BLOQUEADO
     else {
       el.classList.add("bloqueado");
       el.textContent = `🔒 ${nivel.titulo}`;
     }
 
-    container.appendChild(el);
+    containerSub.appendChild(el);
   });
 
-  container.classList.remove("hidden");
+  containerSub.classList.remove("hidden");
 }
 
 /* =====================================================
@@ -222,6 +248,7 @@ async function contabilizarXPPendente(uid) {
 
   for (const d of snap.docs) {
     const data = d.data();
+
     if (data.concluido === true && data.xpContabilizado !== true) {
       total += data.xp || 0;
       await updateDoc(d.ref, { xpContabilizado: true });
@@ -230,6 +257,7 @@ async function contabilizarXPPendente(uid) {
 
   if (total > 0) {
     await updateDoc(userRef, { xp: increment(total) });
+
     if (window.adicionarXPVisual) {
       window.adicionarXPVisual(total);
     }
@@ -246,4 +274,3 @@ function formatarSerie(serie) {
   if (serie === "3ano") return "3º Ano do Ensino Médio";
   return "";
 }
-
