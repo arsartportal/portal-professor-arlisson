@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Termologia — Capacidade Térmica e Calor Específico</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔥 Termologia</h1>
+      <p>
+        Neste nível, vamos estudar como diferentes materiais
+        reagem ao aquecimento e por que alguns aquecem mais rápido que outros.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 2.6 — CAPACIDADE TÉRMICA E CALOR ESPECÍFICO
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-2-6">
+
+      <h2>📘 Nível 2.6 — Capacidade Térmica e Calor Específico</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Capacidade térmica</h3>
+        <p>
+          A <strong>capacidade térmica</strong> de um corpo indica
+          a <strong>quantidade de calor</strong> necessária para variar
+          sua temperatura em uma certa quantidade.
+        </p>
+        <p>
+          Ela depende da massa e do material do corpo.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Calor específico</h3>
+        <p>
+          O <strong>calor específico</strong> é uma característica
+          do material e indica a quantidade de calor necessária
+          para variar a temperatura de <strong>1&nbsp;kg</strong>
+          da substância em <strong>1&nbsp;°C</strong>.
+        </p>
+        <p>
+          Cada substância possui um calor específico próprio.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Relação entre calor, massa e temperatura</h3>
+        <p>
+          A quantidade de calor trocada em um aquecimento ou resfriamento
+          pode ser calculada por:
+        </p>
+        <p><strong>Q = m · c · ΔT</strong></p>
+        <p>
+          onde:
+        </p>
+        <ul>
+          <li><strong>Q</strong> → quantidade de calor</li>
+          <li><strong>m</strong> → massa</li>
+          <li><strong>c</strong> → calor específico</li>
+          <li><strong>ΔT</strong> → variação de temperatura</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Comparação entre materiais</h3>
+        <p>
+          Materiais com <strong>alto calor específico</strong>
+          demoram mais para aquecer e esfriar.
+        </p>
+        <p>
+          A água, por exemplo, possui alto calor específico,
+          ajudando a regular a temperatura do planeta.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Importância no cotidiano</h3>
+        <ul>
+          <li>🌊 Clima das regiões litorâneas</li>
+          <li>🍳 Escolha de materiais de panelas</li>
+          <li>❄️ Sistemas de refrigeração</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Capacidade térmica depende do corpo</li>
+          <li>Calor específico é uma propriedade da substância</li>
+          <li>A relação fundamental é Q = m · c · ΔT</li>
+          <li>Materiais com alto calor específico aquecem mais lentamente</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 2.6
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que indica o calor específico?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            A massa do corpo
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            A quantidade de calor por unidade de massa e temperatura
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            A temperatura inicial
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Qual substância possui alto calor específico?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Ferro
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Água
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Alumínio
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Na expressão Q = m · c · ΔT, o termo ΔT representa:</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            A massa do corpo
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            O calor específico
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            A variação de temperatura
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel26()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_2_6')">
+          ✅ Concluir Nível 2.6
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Termologia.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Finalizar trilha
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/termologia.js"></script>
+
+</body>
+</html>

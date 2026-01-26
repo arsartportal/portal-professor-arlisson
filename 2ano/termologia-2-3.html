@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Termologia — Dilatação Térmica</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔥 Termologia</h1>
+      <p>
+        Neste nível, vamos estudar como os corpos se deformam
+        quando sofrem variações de temperatura.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 2.3 — DILATAÇÃO TÉRMICA
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-2-3">
+
+      <h2>📘 Nível 2.3 — Dilatação Térmica</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é dilatação térmica?</h3>
+        <p>
+          A <strong>dilatação térmica</strong> é o fenômeno que ocorre quando
+          um corpo sofre <strong>variação em suas dimensões</strong>
+          devido à variação de temperatura.
+        </p>
+        <p>
+          Em geral, os corpos <strong>dilatam ao aquecer</strong>
+          e <strong>contraem ao esfriar</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Por que os corpos se dilatam?</h3>
+        <p>
+          Quando a temperatura aumenta, as partículas do material
+          passam a vibrar com maior intensidade.
+        </p>
+        <p>
+          Esse aumento da agitação faz com que a distância média entre
+          as partículas aumente, provocando a dilatação.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Dilatação linear</h3>
+        <p>
+          A <strong>dilatação linear</strong> ocorre quando o aumento
+          do comprimento do corpo é predominante.
+        </p>
+        <p>
+          É comum em fios, barras e trilhos metálicos.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Dilatação superficial e volumétrica</h3>
+        <p>
+          Além da dilatação linear, existem:
+        </p>
+        <ul>
+          <li>
+            <strong>Dilatação superficial</strong> → aumento da área
+          </li>
+          <li>
+            <strong>Dilatação volumétrica</strong> → aumento do volume
+          </li>
+        </ul>
+        <p>
+          Essas dilatações são importantes em estruturas como pontes
+          e tanques metálicos.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Dilatação no cotidiano</h3>
+        <p>
+          A dilatação térmica explica diversas situações do dia a dia:
+        </p>
+        <ul>
+          <li>🚆 Espaços entre trilhos de trem</li>
+          <li>🌉 Juntas de dilatação em pontes</li>
+          <li>🫙 Tampas metálicas difíceis de abrir</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Corpos se dilatam ao aquecer</li>
+          <li>A dilatação ocorre devido à agitação das partículas</li>
+          <li>Existem dilatações linear, superficial e volumétrica</li>
+          <li>A dilatação é importante em construções e máquinas</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 2.3
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que é dilatação térmica?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Aumento de massa do corpo
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Variação das dimensões do corpo com a temperatura
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Mudança do estado físico
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Por que os corpos se dilatam ao aquecer?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Porque aumentam de massa
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Porque as partículas ficam mais agitadas
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Porque o volume diminui
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual tipo de dilatação está relacionada
+            ao aumento do comprimento?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Superficial
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Volumétrica
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Linear
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel23()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_2_3')">
+          ✅ Concluir Nível 2.3
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Termologia.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/termologia.js"></script>
+
+</body>
+</html>

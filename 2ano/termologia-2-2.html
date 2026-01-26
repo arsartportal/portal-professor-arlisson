@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Termologia — Temperatura e Escalas</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔥 Termologia</h1>
+      <p>
+        Neste nível, vamos estudar o conceito físico de temperatura
+        e as principais escalas termométricas utilizadas no mundo.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 2.2 — TEMPERATURA E ESCALAS
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-2-2">
+
+      <h2>📘 Nível 2.2 — Temperatura e Escalas Termométricas</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é temperatura?</h3>
+        <p>
+          A <strong>temperatura</strong> é uma grandeza física que indica
+          o <strong>grau de agitação das partículas</strong> de um corpo.
+        </p>
+        <p>
+          Quanto maior a agitação das partículas, maior é a temperatura do corpo.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Temperatura não é sensação térmica</h3>
+        <p>
+          A sensação de quente ou frio depende do nosso corpo,
+          mas a temperatura é uma <strong>medida objetiva</strong>.
+        </p>
+        <p>
+          Por isso utilizamos instrumentos chamados <strong>termômetros</strong>
+          para medir a temperatura corretamente.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Escalas termométricas</h3>
+        <p>
+          Para medir a temperatura, usamos diferentes escalas.
+          As principais são:
+        </p>
+        <ul>
+          <li><strong>Celsius (°C)</strong> → usada no Brasil</li>
+          <li><strong>Fahrenheit (°F)</strong> → usada nos EUA</li>
+          <li><strong>Kelvin (K)</strong> → usada na ciência</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Zero absoluto</h3>
+        <p>
+          A escala Kelvin possui um valor mínimo chamado
+          <strong>zero absoluto</strong>.
+        </p>
+        <p>
+          No zero absoluto, a agitação das partículas é mínima possível.
+        </p>
+        <p>
+          Esse valor corresponde a:
+        </p>
+        <ul>
+          <li>0 K</li>
+          <li>-273 °C</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Conversão entre escalas</h3>
+        <p>
+          Em muitos problemas, é necessário converter temperaturas
+          entre diferentes escalas.
+        </p>
+        <p>
+          Essas conversões são feitas por meio de relações matemáticas,
+          que veremos com mais detalhes nos próximos exercícios.
+        </p>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Temperatura mede a agitação das partículas</li>
+          <li>Sensação térmica não é temperatura</li>
+          <li>As principais escalas são Celsius, Fahrenheit e Kelvin</li>
+          <li>O zero absoluto é o menor valor possível de temperatura</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 2.2
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que a temperatura mede?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            A quantidade de calor
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            A massa do corpo
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            A agitação das partículas
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Qual escala é utilizada no Sistema Internacional?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Kelvin
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Celsius
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Fahrenheit
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> O que representa o zero absoluto?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            A maior temperatura possível
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            O ponto de ebulição da água
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            A mínima agitação das partículas
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel22()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_2_2')">
+          ✅ Concluir Nível 2.2
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Termologia.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/termologia.js"></script>
+
+</body>
+</html>

@@ -2008,3 +2008,13 @@ body {
   100% { box-shadow: 0 0 20px rgba(255,255,255,.4); }
 }
 
+.btn-concluir {
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+.btn-concluir:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
