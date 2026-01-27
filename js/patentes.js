@@ -179,7 +179,7 @@ export function fecharPatente() {
   if (overlay) overlay.classList.add("hidden");
 
   // redireciona para a página de Física
-  window.location.href = "./fisica.html";
+  window.location.href = "/fisica.html";
 }
 
 // expõe para uso em onclick do HTML
