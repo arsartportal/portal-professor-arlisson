@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastrar Alunos</title>
+
+  <!-- Estilo da página -->
+  <link rel="stylesheet" href="cadastrar-alunos.css?v=999">
+</head>
+<body>
+
+  <main class="container cadastro-alunos">
+
+    <h1>Cadastrar aluno</h1>
+
+    <!-- FORMULÁRIO -->
+    <form id="formCadastrarAluno">
+
+      <label>
+        Nome do aluno
+        <input type="text" id="nome" placeholder="Nome completo" required>
+      </label>
+
+      <label>
+        Escola
+        <select id="escola" required>
+          <option value="">Selecione a escola</option>
+          <option value="boto-de-menezes">Boto de Menezes</option>
+          <option value="audiocomunicacao">Audiocomunicação</option>
+          <option value="maria-geny">Maria Geny</option>
+        </select>
+      </label>
+
+      <label>
+        Série / Ano
+        <!-- NÃO obrigatório -->
+        <select id="serie">
+          <option value="">Selecione</option>
+          <option value="1ano">1º Ano</option>
+          <option value="2ano">2º Ano</option>
+          <option value="3ano">3º Ano</option>
+          <option value="eja">EJA</option>
+          <option value="reforco">Reforço</option>
+        </select>
+      </label>
+
+      <label>
+        Turma
+        <input type="text" id="turma" placeholder="Ex: A, B, C">
+      </label>
+
+      <button type="submit">Cadastrar aluno</button>
+
+    </form>
+
+    <!-- MENSAGENS -->
+    <div id="msg"></div>
+
+  </main>
+
+  <!-- Script principal -->
+  <script type="module" src="cadastrar-alunos.js"></script>
+</body>
+</html>

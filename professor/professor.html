@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- =====================================================
+       ÁREA DO PROFESSOR — PORTAL DO PROFESSOR ARLISSON
+       ===================================================== -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área do Professor</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- CSS exclusivo do professor -->
+  <link rel="stylesheet" href="professor.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     TOPO / HEADER
+     ===================================================== -->
+<header class="topo">
+
+  <div class="topo-esquerda">
+    <h1>Área do Professor</h1>
+    <p class="subtitulo subtitulo-header">
+      Painel administrativo
+    </p>
+  </div>
+
+  <div class="topo-direita">
+    <button onclick="window.location.href='/home.html'">
+      Voltar ao Portal
+    </button>
+  </div>
+
+</header>
+
+<!-- =====================================================
+     CONTEÚDO PRINCIPAL
+     ===================================================== -->
+<main>
+
+  <!-- ===================================================
+       AVISO DE ACESSO NEGADO
+       - visível por padrão
+       - professor.js decide se oculta
+       =================================================== -->
+  <div id="acesso-negado" class="aviso">
+    <h3>🔒 Acesso restrito</h3>
+    <p>Esta área é exclusiva para professores.</p>
+  </div>
+
+  <!-- ===================================================
+       DASHBOARD DO PROFESSOR
+       - totalmente gerado via JS
+       - cards vêm do Firestore
+       =================================================== -->
+  <section
+    id="dashboard-professor"
+    class="cards-grid"
+    style="display: none;"
+  >
+    <!-- cards dinâmicos -->
+  </section>
+
+  <!-- ===================================================
+       PATCH NOTES (TEMPORÁRIO EM HTML)
+       - pode migrar para Firestore depois
+       =================================================== -->
+  <section class="patch-notes">
+
+    <div class="patch-header">
+      <h2>📢 Patch Notes do Portal</h2>
+      <span class="patch-subtitle">
+        Atualizações e melhorias do sistema
+      </span>
+    </div>
+
+    <!-- ===============================
+         v1.4.0
+         =============================== -->
+    <details class="patch-version" open>
+      <summary>
+        <span class="version">v1.4.0</span>
+        <span class="date">22 de Janeiro / 2026</span>
+        <span class="title">Conquistas, Estabilidade e Infra</span>
+      </summary>
+
+      <div class="patch-content">
+
+        <h4>🏅 Gamificação (NOVO)</h4>
+        <ul>
+          <li>Sistema de conquistas por módulo</li>
+          <li>Persistência de badges no Firestore</li>
+          <li>Registro automático da data de conclusão</li>
+          <li>Página <strong>Minhas Conquistas</strong></li>
+        </ul>
+
+        <h4>🚀 Infraestrutura</h4>
+        <ul>
+          <li>Domínio <strong>exatas.site</strong> integrado ao Cloudflare</li>
+          <li>Padronização de caminhos absolutos</li>
+          <li>Correção de fallback de páginas</li>
+        </ul>
+
+        <h4>🔐 Segurança</h4>
+        <ul>
+          <li>Revisão das regras do Firestore</li>
+          <li>Proteção por UID</li>
+        </ul>
+
+      </div>
+    </details>
+
+    <!-- ===============================
+         v1.3.0
+         =============================== -->
+    <details class="patch-version">
+      <summary>
+        <span class="version">v1.3.0</span>
+        <span class="date">Janeiro / 2026</span>
+        <span class="title">Estabilidade e Gamificação</span>
+      </summary>
+
+      <div class="patch-content">
+
+        <h4>🚀 Novidades</h4>
+        <ul>
+          <li>Sistema de patentes visuais</li>
+          <li>HUD gamificado</li>
+        </ul>
+
+        <h4>🐞 Correções</h4>
+        <ul>
+          <li>Diferenças entre ambiente local e produção</li>
+        </ul>
+
+      </div>
+    </details>
+
+  </section>
+
+</main>
+
+<!-- =====================================================
+     SCRIPTS
+     ===================================================== -->
+
+<!-- Guardião da área do professor -->
+<script type="module" src="professor.js"></script>
+
+</body>
+</html>
