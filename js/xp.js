@@ -28,6 +28,9 @@ import {
 
 import { app, db } from "./firebase.js";
 
+import { mostrarAnimacaoMudancaPatente } from "./patentes.js";
+
+
 /* -----------------------------------------------------
    INSTÂNCIAS
 ----------------------------------------------------- */
@@ -43,7 +46,7 @@ const auth = getAuth(app);
  * @param {number} nivel
  */
 export function limiteXP(nivel) {
-  return 100 + nivel * 100;
+  return 100 * Math.pow(2, nivel);
 }
 
 /* -----------------------------------------------------
@@ -105,13 +108,18 @@ export async function adicionarXPImediato(valor, motivo = "") {
 
   const user = auth.currentUser;
 
-  // Segurança: se não estiver logado, não faz nada
   if (!user) {
     console.warn("XP ignorado: usuário não autenticado.");
     return null;
   }
 
   try {
+
+    // 🔹 nível ANTES
+    const snap = await getDoc(doc(db, "usuarios", user.uid));
+    const nivelAnterior = snap.exists() ? snap.data().nivel : 0;
+
+    // 🔹 processa XP
     const resultado = await processarXP(user.uid, valor);
 
     console.log(
@@ -120,6 +128,12 @@ export async function adicionarXPImediato(valor, motivo = "") {
       resultado
     );
 
+    // 🔹 anima patente SE subir nível
+    if (resultado.subiuNivel) {
+      console.log("🔥 SUBIU DE NÍVEL", nivelAnterior, resultado.nivel);
+      mostrarAnimacaoMudancaPatente(nivelAnterior, resultado.nivel);
+    }
+
     return resultado;
 
   } catch (e) {
@@ -127,3 +141,9 @@ export async function adicionarXPImediato(valor, motivo = "") {
     return null;
   }
 }
+
+// 🔧 DEV ONLY — remover em produção
+window.addXP = async (valor = 1000) => {
+  return await adicionarXPImediato(valor, "Teste via console");
+};
+

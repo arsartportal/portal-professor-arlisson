@@ -2,14 +2,13 @@
    INTRODUÇÃO À FÍSICA — PROGRESSO, XP E FLUXO
    Portal do Professor Arlisson
 ===================================================== */
-
+import { adicionarXPImediato } from "./xp.js";
 import { auth, db } from "./firebase.js";
 import {
   doc,
   getDoc,
   updateDoc,
   arrayUnion,
-  increment
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 /* =====================================================
@@ -52,11 +51,13 @@ async function concluirNivel(nivelId) {
     concluidos: arrayUnion(nivelId),
     nivelAtual: nivelNumero + 1
   });
-
+// ⚠️ PROIBIDO atualizar XP aqui
+// XP só pode ser alterado via xp.js
   // Soma XP
-  await updateDoc(userRef, {
-    xp: increment(XP_POR_NIVEL)
-  });
+  await adicionarXPImediato(
+  XP_POR_NIVEL,
+  "Conclusão de nível — Introdução à Física"
+);
 
   // 🔚 ÚLTIMO NÍVEL → tela final
   if (nivelId === "nivel_1_5") {

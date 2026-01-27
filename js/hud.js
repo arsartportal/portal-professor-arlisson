@@ -2,6 +2,8 @@
 // HUD.JS — HUD GLOBAL (NOME, XP, PATENTE)
 // =======================================
 
+import { limiteXP } from "./xp.js";
+
 // 🔐 Firebase Auth
 import {
   getAuth,
@@ -52,7 +54,7 @@ onAuthStateChanged(auth, (user) => {
     // 🎮 Nível e XP
     const nivel = dados.nivel ?? 0;
     const xpAtual = dados.xp ?? 0;
-    const xpParaProximoNivel = (nivel + 1) * 100;
+    const xpParaProximoNivel = limiteXP(nivel);
 
     const nivelSpan = document.getElementById("nivel-usuario");
     if (nivelSpan) {

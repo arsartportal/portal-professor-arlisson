@@ -137,3 +137,50 @@ export function obterPatentePorNivel(nivel) {
     imagem: `/assets/ranks/${ranks[indice]}`
   };
 }
+
+export function mostrarAnimacaoMudancaPatente(nivelAntigo, nivelNovo) {
+
+  if (nivelNovo <= nivelAntigo) return;
+
+  const overlay = document.getElementById("patente-overlay");
+  const card = document.querySelector(".patente-card");
+
+  if (!overlay || !card) return;
+
+  const patenteAntiga = obterPatentePorNivel(nivelAntigo);
+  const patenteNova = obterPatentePorNivel(nivelNovo);
+
+  const imgAntiga = document.getElementById("patente-antiga");
+  const imgNova = document.getElementById("patente-nova");
+
+  // estado inicial LIMPO
+  card.classList.remove("animar");
+  overlay.classList.remove("hidden");
+
+  imgAntiga.src = patenteAntiga.imagem;
+  imgNova.src = patenteNova.imagem;
+
+  // ⏳ ESPERA a imagem nova carregar
+  imgNova.onload = () => {
+
+    // força renderização do estado inicial
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        card.classList.add("animar");
+        if (window.confetti) soltarConfetes();
+      });
+    });
+
+  };
+}
+
+export function fecharPatente() {
+  const overlay = document.getElementById("patente-overlay");
+  if (overlay) overlay.classList.add("hidden");
+
+  // redireciona para a página de Física
+  window.location.href = "./fisica.html";
+}
+
+// expõe para uso em onclick do HTML
+window.fecharPatente = fecharPatente;

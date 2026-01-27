@@ -13,6 +13,9 @@
 
 <!-- Estilo específico do módulo Física -->
 <link rel="stylesheet" href="css/fisica.css">
+
+<!-- Estilo específico da animação da patente -->
+<link rel="stylesheet" href="./css/patentes.css">
 </head>
 
 <!-- 
@@ -133,19 +136,8 @@ function sair() {
 <script src="js/gamificacao.js"></script>
 <!-- JS ESPECÍFICO DA FÍSICA -->
 <script type="module" src="js/fisica.js"></script>
+<script src="./js/patentes.js" type="module"></script>
 
-
-<!-- =========================
-     LEVEL UP OVERLAY
-========================== -->
-<div id="levelup-overlay">
-  <div class="levelup-box">
-    <div class="levelup-title">LEVEL UP</div>
-    <div class="levelup-level">
-      Nível <span id="levelup-nivel">0</span>
-    </div>
-  </div>
-</div>
 
 
 <script type="module">
@@ -190,5 +182,21 @@ function sair() {
     localStorage.removeItem("checkpointConcluido");
   });
 </script>
+
+<!-- OVERLAY DE MUDANÇA DE PATENTE -->
+<div id="patente-overlay" class="hidden">
+  <div class="patente-card">
+
+    <h2>🎉 Nova Patente!</h2>
+
+    <div class="patentes-container">
+      <img id="patente-antiga" class="patente antiga" />
+      <img id="patente-nova" class="patente nova" />
+    </div>
+
+    <button onclick="fecharPatente()">Continuar</button>
+
+  </div>
+</div>
 </body>
 </html>

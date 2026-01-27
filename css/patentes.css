@@ -1,0 +1,198 @@
+/* =========================================================
+   PATENTES.CSS — ANIMAÇÃO DE MUDANÇA DE PATENTE
+   ---------------------------------------------------------
+   COREOGRAFIA:
+   0s–1s  → pausa dramática (nada se move)
+   1s–2s  → patente nova entra
+           patente antiga é empurrada
+========================================================= */
+
+
+/* =========================================================
+   OVERLAY (FUNDO ESCURO)
+========================================================= */
+
+#patente-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#patente-overlay.hidden {
+  display: none;
+}
+
+
+/* =========================================================
+   CARD CENTRAL
+========================================================= */
+
+.patente-card {
+  position: relative;
+  width: 360px;
+  padding: 40px 30px 30px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  color: #fff;
+  text-align: center;
+
+  animation: cardEntrada 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.patente-card h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+
+/* =========================================================
+   CONTAINER DAS PATENTES
+========================================================= */
+
+.patentes-container {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   BASE DAS IMAGENS DE PATENTE
+   ---------------------------------------------------------
+   A transição NÃO fica aqui.
+   Cada patente controla seu próprio tempo.
+========================================================= */
+
+.patente {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: auto;
+
+  transition-property: top, opacity, transform;
+  transition-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1);
+}
+
+
+/* =========================================================
+   PATENTE ANTIGA
+   ---------------------------------------------------------
+   - Começa visível
+   - FICA PARADA por 1s
+   - Depois é empurrada por 1s
+========================================================= */
+
+.patente.antiga {
+  top: 45px;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+
+  transition-duration: 1s;
+  transition-delay: 1s;
+}
+
+
+/* =========================================================
+   PATENTE NOVA
+   ---------------------------------------------------------
+   - Começa fora da tela
+   - Invisível
+   - ESPERA 1s
+   - Entra por 1s
+========================================================= */
+
+.patente.nova {
+  top: -150px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.9);
+
+  transition-duration: 1s;
+  transition-delay: 1s;
+}
+
+
+/* =========================================================
+   ESTADO ANIMADO (COREOGRAFIA)
+   ---------------------------------------------------------
+   Quando o JS adiciona .animar no card:
+   - a nova entra
+   - a antiga é empurrada
+========================================================= */
+
+.patente-card.animar .patente.nova {
+  top: 45px;
+  opacity: 1;
+  transform: translateX(-50%) scale(1.08);
+}
+
+.patente-card.animar .patente.antiga {
+  top: 190px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.82);
+}
+
+
+/* =========================================================
+   GLOW DO CARD (SUAVE, NÃO APRESSADO)
+========================================================= */
+
+.patente-card::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 26px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 209, 102, 0.55),
+    transparent 70%
+  );
+  z-index: -1;
+  animation: glowPulse 2.8s infinite alternate ease-in-out;
+}
+
+
+/* =========================================================
+   BOTÃO CONTINUAR
+========================================================= */
+
+.patente-card button {
+  margin-top: 12px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 12px;
+  background: #ffd166;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.patente-card button:hover {
+  filter: brightness(1.05);
+}
+
+
+/* =========================================================
+   ANIMAÇÕES AUXILIARES
+========================================================= */
+
+@keyframes cardEntrada {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulse {
+  from { opacity: 0.35; }
+  to   { opacity: 0.9; }
+}
