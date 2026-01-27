@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/css/style.css" />
   <!-- CSS específico da Física -->
   <link rel="stylesheet" href="/css/introducao-fisica.css" />
+  <!-- Estilo específico da animação da patente -->
+<link rel="stylesheet" href="/css/patentes.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -239,5 +241,22 @@
   <!-- JS DO MÓDULO -->
   <script type="module" src="/js/introducao-fisica.js"></script>
 
+  <script src="/js/patentes.js" type="module"></script>
+
+  <!-- OVERLAY DE MUDANÇA DE PATENTE -->
+<div id="patente-overlay" class="hidden">
+  <div class="patente-card">
+
+    <h2>🎉 Nova Patente!</h2>
+
+    <div class="patentes-container">
+      <img id="patente-antiga" class="patente antiga" />
+      <img id="patente-nova" class="patente nova" />
+    </div>
+
+    <button onclick="fecharPatente()">Continuar</button>
+
+  </div>
+</div>
 </body>
 </html>
