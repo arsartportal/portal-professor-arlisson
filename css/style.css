@@ -2153,3 +2153,18 @@ body {
   margin-top: 6px;
   font-size: 0.8rem;
 }
+
+/* =========================================
+   FIX CONTRASTE LOGIN
+========================================= */
+
+.login-panel h2 {
+  color: #0f172a !important;
+  font-size: 24px;
+  letter-spacing: -0.3px;
+}
+
+.login-info {
+  color: #475569 !important;   /* cinza elegante */
+}
+
