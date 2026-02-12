@@ -2207,3 +2207,8 @@ body {
 .card-avisos-home.ativo .avisos-seta {
   transform: rotate(180deg);
 }
+
+.card-avisos-home.ativo {
+  transform: scale(1.01);
+  transition: transform 0.2s ease;
+}
