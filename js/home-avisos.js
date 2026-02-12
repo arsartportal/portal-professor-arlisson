@@ -72,3 +72,12 @@ function carregarAvisosHome() {
     });
   });
 }
+
+const cardAvisos = document.getElementById("cardAvisos");
+
+cardAvisos.addEventListener("click", (e) => {
+
+  if (e.target.closest("a")) return;
+
+  cardAvisos.classList.toggle("ativo");
+});
