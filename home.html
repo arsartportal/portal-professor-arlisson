@@ -118,15 +118,27 @@
     <div class="cards">
 
       <!-- CARD DE AVISOS (RESUMO) -->
-<div class="card card-avisos-home">
-  <h3>📢 Avisos</h3>
-
-  <div id="avisos-home-lista">
-    <small>Carregando avisos...</small>
+<div class="card card-avisos-home" id="cardAvisos">
+  <div class="avisos-header">
+    <h3>📢 Avisos</h3>
+    <span class="avisos-seta">▼</span>
   </div>
 
-  <a href="avisos/avisos-aluno.html" class="ver-mais">Ver todos</a>
+  <div class="avisos-preview">
+    <small>Clique para ver os avisos</small>
+  </div>
+
+  <div class="avisos-expandido">
+    <div id="avisos-home-lista">
+      <small>Carregando avisos...</small>
+    </div>
+
+    <a href="/avisos/avisos-aluno.html" class="ver-mais">
+      Ver todos
+    </a>
+  </div>
 </div>
+
 
       <!-- ÁREA DO ALUNO -->
       <a href="fisica.html" class="card">📘 Física</a>
