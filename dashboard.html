@@ -3,36 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard do Professor</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
+  <div class="barra-superior">
+  <button class="btn-voltar" onclick="voltar()">⬅ Voltar</button>
+</div>
 
-<h2>Dashboard do Professor</h2>
+<header class="topo">
+  <h1>📊 Dashboard do Professor</h1>
+</header>
 
-<p>
-  Acompanhamento do progresso dos alunos
-</p>
+<section class="cards-resumo">
+  <div class="card">
+    👥 <span id="total-alunos">0</span>
+    <small>Total de Alunos</small>
+  </div>
 
-<table class="tabela-dashboard">
+  <div class="card">
+    🔥 <span id="ativos">0</span>
+    <small>Ativos (7 dias)</small>
+  </div>
 
-  <thead>
-    <tr>
-      <th>Aluno</th>
-      <th>Turma</th>
-      <th>XP</th>
-      <th>Nível</th>
-      <th>Último acesso</th>
-    </tr>
-  </thead>
+  <div class="card">
+    ⚠️ <span id="inativos">0</span>
+    <small>Inativos (+10 dias)</small>
+  </div>
 
-  <tbody id="lista-alunos">
-    <!-- preenchido via JS -->
-  </tbody>
+  <div class="card">
+    🏆 <span id="maior-xp">---</span>
+    <small>Maior XP</small>
+  </div>
+</section>
 
-</table>
+<section class="filtros">
+  <input type="text" id="busca" placeholder="🔍 Buscar aluno...">
+  
+  <select id="filtro-turma">
+    <option value="">Todas as turmas</option>
+  </select>
+</section>
 
-<!-- Script do dashboard -->
+<section class="tabela-container">
+  <table class="tabela-dashboard">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Aluno</th>
+        <th>Turma</th>
+        <th>XP</th>
+        <th>Nível</th>
+        <th>Status</th>
+        <th>Último acesso</th>
+      </tr>
+    </thead>
+    <tbody id="lista-alunos"></tbody>
+  </table>
+</section>
+
 <script type="module" src="../js/dashboard.js"></script>
 
 </body>

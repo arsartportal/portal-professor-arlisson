@@ -2212,3 +2212,52 @@ body {
   transform: scale(1.01);
   transition: transform 0.2s ease;
 }
+
+/* =========================
+   CARD AVISOS DESTACADO
+========================= */
+
+.card-avisos-home {
+  grid-column: 1 / -1;
+  cursor: pointer;
+  overflow: hidden;
+
+  /* Fundo levemente azulado */
+  background: linear-gradient(
+    180deg,
+    rgba(33, 150, 243, 0.08),
+    rgba(33, 150, 243, 0.04)
+  );
+
+  border-top: 4px solid #1976d2;
+
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.15);
+
+  transition: all 0.3s ease;
+}
+
+.card-avisos-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(25, 118, 210, 0.25);
+}
+
+body[data-theme="dark"] .card-avisos-home {
+  background: linear-gradient(
+    180deg,
+    rgba(100, 181, 246, 0.12),
+    rgba(100, 181, 246, 0.05)
+  );
+
+  border-top: 4px solid #64b5f6;
+
+  box-shadow: 0 4px 18px rgba(100, 181, 246, 0.25);
+}
+
+.badge-aviso {
+  background: #d32f2f;
+  color: white;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 10px;
+}

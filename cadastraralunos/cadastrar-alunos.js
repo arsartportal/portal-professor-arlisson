@@ -1,92 +1,174 @@
 /* =====================================================
    CADASTRO DE ALUNOS — PORTAL DO PROFESSOR
-   -----------------------------------------------------
-   - Verifica login
-   - Verifica se é professor
-   - Cadastra aluno na coleção "usuarios"
-   ===================================================== */
+===================================================== */
 
-import { auth, db } from "../js/firebase.js";
+import { auth, db, firebaseConfig } from "../js/firebase.js";
+
 import {
-  collection,
-  addDoc,
-  serverTimestamp,
   doc,
+  setDoc,
+  serverTimestamp,
   getDoc
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-// Elementos da página
+import {
+  createUserWithEmailAndPassword,
+  getAuth
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
 const form = document.getElementById("formCadastrarAluno");
 const msg = document.getElementById("msg");
 
 /* =====================================================
    SEGURANÇA — SOMENTE PROFESSOR
 ===================================================== */
+
 auth.onAuthStateChanged(async (user) => {
   if (!user) {
-    window.location.href = "/login";
+    window.location.href = "login.html";
     return;
   }
 
-  // 🔥 CORREÇÃO: coleção e campo certos
   const snap = await getDoc(doc(db, "usuarios", user.uid));
 
   if (!snap.exists() || snap.data().tipo !== "professor") {
-    window.location.href = "/home";
+    window.location.href = "home.html";
   }
 });
 
 /* =====================================================
-   SUBMIT DO FORMULÁRIO
+   CUSTOM SELECTS (ESCOLA + SÉRIE)
 ===================================================== */
+
+const customSelects = document.querySelectorAll(".custom-select");
+
+customSelects.forEach(select => {
+  const selected = select.querySelector(".select-selected");
+  const items = select.querySelector(".select-items");
+
+  selected.addEventListener("click", () => {
+    closeAllSelects(select);
+    select.classList.toggle("active");
+  });
+
+  items.querySelectorAll("div").forEach(option => {
+    option.addEventListener("click", () => {
+      selected.textContent = option.textContent;
+      select.dataset.value = option.dataset.value;
+      select.classList.remove("active");
+    });
+  });
+});
+
+function closeAllSelects(current) {
+  customSelects.forEach(select => {
+    if (select !== current) {
+      select.classList.remove("active");
+    }
+  });
+}
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".custom-select")) {
+    closeAllSelects();
+  }
+});
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Captura dos dados
   const nome = document.getElementById("nome").value.trim();
-  const escola = document.getElementById("escola").value;
-  const serie = document.getElementById("serie").value; // opcional
+  const senha = document.getElementById("senha").value;
+
+  const escola = document.querySelector('[data-name="escola"]').dataset.value;
+  const serie = document.querySelector('[data-name="serie"]').dataset.value || "";
   const turma = document.getElementById("turma").value.trim();
 
-  // Validação básica
-  if (!nome || !escola) {
+  if (!nome || !senha || !escola) {
     mostrarMsg("Preencha os campos obrigatórios.", "erro");
     return;
   }
 
-  // Gera o campo "usuario" (login textual)
-  const usuario = nome
+  // Converte nome em login
+  const login = nome
     .toLowerCase()
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, "");
 
+  const email = login + "@exatas.site";
+
   try {
-    // 🔥 Criação compatível com as regras
-    await addDoc(collection(db, "usuarios"), {
+
+    /* ===== Secondary Auth ===== */
+
+    const secondaryApp = initializeApp(firebaseConfig, "Secondary");
+    const secondaryAuth = getAuth(secondaryApp);
+
+    const cred = await createUserWithEmailAndPassword(
+      secondaryAuth,
+      email,
+      senha
+    );
+
+    const alunoUID = cred.user.uid;
+
+    /* ===== Firestore ===== */
+
+    await setDoc(doc(db, "usuarios", alunoUID), {
       nome,
-      usuario,
+      usuario: login,
+      email,
       tipo: "aluno",
       escola,
       turma,
-      serie,               // pode manter
+      serie,
       nivel: 0,
       xp: 0,
       criadoEm: serverTimestamp(),
       ultimoAcesso: serverTimestamp()
     });
 
-    mostrarMsg("Aluno cadastrado com sucesso ✅", "sucesso");
+    mostrarMsg(`Aluno criado! Login: ${login}`, "sucesso");
+
     form.reset();
 
+    document.querySelector('[data-name="escola"] .select-selected')
+      .textContent = "Selecione a escola";
+
+    document.querySelector('[data-name="serie"] .select-selected')
+      .textContent = "Selecione";
+
+    delete document.querySelector('[data-name="escola"]').dataset.value;
+    delete document.querySelector('[data-name="serie"]').dataset.value;
+
   } catch (error) {
-    console.error("Erro ao cadastrar aluno:", error);
-    mostrarMsg("Erro ao cadastrar aluno.", "erro");
+
+    if (error.code === "auth/email-already-in-use") {
+      mostrarMsg("Já existe um aluno com esse nome.", "erro");
+    } else {
+      mostrarMsg("Erro ao cadastrar aluno.", "erro");
+    }
+
+    console.error(error);
   }
 });
 
 /* =====================================================
-   FUNÇÃO DE MENSAGEM
+   MENSAGEM
 ===================================================== */
+
 function mostrarMsg(texto, tipo) {
   msg.textContent = texto;
   msg.className = tipo;
@@ -94,5 +176,5 @@ function mostrarMsg(texto, tipo) {
   setTimeout(() => {
     msg.textContent = "";
     msg.className = "";
-  }, 3000);
+  }, 4000);
 }

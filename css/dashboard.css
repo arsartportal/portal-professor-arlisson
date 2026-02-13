@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.topo h1 {
+  margin-bottom: 20px;
+}
+
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.card small {
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: normal;
+  color: #666;
+}
+
+.filtros {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.filtros input,
+.filtros select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.tabela-dashboard {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabela-dashboard th,
+.tabela-dashboard td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.tabela-dashboard th {
+  background: #1976d2;
+  color: white;
+}
+
+.tabela-dashboard tr:hover {
+  background: #f1f7ff;
+}
+
+.status-ativo {
+  color: green;
+  font-weight: bold;
+}
+
+.status-regular {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-inativo {
+  color: red;
+  font-weight: bold;
+}
+
+.barra-superior {
+  margin-bottom: 15px;
+}
+
+.btn-voltar {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-voltar:hover {
+  background: #125aa3;
+}

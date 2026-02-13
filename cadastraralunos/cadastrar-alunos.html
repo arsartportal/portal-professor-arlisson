@@ -22,27 +22,34 @@
       </label>
 
       <label>
-        Escola
-        <select id="escola" required>
-          <option value="">Selecione a escola</option>
-          <option value="boto-de-menezes">Boto de Menezes</option>
-          <option value="audiocomunicacao">Audiocomunicação</option>
-          <option value="maria-geny">Maria Geny</option>
-        </select>
+        Senha inicial do aluno
+        <input type="password" id="senha" required minlength="6">
       </label>
 
       <label>
-        Série / Ano
-        <!-- NÃO obrigatório -->
-        <select id="serie">
-          <option value="">Selecione</option>
-          <option value="1ano">1º Ano</option>
-          <option value="2ano">2º Ano</option>
-          <option value="3ano">3º Ano</option>
-          <option value="eja">EJA</option>
-          <option value="reforco">Reforço</option>
-        </select>
-      </label>
+  Escola
+  <div class="custom-select" data-name="escola">
+    <div class="select-selected">Selecione a escola</div>
+    <div class="select-items">
+      <div data-value="boto-de-menezes">Boto de Menezes</div>
+      <div data-value="audiocomunicacao">Audiocomunicação</div>
+      <div data-value="maria-geny">Maria Geny</div>
+    </div>
+  </div>
+</label>
+      <label>
+  Série / Ano
+  <div class="custom-select" data-name="serie">
+    <div class="select-selected">Selecione</div>
+    <div class="select-items">
+      <div data-value="1ano">1º Ano</div>
+      <div data-value="2ano">2º Ano</div>
+      <div data-value="3ano">3º Ano</div>
+      <div data-value="eja">EJA</div>
+      <div data-value="reforco">Reforço</div>
+    </div>
+  </div>
+</label>
 
       <label>
         Turma

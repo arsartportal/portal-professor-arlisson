@@ -1,213 +1,181 @@
 /* =====================================================
-   CADASTRO DE ALUNOS — ESTILO TERMINAL / POWERSHELL
-   Portal do Professor Arlisson
-   -----------------------------------------------------
-   Conceito:
-   - Interface de comando
-   - Console administrativo
-   - CLI moderna
+   TERMINAL STYLE
 ===================================================== */
 
-
-/* =====================================================
-   RESET
-===================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-/* =====================================================
-   BODY — TERMINAL
-===================================================== */
 body {
-  font-family: Consolas, "Cascadia Code", "Courier New", monospace;
+  font-family: Consolas, "Cascadia Code", monospace;
   background: #0b0f14;
   color: #c9d1d9;
 }
 
-
-/* =====================================================
-   CONTAINER — JANELA DE TERMINAL
-===================================================== */
 .container {
   max-width: 720px;
   margin: 60px auto;
   padding: 28px 32px;
-
   background: #0d1117;
-
   border-radius: 8px;
   border: 1px solid #30363d;
-
   box-shadow:
     0 0 0 1px #161b22,
     0 20px 50px rgba(0,0,0,0.7);
 }
 
-
-/* =====================================================
-   HEADER DO TERMINAL
-===================================================== */
 .container::before {
   content: "PS C:\\Portal\\Professor>";
   display: block;
-
   margin-bottom: 22px;
   font-size: 0.85rem;
-
   color: #58a6ff;
 }
 
-
-/* =====================================================
-   TÍTULO (COMENTÁRIO DE SISTEMA)
-===================================================== */
 h1 {
   font-size: 0.85rem;
   font-weight: normal;
   margin-bottom: 26px;
-
   color: #8b949e;
 }
 
-
-/* =====================================================
-   FORMULÁRIO
-===================================================== */
 form {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
-
-/* =====================================================
-   LABEL — COMANDO
-===================================================== */
 label {
   display: flex;
   align-items: center;
   gap: 10px;
-
   font-size: 0.85rem;
   color: #58a6ff;
 }
 
-
-/* PREFIXO DO COMANDO */
 label::before {
   content: ">";
   color: #7ee787;
 }
 
+/* INPUTS */
 
-/* =====================================================
-   INPUTS / SELECTS — LINHA DE COMANDO
-===================================================== */
-input,
-select {
+input {
   flex: 1;
-
-  background: transparent;
+  background: transparent !important;
   border: none;
-
+  border-bottom: 1px dashed #30363d;
   font-family: inherit;
   font-size: 0.9rem;
-
   color: #c9d1d9;
-
   padding: 6px 4px;
-
-  border-bottom: 1px dashed #30363d;
-
-  transition: border-color 0.2s;
+  outline: none;
 }
 
+input:focus {
+  border-bottom-color: #7ee787;
+}
 
-/* PLACEHOLDER */
+input[type="password"] {
+  letter-spacing: 2px;
+}
+
 input::placeholder {
   color: #6e7681;
 }
 
+/* BUTTON */
 
-/* FOCO = CURSOR ATIVO */
-input:focus,
-select:focus {
-  outline: none;
-  border-bottom-color: #7ee787;
-}
-
-
-/* =====================================================
-   BOTÃO — EXECUTAR COMANDO
-===================================================== */
 button {
   margin-top: 24px;
-
   align-self: flex-start;
-
   background: transparent;
   border: 1px solid #7ee787;
-
   color: #7ee787;
-
   padding: 10px 18px;
-
   font-family: inherit;
   font-size: 0.8rem;
-
   text-transform: uppercase;
   letter-spacing: 0.18em;
-
   cursor: pointer;
-
-  transition:
-    background 0.2s,
-    box-shadow 0.2s,
-    transform 0.15s;
+  transition: 0.2s;
 }
 
-
-/* HOVER */
 button:hover {
   background: rgba(126,231,135,0.08);
   box-shadow: 0 0 0 3px rgba(126,231,135,0.15);
-  transform: translateY(-1px);
 }
 
+/* CUSTOM SELECT */
 
-/* =====================================================
-   MENSAGEM DE SISTEMA
-===================================================== */
+.custom-select {
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+}
+
+.select-selected {
+  padding: 6px 4px;
+  border-bottom: 1px dashed #30363d;
+  color: #c9d1d9;
+}
+
+.select-selected::after {
+  content: " ▼";
+  color: #7ee787;
+}
+
+.select-items {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  display: none;
+  z-index: 10;
+}
+
+.select-items div {
+  padding: 8px 10px;
+  border-bottom: 1px solid #161b22;
+  transition: 0.2s;
+}
+
+.select-items div:hover {
+  background: rgba(126,231,135,0.08);
+  color: #7ee787;
+}
+
+.custom-select.active .select-items {
+  display: block;
+}
+
 #msg {
   margin-top: 20px;
   font-size: 0.8rem;
-  color: #8b949e;
 }
 
-
-/* SUCESSO */
 #msg.sucesso {
   color: #7ee787;
 }
 
-
-/* ERRO */
 #msg.erro {
   color: #f85149;
 }
 
+/* =========================================
+   CORRIGE AUTOFILL DO CHROME
+========================================= */
 
-/* =====================================================
-   RESPONSIVO
-===================================================== */
-@media (max-width: 760px) {
-  .container {
-    margin: 30px 16px;
-    padding: 22px;
-  }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #0d1117 inset !important;
+  -webkit-text-fill-color: #c9d1d9 !important;
+  caret-color: #7ee787 !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
-
