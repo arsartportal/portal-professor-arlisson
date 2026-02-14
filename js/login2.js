@@ -48,6 +48,14 @@ window.login = async function () {
   ultimoAcesso: serverTimestamp()
 });
 
+console.log("ultimoAcesso atualizado!");
+
+setTimeout(() => {
+  window.location.href = "home.html";
+}, 500);
+
+
+
     // cria sessão local
     localStorage.setItem("uid", cred.user.uid);
 
