@@ -282,7 +282,7 @@ onAuthStateChanged(auth, async (user) => {
       turma: dados.turma || "-",
       xp: dados.xp ?? 0,
       nivel: dados.nivel ?? 0,
-      ultimoLogin: dados.ultimoLogin || null
+      ultimoLogin: dados.ultimoAcesso || null
     });
   });
 

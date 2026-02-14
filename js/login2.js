@@ -45,8 +45,8 @@ window.login = async function () {
 
     // 🔥 ATUALIZA ÚLTIMO LOGIN NO FIRESTORE
     await updateDoc(doc(db, "usuarios", cred.user.uid), {
-      ultimoLogin: serverTimestamp()
-    });
+  ultimoAcesso: serverTimestamp()
+});
 
     // cria sessão local
     localStorage.setItem("uid", cred.user.uid);
