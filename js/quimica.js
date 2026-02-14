@@ -1,6 +1,5 @@
-
 /* =====================================================
-   FISICA.JS — PORTAL DO PROFESSOR ARLISSON
+   QUIMICA.JS — PORTAL DO PROFESSOR ARLISSON
    Trilhas • Subníveis • Progresso • XP
 ===================================================== */
 
@@ -82,41 +81,38 @@ async function carregarTrilhas(uid) {
   if (!userSnap.exists()) return;
 
   const usuario = userSnap.data();
-  
 
   const consulta = usuario.tipo === "professor"
     ? query(
-        collection(db, "trilhas_fisica"),
+        collection(db, "trilhas_quimica"),
         where("ativo", "==", true),
         orderBy("serie"),
         orderBy("ordem")
       )
     : query(
-        collection(db, "trilhas_fisica"),
+        collection(db, "trilhas_quimica"),
         where("ativo", "==", true),
-        where("serie", "==", usuario.serie),
+        where("serie", "==", usuario.turma),
         orderBy("ordem")
       );
 
   const snap = await getDocs(consulta);
-  
- listaTrilhas.innerHTML = "";
 
-// 🔹 Se for PROFESSOR → agrupa por série
+  listaTrilhas.innerHTML = "";
+
+// 🔹 PROFESSOR → agrupa por série
 if (usuario.tipo === "professor") {
 
   const grupos = {
-    "1ano": criarGrupoSerie("1ano", "📘 1º Ano do Ensino Médio"),
-    "2ano": criarGrupoSerie("2ano", "📗 2º Ano do Ensino Médio"),
-    "3ano": criarGrupoSerie("3ano", "📕 3º Ano do Ensino Médio")
+    "1ano": criarGrupoSerie("1ano", "🧪 1º Ano do Ensino Médio"),
+    "2ano": criarGrupoSerie("2ano", "🔬 2º Ano do Ensino Médio"),
+    "3ano": criarGrupoSerie("3ano", "⚗️ 3º Ano do Ensino Médio")
   };
 
-  // adiciona os grupos na ordem correta
   Object.values(grupos).forEach(grupo => {
     listaTrilhas.appendChild(grupo);
   });
 
-  // distribui as trilhas dentro do grupo correto
   snap.forEach(docSnap => {
     const trilha = { id: docSnap.id, ...docSnap.data() };
 
@@ -128,7 +124,7 @@ if (usuario.tipo === "professor") {
 
 }
 
-// 🔹 Se for ALUNO → comportamento normal
+// 🔹 ALUNO → comportamento normal
 else {
   snap.forEach(docSnap => {
     criarCardTrilha(uid, { id: docSnap.id, ...docSnap.data() });
@@ -136,9 +132,8 @@ else {
 }
 }
 
-
 /* =====================================================
-   GRUPO DE SÉRIE (APENAS PARA PROFESSOR)
+   GRUPO DE SÉRIE
 ===================================================== */
 
 function criarGrupoSerie(serie, titulo) {
@@ -154,7 +149,6 @@ function criarGrupoSerie(serie, titulo) {
   return section;
 }
 
-
 /* =====================================================
    CARD DE TRILHA
 ===================================================== */
@@ -163,12 +157,11 @@ function criarCardTrilha(uid, trilha, destino = listaTrilhas) {
 
   const card = document.createElement("div");
   card.className = "trilha-card";
-  card.dataset.serie = trilha.serie; // 👈 ESSENCIAL
-// 🔥 ESTA LINHA RESOLVE TUDO
+  card.dataset.serie = trilha.serie;
 
   card.innerHTML = `
     <div class="trilha-serie">${formatarSerie(trilha.serie)}</div>
-    <div class="trilha-titulo">${trilha.titulo}</div>
+    <div class="trilha-titulo">🧪 ${trilha.titulo}</div>
     <div class="trilha-desc">${trilha.descricao || ""}</div>
     <div class="subniveis hidden"></div>
   `;
@@ -176,12 +169,10 @@ function criarCardTrilha(uid, trilha, destino = listaTrilhas) {
   card.addEventListener("click", async (e) => {
     e.stopPropagation();
 
-    // 🔹 Trilhas COM subníveis
     if (trilha.temSubniveis === true) {
 
       const sub = card.querySelector(".subniveis");
 
-      // Toggle abrir/fechar
       if (!sub.classList.contains("hidden")) {
         sub.classList.add("hidden");
         return;
@@ -191,7 +182,6 @@ function criarCardTrilha(uid, trilha, destino = listaTrilhas) {
       return;
     }
 
-    // 🔹 Trilhas SEM subníveis → navegação direta
     if (trilha.rota && typeof trilha.rota === "string") {
       window.location.href = trilha.rota;
     }
@@ -206,13 +196,12 @@ function criarCardTrilha(uid, trilha, destino = listaTrilhas) {
 
 async function carregarSubniveis(uid, card, trilha) {
 
-  // 🔒 Proteção contra trilha mal configurada
   if (!trilha.progressId || !trilha.baseRota || !trilha.slug) {
     console.error("Trilha mal configurada:", trilha);
     return;
   }
 
-  const niveisRef   = collection(db, "trilhas_fisica", trilha.id, "niveis");
+  const niveisRef   = collection(db, "trilhas_quimica", trilha.id, "niveis");
   const progressRef = doc(db, "usuarios", uid, "progress", trilha.progressId);
 
   const [niveisSnap, progressSnap] = await Promise.all([
@@ -245,13 +234,11 @@ async function carregarSubniveis(uid, card, trilha) {
     const el = document.createElement("div");
     el.className = "subcard-nivel";
 
-    // ✔ Concluído
     if (progress.concluidos.includes(nivel.id)) {
       el.classList.add("concluido");
       el.textContent = `✔ ${nivel.titulo}`;
     }
 
-    // ▶ Liberado
     else if (nivel.ordem <= progress.nivelAtual) {
       el.classList.add("liberado");
       el.textContent = `▶ ${nivel.titulo}`;
@@ -263,7 +250,6 @@ async function carregarSubniveis(uid, card, trilha) {
       });
     }
 
-    // 🔒 Bloqueado
     else {
       el.classList.add("bloqueado");
       el.textContent = `🔒 ${nivel.titulo}`;

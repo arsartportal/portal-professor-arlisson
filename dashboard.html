@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Dashboard do Professor</title>
@@ -7,62 +8,105 @@
 </head>
 
 <body>
+
+  <!-- ============================= -->
+  <!-- BARRA SUPERIOR -->
+  <!-- ============================= -->
   <div class="barra-superior">
-  <button class="btn-voltar" onclick="voltar()">⬅ Voltar</button>
-</div>
-
-<header class="topo">
-  <h1>📊 Dashboard do Professor</h1>
-</header>
-
-<section class="cards-resumo">
-  <div class="card">
-    👥 <span id="total-alunos">0</span>
-    <small>Total de Alunos</small>
+    <button class="btn-voltar" onclick="voltar()">⬅ Voltar</button>
+    <button id="exportar-csv" class="btn-exportar">📥 Exportar CSV</button>
   </div>
 
-  <div class="card">
-    🔥 <span id="ativos">0</span>
-    <small>Ativos (7 dias)</small>
-  </div>
+  <!-- ============================= -->
+  <!-- TOPO -->
+  <!-- ============================= -->
+  <header class="topo">
+    <h1>📊 Dashboard do Professor</h1>
+  </header>
 
-  <div class="card">
-    ⚠️ <span id="inativos">0</span>
-    <small>Inativos (+10 dias)</small>
-  </div>
+  <!-- ============================= -->
+  <!-- CARDS RESUMO -->
+  <!-- ============================= -->
+  <section class="cards-resumo">
 
-  <div class="card">
-    🏆 <span id="maior-xp">---</span>
-    <small>Maior XP</small>
-  </div>
-</section>
+    <div class="card">
+      👥 <span id="total-alunos">0</span>
+      <small>Total de Alunos</small>
+    </div>
 
-<section class="filtros">
-  <input type="text" id="busca" placeholder="🔍 Buscar aluno...">
-  
-  <select id="filtro-turma">
-    <option value="">Todas as turmas</option>
-  </select>
-</section>
+    <div class="card">
+      🔥 <span id="ativos">0</span>
+      <small>Ativos (até 3 dias)</small>
+    </div>
 
-<section class="tabela-container">
-  <table class="tabela-dashboard">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Aluno</th>
-        <th>Turma</th>
-        <th>XP</th>
-        <th>Nível</th>
-        <th>Status</th>
-        <th>Último acesso</th>
-      </tr>
-    </thead>
-    <tbody id="lista-alunos"></tbody>
-  </table>
-</section>
+    <div class="card">
+      ⚠️ <span id="regulares">0</span>
+      <small>Regulares (até 10 dias)</small>
+    </div>
 
-<script type="module" src="../js/dashboard.js"></script>
+    <div class="card">
+      🏆 <span id="maior-xp-nome">---</span>
+      <small><span id="maior-xp-valor">0</span> XP</small>
+    </div>
+
+    <div class="card">
+      📈 <span id="media-xp">0</span>
+      <small>Média de XP</small>
+    </div>
+
+  </section>
+
+  <!-- ============================= -->
+  <!-- FILTROS -->
+  <!-- ============================= -->
+  <section class="filtros">
+
+    <select id="filtro-escola">
+      <option value="todas">Todas as escolas</option>
+    </select>
+
+    <select id="filtro-serie">
+      <option value="todas">Todas as séries</option>
+    </select>
+
+    <select id="filtro-turma">
+      <option value="todas">Todas as turmas</option>
+    </select>
+
+  </section>
+
+  <!-- ============================= -->
+  <!-- TABELA GERAL -->
+  <!-- ============================= -->
+  <section class="tabela-container">
+    <table class="tabela-dashboard">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Aluno</th>
+          <th>Escola</th>
+          <th>Série</th>
+          <th>Turma</th>
+          <th>XP</th>
+          <th>Nível</th>
+          <th>Status</th>
+          <th>Último acesso</th>
+        </tr>
+      </thead>
+      <tbody id="lista-alunos"></tbody>
+    </table>
+  </section>
+
+  <!-- ============================= -->
+  <!-- RANKING POR ESCOLA -->
+  <!-- ============================= -->
+  <section class="ranking-escolas">
+    <h2>🏫 Ranking por Escola</h2>
+    <div id="ranking-escolas-container"></div>
+  </section>
+
+  <!-- SCRIPT -->
+  <script type="module" src="../js/dashboard.js"></script>
 
 </body>
 </html>
