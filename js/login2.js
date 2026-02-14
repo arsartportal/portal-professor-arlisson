@@ -1,5 +1,6 @@
 /* =====================================================
    LOGIN2.JS — PORTAL DO PROFESSOR ARLISSON
+   Atualiza ultimoLogin automaticamente
 ===================================================== */
 
 import {
@@ -7,9 +8,17 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
 import { app } from "./firebase.js";
 
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 window.login = async function () {
 
@@ -27,11 +36,17 @@ window.login = async function () {
   const email = `${usuario}@exatas.site`;
 
   try {
+
     const cred = await signInWithEmailAndPassword(
       auth,
       email,
       senha
     );
+
+    // 🔥 ATUALIZA ÚLTIMO LOGIN NO FIRESTORE
+    await updateDoc(doc(db, "usuarios", cred.user.uid), {
+      ultimoLogin: serverTimestamp()
+    });
 
     // cria sessão local
     localStorage.setItem("uid", cred.user.uid);
@@ -40,6 +55,7 @@ window.login = async function () {
     window.location.href = "home.html";
 
   } catch (e) {
+
     console.error(e);
 
     if (e.code === "auth/wrong-password") {
