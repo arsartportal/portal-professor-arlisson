@@ -92,7 +92,7 @@ async function carregarTrilhas(uid) {
     : query(
         collection(db, "trilhas_quimica"),
         where("ativo", "==", true),
-        where("serie", "==", usuario.turma),
+        where("serie", "==", usuario.serie),
         orderBy("ordem")
       );
 
