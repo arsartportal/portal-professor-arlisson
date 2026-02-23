@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Química — Nível 1.3</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/introducao-quimica.css" />
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+<header id="header"></header>
+
+<main class="conteudo-quimica">
+
+  <!-- CABEÇALHO -->
+  <section class="cabecalho-modulo">
+    <h1>🧪 Introdução à Química</h1>
+    <p>
+      Agora vamos estudar como a matéria pode se apresentar na natureza:
+      os estados físicos.
+    </p>
+  </section>
+
+  <!-- NÍVEL 1.3 -->
+  <section class="nivel-conteudo" id="nivel-1-3">
+
+    <h2>📘 Nível 1.3 — Estados Físicos da Matéria</h2>
+
+    <!-- BLOCO 1 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Quais são os estados físicos?</h3>
+      <p>
+        A matéria pode se apresentar em três estados físicos principais:
+      </p>
+      <ul>
+        <li>🧊 <strong>Sólido</strong></li>
+        <li>💧 <strong>Líquido</strong></li>
+        <li>💨 <strong>Gasoso</strong></li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 2 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Estado Sólido</h3>
+      <p>
+        No estado sólido, as partículas estão muito próximas e organizadas.
+      </p>
+      <ul>
+        <li>Possui forma definida</li>
+        <li>Possui volume definido</li>
+        <li>Exemplo: pedra, madeira, gelo</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 3 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Estado Líquido</h3>
+      <p>
+        No estado líquido, as partículas estão próximas, mas podem se movimentar.
+      </p>
+      <ul>
+        <li>Não possui forma definida</li>
+        <li>Possui volume definido</li>
+        <li>Exemplo: água, óleo, leite</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 4 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Estado Gasoso</h3>
+      <p>
+        No estado gasoso, as partículas estão muito afastadas e se movimentam livremente.
+      </p>
+      <ul>
+        <li>Não possui forma definida</li>
+        <li>Não possui volume definido</li>
+        <li>Exemplo: ar, vapor de água, gás de cozinha</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 5 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Mudanças de estado físico</h3>
+      <p>
+        A matéria pode mudar de estado físico quando recebe ou perde energia.
+      </p>
+      <ul>
+        <li>Fusão → sólido para líquido</li>
+        <li>Solidificação → líquido para sólido</li>
+        <li>Evaporação → líquido para gasoso</li>
+        <li>Condensação → gasoso para líquido</li>
+      </ul>
+    </article>
+
+    <!-- RESUMO -->
+    <article class="bloco-resumo">
+      <h3>🧠 Resumo do Nível</h3>
+      <ul>
+        <li>Existem três estados físicos principais</li>
+        <li>Sólidos têm forma e volume definidos</li>
+        <li>Líquidos têm volume definido</li>
+        <li>Gases não têm forma nem volume definidos</li>
+        <li>A matéria pode mudar de estado</li>
+      </ul>
+    </article>
+
+    <!-- CHECKPOINT -->
+    <section class="checkpoint">
+
+      <h3>✅ Checkpoint — Teste rápido</h3>
+
+      <!-- QUESTÃO 1 -->
+      <div class="questao">
+        <p><strong>1)</strong> Qual estado físico possui forma e volume definidos?</p>
+        <label><input type="radio" name="q1" value="a"> Gasoso</label>
+        <label><input type="radio" name="q1" value="b"> Líquido</label>
+        <label><input type="radio" name="q1" value="c"> Sólido</label>
+      </div>
+
+      <!-- QUESTÃO 2 -->
+      <div class="questao">
+        <p><strong>2)</strong> A evaporação é a passagem de:</p>
+        <label><input type="radio" name="q2" value="a"> Sólido para líquido</label>
+        <label><input type="radio" name="q2" value="b"> Líquido para gasoso</label>
+        <label><input type="radio" name="q2" value="c"> Gasoso para líquido</label>
+      </div>
+
+      <!-- QUESTÃO 3 -->
+      <div class="questao">
+        <p><strong>3)</strong> No estado gasoso, as partículas:</p>
+        <label><input type="radio" name="q3" value="a"> Estão muito organizadas</label>
+        <label><input type="radio" name="q3" value="b"> Estão próximas e fixas</label>
+        <label><input type="radio" name="q3" value="c"> Estão afastadas e se movem livremente</label>
+      </div>
+
+      <button class="btn-checkpoint" onclick="verificarCheckpointNivel13()">
+        Verificar respostas
+      </button>
+
+      <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+    </section>
+
+    <!-- BOTÃO CONCLUIR -->
+    <div class="acoes-nivel">
+      <button
+        class="btn-concluir"
+        disabled
+        style="opacity: 0.5"
+        onclick="concluirNivel('nivel_1_3')">
+        ✅ Concluir Nível 1.3
+      </button>
+    </div>
+
+  </section>
+
+  <!-- MODAL -->
+  <div id="nivel-concluido-modal" class="modal hidden">
+    <div class="modal-conteudo">
+      <h3>✅ Nível concluído!</h3>
+      <p>Você avançou na trilha de Introdução à Química.</p>
+
+      <div class="modal-acoes">
+        <button class="btn-primario" onclick="irParaProximoNivel()">
+          ➡️ Próximo nível
+        </button>
+
+        <button class="btn-secundario" onclick="voltarParaQuimica()">
+          🧭 Trilha de Química
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="status-bar">
+  Sistema online • Progresso salvo automaticamente
+</footer>
+
+<script type="module" src="/js/introducao-quimica.js"></script>
+<script type="module" src="/js/patentes.js"></script>
+
+</body>
+</html>
