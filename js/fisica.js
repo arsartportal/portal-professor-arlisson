@@ -242,35 +242,58 @@ async function carregarSubniveis(uid, card, trilha) {
 
   niveis.forEach(nivel => {
 
-    const el = document.createElement("div");
-    el.className = "subcard-nivel";
+  const el = document.createElement("div");
+  el.className = "subcard-nivel";
 
-    // ✔ Concluído
-    if (progress.concluidos.includes(nivel.id)) {
-      el.classList.add("concluido");
-      el.textContent = `✔ ${nivel.titulo}`;
-    }
+  const rota =
+    `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
 
-    // ▶ Liberado
-    else if (nivel.ordem <= progress.nivelAtual) {
-      el.classList.add("liberado");
-      el.textContent = `▶ ${nivel.titulo}`;
+  // 🟢 MODO REVISÃO → tudo clicável
+  if (progress.finalizado === true) {
 
-      el.addEventListener("click", (e) => {
-        e.stopPropagation();
-        window.location.href =
-          `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
-      });
-    }
+    el.classList.add("revisao");
+    el.textContent = `📘 ${nivel.titulo}`;
 
-    // 🔒 Bloqueado
-    else {
-      el.classList.add("bloqueado");
-      el.textContent = `🔒 ${nivel.titulo}`;
-    }
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.location.href = rota;
+    });
+  }
 
-    subContainer.appendChild(el);
-  });
+  // ✔ Concluído (normal)
+  else if (progress.concluidos.includes(nivel.id)) {
+
+    el.classList.add("concluido");
+    el.textContent = `✔ ${nivel.titulo}`;
+
+    // 🔥 AGORA também clicável
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.location.href = rota;
+    });
+  }
+
+  // ▶ Liberado
+  else if (nivel.ordem <= progress.nivelAtual) {
+
+    el.classList.add("liberado");
+    el.textContent = `▶ ${nivel.titulo}`;
+
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.location.href = rota;
+    });
+  }
+
+  // 🔒 Bloqueado
+  else {
+
+    el.classList.add("bloqueado");
+    el.textContent = `🔒 ${nivel.titulo}`;
+  }
+
+  subContainer.appendChild(el);
+});
 
   subContainer.classList.remove("hidden");
 }

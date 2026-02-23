@@ -164,14 +164,14 @@ window.verificarCheckpointNivel12 = () => {
 // 🔹 NÍVEL 1.3
 window.verificarCheckpointNivel13 = () => {
   verificarRespostas(
-    { q1: "c", q2: "b", q3: "a" }
+    { q1: "c", q2: "b", q3: "c" }
   );
 };
 
 // 🔹 NÍVEL 1.4
 window.verificarCheckpointNivel14 = () => {
   verificarRespostas(
-    { q1: "b", q2: "a", q3: "c" }
+    { q1: "b", q2: "a", q3: "b" }
   );
 };
 
