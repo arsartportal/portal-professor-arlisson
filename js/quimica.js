@@ -241,7 +241,7 @@ async function carregarSubniveis(uid, card, trilha) {
   if (progress.finalizado === true) {
 
     el.classList.add("revisao");
-    el.textContent = `📘 ${nivel.titulo}`;
+    el.textContent = `📚 ${nivel.titulo}`;
 
     el.addEventListener("click", (e) => {
       e.stopPropagation();
