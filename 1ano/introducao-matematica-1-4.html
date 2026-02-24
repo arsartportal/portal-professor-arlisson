@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Problemas com Operações — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Matemática -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+  <!-- Estilo específico da animação da patente -->
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-matematica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🧠 Problemas com Operações</h1>
+      <p>
+        Resolver problemas é o verdadeiro teste da Matemática.
+        Aqui você aplicará as quatro operações em situações do cotidiano.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 1.4 — PROBLEMAS
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-1-4">
+
+      <h2>📘 Nível 1.4 — Problemas com Operações</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Como resolver um problema matemático?</h3>
+        <ul>
+          <li>1️⃣ Leia com atenção</li>
+          <li>2️⃣ Identifique os dados</li>
+          <li>3️⃣ Descubra qual operação usar</li>
+          <li>4️⃣ Resolva com atenção</li>
+          <li>5️⃣ Verifique se a resposta faz sentido</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Exemplo Resolvido</h3>
+        <p>
+          Um mercado vendeu 35 maçãs pela manhã e 27 à tarde.
+          Quantas maçãs foram vendidas no total?
+        </p>
+        <p>
+          Operação: 35 + 27 = 62
+        </p>
+        <p>
+          Resposta: Foram vendidas 62 maçãs.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Atenção à interpretação</h3>
+        <p>
+          Nem sempre o problema deixa clara a operação.
+          É preciso interpretar o texto.
+        </p>
+        <p>
+          Palavras como <strong>"ao todo"</strong> indicam soma.<br>
+          Palavras como <strong>"restaram"</strong> indicam subtração.
+        </p>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Problemas exigem interpretação</li>
+          <li>Nem sempre a operação está explícita</li>
+          <li>Leia antes de calcular</li>
+          <li>Verifique se a resposta é coerente</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 1.4
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Resolva os problemas</h3>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> João tinha 48 reais e gastou 19 reais.
+          Quanto restou?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            29
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            31
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            27
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Uma caixa tem 6 fileiras com 8 lápis cada.
+          Quantos lápis há ao todo?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            42
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            48
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            56
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> 72 balas foram divididas igualmente entre 9 crianças.
+          Quantas balas cada uma recebeu?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            6
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            7
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            8
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpoint()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_1_4_matematica')">
+          ✅ Concluir Nível 1.4
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Fundamentos da Matemática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaMatematica()">
+            🧭 Trilha de Matemática
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <script type="module" src="/js/introducao-matematica.js"></script>
+  <script src="/js/patentes.js" type="module"></script>
+
+</body>
+</html>

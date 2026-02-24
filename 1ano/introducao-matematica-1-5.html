@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Missão Final — Fundamentos da Matemática</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Matemática -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+  <!-- Estilo específico da animação da patente -->
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <header id="header"></header>
+
+  <main class="conteudo-matematica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>👑 Missão Final — Desafio Integrador</h1>
+      <p>
+        Este é o desafio final da Trilha 1.
+        Aqui você aplicará tudo o que aprendeu até agora.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 1.5 — MISSÃO FINAL
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-1-5">
+
+      <h2>🎯 Nível 1.5 — Desafio Integrador</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>📌 Objetivo</h3>
+        <p>
+          Resolver situações que envolvem:
+        </p>
+        <ul>
+          <li>✔ Sistema de numeração</li>
+          <li>✔ Decomposição</li>
+          <li>✔ As quatro operações</li>
+          <li>✔ Interpretação de problemas</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🧠 Estratégia</h3>
+        <ul>
+          <li>Leia com atenção</li>
+          <li>Identifique a operação necessária</li>
+          <li>Resolva com calma</li>
+          <li>Revise antes de confirmar</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — MISSÃO FINAL
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>🔥 Desafio Final</h3>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> Decomponha corretamente o número 4.306:</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            4.000 + 300 + 6
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            400 + 30 + 6
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            4.000 + 30 + 6
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Uma escola tem 325 alunos pela manhã e 287 à tarde.
+          Quantos alunos há ao todo?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            602
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            612
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            592
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> 84 cadernos foram divididos igualmente entre 7 salas.
+          Quantos cadernos cada sala recebeu?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            11
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            12
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            13
+          </label>
+        </div>
+
+        <!-- QUESTÃO 4 -->
+        <div class="questao">
+          <p><strong>4)</strong> Resolva: 5 + 3 × 4</p>
+          <label>
+            <input type="radio" name="q4" value="a">
+            32
+          </label>
+          <label>
+            <input type="radio" name="q4" value="b">
+            17
+          </label>
+          <label>
+            <input type="radio" name="q4" value="c">
+            20
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpoint()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_1_5_matematica')">
+          🏆 Concluir Missão Final
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>🎉 Trilha Concluída!</h3>
+        <p class="modal-subtitulo">
+          Você concluiu a Trilha 1 — Fundamentos da Matemática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximaTrilha()">
+            🚀 Próxima Trilha
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaMatematica()">
+            🧭 Trilha de Matemática
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <script type="module" src="/js/introducao-matematica.js"></script>
+  <script src="/js/patentes.js" type="module"></script>
+
+</body>
+</html>

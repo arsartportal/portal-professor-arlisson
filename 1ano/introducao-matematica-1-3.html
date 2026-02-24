@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>As Quatro Operações — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Matemática -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+  <!-- Estilo específico da animação da patente -->
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-matematica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>➕➖✖️➗ As Quatro Operações</h1>
+      <p>
+        A base de toda a Matemática está nas quatro operações fundamentais.
+        Dominar essas operações é essencial para avançar nos próximos níveis.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 1.3 — AS QUATRO OPERAÇÕES
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-1-3">
+
+      <h2>📘 Nível 1.3 — As Quatro Operações</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>➕ Adição</h3>
+        <p>
+          A adição representa a ideia de <strong>juntar</strong> ou <strong>acrescentar</strong>.
+        </p>
+        <p><strong>Exemplo:</strong> 25 + 13 = 38</p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>➖ Subtração</h3>
+        <p>
+          A subtração representa a ideia de <strong>retirar</strong> ou <strong>diminuir</strong>.
+        </p>
+        <p><strong>Exemplo:</strong> 40 − 18 = 22</p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>✖️ Multiplicação</h3>
+        <p>
+          A multiplicação representa <strong>adições repetidas</strong>.
+        </p>
+        <p><strong>Exemplo:</strong> 6 × 4 = 24</p>
+        <p>(6 + 6 + 6 + 6)</p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>➗ Divisão</h3>
+        <p>
+          A divisão representa a ideia de <strong>repartir igualmente</strong>.
+        </p>
+        <p><strong>Exemplo:</strong> 20 ÷ 5 = 4</p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>⚠️ Ordem das Operações</h3>
+        <p>
+          Quando uma expressão possui mais de uma operação,
+          devemos seguir a ordem:
+        </p>
+        <ul>
+          <li>1º Multiplicação e Divisão</li>
+          <li>2º Adição e Subtração</li>
+        </ul>
+        <p><strong>Exemplo:</strong> 2 + 3 × 4 = 14</p>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Adição → juntar</li>
+          <li>Subtração → retirar</li>
+          <li>Multiplicação → repetir adição</li>
+          <li>Divisão → repartir</li>
+          <li>Existe uma ordem para resolver expressões</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 1.3
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Resolva as questões abaixo:</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> 18 + 7 =</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            24
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            25
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            26
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> 45 − 19 =</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            26
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            24
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            28
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> 6 × 5 =</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            25
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            30
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            35
+          </label>
+        </div>
+
+        <!-- QUESTÃO 4 -->
+        <div class="questao">
+          <p><strong>4)</strong> 20 ÷ 4 =</p>
+          <label>
+            <input type="radio" name="q4" value="a">
+            4
+          </label>
+          <label>
+            <input type="radio" name="q4" value="b">
+            6
+          </label>
+          <label>
+            <input type="radio" name="q4" value="c">
+            5
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpoint()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_1_3_matematica')">
+          ✅ Concluir Nível 1.3
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Fundamentos da Matemática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaMatematica()">
+            🧭 Trilha de Matemática
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <script type="module" src="/js/introducao-matematica.js"></script>
+  <script src="/js/patentes.js" type="module"></script>
+
+</body>
+</html>
