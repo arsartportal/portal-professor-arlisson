@@ -278,6 +278,7 @@ Transformação física • Transformação química • Reação química • R
 
 <script>
 function corrigir(){
+
     const respostas = {
         q1:"a",
         q2:"b",
@@ -294,9 +295,28 @@ function corrigir(){
     let total = 0;
 
     for(let q in respostas){
+
+        let opcoes = document.querySelectorAll('input[name="'+q+'"]');
         let marcada = document.querySelector('input[name="'+q+'"]:checked');
-        if(marcada && marcada.value === respostas[q]){
-            total++;
+
+        // Limpa estilos anteriores
+        opcoes.forEach(opcao => {
+            let label = opcao.parentElement;
+            label.style.color = "#333";
+            label.style.fontWeight = "normal";
+        });
+
+        if(marcada){
+
+            if(marcada.value === respostas[q]){
+                marcada.parentElement.style.color = "#1b5e20"; // verde
+                marcada.parentElement.style.fontWeight = "bold";
+                total++;
+            } else {
+                marcada.parentElement.style.color = "#c62828"; // vermelho
+                marcada.parentElement.style.fontWeight = "bold";
+            }
+
         }
     }
 
@@ -307,9 +327,9 @@ function corrigir(){
     } else if(total >= 7){
         mensagem += "👏 Ótimo resultado!";
     } else if(total >= 5){
-        mensagem += "👍 Resultado regular. Revise alguns conceitos.";
+        mensagem += "👍 Resultado regular. Revise e tente melhorar.";
     } else {
-        mensagem += "📚 É importante revisar o conteúdo e tentar novamente.";
+        mensagem += "📚 Revise o conteúdo e tente novamente.";
     }
 
     document.getElementById("resultado").innerHTML = mensagem;
