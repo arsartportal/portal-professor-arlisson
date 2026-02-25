@@ -2261,3 +2261,84 @@ body[data-theme="dark"] .card-avisos-home {
   border-radius: 12px;
   margin-left: 10px;
 }
+
+.subcard-nivel.revisao {
+  background: #eef3ff;
+  border-left: 4px solid #3b82f6;
+}
+
+/* ===============================
+   CONTADOR PREMIUM
+================================= */
+
+.contador-visitas {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 40px;
+}
+
+.contador-card {
+  background: var(--card-bg);
+  padding: 30px 60px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  min-width: 350px;
+  text-align: center;
+}
+
+.contador-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.icone-olho {
+  font-size: 1.4rem;
+  animation: piscar 2.5s infinite;
+}
+
+@keyframes piscar {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.contador-titulo {
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.contador-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.contador-bloco {
+  display: flex;
+  flex-direction: column;
+}
+
+.contador-numero {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--primary);
+}
+
+.contador-label {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  letter-spacing: 2px;
+}
+
+.contador-divisor {
+  width: 1px;
+  height: 50px;
+  background: rgba(150,150,150,0.2);
+}
