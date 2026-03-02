@@ -214,8 +214,7 @@ async function carregarSubniveis(uid, card, trilha) {
   if (!progressSnap.exists()) {
     progress = {
       nivelAtual: 1,
-      concluidos: [],
-      finalizado: false
+      concluidos: []
     };
     await setDoc(progressRef, progress);
   } else {
@@ -231,57 +230,45 @@ async function carregarSubniveis(uid, card, trilha) {
 
   niveis.forEach(nivel => {
 
-  const el = document.createElement("div");
-  el.className = "subcard-nivel";
+    const el = document.createElement("div");
+    el.className = "subcard-nivel";
 
-  const rota =
-    `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
+    const rota =
+      `/${trilha.baseRota}/${trilha.slug}-${nivel.ordem}.html`;
 
-  // 🟢 MODO REVISÃO → tudo clicável
-  if (progress.finalizado === true) {
+    // ✔ Concluído → revisável
+    if (progress.concluidos.includes(nivel.id)) {
 
-    el.classList.add("revisao");
-    el.textContent = `📚 ${nivel.titulo}`;
+      el.classList.add("concluido");
+      el.textContent = `✔ ${nivel.titulo}`;
 
-    el.addEventListener("click", (e) => {
-      e.stopPropagation();
-      window.location.href = rota;
-    });
-  }
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = rota;
+      });
+    }
 
-  // ✔ Concluído (mas ainda clicável para revisar)
-  else if (progress.concluidos.includes(nivel.id)) {
+    // ▶ Liberado (somente o atual)
+    else if (nivel.ordem === progress.nivelAtual) {
 
-    el.classList.add("concluido");
-    el.textContent = `✔ ${nivel.titulo}`;
+      el.classList.add("liberado");
+      el.textContent = `▶ ${nivel.titulo}`;
 
-    el.addEventListener("click", (e) => {
-      e.stopPropagation();
-      window.location.href = rota;
-    });
-  }
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = rota;
+      });
+    }
 
-  // ▶ Liberado normalmente
-  else if (nivel.ordem <= progress.nivelAtual) {
+    // 🔒 Bloqueado
+    else {
 
-    el.classList.add("liberado");
-    el.textContent = `▶ ${nivel.titulo}`;
+      el.classList.add("bloqueado");
+      el.textContent = `🔒 ${nivel.titulo}`;
+    }
 
-    el.addEventListener("click", (e) => {
-      e.stopPropagation();
-      window.location.href = rota;
-    });
-  }
-
-  // 🔒 Bloqueado
-  else {
-
-    el.classList.add("bloqueado");
-    el.textContent = `🔒 ${nivel.titulo}`;
-  }
-
-  subContainer.appendChild(el);
-});
+    subContainer.appendChild(el);
+  });
 
   subContainer.classList.remove("hidden");
 }

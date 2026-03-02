@@ -2342,3 +2342,303 @@ body[data-theme="dark"] .card-avisos-home {
   height: 50px;
   background: rgba(150,150,150,0.2);
 }
+
+/* =========================================
+   🎮 DESAFIO DIÁRIO - CARD BASE
+========================================= */
+
+.card-desafio{
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 35px;
+
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color: #ffffff;
+
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+}
+
+.card-desafio:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+/* =========================================
+   ✨ BRILHO SUTIL DE FUNDO
+========================================= */
+
+.card-desafio::before{
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(circle,
+        rgba(255,255,255,0.05),
+        transparent 70%);
+    animation: brilhoDesafio 8s linear infinite;
+}
+
+@keyframes brilhoDesafio{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+}
+
+/* =========================================
+   🧠 TOPO DO DESAFIO (CLICÁVEL)
+========================================= */
+
+.desafio-topo{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.desafio-textos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.desafio-info-linha{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.desafio-sub{
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.badge-desafio{
+    background: linear-gradient(90deg,#ff9800,#f59e0b);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255,152,0,0.7);
+}
+
+/* =========================================
+   📦 CONTEÚDO EXPANSÍVEL
+========================================= */
+
+.desafio-conteudo{
+    position: relative;
+    z-index: 2;
+
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.card-desafio.expandido .desafio-conteudo{
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 15px;
+}
+
+.card-desafio.expandido{
+    transform: scale(1.01);
+}
+
+/* =========================================
+   ❓ PERGUNTA
+========================================= */
+
+.pergunta-texto{
+    font-size: 20px;
+    margin: 20px 0;
+    line-height: 1.4;
+}
+
+/* =========================================
+   🔘 OPÇÕES
+========================================= */
+
+.opcoes-quiz{
+    width: 100%;
+    max-width: 600px;
+}
+
+.opcoes-quiz label{
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.opcoes-quiz label:hover{
+    background: rgba(255,255,255,0.15);
+}
+
+.opcoes-quiz input{
+    margin-right: 8px;
+}
+
+/* =========================================
+   🟢 BOTÃO RESPONDER
+========================================= */
+
+.btn-desafio{
+    margin-top: 12px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(90deg,#22c55e,#16a34a);
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-desafio:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(34,197,94,0.7);
+}
+
+.btn-desafio:disabled{
+    background: #555;
+    cursor: not-allowed;
+}
+
+/* =========================================
+   📊 STATUS XP
+========================================= */
+
+.status-xp{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* =========================================
+   🔥 STREAK BAR
+========================================= */
+
+.streak-container{
+    margin-top: 15px;
+}
+
+.streak-bar{
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+#streakBarFill{
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#ffeb3b,#ff9800);
+    transition: width 0.5s ease;
+}
+
+/* =========================================
+   🌟 EFEITO STREAK ALTA (>=5)
+========================================= */
+
+.card-desafio.streak-alta{
+    box-shadow: 0 0 25px rgba(255,152,0,0.6);
+    animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse{
+    0%{ box-shadow:0 0 15px rgba(255,152,0,0.4); }
+    50%{ box-shadow:0 0 30px rgba(255,152,0,0.8); }
+    100%{ box-shadow:0 0 15px rgba(255,152,0,0.4); }
+}
+
+/* =========================================
+   🎉 ANIMAÇÕES DE FEEDBACK
+========================================= */
+
+.xp-sucesso{
+    color: #22c55e;
+    animation: pulseSucesso 0.6s ease;
+}
+
+.xp-erro{
+    color: #ef4444;
+    animation: shakeErro 0.4s ease;
+}
+
+@keyframes pulseSucesso{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.05); }
+    100%{ transform: scale(1); }
+}
+
+@keyframes shakeErro{
+    0%{ transform: translateX(0); }
+    25%{ transform: translateX(-4px); }
+    50%{ transform: translateX(4px); }
+    75%{ transform: translateX(-4px); }
+    100%{ transform: translateX(0); }
+}
+
+/* =========================================
+   🌙 DARK MODE
+========================================= */
+
+body[data-theme="dark"] .card-desafio{
+    background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+.card-desafio.full-width{
+    grid-column: 1 / -1; /* ocupa todas as colunas */
+}
+
+.card-desafio{
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* MUITO IMPORTANTE */
+}
+
+.card-desafio::before{
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle,
+        rgba(255,255,255,0.05),
+        transparent 70%);
+    animation: brilhoDesafio 8s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.card-desafio > *{
+    position: relative;
+    z-index: 1;
+}

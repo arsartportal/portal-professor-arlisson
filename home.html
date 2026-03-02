@@ -2,255 +2,183 @@
 <html lang="pt-br">
 
 <head>
-  <!-- =========================
-       META / CONFIGURAÇÕES
-  ========================== -->
   <meta charset="UTF-8">
   <title>Portal do Professor Arlisson</title>
-
-  <!-- =========================
-       ESTILOS
-       (CSS centralizado)
-  ========================== -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<!-- 
-  data-theme controla o modo light/dark
-  O JS apenas altera esse atributo
--->
 <body data-theme="light">
 
-<!-- =========================
-     HEADER / HUD SUPERIOR
-========================== -->
 <header class="header">
 
-  <!-- =========================
-       MINI HUD DO USUÁRIO
-       (Patente + XP)
-  ========================== -->
   <div class="mini-hud">
-
-    <!-- ÍCONE DA PATENTE (compacto) -->
-    <img
-      id="patente-img"
-      class="mini-patente"
-      src=""
-      alt="Patente do usuário"
-    />
-
-    <!-- BARRA DE XP (compacta) -->
+    <img id="patente-img" class="mini-patente" src="" alt="Patente do usuário" />
     <div class="mini-xp">
       <div id="xp-preenchimento"></div>
     </div>
 
-    <!-- PAINEL EXPANDIDO (hover) -->
     <div class="mini-detalhes">
-
-      <!-- Patente em tamanho grande -->
-      <img
-        id="patente-img-detalhe"
-        class="patente-grande"
-        src=""
-        alt="Patente detalhada"
-      />
-
-      <!-- Informações textuais -->
+      <img id="patente-img-detalhe" class="patente-grande" src="" alt="Patente detalhada" />
       <div class="info-texto">
         <strong>Nível <span id="nivel-usuario">0</span></strong>
         <span id="xp-texto">XP 0 / 100</span>
       </div>
-
     </div>
   </div>
 
-  <!-- =========================
-       TÍTULO CENTRAL
-  ========================== -->
   <div class="header-centro">
     <h1 class="portal-title">
       <span class="portal-brand">Portal</span>
       <span class="portal-name">Professor Arlisson</span>
     </h1>
-
-    <p>
-      Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)
-    </p>
+    <p>Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)</p>
   </div>
 
-  <!-- =========================
-       AÇÕES / PERFIL
-  ========================== -->
   <div class="header-direita">
     <div class="header-botoes">
-
-      <!-- Botão de tema -->
       <button id="toggle-tema" title="Alternar tema">🌙</button>
-
-      <!-- Logout -->
       <button onclick="sair()">Sair</button>
-
     </div>
   </div>
+
 </header>
 
-<!-- =========================
-     CONTEÚDO PRINCIPAL
-========================== -->
 <main>
 
-  <!-- =========================
-       BOAS-VINDAS
-  ========================== -->
   <section class="welcome-user">
-    <h2>
-      Bem-vindo,
-      <span id="nome-usuario">Aluno</span> 👋
-    </h2>
+    <h2>Bem-vindo, <span id="nome-usuario">Aluno</span> 👋</h2>
   </section>
 
   <!-- =========================
-       CARDS DE ACESSO
+       CARDS PRINCIPAIS
   ========================== -->
   <section class="cards-wrapper">
     <div class="cards">
 
-      <!-- CARD DE AVISOS (RESUMO) -->
-<div class="card card-avisos-home" id="cardAvisos">
-  <span class="badge-aviso">Novo</span>
-  
-  <div class="avisos-header">
-    <h3>📢 Avisos</h3>
-    <span class="avisos-seta">▼</span>
-  </div>
+      <!-- CARD AVISOS -->
+      <div class="card card-avisos-home" id="cardAvisos">
+        <span class="badge-aviso">Novo</span>
+        <div class="avisos-header">
+          <h3>📢 Avisos</h3>
+          <span class="avisos-seta">▼</span>
+        </div>
+        <div class="avisos-preview">
+          <small>Clique para ver os avisos</small>
+        </div>
+        <div class="avisos-expandido">
+          <div id="avisos-home-lista">
+            <small>Carregando avisos...</small>
+          </div>
+          <a href="/avisos/avisos-aluno.html" class="ver-mais">Ver todos</a>
+        </div>
+      </div>
 
-  <div class="avisos-preview">
-    <small>Clique para ver os avisos</small>
-  </div>
-
-  <div class="avisos-expandido">
-    <div id="avisos-home-lista">
-      <small>Carregando avisos...</small>
-    </div>
-
-    <a href="/avisos/avisos-aluno.html" class="ver-mais">
-      Ver todos
-    </a>
-  </div>
-</div>
-
-
-      <!-- ÁREA DO ALUNO -->
+      <!-- DISCIPLINAS -->
       <a href="fisica.html" class="card">⚡ Física</a>
       <a href="matematica.html" class="card">📐 Matemática</a>
       <a href="quimica.html" class="card">⚛️ Química</a>
-      <a href="noticias.html" class="card"> 📰 Notícias</a>
-      <a href="ted.html" class="card"> 🎤 TED-Ed & TED Talks </a>
+      <a href="noticias.html" class="card">📰 Notícias</a>
+      <a href="ted.html" class="card">🎤 TED-Ed & TED Talks</a>
       <a href="/public/glossario.html" class="card">📚 Glossário</a>
-      <a href="simulacoes.html" class="card"> 🧪 Laboratório Virtual </a>
+      <a href="simulacoes.html" class="card">🧪 Laboratório Virtual</a>
       <a href="/minhas-conquistas.html" class="card">🏅 Minhas Conquistas</a>
-      <a href="/biblioteca.html" class="card"> 💡 Biblioteca de Conteúdos</a>
-      <a href="1ano/modelos-atomicos.html" class="card"> 🔬 Modelos Atômicos</a>
-      <a href="3ano/transformacoes-quimicas.html" class="card"> ⚗️Transformações Químicas</a>
+      <a href="/biblioteca.html" class="card">💡 Biblioteca</a>
 
       <!-- ÁREA RESTRITA -->
       <a href="gabaritos.html" class="card card-prof">🔒 Gabaritos</a>
       <a href="./professor/professor.html" class="card card-prof admin">👨‍🏫 Área do Professor</a>
 
-       </div>
+    </div>
   </section>
 
-  <!-- CONTADOR DE VISITAS -->
+<section class="cards-wrapper">
+  <div class="cards">
+
+    <div class="card card-desafio compacto full-width" id="cardDesafio">
+
+      <!-- TOPO -->
+      <div class="desafio-topo" onclick="toggleDesafio()">
+        <div class="desafio-textos">
+          <h3>🧠 Desafio Diário</h3>
+
+          <div class="desafio-info-linha">
+            <span id="miniStreak">🔥 0 dias</span>
+            <span class="badge-desafio">+XP</span>
+          </div>
+
+          <p class="desafio-sub">Clique para iniciar</p>
+        </div>
+      </div>
+
+      <!-- CONTEÚDO EXPANSÍVEL -->
+      <div class="desafio-conteudo">
+
+        <p id="perguntaTexto" class="pergunta-texto"></p>
+
+        <div id="opcoes" class="opcoes-quiz"></div>
+
+        <button id="btnResponder" class="btn-desafio" onclick="responderPergunta()">
+          Responder
+        </button>
+
+        <p id="statusXP" class="status-xp"></p>
+
+        <div class="streak-container">
+          <p id="streakInfo">🔥 Streak: 0 dias</p>
+          <div class="streak-bar">
+            <div id="streakBarFill"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTADOR -->
   <div class="contador-visitas">
-
-  <div class="contador-card">
-
-    <div class="contador-header">
-      <span class="icone-olho">👁️</span>
-      <span class="contador-titulo">Estatísticas do Portal</span>
-    </div>
-
-    <div class="contador-grid">
-      <div class="contador-bloco">
-        <span id="visitasHoje" class="contador-numero">000</span>
-        <span class="contador-label">Hoje</span>
+    <div class="contador-card">
+      <div class="contador-header">
+        <span class="icone-olho">👁️</span>
+        <span class="contador-titulo">Estatísticas do Portal</span>
       </div>
-
-      <div class="contador-divisor"></div>
-
-      <div class="contador-bloco">
-        <span id="contadorVisitas" class="contador-numero">000000</span>
-        <span class="contador-label">Total</span>
+      <div class="contador-grid">
+        <div class="contador-bloco">
+          <span id="visitasHoje" class="contador-numero">000</span>
+          <span class="contador-label">Hoje</span>
+        </div>
+        <div class="contador-divisor"></div>
+        <div class="contador-bloco">
+          <span id="contadorVisitas" class="contador-numero">000000</span>
+          <span class="contador-label">Total</span>
+        </div>
       </div>
     </div>
-
   </div>
 
-</div>
-
 </main>
 
-</main>
+<!-- CONFETTI -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<script type="module" src="js/visitas.js"></script>
-<!-- =========================
-     SCRIPT: LOGOUT
-     (simples e seguro)
-========================== -->
+<!-- LOGOUT -->
 <script>
 function sair() {
-
-  /*
-    Limpa qualquer dado local
-    (login simples, flags, etc.)
-  */
   localStorage.clear();
-
-  /*
-    Se Firebase existir, faz logout oficial
-  */
-  if (window.firebase && firebase.auth) {
-    firebase.auth().signOut().finally(() => {
-      window.location.href = "index.html";
-    });
-  } else {
-    /*
-      Fallback simples
-    */
-    window.location.href = "index.html";
-  }
+  window.location.href = "index.html";
 }
 </script>
 
-<!-- =========================
-     SCRIPTS DO SISTEMA
-========================== -->
-
-<!-- Protege página (login obrigatório) -->
+<!-- SCRIPTS -->
 <script type="module" src="js/auth-guard.js"></script>
-
-<!-- Carrega nome, patente, nível, XP -->
 <script type="module" src="js/perfil.js"></script>
 <script type="module" src="js/hud.js"></script>
-<!-- Controle de tema (light / dark) -->
 <script src="js/tema.js"></script>
-
-<!-- Lógica específica da home -->
 <script type="module" src="js/home.js"></script>
-
-<!-- =========================
-     LEVEL UP OVERLAY
-========================== -->
-<div id="levelup-overlay" class="levelup-hidden">
-  <div class="levelup-box">
-    <div class="levelup-title">LEVEL UP</div>
-    <div class="levelup-level">
-      Nível <span id="levelup-nivel">0</span>
-    </div>
-  </div>
-</div>
 <script src="js/gamificacao.js"></script>
 <script type="module" src="js/home-avisos.js"></script>
+<script type="module" src="js/visitas.js"></script>
+
 </body>
 </html>

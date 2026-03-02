@@ -1,19 +1,6 @@
 /* =====================================================
    XP.JS — SISTEMA DE XP DO PORTAL DO PROFESSOR ARLISSON
-   -----------------------------------------------------
-   Responsável por:
-   ✔ controlar XP do usuário
-   ✔ controlar nível
-   ✔ fornecer funções reutilizáveis (login, ações, etc)
-
-   Este arquivo NÃO:
-   ✖ faz login
-   ✖ mexe em UI
 ===================================================== */
-
-/* -----------------------------------------------------
-   IMPORTS DO FIREBASE
------------------------------------------------------ */
 
 import {
   doc,
@@ -27,51 +14,80 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 import { app, db } from "./firebase.js";
-
 import { mostrarAnimacaoMudancaPatente } from "./patentes.js";
-
-
-/* -----------------------------------------------------
-   INSTÂNCIAS
------------------------------------------------------ */
 
 const auth = getAuth(app);
 
-/* -----------------------------------------------------
-   CONFIGURAÇÃO DE NÍVEL / XP
------------------------------------------------------ */
+/* =====================================================
+   CONFIGURAÇÃO DE NÍVEL
+===================================================== */
 
-/**
- * Retorna o limite de XP necessário para subir de nível
- * @param {number} nivel
- */
 export function limiteXP(nivel) {
   return 100 * Math.pow(2, nivel);
 }
 
-/* -----------------------------------------------------
+/* =====================================================
+   VALIDAÇÃO AUTOMÁTICA
+===================================================== */
+
+export async function validarNivelUsuario(uid) {
+
+  const ref = doc(db, "usuarios", uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return null;
+
+  let { xp = 0, nivel = 0 } = snap.data();
+
+  let limite = limiteXP(nivel);
+  let subiuNivel = false;
+  const nivelOriginal = nivel;
+
+  while (xp >= limite) {
+    xp -= limite;
+    nivel++;
+    limite = limiteXP(nivel);
+    subiuNivel = true;
+  }
+
+  if (subiuNivel) {
+    await updateDoc(ref, { xp, nivel });
+
+    console.log("🔄 Nível corrigido automaticamente:", nivelOriginal, "→", nivel);
+    mostrarAnimacaoMudancaPatente(nivelOriginal, nivel);
+  }
+
+  return { xp, nivel };
+}
+
+/* =====================================================
    FUNÇÃO INTERNA — PROCESSA XP
------------------------------------------------------ */
+===================================================== */
 
 async function processarXP(uid, ganhoXP) {
 
   const ref = doc(db, "usuarios", uid);
   const snap = await getDoc(ref);
 
-  // Se o usuário ainda não existe no Firestore, cria
   if (!snap.exists()) {
+
+    let xp = ganhoXP;
+    let nivel = 0;
+    let limite = limiteXP(nivel);
+
+    while (xp >= limite) {
+      xp -= limite;
+      nivel++;
+      limite = limiteXP(nivel);
+    }
+
     await setDoc(ref, {
-      xp: ganhoXP,
-      nivel: 0,
+      xp,
+      nivel,
       criadoEm: new Date()
     });
 
-    return {
-      xp: ganhoXP,
-      nivel: 0,
-      limite: limiteXP(0),
-      subiuNivel: false
-    };
+    return { xp, nivel, limite, subiuNivel: nivel > 0, nivelOriginal: 0 };
   }
 
   let { xp = 0, nivel = 0 } = snap.data();
@@ -80,6 +96,7 @@ async function processarXP(uid, ganhoXP) {
 
   let limite = limiteXP(nivel);
   let subiuNivel = false;
+  const nivelOriginal = nivel;
 
   while (xp >= limite) {
     xp -= limite;
@@ -90,20 +107,13 @@ async function processarXP(uid, ganhoXP) {
 
   await updateDoc(ref, { xp, nivel });
 
-  return { xp, nivel, limite, subiuNivel };
+  return { xp, nivel, limite, subiuNivel, nivelOriginal };
 }
 
-/* -----------------------------------------------------
-   API PÚBLICA — USADA PELO LOGIN E OUTRAS AÇÕES
------------------------------------------------------ */
+/* =====================================================
+   XP PARA USUÁRIO LOGADO
+===================================================== */
 
-/**
- * Adiciona XP imediatamente ao usuário logado
- * Exemplo: login diário, concluir atividade, etc
- *
- * @param {number} valor - quantidade de XP
- * @param {string} motivo - motivo do ganho (opcional)
- */
 export async function adicionarXPImediato(valor, motivo = "") {
 
   const user = auth.currentUser;
@@ -115,11 +125,6 @@ export async function adicionarXPImediato(valor, motivo = "") {
 
   try {
 
-    // 🔹 nível ANTES
-    const snap = await getDoc(doc(db, "usuarios", user.uid));
-    const nivelAnterior = snap.exists() ? snap.data().nivel : 0;
-
-    // 🔹 processa XP
     const resultado = await processarXP(user.uid, valor);
 
     console.log(
@@ -128,10 +133,11 @@ export async function adicionarXPImediato(valor, motivo = "") {
       resultado
     );
 
-    // 🔹 anima patente SE subir nível
     if (resultado.subiuNivel) {
-      console.log("🔥 SUBIU DE NÍVEL", nivelAnterior, resultado.nivel);
-      mostrarAnimacaoMudancaPatente(nivelAnterior, resultado.nivel);
+      mostrarAnimacaoMudancaPatente(
+        resultado.nivelOriginal,
+        resultado.nivel
+      );
     }
 
     return resultado;
@@ -142,8 +148,32 @@ export async function adicionarXPImediato(valor, motivo = "") {
   }
 }
 
-// 🔧 DEV ONLY — remover em produção
+/* =====================================================
+   BONIFICAÇÃO MANUAL DO PROFESSOR
+===================================================== */
+
+export async function adicionarXPManualProfessor(uid, valor) {
+
+  if (!uid || !valor || valor <= 0) return null;
+
+  try {
+
+    const resultado = await processarXP(uid, valor);
+
+    console.log(`🎓 Professor adicionou ${valor} XP`, resultado);
+
+    return resultado;
+
+  } catch (e) {
+    console.error("Erro ao adicionar XP manual:", e);
+    return null;
+  }
+}
+
+/* =====================================================
+   DEV TOOL
+===================================================== */
+
 window.addXP = async (valor = 1000) => {
   return await adicionarXPImediato(valor, "Teste via console");
 };
-

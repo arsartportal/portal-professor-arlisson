@@ -1,7 +1,7 @@
 /* =====================================================
-   DASHBOARD.JS — PORTAL DO PROFESSOR 3.0
-   Ranking Geral + Ranking por Escola
-   Filtros • Gamificação • Multi-escola
+   DASHBOARD.JS — PORTAL DO PROFESSOR 3.3
+   Ranking por PATENTE (nível)
+   XP apenas como desempate
 ===================================================== */
 
 import {
@@ -18,6 +18,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 import { app } from "./firebase.js";
+import { obterPatentePorNivel } from "./patentes.js";
+import { adicionarXPManualProfessor } from "./xp.js";
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -73,6 +75,24 @@ function medalha(posicao) {
 }
 
 /* =====================================================
+   ORDENAÇÃO POR PATENTE (OFICIAL)
+===================================================== */
+
+function ordenarPorPatente(lista) {
+  return lista.sort((a, b) => {
+
+    // 1️⃣ Primeiro critério: nível (patente)
+    if (b.nivel === a.nivel) {
+
+      // 2️⃣ Segundo critério: XP
+      return b.xp - a.xp;
+    }
+
+    return b.nivel - a.nivel;
+  });
+}
+
+/* =====================================================
    RENDERIZAÇÃO PRINCIPAL
 ===================================================== */
 
@@ -84,6 +104,7 @@ function renderizarTabela(lista) {
   lista.forEach((aluno, index) => {
 
     const status = calcularStatus(aluno.ultimoLogin);
+    const patente = obterPatentePorNivel(aluno.nivel ?? 0);
 
     const tr = document.createElement("tr");
 
@@ -94,9 +115,19 @@ function renderizarTabela(lista) {
       <td>${aluno.serie}</td>
       <td>${aluno.turma}</td>
       <td>${aluno.xp}</td>
-      <td>${aluno.nivel}</td>
+      <td class="coluna-patente">
+        <img src="${patente.imagem}" 
+             alt="Patente"
+             class="icone-patente"
+             title="Nível ${aluno.nivel} • ${aluno.xp} XP">
+      </td>
       <td class="${status.classe}">${status.texto}</td>
       <td>${formatarData(aluno.ultimoLogin)}</td>
+      <td>
+        <button class="btn-bonus" data-uid="${aluno.id}">
+          ➕ XP
+        </button>
+      </td>
     `;
 
     tabela.appendChild(tr);
@@ -119,7 +150,6 @@ function renderizarRankingPorEscola(lista) {
 
   const escolas = {};
 
-  // Agrupar alunos por escola
   lista.forEach(aluno => {
     if (!escolas[aluno.escola]) {
       escolas[aluno.escola] = [];
@@ -129,8 +159,9 @@ function renderizarRankingPorEscola(lista) {
 
   Object.keys(escolas).forEach(nomeEscola => {
 
-    const alunosDaEscola = escolas[nomeEscola]
-      .sort((a, b) => b.xp - a.xp);
+    const alunosDaEscola = ordenarPorPatente(
+      [...escolas[nomeEscola]]
+    );
 
     const bloco = document.createElement("div");
     bloco.classList.add("bloco-escola");
@@ -142,17 +173,24 @@ function renderizarRankingPorEscola(lista) {
           <th>#</th>
           <th>Aluno</th>
           <th>XP</th>
-          <th>Nível</th>
+          <th>🎖️ Patente</th>
         </tr>
     `;
 
     alunosDaEscola.forEach((aluno, index) => {
+
+      const patente = obterPatentePorNivel(aluno.nivel ?? 0);
+
       html += `
         <tr>
           <td>${medalha(index + 1)}</td>
           <td>${aluno.nome}</td>
           <td>${aluno.xp}</td>
-          <td>${aluno.nivel}</td>
+          <td class="coluna-patente">
+            <img src="${patente.imagem}" 
+                 class="icone-patente"
+                 title="Nível ${aluno.nivel} • ${aluno.xp} XP">
+          </td>
         </tr>
       `;
     });
@@ -218,6 +256,7 @@ function aplicarFiltros() {
     return true;
   });
 
+  ordenarPorPatente(alunosFiltrados);
   renderizarTabela(alunosFiltrados);
 }
 
@@ -240,6 +279,60 @@ function exportarCSV() {
   link.href = url;
   link.download = "relatorio_alunos.csv";
   link.click();
+}
+
+/* =====================================================
+   EVENTO BONIFICAÇÃO
+===================================================== */
+
+document.addEventListener("click", async (e) => {
+
+  if (!e.target.classList.contains("btn-bonus")) return;
+
+  const uid = e.target.dataset.uid;
+
+  const valor = parseInt(prompt("Quantos XP deseja adicionar?"));
+
+  if (!valor || valor <= 0) return;
+
+  await adicionarXPManualProfessor(uid, valor);
+
+  alert("XP adicionado com sucesso!");
+
+  await carregarAlunos();
+});
+
+/* =====================================================
+   CARREGAR ALUNOS
+===================================================== */
+
+async function carregarAlunos() {
+
+  const snapshot = await getDocs(collection(db, "usuarios"));
+
+  alunosOriginais = [];
+
+  snapshot.forEach(docSnap => {
+
+    const dados = docSnap.data();
+    if (dados.tipo !== "aluno") return;
+
+    alunosOriginais.push({
+      id: docSnap.id,
+      nome: dados.nome || "-",
+      escola: dados.escola || "-",
+      serie: dados.serie || "-",
+      turma: dados.turma || "-",
+      xp: Number.isFinite(dados.xp) ? dados.xp : 0,
+      nivel: Number.isInteger(dados.nivel) ? dados.nivel : 0,
+      ultimoLogin: dados.ultimoAcesso || null
+    });
+  });
+
+  ordenarPorPatente(alunosOriginais);
+  alunosFiltrados = [...alunosOriginais];
+
+  renderizarTabela(alunosFiltrados);
 }
 
 /* =====================================================
@@ -266,40 +359,14 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  const snapshot = await getDocs(collection(db, "usuarios"));
+  await carregarAlunos();
 
-  alunosOriginais = [];
-
-  snapshot.forEach(docSnap => {
-
-    const dados = docSnap.data();
-    if (dados.tipo !== "aluno") return;
-
-    alunosOriginais.push({
-      nome: dados.nome || "-",
-      escola: dados.escola || "-",
-      serie: dados.serie || "-",
-      turma: dados.turma || "-",
-      xp: dados.xp ?? 0,
-      nivel: dados.nivel ?? 0,
-      ultimoLogin: dados.ultimoAcesso || null
-    });
-  });
-
-  // Ordena ranking geral
-  alunosOriginais.sort((a, b) => b.xp - a.xp);
-
-  alunosFiltrados = [...alunosOriginais];
-
-  renderizarTabela(alunosFiltrados);
-
-  // Eventos
   document.getElementById("filtro-escola")?.addEventListener("change", aplicarFiltros);
   document.getElementById("filtro-serie")?.addEventListener("change", aplicarFiltros);
   document.getElementById("filtro-turma")?.addEventListener("change", aplicarFiltros);
   document.getElementById("exportar-csv")?.addEventListener("click", exportarCSV);
 
-  console.log("Dashboard 3.0 carregado com sucesso.");
+  console.log("Dashboard 3.3 carregado com ranking por patente.");
 });
 
 /* =====================================================
