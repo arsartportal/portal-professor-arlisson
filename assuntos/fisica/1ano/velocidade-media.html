@@ -90,22 +90,124 @@ button:disabled{background:#999;cursor:not-allowed;}
 </div>
 
 <h2>📐 1. Definição</h2>
+
 <p>
-Velocidade média é a razão entre o deslocamento e o intervalo de tempo.
+Velocidade média é a razão entre o <strong>deslocamento</strong> e o <strong>intervalo de tempo</strong>
+em que esse deslocamento ocorreu.
 </p>
 
 <p><strong>v<sub>m</sub> = Δs / Δt</strong></p>
 
-<h2>⏱ 2. Unidade</h2>
 <p>
-No SI, a velocidade é medida em metros por segundo (m/s).
-Também pode ser expressa em km/h.
+Isso significa que a velocidade média indica quanto a posição varia,
+em média, a cada unidade de tempo.
 </p>
 
-<h2>🚗 3. Interpretação Física</h2>
 <p>
-Velocidade média indica quanto o móvel varia sua posição por unidade de tempo.
-Não significa que o móvel manteve essa velocidade durante todo o percurso.
+📌 A velocidade média depende apenas da posição inicial, da posição final e do tempo total.
+</p>
+
+
+<h2>⏱ 2. Interpretação Física</h2>
+
+<p>
+É importante entender que velocidade média não significa que o móvel
+manteve essa velocidade durante todo o percurso.
+</p>
+
+<p>
+Um carro pode acelerar, frear e variar sua velocidade,
+mas sua velocidade média considera apenas o deslocamento total
+dividido pelo tempo total.
+</p>
+
+<p>
+📌 Velocidade média é uma descrição global do movimento.
+</p>
+
+
+<h2>🔢 3. Exemplo Resolvido</h2>
+
+<p>
+Um móvel sai da posição 10 m e vai até 70 m em 20 s.
+</p>
+
+<p>
+Passo 1 — Calcular o deslocamento:
+</p>
+
+<p><strong>Δs = 70 − 10 = 60 m</strong></p>
+
+<p>
+Passo 2 — Aplicar a fórmula:
+</p>
+
+<p><strong>v<sub>m</sub> = 60 / 20 = 3 m/s</strong></p>
+
+<p>
+Isso significa que, em média, o móvel variou 3 metros de posição
+a cada segundo.
+</p>
+
+
+<h2>🔄 4. Conversão de Unidades</h2>
+
+<p>
+No Sistema Internacional, a unidade padrão é metro por segundo (m/s).
+</p>
+
+<p>
+Porém, no cotidiano usamos muito km/h.
+</p>
+
+<p>
+Para converter:
+</p>
+
+<p>
+✔ De m/s para km/h → multiplica por 3,6  
+✔ De km/h para m/s → divide por 3,6
+</p>
+
+<p>
+Exemplo:
+</p>
+
+<p>
+72 km/h ÷ 3,6 = 20 m/s
+</p>
+
+
+<h2>⚠ 5. Velocidade Média x Velocidade Instantânea</h2>
+
+<p>
+Velocidade média considera o intervalo total de tempo.
+</p>
+
+<p>
+Já a velocidade instantânea é a velocidade em um instante específico,
+como a indicada no velocímetro de um carro.
+</p>
+
+<p>
+📌 O velocímetro indica velocidade instantânea, não média.
+</p>
+
+
+<h2>🚀 6. Conexão com o Próximo Conteúdo</h2>
+
+<p>
+Quando a velocidade varia ao longo do tempo,
+dizemos que há aceleração.
+</p>
+
+<p>
+Portanto, compreender velocidade média é essencial
+para avançar no estudo da <strong>aceleração</strong>.
+</p>
+
+<p>
+📌 A Cinemática evolui de posição → deslocamento → velocidade → aceleração.
 </p>
 
 <div class="glossario">
@@ -253,18 +355,40 @@ q10:"d"
 let total = 0;
 
 for(let q in respostas){
+
+let opcoes = document.querySelectorAll('input[name="'+q+'"]');
 let marcada = document.querySelector('input[name="'+q+'"]:checked');
-if(marcada && marcada.value===respostas[q]){
+
+opcoes.forEach(opcao => {
+let label = opcao.parentElement;
+label.style.color = "#333";
+label.style.fontWeight = "normal";
+});
+
+if(marcada){
+if(marcada.value === respostas[q]){
+marcada.parentElement.style.color = "#1b5e20";
+marcada.parentElement.style.fontWeight = "bold";
 total++;
+} else {
+marcada.parentElement.style.color = "#c62828";
+marcada.parentElement.style.fontWeight = "bold";
+}
 }
 }
 
 tentativas.push(total);
-localStorage.setItem(CHAVE,JSON.stringify(tentativas));
+localStorage.setItem(CHAVE, JSON.stringify(tentativas));
 
-let melhor=Math.max(...tentativas);
+mostrarResultado(tentativas);
+}
 
-let html="<br><strong>📊 Desempenho:</strong><br>";
+function mostrarResultado(tentativas){
+
+let melhor = Math.max(...tentativas);
+
+let html = "<br><strong>📊 Desempenho:</strong><br>";
+
 tentativas.forEach((nota,index)=>{
 html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
 });
@@ -273,9 +397,14 @@ html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
 
 if(melhor===10){
 html+="🔥 Excelente desempenho!";
-}else if(melhor>=3){
+}
+else if(melhor>=7){
 html+="👏 Ótimo resultado!";
-}else{
+}
+else if(melhor>=5){
+html+="👍 Resultado regular. Revise e tente melhorar.";
+}
+else{
 html+="📚 Revise o conteúdo e tente novamente.";
 }
 
