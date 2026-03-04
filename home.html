@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Portal do Professor Arlisson</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/patentes.css">
 </head>
 
 <body data-theme="light">
@@ -169,6 +170,21 @@ function sair() {
   window.location.href = "index.html";
 }
 </script>
+
+<div id="patente-overlay" class="hidden">
+  <div class="patente-card">
+
+    <h2>🎉 Nova Patente!</h2>
+
+    <div class="patentes-container">
+      <img id="patente-antiga" class="patente antiga" />
+      <img id="patente-nova" class="patente nova" />
+    </div>
+
+    <button onclick="fecharPatente()">Continuar</button>
+
+  </div>
+</div>
 
 <!-- SCRIPTS -->
 <script type="module" src="js/auth-guard.js"></script>
