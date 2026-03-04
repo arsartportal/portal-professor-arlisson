@@ -1,142 +1,90 @@
 /* =========================================================
    SISTEMA DE PATENTES (RANKS – ESTILO DOTA 2)
-   ---------------------------------------------------------
-   ✔ Cada nível do aluno corresponde a UMA imagem
-   ✔ Não exibimos nome do rank, apenas a imagem
-   ✔ Total: 41 níveis (0 a 40)
-   ✔ Compatível com Cloudflare Pages (Linux / case-sensitive)
-   ========================================================= */
-
-
-/* =========================================================
-   LISTA DE IMAGENS DAS PATENTES
-   ---------------------------------------------------------
-   - A posição no array = nível do aluno
-   - O nome do arquivo DEVE bater exatamente com o GitHub
-   - Atenção a MAIÚSCULAS e minúsculas (case-sensitive)
-   ========================================================= */
+========================================================= */
 
 const ranks = [
-
-  /* =========================
-     NÍVEL 0 (INICIANTE)
-     ========================= */
   "SeasonalRank0-0.png",
 
+  "SeasonalRank1-1.png",
+  "SeasonalRank1-2.png",
+  "SeasonalRank1-3.png",
+  "SeasonalRank1-4.png",
+  "SeasonalRank1-5.png",
 
-  /* =========================
-     RANK 1 (níveis 1 a 5)
-     ========================= */
-  "SeasonalRank1-1.png", // nível 1
-  "SeasonalRank1-2.png", // nível 2
-  "SeasonalRank1-3.png", // nível 3
-  "SeasonalRank1-4.png", // nível 4
-  "SeasonalRank1-5.png", // nível 5
+  "SeasonalRank2-1.png",
+  "SeasonalRank2-2.png",
+  "SeasonalRank2-3.png",
+  "SeasonalRank2-4.png",
+  "SeasonalRank2-5.png",
 
+  "SeasonalRank3-1.png",
+  "SeasonalRank3-2.png",
+  "SeasonalRank3-3.png",
+  "SeasonalRank3-4.png",
+  "SeasonalRank3-5.png",
 
-  /* =========================
-     RANK 2 (níveis 6 a 10)
-     ========================= */
-  "SeasonalRank2-1.png", // nível 6
-  "SeasonalRank2-2.png", // nível 7
-  "SeasonalRank2-3.png", // nível 8
-  "SeasonalRank2-4.png", // nível 9
-  "SeasonalRank2-5.png", // nível 10
+  "SeasonalRank4-1.png",
+  "SeasonalRank4-2.png",
+  "SeasonalRank4-3.png",
+  "SeasonalRank4-4.png",
+  "SeasonalRank4-5.png",
 
+  "SeasonalRank5-1.png",
+  "SeasonalRank5-2.png",
+  "SeasonalRank5-3.png",
+  "SeasonalRank5-4.png",
+  "SeasonalRank5-5.png",
 
-  /* =========================
-     RANK 3 (níveis 11 a 15)
-     ========================= */
-  "SeasonalRank3-1.png", // nível 11
-  "SeasonalRank3-2.png", // nível 12
-  "SeasonalRank3-3.png", // nível 13
-  "SeasonalRank3-4.png", // nível 14
-  "SeasonalRank3-5.png", // nível 15
+  "SeasonalRank6-1.png",
+  "SeasonalRank6-2.png",
+  "SeasonalRank6-3.png",
+  "SeasonalRank6-4.png",
+  "SeasonalRank6-5.png",
 
+  "SeasonalRank7-1.png",
+  "SeasonalRank7-2.png",
+  "SeasonalRank7-3.png",
+  "SeasonalRank7-4.png",
+  "SeasonalRank7-5.png",
 
-  /* =========================
-     RANK 4 (níveis 16 a 20)
-     ========================= */
-  "SeasonalRank4-1.png", // nível 16
-  "SeasonalRank4-2.png", // nível 17
-  "SeasonalRank4-3.png", // nível 18
-  "SeasonalRank4-4.png", // nível 19
-  "SeasonalRank4-5.png", // nível 20
-
-
-  /* =========================
-     RANK 5 (níveis 21 a 25)
-     ========================= */
-  "SeasonalRank5-1.png", // nível 21
-  "SeasonalRank5-2.png", // nível 22
-  "SeasonalRank5-3.png", // nível 23
-  "SeasonalRank5-4.png", // nível 24
-  "SeasonalRank5-5.png", // nível 25
-
-
-  /* =========================
-     RANK 6 (níveis 26 a 30)
-     ========================= */
-  "SeasonalRank6-1.png", // nível 26
-  "SeasonalRank6-2.png", // nível 27
-  "SeasonalRank6-3.png", // nível 28
-  "SeasonalRank6-4.png", // nível 29
-  "SeasonalRank6-5.png", // nível 30
-
-
-  /* =========================
-     RANK 7 (níveis 31 a 35)
-     ========================= */
-  "SeasonalRank7-1.png", // nível 31
-  "SeasonalRank7-2.png", // nível 32
-  "SeasonalRank7-3.png", // nível 33
-  "SeasonalRank7-4.png", // nível 34
-  "SeasonalRank7-5.png", // nível 35
-
-
-  /* =========================
-     TOP RANK (níveis 36 a 40)
-     ========================= */
-  "SeasonalRankTop0.png", // nível 36
-  "SeasonalRankTop1.png", // nível 37
-  "SeasonalRankTop2.png", // nível 38
-  "SeasonalRankTop3.png", // nível 39
-  "SeasonalRankTop4.png"  // nível 40
+  "SeasonalRankTop0.png",
+  "SeasonalRankTop1.png",
+  "SeasonalRankTop2.png",
+  "SeasonalRankTop3.png",
+  "SeasonalRankTop4.png"
 ];
 
-
 /* =========================================================
-   FUNÇÃO PRINCIPAL
-   ---------------------------------------------------------
-   Recebe o nível do usuário e devolve:
-   ✔ Caminho ABSOLUTO da imagem da patente
-   ✔ Sempre retorna um índice válido
-   ✔ Nunca quebra o sistema
-   ========================================================= */
+   OBTÉM IMAGEM SEGURA
+========================================================= */
 
 export function obterPatentePorNivel(nivel) {
 
-  /* -----------------------------------------
-     Garante que o nível não seja negativo
-     ----------------------------------------- */
   const nivelSeguro = Math.max(0, nivel);
-
-
-  /* -----------------------------------------
-     Impede ultrapassar o último rank
-     ----------------------------------------- */
   const indice = Math.min(nivelSeguro, ranks.length - 1);
 
-
-  /* -----------------------------------------
-     Retorno padronizado
-     - Caminho absoluto (começa com /)
-     - Compatível com Cloudflare Pages
-     ----------------------------------------- */
   return {
     imagem: `/assets/ranks/${ranks[indice]}`
   };
 }
+
+/* =========================================================
+   CONFETTI SEGURO
+========================================================= */
+
+function soltarConfetes() {
+  if (typeof confetti !== "function") return;
+
+  confetti({
+    particleCount: 160,
+    spread: 90,
+    origin: { y: 0.6 }
+  });
+}
+
+/* =========================================================
+   ANIMAÇÃO DE MUDANÇA DE PATENTE
+========================================================= */
 
 export function mostrarAnimacaoMudancaPatente(nivelAntigo, nivelNovo) {
 
@@ -144,43 +92,52 @@ export function mostrarAnimacaoMudancaPatente(nivelAntigo, nivelNovo) {
 
   const overlay = document.getElementById("patente-overlay");
   const card = document.querySelector(".patente-card");
+  const imgAntiga = document.getElementById("patente-antiga");
+  const imgNova = document.getElementById("patente-nova");
 
-  if (!overlay || !card) return;
+  if (!overlay || !card || !imgAntiga || !imgNova) return;
 
   const patenteAntiga = obterPatentePorNivel(nivelAntigo);
   const patenteNova = obterPatentePorNivel(nivelNovo);
 
-  const imgAntiga = document.getElementById("patente-antiga");
-  const imgNova = document.getElementById("patente-nova");
-
-  // estado inicial LIMPO
+  // reset estado
   card.classList.remove("animar");
   overlay.classList.remove("hidden");
 
   imgAntiga.src = patenteAntiga.imagem;
   imgNova.src = patenteNova.imagem;
 
-  // ⏳ ESPERA a imagem nova carregar
-  imgNova.onload = () => {
-
-    // força renderização do estado inicial
+  // Se a imagem já estiver em cache, onload pode não disparar
+  const iniciarAnimacao = () => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         card.classList.add("animar");
-        if (window.confetti) soltarConfetes();
+        soltarConfetes();
       });
     });
-
   };
+
+  if (imgNova.complete) {
+    iniciarAnimacao();
+  } else {
+    imgNova.onload = iniciarAnimacao;
+    imgNova.onerror = iniciarAnimacao; // mesmo se falhar, não trava
+  }
 }
 
-export function fecharPatente() {
+/* =========================================================
+   FECHAR OVERLAY
+========================================================= */
+
+export function fecharPatente(destino = null) {
+
   const overlay = document.getElementById("patente-overlay");
   if (overlay) overlay.classList.add("hidden");
 
-  // redireciona para a página de Física
-  window.location.href = "/fisica.html";
+  if (destino) {
+    window.location.href = destino;
+  }
 }
 
-// expõe para uso em onclick do HTML
+// disponível para onclick HTML
 window.fecharPatente = fecharPatente;
