@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gerador de Listas | Portal do Professor</title>
+
+<style>
+
+body{
+font-family:'Segoe UI', Arial;
+background:linear-gradient(135deg,#eef2ff,#f8fafc);
+margin:0;
+padding:40px;
+color:#1e293b;
+}
+
+h1{
+margin-bottom:25px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.painel{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+margin-bottom:30px;
+}
+
+select,input{
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+.filtros{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:15px;
+}
+
+button{
+padding:10px 16px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+.gerar{
+background:#2563eb;
+color:white;
+}
+
+.pdf{
+background:#059669;
+color:white;
+}
+
+.questao{
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.06);
+}
+
+ul{
+padding-left:20px;
+}
+
+.gabarito{
+background:#f1f5f9;
+padding:20px;
+border-radius:10px;
+margin-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📚 Gerador Automático de Listas</h1>
+
+<div class="painel">
+
+<div class="filtros">
+
+<select id="serie">
+<option value="1ano">1º Ano</option>
+<option value="2ano">2º Ano</option>
+<option value="3ano">3º Ano</option>
+<option value="eja">EJA</option>
+</select>
+
+<select id="tema">
+<option value="cinematica">Cinemática</option>
+<option value="termologia">Termologia</option>
+<option value="optica">Óptica</option>
+<option value="eletricidade">Eletricidade</option>
+</select>
+
+<select id="nivel">
+<option value="facil">Fácil</option>
+<option value="medio">Médio</option>
+<option value="dificil">Difícil</option>
+</select>
+
+<input type="number" id="quantidade" value="5" min="1" max="50">
+
+<button class="gerar" id="btnGerar">Gerar Lista</button>
+
+<button class="pdf" id="btnPDF">Baixar PDF</button>
+
+</div>
+
+</div>
+
+<div id="area-impressao">
+
+<div id="lista"></div>
+
+<div id="gabarito"></div>
+
+</div>
+
+</div>
+
+<!-- BANCO DE QUESTÕES -->
+<script src="./banco-questoes.js"></script>
+
+<!-- BIBLIOTECA PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+
+/* =====================================
+GERAR LISTA
+===================================== */
+
+document.getElementById("btnGerar").addEventListener("click",()=>{
+
+const serie=document.getElementById("serie").value;
+const tema=document.getElementById("tema").value;
+const nivel=document.getElementById("nivel").value;
+const quantidade=Number(document.getElementById("quantidade").value);
+
+const filtradas=bancoQuestoes.filter(q=>
+
+q.serie===serie &&
+q.tema===tema &&
+q.nivel===nivel
+
+);
+
+if(filtradas.length===0){
+
+alert("Nenhuma questão encontrada.");
+return;
+
+}
+
+const embaralhadas=[...filtradas].sort(()=>Math.random()-0.5);
+
+const lista=embaralhadas.slice(0,quantidade);
+
+mostrarLista(lista);
+
+});
+
+
+/* =====================================
+MOSTRAR QUESTÕES
+===================================== */
+
+function mostrarLista(lista){
+
+const container=document.getElementById("lista");
+const gabarito=document.getElementById("gabarito");
+
+container.innerHTML="";
+gabarito.innerHTML="";
+
+lista.forEach((q,i)=>{
+
+container.innerHTML+=`
+
+<div class="questao">
+
+<h3>Questão ${i+1}</h3>
+
+<p>${q.pergunta}</p>
+
+<ul>
+${q.alternativas.map((alt,index)=>`<li>${String.fromCharCode(65+index)}) ${alt}</li>`).join("")}
+</ul>
+
+</div>
+
+`;
+
+});
+
+
+let respostas="";
+
+lista.forEach((q,i)=>{
+
+const letra=String.fromCharCode(65+q.correta);
+
+respostas+=`<p>Questão ${i+1}: ${letra}</p>`;
+
+});
+
+gabarito.innerHTML=`
+
+<div class="gabarito">
+
+<h3>🧠 Gabarito</h3>
+
+${respostas}
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================
+PDF
+===================================== */
+
+document.getElementById("btnPDF").addEventListener("click",()=>{
+
+const elemento=document.getElementById("area-impressao");
+
+html2pdf().from(elemento).save("lista-exercicios.pdf");
+
+});
+
+</script>
+
+</body>
+</html>

@@ -170,6 +170,63 @@ export async function adicionarXPManualProfessor(uid, valor) {
   }
 }
 
+export async function registrarAtividadeQuiz(atividadeId, acertos, totalQuestoes) {
+
+  const user = auth.currentUser;
+
+  if (!user) {
+    console.warn("Usuário não logado.");
+    return null;
+  }
+
+  const uid = user.uid;
+
+  const ref = doc(db, "usuarios", uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return null;
+
+  const dados = snap.data();
+
+  let atividades = dados.atividades || {};
+
+  const atividade = atividades[atividadeId] || {
+    melhor: 0,
+    tentativas: []
+  };
+
+  atividade.tentativas.push(acertos);
+
+  let xpGanho = 0;
+
+  if (acertos > atividade.melhor) {
+
+    xpGanho = (acertos - atividade.melhor) * 10;
+
+    atividade.melhor = acertos;
+  }
+
+  atividade.totalQuestoes = totalQuestoes;
+  atividade.ultimaData = new Date();
+
+  atividades[atividadeId] = atividade;
+
+  await updateDoc(ref, { atividades });
+
+  if (xpGanho > 0) {
+    await adicionarXPImediato(
+      xpGanho,
+      `Quiz: ${atividadeId}`
+    );
+  }
+
+  return {
+    xpGanho,
+    melhor: atividade.melhor,
+    tentativas: atividade.tentativas
+  };
+}
+
 /* =====================================================
    DEV TOOL
 ===================================================== */
@@ -177,3 +234,72 @@ export async function adicionarXPManualProfessor(uid, valor) {
 window.addXP = async (valor = 1000) => {
   return await adicionarXPImediato(valor, "Teste via console");
 };
+
+/* =====================================================
+   QUIZ COM CONTROLE DE TENTATIVAS (FIRESTORE)
+===================================================== */
+
+export async function registrarTentativaQuiz(atividadeId, acertos, totalQuestoes){
+
+  const user = auth.currentUser;
+
+  if(!user){
+    console.warn("Usuário não logado");
+    return null;
+  }
+
+  const ref = doc(db,"usuarios",user.uid);
+  const snap = await getDoc(ref);
+
+  if(!snap.exists()) return null;
+
+  const dados = snap.data();
+
+  let atividades = dados.atividades || {};
+
+  let atividade = atividades[atividadeId] || {
+    tentativas: [],
+    melhor: 0
+  };
+
+  /* limitar tentativas */
+
+  if(atividade.tentativas.length >= 3){
+    return {
+      bloqueado:true,
+      tentativas:atividade.tentativas,
+      melhor:atividade.melhor
+    };
+  }
+
+  atividade.tentativas.push(acertos);
+
+  let xpGanho = 0;
+
+  if(acertos > atividade.melhor){
+
+    xpGanho = (acertos - atividade.melhor) * 10;
+
+    atividade.melhor = acertos;
+
+    await adicionarXPImediato(
+      xpGanho,
+      `Quiz ${atividadeId}`
+    );
+  }
+
+  atividade.totalQuestoes = totalQuestoes;
+  atividade.ultimaData = new Date();
+
+  atividades[atividadeId] = atividade;
+
+  await updateDoc(ref,{ atividades });
+
+  return {
+    bloqueado:false,
+    xpGanho,
+    tentativas:atividade.tentativas,
+    melhor:atividade.melhor
+  };
+
+}
