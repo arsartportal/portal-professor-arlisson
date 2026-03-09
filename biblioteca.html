@@ -110,6 +110,94 @@ h1{
     border-left:6px solid #6a1b9a;
 }
 
+.card{
+position:relative;
+cursor:pointer;
+transition:all .25s ease;
+overflow:hidden;
+}
+
+.card:hover{
+transform:translateY(-4px) scale(1.02);
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+
+/* BADGE XP */
+
+.badge-xp{
+position:absolute;
+top:10px;
+right:10px;
+
+background:linear-gradient(135deg,#00ff9d,#00d4ff);
+
+color:#000;
+
+font-size:11px;
+font-weight:700;
+
+padding:5px 10px;
+
+border-radius:20px;
+
+display:flex;
+align-items:center;
+gap:4px;
+
+box-shadow:0 0 10px rgba(0,255,157,0.6);
+
+animation:pulseXP 2s infinite;
+}
+
+
+/* ANIMAÇÃO */
+
+@keyframes pulseXP{
+
+0%{
+box-shadow:0 0 6px rgba(0,255,157,0.4);
+}
+
+50%{
+box-shadow:0 0 16px rgba(0,255,157,1);
+}
+
+100%{
+box-shadow:0 0 6px rgba(0,255,157,0.4);
+}
+
+}
+
+
+.badge-xp-off{
+
+position:absolute;
+top:10px;
+right:10px;
+
+background:#f1f1f1;
+color:#666;
+
+font-size:11px;
+font-weight:700;
+
+padding:5px 10px;
+
+border-radius:20px;
+
+border:1px solid #ddd;
+
+letter-spacing:0.5px;
+
+display:flex;
+align-items:center;
+gap:5px;
+
+opacity:0.9;
+
+}
+
 </style>
 </head>
 
@@ -181,46 +269,19 @@ Organizado por disciplina e série
 <h3>2º Ano</h3>
 <div class="lista-conteudos">
 <div class="card" onclick="ir('assuntos/fisica/2ano/temperatura-calor.html')">
+<div class="badge-xp">⚡ +XP</div>
 <h4>Temperatura e Calor</h4>
 <p>Legenda Aqui...</p>
 </div>
 
-<div class="card" onclick="ir('assuntos/fisica/1ano/movimento-referencial.html')">
-<h4>Movimento e Referencial</h4>
-<p>Interpretação do movimento relativo e sua dependência do referencial adotado.</p>
-</div>
-
-<div class="card" onclick="ir('assuntos/fisica/1ano/espaco-deslocamento.html')">
-<h4>Espaço e Deslocamento</h4>
-<p>Análise da variação de posição e interpretação do deslocamento em diferentes sentidos.</p>
-</div>
-
-<div class="card" onclick="ir('assuntos/fisica/1ano/velocidade-media.html')">
-<h4>Velocidade Média</h4>
-<p>Relação entre deslocamento e tempo para determinar a velocidade média de um móvel.</p>
-</div>
-
-<div class="card" onclick="ir('assuntos/fisica/1ano/aceleracao.html')">
-<h4>Aceleração</h4>
-<p>Relação entre velocidade e tempo para determinar a aceleração média de um móvel.</p>
-</div>
-
-<div class="card" onclick="ir('assuntos/fisica/1ano/mru.html')">
-<h4>Movimento Uniforme - M.U.</h4>
-<p>Legenda Aqui...</p>
-</div>
-
-<div class="card" onclick="ir('assuntos/fisica/1ano/mruv.html')">
-<h4>Movimento Uniformemente Variado - M.U.V.</h4>
-<p>Legenda Aqui...</p>
-</div>
-
-<div class="card" onclick="ir('assuntos/fisica/1ano/leisdenewton.html')">
-<h4>Leis de Newton</h4>
-<p>Legenda Aqui...</p>
+<div class="card" onclick="ir('assuntos/fisica/2ano/escalas-termometricas.html')">
+<div class="badge-xp-off">XP OFF</div>
+<h4>Escalas Termométricas</h4>
+<p>Celsius, Kelvin e Fahrenheit</p>
 </div>
 
 <div class="card" onclick="ir('/em-construcao.html')">
+<div class="badge-xp-off">XP OFF</div>
 <h4>🚧</h4>
 <p>Em construção.</p>
 </div>
@@ -385,11 +446,38 @@ Organizado por disciplina e série
 
 <div class="serie">
 <h3>1º Ano</h3>
+
 <div class="lista-conteudos">
+
+<div class="card" onclick="ir('assuntos/quimica/1ano/materia-transformacoes.html')">
+
+<div class="badge-xp">⚡ +XP</div>
+
+<h4>Matéria e Transformações</h4>
+<p>Estudo das propriedades e comportamento das substâncias.</p>
+
+</div>
+
+
+<div class="card" onclick="ir('assuntos/quimica/1ano/substancias-misturas.html')">
+
+<div class="badge-xp">⚡ +XP</div>
+
+<h4>Substâncias e Misturas</h4>
+<p>Estudo das propriedades e comportamento das substâncias e misturas.</p>
+
+</div>
+
+
 <div class="card" onclick="ir('assuntos/quimica/1ano/modelos-atomicos.html')">
+
+<div class="badge-xp">⚡ +XP</div>
+
 <h4>Modelos Atômicos</h4>
 <p>Evolução histórica da estrutura da matéria.</p>
+
 </div>
+
 </div>
 </div>
 

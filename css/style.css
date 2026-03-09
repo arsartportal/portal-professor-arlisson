@@ -526,7 +526,7 @@ body::after {
 }
 
 body::before {
-  content: "🟢 Sistema online • Todos os serviços operando normalmente";
+  content: "🟢 Sistema online • Portal v1.3";
   position: fixed;
   bottom: 8px;
   left: 0;
@@ -3193,4 +3193,21 @@ box-shadow:
 
 background:linear-gradient(135deg,#0f172a,#1e293b) !important;
 
+}
+
+.barra{
+width:100%;
+height:10px;
+background:#e5e7eb;
+border-radius:8px;
+overflow:hidden;
+margin:6px 0;
+}
+
+#barraMissao{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#f11818,#2232c5);
+transition:width .4s;
+border-radius:8px;
 }
