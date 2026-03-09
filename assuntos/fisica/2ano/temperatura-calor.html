@@ -155,6 +155,7 @@ Temperatura • Calor • Energia Interna • Equilíbrio Térmico • Agitaçã
 
 <h2>📝 Avaliação – 10 Questões</h2>
 
+
 <div class="questao">
 <p><strong>1.</strong> Temperatura mede:</p>
 <label><input type="radio" name="q1" value="a"> a) Quantidade de calor</label><br>
@@ -245,27 +246,22 @@ Temperatura • Calor • Energia Interna • Equilíbrio Térmico • Agitaçã
 <label><input type="radio" name="q10" value="e"> e) Processo térmico</label>
 </div>
 
-<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<button id="botaoCorrigir">🏆 Corrigir Avaliação</button>
 <div id="resultado" class="resultado"></div>
 
 </div>
 
-<script>
+<script type="module">
 
-const MAX_TENTATIVAS = 3;
-const CHAVE = "temperaturaCalor_2ano_tentativas";
+import { iniciarQuiz } from "../../../js/quiz-engine.js";
 
-function corrigir(){
+iniciarQuiz({
 
-let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+atividade: "2ano_temperatura_calor",
 
-if(tentativas.length >= MAX_TENTATIVAS){
-document.getElementById("resultado").innerHTML =
-"🚫 Você já utilizou as 3 tentativas permitidas.";
-return;
-}
+totalQuestoes: 10,
 
-const respostas = {
+respostas:{
 q1:"c",
 q2:"b",
 q3:"b",
@@ -276,66 +272,9 @@ q7:"b",
 q8:"c",
 q9:"b",
 q10:"c"
-};
+}
 
-let total = 0;
-
-for(let q in respostas){
-
-let opcoes = document.querySelectorAll('input[name="'+q+'"]');
-let marcada = document.querySelector('input[name="'+q+'"]:checked');
-
-opcoes.forEach(opcao=>{
-let label = opcao.parentElement;
-label.style.color="#333";
-label.style.fontWeight="normal";
 });
-
-if(marcada){
-if(marcada.value===respostas[q]){
-marcada.parentElement.style.color="#1b5e20";
-marcada.parentElement.style.fontWeight="bold";
-total++;
-}else{
-marcada.parentElement.style.color="#c62828";
-marcada.parentElement.style.fontWeight="bold";
-}
-}
-}
-
-tentativas.push(total);
-localStorage.setItem(CHAVE,JSON.stringify(tentativas));
-mostrarResultado(tentativas);
-}
-
-function mostrarResultado(tentativas){
-
-let melhor=Math.max(...tentativas);
-let html="<br><strong>📊 Desempenho:</strong><br>";
-
-tentativas.forEach((nota,index)=>{
-html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
-});
-
-html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
-
-if(melhor===10){
-html+="🔥 Excelente desempenho!";
-}else if(melhor>=7){
-html+="👏 Ótimo resultado!";
-}else if(melhor>=5){
-html+="👍 Resultado regular. Revise e tente melhorar.";
-}else{
-html+="📚 Revise o conteúdo e tente novamente.";
-}
-
-if(tentativas.length>=MAX_TENTATIVAS){
-html+="<br><br>🔒 Limite de tentativas atingido.";
-document.querySelector("button").disabled=true;
-}
-
-document.getElementById("resultado").innerHTML=html;
-}
 
 </script>
 
