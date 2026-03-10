@@ -402,27 +402,31 @@ Carga Elétrica • Eletrização • Indução • Quantização • Coulomb
 <label><input type="radio" name="q10" value="e"> Anulam-se</label>
 </div>
 
-<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<!-- BOTÃO CONTROLADO PELO QUIZ ENGINE -->
+
+<button id="botaoCorrigir">🏆 Corrigir Avaliação</button>
+
 <div id="resultado" class="resultado"></div>
 
 </div>
 
-<script>
+<!-- SCRIPT DO QUIZ ENGINE -->
 
-const MAX_TENTATIVAS = 3;
-const CHAVE = "cargaEletrica_3ano_tentativas";
+<script type="module">
 
-function corrigir(){
+/* importa o sistema central de quiz do Portal */
 
-let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+import { iniciarQuiz } from "../../../js/quiz-engine.js";
 
-if(tentativas.length >= MAX_TENTATIVAS){
-document.getElementById("resultado").innerHTML =
-"🚫 Você já utilizou as 3 tentativas permitidas.";
-return;
-}
+/* inicializa atividade */
 
-const respostas = {
+iniciarQuiz({
+
+atividade: "1ano_carga_eletrica_processos_eletrizacao",
+
+totalQuestoes: 10,
+
+respostas:{
 q1:"b",
 q2:"c",
 q3:"a",
@@ -433,63 +437,9 @@ q7:"c",
 q8:"c",
 q9:"a",
 q10:"b"
-};
+}
 
-let total = 0;
-
-for(let q in respostas){
-
-let opcoes = document.querySelectorAll('input[name="'+q+'"]');
-let marcada = document.querySelector('input[name="'+q+'"]:checked');
-
-opcoes.forEach(opcao=>{
-let label = opcao.parentElement;
-label.style.color="#333";
-label.style.fontWeight="normal";
 });
-
-if(marcada){
-if(marcada.value===respostas[q]){
-marcada.parentElement.style.color="#1b5e20";
-marcada.parentElement.style.fontWeight="bold";
-total++;
-}else{
-marcada.parentElement.style.color="#c62828";
-marcada.parentElement.style.fontWeight="bold";
-}
-}
-}
-
-tentativas.push(total);
-localStorage.setItem(CHAVE,JSON.stringify(tentativas));
-
-let melhor=Math.max(...tentativas);
-
-let html="<br><strong>📊 Desempenho:</strong><br>";
-
-tentativas.forEach((nota,index)=>{
-html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
-});
-
-html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
-
-if(melhor===10){
-html+="🔥 Excelente desempenho!";
-}else if(melhor>=7){
-html+="👏 Ótimo resultado!";
-}else if(melhor>=5){
-html+="👍 Resultado regular.";
-}else{
-html+="📚 Revise o conteúdo.";
-}
-
-if(tentativas.length>=MAX_TENTATIVAS){
-html+="<br><br>🔒 Limite de tentativas atingido.";
-document.querySelector("button").disabled=true;
-}
-
-document.getElementById("resultado").innerHTML=html;
-}
 
 </script>
 

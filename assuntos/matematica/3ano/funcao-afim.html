@@ -245,27 +245,27 @@ A função afim é base para sistemas lineares, inequações e geometria analít
 <label><input type="radio" name="q10" value="e"> -1</label>
 </div>
 
-<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<button id="botaoCorrigir">🏆 Corrigir Avaliação</button>
+
 <div id="resultado" class="resultado"></div>
 
 </div>
 
-<script>
+<script type="module">
 
-const MAX_TENTATIVAS = 3;
-const CHAVE = "funcaoAfim_3ano_tentativas";
+/* importa sistema de quiz do portal */
 
-function corrigir(){
+import { iniciarQuiz } from "../../../js/quiz-engine.js";
 
-let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+/* inicializa atividade */
 
-if(tentativas.length >= MAX_TENTATIVAS){
-document.getElementById("resultado").innerHTML =
-"🚫 Você já utilizou as 3 tentativas permitidas.";
-return;
-}
+iniciarQuiz({
 
-const respostas = {
+atividade: "3ano_funcao_afim",
+
+totalQuestoes: 10,
+
+respostas:{
 q1:"b",
 q2:"b",
 q3:"b",
@@ -276,62 +276,9 @@ q7:"b",
 q8:"b",
 q9:"b",
 q10:"c"
-};
+}
 
-let total = 0;
-
-for(let q in respostas){
-
-let marcada = document.querySelector('input[name="'+q+'"]:checked');
-let opcoes = document.querySelectorAll('input[name="'+q+'"]');
-
-opcoes.forEach(opcao=>{
-opcao.parentElement.style.color="#333";
-opcao.parentElement.style.fontWeight="normal";
 });
-
-if(marcada){
-if(marcada.value===respostas[q]){
-marcada.parentElement.style.color="#1b5e20";
-marcada.parentElement.style.fontWeight="bold";
-total++;
-}else{
-marcada.parentElement.style.color="#c62828";
-marcada.parentElement.style.fontWeight="bold";
-}
-}
-}
-
-tentativas.push(total);
-localStorage.setItem(CHAVE,JSON.stringify(tentativas));
-
-let melhor=Math.max(...tentativas);
-
-let html="<br><strong>📊 Desempenho:</strong><br>";
-
-tentativas.forEach((nota,index)=>{
-html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
-});
-
-html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
-
-if(melhor===10){
-html+="🔥 Excelente desempenho!";
-}else if(melhor>=7){
-html+="👏 Ótimo resultado!";
-}else if(melhor>=5){
-html+="👍 Resultado regular.";
-}else{
-html+="📚 Revise o conteúdo.";
-}
-
-if(tentativas.length>=MAX_TENTATIVAS){
-html+="<br><br>🔒 Limite de tentativas atingido.";
-document.querySelector("button").disabled=true;
-}
-
-document.getElementById("resultado").innerHTML=html;
-}
 
 </script>
 
