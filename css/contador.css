@@ -1,0 +1,303 @@
+/* ===========================
+   CONTADOR PREMIUM
+=========================== */
+
+.lancamento-loja{
+text-align:center;
+max-width:900px;
+margin:auto;
+padding-top:50px;
+}
+
+.descricao-loja{
+margin-bottom:60px;
+}
+
+.contador-area{
+margin-bottom:50px;
+}
+
+.progresso-container{
+margin-top:40px;
+}
+
+.tag-lancamento{
+font-size:12px;
+letter-spacing:2px;
+color:#86868b;
+margin-bottom:10px;
+}
+
+.titulo-loja{
+font-size:64px;
+font-weight:700;
+letter-spacing:-1px;
+margin-bottom:20px;
+}
+
+.descricao-loja{
+font-size:24px;
+color:#6e6e73;
+max-width:650px;
+margin:auto;
+margin-bottom:70px;
+line-height:1.4;
+}
+
+.contador-premium{
+display:flex;
+justify-content:center;
+gap:70px;
+}
+
+.tempo span{
+font-size:80px;
+font-weight:600;
+}
+
+.tempo p{
+font-size:14px;
+color:#86868b;
+margin-top:5px;
+}
+
+/* Barra de progresso */
+
+.barra-progresso{
+width:300px;
+height:6px;
+background:#e5e5ea;
+border-radius:20px;
+margin:auto;
+overflow:hidden;
+}
+
+#barraLancamento{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#0071e3,#42a5ff);
+transition:width 1s ease;
+}
+
+.texto-lancamento{
+margin-top:15px;
+font-size:14px;
+color:#86868b;
+}
+
+/* ======================================
+   BARRA DE LANÇAMENTO ULTRA PREMIUM
+====================================== */
+
+.barra-progresso{
+width:320px;
+height:6px;
+background:#e5e5ea;
+border-radius:20px;
+margin:auto;
+overflow:hidden;
+position:relative;
+box-shadow:
+0 0 10px rgba(0,122,255,0.2),
+0 0 30px rgba(0,122,255,0.15);
+}
+
+/* barra principal */
+
+#barraLancamento{
+height:100%;
+width:0%;
+border-radius:20px;
+position:relative;
+
+background:linear-gradient(
+90deg,
+#0071e3,
+#4aa8ff,
+#0071e3
+);
+
+background-size:300% 100%;
+
+animation:energiaFluxo 3s linear infinite;
+
+transition:width 1s ease;
+}
+
+
+/* energia passando */
+
+#barraLancamento::after{
+
+content:"";
+position:absolute;
+top:0;
+left:-40%;
+width:40%;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.9),
+transparent
+);
+
+animation:energiaPassando 2s linear infinite;
+
+}
+
+
+/* animação do gradiente */
+
+@keyframes energiaFluxo{
+
+0%{
+background-position:0% 0%;
+}
+
+100%{
+background-position:300% 0%;
+}
+
+}
+
+
+/* faísca correndo */
+
+@keyframes energiaPassando{
+
+0%{
+left:-40%;
+opacity:0;
+}
+
+30%{
+opacity:1;
+}
+
+100%{
+left:120%;
+opacity:0;
+}
+
+}
+
+.titulo-loja{
+
+background:linear-gradient(
+90deg,
+#1d1d1f,
+#0071e3,
+#1d1d1f
+);
+
+background-size:200% auto;
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+animation:brilhoTitulo 6s linear infinite;
+
+}
+
+@keyframes brilhoTitulo{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:200%;
+}
+
+}
+
+/* ===============================
+   NÚMEROS COM EFEITO ELÉTRICO
+=============================== */
+
+.tempo span{
+
+font-size:80px;
+font-weight:700;
+display:block;
+
+background:linear-gradient(
+90deg,
+#1d1d1f,
+#0071e3,
+#6ec1ff,
+#0071e3,
+#1d1d1f
+);
+
+background-size:300%;
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+animation:energiaNumeros 3s linear infinite;
+
+text-shadow:
+0 0 5px rgba(0,113,227,0.2),
+0 0 10px rgba(0,113,227,0.2);
+
+}
+
+/* movimento da eletricidade */
+
+@keyframes energiaNumeros{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:300%;
+}
+
+}
+
+.tempo span::after{
+
+content:"";
+position:absolute;
+width:120%;
+height:100%;
+
+left:-120%;
+top:0;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.9),
+transparent
+);
+
+animation:faíscaNumeros 2.5s linear infinite;
+
+}
+
+@keyframes faíscaNumeros{
+
+0%{
+left:-120%;
+opacity:0;
+}
+
+30%{
+opacity:1;
+}
+
+100%{
+left:120%;
+opacity:0;
+}
+
+}
+
+.tempo{
+position:relative;
+}

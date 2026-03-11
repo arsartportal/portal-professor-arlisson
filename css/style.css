@@ -526,7 +526,7 @@ body::after {
 }
 
 body::before {
-  content: "🟢 Sistema online • Portal v1.3";
+  content: "🔒 Ambiente Seguro • Portal v1.3";
   position: fixed;
   bottom: 8px;
   left: 0;
