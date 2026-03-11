@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/patentes.css">
+<link rel="stylesheet" href="css/contador.css">
 
 </head>
 
@@ -152,6 +153,42 @@ Responder
 
 </div>
 
+<section class="lancamento-loja">
+
+<p class="tag-lancamento">
+EM BREVE
+</p>
+
+<h1 class="titulo-loja">
+Loja de Recompensas
+</h1>
+
+<p class="descricao-loja">
+Troque seus <strong>Science Points</strong> por recompensas exclusivas
+e vantagens especiais dentro do Portal do Professor.
+</p>
+
+<div id="contadorDuvidas" class="contador-area"></div>
+
+<div class="progresso-container">
+
+<div class="barra-progresso">
+<div id="barraLancamento"></div>
+</div>
+
+<p class="texto-lancamento">
+Disponível em breve para todos os alunos
+</p>
+
+</div>
+
+</section>
+
+<div id="contadorDuvidas"></div>
+
+</section>
+
+<div id="contadorDuvidas"></div>
 
 <!-- ================================================= -->
 
@@ -164,13 +201,17 @@ Responder
 <div class="cards">
 
 <a href="fisica.html" class="card">⚡ Física</a>
-<a href="matematica.html" class="card"> 📐 Matemática</a>
 <a href="quimica.html" class="card">⚛️ Química</a>
 <a href="noticias.html" class="card">📰 Notícias</a>
 <a href="ted.html" class="card">🎤 TED-Ed & TED Talks</a>
 <a href="simulacoes.html" class="card">🧪 Laboratório Virtual</a>
 <a href="/biblioteca.html" class="card">💡 Biblioteca</a>
 
+
+<a href="/em-construcao.html" class="card card-breve">
+ 📐 Matemática
+<span class="ribbon-pro">EM BREVE</span>
+</a>
 
 <a href="/em-construcao.html" class="card card-breve">
 🏅 Minhas Conquistas
@@ -199,6 +240,11 @@ Responder
 
 <a href="/em-construcao.html" class="card card-breve">
 🎬 Filmes
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+📝 Listas de Exercícios
 <span class="ribbon-pro">EM BREVE</span>
 </a>
 
@@ -305,6 +351,17 @@ window.location.href="index.html"
 <script type="module" src="js/home-avisos.js"></script>
 
 <script type="module" src="js/visitas.js"></script>
+
+<script type="module">
+
+import { iniciarContador } from "./js/contador.js";
+
+iniciarContador(
+"contadorDuvidas",
+"2026-04-01T08:00:00"
+);
+
+</script>
 
 </body>
 </html>

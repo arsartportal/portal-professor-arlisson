@@ -34,11 +34,15 @@ const RECOMPENSA_XP = 100;
 function numeroSemana(){
 
     const hoje = new Date();
-    const inicioAno = new Date(hoje.getFullYear(), 0, 1);
 
-    const dias = Math.floor((hoje - inicioAno) / 86400000);
+    // força segunda-feira como início da semana
+    const dia = hoje.getDay();
+    const diff = hoje.getDate() - dia + (dia === 0 ? -6 : 1);
 
-    return Math.ceil((dias + inicioAno.getDay() + 1) / 7);
+    const segunda = new Date(hoje.setDate(diff));
+    segunda.setHours(0,0,0,0);
+
+    return segunda.getTime(); // identificador único da semana
 }
 
 
