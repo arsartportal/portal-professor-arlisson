@@ -8,107 +8,269 @@
 
 <style>
 
+/* ======================
+   BASE
+====================== */
+
 body{
-font-family:'Segoe UI',Arial;
-background:linear-gradient(135deg,#eef2f7,#dfe9f3);
+font-family:'Inter','Segoe UI',Arial,sans-serif;
+
+background:
+radial-gradient(circle at 20% 20%, #1f2a44 0%, transparent 40%),
+radial-gradient(circle at 80% 70%, #16213e 0%, transparent 40%),
+linear-gradient(135deg,#0f172a,#1e293b);
+
+color:white;
+
 margin:0;
-padding:30px;
+padding:40px;
 }
+
+/* ======================
+   TÍTULO
+====================== */
 
 h1{
 text-align:center;
-margin-bottom:10px;
+font-size:38px;
+margin-bottom:30px;
+
+background:linear-gradient(90deg,#ffd700,#ffb700);
+-webkit-background-clip:text;
+color:transparent;
+
+letter-spacing:1px;
 }
 
+/* ======================
+   SCIENCE POINTS
+====================== */
+
 .sp-box{
-background:white;
-padding:18px;
-border-radius:12px;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
+
+background:linear-gradient(145deg,#1e293b,#0f172a);
+
+border:1px solid rgba(255,255,255,0.08);
+
+padding:20px;
+border-radius:14px;
+
 text-align:center;
-font-size:20px;
-margin-bottom:30px;
+
+font-size:22px;
+
+margin-bottom:35px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 0 20px rgba(255,255,255,0.03);
 }
+
+/* ======================
+   GRID
+====================== */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
+gap:22px;
 }
 
+/* ======================
+   CARDS
+====================== */
+
 .card{
-background:white;
-padding:20px;
-border-radius:14px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-transition:0.25s;
+
+background:linear-gradient(145deg,#1f2937,#111827);
+
+padding:22px;
+border-radius:16px;
+
+border:1px solid rgba(255,255,255,0.05);
+
+box-shadow:
+0 12px 25px rgba(0,0,0,0.6);
+
+transition:0.35s;
+
 display:flex;
 flex-direction:column;
 justify-content:space-between;
+
 position:relative;
+overflow:hidden;
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+left:-120%;
+
+width:200%;
+height:200%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.15),
+transparent
+);
+
+transform:rotate(25deg);
+
+transition:0.8s;
+
 }
 
 .card:hover{
-transform:translateY(-6px);
+
+transform:translateY(-8px) scale(1.02);
+
+box-shadow:
+0 18px 40px rgba(0,0,0,0.7),
+0 0 20px rgba(255,255,255,0.08);
+
+}
+
+.card:hover::before{
+top:120%;
+left:120%;
+}
+
+/* ======================
+   TEXTO
+====================== */
+
+.card h3{
+margin:0;
+font-size:20px;
 }
 
 .desc{
 font-size:14px;
 margin:10px 0;
-color:#555;
+color:#9ca3af;
 }
 
 .preco{
-font-size:18px;
-margin:10px 0;
+
+font-size:20px;
+
+margin:14px 0;
+
 font-weight:bold;
+
+color:#38bdf8;
 }
 
+/* ======================
+   BOTÕES
+====================== */
+
 button{
-padding:10px;
+
+padding:12px;
+
 border:none;
-border-radius:8px;
-background:#4CAF50;
+border-radius:10px;
+
+background:linear-gradient(135deg,#22c55e,#16a34a);
+
 color:white;
+
 font-size:15px;
+font-weight:600;
+
 cursor:pointer;
+
+transition:0.25s;
+
+box-shadow:
+0 5px 15px rgba(34,197,94,0.4);
+
 }
 
 button:hover{
-background:#3b9140;
+
+transform:translateY(-2px);
+
+box-shadow:
+0 10px 25px rgba(34,197,94,0.6);
+
 }
 
 button:disabled{
-background:#ccc;
+
+background:#374151;
+
+box-shadow:none;
+
+color:#888;
+
 cursor:not-allowed;
 }
 
+/* ======================
+   LENDÁRIO
+====================== */
+
 .lendario{
+
 border:2px solid gold;
-background:linear-gradient(145deg,#fff8dc,#ffffff);
-box-shadow:0 0 15px rgba(255,215,0,0.6);
+
+background:
+linear-gradient(145deg,#2c1f00,#111827);
+
+box-shadow:
+0 0 20px rgba(255,215,0,0.6),
+0 0 40px rgba(255,215,0,0.3);
+
 }
 
+/* ======================
+   BADGE
+====================== */
+
 .badge{
+
 position:absolute;
-top:-10px;
-right:-10px;
-background:gold;
-color:black;
+
+top:12px;
+right:12px;
+
+background:linear-gradient(135deg,#ffd700,#ffae00);
+
+color:#111;
+
 font-weight:bold;
-padding:5px 10px;
-border-radius:8px;
-font-size:12px;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:11px;
+
+letter-spacing:1px;
+
 }
+
+/* ======================
+   ESTOQUE
+====================== */
 
 .estoque{
 font-size:13px;
-color:#b30000;
+color:#f87171;
 margin-bottom:10px;
 }
 
 /* ======================
-   CAIXA
+   MODAL
 ====================== */
 
 .modal{
@@ -117,19 +279,32 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.8);
 display:flex;
 justify-content:center;
 align-items:center;
 z-index:999;
 }
 
+/* ======================
+   CAIXA
+====================== */
+
 .modal-box{
-background:white;
+
+background:linear-gradient(145deg,#1f2937,#111827);
+
 padding:40px;
-border-radius:14px;
+
+border-radius:16px;
+
 text-align:center;
+
 animation:pop 0.3s ease;
+
+box-shadow:
+0 30px 80px rgba(0,0,0,0.8);
+
 }
 
 .caixa{
@@ -165,7 +340,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.85);
+background:rgba(0,0,0,0.9);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -173,19 +348,30 @@ z-index:9999;
 }
 
 .roleta-container{
-background:white;
+
+background:linear-gradient(145deg,#1f2937,#111827);
+
 padding:40px;
+
 border-radius:20px;
+
 text-align:center;
-box-shadow:0 30px 80px rgba(0,0,0,0.5);
+
+box-shadow:0 30px 80px rgba(0,0,0,0.9);
+
 }
 
 .roleta{
+
 width:420px;
 height:420px;
+
 border-radius:50%;
-border:12px solid #333;
+
+border:12px solid #111;
+
 position:relative;
+
 margin:auto;
 
 background:conic-gradient(
@@ -202,67 +388,518 @@ transition:transform 8s cubic-bezier(.08,.82,.17,1);
 box-shadow:
 0 0 30px rgba(255,215,0,0.6),
 0 0 80px rgba(255,215,0,0.4);
+
 }
 
 .roleta::after{
+
 content:"⚛";
-white-space:pre;
 
 position:absolute;
+
 top:50%;
 left:50%;
+
 transform:translate(-50%,-50%);
 
 width:120px;
 height:120px;
+
 background:white;
+
 border-radius:50%;
 
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
 
-line-height:1.1;
-text-align:center;
-
 box-shadow:0 0 20px rgba(0,0,0,0.35);
+
 border:6px solid #333;
 
-font-size:32px; /* tamanho do átomo */
+font-size:32px;
+
 }
 
-
 .seta{
+
 position:absolute;
+
 top:-28px;
+
 left:50%;
+
 transform:translateX(-50%);
+
 font-size:50px;
+
 z-index:50;
-color:#111;
+
+color:#fff;
+
 pointer-events:none;
+
 }
 
 .roleta-label{
+
 position:absolute;
+
 width:100%;
+
 text-align:center;
+
 top:50%;
+
 left:0;
+
 font-weight:bold;
+
 font-size:16px;
-color:#222;
+
+color:white;
+
 transform-origin:center;
+
 }
 
 .resultado-final{
+
 font-size:30px;
+
 margin-top:20px;
+
 font-weight:bold;
+
+}
+
+.raridade-comum{
+border-top:3px solid #9ca3af;
+}
+
+.raridade-raro{
+border-top:3px solid #3b82f6;
+box-shadow:0 0 15px rgba(59,130,246,0.4);
+}
+
+.raridade-epico{
+border-top:3px solid #a855f7;
+box-shadow:0 0 20px rgba(168,85,247,0.5);
+}
+
+.raridade-lendario{
+border-top:3px solid gold;
+box-shadow:0 0 25px rgba(255,215,0,0.7);
+}
+
+#sp{
+
+font-weight:bold;
+
+font-size:28px;
+
+color:#38bdf8;
+
+text-shadow:
+0 0 10px #38bdf8,
+0 0 20px #38bdf8,
+0 0 40px #0ea5e9;
+
+animation:energia 1.5s infinite alternate;
+
+}
+
+@keyframes energia{
+
+0%{
+text-shadow:
+0 0 5px #38bdf8,
+0 0 10px #38bdf8;
+}
+
+100%{
+text-shadow:
+0 0 20px #38bdf8,
+0 0 40px #38bdf8,
+0 0 60px #0ea5e9;
+}
+
+}
+
+/* OVERLAY ESCURO */
+
+.popup-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(8px);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+
+opacity:0;
+pointer-events:none;
+transition:0.4s;
+}
+
+.popup-overlay.ativo{
+opacity:1;
+pointer-events:auto;
+}
+
+
+/* CARD */
+
+.popup-card{
+
+background:linear-gradient(145deg,#0f172a,#020617);
+
+border-radius:20px;
+
+padding:40px;
+
+width:350px;
+
+text-align:center;
+
+box-shadow:
+0 0 40px rgba(0,200,255,0.3),
+inset 0 0 30px rgba(255,255,255,0.05);
+
+animation:popupEntrada 0.6s ease;
+}
+
+@keyframes popupEntrada{
+
+0%{
+transform:scale(0.6);
+opacity:0;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+/* TITULO */
+
+.popup-card h2{
+color:#38bdf8;
+margin-top:15px;
+}
+
+/* DESCRIÇÃO */
+
+.popup-card p{
+color:#cbd5f5;
+margin-bottom:25px;
+}
+
+
+/* BOTÃO */
+
+.popup-btn{
+
+background:linear-gradient(90deg,#22c55e,#16a34a);
+
+border:none;
+
+padding:12px 30px;
+
+border-radius:12px;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.2s;
+}
+
+.popup-btn:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 0 20px #22c55e;
+
+}
+
+
+/* ANIMAÇÃO */
+
+.popup-animacao{
+
+font-size:60px;
+
+animation:brilhar 1.2s infinite alternate;
+
+}
+
+@keyframes brilhar{
+
+from{filter:drop-shadow(0 0 5px #fff);}
+to{filter:drop-shadow(0 0 25px #38bdf8);}
+
+}
+
+.caixa-fechada{
+font-size:90px;
+animation:tremer 0.8s infinite;
+}
+
+@keyframes tremer{
+0%{transform:rotate(0)}
+25%{transform:rotate(8deg)}
+50%{transform:rotate(-8deg)}
+75%{transform:rotate(8deg)}
+100%{transform:rotate(0)}
+}
+
+.caixa-aberta{
+font-size:100px;
+animation:abrirCaixa 0.8s forwards;
+}
+
+@keyframes abrirCaixa{
+0%{transform:scale(0.6)}
+60%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+.luz-premio{
+
+font-size:60px;
+
+margin-top:20px;
+
+animation:luz 1s infinite alternate;
+
+}
+
+@keyframes luz{
+
+from{
+filter:drop-shadow(0 0 5px white);
+}
+
+to{
+filter:drop-shadow(0 0 30px gold);
+}
+
+}
+
+/* ======================
+   LOOT BOX ULTRA
+====================== */
+
+.caixa-loot{
+
+font-size:100px;
+
+animation:tremerCaixa 0.8s infinite;
+
+}
+
+@keyframes tremerCaixa{
+
+0%{transform:rotate(0deg)}
+25%{transform:rotate(8deg)}
+50%{transform:rotate(-8deg)}
+75%{transform:rotate(8deg)}
+100%{transform:rotate(0deg)}
+
+}
+
+.explosao{
+
+font-size:110px;
+
+animation:explodir 0.6s ease forwards;
+
+}
+
+@keyframes explodir{
+
+0%{transform:scale(0.5);opacity:0}
+60%{transform:scale(1.3)}
+100%{transform:scale(1)}
+
+}
+
+.premio-xp{
+
+font-size:34px;
+
+margin-top:15px;
+
+font-weight:bold;
+
+color:#38bdf8;
+
+text-shadow:
+0 0 10px #38bdf8,
+0 0 25px #38bdf8,
+0 0 45px #0ea5e9;
+
+animation:xpGlow 1.2s infinite alternate;
+
+}
+
+@keyframes xpGlow{
+
+from{
+text-shadow:
+0 0 10px #38bdf8;
+}
+
+to{
+text-shadow:
+0 0 25px #38bdf8,
+0 0 50px #0ea5e9;
+}
+
+}
+
+/* partículas */
+
+.particulas{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+width:10px;
+height:10px;
+
+background:white;
+
+border-radius:50%;
+
+animation:particula 1s forwards;
+
+}
+
+@keyframes particula{
+
+0%{
+transform:translate(-50%,-50%) scale(0.3);
+opacity:1;
+}
+
+100%{
+transform:translate(var(--x),var(--y)) scale(1);
+opacity:0;
+}
+
+}
+
+/* raridades */
+
+.raridade-comum-premio{
+color:#9ca3af;
+}
+
+.raridade-raro-premio{
+color:#3b82f6;
+text-shadow:0 0 20px #3b82f6;
+}
+
+.raridade-epico-premio{
+color:#a855f7;
+text-shadow:0 0 25px #a855f7;
+}
+
+.raridade-lendario-premio{
+color:gold;
+text-shadow:
+0 0 20px gold,
+0 0 40px gold;
+}
+
+/* ======================
+   PREMIO LENDARIO
+====================== */
+
+.chaveiro-anim{
+
+font-size:90px;
+
+animation:girarChaveiro 2s infinite linear;
+
+filter:drop-shadow(0 0 20px gold);
+
+}
+
+@keyframes girarChaveiro{
+
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+
+}
+
+.lendario-bg{
+
+background:
+radial-gradient(circle,#3b2f00,#000);
+
+box-shadow:
+0 0 40px gold,
+0 0 80px rgba(255,215,0,0.6);
+
+}
+
+.selo-patrocinio{
+
+margin-top:15px;
+
+font-size:14px;
+
+color:#ffd700;
+
+background:rgba(0,0,0,0.5);
+
+padding:6px 14px;
+
+border-radius:20px;
+
+display:inline-block;
+
+letter-spacing:1px;
+
+}
+
+.estoque-baixo{
+
+font-size:13px;
+
+color:#f87171;
+
+margin-bottom:10px;
+
+font-weight:bold;
+
+animation:pulsarEstoque 1.2s infinite alternate;
+
+}
+
+@keyframes pulsarEstoque{
+
+from{opacity:0.6}
+
+to{opacity:1}
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -285,17 +922,18 @@ import { doc, getDoc, updateDoc, runTransaction } from "https://www.gstatic.com/
 
 const recompensas=[
 
-{id:"xp20",nome:"⚡ +20 XP",preco:10,xp:20,descricao:"Pequeno bônus."},
-{id:"xp50",nome:"⚡ +50 XP",preco:20,xp:50,descricao:"Bônus médio."},
-{id:"xp100",nome:"⚡ +100 XP",preco:40,xp:100,descricao:"Grande bônus."},
+{id:"xp20",nome:"⚡ +20 XP",preco:10,xp:20,descricao:"Pequeno bônus.",raridade:"comum"},
+{id:"xp50",nome:"⚡ +50 XP",preco:20,xp:50,descricao:"Bônus médio.",raridade:"raro"},
+{id:"xp100",nome:"⚡ +100 XP",preco:40,xp:100,descricao:"Grande bônus.",raridade:"epico"},
 
-{id:"caixa-basica",nome:"🧪 Caixa Básica",preco:40,descricao:"Recompensas simples."},
-{id:"caixa-cientifica",nome:"⚛ Caixa Científica",preco:60,descricao:"Recompensas melhores."},
-{id:"caixa-lendaria",nome:"👑 Caixa Lendária",preco:120,descricao:"Altas recompensas."},
+{id:"caixa-basica",nome:"🧪 Caixa Básica",preco:40,descricao:"Recompensas simples.",raridade:"comum"},
+{id:"caixa-cientifica",nome:"⚛ Caixa Científica",preco:60,descricao:"Recompensas melhores.",raridade:"raro"},
+{id:"caixa-lendaria",nome:"👑 Caixa Lendária",preco:120,descricao:"Altas recompensas.",raridade:"epico"},
 
-{id:"roleta-cientifica",nome:"🎡 Roleta Científica",preco:200,descricao:"Gire a roleta científica."},
+{id:"roleta-cientifica",nome:"🎡 Roleta Científica",preco:200,descricao:"Gire a roleta científica.",raridade:"epico"},
 
-{id:"chaveiro-univers3d",nome:"🔑 Chaveiro 3D",preco:150,lendario:true,descricao:"Prêmio físico."}
+{id:"chaveiro-univers3d",nome:"🔑 Chaveiro 3D",preco:1500,lendario:true,descricao:"Prêmio físico.",raridade:"lendario"}
+
 
 ]
 
@@ -338,9 +976,16 @@ recompensas.forEach(item=>{
 const podeComprar=spAluno>=item.preco
 
 const card=document.createElement("div")
-card.className="card"
 
-if(item.lendario) card.classList.add("lendario")
+card.classList.add("card")
+
+// aplicar raridade
+card.classList.add("raridade-"+(item.raridade||"comum"))
+
+// lendário continua funcionando
+if(item.lendario){
+card.classList.add("lendario")
+}
 
 card.innerHTML=`
 
@@ -350,11 +995,25 @@ ${item.lendario?'<div class="badge">LENDÁRIO</div>':""}
 
 <p class="desc">${item.descricao}</p>
 
+${item.id==="chaveiro-univers3d" ? `
+<div class="estoque-baixo">
+🔥 Restam apenas ${estoqueChaveiro} unidades
+</div>
+` : ""}
+
 <div class="preco">🧪 ${item.preco} SP</div>
 
-<button ${!podeComprar?"disabled":""}
+<button ${!podeComprar || (item.id==="chaveiro-univers3d" && estoqueChaveiro<=0) ?"disabled":""}
 onclick="comprar('${item.id}')">
-${podeComprar?"Comprar":"SP insuficiente"}
+
+${
+item.id==="chaveiro-univers3d" && estoqueChaveiro<=0
+? "Esgotado"
+: podeComprar
+? "Comprar"
+: "SP insuficiente"
+}
+
 </button>
 
 `
@@ -431,7 +1090,7 @@ xp:(dados.xp||0)+premio.xp
 modal.innerHTML=`
 <div class="roleta-overlay">
 <div class="roleta-container">
-<h2>🎉 Resultado</h2>
+<h2>🎉 Você ganhou</h2>
 <div class="resultado-final">${premio.label}</div>
 <br>
 <button onclick="fecharRoleta()">OK</button>
@@ -464,6 +1123,38 @@ alert("SciencePoints insuficientes!")
 return
 }
 
+/* ======================
+   CAIXAS
+====================== */
+
+if(
+id==="caixa-basica" ||
+id==="caixa-cientifica" ||
+id==="caixa-lendaria"
+){
+
+spAluno-=item.preco
+
+await updateDoc(userRef,{
+sciencePoints:spAluno
+})
+
+document.getElementById("sp").innerText=spAluno
+
+abrirCaixa(id)
+
+return
+
+}
+
+if(id==="chaveiro-univers3d"){
+
+premioChaveiro()
+
+return
+
+}
+
 if(id==="roleta-cientifica"){
 
 spAluno-=200
@@ -493,6 +1184,61 @@ document.getElementById("sp").innerText=spAluno
 
 renderLoja()
 
+mostrarPopup(id)
+
+}
+
+}
+
+function mostrarPopup(tipo){
+
+const overlay=document.getElementById("popupRecompensa")
+const anim=document.getElementById("popupAnimacao")
+const titulo=document.getElementById("popupTitulo")
+const desc=document.getElementById("popupDescricao")
+
+overlay.classList.add("ativo")
+
+if(tipo==="xp20"){
+anim.innerHTML="⚡"
+titulo.innerHTML="+20 XP"
+desc.innerHTML="Seu conhecimento aumentou!"
+}
+
+if(tipo==="xp50"){
+anim.innerHTML="⚡⚡"
+titulo.innerHTML="+50 XP"
+desc.innerHTML="Bônus científico médio!"
+}
+
+if(tipo==="xp100"){
+anim.innerHTML="⚡⚡⚡"
+titulo.innerHTML="+100 XP"
+desc.innerHTML="Grande avanço científico!"
+}
+
+if(tipo==="caixa-basica"){
+anim.innerHTML="📦"
+titulo.innerHTML="Caixa Básica"
+desc.innerHTML="Abrindo recompensas..."
+}
+
+if(tipo==="caixa-cientifica"){
+anim.innerHTML="⚛"
+titulo.innerHTML="Caixa Científica"
+desc.innerHTML="Recompensas raras!"
+}
+
+if(tipo==="caixa-lendaria"){
+anim.innerHTML="👑"
+titulo.innerHTML="Caixa Lendária"
+desc.innerHTML="Recompensa épica!"
+}
+
+if(tipo==="chaveiro-univers3d"){
+anim.innerHTML="🔑"
+titulo.innerHTML="Chaveiro 3D"
+desc.innerHTML="Você ganhou um prêmio físico!"
 }
 
 }
@@ -501,7 +1247,238 @@ auth.onAuthStateChanged(user=>{
 if(user) carregarSP()
 })
 
+window.fecharPopup=function(){
+
+document
+.getElementById("popupRecompensa")
+.classList.remove("ativo")
+
+}
+
+function abrirCaixa(tipo){
+
+let premios
+
+if(tipo==="caixa-basica"){
+premios=[
+{xp:20,raridade:"comum"},
+{xp:30,raridade:"comum"},
+{xp:40,raridade:"raro"},
+{xp:50,raridade:"raro"}
+]
+}
+
+if(tipo==="caixa-cientifica"){
+premios=[
+{xp:60,raridade:"raro"},
+{xp:80,raridade:"raro"},
+{xp:120,raridade:"epico"},
+{xp:150,raridade:"epico"}
+]
+}
+
+if(tipo==="caixa-lendaria"){
+premios=[
+{xp:200,raridade:"epico"},
+{xp:300,raridade:"lendario"},
+{xp:400,raridade:"lendario"}
+]
+}
+
+const premio=premios[Math.floor(Math.random()*premios.length)]
+
+const modal=document.getElementById("modal")
+
+modal.innerHTML=`
+
+<div class="modal">
+
+<div class="modal-box" style="position:relative">
+
+<div id="caixaIcon" class="caixa-loot">📦</div>
+
+<h2>Abrindo caixa...</h2>
+
+</div>
+
+</div>
+
+`
+
+/* abrir caixa */
+
+setTimeout(()=>{
+
+document.getElementById("caixaIcon").className="explosao"
+document.getElementById("caixaIcon").innerHTML="💥"
+
+},1500)
+
+/* partículas */
+
+setTimeout(()=>{
+
+const box=document.querySelector(".modal-box")
+
+for(let i=0;i<20;i++){
+
+const p=document.createElement("div")
+
+p.className="particulas"
+
+p.style.setProperty("--x",(Math.random()*400-200)+"px")
+p.style.setProperty("--y",(Math.random()*400-200)+"px")
+
+box.appendChild(p)
+
+}
+
+},1700)
+
+/* mostrar prêmio */
+
+setTimeout(async ()=>{
+
+const snap=await getDoc(userRef)
+const xpAtual=snap.data().xp||0
+
+await updateDoc(userRef,{
+xp:xpAtual+premio.xp
+})
+
+modal.innerHTML=`
+
+<div class="modal">
+
+<div class="modal-box">
+
+<div class="explosao">🎁</div>
+
+<h2 class="raridade-${premio.raridade}-premio">
+${premio.raridade.toUpperCase()}
+</h2>
+
+<div class="premio-xp">
+⚡ +${premio.xp} XP
+</div>
+
+<br>
+
+<button onclick="fecharCaixa()">Continuar</button>
+
+</div>
+
+</div>
+
+`
+
+},2600)
+
+}
+
+window.fecharCaixa=function(){
+
+document.getElementById("modal").innerHTML=""
+
+renderLoja()
+
+}
+
+async function premioChaveiro(){
+
+const ref=doc(db,"loja","chaveiro-univers3d")
+
+const snap=await getDoc(ref)
+
+const dados=snap.data()
+
+if(dados.estoque<=0){
+
+alert("❌ Chaveiros esgotados!")
+
+return
+
+}
+
+/* desconta SP */
+
+spAluno-=1500
+
+await updateDoc(userRef,{
+sciencePoints:spAluno
+})
+
+document.getElementById("sp").innerText=spAluno
+
+/* diminui estoque */
+
+await updateDoc(ref,{
+estoque:dados.estoque-1
+})
+
+estoqueChaveiro--
+
+renderLoja()
+
+/* animação */
+
+const modal=document.getElementById("modal")
+
+modal.innerHTML=`
+
+<div class="modal">
+
+<div class="modal-box lendario-bg">
+
+<div class="chaveiro-anim">🔑</div>
+
+<h2>🏆 PRÊMIO LENDÁRIO</h2>
+
+<h3>Chaveiro Univers3D</h3>
+
+<p>Você ganhou um prêmio físico!</p>
+
+<div class="selo-patrocinio">
+Patrocinado por @univers3d
+</div>
+
+<br>
+
+<button onclick="fecharCaixa()">Continuar</button>
+
+</div>
+
+</div>
+
+`
+
+}
+
 </script>
+
+<!-- POPUP RECOMPENSA -->
+
+<div id="popupRecompensa" class="popup-overlay">
+
+<div class="popup-card">
+
+<div id="popupAnimacao" class="popup-animacao"></div>
+
+<h2 id="popupTitulo"></h2>
+
+<p id="popupDescricao"></p>
+
+<button onclick="fecharPopup()" class="popup-btn">
+Continuar
+</button>
+
+
+
+</div>
+
+</div>
+
+
 
 </body>
 </html>
