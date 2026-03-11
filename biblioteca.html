@@ -198,6 +198,60 @@ opacity:0.9;
 
 }
 
+.card-breve{
+position:relative;
+overflow:hidden;
+}
+
+.ribbon-pro{
+position:absolute;
+top:12px;
+right:-45px;
+
+background:linear-gradient(45deg,#ffff00,#ff7b00);
+color:rgb(5, 4, 4);
+
+font-size:11px;
+font-weight:700;
+letter-spacing:1px;
+
+padding:6px 50px;
+
+transform:rotate(45deg);
+
+box-shadow:0 4px 12px rgba(0,0,0,0.25);
+
+pointer-events:none;
+}
+
+/* brilho passando */
+
+.ribbon-pro::after{
+content:"";
+position:absolute;
+top:0;
+left:-60%;
+
+width:40%;
+height:100%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.7),
+transparent
+);
+
+transform:skewX(-20deg);
+
+animation:shine 3s infinite;
+}
+
+@keyframes shine{
+0%{ left:-60%; }
+100%{ left:140%; }
+}
+
 </style>
 </head>
 
@@ -225,7 +279,7 @@ Organizado por disciplina e série
 </div>
 
 <div class="card" onclick="ir('assuntos/fisica/1ano/movimento-referencial.html')">
-<div class="badge-xp-off">XP OFF</div>
+<div class="badge-xp">⚡ +XP</div>
 <h4>Movimento e Referencial</h4>
 <p>Interpretação do movimento relativo e sua dependência do referencial adotado.</p>
 </div>
@@ -266,8 +320,8 @@ Organizado por disciplina e série
 <p>Legenda Aqui...</p>
 </div>
 
-<div class="card" onclick="ir('/em-construcao.html')">
-<div class="badge-xp-off">XP OFF</div>
+<div class="card card-breve" onclick="ir('/em-construcao.html')">
+<span class="ribbon-pro">EM BREVE</span>
 <h4>🚧</h4>
 <p>Em construção.</p>
 </div>
@@ -289,8 +343,8 @@ Organizado por disciplina e série
 <p>Celsius, Kelvin e Fahrenheit</p>
 </div>
 
-<div class="card" onclick="ir('/em-construcao.html')">
-<div class="badge-xp-off">XP OFF</div>
+<div class="card card-breve" onclick="ir('/em-construcao.html')">
+<span class="ribbon-pro">EM BREVE</span>
 <h4>🚧</h4>
 <p>Em construção.</p>
 </div>

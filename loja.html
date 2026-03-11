@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🛒 Loja de Recompensas</title>
+
+<style>
+
+body{
+font-family:'Segoe UI',Arial;
+background:linear-gradient(135deg,#eef2f7,#dfe9f3);
+margin:0;
+padding:30px;
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+}
+
+.sp-box{
+background:white;
+padding:18px;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
+text-align:center;
+font-size:20px;
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+transition:0.25s;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+position:relative;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.desc{
+font-size:14px;
+margin:10px 0;
+color:#555;
+}
+
+.preco{
+font-size:18px;
+margin:10px 0;
+font-weight:bold;
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:8px;
+background:#4CAF50;
+color:white;
+font-size:15px;
+cursor:pointer;
+}
+
+button:hover{
+background:#3b9140;
+}
+
+button:disabled{
+background:#ccc;
+cursor:not-allowed;
+}
+
+.lendario{
+border:2px solid gold;
+background:linear-gradient(145deg,#fff8dc,#ffffff);
+box-shadow:0 0 15px rgba(255,215,0,0.6);
+}
+
+.badge{
+position:absolute;
+top:-10px;
+right:-10px;
+background:gold;
+color:black;
+font-weight:bold;
+padding:5px 10px;
+border-radius:8px;
+font-size:12px;
+}
+
+.estoque{
+font-size:13px;
+color:#b30000;
+margin-bottom:10px;
+}
+
+/* ======================
+   CAIXA
+====================== */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-box{
+background:white;
+padding:40px;
+border-radius:14px;
+text-align:center;
+animation:pop 0.3s ease;
+}
+
+.caixa{
+font-size:70px;
+animation:shake 1s infinite;
+}
+
+@keyframes shake{
+0%{transform:rotate(0)}
+25%{transform:rotate(10deg)}
+50%{transform:rotate(-10deg)}
+75%{transform:rotate(10deg)}
+100%{transform:rotate(0)}
+}
+
+@keyframes pop{
+from{transform:scale(0.6)}
+to{transform:scale(1)}
+}
+
+.resultado{
+font-size:26px;
+margin-top:20px;
+}
+
+/* ======================
+   ROLETA ULTRA
+====================== */
+
+.roleta-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.roleta-container{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 30px 80px rgba(0,0,0,0.5);
+}
+
+.roleta{
+width:420px;
+height:420px;
+border-radius:50%;
+border:12px solid #333;
+position:relative;
+margin:auto;
+
+background:conic-gradient(
+#ff6b6b 0deg 60deg,
+#ffd93d 60deg 120deg,
+#6bcB77 120deg 180deg,
+#4d96ff 180deg 240deg,
+#c77dff 240deg 300deg,
+#ff9f1c 300deg 360deg
+);
+
+transition:transform 8s cubic-bezier(.08,.82,.17,1);
+
+box-shadow:
+0 0 30px rgba(255,215,0,0.6),
+0 0 80px rgba(255,215,0,0.4);
+}
+
+.roleta::after{
+content:"⚛";
+white-space:pre;
+
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+
+width:120px;
+height:120px;
+background:white;
+border-radius:50%;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+line-height:1.1;
+text-align:center;
+
+box-shadow:0 0 20px rgba(0,0,0,0.35);
+border:6px solid #333;
+
+font-size:32px; /* tamanho do átomo */
+}
+
+
+.seta{
+position:absolute;
+top:-28px;
+left:50%;
+transform:translateX(-50%);
+font-size:50px;
+z-index:50;
+color:#111;
+pointer-events:none;
+}
+
+.roleta-label{
+position:absolute;
+width:100%;
+text-align:center;
+top:50%;
+left:0;
+font-weight:bold;
+font-size:16px;
+color:#222;
+transform-origin:center;
+}
+
+.resultado-final{
+font-size:30px;
+margin-top:20px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🛒 Loja de Recompensas</h1>
+
+<div class="sp-box">
+🧪 Seus SciencePoints: <span id="sp">...</span>
+</div>
+
+<div class="grid" id="loja"></div>
+
+<div id="modal"></div>
+<div id="roletaModal"></div>
+
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+import { doc, getDoc, updateDoc, runTransaction } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const recompensas=[
+
+{id:"xp20",nome:"⚡ +20 XP",preco:10,xp:20,descricao:"Pequeno bônus."},
+{id:"xp50",nome:"⚡ +50 XP",preco:20,xp:50,descricao:"Bônus médio."},
+{id:"xp100",nome:"⚡ +100 XP",preco:40,xp:100,descricao:"Grande bônus."},
+
+{id:"caixa-basica",nome:"🧪 Caixa Básica",preco:40,descricao:"Recompensas simples."},
+{id:"caixa-cientifica",nome:"⚛ Caixa Científica",preco:60,descricao:"Recompensas melhores."},
+{id:"caixa-lendaria",nome:"👑 Caixa Lendária",preco:120,descricao:"Altas recompensas."},
+
+{id:"roleta-cientifica",nome:"🎡 Roleta Científica",preco:200,descricao:"Gire a roleta científica."},
+
+{id:"chaveiro-univers3d",nome:"🔑 Chaveiro 3D",preco:150,lendario:true,descricao:"Prêmio físico."}
+
+]
+
+let spAluno=0
+let userRef
+let estoqueChaveiro=0
+
+async function carregarEstoque(){
+const ref=doc(db,"loja","chaveiro-univers3d")
+const snap=await getDoc(ref)
+if(snap.exists()) estoqueChaveiro=snap.data().estoque
+}
+
+async function carregarSP(){
+
+const user=auth.currentUser
+if(!user) return
+
+userRef=doc(db,"usuarios",user.uid)
+
+const snap=await getDoc(userRef)
+
+spAluno=snap.data().sciencePoints||0
+
+document.getElementById("sp").innerText=spAluno
+
+await carregarEstoque()
+
+renderLoja()
+
+}
+
+function renderLoja(){
+
+const loja=document.getElementById("loja")
+loja.innerHTML=""
+
+recompensas.forEach(item=>{
+
+const podeComprar=spAluno>=item.preco
+
+const card=document.createElement("div")
+card.className="card"
+
+if(item.lendario) card.classList.add("lendario")
+
+card.innerHTML=`
+
+${item.lendario?'<div class="badge">LENDÁRIO</div>':""}
+
+<h3>${item.nome}</h3>
+
+<p class="desc">${item.descricao}</p>
+
+<div class="preco">🧪 ${item.preco} SP</div>
+
+<button ${!podeComprar?"disabled":""}
+onclick="comprar('${item.id}')">
+${podeComprar?"Comprar":"SP insuficiente"}
+</button>
+
+`
+
+loja.appendChild(card)
+
+})
+
+}
+
+function abrirRoleta(){
+
+const premios=[
+{label:"⚡ +200 XP",xp:200},
+{label:"⚡ +300 XP",xp:300},
+{label:"⚡ +400 XP",xp:400},
+{label:"⚡ +500 XP",xp:500},
+{label:"⚡ +600 XP",xp:600},
+{label:"⚡ +800 XP",xp:800}
+]
+
+const modal=document.getElementById("roletaModal")
+
+modal.innerHTML=`
+<div class="roleta-overlay">
+<div class="roleta-container">
+<div style="position:relative;width:420px;margin:auto">
+
+<div class="seta">🔻</div>
+
+<div id="roleta" class="roleta"></div>
+
+</div>
+</div>
+</div>
+`
+
+const roleta=document.getElementById("roleta")
+
+premios.forEach((p,i)=>{
+
+const ang=(360/premios.length)*i + (360/premios.length)/2
+
+const label=document.createElement("div")
+label.className="roleta-label"
+label.style.transform=`rotate(${ang}deg) translateY(-180px)`
+label.innerText=p.label
+
+roleta.appendChild(label)
+
+})
+
+const index=Math.floor(Math.random()*premios.length)
+
+const anguloSegmento=360/premios.length
+
+const anguloFinal=360*10+(index*anguloSegmento)+(anguloSegmento/2)
+
+setTimeout(()=>{
+roleta.style.transform=`rotate(-${anguloFinal}deg)`
+},200)
+
+setTimeout(async ()=>{
+
+const premio=premios[index]
+
+const snap=await getDoc(userRef)
+const dados=snap.data()
+
+await updateDoc(userRef,{
+xp:(dados.xp||0)+premio.xp
+})
+
+modal.innerHTML=`
+<div class="roleta-overlay">
+<div class="roleta-container">
+<h2>🎉 Resultado</h2>
+<div class="resultado-final">${premio.label}</div>
+<br>
+<button onclick="fecharRoleta()">OK</button>
+</div>
+</div>
+`
+
+},8200)
+
+}
+
+window.fecharRoleta = function(){
+
+const modal = document.getElementById("roletaModal")
+
+if(modal){
+modal.innerHTML=""
+}
+
+renderLoja()
+
+}  
+
+window.comprar=async function(id){
+
+const item=recompensas.find(r=>r.id===id)
+
+if(spAluno<item.preco){
+alert("SciencePoints insuficientes!")
+return
+}
+
+if(id==="roleta-cientifica"){
+
+spAluno-=200
+
+await updateDoc(userRef,{sciencePoints:spAluno})
+
+document.getElementById("sp").innerText=spAluno
+
+abrirRoleta()
+
+return
+}
+
+if(item.xp){
+
+const snap=await getDoc(userRef)
+const xpAtual=snap.data().xp||0
+
+await updateDoc(userRef,{
+sciencePoints:spAluno-item.preco,
+xp:xpAtual+item.xp
+})
+
+spAluno-=item.preco
+
+document.getElementById("sp").innerText=spAluno
+
+renderLoja()
+
+}
+
+}
+
+auth.onAuthStateChanged(user=>{
+if(user) carregarSP()
+})
+
+</script>
+
+</body>
+</html>
