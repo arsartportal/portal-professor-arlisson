@@ -402,10 +402,10 @@ left:50%;
 
 transform:translate(-50%,-50%);
 
-width:120px;
-height:120px;
+width:130px;
+height:130px;
 
-background:white;
+background:radial-gradient(circle,#ffffff,#e5e7eb);
 
 border-radius:50%;
 
@@ -413,11 +413,15 @@ display:flex;
 align-items:center;
 justify-content:center;
 
-box-shadow:0 0 20px rgba(0,0,0,0.35);
+box-shadow:
+inset 0 0 10px rgba(0,0,0,0.2),
+0 0 25px rgba(0,0,0,0.3);
 
 border:6px solid #333;
 
-font-size:32px;
+font-size:46px;
+
+color:#111;
 
 }
 
@@ -898,6 +902,288 @@ to{opacity:1}
 
 }
 
+/* ======================
+   BOTÃO GIRAR ROLETA
+====================== */
+
+.btn-girar{
+
+margin-top:30px;
+
+background:linear-gradient(45deg,#f59e0b,#fbbf24);
+
+border:none;
+
+padding:14px 30px;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+
+transition:0.2s;
+
+}
+
+.btn-girar:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ======================
+   HISTÓRICO DE COMPRAS
+====================== */
+
+.historico-loja{
+
+margin-top:50px;
+
+background:linear-gradient(145deg,#1f2937,#111827);
+
+padding:25px;
+
+border-radius:16px;
+
+box-shadow:0 15px 40px rgba(0,0,0,0.7);
+
+}
+
+.historico-loja h2{
+
+margin-top:0;
+
+color:#38bdf8;
+
+}
+
+#feedCompras{
+
+display:flex;
+flex-direction:column;
+
+gap:8px;
+
+max-height:220px;
+
+overflow:auto;
+
+}
+
+/* ======================
+   SCROLLBAR PREMIUM
+====================== */
+
+#feedCompras::-webkit-scrollbar{
+width:8px;
+}
+
+#feedCompras::-webkit-scrollbar-track{
+background:rgba(255,255,255,0.03);
+border-radius:10px;
+}
+
+#feedCompras::-webkit-scrollbar-thumb{
+
+background:linear-gradient(
+180deg,
+#38bdf8,
+#0ea5e9
+);
+
+border-radius:10px;
+
+box-shadow:
+0 0 8px rgba(56,189,248,0.6);
+
+}
+
+#feedCompras::-webkit-scrollbar-thumb:hover{
+
+background:linear-gradient(
+180deg,
+#7dd3fc,
+#38bdf8
+);
+
+box-shadow:
+0 0 12px rgba(56,189,248,0.9);
+
+}
+
+.compra{
+
+background:#020617;
+
+padding:10px 14px;
+
+border-radius:8px;
+
+font-size:14px;
+
+border-left:3px solid #38bdf8;
+
+}
+
+/* ======================
+   FEED ESTILO GAME
+====================== */
+
+.feed-item{
+display:flex;
+align-items:flex-start;
+gap:12px;
+
+background:linear-gradient(145deg,#020617,#0f172a);
+
+padding:12px 14px;
+
+border-radius:10px;
+
+border-left:4px solid #38bdf8;
+
+animation:feedEntrada 0.5s ease;
+
+}
+
+@keyframes feedEntrada{
+
+from{
+opacity:0;
+transform:translateY(10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.feed-avatar{
+
+font-size:26px;
+width:36px;
+text-align:center;
+
+}
+
+.feed-msg{
+
+flex:1;
+font-size:14px;
+
+}
+
+.feed-msg b{
+color:#e2e8f0;
+}
+
+.feed-info{
+
+font-size:12px;
+color:#94a3b8;
+margin-top:2px;
+
+}
+
+.feed-xp{
+color:#38bdf8;
+font-weight:bold;
+}
+
+/* destaque lendário */
+
+.feed-lendario{
+
+border-left:4px solid gold;
+
+background:linear-gradient(145deg,#2c1f00,#020617);
+
+box-shadow:0 0 15px rgba(255,215,0,0.4);
+
+}
+
+/* destaque roleta */
+
+.feed-roleta{
+border-left:4px solid #f59e0b;
+}
+
+/* destaque caixa */
+
+.feed-caixa{
+border-left:4px solid #22c55e;
+}
+
+/*Patentes */
+
+.feed-avatar img{
+width:36px;
+height:36px;
+object-fit:contain;
+}
+
+.feed-avatar img{
+
+filter:drop-shadow(0 0 6px rgba(255,255,255,0.4));
+
+transition:0.3s;
+
+}
+
+@keyframes glowPatente{
+
+0%{
+filter:drop-shadow(0 0 4px rgba(255,255,255,0.3));
+}
+
+100%{
+filter:drop-shadow(0 0 12px rgba(255,255,255,0.8));
+}
+
+}
+
+.feed-avatar img{
+animation:glowPatente 1.5s infinite alternate;
+}
+
+.patente-top img{
+
+animation:glowTop 1.2s infinite alternate;
+
+}
+
+@keyframes glowTop{
+
+0%{
+filter:drop-shadow(0 0 8px gold);
+}
+
+100%{
+filter:drop-shadow(0 0 18px gold);
+}
+
+}
+
+.feed-avatar{
+
+width:36px;
+height:36px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+flex-shrink:0;
+
+}
+
 </style>
 
 </head>
@@ -915,11 +1201,33 @@ to{opacity:1}
 <div id="modal"></div>
 <div id="roletaModal"></div>
 
+<!-- HISTÓRICO DA LOJA -->
+
+<div class="historico-loja">
+
+<h2>📜 Histórico de Compras</h2>
+
+<div id="feedCompras"></div>
+
+</div>
+
 <script type="module">
 
 import { auth, db } from "./js/firebase.js";
-import { doc, getDoc, updateDoc, runTransaction } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
+import { obterPatentePorNivel } from "./js/patentes.js";
+import { 
+doc,
+getDoc,
+updateDoc,
+runTransaction,
+collection,
+addDoc,
+serverTimestamp,
+query,
+orderBy,
+limit,
+onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 const recompensas=[
 
 {id:"xp20",nome:"⚡ +20 XP",preco:10,xp:20,descricao:"Pequeno bônus.",raridade:"comum"},
@@ -940,11 +1248,204 @@ const recompensas=[
 let spAluno=0
 let userRef
 let estoqueChaveiro=0
+let girando = false
+
+let unsubscribeHistorico = null
+
+
+async function girarRoleta(){
+
+if(girando) return
+girando=true
+
+const roleta=document.getElementById("roleta")
+const botao=document.querySelector(".btn-girar")
+
+// desativa botão após usar
+botao.style.display="none"
+
+const premios=[
+{label:"⚡ +200 XP",xp:200},
+{label:"⚡ +300 XP",xp:300},
+{label:"⚡ +400 XP",xp:400},
+{label:"⚡ +500 XP",xp:500},
+{label:"⚡ +600 XP",xp:600},
+{label:"⚡ +800 XP",xp:800}
+]
+
+const premioIndex=Math.floor(Math.random()*premios.length)
+
+const anguloPorItem=360/premios.length
+
+const anguloFinal=(360-(premioIndex*anguloPorItem))-(anguloPorItem/2)
+
+const voltas=360*10
+
+const rotacao=voltas+anguloFinal
+
+roleta.style.transition="transform 9s cubic-bezier(0.12,0.8,0.2,1)"
+
+roleta.style.transform=`rotate(${rotacao}deg)`
+
+
+// bounce final
+setTimeout(()=>{
+
+roleta.style.transition="transform 0.4s ease-out"
+roleta.style.transform=`rotate(${rotacao-8}deg)`
+
+setTimeout(()=>{
+roleta.style.transform=`rotate(${rotacao}deg)`
+},200)
+
+},9000)
+
+
+// entregar prêmio
+setTimeout(async ()=>{
+
+const premio=premios[premioIndex]
+
+const snap=await getDoc(userRef)
+const dados=snap.data()
+
+await updateDoc(userRef,{
+xp:(dados.xp||0)+premio.xp
+})
+
+await registrarCompra(`girou a Roleta Científica e recebeu +${premio.xp} XP`)
+
+
+document.querySelector(".resultado-final").innerHTML=`
+
+<h2>🎉 Resultado</h2>
+
+<p style="font-size:26px;margin:20px 0;">
+Você recebeu <b>${premio.xp} XP</b>
+</p>
+
+<button onclick="fecharRoleta()">Fechar</button>
+
+`
+
+girando=false
+
+},9400)
+
+
+}
+
+window.girarRoleta = girarRoleta
 
 async function carregarEstoque(){
 const ref=doc(db,"loja","chaveiro-univers3d")
 const snap=await getDoc(ref)
 if(snap.exists()) estoqueChaveiro=snap.data().estoque
+}
+
+async function carregarHistorico(){
+
+if(unsubscribeHistorico){
+unsubscribeHistorico()
+}
+
+const q = query(
+collection(db,"lojaHistorico"),
+orderBy("data","desc"),
+limit(20)
+)
+
+const feed = document.getElementById("feedCompras")
+
+unsubscribeHistorico = onSnapshot(q, async (snapshot)=>{
+
+feed.innerHTML=""
+
+const docsOrdenados = snapshot.docs
+.filter(d => d.data().data) 
+.sort((a,b)=> b.data().data.toMillis() - a.data().data.toMillis())
+
+for (const documento of docsOrdenados) {
+
+const c = documento.data()
+
+if(!c.data) continue
+
+const data = c.data.toDate()
+
+let dataFormatada = ""
+
+if(data){
+
+const dia = data.toLocaleDateString("pt-BR")
+const hora = data.toLocaleTimeString("pt-BR")
+
+dataFormatada = `${dia} • ${hora}`
+
+}
+
+/* ===== BUSCAR NÍVEL DO USUÁRIO ===== */
+
+let patenteImg="/assets/ranks/SeasonalRank0-0.png"
+
+if(c.uid){
+
+const userDoc = await getDoc(doc(db,"usuarios",c.uid))
+
+if(userDoc.exists()){
+
+const dadosUser=userDoc.data()
+
+const nivel=dadosUser.nivel || 0
+
+patenteImg = obterPatentePorNivel(nivel).imagem
+
+}
+
+}
+
+/* ===== DEFINIR CLASSE ===== */
+
+let classe="feed-item"
+
+if(c.item.includes("Roleta")) classe+=" feed-roleta"
+if(c.item.includes("Caixa")) classe+=" feed-caixa"
+if(c.item.includes("Chaveiro")) classe+=" feed-lendario"
+
+if(patenteImg.includes("Top")) classe+=" patente-top"
+
+/* ===== RENDER ===== */
+
+feed.innerHTML += `
+
+<div class="${classe}">
+
+<div class="feed-avatar">
+<img src="${patenteImg}">
+</div>
+
+<div class="feed-msg">
+
+<b>${c.aluno}</b> ${c.item}
+
+<div class="feed-info">
+🏫 ${c.escola} • ${c.serie} ${c.turma}
+<br>
+🕒 ${dataFormatada}
+</div>
+
+</div>
+
+</div>
+
+`
+
+}
+
+feed.scrollTop = 0
+
+})
+
 }
 
 async function carregarSP(){
@@ -1046,6 +1547,12 @@ modal.innerHTML=`
 
 <div id="roleta" class="roleta"></div>
 
+<button class="btn-girar" onclick="girarRoleta()">
+🎯 Girar Roleta
+</button>
+
+<div class="resultado-final"></div>
+
 </div>
 </div>
 </div>
@@ -1066,40 +1573,6 @@ roleta.appendChild(label)
 
 })
 
-const index=Math.floor(Math.random()*premios.length)
-
-const anguloSegmento=360/premios.length
-
-const anguloFinal=360*10+(index*anguloSegmento)+(anguloSegmento/2)
-
-setTimeout(()=>{
-roleta.style.transform=`rotate(-${anguloFinal}deg)`
-},200)
-
-setTimeout(async ()=>{
-
-const premio=premios[index]
-
-const snap=await getDoc(userRef)
-const dados=snap.data()
-
-await updateDoc(userRef,{
-xp:(dados.xp||0)+premio.xp
-})
-
-modal.innerHTML=`
-<div class="roleta-overlay">
-<div class="roleta-container">
-<h2>🎉 Você ganhou</h2>
-<div class="resultado-final">${premio.label}</div>
-<br>
-<button onclick="fecharRoleta()">OK</button>
-</div>
-</div>
-`
-
-},8200)
-
 }
 
 window.fecharRoleta = function(){
@@ -1113,6 +1586,31 @@ modal.innerHTML=""
 renderLoja()
 
 }  
+
+async function registrarCompra(item){
+
+const user = auth.currentUser
+
+const snap = await getDoc(userRef)
+
+const dados = snap.data()
+
+await addDoc(collection(db,"lojaHistorico"),{
+
+uid: user.uid,
+
+aluno: dados.nome || user.email,
+escola: dados.escola || "-",
+serie: dados.serie || "-",
+turma: dados.turma || "-",
+
+item: item,
+
+data: serverTimestamp()
+
+})
+
+}
 
 window.comprar=async function(id){
 
@@ -1184,6 +1682,9 @@ document.getElementById("sp").innerText=spAluno
 
 renderLoja()
 
+const user = auth.currentUser
+await registrarCompra(`comprou ${item.nome}`)
+
 mostrarPopup(id)
 
 }
@@ -1244,7 +1745,11 @@ desc.innerHTML="Você ganhou um prêmio físico!"
 }
 
 auth.onAuthStateChanged(user=>{
-if(user) carregarSP()
+if(user){
+carregarSP()
+carregarHistorico()
+
+}
 })
 
 window.fecharPopup=function(){
@@ -1284,6 +1789,7 @@ premios=[
 {xp:400,raridade:"lendario"}
 ]
 }
+
 
 const premio=premios[Math.floor(Math.random()*premios.length)]
 
@@ -1345,6 +1851,17 @@ const xpAtual=snap.data().xp||0
 await updateDoc(userRef,{
 xp:xpAtual+premio.xp
 })
+
+const nomesCaixas={
+"caixa-basica":"🧪 Caixa Básica",
+"caixa-cientifica":"⚛ Caixa Científica",
+"caixa-lendaria":"👑 Caixa Lendária"
+}
+
+await registrarCompra(
+`abriu ${nomesCaixas[tipo]} e recebeu +${premio.xp} XP`
+)
+
 
 modal.innerHTML=`
 
@@ -1419,6 +1936,8 @@ estoque:dados.estoque-1
 estoqueChaveiro--
 
 renderLoja()
+
+await registrarCompra(`resgatou 🔑 Chaveiro Univers3D`)
 
 /* animação */
 
