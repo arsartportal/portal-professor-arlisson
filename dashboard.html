@@ -1,114 +1,287 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard do Professor</title>
-  <link rel="stylesheet" href="../css/dashboard.css">
+
+<!-- =====================================================
+     META CONFIG
+===================================================== -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>📊 Dashboard do Professor</title>
+
+<!-- CSS PRINCIPAL -->
+<link rel="stylesheet" href="../css/dashboard.css">
+
 </head>
 
 <body>
 
-  <!-- ============================= -->
-  <!-- BARRA SUPERIOR -->
-  <!-- ============================= -->
-  <div class="barra-superior">
-    <button class="btn-voltar" onclick="voltar()">⬅ Voltar</button>
-    <button id="exportar-csv" class="btn-exportar">📥 Exportar CSV</button>
+
+<!-- =====================================================
+     BARRA SUPERIOR
+===================================================== -->
+
+<div class="barra-superior">
+
+  <!-- Botão voltar -->
+  <button class="btn-voltar" onclick="voltar()">
+    ⬅ Voltar
+  </button>
+
+  <!-- Exportação CSV -->
+  <button id="exportar-csv" class="btn-exportar">
+    📥 Exportar CSV
+  </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOPO DO DASHBOARD
+===================================================== -->
+
+<header class="topo">
+
+  <h1>
+    📊 Dashboard do Professor
+  </h1>
+
+</header>
+
+
+
+<!-- =====================================================
+     CARDS RESUMO
+===================================================== -->
+
+<section class="cards-resumo">
+
+  <!-- TOTAL DE ALUNOS -->
+  <div class="card">
+
+    👥 <span id="total-alunos">0</span>
+    <small>Total de Alunos</small>
+
   </div>
 
-  <!-- ============================= -->
-  <!-- TOPO -->
-  <!-- ============================= -->
-  <header class="topo">
-    <h1>📊 Dashboard do Professor</h1>
-  </header>
 
-  <!-- ============================= -->
-  <!-- CARDS RESUMO -->
-  <!-- ============================= -->
-  <section class="cards-resumo">
+  <!-- ATIVOS -->
+  <div class="card">
 
-    <div class="card">
-      👥 <span id="total-alunos">0</span>
-      <small>Total de Alunos</small>
-    </div>
+    🔥 <span id="ativos">0</span>
+    <small>Ativos (até 3 dias)</small>
 
-    <div class="card">
-      🔥 <span id="ativos">0</span>
-      <small>Ativos (até 3 dias)</small>
-    </div>
+  </div>
 
-    <div class="card">
-      ⚠️ <span id="regulares">0</span>
-      <small>Regulares (até 10 dias)</small>
-    </div>
 
-    <div class="card">
-      🏆 <span id="maior-xp-nome">---</span>
-      <small><span id="maior-xp-valor">0</span> XP</small>
-    </div>
+  <!-- REGULARES -->
+  <div class="card">
 
-    <div class="card">
-      📈 <span id="media-xp">0</span>
-      <small>Média de XP</small>
-    </div>
+    ⚠️ <span id="regulares">0</span>
+    <small>Regulares (até 10 dias)</small>
 
-  </section>
+  </div>
 
-  <!-- ============================= -->
-  <!-- FILTROS -->
-  <!-- ============================= -->
-  <section class="filtros">
 
-    <select id="filtro-escola">
-      <option value="todas">Todas as escolas</option>
-    </select>
+  <!-- MAIOR XP -->
+  <div class="card">
 
-    <select id="filtro-serie">
-      <option value="todas">Todas as séries</option>
-    </select>
+    🏆 <span id="maior-xp-nome">---</span>
+    <small>
+      <span id="maior-xp-valor">0</span> XP
+    </small>
 
-    <select id="filtro-turma">
-      <option value="todas">Todas as turmas</option>
-    </select>
+  </div>
 
-  </section>
 
-  <!-- ============================= -->
-  <!-- TABELA GERAL -->
-  <!-- ============================= -->
-  <section class="tabela-container">
-    <table class="tabela-dashboard">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Aluno</th>
-          <th>Escola</th>
-          <th>Série</th>
-          <th>Turma</th>
-          <th>XP</th>
-          <th class="coluna-patente">🎖️ Patente</th>
-          <th>Status</th>
-          <th>Último acesso</th>
-          <th class="coluna-acoes">Ações</th>
-        </tr>
-      </thead>
-      <tbody id="lista-alunos"></tbody>
-    </table>
-  </section>
+  <!-- MÉDIA XP -->
+  <div class="card">
 
-  <!-- ============================= -->
-  <!-- RANKING POR ESCOLA -->
-  <!-- ============================= -->
-  <section class="ranking-escolas">
-    <h2>🏫 Ranking por Escola</h2>
-    <div id="ranking-escolas-container"></div>
-  </section>
+    📈 <span id="media-xp">0</span>
+    <small>Média de XP</small>
 
-  <!-- SCRIPT -->
-  <script type="module" src="../js/dashboard.js"></script>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FILTROS DO DASHBOARD
+===================================================== -->
+
+<section class="filtros">
+
+  <!-- FILTRO ESCOLA -->
+  <select id="filtro-escola">
+
+    <option value="todas">
+      Todas as escolas
+    </option>
+
+  </select>
+
+
+  <!-- FILTRO SÉRIE -->
+  <select id="filtro-serie">
+
+    <option value="todas">
+      Todas as séries
+    </option>
+
+  </select>
+
+
+  <!-- FILTRO TURMA -->
+  <select id="filtro-turma">
+
+    <option value="todas">
+      Todas as turmas
+    </option>
+
+  </select>
+
+</section>
+
+
+
+<!-- =====================================================
+     TABELA PRINCIPAL DE RANKING
+===================================================== -->
+
+<section class="tabela-container">
+
+<table class="tabela-dashboard">
+
+<thead>
+
+<tr>
+
+  <!-- POSIÇÃO -->
+  <th>#</th>
+
+  <!-- NOME -->
+  <th>Aluno</th>
+
+  <!-- ESCOLA -->
+  <th>Escola</th>
+
+  <!-- SÉRIE -->
+  <th>Série</th>
+
+  <!-- TURMA -->
+  <th>Turma</th>
+
+  <!-- XP ATUAL -->
+  <th>XP</th>
+
+  <!-- STREAK -->
+  <th>🔥 Streak</th>
+
+  <!-- MAIOR STREAK -->
+  <th>🏆 Maior Streak</th>
+
+  <!-- SCIENCE POINTS -->
+  <th>🔬 SciencePoints</th>
+
+  <!-- PATENTE -->
+  <th class="coluna-patente">
+    🎖️ Patente
+  </th>
+
+  <!-- STATUS -->
+  <th>Status</th>
+
+  <!-- ÚLTIMO LOGIN -->
+  <th>Último acesso</th>
+
+  <!-- AÇÕES -->
+  <th class="coluna-acoes">
+    Ações
+  </th>
+
+</tr>
+
+</thead>
+
+
+<!-- =====================================================
+     LISTA DINÂMICA DE ALUNOS
+     (preenchida pelo dashboard.js)
+===================================================== -->
+
+<tbody id="lista-alunos">
+
+</tbody>
+
+</table>
+
+</section>
+
+
+
+<!-- =====================================================
+     RANKING POR ESCOLA
+===================================================== -->
+
+<section class="ranking-escolas">
+
+<h2>
+🏫 Ranking por Escola
+</h2>
+
+<!--
+Cada escola terá seu próprio ranking
+Gerado automaticamente pelo dashboard.js
+-->
+
+<div id="ranking-escolas-container">
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RANKING POR TURMA
+     Escola + Série + Turma
+===================================================== -->
+
+<section class="ranking-turmas">
+
+<h2>
+🎓 Ranking por Turma
+</h2>
+
+<!--
+Exemplo de bloco gerado pelo JS:
+
+🏫 Audiocomunicação • 1ano • Turma A
+
+🥇 João
+🥈 Maria
+🥉 Pedro
+-->
+
+<div id="ranking-turmas-container">
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+===================================================== -->
+
+<script type="module" src="../js/dashboard.js"></script>
+
 
 </body>
 </html>
