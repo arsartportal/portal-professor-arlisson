@@ -1,2312 +1,1109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🛒 Loja de Recompensas</title>
+  <title>🛒 Loja de Recompensas</title>
 
-<link rel="stylesheet" href="/js/plugins/global-alert/globalAlert.css">
-
-<style>
-
-/* ======================
-   BASE
-====================== */
-
-body{
-font-family:'Inter','Segoe UI',Arial,sans-serif;
-
-background:
-radial-gradient(circle at 20% 20%, #1f2a44 0%, transparent 40%),
-radial-gradient(circle at 80% 70%, #16213e 0%, transparent 40%),
-linear-gradient(135deg,#0f172a,#1e293b);
-
-color:white;
-
-margin:0;
-padding:40px;
-}
-
-/* ======================
-   TÍTULO
-====================== */
-
-h1{
-text-align:center;
-font-size:38px;
-margin-bottom:30px;
-
-background:linear-gradient(90deg,#ffd700,#ffb700);
--webkit-background-clip:text;
-color:transparent;
-
-letter-spacing:1px;
-}
-
-/* ======================
-   SCIENCE POINTS
-====================== */
-
-.sp-box{
-
-background:linear-gradient(145deg,#1e293b,#0f172a);
-
-border:1px solid rgba(255,255,255,0.08);
-
-padding:20px;
-border-radius:14px;
-
-text-align:center;
-
-font-size:22px;
-
-margin-bottom:35px;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.6),
-inset 0 0 20px rgba(255,255,255,0.03);
-}
-
-/* ======================
-   GRID
-====================== */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:22px;
-}
-
-/* ======================
-   CARDS
-====================== */
-
-.card{
-
-background:linear-gradient(145deg,#1f2937,#111827);
-
-padding:22px;
-border-radius:16px;
-
-border:1px solid rgba(255,255,255,0.05);
-
-box-shadow:
-0 12px 25px rgba(0,0,0,0.6);
-
-transition:0.35s;
-
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-
-position:relative;
-overflow:hidden;
-}
-
-.card::before{
-
-content:"";
-
-position:absolute;
-
-top:-120%;
-left:-120%;
-
-width:200%;
-height:200%;
-
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,0.15),
-transparent
-);
-
-transform:rotate(25deg);
-
-transition:0.8s;
-
-}
-
-.card:hover{
-
-transform:translateY(-8px) scale(1.02);
-
-box-shadow:
-0 18px 40px rgba(0,0,0,0.7),
-0 0 20px rgba(255,255,255,0.08);
-
-}
-
-.card:hover::before{
-top:120%;
-left:120%;
-}
-
-/* ======================
-   TEXTO
-====================== */
-
-.card h3{
-margin:0;
-font-size:20px;
-}
-
-.desc{
-font-size:14px;
-margin:10px 0;
-color:#9ca3af;
-}
-
-.preco{
-
-font-size:20px;
-
-margin:14px 0;
-
-font-weight:bold;
-
-color:#38bdf8;
-}
-
-/* ======================
-   BOTÕES
-====================== */
-
-button{
-
-padding:12px;
-
-border:none;
-border-radius:10px;
-
-background:linear-gradient(135deg,#22c55e,#16a34a);
-
-color:white;
-
-font-size:15px;
-font-weight:600;
-
-cursor:pointer;
-
-transition:0.25s;
-
-box-shadow:
-0 5px 15px rgba(34,197,94,0.4);
-
-}
-
-button:hover{
-
-transform:translateY(-2px);
-
-box-shadow:
-0 10px 25px rgba(34,197,94,0.6);
-
-}
-
-button:disabled{
-
-background:#374151;
-
-box-shadow:none;
-
-color:#888;
-
-cursor:not-allowed;
-}
-
-/* ======================
-   LENDÁRIO
-====================== */
-
-.lendario{
-
-border:2px solid gold;
-
-background:
-linear-gradient(145deg,#2c1f00,#111827);
-
-box-shadow:
-0 0 20px rgba(255,215,0,0.6),
-0 0 40px rgba(255,215,0,0.3);
-
-}
-
-/* ======================
-   BADGE
-====================== */
-
-.badge{
-
-position:absolute;
-
-top:12px;
-right:12px;
-
-background:linear-gradient(135deg,#ffd700,#ffae00);
-
-color:#111;
-
-font-weight:bold;
-
-padding:4px 10px;
-
-border-radius:20px;
-
-font-size:11px;
-
-letter-spacing:1px;
-
-}
-
-/* ======================
-   ESTOQUE
-====================== */
-
-.estoque{
-font-size:13px;
-color:#f87171;
-margin-bottom:10px;
-}
-
-/* ======================
-   MODAL
-====================== */
-
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999;
-}
-
-/* ======================
-   CAIXA
-====================== */
-
-.modal-box{
-
-background:linear-gradient(145deg,#1f2937,#111827);
-
-padding:40px;
-
-border-radius:16px;
-
-text-align:center;
-
-animation:pop 0.3s ease;
-
-box-shadow:
-0 30px 80px rgba(0,0,0,0.8);
-
-}
-
-.caixa{
-font-size:70px;
-animation:shake 1s infinite;
-}
-
-@keyframes shake{
-0%{transform:rotate(0)}
-25%{transform:rotate(10deg)}
-50%{transform:rotate(-10deg)}
-75%{transform:rotate(10deg)}
-100%{transform:rotate(0)}
-}
-
-@keyframes pop{
-from{transform:scale(0.6)}
-to{transform:scale(1)}
-}
-
-.resultado{
-font-size:26px;
-margin-top:20px;
-}
-
-/* ======================
-   ROLETA ULTRA
-====================== */
-
-.roleta-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-.roleta-container{
-
-background:linear-gradient(145deg,#1f2937,#111827);
-
-padding:40px;
-
-border-radius:20px;
-
-text-align:center;
-
-box-shadow:0 30px 80px rgba(0,0,0,0.9);
-
-}
-
-.roleta{
-
-width:420px;
-height:420px;
-
-border-radius:50%;
-
-border:12px solid #111;
-
-position:relative;
-
-margin:auto;
-
-background:conic-gradient(
-#ff6b6b 0deg 60deg,
-#ffd93d 60deg 120deg,
-#6bcB77 120deg 180deg,
-#4d96ff 180deg 240deg,
-#c77dff 240deg 300deg,
-#ff9f1c 300deg 360deg
-);
-
-transition:transform 8s cubic-bezier(.08,.82,.17,1);
-
-box-shadow:
-0 0 30px rgba(255,215,0,0.6),
-0 0 80px rgba(255,215,0,0.4);
-
-}
-
-.roleta::after{
-
-content:"⚛";
-
-position:absolute;
-
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%);
-
-width:130px;
-height:130px;
-
-background:radial-gradient(circle,#ffffff,#e5e7eb);
-
-border-radius:50%;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-box-shadow:
-inset 0 0 10px rgba(0,0,0,0.2),
-0 0 25px rgba(0,0,0,0.3);
-
-border:6px solid #333;
-
-font-size:46px;
-
-color:#111;
-
-}
-
-.seta{
-
-position:absolute;
-
-top:-28px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-font-size:50px;
-
-z-index:50;
-
-color:#fff;
-
-pointer-events:none;
-
-}
-
-.roleta-label{
-
-position:absolute;
-
-width:100%;
-
-text-align:center;
-
-top:50%;
-
-left:0;
-
-font-weight:bold;
-
-font-size:16px;
-
-color:white;
-
-transform-origin:center;
-
-}
-
-.resultado-final{
-
-font-size:30px;
-
-margin-top:20px;
-
-font-weight:bold;
-
-}
-
-.raridade-comum{
-border-top:3px solid #9ca3af;
-}
-
-.raridade-raro{
-border-top:3px solid #3b82f6;
-box-shadow:0 0 15px rgba(59,130,246,0.4);
-}
-
-.raridade-epico{
-border-top:3px solid #a855f7;
-box-shadow:0 0 20px rgba(168,85,247,0.5);
-}
-
-.raridade-lendario{
-border-top:3px solid gold;
-box-shadow:0 0 25px rgba(255,215,0,0.7);
-}
-
-#sp{
-
-font-weight:bold;
-
-font-size:28px;
-
-color:#38bdf8;
-
-text-shadow:
-0 0 10px #38bdf8,
-0 0 20px #38bdf8,
-0 0 40px #0ea5e9;
-
-animation:energia 1.5s infinite alternate;
-
-}
-
-@keyframes energia{
-
-0%{
-text-shadow:
-0 0 5px #38bdf8,
-0 0 10px #38bdf8;
-}
-
-100%{
-text-shadow:
-0 0 20px #38bdf8,
-0 0 40px #38bdf8,
-0 0 60px #0ea5e9;
-}
-
-}
-
-/* OVERLAY ESCURO */
-
-.popup-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-backdrop-filter:blur(8px);
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-
-opacity:0;
-pointer-events:none;
-transition:0.4s;
-}
-
-.popup-overlay.ativo{
-opacity:1;
-pointer-events:auto;
-}
-
-
-/* CARD */
-
-.popup-card{
-
-background:linear-gradient(145deg,#0f172a,#020617);
-
-border-radius:20px;
-
-padding:40px;
-
-width:350px;
-
-text-align:center;
-
-box-shadow:
-0 0 40px rgba(0,200,255,0.3),
-inset 0 0 30px rgba(255,255,255,0.05);
-
-animation:popupEntrada 0.6s ease;
-}
-
-@keyframes popupEntrada{
-
-0%{
-transform:scale(0.6);
-opacity:0;
-}
-
-100%{
-transform:scale(1);
-opacity:1;
-}
-
-}
-
-/* TITULO */
-
-.popup-card h2{
-color:#38bdf8;
-margin-top:15px;
-}
-
-/* DESCRIÇÃO */
-
-.popup-card p{
-color:#cbd5f5;
-margin-bottom:25px;
-}
-
-
-/* BOTÃO */
-
-.popup-btn{
-
-background:linear-gradient(90deg,#22c55e,#16a34a);
-
-border:none;
-
-padding:12px 30px;
-
-border-radius:12px;
-
-color:white;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:0.2s;
-}
-
-.popup-btn:hover{
-
-transform:scale(1.05);
-
-box-shadow:0 0 20px #22c55e;
-
-}
-
-
-/* ANIMAÇÃO */
-
-.popup-animacao{
-
-font-size:60px;
-
-animation:brilhar 1.2s infinite alternate;
-
-}
-
-@keyframes brilhar{
-
-from{filter:drop-shadow(0 0 5px #fff);}
-to{filter:drop-shadow(0 0 25px #38bdf8);}
-
-}
-
-.caixa-fechada{
-font-size:90px;
-animation:tremer 0.8s infinite;
-}
-
-@keyframes tremer{
-0%{transform:rotate(0)}
-25%{transform:rotate(8deg)}
-50%{transform:rotate(-8deg)}
-75%{transform:rotate(8deg)}
-100%{transform:rotate(0)}
-}
-
-.caixa-aberta{
-font-size:100px;
-animation:abrirCaixa 0.8s forwards;
-}
-
-@keyframes abrirCaixa{
-0%{transform:scale(0.6)}
-60%{transform:scale(1.2)}
-100%{transform:scale(1)}
-}
-
-.luz-premio{
-
-font-size:60px;
-
-margin-top:20px;
-
-animation:luz 1s infinite alternate;
-
-}
-
-@keyframes luz{
-
-from{
-filter:drop-shadow(0 0 5px white);
-}
-
-to{
-filter:drop-shadow(0 0 30px gold);
-}
-
-}
-
-/* ======================
-   LOOT BOX ULTRA
-====================== */
-
-.caixa-loot{
-
-font-size:100px;
-
-animation:tremerCaixa 0.8s infinite;
-
-}
-
-@keyframes tremerCaixa{
-
-0%{transform:rotate(0deg)}
-25%{transform:rotate(8deg)}
-50%{transform:rotate(-8deg)}
-75%{transform:rotate(8deg)}
-100%{transform:rotate(0deg)}
-
-}
-
-.explosao{
-
-font-size:110px;
-
-animation:explodir 0.6s ease forwards;
-
-}
-
-@keyframes explodir{
-
-0%{transform:scale(0.5);opacity:0}
-60%{transform:scale(1.3)}
-100%{transform:scale(1)}
-
-}
-
-.premio-xp{
-
-font-size:34px;
-
-margin-top:15px;
-
-font-weight:bold;
-
-color:#38bdf8;
-
-text-shadow:
-0 0 10px #38bdf8,
-0 0 25px #38bdf8,
-0 0 45px #0ea5e9;
-
-animation:xpGlow 1.2s infinite alternate;
-
-}
-
-@keyframes xpGlow{
-
-from{
-text-shadow:
-0 0 10px #38bdf8;
-}
-
-to{
-text-shadow:
-0 0 25px #38bdf8,
-0 0 50px #0ea5e9;
-}
-
-}
-
-/* partículas */
-
-.particulas{
-
-position:absolute;
-
-top:50%;
-left:50%;
-
-width:10px;
-height:10px;
-
-background:white;
-
-border-radius:50%;
-
-animation:particula 1s forwards;
-
-}
-
-@keyframes particula{
-
-0%{
-transform:translate(-50%,-50%) scale(0.3);
-opacity:1;
-}
-
-100%{
-transform:translate(var(--x),var(--y)) scale(1);
-opacity:0;
-}
-
-}
-
-/* raridades */
-
-.raridade-comum-premio{
-color:#9ca3af;
-}
-
-.raridade-raro-premio{
-color:#3b82f6;
-text-shadow:0 0 20px #3b82f6;
-}
-
-.raridade-epico-premio{
-color:#a855f7;
-text-shadow:0 0 25px #a855f7;
-}
-
-.raridade-lendario-premio{
-color:gold;
-text-shadow:
-0 0 20px gold,
-0 0 40px gold;
-}
-
-/* ======================
-   PREMIO LENDARIO
-====================== */
-
-.chaveiro-anim{
-
-font-size:90px;
-
-animation:girarChaveiro 2s infinite linear;
-
-filter:drop-shadow(0 0 20px gold);
-
-}
-
-@keyframes girarChaveiro{
-
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-
-}
-
-.lendario-bg{
-
-background:
-radial-gradient(circle,#3b2f00,#000);
-
-box-shadow:
-0 0 40px gold,
-0 0 80px rgba(255,215,0,0.6);
-
-}
-
-.selo-patrocinio{
-
-margin-top:15px;
-
-font-size:14px;
-
-color:#ffd700;
-
-background:rgba(0,0,0,0.5);
-
-padding:6px 14px;
-
-border-radius:20px;
-
-display:inline-block;
-
-letter-spacing:1px;
-
-}
-
-.estoque-baixo{
-
-font-size:13px;
-
-color:#f87171;
-
-margin-bottom:10px;
-
-font-weight:bold;
-
-animation:pulsarEstoque 1.2s infinite alternate;
-
-}
-
-@keyframes pulsarEstoque{
-
-from{opacity:0.6}
-
-to{opacity:1}
-
-}
-
-/* ======================
-   BOTÃO GIRAR ROLETA
-====================== */
-
-.btn-girar{
-
-margin-top:30px;
-
-background:linear-gradient(45deg,#f59e0b,#fbbf24);
-
-border:none;
-
-padding:14px 30px;
-
-border-radius:12px;
-
-font-size:18px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-box-shadow:0 8px 20px rgba(0,0,0,0.3);
-
-transition:0.2s;
-
-}
-
-.btn-girar:hover{
-
-transform:scale(1.05);
-
-}
-
-/* ======================
-   HISTÓRICO DE COMPRAS
-====================== */
-
-.historico-loja{
-
-margin-top:50px;
-
-background:linear-gradient(145deg,#1f2937,#111827);
-
-padding:25px;
-
-border-radius:16px;
-
-box-shadow:0 15px 40px rgba(0,0,0,0.7);
-
-}
-
-.historico-loja h2{
-
-margin-top:0;
-
-color:#38bdf8;
-
-}
-
-#feedCompras{
-
-display:flex;
-flex-direction:column;
-
-gap:8px;
-
-max-height:220px;
-
-overflow:auto;
-
-}
-
-/* ======================
-   SCROLLBAR PREMIUM
-====================== */
-
-#feedCompras::-webkit-scrollbar{
-width:8px;
-}
-
-#feedCompras::-webkit-scrollbar-track{
-background:rgba(255,255,255,0.03);
-border-radius:10px;
-}
-
-#feedCompras::-webkit-scrollbar-thumb{
-
-background:linear-gradient(
-180deg,
-#38bdf8,
-#0ea5e9
-);
-
-border-radius:10px;
-
-box-shadow:
-0 0 8px rgba(56,189,248,0.6);
-
-}
-
-#feedCompras::-webkit-scrollbar-thumb:hover{
-
-background:linear-gradient(
-180deg,
-#7dd3fc,
-#38bdf8
-);
-
-box-shadow:
-0 0 12px rgba(56,189,248,0.9);
-
-}
-
-.compra{
-
-background:#020617;
-
-padding:10px 14px;
-
-border-radius:8px;
-
-font-size:14px;
-
-border-left:3px solid #38bdf8;
-
-}
-
-/* ======================
-   FEED ESTILO GAME
-====================== */
-
-.feed-item{
-display:flex;
-align-items:flex-start;
-gap:12px;
-
-background:linear-gradient(145deg,#020617,#0f172a);
-
-padding:12px 14px;
-
-border-radius:10px;
-
-border-left:4px solid #38bdf8;
-
-animation:feedEntrada 0.5s ease;
-
-}
-
-@keyframes feedEntrada{
-
-from{
-opacity:0;
-transform:translateY(10px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-.feed-avatar{
-
-font-size:26px;
-width:36px;
-text-align:center;
-
-}
-
-.feed-msg{
-
-flex:1;
-font-size:14px;
-
-}
-
-.feed-msg b{
-color:#e2e8f0;
-}
-
-.feed-info{
-
-font-size:12px;
-color:#94a3b8;
-margin-top:2px;
-
-}
-
-.feed-xp{
-color:#38bdf8;
-font-weight:bold;
-}
-
-/* destaque lendário */
-
-.feed-lendario{
-
-border-left:4px solid gold;
-
-background:linear-gradient(145deg,#2c1f00,#020617);
-
-box-shadow:0 0 15px rgba(255,215,0,0.4);
-
-}
-
-/* destaque roleta */
-
-.feed-roleta{
-border-left:4px solid #f59e0b;
-}
-
-/* destaque caixa */
-
-.feed-caixa{
-border-left:4px solid #22c55e;
-}
-
-/*Patentes */
-
-.feed-avatar img{
-width:36px;
-height:36px;
-object-fit:contain;
-}
-
-.feed-avatar img{
-
-filter:drop-shadow(0 0 6px rgba(255,255,255,0.4));
-
-transition:0.3s;
-
-}
-
-@keyframes glowPatente{
-
-0%{
-filter:drop-shadow(0 0 4px rgba(255,255,255,0.3));
-}
-
-100%{
-filter:drop-shadow(0 0 12px rgba(255,255,255,0.8));
-}
-
-}
-
-.feed-avatar img{
-animation:glowPatente 1.5s infinite alternate;
-}
-
-.patente-top img{
-
-animation:glowTop 1.2s infinite alternate;
-
-}
-
-@keyframes glowTop{
-
-0%{
-filter:drop-shadow(0 0 8px gold);
-}
-
-100%{
-filter:drop-shadow(0 0 18px gold);
-}
-
-}
-
-.feed-avatar{
-
-width:36px;
-height:36px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-flex-shrink:0;
-
-}
-
-/* ======================
-   ATALHO INVENTÁRIO
-====================== */
-
-.atalhos-loja{
-display:flex;
-justify-content:center;
-margin-bottom:28px;
-}
-
-.btn-inventario-loja{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-text-decoration:none;
-padding:14px 24px;
-border-radius:14px;
-font-weight:700;
-font-size:16px;
-color:white;
-background:linear-gradient(135deg,#0ea5e9,#2563eb);
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:
-0 10px 24px rgba(37,99,235,0.28),
-0 0 18px rgba(14,165,233,0.15);
-transition:0.25s;
-}
-
-.btn-inventario-loja:hover{
-transform:translateY(-3px) scale(1.02);
-box-shadow:
-0 16px 34px rgba(37,99,235,0.35),
-0 0 26px rgba(14,165,233,0.22);
-}
-
-.btn-voltar{
-display:inline-flex;
-align-items:center;
-gap:8px;
-text-decoration:none;
-background:linear-gradient(135deg,#1e293b,#0f172a);
-color:#fff;
-padding:12px 18px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,0.08);
-font-weight:600;
-margin-bottom:24px;
-box-shadow:0 8px 20px rgba(0,0,0,0.25);
-transition:0.25s;
-}
-
-.btn-voltar:hover{
-transform:translateY(-2px);
-box-shadow:0 12px 24px rgba(0,0,0,0.35);
-}
-</style>
-
+  <link rel="stylesheet" href="./css/loja.css">
+  <link rel="stylesheet" href="./js/plugins/global-alert/globalAlert.css">
 </head>
 
-<body>
+<body id="topo">
+   
 
-<a href="home.html" class="btn-voltar">⬅ Voltar ao início</a>
+  <a href="home.html" class="btn-voltar">⬅ Voltar ao início</a>
 
 <h1>🛒 Loja de Recompensas</h1>
 
 <div class="sp-box">
-🧪 Seus SciencePoints: <span id="sp">...</span>
+  🧪 Seus SciencePoints: <span id="sp">...</span>
 </div>
+
+<nav class="menu-loja">
+  <a href="#topo" data-target="topo">🏠 Início</a>
+  <a href="#secao-comum" data-target="secao-comum">⚪ Comum</a>
+  <a href="#secao-raro" data-target="secao-raro">🔵 Raro</a>
+  <a href="#secao-epico" data-target="secao-epico">🟣 Épico</a>
+  <a href="#secao-lendario" data-target="secao-lendario">🟡 Lendário</a>
+  <a href="#historico" data-target="historico">📜 Histórico</a>
+</nav>
 
 <div class="atalhos-loja">
-<a href="inventario.html" class="btn-inventario-loja">🎒 Ver meu inventário</a>
+  <a href="inventario.html" class="btn-inventario-loja">🎒 Ver meu inventário</a>
 </div>
 
-<div class="grid" id="loja"></div>
+  <!-- LISTAGEM DA LOJA -->
+  <div id="loja"></div>
 
-<div id="modal"></div>
-<div id="roletaModal"></div>
+  <!-- MODAIS -->
+  <div id="modal"></div>
+  <div id="roletaModal"></div>
 
-<!-- HISTÓRICO DA LOJA -->
+  <!-- HISTÓRICO -->
+  <div class="historico-loja" id="historico">
+    <h2>📜 Histórico de Compras</h2>
+    <div id="feedCompras"></div>
+  </div>
 
-<div class="historico-loja">
+  <!-- POPUP DE RECOMPENSA -->
+  <div id="popupRecompensa" class="popup-overlay">
+    <div class="popup-card">
+      <div id="popupAnimacao" class="popup-animacao"></div>
+      <h2 id="popupTitulo"></h2>
+      <p id="popupDescricao"></p>
 
-<h2>📜 Histórico de Compras</h2>
+      <button onclick="fecharPopup()" class="popup-btn">
+        Continuar
+      </button>
+    </div>
+  </div>
 
-<div id="feedCompras"></div>
+  <script type="module">
+    /* ======================================================
+       IMPORTS
+    ====================================================== */
+    import { auth, db } from "./js/firebase.js";
+    import { obterPatentePorNivel } from "./js/patentes.js";
+    import {
+      initGlobalAlert as iniciarAlertaGlobal,
+      globalAlert as mostrarAlertaGlobal
+    } from "./js/plugins/global-alert/globalAlert.js";
 
-</div>
+    import {
+      logCompraXP,
+      logCompraRanking,
+      logAberturaCaixa,
+      logRoleta,
+      logPremioFisico,
+      adicionarAoInventario,
+      salvarBeneficioInventario
+    } from "./js/inventario-log.js";
 
-<script type="module">
+    import {
+      doc,
+      getDoc,
+      updateDoc,
+      collection,
+      addDoc,
+      serverTimestamp,
+      query,
+      orderBy,
+      limit,
+      onSnapshot,
+      Timestamp
+    } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-import { auth, db } from "./js/firebase.js";
-import { obterPatentePorNivel } from "./js/patentes.js";
-import { initGlobalAlert, globalAlert } from "./js/plugins/global-alert/globalAlert.js"
-import {
-logCompraXP,
-logCompraRanking,
-logAberturaCaixa,
-logRoleta,
-logPremioFisico,
-adicionarAoInventario,
-salvarBeneficioInventario
-} from "./js/inventario-log.js";
-import { 
-doc,
-getDoc,
-updateDoc,
-runTransaction,
-collection,
-addDoc,
-serverTimestamp,
-query,
-orderBy,
-limit,
-onSnapshot,
-Timestamp
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-const recompensas=[
+    /* ======================================================
+       CONFIGURAÇÃO DA LOJA
+    ====================================================== */
+    const recompensas = [
+      { id: "xp20", nome: "⚡ +20 XP", preco: 10, xp: 20, descricao: "Pequeno bônus.", raridade: "comum" },
+      { id: "xp50", nome: "⚡ +50 XP", preco: 20, xp: 50, descricao: "Bônus médio.", raridade: "raro" },
+      { id: "xp100", nome: "⚡ +100 XP", preco: 40, xp: 100, descricao: "Grande bônus.", raridade: "epico" },
 
-{id:"xp20",nome:"⚡ +20 XP",preco:10,xp:20,descricao:"Pequeno bônus.",raridade:"comum"},
-{id:"xp50",nome:"⚡ +50 XP",preco:20,xp:50,descricao:"Bônus médio.",raridade:"raro"},
-{id:"xp100",nome:"⚡ +100 XP",preco:40,xp:100,descricao:"Grande bônus.",raridade:"epico"},
+      { id: "caixa-basica", nome: "🧪 Caixa Básica", preco: 40, descricao: "Recompensas simples.", raridade: "comum" },
+      { id: "caixa-cientifica", nome: "⚛ Caixa Científica", preco: 60, descricao: "Recompensas melhores.", raridade: "raro" },
+      { id: "caixa-lendaria", nome: "👑 Caixa Lendária", preco: 120, descricao: "Altas recompensas.", raridade: "lendario" },
 
-{id:"caixa-basica",nome:"🧪 Caixa Básica",preco:40,descricao:"Recompensas simples.",raridade:"comum"},
-{id:"caixa-cientifica",nome:"⚛ Caixa Científica",preco:60,descricao:"Recompensas melhores.",raridade:"raro"},
-{id:"caixa-lendaria",nome:"👑 Caixa Lendária",preco:120,descricao:"Altas recompensas.",raridade:"epico"},
+      { id: "roleta-cientifica", nome: "🎡 Roleta Científica", preco: 200, descricao: "Gire a roleta científica.", raridade: "epico" },
 
-{id:"roleta-cientifica",nome:"🎡 Roleta Científica",preco:200,descricao:"Gire a roleta científica.",raridade:"epico"},
+      { id: "ranking-7dias", nome: "🏆 Ranking 7 Dias", preco: 300, descricao: "Libera o acesso ao ranking por 7 dias.", raridade: "raro", tipo: "ranking", dias: 7 },
+      { id: "ranking-15dias", nome: "🥈 Ranking 15 Dias", preco: 500, descricao: "Libera o acesso ao ranking por 15 dias.", raridade: "epico", tipo: "ranking", dias: 15 },
+      { id: "ranking-30dias", nome: "👑 Ranking 30 Dias", preco: 900, descricao: "Libera o acesso ao ranking por 30 dias.", raridade: "lendario", tipo: "ranking", dias: 30 },
 
-{id:"ranking-7dias",nome:"🏆 Ranking 7 Dias",preco:300,descricao:"Libera o acesso ao ranking por 7 dias.",raridade:"raro",tipo:"ranking",dias:7},
-{id:"ranking-15dias",nome:"🥈 Ranking 15 Dias",preco:500,descricao:"Libera o acesso ao ranking por 15 dias.",raridade:"epico",tipo:"ranking",dias:15},
-{id:"ranking-30dias",nome:"👑 Ranking 30 Dias",preco:900,descricao:"Libera o acesso ao ranking por 30 dias.",raridade:"lendario",tipo:"ranking",dias:30},
+      { id: "chaveiro-univers3d", nome: "🔑 Chaveiro 3D", preco: 1500, lendario: true, descricao: "Prêmio físico.", raridade: "lendario" }
+    ];
 
-{id:"chaveiro-univers3d",nome:"🔑 Chaveiro 3D",preco:1500,lendario:true,descricao:"Prêmio físico.",raridade:"lendario"}
+    /* ======================================================
+       ESTADO GLOBAL
+    ====================================================== */
+    let spAluno = 0;
+    let userRef = null;
+    let estoqueChaveiro = 0;
+    let girando = false;
+    let unsubscribeHistorico = null;
 
-]
+    /* ======================================================
+       UTILITÁRIOS
+    ====================================================== */
+    function atualizarSPNaTela() {
+      const el = document.getElementById("sp");
+      if (el) el.innerText = spAluno;
+    }
 
-let spAluno=0
-let userRef
-let estoqueChaveiro=0
-let girando = false
+    function mostrarErro(msg) {
+      console.error(msg);
+      alert(msg);
+    }
 
-let unsubscribeHistorico = null
+    /* ======================================================
+       CARREGAR ESTOQUE DO CHAVEIRO
+    ====================================================== */
+    async function carregarEstoque() {
+      try {
+        const ref = doc(db, "loja", "chaveiro-univers3d");
+        const snap = await getDoc(ref);
 
+        if (snap.exists()) {
+          estoqueChaveiro = snap.data().estoque || 0;
+        } else {
+          estoqueChaveiro = 0;
+        }
+      } catch (erro) {
+        console.error("Erro ao carregar estoque:", erro);
+        estoqueChaveiro = 0;
+      }
+    }
 
-async function girarRoleta(){
+    /* ======================================================
+       CARREGAR SCIENCE POINTS DO USUÁRIO
+    ====================================================== */
+    async function carregarSP() {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
 
-if(girando) return
-girando=true
+        userRef = doc(db, "usuarios", user.uid);
 
-const roleta=document.getElementById("roleta")
-const botao=document.querySelector(".btn-girar")
+        const snap = await getDoc(userRef);
+        if (!snap.exists()) return;
 
-// desativa botão após usar
-botao.style.display="none"
+        spAluno = snap.data().sciencePoints || 0;
+        atualizarSPNaTela();
 
-const premios=[
-{label:"⚡ +200 XP",xp:200},
-{label:"⚡ +300 XP",xp:300},
-{label:"⚡ +400 XP",xp:400},
-{label:"⚡ +500 XP",xp:500},
-{label:"⚡ +600 XP",xp:600},
-{label:"⚡ +800 XP",xp:800}
-]
+         await carregarEstoque();
+         renderLoja();
+         iniciarMenuAtivo();
+         
+      } catch (erro) {
+        console.error("Erro ao carregar SciencePoints:", erro);
+      }
+    }
 
-const premioIndex=Math.floor(Math.random()*premios.length)
+    /* ======================================================
+       REGISTRAR COMPRA NO HISTÓRICO GLOBAL
+    ====================================================== */
+    async function registrarCompra(item) {
+      try {
+        const user = auth.currentUser;
+        if (!user || !userRef) return;
 
-const anguloPorItem=360/premios.length
+        const snap = await getDoc(userRef);
+        if (!snap.exists()) return;
 
-const anguloFinal=(360-(premioIndex*anguloPorItem))-(anguloPorItem/2)
+        const dados = snap.data();
 
-const voltas=360*10
+        await addDoc(collection(db, "lojaHistorico"), {
+          uid: user.uid,
+          aluno: dados.nome || user.email,
+          escola: dados.escola || "-",
+          serie: dados.serie || "-",
+          turma: dados.turma || "-",
+          item,
+          data: serverTimestamp()
+        });
+      } catch (erro) {
+        console.error("Erro ao registrar compra:", erro);
+      }
+    }
 
-const rotacao=voltas+anguloFinal
+    /* ======================================================
+       HISTÓRICO GLOBAL DA LOJA
+    ====================================================== */
+    async function carregarHistorico() {
+      try {
+        if (unsubscribeHistorico) {
+          unsubscribeHistorico();
+        }
 
-roleta.style.transition="transform 9s cubic-bezier(0.12,0.8,0.2,1)"
+        const q = query(
+          collection(db, "lojaHistorico"),
+          orderBy("data", "desc"),
+          limit(20)
+        );
 
-roleta.style.transform=`rotate(${rotacao}deg)`
+        const feed = document.getElementById("feedCompras");
+        if (!feed) return;
 
+        unsubscribeHistorico = onSnapshot(q, async (snapshot) => {
+          feed.innerHTML = "";
 
-// bounce final
-setTimeout(()=>{
+          snapshot.docChanges().forEach(change => {
+            if (change.type !== "added") return;
 
-roleta.style.transition="transform 0.4s ease-out"
-roleta.style.transform=`rotate(${rotacao-8}deg)`
+            const c = change.doc.data();
+            if (!c.data || !c.item) return;
 
-setTimeout(()=>{
-roleta.style.transform=`rotate(${rotacao}deg)`
-},200)
+            if (c.item.includes("Caixa Lendária")) {
+              mostrarAlertaGlobal(`🔥 ${c.aluno} abriu uma CAIXA LENDÁRIA!`);
+            }
 
-},9000)
+            if (c.item.includes("Chaveiro")) {
+              mostrarAlertaGlobal(`👑 ${c.aluno} ganhou um Chaveiro Univers3D!`);
+            }
 
+            if (c.item.includes("+800 XP")) {
+              mostrarAlertaGlobal(`⚡ ${c.aluno} ganhou +800 XP na roleta!`);
+            }
+          });
 
-// entregar prêmio
-setTimeout(async ()=>{
+          const docsOrdenados = snapshot.docs
+            .filter(d => d.data().data)
+            .sort((a, b) => b.data().data.toMillis() - a.data().data.toMillis());
 
-const user = auth.currentUser
-const premio = premios[premioIndex]
+          for (const documento of docsOrdenados) {
+            const c = documento.data();
+            if (!c.data) continue;
 
-const snap = await getDoc(userRef)
-const dados = snap.data()
+            const data = c.data.toDate();
+            const dia = data.toLocaleDateString("pt-BR");
+            const hora = data.toLocaleTimeString("pt-BR");
+            const dataFormatada = `${dia} • ${hora}`;
 
-const xpAntes = dados.xp || 0
-const nivelAntes = dados.nivel || 0
-const sciencePointsAntes = dados.sciencePoints || 0
+            let patenteImg = "./assets/ranks/SeasonalRank0-0.png";
 
-const xpDepois = xpAntes + premio.xp
-const sciencePointsDepois = sciencePointsAntes
+            if (c.uid) {
+              try {
+                const userDoc = await getDoc(doc(db, "usuarios", c.uid));
 
-await updateDoc(userRef,{
-xp: xpDepois
-})
+                if (userDoc.exists()) {
+                  const dadosUser = userDoc.data();
+                  const nivel = dadosUser.nivel || 0;
+                  patenteImg = obterPatentePorNivel(nivel).imagem;
+                }
+              } catch (erro) {
+                console.warn("Erro ao carregar patente do usuário:", erro);
+              }
+            }
 
-await registrarCompra(`girou a Roleta Científica e recebeu +${premio.xp} XP`)
+            let classe = "feed-item";
+            if (c.item.includes("Roleta")) classe += " feed-roleta";
+            if (c.item.includes("Caixa")) classe += " feed-caixa";
+            if (c.item.includes("Chaveiro")) classe += " feed-lendario";
+            if (patenteImg.includes("Top")) classe += " patente-top";
 
-await logRoleta({
-uid: user.uid,
-itemId: "roleta-cientifica",
-itemNome: "🎡 Roleta Científica",
-sciencePointsAntes,
-sciencePointsDepois,
-xpAntes,
-xpDepois,
-nivelAntes,
-nivelDepois: nivelAntes,
-premioXp: premio.xp
-})
+            feed.innerHTML += `
+              <div class="${classe}">
+                <div class="feed-avatar">
+                  <img src="${patenteImg}" alt="Patente">
+                </div>
 
-document.querySelector(".resultado-final").innerHTML=`
+                <div class="feed-msg">
+                  <b>${c.aluno}</b> ${c.item}
 
-<h2>🎉 Resultado</h2>
+                  <div class="feed-info">
+                    🏫 ${c.escola} • ${c.serie} ${c.turma}
+                    <br>
+                    🕒 ${dataFormatada}
+                  </div>
+                </div>
+              </div>
+            `;
+          }
 
-<p style="font-size:26px;margin:20px 0;">
-Você recebeu <b>${premio.xp} XP</b>
-</p>
+          feed.scrollTop = 0;
+        });
+      } catch (erro) {
+        console.error("Erro ao carregar histórico:", erro);
+      }
+    }
 
-<button onclick="fecharRoleta()">Fechar</button>
+    /* ======================================================
+       RENDER DA LOJA
+    ====================================================== */
+    function renderLoja() {
+      const loja = document.getElementById("loja");
+      if (!loja) return;
 
-`
+      loja.innerHTML = "";
 
-girando=false
+      const configRaridades = [
+        {
+          id: "comum",
+          titulo: "⚪ Comum",
+          subtitulo: "Itens básicos para progresso rápido.",
+          classeTitulo: "titulo-comum"
+        },
+        {
+          id: "raro",
+          titulo: "🔵 Raro",
+          subtitulo: "Recompensas melhores e benefícios valiosos.",
+          classeTitulo: "titulo-raro"
+        },
+        {
+          id: "epico",
+          titulo: "🟣 Épico",
+          subtitulo: "Itens especiais e recompensas poderosas.",
+          classeTitulo: "titulo-epico"
+        },
+        {
+          id: "lendario",
+          titulo: "🟡 Lendário",
+          subtitulo: "Os itens mais raros e desejados da loja.",
+          classeTitulo: "titulo-lendario"
+        }
+      ];
 
-},9400)
+      configRaridades.forEach(secao => {
+        const itens = recompensas
+          .filter(item => (item.raridade || "comum") === secao.id)
+          .sort((a, b) => a.preco - b.preco);
 
+        if (!itens.length) return;
 
+        const wrapper = document.createElement("section");
+         wrapper.className = `secao-raridade ${secao.id}`;
+         wrapper.id = `secao-${secao.id}`;
+
+        wrapper.innerHTML = `
+          <div class="titulo-raridade ${secao.classeTitulo}">
+            <span>${secao.titulo}</span>
+          </div>
+
+          <p class="subtitulo-raridade">${secao.subtitulo}</p>
+
+          <div class="faixa-raridade"></div>
+          <br>
+
+          <div class="grid-raridade"></div>
+        `;
+
+        const grid = wrapper.querySelector(".grid-raridade");
+
+        itens.forEach(item => {
+          const podeComprar = spAluno >= item.preco;
+
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.classList.add("raridade-" + (item.raridade || "comum"));
+
+          if (item.lendario) {
+            card.classList.add("lendario");
+          }
+
+          card.innerHTML = `
+            ${item.lendario ? '<div class="badge">LENDÁRIO</div>' : ""}
+
+            <h3>${item.nome}</h3>
+            <p class="desc">${item.descricao}</p>
+
+            ${item.id === "chaveiro-univers3d" ? `
+              <div class="estoque-baixo">
+                🔥 Restam apenas ${estoqueChaveiro} unidades
+              </div>
+            ` : ""}
+
+            <div class="preco">🧪 ${item.preco} SP</div>
+
+            <button
+              ${!podeComprar || (item.id === "chaveiro-univers3d" && estoqueChaveiro <= 0) ? "disabled" : ""}
+              onclick="comprar('${item.id}')"
+            >
+              ${
+                item.id === "chaveiro-univers3d" && estoqueChaveiro <= 0
+                  ? "Esgotado"
+                  : podeComprar
+                  ? "Comprar"
+                  : "SP insuficiente"
+              }
+            </button>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        loja.appendChild(wrapper);
+      });
+    }
+
+    /* ======================================================
+       LIBERAR ACESSO AO RANKING
+    ====================================================== */
+    async function liberarAcessoRanking(item) {
+      const user = auth.currentUser;
+      const snap = await getDoc(userRef);
+      const dados = snap.data();
+
+      const agora = new Date();
+
+      const sciencePointsAntes = dados.sciencePoints || 0;
+      const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+      let base = agora;
+      let rankingAntes = null;
+
+      if (
+        dados.rankingLiberadoAte &&
+        typeof dados.rankingLiberadoAte.toDate === "function"
+      ) {
+        const dataAtualRanking = dados.rankingLiberadoAte.toDate();
+        rankingAntes = dataAtualRanking.toISOString();
+
+        if (dataAtualRanking > agora) {
+          base = dataAtualRanking;
+        }
+      }
+
+      const novaData = new Date(base);
+      novaData.setDate(novaData.getDate() + item.dias);
+
+      await updateDoc(userRef, {
+        sciencePoints: sciencePointsDepois,
+        rankingLiberadoAte: Timestamp.fromDate(novaData),
+        rankingPlano: `${item.dias}dias`,
+        rankingCompradoEm: serverTimestamp()
+      });
+
+      spAluno = sciencePointsDepois;
+      atualizarSPNaTela();
+
+      await salvarBeneficioInventario(user.uid, "ranking", {
+        tipo: "ranking",
+        nome: item.nome,
+        origem: "loja",
+        status: "ativo",
+        descricao: `Acesso ao ranking liberado por ${item.dias} dias.`,
+        ativadoEm: serverTimestamp(),
+        expiraEm: Timestamp.fromDate(novaData),
+        detalhes: {
+          dias: item.dias,
+          plano: `${item.dias}dias`
+        }
+      });
+
+      await logCompraRanking({
+        uid: user.uid,
+        itemId: item.id,
+        itemNome: item.nome,
+        sciencePointsAntes,
+        sciencePointsDepois,
+        rankingAntes,
+        rankingDepois: novaData.toISOString(),
+        dias: item.dias
+      });
+
+      await registrarCompra(`comprou acesso ao ranking por ${item.dias} dias`);
+    }
+
+    /* ======================================================
+       ROLETA
+    ====================================================== */
+    function abrirRoleta() {
+      const premios = [
+        { label: "⚡ +200 XP", xp: 200 },
+        { label: "⚡ +300 XP", xp: 300 },
+        { label: "⚡ +400 XP", xp: 400 },
+        { label: "⚡ +500 XP", xp: 500 },
+        { label: "⚡ +600 XP", xp: 600 },
+        { label: "⚡ +800 XP", xp: 800 }
+      ];
+
+      const modal = document.getElementById("roletaModal");
+      if (!modal) return;
+
+      modal.innerHTML = `
+        <div class="roleta-overlay">
+          <div class="roleta-container">
+            <div style="position:relative;width:420px;margin:auto">
+              <div class="seta">🔻</div>
+              <div id="roleta" class="roleta"></div>
+
+              <button class="btn-girar" onclick="girarRoleta()">
+                🎯 Girar Roleta
+              </button>
+
+              <div class="resultado-final"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const roleta = document.getElementById("roleta");
+      if (!roleta) return;
+
+      premios.forEach((p, i) => {
+        const ang = (360 / premios.length) * i + (360 / premios.length) / 2;
+
+        const label = document.createElement("div");
+        label.className = "roleta-label";
+        label.style.transform = `rotate(${ang}deg) translateY(-180px)`;
+        label.innerText = p.label;
+
+        roleta.appendChild(label);
+      });
+    }
+
+    async function girarRoleta() {
+      if (girando) return;
+      girando = true;
+
+      const roleta = document.getElementById("roleta");
+      const botao = document.querySelector(".btn-girar");
+
+      if (!roleta || !botao) {
+        girando = false;
+        return;
+      }
+
+      botao.style.display = "none";
+
+      const premios = [
+        { label: "⚡ +200 XP", xp: 200 },
+        { label: "⚡ +300 XP", xp: 300 },
+        { label: "⚡ +400 XP", xp: 400 },
+        { label: "⚡ +500 XP", xp: 500 },
+        { label: "⚡ +600 XP", xp: 600 },
+        { label: "⚡ +800 XP", xp: 800 }
+      ];
+
+      const premioIndex = Math.floor(Math.random() * premios.length);
+      const anguloPorItem = 360 / premios.length;
+      const anguloFinal = (360 - (premioIndex * anguloPorItem)) - (anguloPorItem / 2);
+      const voltas = 360 * 10;
+      const rotacao = voltas + anguloFinal;
+
+      roleta.style.transition = "transform 9s cubic-bezier(0.12,0.8,0.2,1)";
+      roleta.style.transform = `rotate(${rotacao}deg)`;
+
+      setTimeout(() => {
+        roleta.style.transition = "transform 0.4s ease-out";
+        roleta.style.transform = `rotate(${rotacao - 8}deg)`;
+
+        setTimeout(() => {
+          roleta.style.transform = `rotate(${rotacao}deg)`;
+        }, 200);
+      }, 9000);
+
+      setTimeout(async () => {
+        try {
+          const user = auth.currentUser;
+          const premio = premios[premioIndex];
+
+          const snap = await getDoc(userRef);
+          const dados = snap.data();
+
+          const xpAntes = dados.xp || 0;
+          const nivelAntes = dados.nivel || 0;
+          const sciencePointsAntes = dados.sciencePoints || 0;
+
+          const xpDepois = xpAntes + premio.xp;
+          const sciencePointsDepois = sciencePointsAntes;
+
+          await updateDoc(userRef, {
+            xp: xpDepois
+          });
+
+          await registrarCompra(`girou a Roleta Científica e recebeu +${premio.xp} XP`);
+
+          await logRoleta({
+            uid: user.uid,
+            itemId: "roleta-cientifica",
+            itemNome: "🎡 Roleta Científica",
+            sciencePointsAntes,
+            sciencePointsDepois,
+            xpAntes,
+            xpDepois,
+            nivelAntes,
+            nivelDepois: nivelAntes,
+            premioXp: premio.xp
+          });
+
+          const resultado = document.querySelector(".resultado-final");
+          if (resultado) {
+            resultado.innerHTML = `
+              <h2>🎉 Resultado</h2>
+
+              <p style="font-size:26px;margin:20px 0;">
+                Você recebeu <b>${premio.xp} XP</b>
+              </p>
+
+              <button onclick="fecharRoleta()">Fechar</button>
+            `;
+          }
+        } catch (erro) {
+          console.error("Erro ao girar roleta:", erro);
+          mostrarErro("Erro ao concluir a roleta.");
+        } finally {
+          girando = false;
+        }
+      }, 9400);
+    }
+
+    /* ======================================================
+       CAIXAS
+    ====================================================== */
+    function abrirCaixa(tipo) {
+      let premios = [];
+
+      if (tipo === "caixa-basica") {
+        premios = [
+          { xp: 20, raridade: "comum" },
+          { xp: 30, raridade: "comum" },
+          { xp: 40, raridade: "raro" },
+          { xp: 50, raridade: "raro" }
+        ];
+      }
+
+      if (tipo === "caixa-cientifica") {
+        premios = [
+          { xp: 60, raridade: "raro" },
+          { xp: 80, raridade: "raro" },
+          { xp: 120, raridade: "epico" },
+          { xp: 150, raridade: "epico" }
+        ];
+      }
+
+      if (tipo === "caixa-lendaria") {
+        premios = [
+          { xp: 200, raridade: "epico" },
+          { xp: 300, raridade: "lendario" },
+          { xp: 400, raridade: "lendario" }
+        ];
+      }
+
+      const premio = premios[Math.floor(Math.random() * premios.length)];
+      const modal = document.getElementById("modal");
+      if (!modal) return;
+
+      modal.innerHTML = `
+        <div class="modal">
+          <div class="modal-box" style="position:relative">
+            <div id="caixaIcon" class="caixa-loot">📦</div>
+            <h2>Abrindo caixa...</h2>
+          </div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        const caixaIcon = document.getElementById("caixaIcon");
+        if (caixaIcon) {
+          caixaIcon.className = "explosao";
+          caixaIcon.innerHTML = "💥";
+        }
+      }, 1500);
+
+      setTimeout(() => {
+        const box = document.querySelector(".modal-box");
+        if (!box) return;
+
+        for (let i = 0; i < 20; i++) {
+          const p = document.createElement("div");
+          p.className = "particulas";
+          p.style.setProperty("--x", (Math.random() * 400 - 200) + "px");
+          p.style.setProperty("--y", (Math.random() * 400 - 200) + "px");
+          box.appendChild(p);
+        }
+      }, 1700);
+
+      setTimeout(async () => {
+        try {
+          const user = auth.currentUser;
+          const snap = await getDoc(userRef);
+          const dados = snap.data();
+
+          const xpAntes = dados.xp || 0;
+          const nivelAntes = dados.nivel || 0;
+          const xpDepois = xpAntes + premio.xp;
+
+          await updateDoc(userRef, {
+            xp: xpDepois
+          });
+
+          const nomesCaixas = {
+            "caixa-basica": "🧪 Caixa Básica",
+            "caixa-cientifica": "⚛ Caixa Científica",
+            "caixa-lendaria": "👑 Caixa Lendária"
+          };
+
+          await registrarCompra(`abriu ${nomesCaixas[tipo]} e recebeu +${premio.xp} XP`);
+
+          await logAberturaCaixa({
+            uid: user.uid,
+            itemId: tipo,
+            itemNome: nomesCaixas[tipo],
+            xpAntes,
+            xpDepois,
+            nivelAntes,
+            nivelDepois: nivelAntes,
+            premioXp: premio.xp
+          });
+
+          modal.innerHTML = `
+            <div class="modal">
+              <div class="modal-box">
+                <div class="explosao">🎁</div>
+
+                <h2 class="raridade-${premio.raridade}-premio">
+                  ${premio.raridade.toUpperCase()}
+                </h2>
+
+                <div class="premio-xp">
+                  ⚡ +${premio.xp} XP
+                </div>
+
+                <br>
+
+                <button onclick="fecharCaixa()">Continuar</button>
+              </div>
+            </div>
+          `;
+        } catch (erro) {
+          console.error("Erro ao abrir caixa:", erro);
+          mostrarErro("Erro ao concluir a abertura da caixa.");
+        }
+      }, 2600);
+    }
+
+    /* ======================================================
+       PRÊMIO FÍSICO
+    ====================================================== */
+    async function premioChaveiro() {
+      try {
+        const user = auth.currentUser;
+        const ref = doc(db, "loja", "chaveiro-univers3d");
+
+        const [snapEstoque, snapUser] = await Promise.all([
+          getDoc(ref),
+          getDoc(userRef)
+        ]);
+
+        const dadosEstoque = snapEstoque.data();
+        const dadosUser = snapUser.data();
+
+        if (!dadosEstoque || dadosEstoque.estoque <= 0) {
+          alert("❌ Chaveiros esgotados!");
+          return;
+        }
+
+        const sciencePointsAntes = dadosUser.sciencePoints || 0;
+        const sciencePointsDepois = sciencePointsAntes - 1500;
+
+        await updateDoc(userRef, {
+          sciencePoints: sciencePointsDepois
+        });
+
+        spAluno = sciencePointsDepois;
+        atualizarSPNaTela();
+
+        await updateDoc(ref, {
+          estoque: dadosEstoque.estoque - 1
+        });
+
+        estoqueChaveiro--;
+
+        await adicionarAoInventario(user.uid, {
+          tipo: "premio-fisico",
+          itemId: "chaveiro-univers3d",
+          nome: "🔑 Chaveiro Univers3D",
+          origem: "loja",
+          status: "resgatado",
+          descricao: "Prêmio físico resgatado na loja.",
+          detalhes: {
+            estoqueConsumido: 1
+          }
+        });
+
+        await logPremioFisico({
+          uid: user.uid,
+          itemId: "chaveiro-univers3d",
+          itemNome: "🔑 Chaveiro Univers3D",
+          sciencePointsAntes,
+          sciencePointsDepois
+        });
+
+        await registrarCompra("resgatou 🔑 Chaveiro Univers3D");
+
+        renderLoja();
+
+        const modal = document.getElementById("modal");
+        if (!modal) return;
+
+        modal.innerHTML = `
+          <div class="modal">
+            <div class="modal-box lendario-bg">
+              <div class="chaveiro-anim">🔑</div>
+
+              <h2>🏆 PRÊMIO LENDÁRIO</h2>
+              <h3>Chaveiro Univers3D</h3>
+
+              <p>Você ganhou um prêmio físico!</p>
+
+              <div class="selo-patrocinio">
+                Patrocinado por @univers3d
+              </div>
+
+              <br>
+
+              <button onclick="fecharCaixa()">Continuar</button>
+            </div>
+          </div>
+        `;
+      } catch (erro) {
+        console.error("Erro ao resgatar chaveiro:", erro);
+        mostrarErro("Erro ao resgatar o chaveiro.");
+      }
+    }
+
+    /* ======================================================
+       COMPRAR ITENS
+    ====================================================== */
+    window.comprar = async function(id) {
+      try {
+        const item = recompensas.find(r => r.id === id);
+        if (!item) return;
+
+        if (spAluno < item.preco) {
+          alert("SciencePoints insuficientes!");
+          return;
+        }
+
+        if (
+          id === "caixa-basica" ||
+          id === "caixa-cientifica" ||
+          id === "caixa-lendaria"
+        ) {
+          spAluno -= item.preco;
+
+          await updateDoc(userRef, {
+            sciencePoints: spAluno
+          });
+
+          atualizarSPNaTela();
+          abrirCaixa(id);
+          return;
+        }
+
+        if (id === "chaveiro-univers3d") {
+          await premioChaveiro();
+          return;
+        }
+
+        if (id === "roleta-cientifica") {
+          spAluno -= item.preco;
+
+          await updateDoc(userRef, {
+            sciencePoints: spAluno
+          });
+
+          atualizarSPNaTela();
+          abrirRoleta();
+          return;
+        }
+
+        if (item.tipo === "ranking") {
+          await liberarAcessoRanking(item);
+          renderLoja();
+
+          const modal = document.getElementById("modal");
+          if (!modal) return;
+
+          modal.innerHTML = `
+            <div class="modal">
+              <div class="modal-box">
+                <div class="explosao">🏆</div>
+
+                <h2>Acesso liberado!</h2>
+
+                <p style="font-size:20px;margin-top:15px;">
+                  Você liberou o ranking por <b>${item.dias} dias</b>.
+                </p>
+
+                <br>
+
+                <button onclick="fecharCaixa()">Continuar</button>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (item.xp) {
+          const user = auth.currentUser;
+          const snap = await getDoc(userRef);
+          const dados = snap.data();
+
+          const xpAntes = dados.xp || 0;
+          const nivelAntes = dados.nivel || 0;
+          const sciencePointsAntes = dados.sciencePoints || 0;
+
+          const xpDepois = xpAntes + item.xp;
+          const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+          await updateDoc(userRef, {
+            sciencePoints: sciencePointsDepois,
+            xp: xpDepois
+          });
+
+          spAluno = sciencePointsDepois;
+          atualizarSPNaTela();
+
+          await registrarCompra(`comprou ${item.nome}`);
+
+          await logCompraXP({
+            uid: user.uid,
+            itemId: item.id,
+            itemNome: item.nome,
+            sciencePointsAntes,
+            sciencePointsDepois,
+            xpAntes,
+            xpDepois,
+            nivelAntes,
+            nivelDepois: nivelAntes
+          });
+
+          renderLoja();
+          mostrarPopup(id);
+        }
+      } catch (erro) {
+        console.error("Erro na compra:", erro);
+        mostrarErro("Erro ao processar a compra.");
+      }
+    };
+
+    /* ======================================================
+       POPUP DE RECOMPENSAS
+    ====================================================== */
+    function mostrarPopup(tipo) {
+      const overlay = document.getElementById("popupRecompensa");
+      const anim = document.getElementById("popupAnimacao");
+      const titulo = document.getElementById("popupTitulo");
+      const desc = document.getElementById("popupDescricao");
+
+      if (!overlay || !anim || !titulo || !desc) return;
+
+      overlay.classList.add("ativo");
+
+      if (tipo === "xp20") {
+        anim.innerHTML = "⚡";
+        titulo.innerHTML = "+20 XP";
+        desc.innerHTML = "Seu conhecimento aumentou!";
+      }
+
+      if (tipo === "xp50") {
+        anim.innerHTML = "⚡⚡";
+        titulo.innerHTML = "+50 XP";
+        desc.innerHTML = "Bônus científico médio!";
+      }
+
+      if (tipo === "xp100") {
+        anim.innerHTML = "⚡⚡⚡";
+        titulo.innerHTML = "+100 XP";
+        desc.innerHTML = "Grande avanço científico!";
+      }
+
+      if (tipo === "caixa-basica") {
+        anim.innerHTML = "📦";
+        titulo.innerHTML = "Caixa Básica";
+        desc.innerHTML = "Abrindo recompensas...";
+      }
+
+      if (tipo === "caixa-cientifica") {
+        anim.innerHTML = "⚛";
+        titulo.innerHTML = "Caixa Científica";
+        desc.innerHTML = "Recompensas raras!";
+      }
+
+      if (tipo === "caixa-lendaria") {
+        anim.innerHTML = "👑";
+        titulo.innerHTML = "Caixa Lendária";
+        desc.innerHTML = "Recompensa épica!";
+      }
+
+      if (tipo === "chaveiro-univers3d") {
+        anim.innerHTML = "🔑";
+        titulo.innerHTML = "Chaveiro 3D";
+        desc.innerHTML = "Você ganhou um prêmio físico!";
+      }
+    }
+
+    /* ======================================================
+       FUNÇÕES GLOBAIS
+    ====================================================== */
+    window.fecharPopup = function() {
+      const popup = document.getElementById("popupRecompensa");
+      if (popup) popup.classList.remove("ativo");
+    };
+
+    window.fecharCaixa = function() {
+      const modal = document.getElementById("modal");
+      if (modal) modal.innerHTML = "";
+      renderLoja();
+    };
+
+    window.fecharRoleta = function() {
+      const modal = document.getElementById("roletaModal");
+      if (modal) modal.innerHTML = "";
+      renderLoja();
+    };
+
+    window.girarRoleta = girarRoleta;
+
+      /* ======================================================
+   MENU ATIVO POR SEÇÃO VISÍVEL
+====================================================== */
+function iniciarMenuAtivo() {
+  const links = document.querySelectorAll(".menu-loja a[data-target]");
+  if (!links.length) return;
+
+  const secoesIds = Array.from(links).map(link => link.dataset.target);
+  const secoes = secoesIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if (!secoes.length) return;
+
+  function ativarLink(idAtivo) {
+    links.forEach(link => {
+      const ativo = link.dataset.target === idAtivo;
+      link.classList.toggle("ativo", ativo);
+    });
+  }
+
+  function detectarSecaoAtiva() {
+    const linhaReferencia = window.innerHeight * 0.30;
+    let secaoAtual = "topo";
+
+    for (const secao of secoes) {
+      const rect = secao.getBoundingClientRect();
+
+      if (rect.top <= linhaReferencia) {
+        secaoAtual = secao.id;
+      }
+    }
+
+    ativarLink(secaoAtual);
+  }
+
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      const alvo = link.dataset.target;
+      ativarLink(alvo);
+    });
+  });
+
+  window.addEventListener("scroll", detectarSecaoAtiva, { passive:true });
+  window.addEventListener("resize", detectarSecaoAtiva);
+
+  detectarSecaoAtiva();
 }
-window.girarRoleta = girarRoleta
 
-async function carregarEstoque(){
-const ref=doc(db,"loja","chaveiro-univers3d")
-const snap=await getDoc(ref)
-if(snap.exists()) estoqueChaveiro=snap.data().estoque
-}
-
-/* ======================================================
-   HISTÓRICO GLOBAL DA LOJA (FEED)
-   ====================================================== */
-
-async function carregarHistorico(){
-
-/* cancelar listener antigo se existir */
-if(unsubscribeHistorico){
-unsubscribeHistorico()
-}
-
-/* consulta do histórico */
-
-const q = query(
-collection(db,"lojaHistorico"),
-orderBy("data","desc"),
-limit(20)
-)
-
-const feed = document.getElementById("feedCompras")
-
-/* listener em tempo real */
-
-unsubscribeHistorico = onSnapshot(q, async (snapshot)=>{
-
-feed.innerHTML=""
-
-/* ======================================================
-   ALERTAS GLOBAIS (apenas eventos novos)
-   ====================================================== */
-
-snapshot.docChanges().forEach(change=>{
-
-if(change.type === "added"){
-
-const c = change.doc.data()
-
-if(!c.data) return
-
-if(c.item.includes("Caixa Lendária")){
-globalAlert(`🔥 ${c.aluno} abriu uma CAIXA LENDÁRIA!`)
-}
-
-if(c.item.includes("Chaveiro")){
-globalAlert(`👑 ${c.aluno} ganhou um Chaveiro Univers3D!`)
-}
-
-if(c.item.includes("+800 XP")){
-globalAlert(`⚡ ${c.aluno} ganhou +800 XP na roleta!`)
-}
-
-}
-
-})
-
-/* ======================================================
-   ORDENAR DOCUMENTOS (garantia contra delay do timestamp)
-   ====================================================== */
-
-const docsOrdenados = snapshot.docs
-.filter(d => d.data().data)
-.sort((a,b)=> b.data().data.toMillis() - a.data().data.toMillis())
-
-/* ======================================================
-   RENDER DO FEED
-   ====================================================== */
-
-for (const documento of docsOrdenados) {
-
-const c = documento.data()
-
-if(!c.data) continue
-
-/* ===== FORMATA DATA ===== */
-
-const data = c.data.toDate()
-
-const dia = data.toLocaleDateString("pt-BR")
-const hora = data.toLocaleTimeString("pt-BR")
-
-const dataFormatada = `${dia} • ${hora}`
-
-/* ======================================================
-   BUSCAR PATENTE DO USUÁRIO
-   ====================================================== */
-
-let patenteImg="/assets/ranks/SeasonalRank0-0.png"
-
-if(c.uid){
-
-const userDoc = await getDoc(doc(db,"usuarios",c.uid))
-
-if(userDoc.exists()){
-
-const dadosUser = userDoc.data()
-const nivel = dadosUser.nivel || 0
-
-patenteImg = obterPatentePorNivel(nivel).imagem
-
-}
-
-}
-
-/* ======================================================
-   DEFINIR CLASSE VISUAL DO EVENTO
-   ====================================================== */
-
-let classe="feed-item"
-
-if(c.item.includes("Roleta")) classe+=" feed-roleta"
-if(c.item.includes("Caixa")) classe+=" feed-caixa"
-if(c.item.includes("Chaveiro")) classe+=" feed-lendario"
-
-if(patenteImg.includes("Top")) classe+=" patente-top"
-
-/* ======================================================
-   RENDER HTML
-   ====================================================== */
-
-feed.innerHTML += `
-
-<div class="${classe}">
-
-<div class="feed-avatar">
-<img src="${patenteImg}">
-</div>
-
-<div class="feed-msg">
-
-<b>${c.aluno}</b> ${c.item}
-
-<div class="feed-info">
-🏫 ${c.escola} • ${c.serie} ${c.turma}
-<br>
-🕒 ${dataFormatada}
-</div>
-
-</div>
-
-</div>
-
-`
-
-}
-
-/* ======================================================
-   SCROLL AUTOMÁTICO PARA O TOPO
-   ====================================================== */
-
-feed.scrollTop = 0
-
-})
-
-} 
-
-async function carregarSP(){
-
-const user=auth.currentUser
-if(!user) return
-
-userRef=doc(db,"usuarios",user.uid)
-
-const snap=await getDoc(userRef)
-
-spAluno=snap.data().sciencePoints||0
-
-document.getElementById("sp").innerText=spAluno
-
-await carregarEstoque()
-
-renderLoja()
-
-}
-
-function renderLoja(){
-
-const loja=document.getElementById("loja")
-loja.innerHTML=""
-
-recompensas.forEach(item=>{
-
-const podeComprar=spAluno>=item.preco
-
-const card=document.createElement("div")
-
-card.classList.add("card")
-
-// aplicar raridade
-card.classList.add("raridade-"+(item.raridade||"comum"))
-
-// lendário continua funcionando
-if(item.lendario){
-card.classList.add("lendario")
-}
-
-card.innerHTML=`
-
-${item.lendario?'<div class="badge">LENDÁRIO</div>':""}
-
-<h3>${item.nome}</h3>
-
-<p class="desc">${item.descricao}</p>
-
-${item.id==="chaveiro-univers3d" ? `
-<div class="estoque-baixo">
-🔥 Restam apenas ${estoqueChaveiro} unidades
-</div>
-` : ""}
-
-<div class="preco">🧪 ${item.preco} SP</div>
-
-<button ${!podeComprar || (item.id==="chaveiro-univers3d" && estoqueChaveiro<=0) ?"disabled":""}
-onclick="comprar('${item.id}')">
-
-${
-item.id==="chaveiro-univers3d" && estoqueChaveiro<=0
-? "Esgotado"
-: podeComprar
-? "Comprar"
-: "SP insuficiente"
-}
-
-</button>
-
-`
-
-loja.appendChild(card)
-
-})
-
-}
-
-function abrirRoleta(){
-
-const premios=[
-{label:"⚡ +200 XP",xp:200},
-{label:"⚡ +300 XP",xp:300},
-{label:"⚡ +400 XP",xp:400},
-{label:"⚡ +500 XP",xp:500},
-{label:"⚡ +600 XP",xp:600},
-{label:"⚡ +800 XP",xp:800}
-]
-
-const modal=document.getElementById("roletaModal")
-
-modal.innerHTML=`
-<div class="roleta-overlay">
-<div class="roleta-container">
-<div style="position:relative;width:420px;margin:auto">
-
-<div class="seta">🔻</div>
-
-<div id="roleta" class="roleta"></div>
-
-<button class="btn-girar" onclick="girarRoleta()">
-🎯 Girar Roleta
-</button>
-
-<div class="resultado-final"></div>
-
-</div>
-</div>
-</div>
-`
-
-const roleta=document.getElementById("roleta")
-
-premios.forEach((p,i)=>{
-
-const ang=(360/premios.length)*i + (360/premios.length)/2
-
-const label=document.createElement("div")
-label.className="roleta-label"
-label.style.transform=`rotate(${ang}deg) translateY(-180px)`
-label.innerText=p.label
-
-roleta.appendChild(label)
-
-})
-
-}
-
-window.fecharRoleta = function(){
-
-const modal = document.getElementById("roletaModal")
-
-if(modal){
-modal.innerHTML=""
-}
-
-renderLoja()
-
-}  
-
-async function registrarCompra(item){
-
-const user = auth.currentUser
-
-const snap = await getDoc(userRef)
-
-const dados = snap.data()
-
-await addDoc(collection(db,"lojaHistorico"),{
-
-uid: user.uid,
-
-aluno: dados.nome || user.email,
-escola: dados.escola || "-",
-serie: dados.serie || "-",
-turma: dados.turma || "-",
-
-item: item,
-
-data: serverTimestamp()
-
-})
-
-}
-
-async function liberarAcessoRanking(item){
-
-const user = auth.currentUser
-const snap = await getDoc(userRef)
-const dados = snap.data()
-
-const agora = new Date()
-
-const sciencePointsAntes = dados.sciencePoints || 0
-const sciencePointsDepois = sciencePointsAntes - item.preco
-
-let base = agora
-let rankingAntes = null
-
-if(
-dados.rankingLiberadoAte &&
-typeof dados.rankingLiberadoAte.toDate === "function"
-){
-const dataAtualRanking = dados.rankingLiberadoAte.toDate()
-rankingAntes = dataAtualRanking.toISOString()
-
-if(dataAtualRanking > agora){
-base = dataAtualRanking
-}
-}
-
-const novaData = new Date(base)
-novaData.setDate(novaData.getDate() + item.dias)
-
-await updateDoc(userRef,{
-sciencePoints: sciencePointsDepois,
-rankingLiberadoAte: Timestamp.fromDate(novaData),
-rankingPlano: `${item.dias}dias`,
-rankingCompradoEm: serverTimestamp()
-})
-
-spAluno = sciencePointsDepois
-document.getElementById("sp").innerText = spAluno
-
-await salvarBeneficioInventario(user.uid, "ranking", {
-tipo: "ranking",
-nome: item.nome,
-origem: "loja",
-status: "ativo",
-descricao: `Acesso ao ranking liberado por ${item.dias} dias.`,
-ativadoEm: serverTimestamp(),
-expiraEm: Timestamp.fromDate(novaData),
-detalhes: {
-dias: item.dias,
-plano: `${item.dias}dias`
-}
-})
-
-await logCompraRanking({
-uid: user.uid,
-itemId: item.id,
-itemNome: item.nome,
-sciencePointsAntes,
-sciencePointsDepois,
-rankingAntes,
-rankingDepois: novaData.toISOString(),
-dias: item.dias
-})
-
-await registrarCompra(`comprou acesso ao ranking por ${item.dias} dias`)
-
-}
-
-
-window.comprar=async function(id){
-
-const item=recompensas.find(r=>r.id===id)
-
-if(spAluno<item.preco){
-alert("SciencePoints insuficientes!")
-return
-}
-
-/* ======================
-   CAIXAS
-====================== */
-
-if(
-id==="caixa-basica" ||
-id==="caixa-cientifica" ||
-id==="caixa-lendaria"
-){
-
-spAluno-=item.preco
-
-await updateDoc(userRef,{
-sciencePoints:spAluno
-})
-
-document.getElementById("sp").innerText=spAluno
-
-abrirCaixa(id)
-
-return
-
-}
-
-if(id==="chaveiro-univers3d"){
-
-premioChaveiro()
-
-return
-
-}
-
-if(id==="roleta-cientifica"){
-
-spAluno-=200
-
-await updateDoc(userRef,{sciencePoints:spAluno})
-
-document.getElementById("sp").innerText=spAluno
-
-abrirRoleta()
-
-return
-}
-
-if(item.tipo==="ranking"){
-
-await liberarAcessoRanking(item)
-
-renderLoja()
-
-const modal=document.getElementById("modal")
-
-modal.innerHTML=`
-
-<div class="modal">
-
-<div class="modal-box">
-
-<div class="explosao">🏆</div>
-
-<h2>Acesso liberado!</h2>
-
-<p style="font-size:20px;margin-top:15px;">
-Você liberou o ranking por <b>${item.dias} dias</b>.
-</p>
-
-<br>
-
-<button onclick="fecharCaixa()">Continuar</button>
-
-</div>
-
-</div>
-
-`
-
-return
-}
-
-if(item.xp){
-
-const user = auth.currentUser
-const snap = await getDoc(userRef)
-const dados = snap.data()
-
-const xpAntes = dados.xp || 0
-const nivelAntes = dados.nivel || 0
-const sciencePointsAntes = dados.sciencePoints || 0
-
-const xpDepois = xpAntes + item.xp
-const sciencePointsDepois = sciencePointsAntes - item.preco
-
-await updateDoc(userRef,{
-sciencePoints: sciencePointsDepois,
-xp: xpDepois
-})
-
-spAluno = sciencePointsDepois
-document.getElementById("sp").innerText = spAluno
-
-await registrarCompra(`comprou ${item.nome}`)
-
-await logCompraXP({
-uid: user.uid,
-itemId: item.id,
-itemNome: item.nome,
-sciencePointsAntes,
-sciencePointsDepois,
-xpAntes,
-xpDepois,
-nivelAntes,
-nivelDepois: nivelAntes
-})
-
-renderLoja()
-mostrarPopup(id)
-
-}
-
-}
-
-function mostrarPopup(tipo){
-
-const overlay=document.getElementById("popupRecompensa")
-const anim=document.getElementById("popupAnimacao")
-const titulo=document.getElementById("popupTitulo")
-const desc=document.getElementById("popupDescricao")
-
-overlay.classList.add("ativo")
-
-if(tipo==="xp20"){
-anim.innerHTML="⚡"
-titulo.innerHTML="+20 XP"
-desc.innerHTML="Seu conhecimento aumentou!"
-}
-
-if(tipo==="xp50"){
-anim.innerHTML="⚡⚡"
-titulo.innerHTML="+50 XP"
-desc.innerHTML="Bônus científico médio!"
-}
-
-if(tipo==="xp100"){
-anim.innerHTML="⚡⚡⚡"
-titulo.innerHTML="+100 XP"
-desc.innerHTML="Grande avanço científico!"
-}
-
-if(tipo==="caixa-basica"){
-anim.innerHTML="📦"
-titulo.innerHTML="Caixa Básica"
-desc.innerHTML="Abrindo recompensas..."
-}
-
-if(tipo==="caixa-cientifica"){
-anim.innerHTML="⚛"
-titulo.innerHTML="Caixa Científica"
-desc.innerHTML="Recompensas raras!"
-}
-
-if(tipo==="caixa-lendaria"){
-anim.innerHTML="👑"
-titulo.innerHTML="Caixa Lendária"
-desc.innerHTML="Recompensa épica!"
-}
-
-if(tipo==="chaveiro-univers3d"){
-anim.innerHTML="🔑"
-titulo.innerHTML="Chaveiro 3D"
-desc.innerHTML="Você ganhou um prêmio físico!"
-}
-
-}
-
-auth.onAuthStateChanged(user=>{
-if(user){
-
-initGlobalAlert()
-
-carregarSP()
-carregarHistorico()
-
-}
-})
-
-window.fecharPopup=function(){
-
-document
-.getElementById("popupRecompensa")
-.classList.remove("ativo")
-
-}
-
-function abrirCaixa(tipo){
-
-let premios
-
-if(tipo==="caixa-basica"){
-premios=[
-{xp:20,raridade:"comum"},
-{xp:30,raridade:"comum"},
-{xp:40,raridade:"raro"},
-{xp:50,raridade:"raro"}
-]
-}
-
-if(tipo==="caixa-cientifica"){
-premios=[
-{xp:60,raridade:"raro"},
-{xp:80,raridade:"raro"},
-{xp:120,raridade:"epico"},
-{xp:150,raridade:"epico"}
-]
-}
-
-if(tipo==="caixa-lendaria"){
-premios=[
-{xp:200,raridade:"epico"},
-{xp:300,raridade:"lendario"},
-{xp:400,raridade:"lendario"}
-]
-}
-
-
-const premio=premios[Math.floor(Math.random()*premios.length)]
-
-const modal=document.getElementById("modal")
-
-modal.innerHTML=`
-
-<div class="modal">
-
-<div class="modal-box" style="position:relative">
-
-<div id="caixaIcon" class="caixa-loot">📦</div>
-
-<h2>Abrindo caixa...</h2>
-
-</div>
-
-</div>
-
-`
-
-/* abrir caixa */
-
-setTimeout(()=>{
-
-document.getElementById("caixaIcon").className="explosao"
-document.getElementById("caixaIcon").innerHTML="💥"
-
-},1500)
-
-/* partículas */
-
-setTimeout(()=>{
-
-const box=document.querySelector(".modal-box")
-
-for(let i=0;i<20;i++){
-
-const p=document.createElement("div")
-
-p.className="particulas"
-
-p.style.setProperty("--x",(Math.random()*400-200)+"px")
-p.style.setProperty("--y",(Math.random()*400-200)+"px")
-
-box.appendChild(p)
-
-}
-
-},1700)
-
-/* mostrar prêmio */
-
-setTimeout(async ()=>{
-
-const user = auth.currentUser
-const snap = await getDoc(userRef)
-const dados = snap.data()
-
-const xpAntes = dados.xp || 0
-const nivelAntes = dados.nivel || 0
-const xpDepois = xpAntes + premio.xp
-
-await updateDoc(userRef,{
-xp: xpDepois
-})
-
-const nomesCaixas={
-"caixa-basica":"🧪 Caixa Básica",
-"caixa-cientifica":"⚛ Caixa Científica",
-"caixa-lendaria":"👑 Caixa Lendária"
-}
-
-await registrarCompra(
-`abriu ${nomesCaixas[tipo]} e recebeu +${premio.xp} XP`
-)
-
-await logAberturaCaixa({
-uid: user.uid,
-itemId: tipo,
-itemNome: nomesCaixas[tipo],
-xpAntes,
-xpDepois,
-nivelAntes,
-nivelDepois: nivelAntes,
-premioXp: premio.xp
-})
-
-modal.innerHTML=`
-
-<div class="modal">
-
-<div class="modal-box">
-
-<div class="explosao">🎁</div>
-
-<h2 class="raridade-${premio.raridade}-premio">
-${premio.raridade.toUpperCase()}
-</h2>
-
-<div class="premio-xp">
-⚡ +${premio.xp} XP
-</div>
-
-<br>
-
-<button onclick="fecharCaixa()">Continuar</button>
-
-</div>
-
-</div>
-
-`
-
-},2600)
-
-}
-
-window.fecharCaixa=function(){
-
-document.getElementById("modal").innerHTML=""
-
-renderLoja()
-
-}
-
-async function premioChaveiro(){
-
-const user = auth.currentUser
-const ref = doc(db,"loja","chaveiro-univers3d")
-
-const [snapEstoque, snapUser] = await Promise.all([
-getDoc(ref),
-getDoc(userRef)
-])
-
-const dadosEstoque = snapEstoque.data()
-const dadosUser = snapUser.data()
-
-if(!dadosEstoque || dadosEstoque.estoque <= 0){
-alert("❌ Chaveiros esgotados!")
-return
-}
-
-const sciencePointsAntes = dadosUser.sciencePoints || 0
-const sciencePointsDepois = sciencePointsAntes - 1500
-
-/* desconta SP */
-await updateDoc(userRef,{
-sciencePoints: sciencePointsDepois
-})
-
-spAluno = sciencePointsDepois
-document.getElementById("sp").innerText = spAluno
-
-/* diminui estoque */
-await updateDoc(ref,{
-estoque: dadosEstoque.estoque - 1
-})
-
-estoqueChaveiro--
-
-/* inventário */
-await adicionarAoInventario(user.uid,{
-tipo: "premio-fisico",
-itemId: "chaveiro-univers3d",
-nome: "🔑 Chaveiro Univers3D",
-origem: "loja",
-status: "resgatado",
-descricao: "Prêmio físico resgatado na loja.",
-detalhes: {
-estoqueConsumido: 1
-}
-})
-
-/* log */
-await logPremioFisico({
-uid: user.uid,
-itemId: "chaveiro-univers3d",
-itemNome: "🔑 Chaveiro Univers3D",
-sciencePointsAntes,
-sciencePointsDepois
-})
-
-await registrarCompra(`resgatou 🔑 Chaveiro Univers3D`)
-
-renderLoja()
-
-/* animação */
-const modal=document.getElementById("modal")
-
-modal.innerHTML=`
-
-<div class="modal">
-
-<div class="modal-box lendario-bg">
-
-<div class="chaveiro-anim">🔑</div>
-
-<h2>🏆 PRÊMIO LENDÁRIO</h2>
-
-<h3>Chaveiro Univers3D</h3>
-
-<p>Você ganhou um prêmio físico!</p>
-
-<div class="selo-patrocinio">
-Patrocinado por @univers3d
-</div>
-
-<br>
-
-<button onclick="fecharCaixa()">Continuar</button>
-
-</div>
-
-</div>
-
-`
-
-}
-
-</script>
-
-<!-- POPUP RECOMPENSA -->
-
-<div id="popupRecompensa" class="popup-overlay">
-
-<div class="popup-card">
-
-<div id="popupAnimacao" class="popup-animacao"></div>
-
-<h2 id="popupTitulo"></h2>
-
-<p id="popupDescricao"></p>
-
-<button onclick="fecharPopup()" class="popup-btn">
-Continuar
-</button>
-
-
-
-</div>
-
-</div>
-
-
+    /* ======================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+    auth.onAuthStateChanged(user => {
+  if (!user) return;
+
+  iniciarAlertaGlobal();
+  carregarSP();
+  carregarHistorico();
+
+  setTimeout(() => {
+    iniciarMenuAtivo();
+  }, 300);
+});
+  </script>
 
 </body>
 </html>

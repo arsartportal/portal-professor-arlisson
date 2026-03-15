@@ -1,0 +1,1304 @@
+/* =====================================================
+   LOJA.CSS
+   Loja de Recompensas - Portal do Professor
+   ===================================================== */
+
+/* =====================================================
+   BASE
+   ===================================================== */
+body{
+font-family:'Inter','Segoe UI',Arial,sans-serif;
+background:
+radial-gradient(circle at 20% 20%, #1f2a44 0%, transparent 40%),
+radial-gradient(circle at 80% 70%, #16213e 0%, transparent 40%),
+linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+margin:0;
+padding:40px;
+}
+
+/* =====================================================
+   BOTÃO VOLTAR
+   ===================================================== */
+.btn-voltar{
+display:inline-flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+background:linear-gradient(135deg,#1e293b,#0f172a);
+color:#fff;
+padding:12px 18px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+font-weight:600;
+margin-bottom:24px;
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+transition:0.25s;
+}
+
+.btn-voltar:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 24px rgba(0,0,0,0.35);
+}
+
+/* =====================================================
+   TÍTULO
+   ===================================================== */
+h1{
+text-align:center;
+font-size:38px;
+margin-bottom:30px;
+background:linear-gradient(90deg,#ffd700,#ffb700);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+letter-spacing:1px;
+}
+
+/* =====================================================
+   SCIENCE POINTS
+   ===================================================== */
+.sp-box{
+background:linear-gradient(145deg,#1e293b,#0f172a);
+border:1px solid rgba(255,255,255,0.08);
+padding:20px;
+border-radius:14px;
+text-align:center;
+font-size:22px;
+margin-bottom:35px;
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 0 20px rgba(255,255,255,0.03);
+}
+
+#sp{
+font-weight:bold;
+font-size:28px;
+color:#38bdf8;
+text-shadow:
+0 0 10px #38bdf8,
+0 0 20px #38bdf8,
+0 0 40px #0ea5e9;
+animation:energia 1.5s infinite alternate;
+}
+
+@keyframes energia{
+0%{
+text-shadow:
+0 0 5px #38bdf8,
+0 0 10px #38bdf8;
+}
+100%{
+text-shadow:
+0 0 20px #38bdf8,
+0 0 40px #38bdf8,
+0 0 60px #0ea5e9;
+}
+}
+
+/* =====================================================
+   ATALHO INVENTÁRIO
+   ===================================================== */
+.atalhos-loja{
+display:flex;
+justify-content:center;
+margin-bottom:28px;
+}
+
+.btn-inventario-loja{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+text-decoration:none;
+padding:14px 24px;
+border-radius:14px;
+font-weight:700;
+font-size:16px;
+color:white;
+background:linear-gradient(135deg,#0ea5e9,#2563eb);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 10px 24px rgba(37,99,235,0.28),
+0 0 18px rgba(14,165,233,0.15);
+transition:0.25s;
+}
+
+.btn-inventario-loja:hover{
+transform:translateY(-3px) scale(1.02);
+box-shadow:
+0 16px 34px rgba(37,99,235,0.35),
+0 0 26px rgba(14,165,233,0.22);
+}
+
+/* =====================================================
+   GRID PRINCIPAL
+   ===================================================== */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px;
+}
+
+/* =====================================================
+   SEÇÕES POR RARIDADE
+   ===================================================== */
+.secao-raridade{
+margin-bottom:42px;
+position:relative;
+}
+
+.titulo-raridade{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:16px;
+font-size:28px;
+font-weight:800;
+letter-spacing:0.5px;
+}
+
+.subtitulo-raridade{
+margin:0 0 18px 0;
+color:#94a3b8;
+font-size:14px;
+}
+
+.grid-raridade{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px;
+}
+
+.titulo-comum{
+color:#cbd5e1;
+}
+
+.titulo-raro{
+color:#60a5fa;
+text-shadow:none;
+}
+
+.titulo-epico{
+color:#c084fc;
+text-shadow:none;
+}
+
+.titulo-lendario{
+color:#facc15;
+text-shadow:none;
+}
+
+.faixa-raridade{
+height:1px;
+width:100%;
+margin-top:10px;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+}
+
+.secao-raridade.lendario .faixa-raridade{
+background:linear-gradient(90deg,transparent,rgba(250,204,21,0.22),transparent);
+}
+
+.secao-raridade.raro .faixa-raridade{
+background:linear-gradient(90deg,transparent,rgba(59,130,246,0.26),transparent);
+}
+
+.secao-raridade.epico .faixa-raridade{
+background:linear-gradient(90deg,transparent,rgba(168,85,247,0.26),transparent);
+}
+
+.secao-raridade.comum .faixa-raridade{
+background:linear-gradient(90deg,transparent,rgba(156,163,175,0.20),transparent);
+}
+
+/* =====================================================
+   SEÇÃO LENDÁRIA — PREMIUM MINIMALISTA
+   ===================================================== */
+.secao-lendario{
+position:relative;
+margin-top:40px;
+padding:28px;
+border-radius:24px;
+overflow:hidden;
+isolation:isolate;
+
+background:linear-gradient(135deg,#111827,#0f172a 55%,#0b1220);
+border:1px solid rgba(255,215,0,0.10);
+
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,0.03),
+0 8px 28px rgba(0,0,0,0.28);
+}
+
+.secao-lendario::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:inherit;
+pointer-events:none;
+z-index:0;
+background:
+radial-gradient(circle at top left, rgba(255,220,80,0.05), transparent 28%),
+linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.02) 35%, transparent 65%);
+}
+
+.secao-lendario::after{
+content:"";
+position:absolute;
+inset:-1px;
+border-radius:inherit;
+padding:1px;
+pointer-events:none;
+z-index:1;
+
+background:conic-gradient(
+from 0deg,
+transparent 0deg,
+transparent 82deg,
+rgba(255,230,120,0.95) 88deg,
+rgba(255,214,60,1) 92deg,
+transparent 98deg,
+transparent 360deg
+);
+
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+
+filter:drop-shadow(0 0 4px rgba(255,215,0,0.20));
+animation:correnteLendaria 6s linear infinite;
+}
+
+.secao-lendario > *{
+position:relative;
+z-index:2;
+}
+
+@keyframes correnteLendaria{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+.card{
+background:linear-gradient(145deg,#1f2937,#111827);
+padding:22px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.05);
+box-shadow:0 12px 25px rgba(0,0,0,0.6);
+transition:0.35s;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:-120%;
+left:-120%;
+width:200%;
+height:200%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.08),
+transparent
+);
+transform:rotate(25deg);
+transition:0.8s;
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:
+0 18px 40px rgba(0,0,0,0.7),
+0 0 14px rgba(255,255,255,0.04);
+}
+
+.card:hover::before{
+top:120%;
+left:120%;
+}
+
+/* =====================================================
+   TEXTO DOS CARDS
+   ===================================================== */
+.card h3{
+margin:0;
+font-size:20px;
+}
+
+.desc{
+font-size:14px;
+margin:10px 0;
+color:#9ca3af;
+}
+
+.preco{
+font-size:20px;
+margin:14px 0;
+font-weight:bold;
+color:#38bdf8;
+}
+
+/* =====================================================
+   RARIDADES VISUAIS DOS CARDS
+   ===================================================== */
+.raridade-comum{
+border-top:3px solid #9ca3af;
+}
+
+.raridade-raro{
+border-top:3px solid #3b82f6;
+box-shadow:none;
+}
+
+.raridade-epico{
+border-top:3px solid #a855f7;
+box-shadow:none;
+}
+
+.raridade-lendario{
+border-top:3px solid rgba(250,204,21,0.85);
+box-shadow:none;
+}
+
+/* =====================================================
+   CARD LENDÁRIO ESPECIAL
+   ===================================================== */
+.lendario{
+border:1px solid rgba(250,204,21,0.12);
+background:linear-gradient(145deg,#1f2937,#111827);
+box-shadow:0 12px 25px rgba(0,0,0,0.6);
+}
+
+/* =====================================================
+   BADGE
+   ===================================================== */
+.badge{
+position:absolute;
+top:12px;
+right:12px;
+background:linear-gradient(135deg,#ffd700,#ffae00);
+color:#111;
+font-weight:bold;
+padding:4px 10px;
+border-radius:20px;
+font-size:11px;
+letter-spacing:1px;
+}
+
+/* =====================================================
+   ESTOQUE
+   ===================================================== */
+.estoque{
+font-size:13px;
+color:#f87171;
+margin-bottom:10px;
+}
+
+.estoque-baixo{
+font-size:13px;
+color:#f87171;
+margin-bottom:10px;
+font-weight:bold;
+animation:pulsarEstoque 1.2s infinite alternate;
+}
+
+@keyframes pulsarEstoque{
+from{opacity:0.6;}
+to{opacity:1;}
+}
+
+/* =====================================================
+   BOTÕES
+   ===================================================== */
+button{
+padding:12px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+color:white;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+transition:0.25s;
+box-shadow:0 5px 15px rgba(34,197,94,0.4);
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(34,197,94,0.6);
+}
+
+button:disabled{
+background:#374151;
+box-shadow:none;
+color:#888;
+cursor:not-allowed;
+}
+
+/* =====================================================
+   MODAL BASE
+   ===================================================== */
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-box{
+background:linear-gradient(145deg,#1f2937,#111827);
+padding:40px;
+border-radius:16px;
+text-align:center;
+animation:pop 0.3s ease;
+box-shadow:0 30px 80px rgba(0,0,0,0.8);
+}
+
+@keyframes pop{
+from{transform:scale(0.6);}
+to{transform:scale(1);}
+}
+
+/* =====================================================
+   CAIXA - ANIMAÇÕES ANTIGAS
+   ===================================================== */
+.caixa{
+font-size:70px;
+animation:shake 1s infinite;
+}
+
+@keyframes shake{
+0%{transform:rotate(0);}
+25%{transform:rotate(10deg);}
+50%{transform:rotate(-10deg);}
+75%{transform:rotate(10deg);}
+100%{transform:rotate(0);}
+}
+
+.resultado{
+font-size:26px;
+margin-top:20px;
+}
+
+.caixa-fechada{
+font-size:90px;
+animation:tremer 0.8s infinite;
+}
+
+@keyframes tremer{
+0%{transform:rotate(0);}
+25%{transform:rotate(8deg);}
+50%{transform:rotate(-8deg);}
+75%{transform:rotate(8deg);}
+100%{transform:rotate(0);}
+}
+
+.caixa-aberta{
+font-size:100px;
+animation:abrirCaixa 0.8s forwards;
+}
+
+@keyframes abrirCaixa{
+0%{transform:scale(0.6);}
+60%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+.luz-premio{
+font-size:60px;
+margin-top:20px;
+animation:luz 1s infinite alternate;
+}
+
+@keyframes luz{
+from{
+filter:drop-shadow(0 0 5px white);
+}
+to{
+filter:drop-shadow(0 0 30px gold);
+}
+}
+
+/* =====================================================
+   LOOT BOX ULTRA
+   ===================================================== */
+.caixa-loot{
+font-size:100px;
+animation:tremerCaixa 0.8s infinite;
+}
+
+@keyframes tremerCaixa{
+0%{transform:rotate(0deg);}
+25%{transform:rotate(8deg);}
+50%{transform:rotate(-8deg);}
+75%{transform:rotate(8deg);}
+100%{transform:rotate(0deg);}
+}
+
+.explosao{
+font-size:110px;
+animation:explodir 0.6s ease forwards;
+}
+
+@keyframes explodir{
+0%{transform:scale(0.5);opacity:0;}
+60%{transform:scale(1.3);}
+100%{transform:scale(1);opacity:1;}
+}
+
+.premio-xp{
+font-size:34px;
+margin-top:15px;
+font-weight:bold;
+color:#38bdf8;
+text-shadow:
+0 0 10px #38bdf8,
+0 0 25px #38bdf8,
+0 0 45px #0ea5e9;
+animation:xpGlow 1.2s infinite alternate;
+}
+
+@keyframes xpGlow{
+from{
+text-shadow:0 0 10px #38bdf8;
+}
+to{
+text-shadow:
+0 0 25px #38bdf8,
+0 0 50px #0ea5e9;
+}
+}
+
+/* =====================================================
+   PARTÍCULAS
+   ===================================================== */
+.particulas{
+position:absolute;
+top:50%;
+left:50%;
+width:10px;
+height:10px;
+background:white;
+border-radius:50%;
+animation:particula 1s forwards;
+}
+
+@keyframes particula{
+0%{
+transform:translate(-50%,-50%) scale(0.3);
+opacity:1;
+}
+100%{
+transform:translate(var(--x),var(--y)) scale(1);
+opacity:0;
+}
+}
+
+/* =====================================================
+   RARIDADES DO PRÊMIO
+   ===================================================== */
+.raridade-comum-premio{
+color:#9ca3af;
+}
+
+.raridade-raro-premio{
+color:#3b82f6;
+text-shadow:0 0 20px #3b82f6;
+}
+
+.raridade-epico-premio{
+color:#a855f7;
+text-shadow:0 0 25px #a855f7;
+}
+
+.raridade-lendario-premio{
+color:gold;
+text-shadow:
+0 0 20px gold,
+0 0 40px gold;
+}
+
+/* =====================================================
+   PRÊMIO LENDÁRIO
+   ===================================================== */
+.chaveiro-anim{
+font-size:90px;
+animation:girarChaveiro 2s infinite linear;
+filter:drop-shadow(0 0 20px gold);
+}
+
+@keyframes girarChaveiro{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+.lendario-bg{
+background:radial-gradient(circle,#3b2f00,#000);
+box-shadow:
+0 0 40px gold,
+0 0 80px rgba(255,215,0,0.6);
+}
+
+.selo-patrocinio{
+margin-top:15px;
+font-size:14px;
+color:#ffd700;
+background:rgba(0,0,0,0.5);
+padding:6px 14px;
+border-radius:20px;
+display:inline-block;
+letter-spacing:1px;
+}
+
+/* =====================================================
+   ROLETA ULTRA
+   ===================================================== */
+.roleta-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.roleta-container{
+background:linear-gradient(145deg,#1f2937,#111827);
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 30px 80px rgba(0,0,0,0.9);
+}
+
+.roleta{
+width:420px;
+height:420px;
+border-radius:50%;
+border:12px solid #111;
+position:relative;
+margin:auto;
+background:conic-gradient(
+#ff6b6b 0deg 60deg,
+#ffd93d 60deg 120deg,
+#6bcB77 120deg 180deg,
+#4d96ff 180deg 240deg,
+#c77dff 240deg 300deg,
+#ff9f1c 300deg 360deg
+);
+transition:transform 8s cubic-bezier(.08,.82,.17,1);
+box-shadow:
+0 0 30px rgba(255,215,0,0.6),
+0 0 80px rgba(255,215,0,0.4);
+}
+
+.roleta::after{
+content:"⚛";
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:130px;
+height:130px;
+background:radial-gradient(circle,#ffffff,#e5e7eb);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:
+inset 0 0 10px rgba(0,0,0,0.2),
+0 0 25px rgba(0,0,0,0.3);
+border:6px solid #333;
+font-size:46px;
+color:#111;
+}
+
+.seta{
+position:absolute;
+top:-28px;
+left:50%;
+transform:translateX(-50%);
+font-size:50px;
+z-index:50;
+color:#fff;
+pointer-events:none;
+}
+
+.roleta-label{
+position:absolute;
+width:100%;
+text-align:center;
+top:50%;
+left:0;
+font-weight:bold;
+font-size:16px;
+color:white;
+transform-origin:center;
+}
+
+.resultado-final{
+font-size:30px;
+margin-top:20px;
+font-weight:bold;
+}
+
+.btn-girar{
+margin-top:30px;
+background:linear-gradient(45deg,#f59e0b,#fbbf24);
+border:none;
+padding:14px 30px;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+transition:0.2s;
+}
+
+.btn-girar:hover{
+transform:scale(1.05);
+}
+
+/* =====================================================
+   POPUP DE RECOMPENSA
+   ===================================================== */
+.popup-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(8px);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+opacity:0;
+pointer-events:none;
+transition:0.4s;
+}
+
+.popup-overlay.ativo{
+opacity:1;
+pointer-events:auto;
+}
+
+.popup-card{
+background:linear-gradient(145deg,#0f172a,#020617);
+border-radius:20px;
+padding:40px;
+width:350px;
+text-align:center;
+box-shadow:
+0 0 40px rgba(0,200,255,0.3),
+inset 0 0 30px rgba(255,255,255,0.05);
+animation:popupEntrada 0.6s ease;
+}
+
+@keyframes popupEntrada{
+0%{
+transform:scale(0.6);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.popup-card h2{
+color:#38bdf8;
+margin-top:15px;
+}
+
+.popup-card p{
+color:#cbd5f5;
+margin-bottom:25px;
+}
+
+.popup-btn{
+background:linear-gradient(90deg,#22c55e,#16a34a);
+border:none;
+padding:12px 30px;
+border-radius:12px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+}
+
+.popup-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #22c55e;
+}
+
+.popup-animacao{
+font-size:60px;
+animation:brilhar 1.2s infinite alternate;
+}
+
+@keyframes brilhar{
+from{filter:drop-shadow(0 0 5px #fff);}
+to{filter:drop-shadow(0 0 25px #38bdf8);}
+}
+
+/* =====================================================
+   HISTÓRICO DE COMPRAS
+   ===================================================== */
+.historico-loja{
+margin-top:50px;
+background:linear-gradient(145deg,#1f2937,#111827);
+padding:25px;
+border-radius:16px;
+box-shadow:0 15px 40px rgba(0,0,0,0.7);
+}
+
+.historico-loja h2{
+margin-top:0;
+color:#38bdf8;
+}
+
+#feedCompras{
+display:flex;
+flex-direction:column;
+gap:8px;
+max-height:220px;
+overflow:auto;
+}
+
+/* =====================================================
+   SCROLLBAR PREMIUM
+   ===================================================== */
+#feedCompras::-webkit-scrollbar{
+width:8px;
+}
+
+#feedCompras::-webkit-scrollbar-track{
+background:rgba(255,255,255,0.03);
+border-radius:10px;
+}
+
+#feedCompras::-webkit-scrollbar-thumb{
+background:linear-gradient(180deg,#38bdf8,#0ea5e9);
+border-radius:10px;
+box-shadow:0 0 8px rgba(56,189,248,0.6);
+}
+
+#feedCompras::-webkit-scrollbar-thumb:hover{
+background:linear-gradient(180deg,#7dd3fc,#38bdf8);
+box-shadow:0 0 12px rgba(56,189,248,0.9);
+}
+
+/* =====================================================
+   COMPRA SIMPLES
+   ===================================================== */
+.compra{
+background:#020617;
+padding:10px 14px;
+border-radius:8px;
+font-size:14px;
+border-left:3px solid #38bdf8;
+}
+
+/* =====================================================
+   FEED ESTILO GAME
+   ===================================================== */
+.feed-item{
+display:flex;
+align-items:flex-start;
+gap:12px;
+background:linear-gradient(145deg,#020617,#0f172a);
+padding:12px 14px;
+border-radius:10px;
+border-left:4px solid #38bdf8;
+animation:feedEntrada 0.5s ease;
+}
+
+@keyframes feedEntrada{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.feed-avatar{
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
+font-size:26px;
+text-align:center;
+}
+
+.feed-avatar img{
+width:36px;
+height:36px;
+object-fit:contain;
+filter:drop-shadow(0 0 6px rgba(255,255,255,0.4));
+transition:0.3s;
+animation:glowPatente 1.5s infinite alternate;
+}
+
+@keyframes glowPatente{
+0%{
+filter:drop-shadow(0 0 4px rgba(255,255,255,0.3));
+}
+100%{
+filter:drop-shadow(0 0 12px rgba(255,255,255,0.8));
+}
+}
+
+.patente-top img{
+animation:glowTop 1.2s infinite alternate;
+}
+
+@keyframes glowTop{
+0%{
+filter:drop-shadow(0 0 8px gold);
+}
+100%{
+filter:drop-shadow(0 0 18px gold);
+}
+}
+
+.feed-msg{
+flex:1;
+font-size:14px;
+}
+
+.feed-msg b{
+color:#e2e8f0;
+}
+
+.feed-info{
+font-size:12px;
+color:#94a3b8;
+margin-top:2px;
+}
+
+.feed-xp{
+color:#38bdf8;
+font-weight:bold;
+}
+
+.feed-lendario{
+border-left:4px solid gold;
+background:linear-gradient(145deg,#2c1f00,#020617);
+box-shadow:0 0 15px rgba(255,215,0,0.4);
+}
+
+.feed-roleta{
+border-left:4px solid #f59e0b;
+}
+
+.feed-caixa{
+border-left:4px solid #22c55e;
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+@media (max-width: 900px){
+body{
+padding:24px;
+}
+
+h1{
+font-size:32px;
+}
+
+.roleta{
+width:320px;
+height:320px;
+}
+
+.roleta::after{
+width:100px;
+height:100px;
+font-size:36px;
+}
+
+.roleta-label{
+font-size:13px;
+}
+
+.roleta-container{
+padding:24px;
+}
+}
+
+@media (max-width: 640px){
+body{
+padding:18px;
+}
+
+h1{
+font-size:28px;
+}
+
+.sp-box{
+font-size:18px;
+padding:16px;
+}
+
+#sp{
+font-size:24px;
+}
+
+.btn-voltar,
+.btn-inventario-loja{
+width:100%;
+justify-content:center;
+}
+
+.atalhos-loja{
+display:block;
+}
+
+.card{
+padding:18px;
+}
+
+.modal-box,
+.popup-card,
+.roleta-container{
+width:100%;
+max-width:calc(100vw - 32px);
+padding:24px;
+box-sizing:border-box;
+}
+
+.roleta{
+width:260px;
+height:260px;
+}
+
+.roleta::after{
+width:82px;
+height:82px;
+font-size:30px;
+border-width:4px;
+}
+
+.seta{
+top:-20px;
+font-size:38px;
+}
+
+.btn-girar{
+width:100%;
+}
+
+.resultado-final{
+font-size:22px;
+}
+
+.chaveiro-anim,
+.caixa-loot,
+.explosao{
+font-size:80px;
+}
+}
+
+/* =========================================================
+   SCROLL SUAVE
+========================================================= */
+html{
+scroll-behavior:smooth;
+}
+
+/* =========================================================
+   MENU SUPERIOR DA LOJA
+========================================================= */
+.menu-loja{
+position:sticky;
+top:14px;
+z-index:120;
+width:min(1200px, calc(100% - 32px));
+margin:18px auto 26px;
+padding:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+
+background:rgba(15,23,42,0.78);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+
+border:1px solid rgba(148,163,184,0.18);
+border-radius:18px;
+box-shadow:
+0 12px 30px rgba(0,0,0,0.30),
+inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.menu-loja::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:18px;
+pointer-events:none;
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.02) 35%,
+rgba(255,255,255,0.00) 60%
+);
+}
+
+.menu-loja a{
+position:relative;
+z-index:1;
+text-decoration:none;
+color:#e2e8f0;
+font-weight:700;
+font-size:0.95rem;
+letter-spacing:0.2px;
+
+padding:11px 16px;
+border-radius:12px;
+
+background:linear-gradient(180deg, rgba(30,41,59,0.88), rgba(15,23,42,0.92));
+border:1px solid rgba(148,163,184,0.16);
+
+transition:
+transform 0.22s ease,
+box-shadow 0.22s ease,
+border-color 0.22s ease,
+background 0.22s ease,
+color 0.22s ease;
+}
+
+.menu-loja a:hover{
+transform:translateY(-2px);
+color:#ffffff;
+border-color:rgba(96,165,250,0.42);
+box-shadow:
+0 8px 20px rgba(37,99,235,0.18),
+0 0 0 1px rgba(96,165,250,0.15) inset;
+background:linear-gradient(180deg, rgba(37,99,235,0.22), rgba(15,23,42,0.96));
+}
+
+.menu-loja a:active{
+transform:translateY(0);
+}
+
+.menu-loja a:focus-visible{
+outline:none;
+border-color:rgba(125,211,252,0.80);
+box-shadow:
+0 0 0 3px rgba(56,189,248,0.20),
+0 8px 20px rgba(14,165,233,0.18);
+}
+
+/* =========================================================
+   OFFSET DE ÂNCORA
+========================================================= */
+#topo,
+#secao-comum,
+#secao-raro,
+#secao-epico,
+#secao-lendario,
+#historico{
+scroll-margin-top:120px;
+}
+
+/* =========================================================
+   RESPONSIVIDADE DO MENU
+========================================================= */
+@media (max-width: 768px){
+.menu-loja{
+top:10px;
+width:calc(100% - 20px);
+margin:14px auto 22px;
+padding:10px;
+justify-content:flex-start;
+flex-wrap:nowrap;
+overflow-x:auto;
+overflow-y:hidden;
+scrollbar-width:thin;
+}
+
+.menu-loja::-webkit-scrollbar{
+height:8px;
+}
+
+.menu-loja::-webkit-scrollbar-thumb{
+background:rgba(148,163,184,0.35);
+border-radius:999px;
+}
+
+.menu-loja a{
+flex:0 0 auto;
+white-space:nowrap;
+font-size:0.92rem;
+padding:10px 14px;
+}
+
+#topo,
+#secao-comum,
+#secao-raro,
+#secao-epico,
+#secao-lendario,
+#historico{
+scroll-margin-top:110px;
+}
+}
+
+@media (max-width: 480px){
+.menu-loja{
+border-radius:16px;
+padding:9px;
+gap:8px;
+}
+
+.menu-loja a{
+font-size:0.88rem;
+padding:9px 12px;
+border-radius:10px;
+}
+}
+
+/* =========================================================
+   LINK ATIVO DO MENU DA LOJA
+========================================================= */
+.menu-loja a.ativo{
+color:#ffffff;
+border-color:rgba(125,211,252,0.85);
+background:
+linear-gradient(180deg, rgba(14,165,233,0.30), rgba(15,23,42,0.95));
+box-shadow:
+0 0 0 1px rgba(125,211,252,0.28) inset,
+0 8px 24px rgba(14,165,233,0.22),
+0 0 18px rgba(56,189,248,0.16);
+}
