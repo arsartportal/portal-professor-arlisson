@@ -1,160 +1,120 @@
 /* =========================================================
-   VARIÁVEIS DE TEMA
-   ========================================================= */
-:root {
-  --header-bg: #ffffff;
-  --header-text: #222;
-
-  --hud-bg: #f8f9fa;
-  --hud-border: rgba(0, 0, 0, 0.08);
-
-  --btn-border: rgba(0, 0, 0, 0.25);
-  --btn-hover: rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="dark"] {
-  --header-bg: #1e1e1e;
-  --header-text: #f2f2f2;
-
-  --hud-bg: #2a2a2a;
-  --hud-border: rgba(255, 255, 255, 0.12);
-
-  --btn-border: rgba(255, 255, 255, 0.35);
-  --btn-hover: rgba(255, 255, 255, 0.12);
-}
+   HEADER.CSS — TOPO GLOBAL DO PORTAL
+   Extraído do style.css
+   Contém:
+   - header principal
+   - mini HUD
+   - título e subtítulo
+   - botões do topo
+   - dark mode
+   - responsivo
+   - animações do header
+========================================================= */
 
 /* =========================================================
-   HEADER (CONTAINER PRINCIPAL)
-   ========================================================= */
+   HEADER / TOPO GLOBAL
+========================================================= */
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 12px 24px;
-  background: var(--header-bg);
-  color: var(--header-text);
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: relative;
-  z-index: 100;
-}
+  overflow: visible;
 
-/* =========================================================
-   MINI HUD (PATENTE + XP)
-   ========================================================= */
-.mini-hud {
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
+  gap: 24px;
+
+  padding: 26px 32px;
+
+  background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+
+  isolation: isolate;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-/* Patente pequena */
-.mini-patente {
-  width: 36px;
-  height: 36px;
-}
-
-/* Barra de XP (compacta) */
-.mini-xp {
-  width: 80px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-[data-theme="dark"] .mini-xp {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-#xp-preenchimento {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00e0ff, #00ff9c);
-  transition: width 0.3s ease;
-}
-
-/* =========================================================
-   HUD EXPANDIDO (HOVER)
-   ========================================================= */
-.mini-detalhes {
+.header::before {
+  content: "";
   position: absolute;
-  top: 48px;
-  left: 0;
-
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-
-  padding: 12px;
-  width: 170px;
-
-  background: var(--hud-bg);
-  border: 1px solid var(--hud-border);
-  border-radius: 12px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(59, 130, 246, 0.05) 20%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(59, 130, 246, 0.05) 80%,
+      transparent 100%
+    );
+  background-size: 200% 100%;
+  animation: brilhoHeader 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Ativação no hover */
-.mini-hud:hover .mini-detalhes {
-  display: flex;
+.header::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(520px, 60%);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.45),
+    transparent
+  );
+  filter: blur(0.3px);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
-/* Patente grande */
-.patente-grande {
-  width: 64px;
-  height: 64px;
+.mini-hud,
+.header-centro,
+.header-direita {
+  position: relative;
+  z-index: 2;
 }
 
-/* Texto do HUD */
-.info-texto {
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.info-texto strong {
-  display: block;
-  font-size: 0.95rem;
-}
-
-/* =========================================================
-   TÍTULO E SUBTÍTULO DO PORTAL
-   ========================================================= */
 .header-centro {
   text-align: center;
 }
 
 .portal-title {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+  text-align: center;
+  line-height: 1.15;
 }
 
 .portal-brand {
-  opacity: 0.7;
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  background: rgba(255, 255, 255, 0.45);
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .portal-name {
-  font-weight: 700;
+  display: block;
+  font-size: clamp(2.2rem, 4vw, 4.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: #0f172a;
+  text-shadow: 0 2px 18px rgba(59, 130, 246, 0.10);
 }
 
-.portal-subtitle {
-  margin: 2px 0 0;
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-
-/* =========================================================
-   AÇÕES DO USUÁRIO (BOTÕES)
-   ========================================================= */
 .header-direita {
-  display: flex;
-  align-items: center;
+  justify-self: end;
 }
 
 .header-botoes {
@@ -163,37 +123,259 @@
 }
 
 .header-botoes button {
-  background: transparent;
-  border: 1px solid var(--btn-border);
-  color: inherit;
-
-  padding: 6px 12px;
-  border-radius: 8px;
-
-  cursor: pointer;
-  font-size: 0.9rem;
-
-  transition: background 0.2s ease, transform 0.1s ease;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
 }
 
 .header-botoes button:hover {
-  background: var(--btn-hover);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.26);
+  filter: brightness(1.03);
+}
+
+#toggle-tema {
+  min-width: 52px;
 }
 
 /* =========================================================
-   RESPONSIVIDADE BÁSICA
-   ========================================================= */
-@media (max-width: 768px) {
-  .portal-subtitle {
-    display: none;
+   MINI HUD
+========================================================= */
+.mini-hud {
+  position: relative;
+  z-index: 60;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  width: 150px;
+  padding: 10px 14px;
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #0f172a, #16213b);
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  cursor: pointer;
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.mini-hud:hover {
+  padding: 8px 14px;
+}
+
+.mini-patente {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.mini-hud:hover .mini-patente {
+  transform: scale(1.15);
+}
+
+.mini-xp {
+  width: 90px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.mini-hud:hover .mini-xp {
+  height: 8px;
+}
+
+.mini-xp #xp-preenchimento {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #4da3ff, #7cc7ff);
+  transition: width 0.4s ease;
+}
+
+.mini-tooltip,
+.info-texto,
+#xp-texto {
+  white-space: nowrap;
+}
+
+.mini-detalhes {
+  position: absolute;
+  top: 110%;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #0b1220;
+  padding: 10px 14px;
+  border-radius: 14px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+}
+
+.mini-hud:hover .mini-detalhes {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.patente-grande {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.info-texto {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #e6ecff;
+}
+
+/* =========================================================
+   SUBTÍTULO ANIMADO
+========================================================= */
+.hero-subtitle.animated-lines {
+  position: relative;
+  display: inline-block;
+  padding: 10px 0;
+  color: #3e3e3f;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.hero-subtitle.animated-lines::before,
+.hero-subtitle.animated-lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(79, 124, 255, 0.18);
+}
+
+.hero-subtitle.animated-lines::before {
+  top: 0;
+}
+
+.hero-subtitle.animated-lines::after {
+  bottom: 0;
+}
+
+.hero-subtitle.animated-lines::before,
+.hero-subtitle.animated-lines::after {
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,0.15) 20%,
+      rgba(79,124,255,0.95) 50%,
+      rgba(255,255,255,0.15) 80%,
+      transparent 100%
+    );
+  background-size: 220px 100%;
+  background-repeat: no-repeat;
+}
+
+.hero-subtitle.animated-lines::before {
+  animation: linhaTopo 3s linear infinite;
+}
+
+.hero-subtitle.animated-lines::after {
+  animation: linhaBaixo 3s linear infinite;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+@media (max-width: 960px) {
+  .header {
+    grid-template-columns: 1fr;
+    padding: 22px 18px;
+    gap: 18px;
   }
 
-  .mini-xp {
-    width: 60px;
+  .mini-hud,
+  .header-direita {
+    justify-self: center;
   }
 
-  .portal-title {
-    font-size: 1.2rem;
+  .header-botoes {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .portal-name {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+body[data-theme="dark"] .header {
+  background: linear-gradient(180deg, #071126 0%, #0b1833 100%);
+  border-bottom: 1px solid rgba(96, 165, 250, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+body[data-theme="dark"] .portal-brand {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  color: #93c5fd;
+}
+
+body[data-theme="dark"] .portal-name {
+  color: #eff6ff;
+  text-shadow: 0 0 24px rgba(96, 165, 250, 0.18);
+}
+
+body[data-theme="dark"] .mini-hud {
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+}
+
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+@keyframes brilhoHeader {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes linhaTopo {
+  from {
+    background-position: -220px 0;
+  }
+  to {
+    background-position: calc(100% + 220px) 0;
+  }
+}
+
+@keyframes linhaBaixo {
+  from {
+    background-position: calc(100% + 220px) 0;
+  }
+  to {
+    background-position: -220px 0;
   }
 }
