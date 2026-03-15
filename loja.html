@@ -6,6 +6,8 @@
 
 <title>🛒 Loja de Recompensas</title>
 
+<link rel="stylesheet" href="/js/plugins/global-alert/globalAlert.css">
+
 <style>
 
 /* ======================
@@ -1184,16 +1186,78 @@ flex-shrink:0;
 
 }
 
+/* ======================
+   ATALHO INVENTÁRIO
+====================== */
+
+.atalhos-loja{
+display:flex;
+justify-content:center;
+margin-bottom:28px;
+}
+
+.btn-inventario-loja{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+text-decoration:none;
+padding:14px 24px;
+border-radius:14px;
+font-weight:700;
+font-size:16px;
+color:white;
+background:linear-gradient(135deg,#0ea5e9,#2563eb);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 10px 24px rgba(37,99,235,0.28),
+0 0 18px rgba(14,165,233,0.15);
+transition:0.25s;
+}
+
+.btn-inventario-loja:hover{
+transform:translateY(-3px) scale(1.02);
+box-shadow:
+0 16px 34px rgba(37,99,235,0.35),
+0 0 26px rgba(14,165,233,0.22);
+}
+
+.btn-voltar{
+display:inline-flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+background:linear-gradient(135deg,#1e293b,#0f172a);
+color:#fff;
+padding:12px 18px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+font-weight:600;
+margin-bottom:24px;
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+transition:0.25s;
+}
+
+.btn-voltar:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 24px rgba(0,0,0,0.35);
+}
 </style>
 
 </head>
 
 <body>
 
+<a href="home.html" class="btn-voltar">⬅ Voltar ao início</a>
+
 <h1>🛒 Loja de Recompensas</h1>
 
 <div class="sp-box">
 🧪 Seus SciencePoints: <span id="sp">...</span>
+</div>
+
+<div class="atalhos-loja">
+<a href="inventario.html" class="btn-inventario-loja">🎒 Ver meu inventário</a>
 </div>
 
 <div class="grid" id="loja"></div>
@@ -1215,6 +1279,16 @@ flex-shrink:0;
 
 import { auth, db } from "./js/firebase.js";
 import { obterPatentePorNivel } from "./js/patentes.js";
+import { initGlobalAlert, globalAlert } from "./js/plugins/global-alert/globalAlert.js"
+import {
+logCompraXP,
+logCompraRanking,
+logAberturaCaixa,
+logRoleta,
+logPremioFisico,
+adicionarAoInventario,
+salvarBeneficioInventario
+} from "./js/inventario-log.js";
 import { 
 doc,
 getDoc,
@@ -1226,7 +1300,8 @@ serverTimestamp,
 query,
 orderBy,
 limit,
-onSnapshot
+onSnapshot,
+Timestamp
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 const recompensas=[
 
@@ -1240,8 +1315,11 @@ const recompensas=[
 
 {id:"roleta-cientifica",nome:"🎡 Roleta Científica",preco:200,descricao:"Gire a roleta científica.",raridade:"epico"},
 
-{id:"chaveiro-univers3d",nome:"🔑 Chaveiro 3D",preco:1500,lendario:true,descricao:"Prêmio físico.",raridade:"lendario"}
+{id:"ranking-7dias",nome:"🏆 Ranking 7 Dias",preco:300,descricao:"Libera o acesso ao ranking por 7 dias.",raridade:"raro",tipo:"ranking",dias:7},
+{id:"ranking-15dias",nome:"🥈 Ranking 15 Dias",preco:500,descricao:"Libera o acesso ao ranking por 15 dias.",raridade:"epico",tipo:"ranking",dias:15},
+{id:"ranking-30dias",nome:"👑 Ranking 30 Dias",preco:900,descricao:"Libera o acesso ao ranking por 30 dias.",raridade:"lendario",tipo:"ranking",dias:30},
 
+{id:"chaveiro-univers3d",nome:"🔑 Chaveiro 3D",preco:1500,lendario:true,descricao:"Prêmio físico.",raridade:"lendario"}
 
 ]
 
@@ -1304,17 +1382,37 @@ roleta.style.transform=`rotate(${rotacao}deg)`
 // entregar prêmio
 setTimeout(async ()=>{
 
-const premio=premios[premioIndex]
+const user = auth.currentUser
+const premio = premios[premioIndex]
 
-const snap=await getDoc(userRef)
-const dados=snap.data()
+const snap = await getDoc(userRef)
+const dados = snap.data()
+
+const xpAntes = dados.xp || 0
+const nivelAntes = dados.nivel || 0
+const sciencePointsAntes = dados.sciencePoints || 0
+
+const xpDepois = xpAntes + premio.xp
+const sciencePointsDepois = sciencePointsAntes
 
 await updateDoc(userRef,{
-xp:(dados.xp||0)+premio.xp
+xp: xpDepois
 })
 
 await registrarCompra(`girou a Roleta Científica e recebeu +${premio.xp} XP`)
 
+await logRoleta({
+uid: user.uid,
+itemId: "roleta-cientifica",
+itemNome: "🎡 Roleta Científica",
+sciencePointsAntes,
+sciencePointsDepois,
+xpAntes,
+xpDepois,
+nivelAntes,
+nivelDepois: nivelAntes,
+premioXp: premio.xp
+})
 
 document.querySelector(".resultado-final").innerHTML=`
 
@@ -1334,7 +1432,6 @@ girando=false
 
 
 }
-
 window.girarRoleta = girarRoleta
 
 async function carregarEstoque(){
@@ -1343,11 +1440,18 @@ const snap=await getDoc(ref)
 if(snap.exists()) estoqueChaveiro=snap.data().estoque
 }
 
+/* ======================================================
+   HISTÓRICO GLOBAL DA LOJA (FEED)
+   ====================================================== */
+
 async function carregarHistorico(){
 
+/* cancelar listener antigo se existir */
 if(unsubscribeHistorico){
 unsubscribeHistorico()
 }
+
+/* consulta do histórico */
 
 const q = query(
 collection(db,"lojaHistorico"),
@@ -1357,13 +1461,51 @@ limit(20)
 
 const feed = document.getElementById("feedCompras")
 
+/* listener em tempo real */
+
 unsubscribeHistorico = onSnapshot(q, async (snapshot)=>{
 
 feed.innerHTML=""
 
+/* ======================================================
+   ALERTAS GLOBAIS (apenas eventos novos)
+   ====================================================== */
+
+snapshot.docChanges().forEach(change=>{
+
+if(change.type === "added"){
+
+const c = change.doc.data()
+
+if(!c.data) return
+
+if(c.item.includes("Caixa Lendária")){
+globalAlert(`🔥 ${c.aluno} abriu uma CAIXA LENDÁRIA!`)
+}
+
+if(c.item.includes("Chaveiro")){
+globalAlert(`👑 ${c.aluno} ganhou um Chaveiro Univers3D!`)
+}
+
+if(c.item.includes("+800 XP")){
+globalAlert(`⚡ ${c.aluno} ganhou +800 XP na roleta!`)
+}
+
+}
+
+})
+
+/* ======================================================
+   ORDENAR DOCUMENTOS (garantia contra delay do timestamp)
+   ====================================================== */
+
 const docsOrdenados = snapshot.docs
-.filter(d => d.data().data) 
+.filter(d => d.data().data)
 .sort((a,b)=> b.data().data.toMillis() - a.data().data.toMillis())
+
+/* ======================================================
+   RENDER DO FEED
+   ====================================================== */
 
 for (const documento of docsOrdenados) {
 
@@ -1371,20 +1513,18 @@ const c = documento.data()
 
 if(!c.data) continue
 
+/* ===== FORMATA DATA ===== */
+
 const data = c.data.toDate()
-
-let dataFormatada = ""
-
-if(data){
 
 const dia = data.toLocaleDateString("pt-BR")
 const hora = data.toLocaleTimeString("pt-BR")
 
-dataFormatada = `${dia} • ${hora}`
+const dataFormatada = `${dia} • ${hora}`
 
-}
-
-/* ===== BUSCAR NÍVEL DO USUÁRIO ===== */
+/* ======================================================
+   BUSCAR PATENTE DO USUÁRIO
+   ====================================================== */
 
 let patenteImg="/assets/ranks/SeasonalRank0-0.png"
 
@@ -1394,9 +1534,8 @@ const userDoc = await getDoc(doc(db,"usuarios",c.uid))
 
 if(userDoc.exists()){
 
-const dadosUser=userDoc.data()
-
-const nivel=dadosUser.nivel || 0
+const dadosUser = userDoc.data()
+const nivel = dadosUser.nivel || 0
 
 patenteImg = obterPatentePorNivel(nivel).imagem
 
@@ -1404,7 +1543,9 @@ patenteImg = obterPatentePorNivel(nivel).imagem
 
 }
 
-/* ===== DEFINIR CLASSE ===== */
+/* ======================================================
+   DEFINIR CLASSE VISUAL DO EVENTO
+   ====================================================== */
 
 let classe="feed-item"
 
@@ -1414,7 +1555,9 @@ if(c.item.includes("Chaveiro")) classe+=" feed-lendario"
 
 if(patenteImg.includes("Top")) classe+=" patente-top"
 
-/* ===== RENDER ===== */
+/* ======================================================
+   RENDER HTML
+   ====================================================== */
 
 feed.innerHTML += `
 
@@ -1442,11 +1585,15 @@ feed.innerHTML += `
 
 }
 
+/* ======================================================
+   SCROLL AUTOMÁTICO PARA O TOPO
+   ====================================================== */
+
 feed.scrollTop = 0
 
 })
 
-}
+} 
 
 async function carregarSP(){
 
@@ -1612,6 +1759,75 @@ data: serverTimestamp()
 
 }
 
+async function liberarAcessoRanking(item){
+
+const user = auth.currentUser
+const snap = await getDoc(userRef)
+const dados = snap.data()
+
+const agora = new Date()
+
+const sciencePointsAntes = dados.sciencePoints || 0
+const sciencePointsDepois = sciencePointsAntes - item.preco
+
+let base = agora
+let rankingAntes = null
+
+if(
+dados.rankingLiberadoAte &&
+typeof dados.rankingLiberadoAte.toDate === "function"
+){
+const dataAtualRanking = dados.rankingLiberadoAte.toDate()
+rankingAntes = dataAtualRanking.toISOString()
+
+if(dataAtualRanking > agora){
+base = dataAtualRanking
+}
+}
+
+const novaData = new Date(base)
+novaData.setDate(novaData.getDate() + item.dias)
+
+await updateDoc(userRef,{
+sciencePoints: sciencePointsDepois,
+rankingLiberadoAte: Timestamp.fromDate(novaData),
+rankingPlano: `${item.dias}dias`,
+rankingCompradoEm: serverTimestamp()
+})
+
+spAluno = sciencePointsDepois
+document.getElementById("sp").innerText = spAluno
+
+await salvarBeneficioInventario(user.uid, "ranking", {
+tipo: "ranking",
+nome: item.nome,
+origem: "loja",
+status: "ativo",
+descricao: `Acesso ao ranking liberado por ${item.dias} dias.`,
+ativadoEm: serverTimestamp(),
+expiraEm: Timestamp.fromDate(novaData),
+detalhes: {
+dias: item.dias,
+plano: `${item.dias}dias`
+}
+})
+
+await logCompraRanking({
+uid: user.uid,
+itemId: item.id,
+itemNome: item.nome,
+sciencePointsAntes,
+sciencePointsDepois,
+rankingAntes,
+rankingDepois: novaData.toISOString(),
+dias: item.dias
+})
+
+await registrarCompra(`comprou acesso ao ranking por ${item.dias} dias`)
+
+}
+
+
 window.comprar=async function(id){
 
 const item=recompensas.find(r=>r.id===id)
@@ -1666,25 +1882,77 @@ abrirRoleta()
 return
 }
 
-if(item.xp){
+if(item.tipo==="ranking"){
 
-const snap=await getDoc(userRef)
-const xpAtual=snap.data().xp||0
-
-await updateDoc(userRef,{
-sciencePoints:spAluno-item.preco,
-xp:xpAtual+item.xp
-})
-
-spAluno-=item.preco
-
-document.getElementById("sp").innerText=spAluno
+await liberarAcessoRanking(item)
 
 renderLoja()
 
+const modal=document.getElementById("modal")
+
+modal.innerHTML=`
+
+<div class="modal">
+
+<div class="modal-box">
+
+<div class="explosao">🏆</div>
+
+<h2>Acesso liberado!</h2>
+
+<p style="font-size:20px;margin-top:15px;">
+Você liberou o ranking por <b>${item.dias} dias</b>.
+</p>
+
+<br>
+
+<button onclick="fecharCaixa()">Continuar</button>
+
+</div>
+
+</div>
+
+`
+
+return
+}
+
+if(item.xp){
+
 const user = auth.currentUser
+const snap = await getDoc(userRef)
+const dados = snap.data()
+
+const xpAntes = dados.xp || 0
+const nivelAntes = dados.nivel || 0
+const sciencePointsAntes = dados.sciencePoints || 0
+
+const xpDepois = xpAntes + item.xp
+const sciencePointsDepois = sciencePointsAntes - item.preco
+
+await updateDoc(userRef,{
+sciencePoints: sciencePointsDepois,
+xp: xpDepois
+})
+
+spAluno = sciencePointsDepois
+document.getElementById("sp").innerText = spAluno
+
 await registrarCompra(`comprou ${item.nome}`)
 
+await logCompraXP({
+uid: user.uid,
+itemId: item.id,
+itemNome: item.nome,
+sciencePointsAntes,
+sciencePointsDepois,
+xpAntes,
+xpDepois,
+nivelAntes,
+nivelDepois: nivelAntes
+})
+
+renderLoja()
 mostrarPopup(id)
 
 }
@@ -1746,6 +2014,9 @@ desc.innerHTML="Você ganhou um prêmio físico!"
 
 auth.onAuthStateChanged(user=>{
 if(user){
+
+initGlobalAlert()
+
 carregarSP()
 carregarHistorico()
 
@@ -1845,11 +2116,16 @@ box.appendChild(p)
 
 setTimeout(async ()=>{
 
-const snap=await getDoc(userRef)
-const xpAtual=snap.data().xp||0
+const user = auth.currentUser
+const snap = await getDoc(userRef)
+const dados = snap.data()
+
+const xpAntes = dados.xp || 0
+const nivelAntes = dados.nivel || 0
+const xpDepois = xpAntes + premio.xp
 
 await updateDoc(userRef,{
-xp:xpAtual+premio.xp
+xp: xpDepois
 })
 
 const nomesCaixas={
@@ -1862,6 +2138,16 @@ await registrarCompra(
 `abriu ${nomesCaixas[tipo]} e recebeu +${premio.xp} XP`
 )
 
+await logAberturaCaixa({
+uid: user.uid,
+itemId: tipo,
+itemNome: nomesCaixas[tipo],
+xpAntes,
+xpDepois,
+nivelAntes,
+nivelDepois: nivelAntes,
+premioXp: premio.xp
+})
 
 modal.innerHTML=`
 
@@ -1903,44 +2189,67 @@ renderLoja()
 
 async function premioChaveiro(){
 
-const ref=doc(db,"loja","chaveiro-univers3d")
+const user = auth.currentUser
+const ref = doc(db,"loja","chaveiro-univers3d")
 
-const snap=await getDoc(ref)
+const [snapEstoque, snapUser] = await Promise.all([
+getDoc(ref),
+getDoc(userRef)
+])
 
-const dados=snap.data()
+const dadosEstoque = snapEstoque.data()
+const dadosUser = snapUser.data()
 
-if(dados.estoque<=0){
-
+if(!dadosEstoque || dadosEstoque.estoque <= 0){
 alert("❌ Chaveiros esgotados!")
-
 return
-
 }
 
+const sciencePointsAntes = dadosUser.sciencePoints || 0
+const sciencePointsDepois = sciencePointsAntes - 1500
+
 /* desconta SP */
-
-spAluno-=1500
-
 await updateDoc(userRef,{
-sciencePoints:spAluno
+sciencePoints: sciencePointsDepois
 })
 
-document.getElementById("sp").innerText=spAluno
+spAluno = sciencePointsDepois
+document.getElementById("sp").innerText = spAluno
 
 /* diminui estoque */
-
 await updateDoc(ref,{
-estoque:dados.estoque-1
+estoque: dadosEstoque.estoque - 1
 })
 
 estoqueChaveiro--
 
-renderLoja()
+/* inventário */
+await adicionarAoInventario(user.uid,{
+tipo: "premio-fisico",
+itemId: "chaveiro-univers3d",
+nome: "🔑 Chaveiro Univers3D",
+origem: "loja",
+status: "resgatado",
+descricao: "Prêmio físico resgatado na loja.",
+detalhes: {
+estoqueConsumido: 1
+}
+})
+
+/* log */
+await logPremioFisico({
+uid: user.uid,
+itemId: "chaveiro-univers3d",
+itemNome: "🔑 Chaveiro Univers3D",
+sciencePointsAntes,
+sciencePointsDepois
+})
 
 await registrarCompra(`resgatou 🔑 Chaveiro Univers3D`)
 
-/* animação */
+renderLoja()
 
+/* animação */
 const modal=document.getElementById("modal")
 
 modal.innerHTML=`

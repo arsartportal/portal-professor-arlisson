@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal do Professor Arlisson</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/patentes.css">
 <link rel="stylesheet" href="css/contador.css">
-
 </head>
 
 <body data-theme="light">
@@ -17,7 +16,6 @@
 <header class="header">
 
 <div class="mini-hud">
-
 <img id="patente-img" class="mini-patente" src="" alt="Patente do usuário"/>
 
 <div class="mini-xp">
@@ -25,35 +23,29 @@
 </div>
 
 <div class="mini-detalhes">
-
 <img id="patente-img-detalhe" class="patente-grande" src="" alt="Patente detalhada"/>
 
 <div class="info-texto">
 <strong>Nível <span id="nivel-usuario">0</span></strong>
 <span id="xp-texto">XP 0 / 100</span>
 </div>
-
 </div>
 </div>
 
 <div class="header-centro">
-
 <h1 class="portal-title">
 <span class="portal-brand">Portal</span>
 <span class="portal-name">Professor Arlisson</span>
 </h1>
 
-<p>Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)</p>
-
+<p class="portal-subtitle">Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)</p>
 </div>
 
 <div class="header-direita">
-
 <div class="header-botoes">
 <button id="toggle-tema" title="Alternar tema">🌙</button>
 <button onclick="sair()">Sair</button>
 </div>
-
 </div>
 
 </header>
@@ -65,17 +57,13 @@
 </section>
 
 <!-- ================================================= -->
-
 <!-- DASHBOARD SUPERIOR -->
-
 <!-- ================================================= -->
 
 <div class="top-dashboard-container">
-
 <section class="top-dashboard">
 
 <!-- AVISOS -->
-
 <div class="card card-avisos-home" id="cardAvisos">
 
 <div class="avisos-header">
@@ -88,7 +76,6 @@
 </div>
 
 <div class="avisos-expandido">
-
 <div id="avisos-home-lista">
 <small>Carregando avisos...</small>
 </div>
@@ -96,18 +83,14 @@
 <a href="/avisos/avisos-aluno.html" class="ver-mais">
 Ver todos
 </a>
-
 </div>
 
 </div>
 
-
-<!-- DESAFIO -->
-
+<!-- DESAFIO DIÁRIO -->
 <div class="card card-desafio compacto" id="cardDesafio">
 
 <div class="desafio-topo" onclick="toggleDesafio()">
-
 <div class="desafio-textos">
 
 <h3>🧠 Desafio Diário</h3>
@@ -120,11 +103,11 @@ Ver todos
 <p class="desafio-sub">Clique para iniciar</p>
 
 </div>
-
 </div>
 
 <div class="desafio-conteudo">
 
+<p id="materiaPergunta" class="materia-pergunta"></p>
 <p id="perguntaTexto" class="pergunta-texto"></p>
 
 <div id="opcoes" class="opcoes-quiz"></div>
@@ -134,34 +117,31 @@ Responder
 </button>
 
 <p id="statusXP" class="status-xp"></p>
+<p id="contadorDesafio" class="contador-desafio"></p>
 
 <div class="streak-container">
-
-<p id="streakInfo">🔥 Streak: 0 dias</p>
+<p id="streakInfo">🔥 Streak atual: 0 dias</p>
 
 <div class="streak-bar">
 <div id="streakBarFill"></div>
 </div>
-
 </div>
 
 </div>
-
 </div>
 
 </section>
-
 </div>
+
+<!-- ================================================= -->
+<!-- LANÇAMENTO DA LOJA -->
+<!-- ================================================= -->
 
 <section class="lancamento-loja">
 
-<p class="tag-lancamento">
-EM BREVE
-</p>
+<p class="tag-lancamento">EM BREVE</p>
 
-<h1 class="titulo-loja">
-Loja de Recompensas
-</h1>
+<h1 class="titulo-loja">Loja de Recompensas</h1>
 
 <p class="descricao-loja">
 Troque seus <strong>Science Points</strong> por recompensas exclusivas
@@ -171,7 +151,6 @@ e vantagens especiais dentro do Portal do Professor.
 <div id="contadorDuvidas" class="contador-area"></div>
 
 <div class="progresso-container">
-
 <div class="barra-progresso">
 <div id="barraLancamento"></div>
 </div>
@@ -179,21 +158,12 @@ e vantagens especiais dentro do Portal do Professor.
 <p class="texto-lancamento">
 Disponível em breve para todos os alunos
 </p>
-
 </div>
 
 </section>
 
-<div id="contadorDuvidas"></div>
-
-</section>
-
-<div id="contadorDuvidas"></div>
-
 <!-- ================================================= -->
-
 <!-- CARDS PRINCIPAIS -->
-
 <!-- ================================================= -->
 
 <section class="cards-wrapper">
@@ -202,14 +172,35 @@ Disponível em breve para todos os alunos
 
 <a href="fisica.html" class="card">⚡ Física</a>
 <a href="quimica.html" class="card">⚛️ Química</a>
-<a href="noticias.html" class="card">📰 Notícias</a>
-<a href="ted.html" class="card">🎤 TED-Ed & TED Talks</a>
-<a href="simulacoes.html" class="card">🧪 Laboratório Virtual</a>
 <a href="/biblioteca.html" class="card">💡 Biblioteca</a>
 
+<a href="/em-construcao.html" class="card card-breve">
+🏆 Ranking
+<span class="ribbon-pro">EM BREVE</span>
+</a>
 
 <a href="/em-construcao.html" class="card card-breve">
- 📐 Matemática
+🎤 TED-Ed & TED Talks
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+📰 Notícias
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🧪 Laboratório Virtual
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🎒 Inventário
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+📐 Matemática
 <span class="ribbon-pro">EM BREVE</span>
 </a>
 
@@ -254,36 +245,41 @@ Disponível em breve para todos os alunos
 
 </div>
 
-<div class="missao-card">
+<section class="card-missao-semanal" id="cardMissaoSemanal">
+    <h2>🏆 Missão Semanal</h2>
+    <p>
+        Complete 5 desafios ao longo da semana para desbloquear sua recompensa especial.
+    </p>
 
-<h3>📜 Missão da Semana</h3>
+    <div class="progresso-missao-wrap">
+        <div class="progresso-missao-texto" id="textoMissao">
+            0 / 5
+        </div>
 
-<p>Resolver 5 desafios</p>
+        <div class="progresso-missao-barra">
+            <div class="progresso-missao-preenchimento" id="barraMissao"></div>
+        </div>
+    </div>
 
-<div class="barra">
-<div id="barraMissao"></div>
-</div>
+    <div class="recompensa-missao">
+        🎁 Recompensa: 100 XP
+    </div>
 
-<p id="textoMissao">0 / 5</p>
-
-</div>
-
+    <button id="btnColetarMissao" style="display:none;" onclick="coletarRecompensaMissao()">
+        🎁 Coletar recompensa
+    </button>
 </section>
 
 <!-- ================================================= -->
-
-<!-- CONTADOR -->
-
+<!-- CONTADOR DE VISITAS -->
 <!-- ================================================= -->
 
 <div class="contador-visitas">
-
 <div class="contador-card">
 
 <div class="contador-header">
-
-<span class="icone-olho">👁️</span> <span class="contador-titulo">Estatísticas do Portal</span>
-
+<span class="icone-olho">👁️</span>
+<span class="contador-titulo">Estatísticas do Portal</span>
 </div>
 
 <div class="contador-grid">
@@ -301,9 +297,7 @@ Disponível em breve para todos os alunos
 </div>
 
 </div>
-
 </div>
-
 </div>
 
 </main>
@@ -312,55 +306,39 @@ Disponível em breve para todos os alunos
 
 <script>
 function sair(){
-localStorage.clear()
-window.location.href="index.html"
+localStorage.clear();
+window.location.href = "index.html";
 }
 </script>
 
 <div id="patente-overlay" class="hidden">
-
 <div class="patente-card">
 
 <h2>🎉 Nova Patente!</h2>
 
 <div class="patentes-container">
-
-<img id="patente-antiga" class="patente antiga"/>
-<img id="patente-nova" class="patente nova"/>
-
+<img id="patente-antiga" class="patente antiga" alt="Patente antiga"/>
+<img id="patente-nova" class="patente nova" alt="Nova patente"/>
 </div>
 
 <button onclick="fecharPatente()">Continuar</button>
 
 </div>
-
 </div>
 
 <script type="module" src="js/auth-guard.js"></script>
-
 <script type="module" src="js/perfil.js"></script>
-
 <script type="module" src="js/hud.js"></script>
-
 <script src="js/tema.js"></script>
-
 <script type="module" src="js/home.js"></script>
-
 <script src="js/gamificacao.js"></script>
-
 <script type="module" src="js/home-avisos.js"></script>
-
 <script type="module" src="js/visitas.js"></script>
 
 <script type="module">
-
 import { iniciarContador } from "./js/contador.js";
 
-iniciarContador(
-"contadorDuvidas",
-"2026-04-01T08:00:00"
-);
-
+iniciarContador("contadorDuvidas", "2026-04-01T08:00:00");
 </script>
 
 </body>

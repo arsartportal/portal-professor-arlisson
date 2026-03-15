@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎒 Inventário do Aluno</title>
+
+<style>
+body{
+font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:30px;
+background:
+radial-gradient(circle at top,#1e293b,#020617);
+color:white;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.subtitulo{
+text-align:center;
+color:#94a3b8;
+margin-bottom:35px;
+}
+
+.bloco{
+background:rgba(15,23,42,0.88);
+border:1px solid rgba(255,255,255,0.06);
+border-radius:18px;
+padding:24px;
+margin-bottom:28px;
+box-shadow:0 14px 32px rgba(0,0,0,0.35);
+}
+
+.bloco h2{
+margin-top:0;
+color:#38bdf8;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+}
+
+.item{
+background:linear-gradient(145deg,#1f2937,#111827);
+border-radius:16px;
+padding:18px;
+border:1px solid rgba(255,255,255,0.06);
+box-shadow:0 8px 18px rgba(0,0,0,0.35);
+}
+
+.item h3{
+margin:0 0 10px 0;
+font-size:19px;
+}
+
+.item p{
+margin:6px 0;
+color:#cbd5e1;
+font-size:14px;
+}
+
+.status{
+display:inline-block;
+padding:6px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+margin-top:10px;
+}
+
+.status.ativo{
+background:rgba(34,197,94,0.18);
+color:#86efac;
+border:1px solid rgba(34,197,94,0.3);
+}
+
+.status.resgatado{
+background:rgba(250,204,21,0.14);
+color:#fde68a;
+border:1px solid rgba(250,204,21,0.28);
+}
+
+.lista-logs{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.log{
+background:linear-gradient(145deg,#020617,#0f172a);
+border-left:4px solid #38bdf8;
+padding:14px 16px;
+border-radius:10px;
+}
+
+.log strong{
+color:#e2e8f0;
+}
+
+.log .data{
+font-size:12px;
+color:#94a3b8;
+margin-top:6px;
+}
+
+.vazio{
+text-align:center;
+padding:25px;
+color:#94a3b8;
+}
+
+.info-topo{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:16px;
+margin-bottom:28px;
+}
+
+.card-topo{
+background:linear-gradient(145deg,#1e293b,#0f172a);
+border-radius:16px;
+padding:18px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.card-topo span{
+display:block;
+font-size:13px;
+color:#94a3b8;
+margin-bottom:8px;
+}
+
+.card-topo b{
+font-size:24px;
+color:#38bdf8;
+}
+
+@media(max-width:700px){
+body{
+padding:18px;
+}
+}
+
+.btn-voltar{
+display:inline-flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+background:linear-gradient(135deg,#1e293b,#0f172a);
+color:#fff;
+padding:12px 18px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+font-weight:600;
+margin-bottom:24px;
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+transition:0.25s;
+}
+
+.btn-voltar:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 24px rgba(0,0,0,0.35);
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<a href="home.html" class="btn-voltar">⬅ Voltar ao início</a>
+
+<h1>🎒 Inventário do Aluno</h1>
+<div class="subtitulo">Seus benefícios, itens resgatados e histórico recente</div>
+
+<div class="info-topo" id="infoTopo"></div>
+
+<div class="bloco">
+<h2>📦 Inventário</h2>
+<div class="grid" id="inventarioLista"></div>
+</div>
+
+<div class="bloco">
+<h2>📝 Logs Recentes</h2>
+<div class="lista-logs" id="logsLista"></div>
+</div>
+
+</div>
+
+<script type="module">
+import { auth, db } from "./js/firebase.js";
+import {
+doc,
+getDoc,
+collection,
+getDocs,
+query,
+orderBy,
+limit
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+function formatarData(valor){
+if(!valor) return "-"
+
+if(typeof valor.toDate === "function"){
+const data = valor.toDate()
+return data.toLocaleDateString("pt-BR") + " • " + data.toLocaleTimeString("pt-BR")
+}
+
+if(valor instanceof Date){
+return valor.toLocaleDateString("pt-BR") + " • " + valor.toLocaleTimeString("pt-BR")
+}
+
+return "-"
+}
+
+function renderInfoTopo(dados){
+const topo = document.getElementById("infoTopo")
+
+topo.innerHTML = `
+<div class="card-topo">
+<span>SciencePoints</span>
+<b>${dados.sciencePoints || 0}</b>
+</div>
+
+<div class="card-topo">
+<span>XP Atual</span>
+<b>${dados.xp || 0}</b>
+</div>
+
+<div class="card-topo">
+<span>Nível Atual</span>
+<b>${dados.nivel || 0}</b>
+</div>
+`
+}
+
+async function carregarInventario(uid){
+const lista = document.getElementById("inventarioLista")
+
+const q = query(
+collection(db,"usuarios",uid,"inventario"),
+orderBy("atualizadoEm","desc")
+)
+const snapshot = await getDocs(q)
+
+if(snapshot.empty){
+lista.innerHTML = `<div class="vazio">Nenhum item no inventário.</div>`
+return
+}
+
+lista.innerHTML = ""
+
+snapshot.forEach(docItem=>{
+const item = docItem.data()
+
+const statusClasse = (item.status || "ativo").toLowerCase()
+const dataAdicao = item.adicionadoEm || item.ativadoEm || null
+lista.innerHTML += `
+<div class="item">
+<h3>${item.nome || "Item sem nome"}</h3>
+<p><strong>Tipo:</strong> ${item.tipo || "-"}</p>
+<p><strong>Origem:</strong> ${item.origem || "-"}</p>
+<p><strong>Descrição:</strong> ${item.descricao || "-"}</p>
+<p><strong>Adicionado em:</strong> ${formatarData(dataAdicao)}</p>
+${item.expiraEm ? `<p><strong>Expira em:</strong> ${formatarData(item.expiraEm)}</p>` : ""}
+<div class="status ${statusClasse}">${item.status || "ativo"}</div>
+</div>
+`
+})
+}
+
+async function carregarLogs(uid){
+const lista = document.getElementById("logsLista")
+
+const q = query(
+collection(db,"usuarios",uid,"logs"),
+orderBy("data","desc"),
+limit(30)
+)
+
+const snapshot = await getDocs(q)
+
+if(snapshot.empty){
+lista.innerHTML = `<div class="vazio">Nenhum log encontrado.</div>`
+return
+}
+
+lista.innerHTML = ""
+
+snapshot.forEach(docItem=>{
+const log = docItem.data()
+
+lista.innerHTML += `
+<div class="log">
+<div><strong>${log.itemNome || "Ação do sistema"}</strong></div>
+<div>${log.descricao || "-"}</div>
+<div style="margin-top:8px;font-size:14px;color:#cbd5e1;">
+SP: ${log.sciencePointsAntes ?? "-"} → ${log.sciencePointsDepois ?? "-"}<br>
+XP: ${log.xpAntes ?? "-"} → ${log.xpDepois ?? "-"}<br>
+Nível: ${log.nivelAntes ?? "-"} → ${log.nivelDepois ?? "-"}
+</div>
+<div class="data">${formatarData(log.data)}</div>
+</div>
+`
+})
+}
+
+auth.onAuthStateChanged(async user=>{
+if(!user){
+document.body.innerHTML = `
+<div style="display:flex;justify-content:center;align-items:center;height:100vh;color:white;font-family:Segoe UI,sans-serif;">
+🔒 Faça login para acessar seu inventário.
+</div>
+`
+return
+}
+
+const snap = await getDoc(doc(db,"usuarios",user.uid))
+
+if(!snap.exists()){
+document.body.innerHTML = `
+<div style="display:flex;justify-content:center;align-items:center;height:100vh;color:white;font-family:Segoe UI,sans-serif;">
+❌ Usuário não encontrado.
+</div>
+`
+return
+}
+
+const dados = snap.data()
+
+renderInfoTopo(dados)
+await carregarInventario(user.uid)
+await carregarLogs(user.uid)
+})
+</script>
+</body>
+</html>
