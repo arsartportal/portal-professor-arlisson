@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil do Aluno</title>
+  <link rel="stylesheet" href="minha-conta.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 👤 PERFIL -->
+    <section class="perfil-card">
+      <div class="avatar-area">
+
+  <div class="avatar-stack">
+    <img id="avatar-corpo" src="assets/avatar/corpo/base.png">
+    <img id="avatar-roupa">
+    <img id="avatar-cabelo">
+    <img id="avatar-acessorio">
+  </div>
+
+</div>
+
+<section class="customizacao-card">
+  <h3>Customizar Perfil</h3>
+
+  <!-- 🎨 COR -->
+  <div class="custom-bloco">
+    <p>Cor do perfil</p>
+    <input type="color" id="cor-perfil">
+  </div>
+
+  <!-- 🏷 TÍTULO -->
+  <div class="custom-bloco">
+    <p>Título</p>
+    <input type="text" id="titulo" placeholder="Ex: Mestre da Matemática">
+  </div>
+
+  <!-- 🖼 BANNER -->
+  <div class="custom-bloco">
+    <p>Banner</p>
+    <select id="banner">
+      <option value="banner1.png">Clássico</option>
+      <option value="banner2.png">Espaço</option>
+      <option value="banner3.png">Neon</option>
+    </select>
+  </div>
+
+  <button id="salvar-custom">Salvar</button>
+</section>
+
+      <div class="info">
+        <h2 id="nome">Carregando...</h2>
+        <p id="escola">...</p>
+        <p id="turma">...</p>
+      </div>
+    </section>
+
+    <!-- 📊 XP E NÍVEL -->
+    <section class="xp-card">
+      <h3>Nível <span id="nivel">1</span></h3>
+      <div class="barra">
+        <div id="barra-xp"></div>
+      </div>
+      <p><span id="xp">0</span> XP</p>
+    </section>
+
+    <!-- 🎒 INVENTÁRIO -->
+    <section class="inventario-card">
+      <h3>Inventário</h3>
+      <div id="inventario-grid"></div>
+    </section>
+
+    <!-- 🎁 RECOMPENSA DIÁRIA -->
+    <section class="daily-card">
+      <h3>Recompensa diária</h3>
+      <button id="btn-recompensa">Coletar</button>
+    </section>
+
+    <!-- 🏆 CONQUISTAS -->
+    <section class="conquistas-card">
+      <h3>Conquistas</h3>
+      <div id="conquistas-grid"></div>
+    </section>
+
+  </div>
+
+  <script type="module" src="minha-conta.js"></script>
+</body>
+</html>

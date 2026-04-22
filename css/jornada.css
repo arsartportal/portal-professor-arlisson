@@ -1,0 +1,207 @@
+/* ================= BASE ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0f141a, #070a0f);
+  color: #eaeef2;
+  text-align: center;
+}
+
+/* ================= TOPO ================= */
+.topbar {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* ================= PROGRESSO ================= */
+.progress-bar {
+  width: 90%;
+  height: 8px;
+  margin: 10px auto;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: #ffffff;
+  transition: width 0.3s ease;
+}
+
+/* ================= MAPA ================= */
+#map {
+  position: relative;
+  width: 900px;
+  height: 550px;
+  margin: auto;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+/* ================= CASAS ================= */
+.casa {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 14px;
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+
+  transition: all 0.15s ease;
+  z-index: 2;
+}
+
+/* hover clean */
+.casa:hover {
+  transform: scale(1.1);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ================= TIPOS ================= */
+
+/* normal */
+.casa.normal {
+  opacity: 0.6;
+}
+
+/* início */
+.casa.inicio {
+  background: rgba(46, 204, 113, 0.12);
+  border-color: rgba(46, 204, 113, 0.5);
+}
+
+/* fim */
+.casa.fim {
+  background: rgba(231, 76, 60, 0.12);
+  border-color: rgba(231, 76, 60, 0.5);
+}
+
+/* recompensa */
+.casa.recompensa {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* pergunta */
+.casa.pergunta {
+  background: rgba(80, 160, 255, 0.12);
+  border-color: rgba(80, 160, 255, 0.5);
+}
+
+/* voltar */
+.casa.voltar {
+  background: rgba(255, 120, 120, 0.12);
+  border-color: rgba(255, 120, 120, 0.5);
+}
+
+/* ================= IMPACTO ================= */
+.casa.ativa {
+  animation: impacto 0.25s ease;
+}
+
+@keyframes impacto {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); border-color: white; }
+  100% { transform: scale(1.05); }
+}
+
+/* ================= PLAYER ================= */
+#player {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+
+  background: white;
+  border-radius: 50%;
+
+  box-shadow: 0 0 8px rgba(255,255,255,0.7);
+
+  z-index: 10;
+
+  transition: all 0.2s ease;
+}
+
+/* bounce */
+.player-bounce {
+  animation: bounce 0.35s ease;
+}
+
+@keyframes bounce {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -65%) scale(1.15); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ================= DADO ================= */
+#dice {
+  font-size: 36px;
+}
+
+.rolling {
+  animation: rollDice 0.6s ease;
+}
+
+@keyframes rollDice {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(720deg); }
+}
+
+#diceBtn {
+  margin-top: 10px;
+  padding: 8px 16px;
+
+  border-radius: 6px;
+  border: none;
+
+  background: rgba(255,255,255,0.1);
+  color: white;
+
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+#diceBtn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+/* ================= LOG ================= */
+#log {
+  margin-top: 15px;
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ================= TRILHA ================= */
+#trilha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}

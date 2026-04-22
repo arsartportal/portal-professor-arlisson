@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔢 Análise Combinatória | 3º Ano | Prof. Arlisson Ferreira</title>
+
+<style>
+body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:linear-gradient(135deg,#eef2f7,#dfe9f3);
+    margin:0;
+    padding:30px;
+    color:#333;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    padding:60px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+h1{text-align:center;font-size:38px;}
+.subtitulo{text-align:center;color:#555;margin-bottom:40px;}
+h2{
+    margin-top:50px;
+    color:#4a148c;
+    border-left:6px solid #7b1fa2;
+    padding-left:12px;
+}
+p{
+    text-align:justify;
+    line-height:1.9;
+    font-size:17px;
+}
+.destaque{
+    background:#f3e5f5;
+    padding:25px;
+    border-left:6px solid #9c27b0;
+    border-radius:12px;
+    margin:35px 0;
+}
+.questao{
+    margin-top:25px;
+    padding:20px;
+    background:#faf5ff;
+    border-radius:12px;
+    border:1px solid #e1bee7;
+}
+button{
+    margin-top:35px;
+    padding:14px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2e7d32;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover{background:#1b5e20;}
+button:disabled{background:#999;}
+.resultado{
+    margin-top:30px;
+    font-size:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🔢 Análise Combinatória</h1>
+<p class="subtitulo">
+Matemática • 3º Ano • Professor: <strong>Arlisson Ferreira</strong>
+</p>
+
+<div class="destaque">
+🎯 Desenvolver técnicas para contar possibilidades sem enumerá-las uma a uma.
+</div>
+
+<h2>1️⃣ Princípio Fundamental da Contagem (PFC)</h2>
+<p>
+Se uma decisão pode ser tomada de m maneiras e outra de n maneiras,
+então o total é m × n.
+</p>
+
+<h2>2️⃣ Fatorial</h2>
+<p>
+n! = n · (n−1) · (n−2) · ... · 1
+</p>
+
+<h2>3️⃣ Permutação Simples</h2>
+<p>
+Organização de n elementos distintos:
+</p>
+<p>
+Pₙ = n!
+</p>
+
+<h2>4️⃣ Arranjo Simples</h2>
+<p>
+Quando a ordem importa e escolhemos p elementos:
+</p>
+<p>
+Aₙ,p = n! / (n−p)!
+</p>
+
+<h2>5️⃣ Combinação Simples</h2>
+<p>
+Quando a ordem não importa:
+</p>
+<p>
+Cₙ,p = n! / [p!(n−p)!]
+</p>
+
+<h2>6️⃣ Diferença Fundamental</h2>
+<p>
+✔ Arranjo → ordem importa  
+✔ Combinação → ordem não importa  
+</p>
+
+<h2>7️⃣ Exemplo</h2>
+<p>
+Quantas maneiras de formar uma dupla entre 5 alunos?
+</p>
+<p>
+C₅,₂ = 5! / (2!3!) = 10
+</p>
+
+<h2>8️⃣ Aplicações</h2>
+<p>
+✔ Senhas  
+✔ Placas  
+✔ Jogos  
+✔ Probabilidade  
+</p>
+
+<h2>9️⃣ Erros Comuns</h2>
+<p>
+❌ Confundir arranjo com combinação  
+❌ Esquecer fatorial  
+</p>
+
+<h2>🔟 Conexão</h2>
+<p>
+Base direta para probabilidade.
+</p>
+
+<hr>
+
+<h2>📝 Avaliação – 10 Questões</h2>
+
+<div class="questao">
+<p><strong>1.</strong> O PFC usa:</p>
+<label><input type="radio" name="q1" value="a"> Soma</label><br>
+<label><input type="radio" name="q1" value="b"> Multiplicação</label><br>
+<label><input type="radio" name="q1" value="c"> Divisão</label><br>
+<label><input type="radio" name="q1" value="d"> Log</label><br>
+<label><input type="radio" name="q1" value="e"> Média</label>
+</div>
+
+<div class="questao">
+<p><strong>2.</strong> 4! é:</p>
+<label><input type="radio" name="q2" value="a"> 12</label><br>
+<label><input type="radio" name="q2" value="b"> 24</label><br>
+<label><input type="radio" name="q2" value="c"> 16</label><br>
+<label><input type="radio" name="q2" value="d"> 20</label><br>
+<label><input type="radio" name="q2" value="e"> 10</label>
+</div>
+
+<div class="questao">
+<p><strong>3.</strong> Permutação de 5 elementos:</p>
+<label><input type="radio" name="q3" value="a"> 25</label><br>
+<label><input type="radio" name="q3" value="b"> 120</label><br>
+<label><input type="radio" name="q3" value="c"> 60</label><br>
+<label><input type="radio" name="q3" value="d"> 24</label><br>
+<label><input type="radio" name="q3" value="e"> 5</label>
+</div>
+
+<div class="questao">
+<p><strong>4.</strong> Arranjo considera:</p>
+<label><input type="radio" name="q4" value="a"> Ordem importa</label><br>
+<label><input type="radio" name="q4" value="b"> Ordem não importa</label><br>
+<label><input type="radio" name="q4" value="c"> Média</label><br>
+<label><input type="radio" name="q4" value="d"> Soma</label><br>
+<label><input type="radio" name="q4" value="e"> Probabilidade</label>
+</div>
+
+<div class="questao">
+<p><strong>5.</strong> Combinação considera:</p>
+<label><input type="radio" name="q5" value="a"> Ordem importa</label><br>
+<label><input type="radio" name="q5" value="b"> Ordem não importa</label><br>
+<label><input type="radio" name="q5" value="c"> Produto</label><br>
+<label><input type="radio" name="q5" value="d"> Divisão</label><br>
+<label><input type="radio" name="q5" value="e"> Expoente</label>
+</div>
+
+<div class="questao">
+<p><strong>6.</strong> C₅,₂ é:</p>
+<label><input type="radio" name="q6" value="a"> 5</label><br>
+<label><input type="radio" name="q6" value="b"> 10</label><br>
+<label><input type="radio" name="q6" value="c"> 20</label><br>
+<label><input type="radio" name="q6" value="d"> 15</label><br>
+<label><input type="radio" name="q6" value="e"> 25</label>
+</div>
+
+<div class="questao">
+<p><strong>7.</strong> 0! vale:</p>
+<label><input type="radio" name="q7" value="a"> 0</label><br>
+<label><input type="radio" name="q7" value="b"> 1</label><br>
+<label><input type="radio" name="q7" value="c"> Indefinido</label><br>
+<label><input type="radio" name="q7" value="d"> 2</label><br>
+<label><input type="radio" name="q7" value="e"> 10</label>
+</div>
+
+<div class="questao">
+<p><strong>8.</strong> A₅,₂ é:</p>
+<label><input type="radio" name="q8" value="a"> 10</label><br>
+<label><input type="radio" name="q8" value="b"> 20</label><br>
+<label><input type="radio" name="q8" value="c"> 5</label><br>
+<label><input type="radio" name="q8" value="d"> 15</label><br>
+<label><input type="radio" name="q8" value="e"> 25</label>
+</div>
+
+<div class="questao">
+<p><strong>9.</strong> Análise combinatória é base da:</p>
+<label><input type="radio" name="q9" value="a"> Estatística</label><br>
+<label><input type="radio" name="q9" value="b"> Probabilidade</label><br>
+<label><input type="radio" name="q9" value="c"> Geometria</label><br>
+<label><input type="radio" name="q9" value="d"> Álgebra</label><br>
+<label><input type="radio" name="q9" value="e"> Logaritmo</label>
+</div>
+
+<div class="questao">
+<p><strong>10.</strong> 3! é:</p>
+<label><input type="radio" name="q10" value="a"> 3</label><br>
+<label><input type="radio" name="q10" value="b"> 6</label><br>
+<label><input type="radio" name="q10" value="c"> 9</label><br>
+<label><input type="radio" name="q10" value="d"> 12</label><br>
+<label><input type="radio" name="q10" value="e"> 1</label>
+</div>
+
+<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+
+const MAX_TENTATIVAS = 3;
+const CHAVE = "analiseCombinatoria_3ano_tentativas";
+
+function corrigir(){
+
+let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+
+if(tentativas.length >= MAX_TENTATIVAS){
+document.getElementById("resultado").innerHTML =
+"🚫 Você já utilizou as 3 tentativas permitidas.";
+return;
+}
+
+const respostas = {
+q1:"b",
+q2:"b",
+q3:"b",
+q4:"a",
+q5:"b",
+q6:"b",
+q7:"b",
+q8:"b",
+q9:"b",
+q10:"b"
+};
+
+let total = 0;
+
+for(let q in respostas){
+
+let marcada = document.querySelector('input[name="'+q+'"]:checked');
+let opcoes = document.querySelectorAll('input[name="'+q+'"]');
+
+opcoes.forEach(opcao=>{
+opcao.parentElement.style.color="#333";
+opcao.parentElement.style.fontWeight="normal";
+});
+
+if(marcada){
+if(marcada.value===respostas[q]){
+marcada.parentElement.style.color="#1b5e20";
+marcada.parentElement.style.fontWeight="bold";
+total++;
+}else{
+marcada.parentElement.style.color="#c62828";
+marcada.parentElement.style.fontWeight="bold";
+}
+}
+}
+
+tentativas.push(total);
+localStorage.setItem(CHAVE,JSON.stringify(tentativas));
+
+let melhor=Math.max(...tentativas);
+
+let html="<br><strong>📊 Desempenho:</strong><br>";
+
+tentativas.forEach((nota,index)=>{
+html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
+});
+
+html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
+
+if(melhor===10){
+html+="🔥 Excelente desempenho!";
+}else if(melhor>=7){
+html+="👏 Ótimo resultado!";
+}else if(melhor>=5){
+html+="👍 Resultado regular.";
+}else{
+html+="📚 Revise o conteúdo.";
+}
+
+if(tentativas.length>=MAX_TENTATIVAS){
+html+="<br><br>🔒 Limite de tentativas atingido.";
+document.querySelector("button").disabled=true;
+}
+
+document.getElementById("resultado").innerHTML=html;
+}
+
+</script>
+
+</body>
+</html>

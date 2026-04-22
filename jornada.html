@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🎮 Jornada Educativa</title>
+  <link rel="stylesheet" href="./css/jornada.css">
+</head>
+
+<body>
+
+<!-- ================= TOPO ================= -->
+<header class="topbar">
+  <div class="player-info">
+    👨‍🎓 Aluno • Nível <span id="nivel">1</span>
+  </div>
+
+  <div class="xp-info">
+    ⭐ XP: <span id="xp">0</span>
+  </div>
+</header>
+
+<!-- ================= PROGRESSO ================= -->
+<section class="progress-container">
+  <div class="progress-bar">
+    <div id="progressFill"></div>
+  </div>
+</section>
+
+<!-- ================= MAPA ================= -->
+<main id="map">
+
+  <!-- TRILHA -->
+  <canvas id="trilha"></canvas>
+
+  <!-- GRID DE CASAS -->
+  <div id="grid"></div>
+
+  <!-- PLAYER -->
+  <div id="player">🚀</div>
+
+  <!-- DADO -->
+  <div class="dice-area">
+    <div id="dice">🎲</div>
+    <button id="diceBtn">ROLAR</button>
+  </div>
+
+</main>
+
+<!-- ================= LOG ================= -->
+<footer id="log">
+  Prepare-se 🚀
+</footer>
+
+<script src="./js/jornada.js"></script>
+
+</body>
+</html>

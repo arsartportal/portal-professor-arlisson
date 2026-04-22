@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistema de Numeração — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Matemática -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+  <!-- Estilo específico da animação da patente -->
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-matematica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔢 Sistema de Numeração Decimal</h1>
+      <p>
+        Para avançar na Matemática, é essencial compreender
+        como os números são organizados e estruturados.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 1.2 — SISTEMA DE NUMERAÇÃO
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-1-2">
+
+      <h2>📘 Nível 1.2 — Sistema de Numeração Decimal</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é o Sistema Decimal?</h3>
+        <p>
+          O sistema que utilizamos diariamente é chamado de
+          <strong>Sistema de Numeração Decimal</strong>.
+        </p>
+        <p>
+          Ele é formado por apenas <strong>10 algarismos</strong>:
+          0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.
+        </p>
+        <p>
+          Com esses 10 símbolos conseguimos representar
+          qualquer número.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Valor Posicional</h3>
+        <p>
+          No sistema decimal, o valor de um número depende
+          da <strong>posição</strong> que o algarismo ocupa.
+        </p>
+
+        <p><strong>Exemplo: 347</strong></p>
+
+        <ul>
+          <li>3 → Centena (300)</li>
+          <li>4 → Dezena (40)</li>
+          <li>7 → Unidade (7)</li>
+        </ul>
+
+        <p><strong>347 = 300 + 40 + 7</strong></p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Ordens e Classes</h3>
+        <p>Os números se organizam em ordens:</p>
+
+        <ul>
+          <li>Unidade (U)</li>
+          <li>Dezena (D)</li>
+          <li>Centena (C)</li>
+          <li>Unidade de Milhar (UM)</li>
+        </ul>
+
+        <p>
+          Cada grupo de três ordens forma uma
+          <strong>classe</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Decomposição de Números</h3>
+
+        <p>
+          Decompor um número significa escrevê-lo
+          como a soma dos valores de cada posição.
+        </p>
+
+        <p><strong>Exemplo: 5.284</strong></p>
+
+        <ul>
+          <li>5 → 5.000</li>
+          <li>2 → 200</li>
+          <li>8 → 80</li>
+          <li>4 → 4</li>
+        </ul>
+
+        <p><strong>5.284 = 5.000 + 200 + 80 + 4</strong></p>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>O sistema decimal usa 10 algarismos</li>
+          <li>O valor depende da posição</li>
+          <li>Os números podem ser decompostos</li>
+          <li>Ordens formam classes</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 1.2
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O sistema decimal é baseado em quantos algarismos?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            5
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            10
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            100
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> No número 482, o algarismo 8 representa:</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            8 unidades
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            80
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            800
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> A decomposição correta de 2.305 é:</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            2.000 + 300 + 5
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            200 + 30 + 5
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            2.000 + 30 + 5
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpoint()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_1_2_matematica')">
+          ✅ Concluir Nível 1.2
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Fundamentos da Matemática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaMatematica()">
+            🧭 Trilha de Matemática
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <script type="module" src="/js/introducao-matematica.js"></script>
+  <script src="/js/patentes.js" type="module"></script>
+
+</body>
+</html>

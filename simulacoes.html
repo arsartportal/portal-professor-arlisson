@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Laboratório Virtual - PhET</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background: #1e293b;
+}
+
+header h1 {
+    color: #38bdf8;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    width: 90%;
+    margin: 40px auto;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card h3 {
+    color: #38bdf8;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 8px;
+    padding: 8px 14px;
+    background: #38bdf8;
+    color: black;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #0ea5e9;
+}
+
+.roteiro {
+    display: none;
+    margin-top: 15px;
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.roteiro h4 {
+    color: #facc15;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin: 2% auto;
+    background: #000;
+    border-radius: 10px;
+}
+
+.modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🧪 Laboratório Virtual - PhET</h1>
+<p>Explore, investigue e responda aos roteiros experimentais.</p>
+</header>
+
+<div class="grid">
+
+<!-- 1 PROJÉTIL -->
+<div class="card">
+<h3>🎯 Movimento do Projétil</h3>
+<p>Cinemática – Lançamento oblíquo.</p>
+
+<div class="btn" onclick="openSim('https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_pt_BR.html')">Abrir</div>
+<div class="btn" onclick="toggleRoteiro('r1')">📘 Roteiro</div>
+
+<div id="r1" class="roteiro">
+<h4>🎯 Objetivo</h4>
+<p>Investigar o efeito do ângulo no alcance.</p>
+<h4>🔬 Procedimentos</h4>
+<ul>
+<li>Velocidade fixa: 15 m/s</li>
+<li>Testar ângulos: 15°, 30°, 45°, 60°</li>
+</ul>
+<h4>🧠 Perguntas</h4>
+<ul>
+<li>Qual ângulo gera maior alcance?</li>
+<li>Existe simetria entre 30° e 60°?</li>
+</ul>
+</div>
+</div>
+
+<!-- 2 HOMEM EM MOVIMENTO -->
+<div class="card">
+<h3>📈 O Homem em Movimento</h3>
+<p>Gráficos de posição e velocidade.</p>
+
+<div class="btn" onclick="openSim('https://phet.colorado.edu/sims/html/moving-man/latest/moving-man_pt_BR.html')">Abrir</div>
+<div class="btn" onclick="toggleRoteiro('r2')">📘 Roteiro</div>
+
+<div id="r2" class="roteiro">
+<h4>🎯 Objetivo</h4>
+<p>Relacionar gráficos ao movimento.</p>
+<ul>
+<li>Movimento uniforme</li>
+<li>Depois aceleração constante</li>
+</ul>
+<h4>🧠 Perguntas</h4>
+<ul>
+<li>Como fica o gráfico da posição com aceleração?</li>
+<li>Como identificar velocidade constante?</li>
+</ul>
+</div>
+</div>
+
+<!-- 3 FORÇAS -->
+<div class="card">
+<h3>🧲 Forças e Movimento</h3>
+<p>Leis de Newton.</p>
+
+<div class="btn" onclick="openSim('https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_pt_BR.html')">Abrir</div>
+<div class="btn" onclick="toggleRoteiro('r3')">📘 Roteiro</div>
+
+<div id="r3" class="roteiro">
+<h4>🎯 Objetivo</h4>
+<p>Observar a relação F = m·a.</p>
+<ul>
+<li>Aumente a força aplicada.</li>
+<li>Observe a aceleração.</li>
+</ul>
+<h4>🧠 Perguntas</h4>
+<ul>
+<li>O que ocorre ao dobrar a força?</li>
+<li>Como a massa influencia?</li>
+</ul>
+</div>
+</div>
+
+<!-- 4 ENERGIA -->
+<div class="card">
+<h3>⚡ Energia na Montanha-Russa</h3>
+<p>Energia cinética e potencial.</p>
+
+<div class="btn" onclick="openSim('https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_pt_BR.html')">Abrir</div>
+<div class="btn" onclick="toggleRoteiro('r4')">📘 Roteiro</div>
+
+<div id="r4" class="roteiro">
+<h4>🎯 Objetivo</h4>
+<p>Verificar conservação da energia.</p>
+<ul>
+<li>Sem atrito</li>
+<li>Com atrito</li>
+</ul>
+<h4>🧠 Perguntas</h4>
+<ul>
+<li>A energia total se conserva?</li>
+<li>O que acontece com atrito?</li>
+</ul>
+</div>
+</div>
+
+<!-- 5 ONDAS -->
+<div class="card">
+<h3>🌊 Ondas em uma Corda</h3>
+<p>Frequência e amplitude.</p>
+
+<div class="btn" onclick="openSim('https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_pt_BR.html')">Abrir</div>
+<div class="btn" onclick="toggleRoteiro('r5')">📘 Roteiro</div>
+
+<div id="r5" class="roteiro">
+<h4>🎯 Objetivo</h4>
+<p>Relacionar frequência e comprimento de onda.</p>
+<ul>
+<li>Aumente a frequência.</li>
+<li>Observe a mudança no padrão.</li>
+</ul>
+</div>
+</div>
+
+<!-- 6 CIRCUITO -->
+<div class="card">
+<h3>⚡ Circuito DC</h3>
+<p>Corrente elétrica e resistência.</p>
+
+<div class="btn" onclick="openSim('https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_pt_BR.html')">Abrir</div>
+<div class="btn" onclick="toggleRoteiro('r6')">📘 Roteiro</div>
+
+<div id="r6" class="roteiro">
+<h4>🎯 Objetivo</h4>
+<p>Montar circuito simples.</p>
+<ul>
+<li>Adicionar bateria e lâmpada.</li>
+<li>Alterar resistência.</li>
+</ul>
+<h4>🧠 Perguntas</h4>
+<ul>
+<li>O que ocorre ao aumentar resistência?</li>
+<li>Como aplicar Lei de Ohm?</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div id="simModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeSim()">&times;</span>
+<iframe id="simFrame"></iframe>
+</div>
+</div>
+
+<script>
+function openSim(url) {
+    document.getElementById("simFrame").src = url;
+    document.getElementById("simModal").style.display = "block";
+}
+
+function closeSim() {
+    document.getElementById("simFrame").src = "";
+    document.getElementById("simModal").style.display = "none";
+}
+
+function toggleRoteiro(id) {
+    var el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+<footer>
+Simulações fornecidas por PhET – University of Colorado Boulder  
+Portal do Professor Arlisson © 2026
+</footer>
+
+</body>
+</html>

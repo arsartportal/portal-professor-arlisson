@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastrar Alunos • Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="cadastrar-alunosv2.css">
+</head>
+<body>
+
+<main class="container">
+
+  <h1>Cadastrar aluno</h1>
+  <p class="subtitle">Adicione novos alunos ao sistema</p>
+
+  <form id="formCadastrarAluno">
+
+    <!-- NOME -->
+    <div class="input-group">
+      <label>Nome</label>
+      <input type="text" id="nome" placeholder="Nome completo" required>
+    </div>
+
+    <!-- LOGIN INTELIGENTE -->
+    <div class="input-group">
+      <label>Login</label>
+      <input type="text" id="loginPreview" readonly>
+      <small id="loginStatus"></small>
+    </div>
+
+    <!-- SENHA -->
+    <div class="input-group">
+      <label>Senha</label>
+
+      <div class="password-box">
+        <input type="password" id="senha" required minlength="6">
+
+        <button type="button" id="toggleSenha">👁</button>
+        <button type="button" id="gerarSenha">⚡</button>
+      </div>
+
+      <small id="senhaTipo" class="senha-badge ok">
+        Senha definida manualmente
+      </small>
+    </div>
+
+    <!-- ESCOLA -->
+    <div class="input-group">
+      <label>Escola</label>
+      <select id="escola" required>
+        <option value="">Selecione</option>
+        <option value="boto-de-menezes">Boto de Menezes</option>
+        <option value="audiocomunicacao">Audiocomunicação</option>
+        <option value="maria-geny">Maria Geny</option>
+      </select>
+    </div>
+
+    <!-- SÉRIE / TURMA -->
+    <div class="row">
+      <div class="input-group">
+        <label>Série</label>
+        <select id="serie">
+          <option value="">Selecione</option>
+          <option value="1ano">1º Ano</option>
+          <option value="2ano">2º Ano</option>
+          <option value="3ano">3º Ano</option>
+          <option value="eja">EJA</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Turma</label>
+        <input type="text" id="turma" placeholder="A, B...">
+      </div>
+    </div>
+
+    <button type="submit" id="btnCadastrar">
+      <span class="text">Cadastrar aluno</span>
+      <span class="loader"></span>
+    </button>
+
+  </form>
+
+  <div id="msg"></div>
+
+</main>
+
+<script type="module" src="cadastrar-alunosv2.js"></script>
+
+</body>
+</html>

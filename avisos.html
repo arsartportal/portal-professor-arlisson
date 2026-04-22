@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avisos • Portal</title>
+
+  <link rel="stylesheet" href="css/avisos.css">
+</head>
+
+<body>
+
+<!-- =========================
+TOPO
+========================= -->
+
+<div class="topo-premium">
+  <div>
+    <h1>📢 Avisos</h1>
+    <p class="subtitulo">Comunicados importantes para você</p>
+  </div>
+
+  <button class="btn-voltar" onclick="history.back()">← Voltar</button>
+</div>
+
+<!-- =========================
+CONTROLES
+========================= -->
+
+<div class="controle-avisos">
+
+  <input 
+    type="text" 
+    id="buscaAvisos" 
+    placeholder="🔍 Buscar avisos..."
+  >
+
+  <!-- filtros (já pronto pra ativar depois) -->
+  <div class="filtros">
+    <button class="filtro ativo">Todos</button>
+    <button class="filtro">Não lidos</button>
+    <button class="filtro">Fixados</button>
+  </div>
+
+</div>
+
+<!-- =========================
+RESUMO
+========================= -->
+
+<div class="resumo-avisos">
+
+  <div class="card-resumo">
+    <strong id="totalAvisos">0</strong>
+    <span>Total</span>
+  </div>
+
+  <div class="card-resumo destaque">
+    <strong id="naoLidosAvisos">0</strong>
+    <span>Não lidos</span>
+  </div>
+
+</div>
+
+<!-- =========================
+LISTA
+========================= -->
+
+<div id="listaAvisos" class="lista-premium">
+  <p style="opacity:.6;">Carregando avisos...</p>
+</div>
+
+<!-- =========================
+SCRIPT
+========================= -->
+
+<script type="module" src="js/avisos.js"></script>
+
+</body>
+</html>

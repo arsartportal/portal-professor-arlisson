@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — 3º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        A <strong>Eletrostática</strong> é a área da Física que estuda as
+        <strong>cargas elétricas em repouso</strong>, suas interações
+        e os fenômenos associados.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.1 — INTRODUÇÃO À ELETROSTÁTICA
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-1">
+
+      <h2>📘 Nível 3.1 — Introdução à Eletrostática</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é Eletrostática?</h3>
+        <p>
+          A <strong>Eletrostática</strong> é o ramo da Física que estuda
+          o comportamento das <strong>cargas elétricas em repouso</strong>
+          e as forças que atuam entre elas.
+        </p>
+        <p>
+          Fenômenos elétricos estão presentes desde um simples choque
+          ao tocar uma maçaneta até o funcionamento de diversos dispositivos.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Carga elétrica</h3>
+        <p>
+          A carga elétrica é uma propriedade fundamental da matéria.
+          Ela pode ser de dois tipos:
+        </p>
+        <ul>
+          <li>➕ <strong>Carga positiva</strong></li>
+          <li>➖ <strong>Carga negativa</strong></li>
+        </ul>
+        <p>
+          Cargas de mesmo sinal se repelem, enquanto cargas de sinais opostos
+          se atraem.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Eletrização dos corpos</h3>
+        <p>
+          Um corpo pode adquirir carga elétrica por meio de processos
+          de <strong>eletrização</strong>, como:
+        </p>
+        <ul>
+          <li>⚡ Atrito</li>
+          <li>🔌 Contato</li>
+          <li>🧲 Indução</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Importância da Eletrostática</h3>
+        <p>
+          O estudo da Eletrostática é fundamental para compreender:
+        </p>
+        <ul>
+          <li>Descargas elétricas atmosféricas (raios)</li>
+          <li>Funcionamento de impressoras a laser</li>
+          <li>Filtros eletrostáticos</li>
+          <li>Dispositivos eletrônicos</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>A Eletrostática estuda cargas elétricas em repouso</li>
+          <li>Cargas podem ser positivas ou negativas</li>
+          <li>Cargas iguais se repelem e opostas se atraem</li>
+          <li>Existem diferentes processos de eletrização</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.1
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que a Eletrostática estuda?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Cargas elétricas em movimento
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Cargas elétricas em repouso
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Fenômenos térmicos
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> O que acontece entre cargas de sinais opostos?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Elas se repelem
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Elas se atraem
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Não interagem
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual NÃO é um processo de eletrização?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Atrito
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Indução
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Condução térmica
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpoint()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <button
+        class="btn-concluir"
+        disabled
+        onclick="concluirNivel('nivel_3_1')"
+      >
+        ✅ Concluir Nível 3.1
+      </button>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>

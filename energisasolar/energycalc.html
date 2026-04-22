@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Comparador de Energia – Solar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --verde: #1fa866;
+  --verde-escuro: #168554;
+  --verde-claro: #e8f8f0;
+
+  --vermelho: #d32f2f;
+  --vermelho-escuro: #b71c1c;
+  --vermelho-claro: #fdecea;
+
+  --texto: #333;
+}
+
+body{
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg,#ffffff,#f3f7f5);
+  padding: 20px;
+  color: var(--texto);
+}
+
+.container{
+  max-width: 820px;
+  margin: auto;
+}
+
+.header{
+  background: linear-gradient(135deg,var(--verde),var(--verde-escuro));
+  color:#fff;
+  padding:28px;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.header h1{
+  margin:0;
+  font-size:26px;
+}
+
+.header p{
+  margin-top:8px;
+  font-size:14px;
+  opacity:.95;
+}
+
+.card{
+  background:#fff;
+  margin-top:25px;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:bold;
+  font-size:18px;
+  margin-bottom:15px;
+}
+
+.icon{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--verde);
+  color:#fff;
+  font-size:18px;
+}
+
+label{
+  margin-top:14px;
+  display:block;
+  font-weight:600;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:15px;
+}
+
+button{
+  width:100%;
+  margin-top:26px;
+  padding:16px;
+  background:linear-gradient(135deg,var(--verde),#2ecf86);
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
+}
+
+button:hover{ opacity:.92; }
+
+.resultado{
+  display:none;
+  margin-top:30px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+/* CAIXAS */
+.box-vermelho{
+  background: var(--vermelho-claro);
+  border-left:6px solid var(--vermelho);
+  padding:20px;
+  border-radius:16px;
+}
+
+.box-vermelho strong{
+  color: var(--vermelho-escuro);
+}
+
+.box-verde{
+  background: var(--verde-claro);
+  border-left:6px solid var(--verde);
+  padding:20px;
+  border-radius:16px;
+}
+
+.valor{
+  font-size:16px;
+  margin-top:6px;
+}
+
+.total{
+  font-size:20px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* ECONOMIA */
+.economia{
+  margin-top:28px;
+  background:linear-gradient(135deg,#eafff3,#d7f7e6);
+  border-left:6px solid var(--verde);
+  padding:24px;
+  border-radius:18px;
+  text-align:center;
+}
+
+.economia span{
+  font-size:28px;
+  font-weight:bold;
+  color:var(--verde);
+}
+
+.obs{
+  font-size:12px;
+  color:#666;
+  margin-top:20px;
+  text-align:center;
+}
+
+.vantagens{
+  margin-top:35px;
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.vantagens li{
+  margin-bottom:12px;
+}
+
+/* RODAPÉ */
+.footer{
+  margin-top:40px;
+  text-align:center;
+  font-size:13px;
+  color:#777;
+}
+
+@media(max-width:700px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>🌞 Comparador de Energia Solar</h1>
+    <p>Tarifa Completa da Energisa × Energia Solar • Lei 14.300</p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">⚡</div>
+      Dados do Consumo
+    </div>
+
+    <label>Consumo total mensal (kWh)</label>
+    <input type="number" id="consumo" value="116">
+
+    <label>Energia solar compensada (kWh)</label>
+    <input type="number" id="kwhSolar" value="108">
+
+    <label>Tarifa cheia da Energisa (R$/kWh)</label>
+    <input type="number" id="tarifaCheia" step="0.001" value="0.957">
+
+    <label>Base fixa da Energisa (R$)</label>
+    <input type="number" id="baseEnergisa" step="0.01" value="15.64">
+
+    <label>Valor do kWh solar (R$)</label>
+    <input type="number" id="tarifaSolar" step="0.01" value="0.60">
+
+    <button onclick="calcular()">🔍 Calcular Economia</button>
+  </div>
+
+  <div class="resultado" id="resultado">
+
+    <div class="grid">
+      <div class="box-vermelho">
+        <strong>❌ Tarifa Completa da Energisa</strong>
+        <div class="valor" id="energisaSemSolar"></div>
+      </div>
+
+      <div class="box-verde">
+        <strong>☀️ Com Energia Solar</strong>
+        <div class="valor" id="energisaComSolar"></div>
+        <div class="valor" id="solarPago"></div>
+        <div class="total" id="totalComSolar"></div>
+      </div>
+    </div>
+
+    <div class="economia">
+      💰 Economia estimada<br>
+      <span id="economia"></span>
+    </div>
+
+    <div class="obs">
+      * Energia solar paga apenas TRF (0,1416/kWh).<br>
+      * Se o consumo for maior que a energia solar, a diferença é cobrada pela tarifa normal da Energisa.
+    </div>
+  </div>
+
+  <div class="vantagens">
+    <h2> 🌞⚡ Vantagens da Energia Solar ⚡🌞 </h2>
+    <ul>
+      <li><strong>Sem bandeira tarifária:</strong> mesmo em bandeira vermelha.</li>
+      <li><strong>Preço previsível:</strong> sem sustos na conta.</li>
+      <li><strong>Redução real do custo:</strong> substitui a energia mais cara.</li>
+      <li><strong>Energia limpa e sustentável.</strong></li>
+    </ul>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="footer">
+    Calculadora Desenvolvida por <strong>Arlisson Ferreira</strong>
+  </div>
+
+</div>
+
+<script>
+const TRF_GD = 0.1416;
+
+function calcular(){
+  const consumo = Number(document.getElementById("consumo").value);
+  const kwhSolar = Number(document.getElementById("kwhSolar").value);
+  const tarifaCheia = Number(document.getElementById("tarifaCheia").value);
+  const baseEnergisa = Number(document.getElementById("baseEnergisa").value);
+  const tarifaSolar = Number(document.getElementById("tarifaSolar").value);
+
+  const kwhRede = Math.max(consumo - kwhSolar, 0);
+
+  const custoSemSolar = consumo * tarifaCheia;
+
+  const custoEnergisa =
+    baseEnergisa +
+    (kwhSolar * TRF_GD) +
+    (kwhRede * tarifaCheia);
+
+  const custoSolar = kwhSolar * tarifaSolar;
+
+  const totalComSolar = custoEnergisa + custoSolar;
+  const economia = custoSemSolar - totalComSolar;
+  const economiaPerc = (economia / custoSemSolar) * 100;
+
+  document.getElementById("energisaSemSolar").innerHTML =
+    "R$ " + custoSemSolar.toFixed(2);
+
+  document.getElementById("energisaComSolar").innerHTML =
+    "Energisa: R$ " + custoEnergisa.toFixed(2);
+
+  document.getElementById("solarPago").innerHTML =
+    "Solar: R$ " + custoSolar.toFixed(2);
+
+  document.getElementById("totalComSolar").innerHTML =
+    "Total: R$ " + totalComSolar.toFixed(2);
+
+  document.getElementById("economia").innerHTML =
+    "R$ " + economia.toFixed(2) + " (" + economiaPerc.toFixed(1) + "%)";
+
+  document.getElementById("resultado").style.display = "block";
+}
+</script>
+
+</body>
+</html>

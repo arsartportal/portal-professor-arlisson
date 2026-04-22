@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Planos – Calc3D Pro</title>
+
+<style>
+:root {
+  --azul: #1e40af;
+  --azul-escuro: #020617;
+  --cinza: #475569;
+  --cinza-claro: #e5e7eb;
+  --bg: #f8fafc;
+  --verde: #16a34a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--azul-escuro);
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #020617, #1e3a8a);
+  color: #fff;
+  padding: 90px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 46px;
+  margin-bottom: 16px;
+}
+
+header p {
+  font-size: 20px;
+  opacity: .9;
+}
+
+/* TRUST BAR */
+.trust {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 45px 20px;
+  background: #fff;
+  border-bottom: 1px solid var(--cinza-claro);
+  flex-wrap: wrap;
+}
+
+.trust div {
+  font-size: 15px;
+  color: var(--cinza);
+}
+
+.trust strong {
+  color: var(--azul-escuro);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 20px;
+}
+
+/* PLANOS */
+.planos {
+  display: flex;
+  gap: 45px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.plano {
+  background: #fff;
+  padding: 55px 45px;
+  border-radius: 22px;
+  width: 380px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.08);
+  text-align: center;
+  position: relative;
+}
+
+.plano h2 {
+  font-size: 24px;
+}
+
+.preco {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--azul);
+  margin: 30px 0 10px;
+}
+
+.preco span {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--cinza);
+}
+
+.economia {
+  font-size: 14px;
+  color: var(--verde);
+  margin-bottom: 30px;
+}
+
+.plano ul {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0;
+}
+
+.plano li {
+  margin-bottom: 14px;
+  color: var(--cinza);
+}
+
+.plano li::before {
+  content: "✔ ";
+  color: var(--verde);
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 14px;
+  background: var(--azul);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* DESTAQUE */
+.plano.destaque {
+  border: 2px solid var(--azul);
+  transform: scale(1.07);
+}
+
+.plano.destaque::before {
+  content: "PLANO RECOMENDADO";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--azul);
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* FAQ */
+.faq {
+  margin-top: 140px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq h3 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 60px;
+}
+
+.faq-item {
+  background: #fff;
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.faq-item strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+  background: #020617;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 45px 20px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Calc3D Pro</h1>
+  <p>Software profissional para cálculos e orçamentos tridimensionais</p>
+</header>
+
+<div class="trust">
+  <div><strong>✔</strong> Uso profissional</div>
+  <div><strong>✔</strong> Acesso imediato</div>
+  <div><strong>✔</strong> Atualizações contínuas</div>
+  <div><strong>✔</strong> Suporte humano</div>
+</div>
+
+<div class="container">
+
+  <div class="planos">
+
+    <div class="plano">
+      <h2>Plano Mensal</h2>
+      <div class="preco">R$ 20<span>/mês</span></div>
+      <ul>
+        <li>Acesso completo ao sistema</li>
+        <li>Orçamentos ilimitados</li>
+        <li>Atualizações contínuas</li>
+        <li>Suporte padrão</li>
+      </ul>
+      <button onclick="assinar('Mensal', this)">Assinar plano mensal</button>
+    </div>
+
+    <div class="plano destaque">
+      <h2>Plano Anual</h2>
+      <div class="preco">R$ 150<span>/ano</span></div>
+      <div class="economia">Economia de R$ 90 ao ano</div>
+      <ul>
+        <li>Acesso completo ao sistema</li>
+        <li>Orçamentos ilimitados</li>
+        <li>Atualizações contínuas</li>
+        <li>Suporte prioritário</li>
+      </ul>
+      <button onclick="assinar('Anual', this)">Assinar plano anual</button>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <h3>Perguntas frequentes</h3>
+
+    <div class="faq-item">
+      <strong>O Calc3D Pro é um software online?</strong>
+      Sim. O acesso é feito via navegador, sem necessidade de instalação.
+    </div>
+
+    <div class="faq-item">
+      <strong>Como funciona o processo de contratação?</strong>
+      A contratação é feita diretamente via WhatsApp, onde são alinhados pagamento e liberação de acesso.
+    </div>
+
+    <div class="faq-item">
+      <strong>O acesso é liberado imediatamente?</strong>
+      Sim. Após a confirmação do pagamento, o acesso é liberado de forma imediata.
+    </div>
+
+    <div class="faq-item">
+      <strong>Posso cancelar quando quiser?</strong>
+      Sim. Não há fidelidade ou multa por cancelamento.
+    </div>
+
+    <div class="faq-item">
+      <strong>Existe contrato?</strong>
+      Não. O uso é recorrente enquanto o plano estiver ativo.
+    </div>
+
+    <div class="faq-item">
+      <strong>Para quem o Calc3D Pro é indicado?</strong>
+      Profissionais e estudantes que necessitam de cálculos e orçamentos tridimensionais com precisão.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Calc3D Pro • Todos os direitos reservados
+</footer>
+
+<script>
+function assinar(plano, botao) {
+  botao.innerText = "Abrindo WhatsApp...";
+  botao.disabled = true;
+
+  const telefone = "5583998233803";
+  const mensagem = `Olá! Quero assinar o plano ${plano} do Calc3D Pro.`;
+
+  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+  setTimeout(() => {
+    window.open(url, "_blank");
+    botao.innerText = "Assinar";
+    botao.disabled = false;
+  }, 600);
+}
+</script>
+
+</body>
+</html>

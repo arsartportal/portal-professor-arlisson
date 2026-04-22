@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dúvidas Frequentes</title>
+<link rel="stylesheet" href="faq.css">
+</head>
+
+<body>
+
+<!-- BOTÃO VOLTAR -->
+<button class="btn-voltar" onclick="voltarPagina()">⬅ Voltar</button>
+
+<div class="faq-container">
+
+  <h1>❓ Dúvidas Frequentes</h1>
+  <p class="sub">Tudo que você precisa saber sobre o portal</p>
+
+  <!-- AVISO IMPORTANTE -->
+  <div class="aviso">
+    ⚠️ Os <strong>Science Points (SP)</strong> não possuem valor monetário real e são utilizados apenas dentro do portal como forma de incentivo educacional.
+  </div>
+
+  <!-- PERGUNTAS -->
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Como ganhar XP no portal?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Você ganha XP resolvendo desafios, atividades, quizzes e participando das aulas.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      O que são Science Points (SP)?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      São pontos do sistema usados na central de recompensas. Eles não podem ser convertidos em dinheiro.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Posso trocar SP por dinheiro?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      ❌ Não. Os SP são apenas virtuais e fazem parte do sistema educacional do portal.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Posso perder XP?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Não! O XP é acumulativo e mostra sua evolução ao longo do tempo.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Como subir de nível?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Ao acumular XP suficiente, você automaticamente sobe de nível dentro do sistema.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      O que acontece se eu não entrar no portal?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Você pode perder bônus de frequência (streak) e deixar de ganhar recompensas extras.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Meu XP não atualizou, o que faço?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Atualize a página ou aguarde alguns segundos. Se persistir, fale com o professor.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Como ganhar bônus?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Você pode ganhar bônus mantendo sequência de dias ativos, participando de desafios especiais ou eventos.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Para que serve o ranking?
+      <span>+</span>
+    </button>
+    <div class="faq-answer">
+      O ranking mostra os alunos com maior desempenho, incentivando a participação e o aprendizado.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function voltarPagina(){
+  window.history.back();
+}
+</script>
+
+<!-- BOTÃO CHAT -->
+<button class="btn-chat" onclick="abrirChat()">
+  🤖 Ainda com dúvida?
+</button>
+
+<!-- CHAT -->
+<div class="chat-box" id="chatBox">
+
+  <div class="chat-header">
+    Assistente do Portal
+    <span onclick="fecharChat()">✖</span>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="bot">
+      Olá! 👋<br>
+      Como posso te ajudar?
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Digite sua dúvida...">
+    <button onclick="enviarMensagem()">Enviar</button>
+  </div>
+
+</div>
+
+<script type="module" src="faq.js"></script>
+
+
+</body>
+</html>

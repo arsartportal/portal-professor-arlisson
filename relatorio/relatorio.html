@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios do Portal</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="relatorio.css">
+
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="topo">
+      <div>
+        <h1>Relatórios do Portal</h1>
+        <p>Dashboard da turma, evolução individual e protagonismo dos alunos.</p>
+      </div>
+
+      <div class="filtros">
+        <select id="filtroEscola">
+          <option>Todas as escolas</option>
+          <option>Boto de Menezes</option>
+          <option>Maria Geny</option>
+        </select>
+
+        <select id="filtroTurma">
+  <option>Todas as turmas</option>
+
+  <option value="1ano">1º Ano</option>
+  <option value="1ano-A">1º Ano A</option>
+  <option value="1ano-B">1º Ano B</option>
+
+  <option value="2ano">2º Ano</option>
+  <option value="2ano-A">2º Ano A</option>
+  <option value="2ano-B">2º Ano B</option>
+
+  <option value="3ano">3º Ano</option>
+  <option value="3ano-A">3º Ano A</option>
+  <option value="3ano-B">3º Ano B</option>
+</select>
+
+        <select id="filtroMes"></select>
+        <select id="filtroAno"></select>
+      </div>
+    </div>
+
+    <section class="secao">
+      <h2>Dashboard da Turma</h2>
+      <p class="subtitulo">Resumo geral da utilização do portal.</p>
+
+      <div class="cards">
+<div class="card">
+  <span>Alunos ativos</span>
+  <h3 id="alunosAtivos">0</h3>
+  <small id="alunosAtivosInfo">-</small>
+</div>
+
+<div class="card">
+  <span>Acessos ao portal</span>
+  <h3 id="acessosPortal">0</h3>
+  <small id="acessosPortalInfo">-</small>
+</div>
+
+<div class="card">
+  <span>Desafios realizados</span>
+  <h3 id="desafiosRealizados">0</h3>
+  <small id="desafiosRealizadosInfo">-</small>
+</div>
+
+<div class="card">
+  <span>XP médio da turma</span>
+  <h3 id="xpMedio">0 XP</h3>
+  <small id="xpMedioInfo">-</small>
+</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="bloco">
+          <h3>Acessos por período</h3>
+          <p>Número de acessos ao longo da semana.</p>
+          <canvas id="graficoAcessos"></canvas>
+        </div>
+
+        <div class="bloco">
+  <h3>Participação da turma</h3>
+  <p>Percentual de desafios, quizzes e recompensas.</p>
+
+  <div class="barra-item">
+    <div class="barra-topo">
+      <span>Desafios realizados</span>
+      <strong id="percentDesafios">0%</strong>
+    </div>
+    <div class="barra">
+      <div id="barraDesafios" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="barra-item">
+    <div class="barra-topo">
+      <span>Quizzes concluídos</span>
+      <strong id="percentQuizzes">0%</strong>
+    </div>
+    <div class="barra">
+      <div id="barraQuizzes" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="barra-item">
+    <div class="barra-topo">
+      <span>Recompensas resgatadas</span>
+      <strong id="percentRecompensas">0%</strong>
+    </div>
+    <div class="barra">
+      <div id="barraRecompensas" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="barra-item">
+    <div class="barra-topo">
+      <span>Missões semanais</span>
+      <strong id="percentMissoes">0%</strong>
+    </div>
+    <div class="barra">
+      <div id="barraMissoes" style="width:0%"></div>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>Relatório Automático do Aluno</h2>
+      <p class="subtitulo">Desempenho, XP, recompensas e conteúdos com maior dificuldade.</p>
+
+      <div class="grid-2">
+        <div class="bloco">
+          <h3>Evolução do desempenho</h3>
+          <p>Percentual de crescimento ao longo dos meses.</p>
+          <canvas id="graficoEvolucao"></canvas>
+        </div>
+
+        <div class="bloco">
+          <div class="aluno-box">
+  <span style="color:#94a3b8">Aluno</span>
+  <h3 id="nomeAluno" style="margin-top:6px">-</h3>
+</div>
+
+<div class="mini-grid">
+  <div class="mini-card">
+    <span>XP</span>
+    <strong id="xpAluno">0</strong>
+  </div>
+
+  <div class="mini-card">
+    <span>Nível</span>
+    <strong id="nivelAluno">0</strong>
+  </div>
+</div>
+
+<div class="aluno-box">
+  <span style="color:#94a3b8">Recompensas obtidas</span>
+  <h3 id="recompensasAluno" style="font-size:1.1rem; margin-top:8px">
+    -
+  </h3>
+</div>
+      </div>
+
+      <div class="bloco">
+        <h3>Conteúdos com maior dificuldade</h3>
+        <p>Tópicos com menor desempenho da turma.</p>
+        <canvas id="graficoDificuldades"></canvas>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>Painel de Protagonismo</h2>
+      <p class="subtitulo">Participação espontânea, ranking e atividades sem solicitação.</p>
+
+      <div class="grid-2">
+<div class="bloco">
+  <h3>Ranking de protagonismo</h3>
+  <p>Alunos que mais acessam e participam espontaneamente.</p>
+
+  <div class="ranking" id="rankingProtagonismo"></div>
+</div>
+
+        <div class="bloco">
+          <h3>Atividades espontâneas</h3>
+          <p>Distribuição das ações realizadas sem solicitação do professor.</p>
+          <canvas id="graficoProtagonismo"></canvas>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+<script type="module" src="relatorio.js"></script>
+
+</body>
+</html>

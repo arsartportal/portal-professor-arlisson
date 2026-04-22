@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎓 Professor por um Dia</title>
+
+<link rel="stylesheet" href="./css/professor-dia.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>🎓 Professor por um Dia</h1>
+  <span class="badge">Modo Ativo</span>
+</header>
+
+<main class="grid">
+
+  <!-- 📚 TEMA -->
+  <div class="card">
+    <h2>📚 Tema</h2>
+    <select id="tema">
+      <option>Cinemática</option>
+      <option>Leis de Newton</option>
+      <option>Energia</option>
+      <option>Ondulatória</option>
+    </select>
+  </div>
+
+  <!-- 👥 GRUPOS -->
+  <div class="card">
+    <h2>👥 Grupos</h2>
+    <button class="btn" onclick="criarGrupos()">Gerar Grupos</button>
+    <ul id="listaGrupos"></ul>
+  </div>
+
+  <!-- 🎯 MISSÃO -->
+  <div class="card destaque">
+    <h2>🎯 Missão</h2>
+    <p>
+      Explicar o conteúdo<br>
+      Dar exemplo real<br>
+      Criar 2 questões<br>
+      Apresentar
+    </p>
+  </div>
+
+  <!-- ⏱️ TIMER -->
+  <div class="card timer-card">
+    <h2>⏱️ Tempo</h2>
+    <div class="timer" id="timer">00:00</div>
+    <div class="actions">
+      <button class="btn" onclick="iniciarTimer(20)">20 min</button>
+      <button class="btn ghost" onclick="iniciarTimer(30)">30 min</button>
+    </div>
+  </div>
+
+  <!-- 📝 AVALIAÇÃO -->
+  <div class="card">
+    <h2>📝 Avaliação</h2>
+
+    <div class="inputs">
+      <label>Explicação <input type="number" id="exp" max="4"></label>
+      <label>Clareza <input type="number" id="cla" max="2"></label>
+      <label>Criatividade <input type="number" id="cri" max="2"></label>
+      <label>Participação <input type="number" id="par" max="2"></label>
+    </div>
+
+    <button class="btn" onclick="calcularNota()">Calcular</button>
+    <div class="resultado" id="nota"></div>
+  </div>
+
+</main>
+
+<script src="./js/professor-dia.js"></script>
+</body>
+</html>

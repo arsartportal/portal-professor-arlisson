@@ -1,0 +1,15 @@
+/* =====================================================
+   PROFESSOR.CSS — ESTILOS EXCLUSIVOS
+===================================================== */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card-bloqueado {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

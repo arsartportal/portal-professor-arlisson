@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — Carga Elétrica</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        Neste nível, vamos estudar o conceito de carga elétrica
+        e os tipos de cargas presentes na matéria.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.2 — CARGA ELÉTRICA
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-2">
+
+      <h2>📘 Nível 3.2 — Carga Elétrica</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é carga elétrica?</h3>
+        <p>
+          A <strong>carga elétrica</strong> é uma propriedade física da matéria
+          responsável pelas <strong>interações elétricas</strong>.
+        </p>
+        <p>
+          Ela está associada às partículas que formam os átomos,
+          principalmente <strong>elétrons</strong> e <strong>prótons</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Tipos de carga elétrica</h3>
+        <p>
+          Existem dois tipos de carga elétrica:
+        </p>
+        <ul>
+          <li><strong>Carga positiva (+)</strong> → associada aos prótons</li>
+          <li><strong>Carga negativa (−)</strong> → associada aos elétrons</li>
+        </ul>
+        <p>
+          Cargas de mesmo sinal se repelem, enquanto cargas de sinais opostos
+          se atraem.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Corpo neutro e corpo eletrizado</h3>
+        <p>
+          Um corpo é considerado <strong>neutro</strong> quando possui
+          a mesma quantidade de cargas positivas e negativas.
+        </p>
+        <p>
+          Quando há excesso ou falta de elétrons, o corpo está
+          <strong>eletrizado</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Conservação da carga elétrica</h3>
+        <p>
+          A carga elétrica total de um sistema isolado
+          <strong>sempre se conserva</strong>.
+        </p>
+        <p>
+          Isso significa que cargas não são criadas nem destruídas,
+          apenas transferidas entre corpos.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Unidade de carga elétrica</h3>
+        <p>
+          No Sistema Internacional, a carga elétrica é medida em
+          <strong>coulomb (C)</strong>.
+        </p>
+        <p>
+          A carga do elétron é aproximadamente:
+        </p>
+        <ul>
+          <li>−1,6 × 10⁻¹⁹ C</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Carga elétrica é uma propriedade da matéria</li>
+          <li>Existem cargas positivas e negativas</li>
+          <li>Cargas iguais se repelem e opostas se atraem</li>
+          <li>A carga elétrica se conserva</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.2
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que é carga elétrica?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Tipo de energia térmica
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Propriedade física da matéria
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Forma de movimento
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> O que acontece entre cargas de sinais iguais?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Elas se repelem
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Elas se atraem
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Não interagem
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual é a unidade de carga elétrica?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Volt
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Ampère
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Coulomb
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel32()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_3_2')">
+          ✅ Concluir Nível 3.2
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>

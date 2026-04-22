@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Científico</title>
+  <link rel="stylesheet" href="quiz-cientifico.css">
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+  <h1>⚡ Quiz Científico</h1>
+
+  <!-- 📘 INSTRUÇÕES -->
+  <div id="instrucoes" class="card">
+    <h2>📘 Como funciona</h2>
+
+    <ul>
+      <li>🎟️ Cada partida custa <b>1 ficha</b></li>
+      <li>⏳ Você tem <b>5</b> segundos por pergunta</li>
+      <li>❌ Errou ou acabou o tempo → perde</li>
+      <li>🏆 3+ acertos → ganha recompensa</li>
+      <li>🔥 5 acertos → bônus máximo</li>
+    </ul>
+
+    <!-- 🎟️ FICHAS -->
+    <div class="fichas-info">
+      🎟️ Fichas: <b id="fichas">0</b>
+    </div>
+    <div class="fichas-stats">
+  📊 Hoje: <b id="gastasHoje">0</b> |
+  🧾 Total: <b id="gastasTotal">0</b>
+</div>
+
+    <!-- 🔥 BOTÕES (ALINHADO COM CSS .botoes) -->
+    <div class="botoes">
+      <button id="btnIniciar">Jogar</button>
+      <a href="/loja.html" class="btn-loja-link">🛒 Resgatar fichas</a>
+    </div>
+
+  </div>
+
+  <!-- 🎮 QUIZ -->
+  <div id="quizArea" class="card hidden">
+
+    <div class="topo">
+      <span>Pergunta <b id="numPergunta">1</b>/5</span>
+      <span>⏳ <b id="tempo">5</b>s</span>
+    </div>
+
+    <div class="barra">
+      <div id="progresso"></div>
+    </div>
+
+    <h2 id="pergunta"></h2>
+
+    <div id="opcoes"></div>
+
+    <div id="resultado" class="hidden"></div>
+
+  </div>
+
+  <!-- 🏆 LEADERBOARD -->
+  <div class="card">
+    <h2>🏆 Ranking</h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="total">Total</button>
+      <button class="tab" data-tab="semanal">Semanal</button>
+    </div>
+
+    <div id="ranking"></div>
+  </div>
+
+</div>
+
+<script type="module" src="quiz-cientifico.js"></script>
+
+</body>
+</html>

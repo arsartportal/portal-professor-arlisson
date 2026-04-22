@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔥 Desafio Diário</title>
+
+<link rel="stylesheet" href="./css/desafios.css">
+
+</head>
+
+<body>
+
+<!-- 🔙 BOTÃO VOLTAR -->
+<div class="back" onclick="history.back()">⬅ Voltar</div>
+
+<!-- 🚀 CONTAINER PRINCIPAL -->
+<div class="container">
+
+  <!-- TÍTULO -->
+  <h1 id="tituloDesafio">🔥 Desafio Diário</h1>
+
+  <!-- INFO SUPERIOR -->
+  <div class="top-info">
+    <span id="materia">📘 Matemática</span>
+    <span id="xpReward">⚡ +20 XP</span>
+  </div>
+
+  <!-- BADGE -->
+  <div class="badge-desafio" id="materia">
+    🔥 Valendo XP hoje
+  </div>
+
+  <!-- PERGUNTA -->
+  <p id="pergunta"></p>
+
+  <!-- OPÇÕES -->
+  <div id="opcoes" class="options"></div>
+
+  <!-- BOTÃO -->
+  <button id="btnResponder">Responder</button>
+
+  <!-- STATUS -->
+  <p id="status"></p>
+
+  <!-- 🔥 FEEDBACK VISUAL -->
+  <div id="feedbackVisual" class="feedback-visual"></div>
+
+  <!-- ⏳ TIMER -->
+  <p id="timer"></p>
+
+  <!-- ⏳ PRÓXIMA QUESTÃO (NOVO) -->
+  <div id="nextQuestionBox" class="next-question-box" style="display:none;">
+    ⏳ Próxima pergunta em:
+    <span id="nextTimer">--:--</span>
+  </div>
+
+  <!-- 🔥 STREAK -->
+  <div class="streak-box">
+    Streak: <span id="streakValor"> 0</span>
+
+    <div class="streak-bar">
+      <div id="streakFill"></div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- =========================
+🏆 MISSÃO SEMANAL
+========================= -->
+<section class="card-missao-semanal" id="cardMissaoSemanal">
+
+  <h2>🏆 Missão Semanal</h2>
+
+  <p>
+    Complete 5 desafios ao longo da semana para desbloquear sua recompensa especial.
+  </p>
+
+  <div class="progresso-missao-wrap">
+
+    <div class="progresso-missao-texto" id="textoMissao">
+      0 / 5
+    </div>
+
+    <div class="progresso-missao-barra">
+      <div class="progresso-missao-preenchimento" id="barraMissao"></div>
+    </div>
+
+  </div>
+
+  <div class="recompensa-missao">
+    🎁 Recompensa: 100 XP
+  </div>
+
+  <button id="btnColetarMissao" style="display:none;">
+  🎁 Coletar recompensa
+</button>
+  
+
+</section>
+
+<section class="card-recompensa-diaria">
+
+  <h2>🎁 Recompensa Diária</h2>
+
+  <p>
+    Entre todos os dias para coletar bônus e manter sua sequência ativa.
+  </p>
+
+  <div class="reward-days" id="rewardDays"></div>
+
+  <div class="reward-info">
+    🎁 Hoje: <span id="rewardToday">+10 XP</span>
+  </div>
+
+  <p id="rewardMensagem" class="reward-msg"></p>
+
+  <button id="btnColetarReward">
+    🎁 Coletar recompensa
+  </button>
+
+</section>
+
+<!-- 🎆 CAMADA DE EFEITOS -->
+<div id="fx-layer"></div>
+
+<!-- LIBS -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<!-- SCRIPT -->
+<script type="module" src="./js/desafios.js"></script>
+
+
+<div id="xp-float" class="xp-float"></div>
+
+<!-- BOTÃO FLOTANTE DA LOJA -->
+<button id="btnLojaFloat" class="btn-loja-float">
+  🛒 🔬 <span class="spUsuario">0</span>
+</button>
+
+</body>
+</html>

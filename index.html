@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- RESPONSIVIDADE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description" content="Portal do Professor Arlisson - Plataforma de Física e Matemática">
+
+  <title>Portal do Professor Arlisson • Acesso</title>
+
+  <!-- FONTE PREMIUM (estilo Apple) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ESTILO -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body class="login-body">
+
+  <!-- 🌫️ FUNDO ANIMADO -->
+  <canvas id="particles"></canvas>
+
+  <!-- 🌑 OVERLAY (efeito glass + profundidade) -->
+  <div class="bg-overlay"></div>
+
+  <!-- 📦 CONTAINER PRINCIPAL -->
+  <main class="login-wrapper">
+
+    <!-- =========================
+         LADO ESQUERDO
+    ========================== -->
+    <section class="login-brand">
+
+      <div class="brand-content">
+        <h1>Portal do Professor Arlisson</h1>
+
+        <p class="login-slogan">
+          Física e Matemática • Ensino Médio e EJA
+        </p>
+
+        <ul class="login-features">
+          <li>🏆 Gamificação educacional com XP, níveis e desafios</li>
+          <li>🌐 Sala de aula expandida com atividades complementares</li>
+          <li>❓ Quizzes interativos para revisão e fixação dos conteúdos</li>
+          <li>📊 Acompanhamento do desempenho e progresso dos estudantes</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- =========================
+         LADO DIREITO (LOGIN)
+    ========================== -->
+    <section class="login-panel">
+
+      <div class="login-card">
+
+        <h2>Acesso do Aluno</h2>
+
+        <p class="login-info">
+          Utilize o usuário e senha fornecidos em sala.
+        </p>
+
+        <!-- FORMULÁRIO -->
+        <form
+          class="login-form"
+          id="formLogin"
+          autocomplete="on"
+          aria-label="Formulário de login"
+        >
+
+          <!-- USUÁRIO -->
+          <label for="usuario" class="sr-only">Usuário</label>
+          <input
+            type="text"
+            id="usuario"
+            name="usuario"
+            placeholder="Usuário"
+            autocomplete="username"
+            required
+            autofocus
+          >
+
+          <!-- SENHA -->
+          <label for="senha" class="sr-only">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="Senha"
+            autocomplete="current-password"
+            required
+          >
+
+          <!-- BOTÃO -->
+          <button type="submit" id="btnLogin">
+            <span>Entrar no Portal</span>
+          </button>
+
+                    <!-- ERRO -->
+          <p id="erro" role="alert" aria-live="assertive"></p>
+
+        </form>
+
+        <!-- LINKS SECUNDÁRIOS -->
+        <div class="login-links">
+  <a href="./sobre.html">Sobre</a>
+  <span class="separator">•</span>
+
+  <a href="./contato.html">Contato</a>
+  <span class="separator">•</span>
+
+  <a href="./privacidade.html">Política de Privacidade</a>
+</div>
+
+        <!-- RODAPÉ -->
+        <p class="login-footer">
+          © 2026 • Portal do Professor Arlisson
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script type="module" src="./js/index.js"></script>
+  <script src="./js/particles.js"></script>
+
+  
+</body>
+</html>

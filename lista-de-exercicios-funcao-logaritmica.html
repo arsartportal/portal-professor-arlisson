@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aula – Função Logarítmica</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* =====================================================
+   ESTILO GERAL
+===================================================== */
+body{
+font-family:'Segoe UI',Arial,sans-serif;
+background:#eef2f8;
+margin:0;
+padding:40px;
+color:#2c3e50;
+}
+
+.container{
+max-width:1150px;
+margin:auto;
+background:#ffffff;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 35px rgba(0,0,0,0.12);
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.sub{
+text-align:center;
+color:#6b7c93;
+margin-bottom:40px;
+}
+
+h2{
+margin-top:40px;
+border-bottom:2px solid #e4e9f2;
+padding-bottom:6px;
+}
+
+.card{
+background:#f7f9fc;
+padding:20px;
+border-radius:8px;
+margin-top:15px;
+line-height:1.8;
+}
+
+.formula{
+font-size:28px;
+text-align:center;
+margin:20px 0;
+font-weight:bold;
+}
+
+.exemplo{
+background:#eef6ff;
+border-left:4px solid #3498db;
+padding:15px;
+margin-top:15px;
+border-radius:6px;
+}
+
+.simulador{
+background:#f7f9ff;
+padding:25px;
+border-radius:8px;
+margin-top:20px;
+}
+
+input{
+padding:10px;
+width:110px;
+margin:6px;
+border:1px solid #ccd6e4;
+border-radius:6px;
+font-size:15px;
+}
+
+button{
+padding:10px 18px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+}
+
+button:hover{
+background:#1a68d1;
+}
+
+canvas{
+margin-top:20px;
+background:#fff;
+border-radius:10px;
+border:1px solid #dbe4f0;
+padding:10px;
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+margin-top:20px;
+}
+
+.info-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.info-card h4{
+margin:0 0 8px 0;
+font-size:16px;
+color:#2c7be5;
+}
+
+.painel-etapas{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:16px;
+}
+
+.etapa{
+background:#f7fbff;
+border:1px solid #d6e7fb;
+padding:12px 14px;
+border-radius:10px;
+font-size:18px;
+line-height:1.7;
+opacity:0;
+transform:translateY(8px);
+animation:aparecer 0.45s ease forwards;
+}
+
+.etapa strong{
+color:#2c7be5;
+}
+
+.etapa-final{
+background:#edfdf2;
+border:1px solid #cdeed8;
+}
+
+.comparacao-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+margin-top:18px;
+}
+
+.comparacao-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.comparacao-card h4{
+margin:0 0 8px 0;
+font-size:16px;
+color:#2c7be5;
+}
+
+.destaque{
+font-size:18px;
+font-weight:bold;
+margin-top:15px;
+line-height:1.8;
+}
+
+.questao{
+background:#fafcff;
+padding:18px;
+margin-top:20px;
+border-left:4px solid #2c7be5;
+border-radius:6px;
+}
+
+.alt{
+margin-top:6px;
+}
+
+.resultado{
+margin-top:10px;
+font-weight:bold;
+}
+
+.legenda-grafico{
+margin-top:14px;
+padding:14px;
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+line-height:1.8;
+}
+
+@keyframes aparecer{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@media (max-width:768px){
+body{
+padding:20px;
+}
+.container{
+padding:22px;
+}
+input{
+width:100%;
+box-sizing:border-box;
+}
+button{
+width:100%;
+margin-top:10px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Função Logarítmica</h1>
+<p class="sub">Matemática – Ensino Médio</p>
+
+<h2>1. Definição</h2>
+<div class="card">
+A <b>função logarítmica</b> é aquela em que a variável aparece dentro do logaritmo.
+
+<div class="formula">
+f(x) = log<sub>a</sub>(x)
+</div>
+
+em que:
+
+<br><br>
+<b>a</b> é a base do logaritmo, com:
+<br>
+<b>a &gt; 0</b> e <b>a ≠ 1</b>
+
+<br><br>
+Além disso, para o logaritmo existir, é necessário que:
+
+<div class="formula">
+x &gt; 0
+</div>
+
+<div class="exemplo">
+Exemplos:
+<br><br>
+f(x) = log<sub>2</sub>(x)
+<br>
+f(x) = log<sub>10</sub>(x)
+<br>
+f(x) = log<sub>1/2</sub>(x)
+</div>
+</div>
+
+<h2>2. Ideia do logaritmo</h2>
+<div class="card">
+O logaritmo responde à pergunta:
+
+<div class="formula">
+a<sup>?</sup> = x
+</div>
+
+Ou seja:
+
+<div class="formula">
+log<sub>a</sub>(x) = y ⇔ a<sup>y</sup> = x
+</div>
+
+<div class="exemplo">
+log<sub>2</sub>(8) = 3, porque:
+<br>
+2<sup>3</sup> = 8
+
+<br><br>
+
+log<sub>10</sub>(100) = 2, porque:
+<br>
+10<sup>2</sup> = 100
+</div>
+</div>
+
+<h2>3. Comportamento da função</h2>
+<div class="card">
+O comportamento da função logarítmica depende da base.
+
+<div class="exemplo">
+Se <b>a &gt; 1</b>, a função é <b>crescente</b>.
+<br>
+Se <b>0 &lt; a &lt; 1</b>, a função é <b>decrescente</b>.
+</div>
+
+Além disso:
+
+<br><br>
+• o domínio é o conjunto dos números reais <b>positivos</b>  
+<br>
+• a imagem é o conjunto dos números reais  
+<br>
+• toda função logarítmica passa pelo ponto <b>(1,0)</b>, porque:
+<br><br>
+<div class="formula">
+log<sub>a</sub>(1) = 0
+</div>
+<br>
+• a reta <b>x = 0</b> é uma assíntota vertical
+</div>
+
+<h2>4. Relação com a função exponencial</h2>
+<div class="card">
+A função logarítmica é a <b>inversa</b> da função exponencial.
+
+<div class="exemplo">
+Se:
+<br>
+y = a<sup>x</sup>
+<br><br>
+então a inversa é:
+<br>
+y = log<sub>a</sub>(x)
+</div>
+
+Isso significa que os gráficos dessas funções são simétricos em relação à reta <b>y = x</b>.
+</div>
+
+<h2>5. Exemplo resolvido</h2>
+<div class="card">
+Considere a função:
+
+<div class="formula">
+f(x) = log<sub>2</sub>(x)
+</div>
+
+Calculando alguns valores:
+
+<div class="exemplo">
+x = 1 → f(x) = log<sub>2</sub>(1) = 0
+<br>
+x = 2 → f(x) = log<sub>2</sub>(2) = 1
+<br>
+x = 4 → f(x) = log<sub>2</sub>(4) = 2
+<br>
+x = 8 → f(x) = log<sub>2</sub>(8) = 3
+<br>
+x = 1/2 → f(x) = log<sub>2</sub>(1/2) = -1
+</div>
+
+Como a base é maior que 1, a função é crescente.
+</div>
+
+<h2>6. Simulador da função logarítmica</h2>
+<div class="simulador">
+
+<p>Escolha a base <b>a</b> e observe a função logarítmica, a exponencial inversa e a reta y = x.</p>
+
+Base a =
+<input type="number" id="base" value="2" step="0.1">
+
+<button onclick="gerar()">Gerar gráfico</button>
+
+<div class="destaque" id="funcao"></div>
+
+<div class="info-grid" id="infos"></div>
+
+<div class="comparacao-box" id="comparacao"></div>
+
+<div class="painel-etapas" id="passos"></div>
+
+<div class="legenda-grafico" id="legendaGrafico"></div>
+
+<canvas id="grafico" height="110"></canvas>
+
+</div>
+
+<h2>7. Exercícios</h2>
+<div id="exercicios"></div>
+
+</div>
+
+<script>
+/* =====================================================
+   VARIÁVEL DO GRÁFICO
+===================================================== */
+let chart;
+
+/* =====================================================
+   FUNÇÕES AUXILIARES
+===================================================== */
+function formatarNumero(n){
+if(Number.isInteger(n)) return n.toString();
+return n.toFixed(4).replace(".",",").replace(/,?0+$/,"");
+}
+
+function logBase(x, base){
+return Math.log(x) / Math.log(base);
+}
+
+/* =====================================================
+   GERAR SIMULADOR E GRÁFICO
+===================================================== */
+function gerar(){
+let a = parseFloat(document.getElementById("base").value);
+
+if(a <= 0 || a === 1){
+document.getElementById("funcao").innerHTML = "A base deve ser <b>positiva</b> e <b>diferente de 1</b>.";
+document.getElementById("infos").innerHTML = "";
+document.getElementById("comparacao").innerHTML = "";
+document.getElementById("passos").innerHTML = "";
+document.getElementById("legendaGrafico").innerHTML = "";
+if(chart) chart.destroy();
+return;
+}
+
+document.getElementById("funcao").innerHTML = `
+Função logarítmica: <b>f(x) = log<sub>${formatarNumero(a)}</sub>(x)</b>
+<br>
+Função exponencial inversa: <b>g(x) = ${formatarNumero(a)}<sup>x</sup></b>
+`;
+
+let comportamento = a > 1 ? "Crescente" : "Decrescente";
+
+document.getElementById("infos").innerHTML = `
+<div class="info-card">
+<h4>Base</h4>
+<div>${formatarNumero(a)}</div>
+</div>
+
+<div class="info-card">
+<h4>Comportamento</h4>
+<div>${comportamento}</div>
+</div>
+
+<div class="info-card">
+<h4>Domínio da log</h4>
+<div>x > 0</div>
+</div>
+
+<div class="info-card">
+<h4>Imagem da log</h4>
+<div>Todos os reais</div>
+</div>
+
+<div class="info-card">
+<h4>Ponto notável</h4>
+<div>(1,0)</div>
+</div>
+
+<div class="info-card">
+<h4>Assíntota vertical</h4>
+<div>x = 0</div>
+</div>
+`;
+
+let valores = [0.5,1,2,4,8];
+let htmlComparacao = "";
+
+valores.forEach(v=>{
+let y = logBase(v,a);
+htmlComparacao += `
+<div class="comparacao-card">
+<h4>x = ${formatarNumero(v)}</h4>
+<div>f(x) = ${formatarNumero(y)}</div>
+</div>
+`;
+});
+
+document.getElementById("comparacao").innerHTML = htmlComparacao;
+
+document.getElementById("passos").innerHTML = `
+<div class="etapa" style="animation-delay:0s;">
+<strong>Etapa 1:</strong> Identificamos a base: <b>a = ${formatarNumero(a)}</b>
+</div>
+
+<div class="etapa" style="animation-delay:0.15s;">
+<strong>Etapa 2:</strong> Verificamos que a base é válida, pois <b>a > 0</b> e <b>a ≠ 1</b>
+</div>
+
+<div class="etapa" style="animation-delay:0.30s;">
+<strong>Etapa 3:</strong> Como <b>${formatarNumero(a)} ${a > 1 ? ">" : "<"} 1</b>, a função é <b>${comportamento.toLowerCase()}</b>
+</div>
+
+<div class="etapa" style="animation-delay:0.45s;">
+<strong>Etapa 4:</strong> O logaritmo só existe para <b>x > 0</b>, então não há gráfico em x = 0 ou em valores negativos
+</div>
+
+<div class="etapa" style="animation-delay:0.60s;">
+<strong>Etapa 5:</strong> A função sempre passa por <b>(1,0)</b>, pois <b>log<sub>${formatarNumero(a)}</sub>(1)=0</b>
+</div>
+
+<div class="etapa etapa-final" style="animation-delay:0.75s;">
+<strong>Etapa 6:</strong> A função <b>y = log<sub>${formatarNumero(a)}</sub>(x)</b> é inversa de <b>y = ${formatarNumero(a)}<sup>x</sup></b>, por isso seus gráficos ficam espelhados em relação à reta <b>y = x</b>
+</div>
+`;
+
+document.getElementById("legendaGrafico").innerHTML = `
+<b>No gráfico:</b>
+<br>
+• a curva da função logarítmica mostra <b>y = log<sub>${formatarNumero(a)}</sub>(x)</b>
+<br>
+• a outra curva mostra a função exponencial inversa <b>y = ${formatarNumero(a)}<sup>x</sup></b>
+<br>
+• a reta <b>y = x</b> ajuda a visualizar que uma é o espelho da outra
+`;
+
+let pontosLog = [];
+for(let x = 0.1; x <= 10; x += 0.05){
+pontosLog.push({x:x, y:logBase(x,a)});
+}
+
+let pontosExp = [];
+for(let x = -5; x <= 5; x += 0.05){
+let y = Math.pow(a,x);
+if(y <= 10){
+pontosExp.push({x:x, y:y});
+}
+}
+
+let pontosDiagonal = [];
+for(let x = -5; x <= 10; x += 0.1){
+pontosDiagonal.push({x:x, y:x});
+}
+
+if(chart) chart.destroy();
+
+chart = new Chart(document.getElementById("grafico"), {
+type:'line',
+data:{
+datasets:[
+{
+label:'Função logarítmica',
+data:pontosLog,
+borderColor:'#2c7be5',
+borderWidth:3,
+fill:false,
+pointRadius:0,
+tension:0.22
+},
+{
+label:'Função exponencial inversa',
+data:pontosExp,
+borderColor:'#27ae60',
+borderWidth:3,
+fill:false,
+pointRadius:0,
+tension:0.22
+},
+{
+label:'Reta y = x',
+data:pontosDiagonal,
+borderColor:'#9b59b6',
+borderWidth:2,
+fill:false,
+pointRadius:0,
+borderDash:[7,7]
+},
+{
+label:'Eixo X',
+data:[{x:-5,y:0},{x:10,y:0}],
+borderColor:'#000',
+borderWidth:2,
+pointRadius:0
+},
+{
+label:'Eixo Y',
+data:[{x:0,y:-5},{x:0,y:10}],
+borderColor:'#000',
+borderWidth:2,
+pointRadius:0
+},
+{
+label:'Ponto (1,0)',
+data:[{x:1,y:0}],
+borderColor:'#2c7be5',
+backgroundColor:'#2c7be5',
+pointRadius:5,
+showLine:false
+},
+{
+label:'Ponto (0,1)',
+data:[{x:0,y:1}],
+borderColor:'#27ae60',
+backgroundColor:'#27ae60',
+pointRadius:5,
+showLine:false
+}
+]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+display:true
+}
+},
+scales:{
+x:{
+type:'linear',
+min:-5,
+max:10,
+title:{display:true,text:'x'},
+grid:{color:'#ddd'}
+},
+y:{
+min:-5,
+max:10,
+title:{display:true,text:'y'},
+grid:{color:'#ddd'}
+}
+}
+}
+});
+}
+
+/* =====================================================
+   EXERCÍCIOS
+===================================================== */
+const questoes = [
+{
+p:"Qual é a forma geral da função logarítmica?",
+a:[
+"f(x)=a<sup>x</sup>",
+"f(x)=log<sub>a</sub>(x)",
+"f(x)=ax+b",
+"f(x)=x<sup>2</sup>"
+],
+c:1
+},
+{
+p:"Na função logarítmica, a base deve ser:",
+a:[
+"a &gt; 0 e a ≠ 1",
+"a &lt; 0",
+"a = 1",
+"qualquer número real"
+],
+c:0
+},
+{
+p:"Para log<sub>a</sub>(x) existir, é necessário que:",
+a:[
+"x &lt; 0",
+"x ≠ 0",
+"x &gt; 0",
+"x ≥ 0"
+],
+c:2
+},
+{
+p:"Se a &gt; 1, a função logarítmica é:",
+a:[
+"decrescente",
+"constante",
+"crescente",
+"quadrática"
+],
+c:2
+},
+{
+p:"Se 0 &lt; a &lt; 1, a função logarítmica é:",
+a:[
+"crescente",
+"decrescente",
+"constante",
+"afim"
+],
+c:1
+},
+{
+p:"Toda função logarítmica passa pelo ponto:",
+a:[
+"(0,1)",
+"(1,0)",
+"(0,0)",
+"(1,1)"
+],
+c:1
+},
+{
+p:"Quanto vale log<sub>2</sub>(8)?",
+a:["2","3","4","8"],
+c:1
+},
+{
+p:"Quanto vale log<sub>10</sub>(100)?",
+a:["1","2","10","100"],
+c:1
+},
+{
+p:"O domínio da função logarítmica é:",
+a:[
+"todos os reais",
+"x &gt; 0",
+"x &lt; 0",
+"x ≠ 1"
+],
+c:1
+},
+{
+p:"A função logarítmica é inversa da função:",
+a:[
+"afim",
+"quadrática",
+"exponencial",
+"modular"
+],
+c:2
+}
+];
+
+const tentativas = {};
+
+function carregar(){
+const div = document.getElementById("exercicios");
+let html = "";
+
+questoes.forEach((q,i)=>{
+tentativas[i] = 0;
+
+html += "<div class='questao'>";
+html += "<p>"+(i+1)+") "+q.p+"</p>";
+
+q.a.forEach((alt,j)=>{
+html += "<div class='alt'>";
+html += "<label><input type='radio' name='q"+i+"' value='"+j+"'> "+alt+"</label>";
+html += "</div>";
+});
+
+html += "<button onclick='corrigir("+i+")'>Responder</button>";
+html += "<div class='resultado' id='r"+i+"'></div>";
+html += "</div>";
+});
+
+div.innerHTML = html;
+}
+
+function corrigir(i){
+let radios = document.getElementsByName("q"+i);
+let escolha;
+
+for(let r of radios){
+if(r.checked) escolha = parseInt(r.value);
+}
+
+if(escolha === undefined) return;
+
+if(escolha === questoes[i].c){
+document.getElementById("r"+i).innerHTML = "✅ Correto!";
+}else{
+tentativas[i]++;
+
+if(tentativas[i] >= 3){
+document.getElementById("r"+i).innerHTML = "❌ Resposta correta: " + questoes[i].a[questoes[i].c];
+}else{
+document.getElementById("r"+i).innerHTML = "❌ Tente novamente ("+(3-tentativas[i])+" tentativas restantes)";
+}
+}
+}
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+gerar();
+carregar();
+</script>
+
+</body>
+</html>

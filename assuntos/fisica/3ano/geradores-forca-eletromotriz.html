@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ Geradores e Força Eletromotriz | 3º Ano | Prof. Arlisson Ferreira</title>
+
+<style>
+body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:linear-gradient(135deg,#eef2f7,#dfe9f3);
+    margin:0;
+    padding:30px;
+    color:#333;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    padding:60px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+h1{text-align:center;font-size:38px;}
+.subtitulo{text-align:center;color:#555;margin-bottom:40px;}
+h2{
+    margin-top:55px;
+    color:#1565c0;
+    border-left:6px solid #1565c0;
+    padding-left:12px;
+}
+p{
+    text-align:justify;
+    line-height:1.9;
+    font-size:17px;
+}
+.destaque{
+    background:#e3f2fd;
+    padding:25px;
+    border-left:6px solid #1e88e5;
+    border-radius:12px;
+    margin:35px 0;
+}
+.questao{
+    margin-top:30px;
+    padding:25px;
+    background:#f4f7ff;
+    border-radius:12px;
+    border:1px solid #d9e3ff;
+}
+button{
+    margin-top:35px;
+    padding:14px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2e7d32;
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:bold;
+}
+button:hover{background:#1b5e20;}
+button:disabled{background:#999;}
+.resultado{
+    margin-top:30px;
+    font-size:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>⚡ Geradores e Força Eletromotriz (fem)</h1>
+<p class="subtitulo">
+3º Ano do Ensino Médio • Física • Professor: <strong>Arlisson Ferreira</strong>
+</p>
+
+<div class="destaque">
+🎯 Compreender o funcionamento real de um gerador elétrico e a influência da resistência interna.
+</div>
+
+<h2>1️⃣ O que é um Gerador?</h2>
+
+<p>
+Gerador é um dispositivo capaz de transformar outras formas de energia
+(em geral química ou mecânica) em energia elétrica.
+</p>
+
+<p>
+Exemplos:
+<br>✔ Pilhas  
+✔ Baterias  
+✔ Alternadores  
+✔ Usinas elétricas  
+</p>
+
+<h2>2️⃣ Força Eletromotriz (fem)</h2>
+
+<p>
+A força eletromotriz (ε) representa a energia fornecida pelo gerador
+por unidade de carga.
+</p>
+
+<p><strong>ε = E / q</strong></p>
+
+<p>
+Apesar do nome, não é uma força,
+mas sim uma diferença de potencial.
+</p>
+
+<h2>3️⃣ Resistência Interna</h2>
+
+<p>
+Todo gerador real possui uma resistência interna (r).
+</p>
+
+<p>
+Quando há corrente:
+</p>
+
+<p><strong>U = ε − r · I</strong></p>
+
+<p>
+Onde:
+<br>✔ U = tensão nos terminais  
+✔ ε = fem  
+✔ r = resistência interna  
+✔ I = corrente  
+</p>
+
+<h2>4️⃣ Interpretação Física</h2>
+
+<p>
+Se não houver corrente (circuito aberto):
+</p>
+
+<p><strong>U = ε</strong></p>
+
+<p>
+Se houver corrente:
+</p>
+
+<p>
+Parte da energia é dissipada internamente.
+</p>
+
+<h2>5️⃣ Rendimento do Gerador</h2>
+
+<p><strong>η = U / ε</strong></p>
+
+<p>
+Quanto menor a resistência interna,
+maior o rendimento.
+</p>
+
+<h2>6️⃣ Exemplo Resolvido</h2>
+
+<p>
+ε = 12V  
+r = 1Ω  
+I = 2A  
+</p>
+
+<p>
+U = ε − rI  
+U = 12 − (1 × 2)  
+</p>
+
+<p><strong>U = 10V</strong></p>
+
+<h2>7️⃣ Representação Gráfica</h2>
+
+<p>
+O gráfico U × I é uma reta decrescente.
+</p>
+
+<p>
+Coeficiente angular = −r  
+Intercepto = ε  
+</p>
+
+<h2>8️⃣ Erros Comuns</h2>
+
+<p>
+❌ Achar que fem é força  
+✔ É diferença de potencial.
+</p>
+
+<p>
+❌ Ignorar resistência interna  
+✔ Geradores reais sempre têm r.
+</p>
+
+<h2>9️⃣ Aplicações</h2>
+
+<p>
+✔ Dimensionamento de baterias  
+✔ Sistemas automotivos  
+✔ Eletrônica  
+</p>
+
+<h2>🔟 Conexão com Próximo Conteúdo</h2>
+
+<p>
+Agora estudaremos <strong>Leis de Kirchhoff</strong>
+para resolver circuitos completos.
+</p>
+
+<hr>
+
+<h2>📝 Avaliação – 10 Questões</h2>
+
+<div class="questao">
+<p><strong>1.</strong> A fem representa:</p>
+<label><input type="radio" name="q1" value="a"> Corrente</label><br>
+<label><input type="radio" name="q1" value="b"> Energia por carga</label><br>
+<label><input type="radio" name="q1" value="c"> Resistência</label><br>
+<label><input type="radio" name="q1" value="d"> Potência</label><br>
+<label><input type="radio" name="q1" value="e"> Campo</label>
+</div>
+
+<div class="questao">
+<p><strong>2.</strong> Unidade da fem:</p>
+<label><input type="radio" name="q2" value="a"> Volt</label><br>
+<label><input type="radio" name="q2" value="b"> Watt</label><br>
+<label><input type="radio" name="q2" value="c"> Ohm</label><br>
+<label><input type="radio" name="q2" value="d"> Joule</label><br>
+<label><input type="radio" name="q2" value="e"> Ampère</label>
+</div>
+
+<div class="questao">
+<p><strong>3.</strong> Tensão nos terminais:</p>
+<label><input type="radio" name="q3" value="a"> U = ε + rI</label><br>
+<label><input type="radio" name="q3" value="b"> U = ε − rI</label><br>
+<label><input type="radio" name="q3" value="c"> U = r/I</label><br>
+<label><input type="radio" name="q3" value="d"> U = εI</label><br>
+<label><input type="radio" name="q3" value="e"> U = ε/r</label>
+</div>
+
+<div class="questao">
+<p><strong>4.</strong> Se I = 0:</p>
+<label><input type="radio" name="q4" value="a"> U = 0</label><br>
+<label><input type="radio" name="q4" value="b"> U = ε</label><br>
+<label><input type="radio" name="q4" value="c"> U = r</label><br>
+<label><input type="radio" name="q4" value="d"> U = I</label><br>
+<label><input type="radio" name="q4" value="e"> U = rI</label>
+</div>
+
+<div class="questao">
+<p><strong>5.</strong> Resistência interna causa:</p>
+<label><input type="radio" name="q5" value="a"> Aumento de tensão</label><br>
+<label><input type="radio" name="q5" value="b"> Perda de energia interna</label><br>
+<label><input type="radio" name="q5" value="c"> Aumento de corrente</label><br>
+<label><input type="radio" name="q5" value="d"> Campo elétrico</label><br>
+<label><input type="radio" name="q5" value="e"> Inércia</label>
+</div>
+
+<div class="questao">
+<p><strong>6.</strong> Rendimento é:</p>
+<label><input type="radio" name="q6" value="a"> U/ε</label><br>
+<label><input type="radio" name="q6" value="b"> ε/U</label><br>
+<label><input type="radio" name="q6" value="c"> r/I</label><br>
+<label><input type="radio" name="q6" value="d"> I/U</label><br>
+<label><input type="radio" name="q6" value="e"> V/I</label>
+</div>
+
+<div class="questao">
+<p><strong>7.</strong> Quanto maior r:</p>
+<label><input type="radio" name="q7" value="a"> Maior rendimento</label><br>
+<label><input type="radio" name="q7" value="b"> Menor rendimento</label><br>
+<label><input type="radio" name="q7" value="c"> Igual rendimento</label><br>
+<label><input type="radio" name="q7" value="d"> Corrente zero</label><br>
+<label><input type="radio" name="q7" value="e"> Tensão zero</label>
+</div>
+
+<div class="questao">
+<p><strong>8.</strong> Gráfico U × I é:</p>
+<label><input type="radio" name="q8" value="a"> Crescente</label><br>
+<label><input type="radio" name="q8" value="b"> Reta decrescente</label><br>
+<label><input type="radio" name="q8" value="c"> Curva</label><br>
+<label><input type="radio" name="q8" value="d"> Horizontal</label><br>
+<label><input type="radio" name="q8" value="e"> Vertical</label>
+</div>
+
+<div class="questao">
+<p><strong>9.</strong> Fem não é:</p>
+<label><input type="radio" name="q9" value="a"> Diferença de potencial</label><br>
+<label><input type="radio" name="q9" value="b"> Energia por carga</label><br>
+<label><input type="radio" name="q9" value="c"> Força mecânica</label><br>
+<label><input type="radio" name="q9" value="d"> Volt</label><br>
+<label><input type="radio" name="q9" value="e"> Tensão</label>
+</div>
+
+<div class="questao">
+<p><strong>10.</strong> Próximo conteúdo:</p>
+<label><input type="radio" name="q10" value="a"> Kirchhoff</label><br>
+<label><input type="radio" name="q10" value="b"> Ondas</label><br>
+<label><input type="radio" name="q10" value="c"> Óptica</label><br>
+<label><input type="radio" name="q10" value="d"> Gravitação</label><br>
+<label><input type="radio" name="q10" value="e"> Termologia</label>
+</div>
+
+<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+
+const MAX_TENTATIVAS = 3;
+const CHAVE = "geradores_fem_3ano_tentativas";
+
+function corrigir(){
+
+let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+
+if(tentativas.length >= MAX_TENTATIVAS){
+document.getElementById("resultado").innerHTML =
+"🚫 Você já utilizou as 3 tentativas permitidas.";
+return;
+}
+
+const respostas = {
+q1:"b",
+q2:"a",
+q3:"b",
+q4:"b",
+q5:"b",
+q6:"a",
+q7:"b",
+q8:"b",
+q9:"c",
+q10:"a"
+};
+
+let total = 0;
+
+for(let q in respostas){
+
+let marcada = document.querySelector('input[name="'+q+'"]:checked');
+let opcoes = document.querySelectorAll('input[name="'+q+'"]');
+
+opcoes.forEach(opcao=>{
+opcao.parentElement.style.color="#333";
+opcao.parentElement.style.fontWeight="normal";
+});
+
+if(marcada){
+if(marcada.value===respostas[q]){
+marcada.parentElement.style.color="#1b5e20";
+marcada.parentElement.style.fontWeight="bold";
+total++;
+}else{
+marcada.parentElement.style.color="#c62828";
+marcada.parentElement.style.fontWeight="bold";
+}
+}
+}
+
+tentativas.push(total);
+localStorage.setItem(CHAVE,JSON.stringify(tentativas));
+
+let melhor=Math.max(...tentativas);
+
+let html="<br><strong>📊 Desempenho:</strong><br>";
+
+tentativas.forEach((nota,index)=>{
+html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
+});
+
+html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
+
+if(melhor===10){
+html+="🔥 Excelente desempenho!";
+}else if(melhor>=7){
+html+="👏 Ótimo resultado!";
+}else if(melhor>=5){
+html+="👍 Resultado regular.";
+}else{
+html+="📚 Revise o conteúdo.";
+}
+
+if(tentativas.length>=MAX_TENTATIVAS){
+html+="<br><br>🔒 Limite de tentativas atingido.";
+document.querySelector("button").disabled=true;
+}
+
+document.getElementById("resultado").innerHTML=html;
+}
+
+</script>
+
+</body>
+</html>

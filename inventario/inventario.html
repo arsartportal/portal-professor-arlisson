@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎒 Inventário do Aluno</title>
+
+<link rel="stylesheet" href="inventario.css">
+</head>
+
+<body>
+<div class="container">
+
+<a href="../home.html" class="btn-voltar">⬅ Voltar ao início</a>
+
+<h1 class="titulo-inventario">
+  <span class="icone">🎒</span>
+  <span class="texto">Inventário do Aluno</span>
+</h1>
+
+<div class="subtitulo">Seus benefícios, itens resgatados e histórico recente</div>
+
+<div class="info-topo" id="infoTopo"></div>
+
+<!-- 🏦 SCIENCEBANK -->
+<div class="bloco sciencebank">
+<h2>🏦 ScienceBank</h2>
+
+<p id="textoScienceBank">
+💰 Seu rendimento semanal está disponível!
+</p>
+
+<div class="sciencebank-valor">
++<span id="valorSP">0</span> SP
+</div>
+
+<p id="contadorSB" style="margin-top:10px;font-weight:bold;"></p>
+
+<button id="btnColetarSP">
+💰 Coletar recompensa
+</button>
+
+<div class="sciencebank-stats">
+
+<p>
+🧍‍♂️ Você já recebeu:
+<b id="spUsuarioTotal">0</b> SP
+</p>
+
+<p>
+🌍 Comunidade já recebeu:
+<b id="spGlobalTotal">0</b> SP
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="bloco">
+<h2>📦 Inventário</h2>
+<div class="grid" id="inventarioLista"></div>
+</div>
+
+<div class="bloco">
+<h2>📝 Logs Recentes</h2>
+<div class="lista-logs" id="logsLista"></div>
+</div>
+
+</div>
+
+<div id="popupScienceBank" class="popup-overlay hidden">
+  <div class="popup-sciencebank">
+
+    <div class="popup-topo">
+      <div class="popup-icone">🏦</div>
+      <div>
+        <h2>ScienceBank</h2>
+        <p>Seu rendimento semanal está pronto!</p>
+      </div>
+    </div>
+
+    <div class="popup-conteudo">
+      <div class="popup-valor">
+        +<span id="popupValorSP">0</span> SP
+      </div>
+
+      <p>
+        Deseja sacar esta recompensa agora?
+      </p>
+    </div>
+
+    <div class="popup-botoes">
+      <button id="btnCancelarPopup" class="btn-popup cancelar">
+        Cancelar
+      </button>
+
+      <button id="btnConfirmarPopup" class="btn-popup confirmar">
+        💰 Sacar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="popupRecebido" class="popup-recebido hidden">
+  <div class="popup-recebido-box">
+
+    <div class="popup-recebido-icone">🎉</div>
+
+    <h2>Recompensa Recebida!</h2>
+
+    <div class="popup-recebido-sp">
+      +<span id="popupRecebidoValor">0</span> SP
+    </div>
+
+    <p>
+      Seus SciencePoints foram adicionados ao seu saldo.
+    </p>
+
+    <button id="btnFecharPopupRecebido" class="btn-fechar-popup">
+      Continuar
+    </button>
+
+  </div>
+</div>
+
+<script type="module" src="inventario.js"></script>
+</body>
+</html>

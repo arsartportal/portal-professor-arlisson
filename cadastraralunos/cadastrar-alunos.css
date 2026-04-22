@@ -1,0 +1,321 @@
+/* =====================================================
+🌌 BASE GLOBAL
+===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Consolas, "Cascadia Code", monospace;
+
+  background:
+    radial-gradient(circle at 20% 10%, #1e293b, transparent 40%),
+    radial-gradient(circle at 80% 90%, #0ea5e9, transparent 40%),
+    #020617;
+
+  color: #c9d1d9;
+}
+
+
+/* =====================================================
+📦 CONTAINER
+===================================================== */
+.container {
+  max-width: 760px;
+  margin: 60px auto;
+  padding: 32px;
+
+  background: rgba(13,17,23,0.85);
+  backdrop-filter: blur(14px);
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.05);
+
+  animation: fadeUp 0.5s ease;
+}
+
+
+/* terminal header */
+.container::before {
+  content: "● ● ●   Portal\\Professor";
+  display: block;
+  margin-bottom: 24px;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+
+/* =====================================================
+🏆 TITULO
+===================================================== */
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+
+  background: linear-gradient(90deg,#22c55e,#0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =====================================================
+📋 FORM
+===================================================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* =====================================================
+🏷 LABEL
+===================================================== */
+label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 0.8rem;
+  color: #38bdf8;
+
+  width: 100%;
+}
+
+label::before {
+  content: ">";
+  color: #22c55e;
+}
+
+label input,
+label select,
+label .custom-select {
+  flex: 1;
+}
+
+
+/* =====================================================
+✏ INPUTS (CORRIGIDO 🔥)
+===================================================== */
+input,
+select {
+  flex: 1;
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 10px;
+
+  padding: 12px 14px;
+
+  font-family: 'Segoe UI', system-ui, sans-serif; /* 🔥 melhora leitura */
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  color: #e6edf3;
+
+  transition: 0.25s;
+
+  letter-spacing: 0.3px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+
+  border-color: #22c55e;
+
+  background: rgba(255,255,255,0.05);
+
+  box-shadow:
+    0 0 0 2px rgba(34,197,94,0.2),
+    0 0 20px rgba(34,197,94,0.25);
+}
+
+input[type="password"] {
+  letter-spacing: 2px;
+}
+
+input::placeholder {
+  color: #94a3b8;
+  opacity: 0.6;
+}
+
+
+/* =====================================================
+🎯 SELECT CUSTOMIZADO (FIX PRINCIPAL 🔥)
+===================================================== */
+#professor {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 10px;
+
+  padding: 12px 40px 12px 14px;
+
+  color: #e6edf3;
+  font-size: 0.95rem;
+
+  cursor: pointer;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%2322c55e' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+/* opções */
+select option {
+  background: #020617;
+  color: #e6edf3;
+}
+
+
+/* =====================================================
+🎛 CUSTOM SELECT (ESCOLA / SÉRIE)
+===================================================== */
+.custom-select {
+  position: relative;
+  flex: 1;
+}
+
+.select-selected {
+  padding: 12px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  cursor: pointer;
+}
+
+.select-selected::after {
+  content: " ▼";
+  color: #22c55e;
+}
+
+.select-items {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 110%;
+
+  background: #020617;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  overflow: hidden;
+
+  display: none;
+  z-index: 10;
+}
+
+.select-items div {
+  padding: 12px;
+  transition: 0.2s;
+}
+
+.select-items div:hover {
+  background: rgba(34,197,94,0.1);
+  color: #22c55e;
+}
+
+.custom-select.active .select-items {
+  display: block;
+}
+
+
+/* =====================================================
+🚀 BOTÃO
+===================================================== */
+button {
+  margin-top: 20px;
+
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 14px;
+
+  color: white;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  box-shadow: 0 8px 25px rgba(34,197,94,0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(34,197,94,0.4),
+    0 0 20px rgba(34,197,94,0.5);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+
+/* =====================================================
+💬 MENSAGENS
+===================================================== */
+#msg {
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
+
+#msg.sucesso {
+  color: #22c55e;
+}
+
+#msg.erro {
+  color: #ef4444;
+}
+
+
+/* =====================================================
+✨ ANIMAÇÃO
+===================================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+📱 RESPONSIVO
+===================================================== */
+@media(max-width: 600px){
+
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+}

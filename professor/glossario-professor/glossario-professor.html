@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel do Professor - Glossário</title>
+  <link rel="stylesheet" href="glossario-professor.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>📚 Glossário da Aprendizagem</h1>
+
+  <!-- FORM -->
+  <div class="card">
+    <h2>➕ Adicionar Termo</h2>
+
+    <label>📅 Semana:</label>
+    <input type="number" id="semanaInput" min="1" max="53">
+
+    <label>🧠 Termo:</label>
+    <input type="text" id="termoInput" placeholder="Ex: Aceleração">
+
+    <label>⚙️ Fase:</label>
+    <select id="faseInput">
+      <option value="auto">Automático</option>
+      <option value="criacao">✍️ Criação</option>
+      <option value="votacao">🗳️ Votação</option>
+      <option value="validacao">📌 Validação</option>
+    </select>
+
+    <button onclick="adicionarTermo()">Adicionar</button>
+  </div>
+
+  <!-- LISTA -->
+  <div class="card">
+    <h2>📋 Termos da Semana</h2>
+    <div id="listaTermos"></div>
+  </div>
+
+</div>
+
+<script type="module" src="glossario-professor.js"></script>
+</body>
+</html>

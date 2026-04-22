@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- =====================================================
+       ÁREA DO PROFESSOR — PORTAL DO PROFESSOR ARLISSON
+       ===================================================== -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área do Professor</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- CSS exclusivo do professor -->
+  <link rel="stylesheet" href="professor.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     TOPO / HEADER
+     ===================================================== -->
+<header class="topo">
+
+  <div class="topo-esquerda">
+    <h1>Área do Professor</h1>
+    <p class="subtitulo subtitulo-header">
+      Painel administrativo
+    </p>
+  </div>
+
+  <div class="topo-direita">
+    <button onclick="window.location.href='/home.html'">
+      Voltar ao Portal
+    </button>
+  </div>
+
+</header>
+
+<!-- =====================================================
+     CONTEÚDO PRINCIPAL
+     ===================================================== -->
+<main>
+
+  <!-- ===================================================
+       AVISO DE ACESSO NEGADO
+       - visível por padrão
+       - professor.js decide se oculta
+       =================================================== -->
+  <div id="acesso-negado" class="aviso">
+    <h3>🔒 Acesso restrito</h3>
+    <p>Esta área é exclusiva para professores.</p>
+  </div>
+
+  <!-- ===================================================
+       DASHBOARD DO PROFESSOR
+       - totalmente gerado via JS
+       - cards vêm do Firestore
+       =================================================== -->
+  <section
+    id="dashboard-professor"
+    class="cards-grid"
+    style="display: none;"
+  >
+    <!-- cards dinâmicos -->
+  </section>
+
+  
+
+</main>
+
+<!-- =====================================================
+     SCRIPTS
+     ===================================================== -->
+
+<!-- Guardião da área do professor -->
+<script type="module" src="professor.js"></script>
+
+</body>
+</html>

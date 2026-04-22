@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — Lei de Coulomb</title>
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        Neste nível, vamos estudar a <strong>Lei de Coulomb</strong>,
+        que descreve a força elétrica entre cargas.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.5 — LEI DE COULOMB
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-5">
+
+      <h2>📘 Nível 3.5 — Lei de Coulomb</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é a Lei de Coulomb?</h3>
+        <p>
+          A <strong>Lei de Coulomb</strong> descreve a
+          <strong>força elétrica</strong> que atua entre duas
+          cargas elétricas em repouso.
+        </p>
+        <p>
+          Essa força pode ser de <strong>atração</strong> ou
+          <strong>repulsão</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Tipos de força elétrica</h3>
+        <ul>
+          <li>🔴 Cargas de <strong>mesmo sinal</strong> → repulsão</li>
+          <li>🔵 Cargas de <strong>sinais opostos</strong> → atração</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Expressão matemática</h3>
+        <p>
+          A intensidade da força elétrica é dada por:
+        </p>
+
+        <p><strong>F = k · |q₁ · q₂| / d²</strong></p>
+
+        <ul>
+          <li><strong>F</strong> → força elétrica</li>
+          <li><strong>k</strong> → constante eletrostática</li>
+          <li><strong>q₁, q₂</strong> → cargas elétricas</li>
+          <li><strong>d</strong> → distância entre as cargas</li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Dependências da força elétrica</h3>
+        <p>A força elétrica:</p>
+        <ul>
+          <li>📈 Aumenta com o valor das cargas</li>
+          <li>📉 Diminui com o aumento da distância</li>
+          <li>↘️ É inversamente proporcional ao <strong>quadrado da distância</strong></li>
+        </ul>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Importância da Lei de Coulomb</h3>
+        <p>
+          Essa lei é fundamental para compreender:
+        </p>
+        <ul>
+          <li>Interações elétricas microscópicas</li>
+          <li>Funcionamento de cargas e campos</li>
+          <li>Base para o estudo do campo elétrico</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>A Lei de Coulomb descreve a força elétrica</li>
+          <li>Cargas iguais se repelem</li>
+          <li>Cargas opostas se atraem</li>
+          <li>A força depende das cargas e da distância</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.5
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que a Lei de Coulomb determina?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            A força elétrica entre cargas
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            O campo magnético
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            A corrente elétrica
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> A força elétrica varia com a distância como:</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Diretamente proporcional
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Inversamente proporcional ao quadrado da distância
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Independente da distância
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> A força elétrica depende de:</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Apenas da distância
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Apenas das cargas
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Das cargas e da distância
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel35()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_3_5')">
+          ✅ Concluir Nível 3.5
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DA TRILHA -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>

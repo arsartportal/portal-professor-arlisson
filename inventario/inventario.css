@@ -1,0 +1,680 @@
+/* =========================================
+🌌 BASE (IDENTIDADE VISUAL)
+========================================= */
+body{
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+  padding:30px;
+  color:white;
+  scroll-behavior:smooth;
+
+  background:
+    radial-gradient(circle at top,#1e3a8a,#020617 70%);
+
+  background-size: 200% 200%;
+  animation: bgMove 25s ease-in-out infinite;
+}
+
+@keyframes bgMove{
+  0%{
+    background-position: 50% 0%;
+  }
+  50%{
+    background-position: 60% 100%;
+  }
+  100%{
+    background-position: 50% 0%;
+  }
+}
+
+/* partículas sutis */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background-image:radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:0.15;
+  pointer-events:none;
+
+  animation: particlesMove 60s linear infinite;
+}
+
+@keyframes particlesMove{
+  0%{
+    transform:translateY(0);
+  }
+  100%{
+    transform:translateY(-100px);
+  }
+}
+
+/* =========================================
+📦 CONTAINER
+========================================= */
+.container{
+  max-width:1100px;
+  margin:auto;
+}
+
+/* =========================================
+🧠 TÍTULO
+========================================= */
+h1{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:10px;
+  
+}
+
+.subtitulo{
+  text-align:center;
+  color:#94a3b8;
+  margin-bottom:35px;
+}
+
+/* =========================================
+🧱 BLOCOS
+========================================= */
+.bloco{
+  background:linear-gradient(145deg,#0f172a,#020617);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:20px;
+  padding:26px;
+  margin-bottom:30px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(56,189,248,0.05);
+  backdrop-filter:blur(6px);
+}
+
+.bloco h2{
+  margin-top:0;
+  color:#38bdf8;
+}
+
+/* =========================================
+📊 TOPO
+========================================= */
+.info-topo{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+  margin-bottom:30px;
+}
+
+.card-topo{
+  background:linear-gradient(135deg,#1e3a8a,#0f172a);
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+  transition:0.25s;
+}
+
+.card-topo:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 28px rgba(0,0,0,0.5);
+}
+
+.card-topo span{
+  display:block;
+  font-size:13px;
+  color:#94a3b8;
+  margin-bottom:8px;
+}
+
+.card-topo b{
+  font-size:26px;
+  color:#38bdf8;
+}
+
+/* =========================================
+📦 INVENTÁRIO
+========================================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.item{
+  background:linear-gradient(145deg,#1e293b,#020617);
+  border-radius:18px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  transition:0.25s;
+  position:relative;
+  overflow:hidden;
+}
+
+.item:hover{
+  transform:translateY(-5px) scale(1.01);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.6),
+    0 0 20px rgba(56,189,248,0.2);
+}
+
+.item:hover h3{
+  color:#38bdf8;
+}
+
+/* linha decorativa */
+.item::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  background:linear-gradient(90deg,#38bdf8,#818cf8);
+}
+
+.item h3{
+  margin:0 0 10px 0;
+  font-size:18px;
+}
+
+.item p{
+  margin:6px 0;
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+/* =========================================
+🏷 STATUS
+========================================= */
+.status{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  margin-top:10px;
+}
+
+.status.ativo{
+  background:rgba(34,197,94,0.2);
+  color:#86efac;
+  border:1px solid rgba(34,197,94,0.4);
+}
+
+.status.resgatado{
+  background:rgba(250,204,21,0.2);
+  color:#fde68a;
+  border:1px solid rgba(250,204,21,0.4);
+}
+
+/* =========================================
+📝 LOGS
+========================================= */
+.lista-logs{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.log{
+  background:linear-gradient(145deg,#020617,#0f172a);
+  border-left:4px solid #38bdf8;
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  transition:0.2s;
+}
+
+.log:hover{
+  transform:translateX(4px);
+}
+
+.log strong{
+  color:#e2e8f0;
+}
+
+.log .data{
+  font-size:12px;
+  color:#94a3b8;
+  margin-top:6px;
+}
+
+/* =========================================
+📭 VAZIO
+========================================= */
+.vazio{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8;
+}
+
+/* =========================================
+🔙 BOTÃO VOLTAR
+========================================= */
+.btn-voltar{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  background:linear-gradient(135deg,#1e3a8a,#0f172a);
+  color:#fff;
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05);
+  font-weight:600;
+  margin-bottom:24px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+  transition:0.25s;
+}
+
+.btn-voltar:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.6),
+    0 0 12px rgba(56,189,248,0.3);
+}
+
+/* =========================================
+🏦 SCIENCEBANK PREMIUM
+========================================= */
+
+.sciencebank{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+
+  border-radius:20px;
+  padding:28px;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(16,185,129,0.25), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(56,189,248,0.15), transparent 60%),
+    linear-gradient(135deg, #022c22, #020617);
+
+  border:1px solid rgba(16,185,129,0.2);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.5),
+    0 0 30px rgba(16,185,129,0.15);
+}
+
+.sciencebank::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,0.05),
+    transparent 40%
+  );
+  pointer-events:none;
+}
+
+/* glow animado */
+.sciencebank::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle, rgba(16,185,129,0.15), transparent 60%);
+  animation:sbGlow 6s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes sbGlow{
+  0%{ transform:rotate(0deg); }
+  100%{ transform:rotate(360deg); }
+}
+
+.sciencebank h2{
+  color:#34d399;
+}
+
+/* valor SP */
+.sciencebank-valor{
+  font-size:42px;
+  font-weight:900;
+  color:#34d399;
+  margin:20px 0;
+  text-shadow:
+    0 0 10px rgba(16,185,129,0.6),
+    0 0 25px rgba(16,185,129,0.3);
+  animation:floatSP 2s ease-in-out infinite;
+}
+
+@keyframes floatSP{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-4px); }
+}
+
+/* botão */
+#btnColetarSP{
+  background:linear-gradient(135deg,#10b981,#059669);
+  border:none;
+  padding:14px 24px;
+  border-radius:12px;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  box-shadow:0 6px 15px rgba(16,185,129,0.3);
+}
+
+#btnColetarSP:hover{
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:
+    0 10px 25px rgba(16,185,129,0.5),
+    0 0 15px rgba(16,185,129,0.4);
+}
+
+#btnColetarSP:active{
+  transform:scale(0.97);
+}
+
+/* contador */
+#contadorSB{
+  margin-top:10px;
+  font-size:15px;
+  color:#a7f3d0;
+  font-weight:600;
+  animation:pulseText 2s infinite;
+}
+
+@keyframes pulseText{
+  0%,100%{ opacity:0.7; }
+  50%{ opacity:1; }
+}
+
+.sciencebank-stats{
+  margin-top:20px;
+  font-size:14px;
+  color:#a7f3d0;
+}
+
+.sciencebank-stats b{
+  color:#34d399;
+  font-size:16px;
+}
+
+/* =========================================
+📱 RESPONSIVO
+========================================= */
+@media(max-width:700px){
+  body{
+    padding:18px;
+  }
+}
+
+/* =========================================
+🎒 TÍTULO CORRIGIDO (SEM BUG)
+========================================= */
+
+.titulo-inventario{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-size:36px;
+  margin-bottom:10px;
+}
+
+/* 🔥 GRADIENTE SÓ NO TEXTO */
+.titulo-inventario .texto{
+  background:linear-gradient(90deg,#38bdf8,#818cf8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* 🎒 ÍCONE VISÍVEL NORMAL */
+.titulo-inventario .icone{
+  font-size:32px;
+  color:white; /* 👈 ESSENCIAL */
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  filter:drop-shadow(0 0 6px rgba(56,189,248,0.5));
+}
+
+.popup-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  animation: fadeIn .25s ease;
+}
+
+.popup-overlay.hidden{
+  display: none;
+}
+
+.popup-sciencebank{
+  width: min(92%, 420px);
+  background: linear-gradient(180deg,#0f172a,#111827);
+  border: 2px solid #38bdf8;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow:
+    0 0 30px rgba(56,189,248,.25),
+    0 20px 50px rgba(0,0,0,.5);
+  animation: popupUp .3s ease;
+}
+
+.popup-topo{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.popup-icone{
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  background: linear-gradient(135deg,#0ea5e9,#2563eb);
+  box-shadow: 0 0 18px rgba(59,130,246,.45);
+}
+
+.popup-topo h2{
+  margin: 0;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.popup-topo p{
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: .95rem;
+}
+
+.popup-conteudo{
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.popup-valor{
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #22c55e;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px rgba(34,197,94,.5);
+}
+
+.popup-conteudo p{
+  color: #e2e8f0;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.popup-botoes{
+  display: flex;
+  gap: 12px;
+}
+
+.btn-popup{
+  flex: 1;
+  border: none;
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn-popup.cancelar{
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+.btn-popup.cancelar:hover{
+  transform: translateY(-2px);
+  background: #334155;
+}
+
+.btn-popup.confirmar{
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+  color: white;
+  box-shadow: 0 0 18px rgba(34,197,94,.35);
+}
+
+.btn-popup.confirmar:hover{
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 24px rgba(34,197,94,.55);
+}
+
+@keyframes popupUp{
+  from{
+    opacity: 0;
+    transform: translateY(20px) scale(.95);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+
+/* =========================================
+🎉 POPUP DE RECOMPENSA RECEBIDA
+========================================= */
+
+.popup-recebido{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(8px);
+  animation: fadeIn .25s ease;
+}
+
+.popup-recebido.hidden{
+  display: none;
+}
+
+.popup-recebido-box{
+  width: min(92%, 420px);
+  padding: 34px 28px;
+  border-radius: 28px;
+  text-align: center;
+
+  background:
+    radial-gradient(circle at top, rgba(34,197,94,.22), transparent 60%),
+    linear-gradient(180deg,#052e16,#0f172a);
+
+  border: 2px solid rgba(34,197,94,.45);
+
+  box-shadow:
+    0 0 35px rgba(34,197,94,.25),
+    0 25px 60px rgba(0,0,0,.55);
+
+  animation: popupReward .4s ease;
+}
+
+.popup-recebido-icone{
+  font-size: 62px;
+  margin-bottom: 12px;
+  animation: rewardBounce 1.4s infinite;
+}
+
+.popup-recebido-box h2{
+  margin: 0;
+  color: #dcfce7;
+  font-size: 2rem;
+}
+
+.popup-recebido-sp{
+  margin: 18px 0 10px;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #22c55e;
+
+  text-shadow:
+    0 0 12px rgba(34,197,94,.5),
+    0 0 24px rgba(34,197,94,.3);
+}
+
+.popup-recebido-box p{
+  color: #bbf7d0;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.btn-fechar-popup{
+  border: none;
+  border-radius: 16px;
+  padding: 14px 26px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: white;
+
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+
+  box-shadow: 0 0 18px rgba(34,197,94,.35);
+  transition: .2s;
+}
+
+.btn-fechar-popup:hover{
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 26px rgba(34,197,94,.55);
+}
+
+@keyframes popupReward{
+  from{
+    opacity: 0;
+    transform: scale(.92) translateY(18px);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes rewardBounce{
+  0%,100%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-8px);
+  }
+}

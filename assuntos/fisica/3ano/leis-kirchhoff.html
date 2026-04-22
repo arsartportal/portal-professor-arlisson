@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ Leis de Kirchhoff | 3º Ano | Prof. Arlisson Ferreira</title>
+
+<style>
+body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:linear-gradient(135deg,#eef2f7,#dfe9f3);
+    margin:0;
+    padding:30px;
+    color:#333;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    padding:60px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+h1{text-align:center;font-size:38px;}
+.subtitulo{text-align:center;color:#555;margin-bottom:40px;}
+h2{
+    margin-top:55px;
+    color:#2e7d32;
+    border-left:6px solid #2e7d32;
+    padding-left:12px;
+}
+p{
+    text-align:justify;
+    line-height:1.9;
+    font-size:17px;
+}
+.destaque{
+    background:#e8f5e9;
+    padding:25px;
+    border-left:6px solid #43a047;
+    border-radius:12px;
+    margin:35px 0;
+}
+.questao{
+    margin-top:30px;
+    padding:25px;
+    background:#f4f7ff;
+    border-radius:12px;
+    border:1px solid #d9e3ff;
+}
+button{
+    margin-top:35px;
+    padding:14px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2e7d32;
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:bold;
+}
+button:hover{background:#1b5e20;}
+button:disabled{background:#999;}
+.resultado{
+    margin-top:30px;
+    font-size:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>⚡ Leis de Kirchhoff</h1>
+<p class="subtitulo">
+3º Ano do Ensino Médio • Física • Professor: <strong>Arlisson Ferreira</strong>
+</p>
+
+<div class="destaque">
+🎯 Resolver circuitos elétricos completos utilizando as Leis de Kirchhoff.
+</div>
+
+<h2>1️⃣ Primeira Lei – Lei dos Nós</h2>
+
+<p>
+Também chamada de Lei das Correntes.
+</p>
+
+<p><strong>A soma das correntes que entram em um nó é igual à soma das correntes que saem.</strong></p>
+
+<p>
+Base física: Conservação da carga elétrica.
+</p>
+
+<p><strong>ΣI = 0</strong></p>
+
+<h2>2️⃣ Segunda Lei – Lei das Malhas</h2>
+
+<p>
+Também chamada de Lei das Tensões.
+</p>
+
+<p><strong>A soma algébrica das tensões em uma malha fechada é zero.</strong></p>
+
+<p>
+Base física: Conservação da energia.
+</p>
+
+<p><strong>Σε = ΣRI</strong></p>
+
+<h2>3️⃣ Interpretação Física</h2>
+
+<p>
+Lei dos Nós → Carga não se acumula.  
+Lei das Malhas → Energia se conserva.
+</p>
+
+<h2>4️⃣ Método de Resolução</h2>
+
+<p>
+1. Escolher sentido para correntes  
+2. Aplicar Lei dos Nós  
+3. Aplicar Lei das Malhas  
+4. Resolver sistema de equações  
+</p>
+
+<h2>5️⃣ Exemplo Resolvido</h2>
+
+<p>
+Considere uma malha simples:
+</p>
+
+<p>
+ε = 12V  
+R = 4Ω  
+r = 2Ω  
+</p>
+
+<p>
+Lei da Malha:
+</p>
+
+<p>
+12 − 4I − 2I = 0  
+12 = 6I  
+</p>
+
+<p><strong>I = 2A</strong></p>
+
+<h2>6️⃣ Sinais nas Malhas</h2>
+
+<p>
+✔ Percorrendo no sentido da corrente → queda de tensão (−RI)  
+✔ Percorrendo no sentido da fem → positivo  
+</p>
+
+<h2>7️⃣ Erros Comuns</h2>
+
+<p>
+❌ Errar sinal da tensão  
+❌ Esquecer resistência interna  
+❌ Não organizar equações  
+</p>
+
+<h2>8️⃣ Aplicações</h2>
+
+<p>
+✔ Circuitos residenciais  
+✔ Eletrônica  
+✔ Engenharia elétrica  
+</p>
+
+<h2>9️⃣ Importância</h2>
+
+<p>
+Permite resolver qualquer circuito linear.
+</p>
+
+<h2>🔟 Conexão Final</h2>
+
+<p>
+Com Kirchhoff,
+você domina completamente a Eletrodinâmica clássica.
+</p>
+
+<hr>
+
+<h2>📝 Avaliação – 10 Questões</h2>
+
+<div class="questao">
+<p><strong>1.</strong> Lei dos Nós baseia-se na:</p>
+<label><input type="radio" name="q1" value="a"> Energia</label><br>
+<label><input type="radio" name="q1" value="b"> Conservação da carga</label><br>
+<label><input type="radio" name="q1" value="c"> Força</label><br>
+<label><input type="radio" name="q1" value="d"> Potência</label><br>
+<label><input type="radio" name="q1" value="e"> Resistência</label>
+</div>
+
+<div class="questao">
+<p><strong>2.</strong> Lei das Malhas baseia-se na:</p>
+<label><input type="radio" name="q2" value="a"> Energia</label><br>
+<label><input type="radio" name="q2" value="b"> Carga</label><br>
+<label><input type="radio" name="q2" value="c"> Massa</label><br>
+<label><input type="radio" name="q2" value="d"> Força</label><br>
+<label><input type="radio" name="q2" value="e"> Campo</label>
+</div>
+
+<div class="questao">
+<p><strong>3.</strong> Em um nó:</p>
+<label><input type="radio" name="q3" value="a"> Corrente se perde</label><br>
+<label><input type="radio" name="q3" value="b"> Corrente se acumula</label><br>
+<label><input type="radio" name="q3" value="c"> Corrente se conserva</label><br>
+<label><input type="radio" name="q3" value="d"> Corrente zera</label><br>
+<label><input type="radio" name="q3" value="e"> Corrente inverte</label>
+</div>
+
+<div class="questao">
+<p><strong>4.</strong> Em uma malha fechada:</p>
+<label><input type="radio" name="q4" value="a"> Energia se perde</label><br>
+<label><input type="radio" name="q4" value="b"> Soma das tensões é zero</label><br>
+<label><input type="radio" name="q4" value="c"> Corrente zera</label><br>
+<label><input type="radio" name="q4" value="d"> Potência zera</label><br>
+<label><input type="radio" name="q4" value="e"> Resistência zera</label>
+</div>
+
+<div class="questao">
+<p><strong>5.</strong> Se 3A entram e 1A sai, a outra saída é:</p>
+<label><input type="radio" name="q5" value="a"> 1A</label><br>
+<label><input type="radio" name="q5" value="b"> 2A</label><br>
+<label><input type="radio" name="q5" value="c"> 3A</label><br>
+<label><input type="radio" name="q5" value="d"> 4A</label><br>
+<label><input type="radio" name="q5" value="e"> 0A</label>
+</div>
+
+<div class="questao">
+<p><strong>6.</strong> 12V em série com 6Ω → I:</p>
+<label><input type="radio" name="q6" value="a"> 1A</label><br>
+<label><input type="radio" name="q6" value="b"> 2A</label><br>
+<label><input type="radio" name="q6" value="c"> 3A</label><br>
+<label><input type="radio" name="q6" value="d"> 4A</label><br>
+<label><input type="radio" name="q6" value="e"> 6A</label>
+</div>
+
+<div class="questao">
+<p><strong>7.</strong> Kirchhoff resolve:</p>
+<label><input type="radio" name="q7" value="a"> Apenas série</label><br>
+<label><input type="radio" name="q7" value="b"> Apenas paralelo</label><br>
+<label><input type="radio" name="q7" value="c"> Circuitos completos</label><br>
+<label><input type="radio" name="q7" value="d"> Ondas</label><br>
+<label><input type="radio" name="q7" value="e"> Campo</label>
+</div>
+
+<div class="questao">
+<p><strong>8.</strong> Sinal de −RI indica:</p>
+<label><input type="radio" name="q8" value="a"> Aumento de tensão</label><br>
+<label><input type="radio" name="q8" value="b"> Queda de tensão</label><br>
+<label><input type="radio" name="q8" value="c"> Campo</label><br>
+<label><input type="radio" name="q8" value="d"> Potência</label><br>
+<label><input type="radio" name="q8" value="e"> Força</label>
+</div>
+
+<div class="questao">
+<p><strong>9.</strong> Base física geral:</p>
+<label><input type="radio" name="q9" value="a"> Conservação</label><br>
+<label><input type="radio" name="q9" value="b"> Dilatação</label><br>
+<label><input type="radio" name="q9" value="c"> Inércia</label><br>
+<label><input type="radio" name="q9" value="d"> Gravidade</label><br>
+<label><input type="radio" name="q9" value="e"> Campo</label>
+</div>
+
+<div class="questao">
+<p><strong>10.</strong> Com Kirchhoff você domina:</p>
+<label><input type="radio" name="q10" value="a"> Ondas</label><br>
+<label><input type="radio" name="q10" value="b"> Óptica</label><br>
+<label><input type="radio" name="q10" value="c"> Eletrodinâmica</label><br>
+<label><input type="radio" name="q10" value="d"> Termologia</label><br>
+<label><input type="radio" name="q10" value="e"> Gravitação</label>
+</div>
+
+<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+
+const MAX_TENTATIVAS = 3;
+const CHAVE = "kirchhoff_3ano_tentativas";
+
+function corrigir(){
+
+let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+
+if(tentativas.length >= MAX_TENTATIVAS){
+document.getElementById("resultado").innerHTML =
+"🚫 Você já utilizou as 3 tentativas permitidas.";
+return;
+}
+
+const respostas = {
+q1:"b",
+q2:"a",
+q3:"c",
+q4:"b",
+q5:"b",
+q6:"b",
+q7:"c",
+q8:"b",
+q9:"a",
+q10:"c"
+};
+
+let total = 0;
+
+for(let q in respostas){
+
+let marcada = document.querySelector('input[name="'+q+'"]:checked');
+let opcoes = document.querySelectorAll('input[name="'+q+'"]');
+
+opcoes.forEach(opcao=>{
+opcao.parentElement.style.color="#333";
+opcao.parentElement.style.fontWeight="normal";
+});
+
+if(marcada){
+if(marcada.value===respostas[q]){
+marcada.parentElement.style.color="#1b5e20";
+marcada.parentElement.style.fontWeight="bold";
+total++;
+}else{
+marcada.parentElement.style.color="#c62828";
+marcada.parentElement.style.fontWeight="bold";
+}
+}
+}
+
+tentativas.push(total);
+localStorage.setItem(CHAVE,JSON.stringify(tentativas));
+
+let melhor=Math.max(...tentativas);
+
+let html="<br><strong>📊 Desempenho:</strong><br>";
+
+tentativas.forEach((nota,index)=>{
+html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
+});
+
+html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
+
+if(melhor===10){
+html+="🔥 Excelente desempenho!";
+}else if(melhor>=7){
+html+="👏 Ótimo resultado!";
+}else if(melhor>=5){
+html+="👍 Resultado regular.";
+}else{
+html+="📚 Revise o conteúdo.";
+}
+
+if(tentativas.length>=MAX_TENTATIVAS){
+html+="<br><br>🔒 Limite de tentativas atingido.";
+document.querySelector("button").disabled=true;
+}
+
+document.getElementById("resultado").innerHTML=html;
+}
+
+</script>
+
+</body>
+</html>

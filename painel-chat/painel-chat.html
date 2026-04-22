@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Chat</title>
+<link rel="stylesheet" href="painel-chat.css">
+</head>
+
+<body>
+
+<div class="chat-admin">
+
+  <!-- LISTA DE ALUNOS -->
+  <div class="lista-chats" id="listaChats">
+    <h2>💬 Alunos</h2>
+  </div>
+
+  <!-- CONVERSA -->
+  <div class="chat-area">
+
+    <div class="chat-header" id="chatHeader">
+      Selecione um aluno
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="chat-input">
+      <input type="text" id="respostaInput" placeholder="Responder aluno...">
+      <button onclick="responder()">Enviar</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="painel-chat.js"></script>
+</body>
+</html>

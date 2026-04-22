@@ -1,0 +1,394 @@
+/* =========================================================
+   RESET
+========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   FUNDO (APPLE REAL)
+========================================================= */
+.login-body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* NOVO FUNDO (mais contraste) */
+  background: radial-gradient(circle at top, #1e293b, #020617);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================
+   OVERLAY (SEGREDO DO VISUAL APPLE)
+========================================================= */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.6); /* escuro transparente */
+  backdrop-filter: blur(30px);
+
+  z-index: 0;
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.35;
+}
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+.login-wrapper {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: 6.5fr 3.5fr;
+
+  width: 1100px;
+  max-width: 95%;
+  min-height: 540px;
+
+  border-radius: 24px;
+  overflow: hidden;
+
+  /* GLASS */
+  background: rgba(251, 251, 251, 0.622);
+  backdrop-filter: blur(25px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* sombra Apple real */
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  animation: fadeIn 0.8s ease;
+}
+
+/* =========================================================
+   LADO ESQUERDO
+========================================================= */
+.login-brand {
+  padding: 60px;
+
+  background: linear-gradient(160deg, #0f172a, #020617);
+  color: #f1f9f4;
+
+  display: flex;
+  align-items: center;
+}
+
+.brand-content {
+  animation: slideLeft 0.8s ease;
+}
+
+.login-brand h1 {
+  font-size: 40px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.login-brand h1::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 10px;
+}
+
+.login-slogan {
+  font-size: 20px;
+  margin-bottom: 35px;
+  color: #cbd5f5;
+}
+
+.login-features li {
+  margin-bottom: 12px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* =========================================================
+   LADO DIREITO
+========================================================= */
+.login-panel {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+}
+
+/* CARD INTERNO */
+.login-card {
+  width: 100%;
+  animation: slideRight 0.8s ease;
+}
+
+.login-panel h2 {
+  font-size: 25px;
+  margin-bottom: 6px;
+  color: #01143f;
+}
+
+.login-info {
+  font-size: 18px;
+  color: #000000;
+  margin-bottom: 25px;
+}
+
+/* =========================================================
+   INPUTS PREMIUM
+========================================================= */
+.login-form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+
+  border-radius: 14px;
+  border: 1px solid transparent;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.25s ease;
+}
+
+.login-form input:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.login-form input:focus {
+  outline: none;
+
+  border: 1px solid #3b82f6;
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.15);
+
+  background: #ffffff;
+}
+
+/* =========================================================
+   BOTÃO APPLE STYLE
+========================================================= */
+.login-form button {
+  width: 100%;
+  padding: 14px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: all 0.25s ease;
+}
+
+/* brilho passando */
+.login-form button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+
+  transition: 0.6s;
+}
+
+.login-form button:hover::after {
+  left: 100%;
+}
+
+.login-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+.login-form button:active {
+  transform: scale(0.97);
+}
+
+/* =========================================================
+   ERRO
+========================================================= */
+#erro {
+  margin-top: 10px;
+  color: #dc2626;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.login-footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: #101010;
+  text-align: center;
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+.sr-only {
+  position: absolute;
+  left: -9999px;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+@media (max-width: 768px) {
+  .login-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .login-brand {
+    text-align: center;
+    justify-content: center;
+  }
+
+}
+
+/* ==========================================
+   LINKS SECUNDÁRIOS DO LOGIN
+========================================== */
+
+.login-links {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.login-links a {
+  white-space: nowrap;
+}
+
+.login-links a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.login-links a:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.login-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: width 0.25s ease;
+}
+
+.login-links a:hover::after {
+  width: 100%;
+}
+
+.login-links span {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 500px) {
+  .login-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .login-links span {
+    display: none;
+  }
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.9rem;
+  user-select: none;
+}

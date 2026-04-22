@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório de Ideias</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="sugestoes.css">
+</head>
+<body>
+
+  <div class="pagina">
+
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icone">💡</div>
+        <div>
+          <h1>Laboratório de Ideias</h1>
+          <p>Portal do Professor</p>
+        </div>
+      </div>
+
+      <div class="estatisticas">
+        <div class="card-estatistica">
+          <span>Sugestões enviadas</span>
+          <strong id="totalSugestoes">42</strong>
+        </div>
+
+        <div class="card-estatistica">
+          <span>Aprovadas</span>
+          <strong id="totalAprovadas">8</strong>
+        </div>
+
+        <div class="card-estatistica">
+          <span>Em desenvolvimento</span>
+          <strong id="totalDesenvolvimento">3</strong>
+        </div>
+      </div>
+
+      <div class="ranking">
+        <h3>🏆 Top Inventores</h3>
+
+        <div class="aluno">
+          <div class="aluno-info">
+            <div class="avatar">A</div>
+            <div>
+              <strong>Ana</strong>
+              <p>245 XP</p>
+            </div>
+          </div>
+          <span>1º</span>
+        </div>
+
+        <div class="aluno">
+          <div class="aluno-info">
+            <div class="avatar">J</div>
+            <div>
+              <strong>João</strong>
+              <p>180 XP</p>
+            </div>
+          </div>
+          <span>2º</span>
+        </div>
+
+        <div class="aluno">
+          <div class="aluno-info">
+            <div class="avatar">M</div>
+            <div>
+              <strong>Maria</strong>
+              <p>160 XP</p>
+            </div>
+          </div>
+          <span>3º</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="conteudo">
+
+      <section class="hero">
+        <div class="hero-texto">
+          <h2>💡 Ajude a melhorar o portal!</h2>
+          <p>
+            Envie ideias, vote nas melhores sugestões e acompanhe o que está sendo planejado para o Portal do Professor.
+          </p>
+        </div>
+
+        <div class="xp-box">
+          <span>Recompensa por participar</span>
+          <strong>+10 XP</strong>
+          <p>Envie uma sugestão e ganhe XP imediatamente.</p>
+        </div>
+      </section>
+
+      <section class="painel-envio">
+        <h3>Enviar Nova Sugestão</h3>
+
+        <div class="form-grid">
+          <input type="text" id="tituloSugestao" placeholder="Título da sugestão">
+
+          <select id="categoriaSugestao">
+            <option value="">Categoria</option>
+            <option value="Gamificação">Gamificação</option>
+            <option value="Loja">Loja</option>
+            <option value="Desafios">Desafios</option>
+            <option value="Avatar">Avatar</option>
+            <option value="Ranking">Ranking</option>
+            <option value="Calculadora">Calculadora</option>
+            <option value="Quiz">Quiz</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <textarea id="descricaoSugestao" placeholder="Descreva sua ideia... Ex: Gostaria que existisse um sistema de pets para acompanhar o avatar do aluno."></textarea>
+
+        <button class="btn-enviar" id="btnEnviarSugestao">🚀 Enviar Sugestão</button>
+      </section>
+
+      <section class="sugestao-semana">
+        <span class="tag">🌟 Sugestão da Semana</span>
+        <h3>Sistema de pets para o avatar</h3>
+        <p>
+          Os alunos poderiam desbloquear pets especiais conforme completam desafios, ganham XP e sobem de nível.
+        </p>
+
+        <div class="info-semana">
+          <div>34 votos</div>
+          <div>Categoria: Gamificação</div>
+          <div>Recompensa: +100 XP</div>
+        </div>
+      </section>
+
+      <section class="topo-lista">
+        <div class="pesquisa">
+          <input type="text" id="campoPesquisa" placeholder="🔎 Pesquisar sugestão...">
+        </div>
+
+        <div class="filtros">
+          <button class="filtro ativo" data-filtro="todas">Mais votadas</button>
+          <button class="filtro" data-filtro="recentes">Recentes</button>
+          <button class="filtro" data-filtro="aprovadas">Aprovadas</button>
+          <button class="filtro" data-filtro="gamificacao">Gamificação</button>
+        </div>
+      </section>
+
+      <section class="lista-cards" id="listaSugestoes">
+
+        <article class="card">
+          <div class="card-topo">
+            <span class="categoria">🎮 Gamificação</span>
+            <span class="status status-desenvolvimento">🟢 Em desenvolvimento</span>
+          </div>
+
+          <h4>Medalhas para desafios semanais</h4>
+
+          <p>
+            Ganhar medalhas especiais ao completar quatro semanas seguidas de desafios.
+          </p>
+
+          <div class="card-footer">
+            <span class="autor">Por João • 18 votos</span>
+            <button class="btn-votar">⬆ Votar</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-topo">
+            <span class="categoria">🛒 Loja</span>
+            <span class="status status-analise">🟡 Em análise</span>
+          </div>
+
+          <h4>Novos itens secretos na loja</h4>
+
+          <p>
+            Adicionar itens raros que aparecem somente em alguns dias da semana.
+          </p>
+
+          <div class="card-footer">
+            <span class="autor">Por Maria • 14 votos</span>
+            <button class="btn-votar">⬆ Votar</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-topo">
+            <span class="categoria">🧠 Quiz</span>
+            <span class="status status-planejada">🔵 Planejada</span>
+          </div>
+
+          <h4>Quiz relâmpago no intervalo</h4>
+
+          <p>
+            Um mini quiz surpresa liberado em horários aleatórios valendo XP extra.
+          </p>
+
+          <div class="card-footer">
+            <span class="autor">Por Ana • 27 votos</span>
+            <button class="btn-votar">⬆ Votar</button>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="sugestoes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

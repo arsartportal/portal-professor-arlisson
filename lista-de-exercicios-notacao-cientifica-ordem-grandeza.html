@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aula – Notação Científica e Ordem de Grandeza</title>
+
+<style>
+/* =====================================================
+   ESTILO GERAL
+===================================================== */
+body{
+font-family:'Segoe UI',Arial,sans-serif;
+background:#eef2f8;
+margin:0;
+padding:40px;
+color:#2c3e50;
+}
+
+.container{
+max-width:1150px;
+margin:auto;
+background:#ffffff;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 35px rgba(0,0,0,0.12);
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.sub{
+text-align:center;
+color:#6b7c93;
+margin-bottom:40px;
+}
+
+h2{
+margin-top:40px;
+border-bottom:2px solid #e4e9f2;
+padding-bottom:6px;
+}
+
+.card{
+background:#f7f9fc;
+padding:20px;
+border-radius:8px;
+margin-top:15px;
+line-height:1.8;
+}
+
+.formula{
+font-size:28px;
+text-align:center;
+margin:20px 0;
+font-weight:bold;
+}
+
+.exemplo{
+background:#eef6ff;
+border-left:4px solid #3498db;
+padding:15px;
+margin-top:15px;
+border-radius:6px;
+}
+
+.simulador{
+background:#f7f9ff;
+padding:25px;
+border-radius:8px;
+margin-top:20px;
+}
+
+input{
+padding:10px;
+width:240px;
+margin:6px;
+border:1px solid #ccd6e4;
+border-radius:6px;
+font-size:15px;
+}
+
+button{
+padding:10px 18px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+}
+
+button:hover{
+background:#1a68d1;
+}
+
+#resultadoConversao,
+#resultadoOrdem{
+margin-top:18px;
+font-size:18px;
+font-weight:bold;
+line-height:1.8;
+}
+
+#explicacaoPassos,
+#explicacaoOrdem{
+margin-top:16px;
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:16px;
+line-height:1.8;
+}
+
+.contador-box{
+margin-top:15px;
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.contador-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:12px 16px;
+font-weight:bold;
+box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+
+.animacao-box{
+margin-top:20px;
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:12px;
+padding:18px;
+}
+
+.animacao-titulo{
+font-size:18px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.painel-etapas{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:10px;
+}
+
+.etapa{
+background:#f7fbff;
+border:1px solid #d6e7fb;
+padding:12px 14px;
+border-radius:10px;
+font-size:20px;
+line-height:1.7;
+opacity:0;
+transform:translateY(8px);
+animation:aparecer 0.45s ease forwards;
+}
+
+.etapa strong{
+color:#2c7be5;
+}
+
+.etapa-final{
+background:#edfdf2;
+border:1px solid #cdeed8;
+}
+
+@keyframes aparecer{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.linha-box{
+margin-top:22px;
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:12px;
+padding:20px;
+overflow-x:auto;
+}
+
+.linha-titulo{
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.linha-expoentes{
+display:flex;
+gap:10px;
+align-items:center;
+min-width:max-content;
+padding-bottom:8px;
+}
+
+.bloco-exp{
+min-width:90px;
+padding:12px 10px;
+text-align:center;
+background:#f7faff;
+border:2px solid #dbe4f0;
+border-radius:10px;
+transition:0.3s;
+}
+
+.bloco-exp .pot{
+font-size:22px;
+font-weight:bold;
+color:#2c7be5;
+}
+
+.bloco-exp .valor{
+font-size:13px;
+color:#6c7a8c;
+margin-top:6px;
+}
+
+.bloco-exp.ativo{
+background:#eaf3ff;
+border-color:#2c7be5;
+box-shadow:0 8px 18px rgba(44,123,229,0.16);
+transform:translateY(-4px);
+}
+
+.comparacao-box{
+margin-top:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
+.comparacao-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.comparacao-card h4{
+margin:0 0 8px 0;
+font-size:16px;
+color:#2c7be5;
+}
+
+.destaque-menor{
+background:#eef7ff;
+border:2px solid #2c7be5;
+}
+
+.destaque-maior{
+background:#edfdf2;
+border:2px solid #27ae60;
+}
+
+.questao{
+background:#fafcff;
+padding:18px;
+margin-top:20px;
+border-left:4px solid #2c7be5;
+border-radius:6px;
+}
+
+.alt{
+margin-top:6px;
+}
+
+.resultado{
+margin-top:10px;
+font-weight:bold;
+}
+
+@media (max-width:768px){
+body{
+padding:20px;
+}
+.container{
+padding:22px;
+}
+input{
+width:100%;
+box-sizing:border-box;
+}
+button{
+width:100%;
+margin-top:10px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Notação Científica e Ordem de Grandeza</h1>
+<p class="sub">Física – Ensino Médio</p>
+
+<h2>1. O que é notação científica?</h2>
+<div class="card">
+A <b>notação científica</b> é uma forma de escrever números muito grandes ou muito pequenos de maneira mais compacta e prática.
+
+<div class="formula">
+a × 10<sup>n</sup>
+</div>
+
+onde:
+
+<br><br>
+<b>a</b> é o <b>coeficiente</b> e deve satisfazer:
+<br>
+<b>1 ≤ a &lt; 10</b>
+
+<br><br>
+<b>n</b> é um número inteiro chamado <b>expoente</b> da potência de 10.
+
+<div class="exemplo">
+Exemplos:
+<br><br>
+3000000 = 3 × 10<sup>6</sup>
+<br>
+0,00045 = 4,5 × 10<sup>-4</sup>
+</div>
+
+Essa forma de escrita é muito usada na Física, Química, Astronomia e em várias áreas da ciência.
+</div>
+
+<h2>2. Como transformar um número em notação científica</h2>
+<div class="card">
+Para escrever um número em notação científica, deslocamos a vírgula até que o número fique com apenas <b>um algarismo diferente de zero antes da vírgula</b>.
+
+<div class="exemplo">
+<b>Se a vírgula vai para a esquerda</b>, o expoente é <b>positivo</b>.
+<br>
+Exemplo:
+<br>
+350000 = 3,5 × 10<sup>5</sup>
+
+<br><br>
+
+<b>Se a vírgula vai para a direita</b>, o expoente é <b>negativo</b>.
+<br>
+Exemplo:
+<br>
+0,00042 = 4,2 × 10<sup>-4</sup>
+</div>
+</div>
+
+<h2>3. O que é ordem de grandeza?</h2>
+<div class="card">
+A <b>ordem de grandeza</b> é uma estimativa da potência de 10 mais próxima de um valor.
+
+Primeiro escrevemos o número em notação científica:
+
+<div class="formula">
+a × 10<sup>n</sup>
+</div>
+
+Depois comparamos o coeficiente <b>a</b> com <b>3,16</b>.
+
+<div class="exemplo">
+Se <b>a &lt; 3,16</b>, a ordem de grandeza é <b>10<sup>n</sup></b>.
+<br>
+Se <b>a ≥ 3,16</b>, a ordem de grandeza é <b>10<sup>n+1</sup></b>.
+</div>
+
+Isso acontece porque 3,16 é aproximadamente a raiz de 10.
+</div>
+
+<h2>4. Exemplos resolvidos</h2>
+<div class="card">
+
+<div class="exemplo">
+<b>Exemplo 1:</b> 820000
+<br>
+820000 = 8,2 × 10<sup>5</sup>
+<br>
+Como 8,2 ≥ 3,16, a ordem de grandeza é:
+<br>
+<b>10<sup>6</sup></b>
+</div>
+
+<div class="exemplo">
+<b>Exemplo 2:</b> 0,00091
+<br>
+0,00091 = 9,1 × 10<sup>-4</sup>
+<br>
+Como 9,1 ≥ 3,16, a ordem de grandeza é:
+<br>
+<b>10<sup>-3</sup></b>
+</div>
+
+<div class="exemplo">
+<b>Exemplo 3:</b> 2100
+<br>
+2100 = 2,1 × 10<sup>3</sup>
+<br>
+Como 2,1 &lt; 3,16, a ordem de grandeza é:
+<br>
+<b>10<sup>3</sup></b>
+</div>
+
+</div>
+
+<h2>5. Simulador de notação científica</h2>
+<div class="simulador">
+
+<p>Digite um número e observe a conversão, o deslocamento da vírgula e o expoente correspondente.</p>
+
+Número =
+<input type="text" id="numeroInput" value="350000">
+<button onclick="converterNotacao()">Converter</button>
+
+<div id="resultadoConversao"></div>
+<div id="explicacaoPassos"></div>
+
+<div class="contador-box" id="contadorNotacao"></div>
+
+<div class="animacao-box">
+<div class="animacao-titulo">Passo a passo correto do deslocamento da vírgula</div>
+<div id="animacaoNotacao" class="painel-etapas"></div>
+</div>
+
+<div class="linha-box">
+<div class="linha-titulo">Linha dos expoentes</div>
+<div class="linha-expoentes" id="linhaExpoentes"></div>
+</div>
+
+</div>
+
+<h2>6. Simulador de ordem de grandeza</h2>
+<div class="simulador">
+
+<p>Digite um número para descobrir sua notação científica e sua ordem de grandeza.</p>
+
+Número =
+<input type="text" id="ordemInput" value="4200000">
+<button onclick="calcularOrdem()">Calcular</button>
+
+<div id="resultadoOrdem"></div>
+<div id="explicacaoOrdem"></div>
+
+<div class="animacao-box">
+<div class="animacao-titulo">Análise da ordem de grandeza</div>
+<div id="animacaoOrdem"></div>
+</div>
+
+<div class="comparacao-box" id="comparacaoOrdem"></div>
+
+</div>
+
+<h2>7. Exercícios</h2>
+<div id="exercicios"></div>
+
+</div>
+
+<script>
+/* =====================================================
+   FUNÇÕES AUXILIARES
+===================================================== */
+function limparNumero(texto){
+return texto.replace(/\./g,"").replace(",",".").trim();
+}
+
+function formatarBR(num, casas = 12){
+return Number(num).toLocaleString("pt-BR", {
+maximumFractionDigits: casas
+});
+}
+
+/* =====================================================
+   GERA LINHA DOS EXPOENTES
+===================================================== */
+function gerarLinhaExpoentes(expoenteAtivo){
+const linha = document.getElementById("linhaExpoentes");
+let html = "";
+
+for(let i=-9; i<=9; i++){
+let classe = "bloco-exp";
+if(i === expoenteAtivo) classe += " ativo";
+
+html += `
+<div class="${classe}">
+<div class="pot">10<sup>${i}</sup></div>
+<div class="valor">${formatarBR(Math.pow(10,i), 12)}</div>
+</div>
+`;
+}
+
+linha.innerHTML = html;
+}
+
+/* =====================================================
+   CRIA PASSOS REAIS DO DESLOCAMENTO DA VÍRGULA
+===================================================== */
+function gerarPassosVirgula(valor){
+const abs = Math.abs(valor);
+
+if(abs === 0){
+return {
+passos:["0"],
+expoente:0,
+coeficiente:0
+};
+}
+
+let texto = abs.toString();
+
+if(texto.includes("e")){
+texto = abs.toFixed(20).replace(/0+$/,"").replace(/\.$/,"");
+}
+
+if(!texto.includes(".")){
+texto += ".0";
+}
+
+let [parteInteira, parteDecimal] = texto.split(".");
+let passos = [];
+
+if(abs >= 1){
+let atualInteira = parteInteira;
+let atualDecimal = parteDecimal;
+
+passos.push(atualInteira + "," + atualDecimal);
+
+while(atualInteira.length > 1){
+atualDecimal = atualInteira.slice(-1) + atualDecimal;
+atualInteira = atualInteira.slice(0,-1);
+passos.push(atualInteira + "," + atualDecimal);
+}
+
+const coefStr = atualInteira + "." + atualDecimal;
+const expoente = passos.length - 1;
+
+return {
+passos,
+expoente,
+coeficiente:Number(coefStr)
+};
+}else{
+let zeros = 0;
+while(parteDecimal[zeros] === "0"){
+zeros++;
+}
+
+let algarismos = parteDecimal.slice(zeros);
+let atualAntes = "0";
+let atualDepois = parteDecimal;
+
+passos.push("0," + atualDepois);
+
+for(let i=0; i<zeros+1; i++){
+const movido = atualDepois.charAt(0);
+atualDepois = atualDepois.slice(1);
+
+if(atualAntes === "0"){
+atualAntes = movido;
+}else{
+atualAntes += movido;
+}
+
+if(i < zeros){
+passos.push("0," + atualDepois);
+}else{
+passos.push(atualAntes + "," + (atualDepois || "0"));
+}
+}
+
+const coefInteira = algarismos.charAt(0);
+const coefDecimal = algarismos.slice(1) || "0";
+const coeficiente = Number(coefInteira + "." + coefDecimal);
+const expoente = -(zeros + 1);
+
+return {
+passos,
+expoente,
+coeficiente
+};
+}
+}
+
+/* =====================================================
+   CONVERTER PARA NOTAÇÃO CIENTÍFICA
+===================================================== */
+function converterNotacao(){
+const textoOriginal = document.getElementById("numeroInput").value.trim();
+const valor = Number(limparNumero(textoOriginal));
+
+const resultado = document.getElementById("resultadoConversao");
+const explicacao = document.getElementById("explicacaoPassos");
+const animacao = document.getElementById("animacaoNotacao");
+const contador = document.getElementById("contadorNotacao");
+
+if(isNaN(valor) || textoOriginal === ""){
+resultado.innerHTML = "Digite um número válido.";
+explicacao.innerHTML = "";
+animacao.innerHTML = "";
+contador.innerHTML = "";
+document.getElementById("linhaExpoentes").innerHTML = "";
+return;
+}
+
+if(valor === 0){
+resultado.innerHTML = "0 em notação científica permanece <b>0</b>.";
+explicacao.innerHTML = "O zero é um caso especial e não exige deslocamento da vírgula.";
+animacao.innerHTML = "<div class='etapa etapa-final' style='opacity:1;transform:none;'>Número especial: 0</div>";
+contador.innerHTML = "";
+document.getElementById("linhaExpoentes").innerHTML = "";
+return;
+}
+
+const dados = gerarPassosVirgula(valor);
+const sinal = valor < 0 ? "-" : "";
+const coeficienteFinal = sinal + formatarBR(dados.coeficiente,12);
+
+resultado.innerHTML = `
+<b>${formatarBR(valor,12)}</b> = 
+<b>${coeficienteFinal} × 10<sup>${dados.expoente}</sup></b>
+`;
+
+if(Math.abs(valor) >= 1){
+explicacao.innerHTML = `
+O número tinha módulo maior ou igual a 1, então a vírgula foi deslocada para a <b>esquerda</b>.<br>
+Cada deslocamento para a esquerda aumenta em 1 o expoente da potência de 10.<br><br>
+Total de deslocamentos: <b>${dados.expoente}</b>
+`;
+}else{
+explicacao.innerHTML = `
+O número tinha módulo entre 0 e 1, então a vírgula foi deslocada para a <b>direita</b>.<br>
+Cada deslocamento para a direita gera expoente <b>negativo</b>.<br><br>
+Total de deslocamentos: <b>${Math.abs(dados.expoente)}</b>
+`;
+}
+
+contador.innerHTML = `
+<div class="contador-card">Coeficiente: ${coeficienteFinal}</div>
+<div class="contador-card">Deslocamentos: ${Math.abs(dados.expoente)}</div>
+<div class="contador-card">Expoente: ${dados.expoente}</div>
+`;
+
+animacao.innerHTML = "";
+
+dados.passos.forEach((passo,i)=>{
+const div = document.createElement("div");
+div.className = "etapa" + (i === dados.passos.length - 1 ? " etapa-final" : "");
+div.style.animationDelay = (i * 0.35) + "s";
+
+if(i === dados.passos.length - 1){
+div.innerHTML = `<strong>Etapa ${i+1}:</strong> ${coeficienteFinal} × 10<sup>${dados.expoente}</sup>`;
+}else{
+div.innerHTML = `<strong>Etapa ${i+1}:</strong> ${sinal}${passo}`;
+}
+
+animacao.appendChild(div);
+});
+
+gerarLinhaExpoentes(dados.expoente);
+}
+
+/* =====================================================
+   CALCULAR ORDEM DE GRANDEZA
+===================================================== */
+function calcularOrdem(){
+const texto = document.getElementById("ordemInput").value.trim();
+const valor = Number(limparNumero(texto));
+
+const resultado = document.getElementById("resultadoOrdem");
+const explicacao = document.getElementById("explicacaoOrdem");
+const comparacao = document.getElementById("comparacaoOrdem");
+const animacao = document.getElementById("animacaoOrdem");
+
+if(isNaN(valor) || texto === ""){
+resultado.innerHTML = "Digite um número válido.";
+explicacao.innerHTML = "";
+comparacao.innerHTML = "";
+animacao.innerHTML = "";
+return;
+}
+
+if(valor === 0){
+resultado.innerHTML = "O número zero não possui ordem de grandeza definida nesse contexto.";
+explicacao.innerHTML = "A ordem de grandeza é usada para valores diferentes de zero.";
+comparacao.innerHTML = "";
+animacao.innerHTML = "";
+return;
+}
+
+const abs = Math.abs(valor);
+const expoente = Math.floor(Math.log10(abs));
+const coeficiente = abs / Math.pow(10, expoente);
+const referencia = 3.16;
+const ordemExpoente = coeficiente < referencia ? expoente : expoente + 1;
+
+resultado.innerHTML = `
+Notação científica: <b>${formatarBR(coeficiente,12)} × 10<sup>${expoente}</sup></b><br>
+Ordem de grandeza: <b>10<sup>${ordemExpoente}</sup></b>
+`;
+
+explicacao.innerHTML = `
+Primeiro escrevemos o valor em notação científica.<br>
+Depois comparamos o coeficiente <b>${formatarBR(coeficiente,12)}</b> com <b>3,16</b>.<br><br>
+${coeficiente < referencia
+? `Como <b>${formatarBR(coeficiente,12)} &lt; 3,16</b>, mantemos a potência <b>10<sup>${expoente}</sup></b>.`
+: `Como <b>${formatarBR(coeficiente,12)} ≥ 3,16</b>, avançamos para <b>10<sup>${expoente + 1}</sup></b>.`
+}
+`;
+
+animacao.innerHTML = `
+<div class="painel-etapas">
+<div class="etapa" style="opacity:1;transform:none;">
+<strong>Etapa 1:</strong> Escrever em notação científica: ${formatarBR(coeficiente,12)} × 10<sup>${expoente}</sup>
+</div>
+
+<div class="etapa" style="opacity:1;transform:none;animation-delay:0.2s;">
+<strong>Etapa 2:</strong> Comparar o coeficiente ${formatarBR(coeficiente,12)} com 3,16
+</div>
+
+<div class="etapa etapa-final" style="opacity:1;transform:none;animation-delay:0.4s;">
+<strong>Etapa 3:</strong>
+${coeficiente < referencia
+? `Como ${formatarBR(coeficiente,12)} é menor que 3,16, a ordem de grandeza é 10<sup>${expoente}</sup>.`
+: `Como ${formatarBR(coeficiente,12)} é maior ou igual a 3,16, a ordem de grandeza é 10<sup>${expoente + 1}</sup>.`
+}
+</div>
+</div>
+`;
+
+comparacao.innerHTML = `
+<div class="comparacao-card">
+<h4>Valor analisado</h4>
+<div>${formatarBR(abs,12)}</div>
+</div>
+
+<div class="comparacao-card ${coeficiente < referencia ? 'destaque-menor' : ''}">
+<h4>Coeficiente</h4>
+<div>${formatarBR(coeficiente,12)}</div>
+</div>
+
+<div class="comparacao-card">
+<h4>Referência</h4>
+<div>3,16</div>
+</div>
+
+<div class="comparacao-card ${coeficiente >= referencia ? 'destaque-maior' : ''}">
+<h4>Ordem de grandeza</h4>
+<div>10<sup>${ordemExpoente}</sup></div>
+</div>
+`;
+}
+
+/* =====================================================
+   EXERCÍCIOS
+===================================================== */
+const questoes = [
+{p:"3000000 em notação científica é:",a:["3 × 10<sup>6</sup>","30 × 10<sup>5</sup>","0,3 × 10<sup>7</sup>","3 × 10<sup>5</sup>"],c:0},
+{p:"0,0004 em notação científica é:",a:["4 × 10<sup>-4</sup>","4 × 10<sup>-3</sup>","0,4 × 10<sup>-4</sup>","40 × 10<sup>-5</sup>"],c:0},
+{p:"Na notação científica, o coeficiente deve estar:",a:["entre 1 e 10","acima de 10","sempre inteiro","sempre negativo"],c:0},
+{p:"Se a vírgula se desloca para a esquerda, o expoente fica:",a:["negativo","positivo","zero","fracionário"],c:1},
+{p:"A ordem de grandeza de 2,8 × 10<sup>5</sup> é:",a:["10<sup>4</sup>","10<sup>5</sup>","10<sup>6</sup>","10<sup>7</sup>"],c:1},
+{p:"A ordem de grandeza de 4,0 × 10<sup>5</sup> é:",a:["10<sup>4</sup>","10<sup>5</sup>","10<sup>6</sup>","10<sup>7</sup>"],c:2},
+{p:"0,0000009 em notação científica é:",a:["9 × 10<sup>-7</sup>","9 × 10<sup>-6</sup>","0,9 × 10<sup>-7</sup>","9 × 10<sup>7</sup>"],c:0},
+{p:"7,5 × 10<sup>3</sup> representa:",a:["750","7500","0,75","75000"],c:1},
+{p:"O número 1,2 × 10<sup>-3</sup> em decimal é:",a:["0,012","0,0012","0,00012","12"],c:1},
+{p:"A ordem de grandeza de 3,2 × 10<sup>8</sup> é:",a:["10<sup>7</sup>","10<sup>8</sup>","10<sup>9</sup>","10<sup>10</sup>"],c:2}
+];
+
+const tentativas = {};
+
+function carregar(){
+const div = document.getElementById("exercicios");
+let html = "";
+
+questoes.forEach((q,i)=>{
+tentativas[i] = 0;
+
+html += "<div class='questao'>";
+html += "<p>"+(i+1)+") "+q.p+"</p>";
+
+q.a.forEach((alt,j)=>{
+html += "<div class='alt'>";
+html += "<input type='radio' name='q"+i+"' value='"+j+"'> "+alt;
+html += "</div>";
+});
+
+html += "<button onclick='corrigir("+i+")'>Responder</button>";
+html += "<div class='resultado' id='r"+i+"'></div>";
+html += "</div>";
+});
+
+div.innerHTML = html;
+}
+
+function corrigir(i){
+let radios = document.getElementsByName("q"+i);
+let escolha;
+
+for(let r of radios){
+if(r.checked) escolha = parseInt(r.value);
+}
+
+if(escolha === undefined) return;
+
+if(escolha === questoes[i].c){
+document.getElementById("r"+i).innerHTML = "✅ Correto!";
+}else{
+tentativas[i]++;
+
+if(tentativas[i] >= 3){
+document.getElementById("r"+i).innerHTML = "❌ Resposta correta: " + questoes[i].a[questoes[i].c];
+}else{
+document.getElementById("r"+i).innerHTML = "❌ Tente novamente ("+(3-tentativas[i])+" tentativas restantes)";
+}
+}
+}
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+converterNotacao();
+calcularOrdem();
+carregar();
+</script>
+
+</body>
+</html>

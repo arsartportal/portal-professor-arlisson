@@ -1,0 +1,216 @@
+/* =====================================================
+   TRILHAS.CSS
+   Portal do Professor Arlisson
+   Estilo premium para aulas e checkpoints
+   ===================================================== */
+
+/* =====================================================
+   1. FUNDO GERAL DA PÁGINA DE TRILHA
+   ===================================================== */
+
+body {
+  background-color: #f4f6f9; /* cinza claro premium */
+}
+
+/* =====================================================
+   2. CARD PRINCIPAL DE CONTEÚDO
+   ===================================================== */
+
+.conteudo-card {
+  max-width: 900px;
+  margin: 48px auto;
+  padding: 48px;
+
+  background-color: #ffffff;
+  border-radius: 16px;
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+/* =====================================================
+   3. TÍTULO E DESCRIÇÃO DO CARD
+   ===================================================== */
+
+/* Título principal (ex: Cinemática) */
+.conteudo-card h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2937; /* quase preto */
+
+  margin-bottom: 8px;
+}
+
+/* Subtítulo / descrição do card */
+.descricao-card {
+  font-size: 16px;
+  color: #6b7280; /* cinza médio */
+
+  margin-bottom: 40px;
+}
+
+/* =====================================================
+   4. SEÇÕES DO CONTEÚDO (h3 + texto)
+   ===================================================== */
+
+/* Subtítulos das seções */
+.conteudo-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+
+  margin-top: 48px;
+  margin-bottom: 16px;
+
+  padding-left: 14px;
+  border-left: 4px solid #2563eb; /* azul premium */
+}
+
+/* Parágrafos */
+.conteudo-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #374151;
+
+  margin-bottom: 16px;
+}
+
+/* =====================================================
+   5. LISTAS (erros comuns, exemplos etc.)
+   ===================================================== */
+
+.conteudo-card ul {
+  margin-left: 24px;
+  margin-top: 12px;
+}
+
+.conteudo-card li {
+  font-size: 16px;
+  color: #374151;
+
+  margin-bottom: 10px;
+}
+
+/* =====================================================
+   6. SEPARADORES
+   ===================================================== */
+
+.conteudo-card hr {
+  margin: 36px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* =====================================================
+   7. CHECKPOINT – FORMULÁRIO (VERSÃO FINAL)
+   ===================================================== */
+
+#checkpoint {
+  margin-top: 32px;
+}
+
+/* Enunciado da questão */
+#checkpoint p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 14px;
+}
+
+/* Container da alternativa */
+#checkpoint label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 18px;
+  margin-bottom: 12px;
+
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+
+  font-size: 15px;
+  color: #111827; /* 🔥 TEXTO ESCURO */
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Esconde o radio padrão (mantém funcional) */
+#checkpoint input[type="radio"] {
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+/* Hover */
+#checkpoint label:hover {
+  background-color: #f1f5ff;
+  border-color: #2563eb;
+}
+
+/* Quando a alternativa estiver selecionada */
+#checkpoint input[type="radio"]:checked + span,
+#checkpoint input[type="radio"]:checked {
+  font-weight: 600;
+}
+
+/* Realce do label quando selecionado */
+#checkpoint label:has(input[type="radio"]:checked) {
+  background-color: #eef2ff;
+  border-color: #2563eb;
+}
+
+/* =====================================================
+   8. BOTÃO DO CHECKPOINT (AÇÃO PREMIUM)
+   ===================================================== */
+
+#finalizarCheckpoint {
+  margin-top: 48px;
+  margin-left: auto;
+  display: block;
+
+  padding: 12px 28px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #ffffff;
+  background-color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+#finalizarCheckpoint:hover {
+  background-color: #1e40af;
+  border-color: #1e40af;
+  transform: translateY(-1px);
+}
+
+/* Clique */
+#finalizarCheckpoint:active {
+  transform: translateY(0);
+  opacity: 0.95;
+}
+
+/* =====================================================
+   9. RESPONSIVIDADE (CELULAR)
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .conteudo-card {
+    padding: 28px;
+    margin: 24px 16px;
+  }
+
+  .conteudo-card h2 {
+    font-size: 26px;
+  }
+
+  .conteudo-card h3 {
+    font-size: 20px;
+  }
+}

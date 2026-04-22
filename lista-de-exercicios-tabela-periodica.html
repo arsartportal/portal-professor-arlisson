@@ -1,0 +1,3388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aula – Tabela Periódica</title>
+
+<style>
+
+/* =====================================================
+   ESTILO BASE (SEU PADRÃO)
+===================================================== */
+body{
+font-family:'Segoe UI',Arial,sans-serif;
+background:#eef2f8;
+margin:0;
+padding:40px;
+color:#2c3e50;
+}
+
+.container{
+max-width:1150px;
+margin:auto;
+background:#ffffff;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 35px rgba(0,0,0,0.12);
+}
+
+h1{text-align:center;font-size:34px;}
+.sub{text-align:center;color:#6b7c93;}
+
+h2{
+margin-top:40px;
+border-bottom:2px solid #e4e9f2;
+padding-bottom:6px;
+}
+
+.card{
+background:#f7f9fc;
+padding:20px;
+border-radius:8px;
+margin-top:15px;
+line-height:1.8;
+}
+
+/* =====================================================
+   PROGRESSO
+===================================================== */
+.painel-progresso{
+background:#f7f9fc;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:18px;
+margin-bottom:25px;
+}
+
+.barra{
+width:100%;
+height:14px;
+background:#dde6f2;
+border-radius:999px;
+overflow:hidden;
+margin-top:14px;
+}
+
+.barra-fill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#2c7be5,#27ae60);
+}
+
+/* =====================================================
+   TABELA PERIÓDICA
+===================================================== */
+#tabela{
+display:grid;
+grid-template-columns:repeat(18, 1fr);
+gap:6px;
+margin-top:20px;
+}
+
+.elemento{
+border-radius:8px;
+padding:6px;
+font-size:11px;
+text-align:center;
+cursor:pointer;
+border:1px solid #dbe4f0;
+background:#fff;
+transition:0.2s;
+}
+
+.elemento:hover{
+transform:scale(1.05);
+}
+
+.numero{font-size:9px;color:#888;}
+.simbolo{font-size:16px;font-weight:bold;}
+.nome{font-size:9px;}
+
+.alcalinos{background:#ffe5e5;}
+.alcalino{background:#fff4cc;}
+.ametais{background:#e5ffe5;}
+.nobres{background:#e5f0ff;}
+.transicao{background:#efe5ff;}
+
+.info-box{
+margin-top:20px;
+padding:20px;
+border-radius:10px;
+background:#fff;
+border:1px solid #dbe4f0;
+}
+
+button{
+padding:10px 16px;
+margin:5px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.questao{
+background:#fafcff;
+padding:18px;
+margin-top:20px;
+border-left:4px solid #2c7be5;
+border-radius:6px;
+}
+
+.resultado{
+margin-top:10px;
+font-weight:bold;
+}
+
+.destaque{
+margin-top:15px;
+padding:14px 16px;
+
+background:linear-gradient(135deg,#fff7e6,#ffe8cc);
+border-left:5px solid #f39c12;
+
+border-radius:8px;
+
+font-weight:600;
+font-size:15px;
+line-height:1.6;
+
+color:#7a4b00;
+
+box-shadow:0 4px 10px rgba(243,156,18,0.15);
+
+animation:aparecerDestaque 0.4s ease;
+}
+
+@keyframes aparecerDestaque{
+from{
+opacity:0;
+transform:translateY(6px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* =====================================================
+   LANTANÍDEOS E ACTINÍDEOS
+===================================================== */
+.linha-extra{
+display:grid;
+grid-template-columns:repeat(15, 1fr);
+gap:6px;
+margin-top:10px;
+justify-content:center;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.placeholder-f{
+background:#f0f3f8;
+border:2px dashed #9fb3c8;
+color:#5c6f82;
+
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+
+font-size:11px;
+font-weight:bold;
+
+border-radius:8px;
+cursor:default;
+}
+
+/* TOOLTIP BLOCO F */
+.placeholder-f{
+position:relative;
+background:#f0f3f8;
+border:2px dashed #9fb3c8;
+color:#5c6f82;
+
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+
+font-size:11px;
+font-weight:bold;
+
+border-radius:8px;
+cursor:help;
+}
+
+/* TEXTO OCULTO */
+.placeholder-f::after{
+content: attr(data-info);
+
+position:absolute;
+bottom:110%;
+left:50%;
+transform:translateX(-50%);
+
+background:#2c3e50;
+color:#fff;
+
+padding:8px 10px;
+border-radius:6px;
+
+font-size:11px;
+width:180px;
+
+opacity:0;
+pointer-events:none;
+transition:0.25s;
+}
+
+/* SETINHA */
+.placeholder-f::before{
+content:"";
+
+position:absolute;
+bottom:100%;
+left:50%;
+transform:translateX(-50%);
+
+border:6px solid transparent;
+border-top-color:#2c3e50;
+
+opacity:0;
+transition:0.25s;
+}
+
+/* HOVER */
+.placeholder-f:hover::after,
+.placeholder-f:hover::before{
+opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Tabela Periódica</h1>
+<p class="sub">Química – Ensino Médio</p>
+
+<div class="painel-progresso">
+<h3>Progresso</h3>
+<div id="info">0/10</div>
+
+<div class="barra">
+<div class="barra-fill" id="barra"></div>
+</div>
+</div>
+
+<h2>1. Conceito</h2>
+<div class="card">
+A tabela periódica organiza os elementos pelo número atômico e propriedades químicas.
+</div>
+
+<h2>2. Filtro</h2>
+<div class="card">
+<button onclick="filtrar('todos')">Todos</button>
+<button onclick="filtrar('alcalinos')">Alcalinos</button>
+<button onclick="filtrar('alcalino')">Alcalino-terrosos</button>
+<button onclick="filtrar('ametais')">Ametais</button>
+<button onclick="filtrar('nobres')">Gases Nobres</button>
+</div>
+
+<h2>3. Tabela</h2>
+<div id="tabela"></div>
+
+<div id="infoElemento" class="info-box">
+Clique em um elemento
+</div>
+
+<h2 style="margin-top:40px;">Lantanídeos</h2>
+<div id="linhaLantanideos" class="linha-extra"></div>
+
+<h2 style="margin-top:20px;">Actinídeos</h2>
+<div id="linhaActinideos" class="linha-extra"></div>
+
+<h2>4. Exercícios</h2>
+<div id="exercicios"></div>
+
+</div>
+
+<script>
+
+const elementos = [
+
+/* ================= PERÍODO 1 ================= */
+{n:1,s:"H",nome:"Hidrogênio",fam:"ametais",x:1,y:1},
+{n:2,s:"He",nome:"Hélio",fam:"nobres",x:18,y:1},
+
+/* ================= PERÍODO 2 ================= */
+{n:3,s:"Li",nome:"Lítio",fam:"alcalinos",x:1,y:2},
+{n:4,s:"Be",nome:"Berílio",fam:"alcalino",x:2,y:2},
+{n:5,s:"B",nome:"Boro",fam:"ametais",x:13,y:2},
+{n:6,s:"C",nome:"Carbono",fam:"ametais",x:14,y:2},
+{n:7,s:"N",nome:"Nitrogênio",fam:"ametais",x:15,y:2},
+{n:8,s:"O",nome:"Oxigênio",fam:"ametais",x:16,y:2},
+{n:9,s:"F",nome:"Flúor",fam:"ametais",x:17,y:2},
+{n:10,s:"Ne",nome:"Neônio",fam:"nobres",x:18,y:2},
+
+/* ================= PERÍODO 3 ================= */
+{n:11,s:"Na",nome:"Sódio",fam:"alcalinos",x:1,y:3},
+{n:12,s:"Mg",nome:"Magnésio",fam:"alcalino",x:2,y:3},
+{n:13,s:"Al",nome:"Alumínio",fam:"transicao",x:13,y:3},
+{n:14,s:"Si",nome:"Silício",fam:"ametais",x:14,y:3},
+{n:15,s:"P",nome:"Fósforo",fam:"ametais",x:15,y:3},
+{n:16,s:"S",nome:"Enxofre",fam:"ametais",x:16,y:3},
+{n:17,s:"Cl",nome:"Cloro",fam:"ametais",x:17,y:3},
+{n:18,s:"Ar",nome:"Argônio",fam:"nobres",x:18,y:3},
+
+/* ================= PERÍODO 4 ================= */
+{n:19,s:"K",nome:"Potássio",fam:"alcalinos",x:1,y:4},
+{n:20,s:"Ca",nome:"Cálcio",fam:"alcalino",x:2,y:4},
+
+{n:21,s:"Sc",nome:"Escândio",fam:"transicao",x:3,y:4},
+{n:22,s:"Ti",nome:"Titânio",fam:"transicao",x:4,y:4},
+{n:23,s:"V",nome:"Vanádio",fam:"transicao",x:5,y:4},
+{n:24,s:"Cr",nome:"Cromo",fam:"transicao",x:6,y:4},
+{n:25,s:"Mn",nome:"Manganês",fam:"transicao",x:7,y:4},
+{n:26,s:"Fe",nome:"Ferro",fam:"transicao",x:8,y:4},
+{n:27,s:"Co",nome:"Cobalto",fam:"transicao",x:9,y:4},
+{n:28,s:"Ni",nome:"Níquel",fam:"transicao",x:10,y:4},
+{n:29,s:"Cu",nome:"Cobre",fam:"transicao",x:11,y:4},
+{n:30,s:"Zn",nome:"Zinco",fam:"transicao",x:12,y:4},
+
+{n:31,s:"Ga",nome:"Gálio",fam:"transicao",x:13,y:4},
+{n:32,s:"Ge",nome:"Germânio",fam:"ametais",x:14,y:4},
+{n:33,s:"As",nome:"Arsênio",fam:"ametais",x:15,y:4},
+{n:34,s:"Se",nome:"Selênio",fam:"ametais",x:16,y:4},
+{n:35,s:"Br",nome:"Bromo",fam:"ametais",x:17,y:4},
+{n:36,s:"Kr",nome:"Criptônio",fam:"nobres",x:18,y:4},
+
+/* ================= PERÍODO 5 ================= */
+{n:37,s:"Rb",nome:"Rubídio",fam:"alcalinos",x:1,y:5},
+{n:38,s:"Sr",nome:"Estrôncio",fam:"alcalino",x:2,y:5},
+
+{n:39,s:"Y",nome:"Ítrio",fam:"transicao",x:3,y:5},
+{n:40,s:"Zr",nome:"Zircônio",fam:"transicao",x:4,y:5},
+{n:41,s:"Nb",nome:"Nióbio",fam:"transicao",x:5,y:5},
+{n:42,s:"Mo",nome:"Molibdênio",fam:"transicao",x:6,y:5},
+{n:43,s:"Tc",nome:"Tecnécio",fam:"transicao",x:7,y:5},
+{n:44,s:"Ru",nome:"Rutênio",fam:"transicao",x:8,y:5},
+{n:45,s:"Rh",nome:"Ródio",fam:"transicao",x:9,y:5},
+{n:46,s:"Pd",nome:"Paládio",fam:"transicao",x:10,y:5},
+{n:47,s:"Ag",nome:"Prata",fam:"transicao",x:11,y:5},
+{n:48,s:"Cd",nome:"Cádmio",fam:"transicao",x:12,y:5},
+
+{n:49,s:"In",nome:"Índio",fam:"transicao",x:13,y:5},
+{n:50,s:"Sn",nome:"Estanho",fam:"transicao",x:14,y:5},
+{n:51,s:"Sb",nome:"Antimônio",fam:"ametais",x:15,y:5},
+{n:52,s:"Te",nome:"Telúrio",fam:"ametais",x:16,y:5},
+{n:53,s:"I",nome:"Iodo",fam:"ametais",x:17,y:5},
+{n:54,s:"Xe",nome:"Xenônio",fam:"nobres",x:18,y:5},
+
+/* ================= PERÍODO 6 ================= */
+{n:55,s:"Cs",nome:"Césio",fam:"alcalinos",x:1,y:6},
+{n:56,s:"Ba",nome:"Bário",fam:"alcalino",x:2,y:6},
+
+{n:57,s:"La",nome:"Lantânio",fam:"transicao",x:3,y:6},
+{n:58,s:"Ce",nome:"Cério",fam:"transicao",x:4,y:8},
+{n:59,s:"Pr",nome:"Praseodímio",fam:"transicao",x:5,y:8},
+{n:60,s:"Nd",nome:"Neodímio",fam:"transicao",x:6,y:8},
+{n:61,s:"Pm",nome:"Promécio",fam:"transicao",x:7,y:8},
+{n:62,s:"Sm",nome:"Samário",fam:"transicao",x:8,y:8},
+{n:63,s:"Eu",nome:"Európio",fam:"transicao",x:9,y:8},
+{n:64,s:"Gd",nome:"Gadolínio",fam:"transicao",x:10,y:8},
+{n:65,s:"Tb",nome:"Térbio",fam:"transicao",x:11,y:8},
+{n:66,s:"Dy",nome:"Disprósio",fam:"transicao",x:12,y:8},
+{n:67,s:"Ho",nome:"Hólmio",fam:"transicao",x:13,y:8},
+{n:68,s:"Er",nome:"Érbio",fam:"transicao",x:14,y:8},
+{n:69,s:"Tm",nome:"Túlio",fam:"transicao",x:15,y:8},
+{n:70,s:"Yb",nome:"Itérbio",fam:"transicao",x:16,y:8},
+{n:71,s:"Lu",nome:"Lutécio",fam:"transicao",x:17,y:8},
+
+{n:72,s:"Hf",nome:"Háfnio",fam:"transicao",x:4,y:6},
+{n:73,s:"Ta",nome:"Tântalo",fam:"transicao",x:5,y:6},
+{n:74,s:"W",nome:"Tungstênio",fam:"transicao",x:6,y:6},
+{n:75,s:"Re",nome:"Rênio",fam:"transicao",x:7,y:6},
+{n:76,s:"Os",nome:"Ósmio",fam:"transicao",x:8,y:6},
+{n:77,s:"Ir",nome:"Irídio",fam:"transicao",x:9,y:6},
+{n:78,s:"Pt",nome:"Platina",fam:"transicao",x:10,y:6},
+{n:79,s:"Au",nome:"Ouro",fam:"transicao",x:11,y:6},
+{n:80,s:"Hg",nome:"Mercúrio",fam:"transicao",x:12,y:6},
+
+{n:81,s:"Tl",nome:"Tálio",fam:"transicao",x:13,y:6},
+{n:82,s:"Pb",nome:"Chumbo",fam:"transicao",x:14,y:6},
+{n:83,s:"Bi",nome:"Bismuto",fam:"transicao",x:15,y:6},
+{n:84,s:"Po",nome:"Polônio",fam:"ametais",x:16,y:6},
+{n:85,s:"At",nome:"Astato",fam:"ametais",x:17,y:6},
+{n:86,s:"Rn",nome:"Radônio",fam:"nobres",x:18,y:6},
+
+/* ================= PERÍODO 7 ================= */
+{n:87,s:"Fr",nome:"Frâncio",fam:"alcalinos",x:1,y:7},
+{n:88,s:"Ra",nome:"Rádio",fam:"alcalino",x:2,y:7},
+
+{n:89,s:"Ac",nome:"Actínio",fam:"transicao",x:3,y:7},
+{n:90,s:"Th",nome:"Tório",fam:"transicao",x:4,y:9},
+{n:91,s:"Pa",nome:"Protactínio",fam:"transicao",x:5,y:9},
+{n:92,s:"U",nome:"Urânio",fam:"transicao",x:6,y:9},
+{n:93,s:"Np",nome:"Netúnio",fam:"transicao",x:7,y:9},
+{n:94,s:"Pu",nome:"Plutônio",fam:"transicao",x:8,y:9},
+{n:95,s:"Am",nome:"Amerício",fam:"transicao",x:9,y:9},
+{n:96,s:"Cm",nome:"Cúrio",fam:"transicao",x:10,y:9},
+{n:97,s:"Bk",nome:"Berquélio",fam:"transicao",x:11,y:9},
+{n:98,s:"Cf",nome:"Califórnio",fam:"transicao",x:12,y:9},
+{n:99,s:"Es",nome:"Einstênio",fam:"transicao",x:13,y:9},
+{n:100,s:"Fm",nome:"Férmio",fam:"transicao",x:14,y:9},
+{n:101,s:"Md",nome:"Mendelévio",fam:"transicao",x:15,y:9},
+{n:102,s:"No",nome:"Nobélio",fam:"transicao",x:16,y:9},
+{n:103,s:"Lr",nome:"Laurêncio",fam:"transicao",x:17,y:9},
+
+{n:104,s:"Rf",nome:"Rutherfórdio",fam:"transicao",x:4,y:7},
+{n:105,s:"Db",nome:"Dúbnio",fam:"transicao",x:5,y:7},
+{n:106,s:"Sg",nome:"Seabórgio",fam:"transicao",x:6,y:7},
+{n:107,s:"Bh",nome:"Bóhrio",fam:"transicao",x:7,y:7},
+{n:108,s:"Hs",nome:"Hássio",fam:"transicao",x:8,y:7},
+{n:109,s:"Mt",nome:"Meitnério",fam:"transicao",x:9,y:7},
+{n:110,s:"Ds",nome:"Darmstádio",fam:"transicao",x:10,y:7},
+{n:111,s:"Rg",nome:"Roentgênio",fam:"transicao",x:11,y:7},
+{n:112,s:"Cn",nome:"Copernício",fam:"transicao",x:12,y:7},
+
+{n:113,s:"Nh",nome:"Nihônio",fam:"transicao",x:13,y:7},
+{n:114,s:"Fl",nome:"Fleróvio",fam:"transicao",x:14,y:7},
+{n:115,s:"Mc",nome:"Moscóvio",fam:"transicao",x:15,y:7},
+{n:116,s:"Lv",nome:"Livermório",fam:"transicao",x:16,y:7},
+{n:117,s:"Ts",nome:"Tenessino",fam:"ametais",x:17,y:7},
+{n:118,s:"Og",nome:"Oganessônio",fam:"nobres",x:18,y:7}
+
+];
+
+
+const dadosExtras = {
+
+H:{
+massa:"1.008",
+tipo:"Ametal",
+bloco:"s",
+
+configCompleta:"1s¹",
+configCamadas:"1",
+valencia:1,
+
+eletronegatividade:2.20,
+raio:53,
+energiaIonizacao:"1312 kJ/mol",
+
+estado:"Gás",
+densidade:"0,000089 g/cm³",
+fusao:"-259,2°C",
+ebulicao:"-252,9°C",
+
+ligacao:"Covalente",
+
+descricao:"Elemento mais abundante do universo, presente nas estrelas e essencial na formação da água (H₂O).",
+
+aplicacao:"Produção de amônia (fertilizantes), combustível de foguetes, células de hidrogênio e indústria petroquímica.",
+
+curiosidade:"Elemento extremamente leve, altamente inflamável e o primeiro da tabela periódica."
+},
+
+He:{
+massa:"4.0026",
+tipo:"Gás nobre",
+bloco:"s",
+
+configCompleta:"1s²",
+configCamadas:"2",
+valencia:0,
+
+eletronegatividade:"-",
+raio:31,
+energiaIonizacao:"2372 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0001785 g/cm³",
+fusao:"-272,2°C",
+ebulicao:"-268,9°C",
+
+ligacao:"Não forma ligações (inerte)",
+
+descricao:"Gás nobre incolor, inodoro e extremamente estável, presente em pequenas quantidades na atmosfera.",
+
+aplicacao:"Balões e dirigíveis, resfriamento de equipamentos (como ressonância magnética) e atmosferas inertes.",
+
+curiosidade:"Possui o menor ponto de ebulição entre todos os elementos e não solidifica facilmente."
+},
+
+Li:{
+massa:"6.94",
+tipo:"Metal alcalino",
+bloco:"s",
+
+configCompleta:"1s² 2s¹",
+configCamadas:"2-1",
+valencia:1,
+
+eletronegatividade:0.98,
+raio:167,
+energiaIonizacao:"520 kJ/mol",
+
+estado:"Sólido",
+densidade:"0,534 g/cm³",
+fusao:"180,5°C",
+ebulicao:"1342°C",
+
+ligacao:"Metálica (forma compostos iônicos)",
+
+descricao:"Metal alcalino macio, muito leve e altamente reativo, especialmente com água.",
+
+aplicacao:"Baterias recarregáveis (íon-lítio), medicamentos psiquiátricos e ligas metálicas leves.",
+
+curiosidade:"É o metal sólido mais leve da tabela periódica e pode flutuar na água."
+},
+
+Be:{
+massa:"9.0122",
+tipo:"Metal alcalino-terroso",
+bloco:"s",
+
+configCompleta:"1s² 2s²",
+configCamadas:"2-2",
+valencia:2,
+
+eletronegatividade:1.57,
+raio:112,
+energiaIonizacao:"900 kJ/mol",
+
+estado:"Sólido",
+densidade:"1,85 g/cm³",
+fusao:"1287°C",
+ebulicao:"2470°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal leve, duro e relativamente raro, com alta resistência térmica.",
+
+aplicacao:"Ligas metálicas aeroespaciais e janelas de equipamentos de raio X.",
+
+curiosidade:"É tóxico quando inalado em forma de poeira."
+},
+
+B:{
+massa:"10.81",
+tipo:"Semimetal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p¹",
+configCamadas:"2-3",
+valencia:3,
+
+eletronegatividade:2.04,
+raio:85,
+energiaIonizacao:"801 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,34 g/cm³",
+fusao:"2075°C",
+ebulicao:"4000°C",
+
+ligacao:"Covalente",
+
+descricao:"Semimetal com propriedades intermediárias entre metais e ametais.",
+
+aplicacao:"Vidros resistentes (borossilicato) e detergentes.",
+
+curiosidade:"Muito usado para aumentar resistência de materiais."
+},
+
+C:{
+massa:"12.01",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p²",
+configCamadas:"2-4",
+valencia:4,
+
+eletronegatividade:2.55,
+raio:70,
+energiaIonizacao:"1086 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,26 g/cm³",
+fusao:"3550°C",
+ebulicao:"4827°C",
+
+ligacao:"Covalente",
+
+descricao:"Elemento base da vida, presente em todos os compostos orgânicos.",
+
+aplicacao:"Combustíveis, grafite, diamante e materiais orgânicos.",
+
+curiosidade:"Forma estruturas diferentes como grafite e diamante."
+},
+
+N:{
+massa:"14.01",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p³",
+configCamadas:"2-5",
+valencia:5,
+
+eletronegatividade:3.04,
+raio:65,
+energiaIonizacao:"1402 kJ/mol",
+
+estado:"Gás",
+densidade:"0,00125 g/cm³",
+fusao:"-210°C",
+ebulicao:"-196°C",
+
+ligacao:"Covalente",
+
+descricao:"Principal componente do ar atmosférico (≈78%).",
+
+aplicacao:"Fertilizantes, conservação de alimentos e indústria química.",
+
+curiosidade:"Possui ligação tripla muito estável (N≡N)."
+},
+
+O:{
+massa:"16.00",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁴",
+configCamadas:"2-6",
+valencia:6,
+
+eletronegatividade:3.44,
+raio:60,
+energiaIonizacao:"1314 kJ/mol",
+
+estado:"Gás",
+densidade:"0,00143 g/cm³",
+fusao:"-218°C",
+ebulicao:"-183°C",
+
+ligacao:"Covalente",
+
+descricao:"Essencial para respiração e combustão.",
+
+aplicacao:"Uso médico, combustão e processos industriais.",
+
+curiosidade:"Altamente reativo e forma óxidos com quase todos os elementos."
+},
+
+F:{
+massa:"19.00",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁵",
+configCamadas:"2-7",
+valencia:7,
+
+eletronegatividade:3.98,
+raio:50,
+energiaIonizacao:"1681 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0017 g/cm³",
+fusao:"-220°C",
+ebulicao:"-188°C",
+
+ligacao:"Covalente",
+
+descricao:"Elemento mais eletronegativo da tabela periódica.",
+
+aplicacao:"Pastas de dente, produtos químicos e Teflon.",
+
+curiosidade:"Extremamente reativo e corrosivo."
+},
+
+Ne:{
+massa:"20.18",
+tipo:"Gás nobre",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶",
+configCamadas:"2-8",
+valencia:0,
+
+eletronegatividade:"-",
+raio:38,
+energiaIonizacao:"2080 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0009 g/cm³",
+fusao:"-249°C",
+ebulicao:"-246°C",
+
+ligacao:"Inerte",
+
+descricao:"Gás nobre estável e não reativo.",
+
+aplicacao:"Luzes de neon e sinalização.",
+
+curiosidade:"Emite luz vermelha intensa quando eletrizado."
+},
+
+Na:{
+massa:"22.99",
+tipo:"Metal alcalino",
+bloco:"s",
+
+configCompleta:"1s² 2s² 2p⁶ 3s¹",
+configCamadas:"2-8-1",
+valencia:1,
+
+eletronegatividade:0.93,
+raio:190,
+energiaIonizacao:"496 kJ/mol",
+
+estado:"Sólido",
+densidade:"0,97 g/cm³",
+fusao:"97,8°C",
+ebulicao:"883°C",
+
+ligacao:"Metálica (forma compostos iônicos)",
+
+descricao:"Metal alcalino altamente reativo, especialmente com água.",
+
+aplicacao:"Sal de cozinha (NaCl), lâmpadas de vapor e indústria química.",
+
+curiosidade:"Reage violentamente com água, liberando hidrogênio."
+},
+
+Mg:{
+massa:"24.31",
+tipo:"Metal alcalino-terroso",
+bloco:"s",
+
+configCompleta:"1s² 2s² 2p⁶ 3s²",
+configCamadas:"2-8-2",
+valencia:2,
+
+eletronegatividade:1.31,
+raio:145,
+energiaIonizacao:"738 kJ/mol",
+
+estado:"Sólido",
+densidade:"1,74 g/cm³",
+fusao:"650°C",
+ebulicao:"1090°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal leve e resistente, importante para organismos vivos.",
+
+aplicacao:"Ligas metálicas, fogos de artifício e suplementos alimentares.",
+
+curiosidade:"Queima com luz branca intensa."
+},
+
+Al:{
+massa:"26.98",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶ 3s² 3p¹",
+configCamadas:"2-8-3",
+valencia:3,
+
+eletronegatividade:1.61,
+raio:118,
+energiaIonizacao:"578 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,70 g/cm³",
+fusao:"660°C",
+ebulicao:"2470°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal leve, resistente à corrosão e amplamente utilizado.",
+
+aplicacao:"Latas, estruturas metálicas, cabos elétricos.",
+
+curiosidade:"Forma uma camada protetora de óxido que evita corrosão."
+},
+
+Si:{
+massa:"28.09",
+tipo:"Semimetal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶ 3s² 3p²",
+configCamadas:"2-8-4",
+valencia:4,
+
+eletronegatividade:1.90,
+raio:111,
+energiaIonizacao:"787 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,33 g/cm³",
+fusao:"1414°C",
+ebulicao:"3265°C",
+
+ligacao:"Covalente",
+
+descricao:"Semicondutor fundamental para tecnologia moderna.",
+
+aplicacao:"Chips eletrônicos, painéis solares e microprocessadores.",
+
+curiosidade:"Base da indústria de informática."
+},
+
+P:{
+massa:"30.97",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶ 3s² 3p³",
+configCamadas:"2-8-5",
+valencia:5,
+
+eletronegatividade:2.19,
+raio:98,
+energiaIonizacao:"1012 kJ/mol",
+
+estado:"Sólido",
+densidade:"1,82 g/cm³",
+fusao:"44°C",
+ebulicao:"280°C",
+
+ligacao:"Covalente",
+
+descricao:"Elemento essencial para a vida (DNA e ATP).",
+
+aplicacao:"Fertilizantes, fósforos e produtos químicos.",
+
+curiosidade:"Existe em diferentes formas, como fósforo branco e vermelho."
+},
+
+S:{
+massa:"32.06",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶ 3s² 3p⁴",
+configCamadas:"2-8-6",
+valencia:6,
+
+eletronegatividade:2.58,
+raio:88,
+energiaIonizacao:"1000 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,07 g/cm³",
+fusao:"115°C",
+ebulicao:"445°C",
+
+ligacao:"Covalente",
+
+descricao:"Ametal amarelo importante na indústria química.",
+
+aplicacao:"Produção de ácido sulfúrico, fertilizantes e borracha.",
+
+curiosidade:"Possui odor característico quando em compostos como H₂S."
+},
+
+Cl:{
+massa:"35.45",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶ 3s² 3p⁵",
+configCamadas:"2-8-7",
+valencia:7,
+
+eletronegatividade:3.16,
+raio:100,
+energiaIonizacao:"1251 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0032 g/cm³",
+fusao:"-101°C",
+ebulicao:"-34°C",
+
+ligacao:"Covalente",
+
+descricao:"Gás tóxico e altamente reativo.",
+
+aplicacao:"Tratamento de água, desinfetantes e indústria química.",
+
+curiosidade:"Muito usado para eliminar bactérias na água."
+},
+
+Ar:{
+massa:"39.95",
+tipo:"Gás nobre",
+bloco:"p",
+
+configCompleta:"1s² 2s² 2p⁶ 3s² 3p⁶",
+configCamadas:"2-8-8",
+valencia:0,
+
+eletronegatividade:"-",
+raio:71,
+energiaIonizacao:"1521 kJ/mol",
+
+estado:"Gás",
+densidade:"0,00178 g/cm³",
+fusao:"-189°C",
+ebulicao:"-186°C",
+
+ligacao:"Inerte",
+
+descricao:"Gás nobre estável presente no ar atmosférico.",
+
+aplicacao:"Soldagem, lâmpadas e atmosferas inertes.",
+
+curiosidade:"Não reage facilmente com outros elementos."
+},
+
+K:{
+massa:"39.10",
+tipo:"Metal alcalino",
+bloco:"s",
+
+configCompleta:"[Ar] 4s¹",
+configCamadas:"2-8-8-1",
+valencia:1,
+
+eletronegatividade:0.82,
+raio:243,
+energiaIonizacao:"419 kJ/mol",
+
+estado:"Sólido",
+densidade:"0,86 g/cm³",
+fusao:"63,5°C",
+ebulicao:"759°C",
+
+ligacao:"Metálica (forma compostos iônicos)",
+
+descricao:"Metal alcalino extremamente reativo, mais reativo que o sódio.",
+
+aplicacao:"Fertilizantes (potássio), eletrólitos e indústria química.",
+
+curiosidade:"Reage violentamente com água, podendo gerar explosões."
+},
+
+Ca:{
+massa:"40.08",
+tipo:"Metal alcalino-terroso",
+bloco:"s",
+
+configCompleta:"[Ar] 4s²",
+configCamadas:"2-8-8-2",
+valencia:2,
+
+eletronegatividade:1.00,
+raio:194,
+energiaIonizacao:"590 kJ/mol",
+
+estado:"Sólido",
+densidade:"1,55 g/cm³",
+fusao:"842°C",
+ebulicao:"1484°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal essencial para organismos vivos, especialmente ossos e dentes.",
+
+aplicacao:"Produção de cimento, cal e suplementos alimentares.",
+
+curiosidade:"É um dos elementos mais importantes para o corpo humano."
+},
+
+Sc:{
+massa:"44.96",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d¹ 4s²",
+configCamadas:"2-8-9-2",
+valencia:3,
+
+eletronegatividade:1.36,
+raio:162,
+energiaIonizacao:"633 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,99 g/cm³",
+fusao:"1541°C",
+ebulicao:"2836°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal leve usado em ligas especiais.",
+
+aplicacao:"Indústria aeroespacial e lâmpadas de alta intensidade.",
+
+curiosidade:"Pouco abundante na natureza."
+},
+
+Ti:{
+massa:"47.87",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d² 4s²",
+configCamadas:"2-8-10-2",
+valencia:4,
+
+eletronegatividade:1.54,
+raio:147,
+energiaIonizacao:"659 kJ/mol",
+
+estado:"Sólido",
+densidade:"4,51 g/cm³",
+fusao:"1668°C",
+ebulicao:"3287°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal resistente e leve.",
+
+aplicacao:"Próteses médicas, aviões e ligas resistentes.",
+
+curiosidade:"Muito resistente à corrosão."
+},
+
+V:{
+massa:"50.94",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d³ 4s²",
+configCamadas:"2-8-11-2",
+valencia:5,
+
+eletronegatividade:1.63,
+raio:134,
+energiaIonizacao:"651 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,11 g/cm³",
+fusao:"1910°C",
+ebulicao:"3407°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em ligas fortes.",
+
+aplicacao:"Aço de alta resistência.",
+
+curiosidade:"Aumenta resistência mecânica do aço."
+},
+
+Cr:{
+massa:"52.00",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d⁵ 4s¹",
+configCamadas:"2-8-13-1",
+valencia:3,
+
+eletronegatividade:1.66,
+raio:128,
+energiaIonizacao:"653 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,19 g/cm³",
+fusao:"1907°C",
+ebulicao:"2671°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal duro e resistente.",
+
+aplicacao:"Aço inoxidável e cromagem.",
+
+curiosidade:"Responsável pelo brilho do aço inox."
+},
+
+Mn:{
+massa:"54.94",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d⁵ 4s²",
+configCamadas:"2-8-13-2",
+valencia:2,
+
+eletronegatividade:1.55,
+raio:127,
+energiaIonizacao:"717 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,21 g/cm³",
+fusao:"1246°C",
+ebulicao:"2061°C",
+
+ligacao:"Metálica",
+
+descricao:"Importante na produção de aço.",
+
+aplicacao:"Ligas metálicas e baterias.",
+
+curiosidade:"Essencial em pequenas quantidades para o corpo humano."
+},
+
+Fe:{
+massa:"55.85",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d⁶ 4s²",
+configCamadas:"2-8-14-2",
+valencia:2,
+
+eletronegatividade:1.83,
+raio:156,
+energiaIonizacao:"762 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,87 g/cm³",
+fusao:"1538°C",
+ebulicao:"2862°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal fundamental na indústria.",
+
+aplicacao:"Construção civil, aço e ferramentas.",
+
+curiosidade:"Principal componente do aço."
+},
+
+Co:{
+massa:"58.93",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d⁷ 4s²",
+configCamadas:"2-8-15-2",
+valencia:2,
+
+eletronegatividade:1.88,
+raio:152,
+energiaIonizacao:"760 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,90 g/cm³",
+fusao:"1495°C",
+ebulicao:"2927°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em ligas especiais.",
+
+aplicacao:"Baterias e superligas.",
+
+curiosidade:"Usado em ímãs permanentes."
+},
+
+Ni:{
+massa:"58.69",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d⁸ 4s²",
+configCamadas:"2-8-16-2",
+valencia:2,
+
+eletronegatividade:1.91,
+raio:149,
+energiaIonizacao:"737 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,90 g/cm³",
+fusao:"1455°C",
+ebulicao:"2913°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal resistente à corrosão.",
+
+aplicacao:"Moedas, ligas e baterias.",
+
+curiosidade:"Muito usado em revestimentos metálicos."
+},
+
+Cu:{
+massa:"63.55",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d¹⁰ 4s¹",
+configCamadas:"2-8-18-1",
+valencia:1,
+
+eletronegatividade:1.90,
+raio:145,
+energiaIonizacao:"745 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,96 g/cm³",
+fusao:"1085°C",
+ebulicao:"2562°C",
+
+ligacao:"Metálica",
+
+descricao:"Excelente condutor elétrico.",
+
+aplicacao:"Fios elétricos e eletrônicos.",
+
+curiosidade:"Um dos melhores condutores de eletricidade."
+},
+
+Zn:{
+massa:"65.38",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Ar] 3d¹⁰ 4s²",
+configCamadas:"2-8-18-2",
+valencia:2,
+
+eletronegatividade:1.65,
+raio:142,
+energiaIonizacao:"906 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,14 g/cm³",
+fusao:"419°C",
+ebulicao:"907°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal importante para galvanização.",
+
+aplicacao:"Proteção contra corrosão e ligas metálicas.",
+
+curiosidade:"Protege o ferro contra ferrugem."
+},
+
+Ga:{
+massa:"69.72",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"[Ar] 3d¹⁰ 4s² 4p¹",
+configCamadas:"2-8-18-3",
+valencia:3,
+
+eletronegatividade:1.81,
+raio:136,
+energiaIonizacao:"579 kJ/mol",
+
+estado:"Sólido",
+densidade:"5,91 g/cm³",
+fusao:"29,8°C",
+ebulicao:"2403°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal macio com baixo ponto de fusão.",
+
+aplicacao:"Semicondutores, LEDs e eletrônica.",
+
+curiosidade:"Pode derreter na palma da mão."
+},
+
+Ge:{
+massa:"72.63",
+tipo:"Semimetal",
+bloco:"p",
+
+configCompleta:"[Ar] 3d¹⁰ 4s² 4p²",
+configCamadas:"2-8-18-4",
+valencia:4,
+
+eletronegatividade:2.01,
+raio:125,
+energiaIonizacao:"762 kJ/mol",
+
+estado:"Sólido",
+densidade:"5,32 g/cm³",
+fusao:"938°C",
+ebulicao:"2833°C",
+
+ligacao:"Covalente",
+
+descricao:"Semimetal com propriedades semicondutoras.",
+
+aplicacao:"Transistores, fibras ópticas e eletrônica.",
+
+curiosidade:"Muito usado antes do silício em eletrônicos."
+},
+
+As:{
+massa:"74.92",
+tipo:"Semimetal",
+bloco:"p",
+
+configCompleta:"[Ar] 3d¹⁰ 4s² 4p³",
+configCamadas:"2-8-18-5",
+valencia:5,
+
+eletronegatividade:2.18,
+raio:114,
+energiaIonizacao:"947 kJ/mol",
+
+estado:"Sólido",
+densidade:"5,73 g/cm³",
+fusao:"817°C",
+ebulicao:"614°C",
+
+ligacao:"Covalente",
+
+descricao:"Elemento tóxico com propriedades semicondutoras.",
+
+aplicacao:"Semicondutores e pesticidas.",
+
+curiosidade:"Historicamente usado como veneno."
+},
+
+Se:{
+massa:"78.97",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"[Ar] 3d¹⁰ 4s² 4p⁴",
+configCamadas:"2-8-18-6",
+valencia:6,
+
+eletronegatividade:2.55,
+raio:103,
+energiaIonizacao:"941 kJ/mol",
+
+estado:"Sólido",
+densidade:"4,81 g/cm³",
+fusao:"221°C",
+ebulicao:"685°C",
+
+ligacao:"Covalente",
+
+descricao:"Ametal importante biologicamente em pequenas quantidades.",
+
+aplicacao:"Fotocélulas, eletrônica e suplementos.",
+
+curiosidade:"Essencial em pequenas quantidades, mas tóxico em excesso."
+},
+
+Br:{
+massa:"79.90",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"[Ar] 3d¹⁰ 4s² 4p⁵",
+configCamadas:"2-8-18-7",
+valencia:7,
+
+eletronegatividade:2.96,
+raio:114,
+energiaIonizacao:"1140 kJ/mol",
+
+estado:"Líquido",
+densidade:"3,12 g/cm³",
+fusao:"-7°C",
+ebulicao:"59°C",
+
+ligacao:"Covalente",
+
+descricao:"Único ametal líquido à temperatura ambiente.",
+
+aplicacao:"Desinfetantes e produtos químicos.",
+
+curiosidade:"Tem coloração marrom-avermelhada."
+},
+
+Kr:{
+massa:"83.80",
+tipo:"Gás nobre",
+bloco:"p",
+
+configCompleta:"[Ar] 3d¹⁰ 4s² 4p⁶",
+configCamadas:"2-8-18-8",
+valencia:0,
+
+eletronegatividade:"-",
+raio:88,
+energiaIonizacao:"1351 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0037 g/cm³",
+fusao:"-157°C",
+ebulicao:"-153°C",
+
+ligacao:"Inerte",
+
+descricao:"Gás nobre raro e pouco reativo.",
+
+aplicacao:"Iluminação e flashes fotográficos.",
+
+curiosidade:"Produz luz branca intensa em descargas elétricas."
+},
+
+Rb:{
+massa:"85.47",
+tipo:"Metal alcalino",
+bloco:"s",
+
+configCompleta:"[Kr] 5s¹",
+configCamadas:"2-8-18-8-1",
+valencia:1,
+
+eletronegatividade:0.82,
+raio:265,
+energiaIonizacao:"403 kJ/mol",
+
+estado:"Sólido",
+densidade:"1,53 g/cm³",
+fusao:"39°C",
+ebulicao:"688°C",
+
+ligacao:"Metálica (forma compostos iônicos)",
+
+descricao:"Metal alcalino extremamente reativo.",
+
+aplicacao:"Pesquisas científicas e relógios atômicos.",
+
+curiosidade:"Pode inflamar espontaneamente em contato com o ar."
+},
+
+Sr:{
+massa:"87.62",
+tipo:"Metal alcalino-terroso",
+bloco:"s",
+
+configCompleta:"[Kr] 5s²",
+configCamadas:"2-8-18-8-2",
+valencia:2,
+
+eletronegatividade:0.95,
+raio:219,
+energiaIonizacao:"549 kJ/mol",
+
+estado:"Sólido",
+densidade:"2,64 g/cm³",
+fusao:"777°C",
+ebulicao:"1382°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal reativo usado em pirotecnia.",
+
+aplicacao:"Fogos de artifício (cor vermelha).",
+
+curiosidade:"Responsável pela cor vermelha intensa em fogos."
+},
+
+Y:{
+massa:"88.91",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d¹ 5s²",
+configCamadas:"2-8-18-9-2",
+valencia:3,
+
+eletronegatividade:1.22,
+raio:180,
+energiaIonizacao:"600 kJ/mol",
+
+estado:"Sólido",
+densidade:"4,47 g/cm³",
+fusao:"1526°C",
+ebulicao:"3336°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em materiais tecnológicos.",
+
+aplicacao:"LEDs, lasers e supercondutores.",
+
+curiosidade:"Importante na tecnologia moderna."
+},
+
+Zr:{
+massa:"91.22",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d² 5s²",
+configCamadas:"2-8-18-10-2",
+valencia:4,
+
+eletronegatividade:1.33,
+raio:160,
+energiaIonizacao:"640 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,52 g/cm³",
+fusao:"1855°C",
+ebulicao:"4409°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal resistente à corrosão.",
+
+aplicacao:"Reatores nucleares e ligas metálicas.",
+
+curiosidade:"Muito resistente ao calor."
+},
+
+Nb:{
+massa:"92.91",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d⁴ 5s¹",
+configCamadas:"2-8-18-12-1",
+valencia:5,
+
+eletronegatividade:1.6,
+raio:146,
+energiaIonizacao:"652 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,57 g/cm³",
+fusao:"2477°C",
+ebulicao:"4744°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal estratégico para o Brasil.",
+
+aplicacao:"Aços especiais e indústria aeronáutica.",
+
+curiosidade:"O Brasil é o maior produtor mundial."
+},
+
+Mo:{
+massa:"95.95",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d⁵ 5s¹",
+configCamadas:"2-8-18-13-1",
+valencia:6,
+
+eletronegatividade:2.16,
+raio:139,
+energiaIonizacao:"684 kJ/mol",
+
+estado:"Sólido",
+densidade:"10,28 g/cm³",
+fusao:"2623°C",
+ebulicao:"4639°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal resistente a altas temperaturas.",
+
+aplicacao:"Ligas metálicas e catalisadores.",
+
+curiosidade:"Usado em ambientes extremos."
+},
+
+Tc:{
+massa:"98",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d⁵ 5s²",
+configCamadas:"2-8-18-13-2",
+valencia:7,
+
+eletronegatividade:1.9,
+raio:136,
+energiaIonizacao:"702 kJ/mol",
+
+estado:"Sólido",
+densidade:"11 g/cm³",
+fusao:"2157°C",
+ebulicao:"4265°C",
+
+ligacao:"Metálica",
+
+descricao:"Elemento radioativo.",
+
+aplicacao:"Medicina nuclear (diagnóstico).",
+
+curiosidade:"Primeiro elemento produzido artificialmente."
+},
+
+Ru:{
+massa:"101.07",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d⁷ 5s¹",
+configCamadas:"2-8-18-15-1",
+valencia:3,
+
+eletronegatividade:2.2,
+raio:134,
+energiaIonizacao:"710 kJ/mol",
+
+estado:"Sólido",
+densidade:"12,37 g/cm³",
+fusao:"2334°C",
+ebulicao:"4150°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal raro e resistente.",
+
+aplicacao:"Eletrônica e catalisadores.",
+
+curiosidade:"Muito resistente ao desgaste."
+},
+
+Rh:{
+massa:"102.91",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d⁸ 5s¹",
+configCamadas:"2-8-18-16-1",
+valencia:3,
+
+eletronegatividade:2.28,
+raio:134,
+energiaIonizacao:"720 kJ/mol",
+
+estado:"Sólido",
+densidade:"12,41 g/cm³",
+fusao:"1964°C",
+ebulicao:"3695°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal precioso e raro.",
+
+aplicacao:"Catalisadores automotivos.",
+
+curiosidade:"Um dos metais mais caros do mundo."
+},
+
+Pd:{
+massa:"106.42",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d¹⁰",
+configCamadas:"2-8-18-18",
+valencia:2,
+
+eletronegatividade:2.20,
+raio:137,
+energiaIonizacao:"804 kJ/mol",
+
+estado:"Sólido",
+densidade:"12,02 g/cm³",
+fusao:"1555°C",
+ebulicao:"2963°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal que absorve hidrogênio.",
+
+aplicacao:"Catalisadores e eletrônica.",
+
+curiosidade:"Pode absorver grandes quantidades de hidrogênio."
+},
+
+Ag:{
+massa:"107.87",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d¹⁰ 5s¹",
+configCamadas:"2-8-18-18-1",
+valencia:1,
+
+eletronegatividade:1.93,
+raio:165,
+energiaIonizacao:"731 kJ/mol",
+
+estado:"Sólido",
+densidade:"10,49 g/cm³",
+fusao:"962°C",
+ebulicao:"2162°C",
+
+ligacao:"Metálica",
+
+descricao:"Excelente condutor elétrico.",
+
+aplicacao:"Joias, eletrônicos e moedas.",
+
+curiosidade:"Melhor condutor elétrico entre os metais."
+},
+
+Cd:{
+massa:"112.41",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Kr] 4d¹⁰ 5s²",
+configCamadas:"2-8-18-18-2",
+valencia:2,
+
+eletronegatividade:1.69,
+raio:161,
+energiaIonizacao:"868 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,65 g/cm³",
+fusao:"321°C",
+ebulicao:"767°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal tóxico.",
+
+aplicacao:"Baterias e pigmentos.",
+
+curiosidade:"Pode causar danos ambientais."
+},
+
+In:{
+massa:"114.82",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"[Kr] 4d¹⁰ 5s² 5p¹",
+configCamadas:"2-8-18-18-3",
+valencia:3,
+
+eletronegatividade:1.78,
+raio:156,
+energiaIonizacao:"558 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,31 g/cm³",
+fusao:"156°C",
+ebulicao:"2072°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal macio e raro.",
+
+aplicacao:"Telas LCD e eletrônica.",
+
+curiosidade:"Usado em telas sensíveis ao toque."
+},
+
+Sn:{
+massa:"118.71",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"[Kr] 4d¹⁰ 5s² 5p²",
+configCamadas:"2-8-18-18-4",
+valencia:4,
+
+eletronegatividade:1.96,
+raio:145,
+energiaIonizacao:"709 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,31 g/cm³",
+fusao:"232°C",
+ebulicao:"2602°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em revestimentos.",
+
+aplicacao:"Latas e soldas.",
+
+curiosidade:"Protege o ferro contra corrosão."
+},
+
+Sb:{
+massa:"121.76",
+tipo:"Semimetal",
+bloco:"p",
+
+configCompleta:"[Kr] 4d¹⁰ 5s² 5p³",
+configCamadas:"2-8-18-18-5",
+valencia:5,
+
+eletronegatividade:2.05,
+raio:133,
+energiaIonizacao:"834 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,68 g/cm³",
+fusao:"631°C",
+ebulicao:"1587°C",
+
+ligacao:"Covalente",
+
+descricao:"Semimetal com propriedades intermediárias.",
+
+aplicacao:"Ligas metálicas e retardantes de chama.",
+
+curiosidade:"Melhora resistência de ligas."
+},
+
+Te:{
+massa:"127.60",
+tipo:"Semimetal",
+bloco:"p",
+
+configCompleta:"[Kr] 4d¹⁰ 5s² 5p⁴",
+configCamadas:"2-8-18-18-6",
+valencia:6,
+
+eletronegatividade:2.1,
+raio:123,
+energiaIonizacao:"869 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,24 g/cm³",
+fusao:"450°C",
+ebulicao:"988°C",
+
+ligacao:"Covalente",
+
+descricao:"Semimetal raro.",
+
+aplicacao:"Semicondutores e ligas.",
+
+curiosidade:"Usado em dispositivos eletrônicos."
+},
+
+I:{
+massa:"126.90",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"[Kr] 4d¹⁰ 5s² 5p⁵",
+configCamadas:"2-8-18-18-7",
+valencia:7,
+
+eletronegatividade:2.66,
+raio:133,
+energiaIonizacao:"1008 kJ/mol",
+
+estado:"Sólido",
+densidade:"4,93 g/cm³",
+fusao:"114°C",
+ebulicao:"184°C",
+
+ligacao:"Covalente",
+
+descricao:"Halogênio essencial ao organismo.",
+
+aplicacao:"Sal iodado e medicina.",
+
+curiosidade:"Sublima formando vapor roxo."
+},
+
+Xe:{
+massa:"131.29",
+tipo:"Gás nobre",
+bloco:"p",
+
+configCompleta:"[Kr] 4d¹⁰ 5s² 5p⁶",
+configCamadas:"2-8-18-18-8",
+valencia:0,
+
+eletronegatividade:"-",
+raio:108,
+energiaIonizacao:"1170 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0059 g/cm³",
+fusao:"-112°C",
+ebulicao:"-108°C",
+
+ligacao:"Inerte",
+
+descricao:"Gás nobre raro.",
+
+aplicacao:"Lâmpadas, flashes e anestesia.",
+
+curiosidade:"Pode formar compostos em condições especiais."
+},
+
+Cs:{
+massa:"132.91",
+tipo:"Metal alcalino",
+bloco:"s",
+
+configCompleta:"[Xe] 6s¹",
+configCamadas:"2-8-18-18-8-1",
+valencia:1,
+
+eletronegatividade:0.79,
+raio:298,
+energiaIonizacao:"376 kJ/mol",
+
+estado:"Sólido",
+densidade:"1,93 g/cm³",
+fusao:"28,5°C",
+ebulicao:"671°C",
+
+ligacao:"Metálica (forma compostos iônicos)",
+
+descricao:"Metal extremamente reativo e macio.",
+
+aplicacao:"Relógios atômicos e pesquisas científicas.",
+
+curiosidade:"Um dos elementos mais reativos da tabela."
+},
+
+Ba:{
+massa:"137.33",
+tipo:"Metal alcalino-terroso",
+bloco:"s",
+
+configCompleta:"[Xe] 6s²",
+configCamadas:"2-8-18-18-8-2",
+valencia:2,
+
+eletronegatividade:0.89,
+raio:253,
+energiaIonizacao:"503 kJ/mol",
+
+estado:"Sólido",
+densidade:"3,62 g/cm³",
+fusao:"727°C",
+ebulicao:"1870°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal reativo usado em compostos químicos.",
+
+aplicacao:"Contraste em exames de raio X (sulfato de bário).",
+
+curiosidade:"Seus compostos podem ser tóxicos."
+},
+
+La:{
+massa:"138.91",
+tipo:"Metal de transição (lantanídeo inicial)",
+bloco:"f",
+
+configCompleta:"[Xe] 5d¹ 6s²",
+configCamadas:"2-8-18-18-9-2",
+valencia:3,
+
+eletronegatividade:1.10,
+raio:195,
+energiaIonizacao:"538 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,15 g/cm³",
+fusao:"920°C",
+ebulicao:"3464°C",
+
+ligacao:"Metálica",
+
+descricao:"Elemento que inicia a série dos lantanídeos.",
+
+aplicacao:"Lentes ópticas e catalisadores.",
+
+curiosidade:"Usado em vidros especiais."
+},
+
+Hf:{
+massa:"178.49",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d² 6s²",
+configCamadas:"2-8-18-32-10-2",
+valencia:4,
+
+eletronegatividade:1.30,
+raio:159,
+energiaIonizacao:"658 kJ/mol",
+
+estado:"Sólido",
+densidade:"13,31 g/cm³",
+fusao:"2233°C",
+ebulicao:"4603°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal resistente ao calor.",
+
+aplicacao:"Reatores nucleares.",
+
+curiosidade:"Absorve nêutrons facilmente."
+},
+
+Ta:{
+massa:"180.95",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d³ 6s²",
+configCamadas:"2-8-18-32-11-2",
+valencia:5,
+
+eletronegatividade:1.50,
+raio:146,
+energiaIonizacao:"761 kJ/mol",
+
+estado:"Sólido",
+densidade:"16,69 g/cm³",
+fusao:"3017°C",
+ebulicao:"5458°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal altamente resistente.",
+
+aplicacao:"Capacitores eletrônicos.",
+
+curiosidade:"Muito resistente à corrosão."
+},
+
+W:{
+massa:"183.84",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d⁴ 6s²",
+configCamadas:"2-8-18-32-12-2",
+valencia:6,
+
+eletronegatividade:2.36,
+raio:139,
+energiaIonizacao:"770 kJ/mol",
+
+estado:"Sólido",
+densidade:"19,25 g/cm³",
+fusao:"3422°C",
+ebulicao:"5555°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal com maior ponto de fusão.",
+
+aplicacao:"Filamentos de lâmpadas.",
+
+curiosidade:"Suporta temperaturas extremas."
+},
+
+Re:{
+massa:"186.21",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d⁵ 6s²",
+configCamadas:"2-8-18-32-13-2",
+valencia:7,
+
+eletronegatividade:1.9,
+raio:137,
+energiaIonizacao:"760 kJ/mol",
+
+estado:"Sólido",
+densidade:"21,02 g/cm³",
+fusao:"3186°C",
+ebulicao:"5596°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal raro e denso.",
+
+aplicacao:"Ligas aeroespaciais.",
+
+curiosidade:"Um dos metais mais densos."
+},
+
+Os:{
+massa:"190.23",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d⁶ 6s²",
+configCamadas:"2-8-18-32-14-2",
+valencia:4,
+
+eletronegatividade:2.2,
+raio:135,
+energiaIonizacao:"840 kJ/mol",
+
+estado:"Sólido",
+densidade:"22,59 g/cm³",
+fusao:"3033°C",
+ebulicao:"5012°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal mais denso da tabela.",
+
+aplicacao:"Ligas especiais.",
+
+curiosidade:"Extremamente denso."
+},
+
+Ir:{
+massa:"192.22",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d⁷ 6s²",
+configCamadas:"2-8-18-32-15-2",
+valencia:3,
+
+eletronegatividade:2.20,
+raio:136,
+energiaIonizacao:"880 kJ/mol",
+
+estado:"Sólido",
+densidade:"22,56 g/cm³",
+fusao:"2446°C",
+ebulicao:"4428°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal extremamente resistente.",
+
+aplicacao:"Velas de ignição.",
+
+curiosidade:"Resiste a corrosão extrema."
+},
+
+Pt:{
+massa:"195.08",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d⁹ 6s¹",
+configCamadas:"2-8-18-32-17-1",
+valencia:2,
+
+eletronegatividade:2.28,
+raio:139,
+energiaIonizacao:"870 kJ/mol",
+
+estado:"Sólido",
+densidade:"21,45 g/cm³",
+fusao:"1768°C",
+ebulicao:"3825°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal nobre resistente.",
+
+aplicacao:"Joias e catalisadores.",
+
+curiosidade:"Muito usado em catalisadores automotivos."
+},
+
+Au:{
+massa:"196.97",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s¹",
+configCamadas:"2-8-18-32-18-1",
+valencia:1,
+
+eletronegatividade:2.54,
+raio:144,
+energiaIonizacao:"890 kJ/mol",
+
+estado:"Sólido",
+densidade:"19,32 g/cm³",
+fusao:"1064°C",
+ebulicao:"2856°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal precioso e altamente condutor.",
+
+aplicacao:"Joias, eletrônica e investimento.",
+
+curiosidade:"Não oxida facilmente."
+},
+
+Hg:{
+massa:"200.59",
+tipo:"Metal de transição",
+bloco:"d",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s²",
+configCamadas:"2-8-18-32-18-2",
+valencia:2,
+
+eletronegatividade:2.00,
+raio:151,
+energiaIonizacao:"1007 kJ/mol",
+
+estado:"Líquido",
+densidade:"13,53 g/cm³",
+fusao:"-39°C",
+ebulicao:"357°C",
+
+ligacao:"Metálica",
+
+descricao:"Único metal líquido à temperatura ambiente.",
+
+aplicacao:"Termômetros (antigos) e lâmpadas.",
+
+curiosidade:"Altamente tóxico."
+},
+
+Tl:{
+massa:"204.38",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹",
+configCamadas:"2-8-18-32-18-3",
+valencia:3,
+
+eletronegatividade:1.62,
+raio:156,
+energiaIonizacao:"589 kJ/mol",
+
+estado:"Sólido",
+densidade:"11,85 g/cm³",
+fusao:"304°C",
+ebulicao:"1473°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal macio e tóxico.",
+
+aplicacao:"Eletrônica e detectores.",
+
+curiosidade:"Pode ser perigoso para o sistema nervoso."
+},
+
+Pb:{
+massa:"207.2",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²",
+configCamadas:"2-8-18-32-18-4",
+valencia:4,
+
+eletronegatividade:2.33,
+raio:154,
+energiaIonizacao:"716 kJ/mol",
+
+estado:"Sólido",
+densidade:"11,34 g/cm³",
+fusao:"327°C",
+ebulicao:"1749°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal pesado e tóxico.",
+
+aplicacao:"Baterias automotivas e proteção contra radiação.",
+
+curiosidade:"Já foi usado em combustíveis, mas foi proibido."
+},
+
+Bi:{
+massa:"208.98",
+tipo:"Metal",
+bloco:"p",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³",
+configCamadas:"2-8-18-32-18-5",
+valencia:3,
+
+eletronegatividade:2.02,
+raio:143,
+energiaIonizacao:"703 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,78 g/cm³",
+fusao:"271°C",
+ebulicao:"1564°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal menos tóxico comparado a outros pesados.",
+
+aplicacao:"Medicamentos e ligas.",
+
+curiosidade:"Substitui o chumbo em algumas aplicações."
+},
+
+Po:{
+massa:"209",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴",
+configCamadas:"2-8-18-32-18-6",
+valencia:6,
+
+eletronegatividade:2.0,
+raio:135,
+energiaIonizacao:"812 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,32 g/cm³",
+fusao:"254°C",
+ebulicao:"962°C",
+
+ligacao:"Covalente",
+
+descricao:"Elemento altamente radioativo.",
+
+aplicacao:"Fontes de energia nuclear.",
+
+curiosidade:"Extremamente perigoso devido à radioatividade."
+},
+
+At:{
+massa:"210",
+tipo:"Ametal",
+bloco:"p",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵",
+configCamadas:"2-8-18-32-18-7",
+valencia:7,
+
+eletronegatividade:2.2,
+raio:150,
+energiaIonizacao:"920 kJ/mol",
+
+estado:"Sólido",
+densidade:"7 g/cm³",
+fusao:"302°C",
+ebulicao:"337°C",
+
+ligacao:"Covalente",
+
+descricao:"Halogênio extremamente raro.",
+
+aplicacao:"Pesquisas médicas e nucleares.",
+
+curiosidade:"Um dos elementos mais raros da Terra."
+},
+
+Rn:{
+massa:"222",
+tipo:"Gás nobre",
+bloco:"p",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶",
+configCamadas:"2-8-18-32-18-8",
+valencia:0,
+
+eletronegatividade:"-",
+raio:120,
+energiaIonizacao:"1037 kJ/mol",
+
+estado:"Gás",
+densidade:"0,0097 g/cm³",
+fusao:"-71°C",
+ebulicao:"-62°C",
+
+ligacao:"Inerte",
+
+descricao:"Gás radioativo natural.",
+
+aplicacao:"Uso limitado em medicina.",
+
+curiosidade:"Pode acumular em ambientes fechados e ser perigoso."
+},
+
+Ce:{
+massa:"140.12",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹ 5d¹ 6s²",
+configCamadas:"2-8-18-19-9-2",
+valencia:3,
+
+eletronegatividade:1.12,
+raio:182,
+energiaIonizacao:"534 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,77 g/cm³",
+fusao:"798°C",
+ebulicao:"3443°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal reativo comum entre os lantanídeos.",
+
+aplicacao:"Catalisadores e polimento de vidro.",
+
+curiosidade:"Pode se oxidar facilmente no ar."
+},
+
+Pr:{
+massa:"140.91",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f³ 6s²",
+configCamadas:"2-8-18-21-8-2",
+valencia:3,
+
+eletronegatividade:1.13,
+raio:182,
+energiaIonizacao:"527 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,77 g/cm³",
+fusao:"931°C",
+ebulicao:"3520°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em ligas especiais.",
+
+aplicacao:"Ímãs e motores elétricos.",
+
+curiosidade:"Contribui para ímãs de alto desempenho."
+},
+
+Nd:{
+massa:"144.24",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁴ 6s²",
+configCamadas:"2-8-18-22-8-2",
+valencia:3,
+
+eletronegatividade:1.14,
+raio:181,
+energiaIonizacao:"533 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,01 g/cm³",
+fusao:"1024°C",
+ebulicao:"3074°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal importante na tecnologia.",
+
+aplicacao:"Ímãs de neodímio (os mais fortes).",
+
+curiosidade:"Usado em fones de ouvido e motores elétricos."
+},
+
+Pm:{
+massa:"145",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁵ 6s²",
+configCamadas:"2-8-18-23-8-2",
+valencia:3,
+
+eletronegatividade:1.13,
+raio:183,
+energiaIonizacao:"540 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,26 g/cm³",
+fusao:"1042°C",
+ebulicao:"3000°C",
+
+ligacao:"Metálica",
+
+descricao:"Elemento radioativo.",
+
+aplicacao:"Pesquisas científicas.",
+
+curiosidade:"Não ocorre naturalmente em grandes quantidades."
+},
+
+Sm:{
+massa:"150.36",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁶ 6s²",
+configCamadas:"2-8-18-24-8-2",
+valencia:3,
+
+eletronegatividade:1.17,
+raio:180,
+energiaIonizacao:"544 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,52 g/cm³",
+fusao:"1072°C",
+ebulicao:"1794°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em ímãs.",
+
+aplicacao:"Ímãs e lasers.",
+
+curiosidade:"Importante em tecnologia magnética."
+},
+
+Eu:{
+massa:"151.96",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁷ 6s²",
+configCamadas:"2-8-18-25-8-2",
+valencia:2,
+
+eletronegatividade:1.20,
+raio:204,
+energiaIonizacao:"547 kJ/mol",
+
+estado:"Sólido",
+densidade:"5,24 g/cm³",
+fusao:"822°C",
+ebulicao:"1529°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal reativo.",
+
+aplicacao:"Telas de TV e LEDs.",
+
+curiosidade:"Responsável pela cor vermelha em telas."
+},
+
+Gd:{
+massa:"157.25",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁷ 5d¹ 6s²",
+configCamadas:"2-8-18-25-9-2",
+valencia:3,
+
+eletronegatividade:1.20,
+raio:180,
+energiaIonizacao:"593 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,90 g/cm³",
+fusao:"1312°C",
+ebulicao:"3273°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal magnético.",
+
+aplicacao:"Ressonância magnética.",
+
+curiosidade:"Usado como contraste em exames."
+},
+
+Tb:{
+massa:"158.93",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁹ 6s²",
+configCamadas:"2-8-18-27-8-2",
+valencia:3,
+
+eletronegatividade:1.2,
+raio:177,
+energiaIonizacao:"565 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,23 g/cm³",
+fusao:"1356°C",
+ebulicao:"3230°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em dispositivos eletrônicos.",
+
+aplicacao:"Telas e sensores.",
+
+curiosidade:"Produz cor verde em telas."
+},
+
+Dy:{
+massa:"162.50",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹⁰ 6s²",
+configCamadas:"2-8-18-28-8-2",
+valencia:3,
+
+eletronegatividade:1.22,
+raio:178,
+energiaIonizacao:"573 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,55 g/cm³",
+fusao:"1407°C",
+ebulicao:"2567°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal magnético.",
+
+aplicacao:"Ímãs de alto desempenho.",
+
+curiosidade:"Melhora estabilidade térmica de ímãs."
+},
+
+Ho:{
+massa:"164.93",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹¹ 6s²",
+configCamadas:"2-8-18-29-8-2",
+valencia:3,
+
+eletronegatividade:1.23,
+raio:176,
+energiaIonizacao:"581 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,80 g/cm³",
+fusao:"1474°C",
+ebulicao:"2700°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal raro.",
+
+aplicacao:"Lasers e equipamentos médicos.",
+
+curiosidade:"Usado em lasers especiais."
+},
+
+Er:{
+massa:"167.26",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹² 6s²",
+configCamadas:"2-8-18-30-8-2",
+valencia:3,
+
+eletronegatividade:1.24,
+raio:176,
+energiaIonizacao:"589 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,07 g/cm³",
+fusao:"1529°C",
+ebulicao:"2868°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em fibras ópticas.",
+
+aplicacao:"Telecomunicações.",
+
+curiosidade:"Amplifica sinais de fibra óptica."
+},
+
+Tm:{
+massa:"168.93",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹³ 6s²",
+configCamadas:"2-8-18-31-8-2",
+valencia:3,
+
+eletronegatividade:1.25,
+raio:175,
+energiaIonizacao:"597 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,32 g/cm³",
+fusao:"1545°C",
+ebulicao:"1950°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal raro.",
+
+aplicacao:"Equipamentos médicos.",
+
+curiosidade:"Um dos lantanídeos mais raros."
+},
+
+Yb:{
+massa:"173.05",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹⁴ 6s²",
+configCamadas:"2-8-18-32-8-2",
+valencia:2,
+
+eletronegatividade:1.1,
+raio:194,
+energiaIonizacao:"603 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,90 g/cm³",
+fusao:"819°C",
+ebulicao:"1196°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal macio.",
+
+aplicacao:"Lasers e ligas.",
+
+curiosidade:"Pode ter valência 2 ou 3."
+},
+
+Lu:{
+massa:"174.97",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹ 6s²",
+configCamadas:"2-8-18-32-9-2",
+valencia:3,
+
+eletronegatividade:1.27,
+raio:174,
+energiaIonizacao:"523 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,84 g/cm³",
+fusao:"1663°C",
+ebulicao:"3402°C",
+
+ligacao:"Metálica",
+
+descricao:"Último dos lantanídeos.",
+
+aplicacao:"Catalisadores e tecnologia médica.",
+
+curiosidade:"Um dos mais densos do grupo."
+},
+
+Ce:{
+massa:"140.12",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹ 5d¹ 6s²",
+configCamadas:"2-8-18-19-9-2",
+valencia:3,
+
+eletronegatividade:1.12,
+raio:182,
+energiaIonizacao:"534 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,77 g/cm³",
+fusao:"798°C",
+ebulicao:"3443°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal reativo comum entre os lantanídeos.",
+
+aplicacao:"Catalisadores e polimento de vidro.",
+
+curiosidade:"Pode se oxidar facilmente no ar."
+},
+
+Pr:{
+massa:"140.91",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f³ 6s²",
+configCamadas:"2-8-18-21-8-2",
+valencia:3,
+
+eletronegatividade:1.13,
+raio:182,
+energiaIonizacao:"527 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,77 g/cm³",
+fusao:"931°C",
+ebulicao:"3520°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em ligas especiais.",
+
+aplicacao:"Ímãs e motores elétricos.",
+
+curiosidade:"Contribui para ímãs de alto desempenho."
+},
+
+Nd:{
+massa:"144.24",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁴ 6s²",
+configCamadas:"2-8-18-22-8-2",
+valencia:3,
+
+eletronegatividade:1.14,
+raio:181,
+energiaIonizacao:"533 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,01 g/cm³",
+fusao:"1024°C",
+ebulicao:"3074°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal importante na tecnologia.",
+
+aplicacao:"Ímãs de neodímio (os mais fortes).",
+
+curiosidade:"Usado em fones de ouvido e motores elétricos."
+},
+
+Pm:{
+massa:"145",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁵ 6s²",
+configCamadas:"2-8-18-23-8-2",
+valencia:3,
+
+eletronegatividade:1.13,
+raio:183,
+energiaIonizacao:"540 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,26 g/cm³",
+fusao:"1042°C",
+ebulicao:"3000°C",
+
+ligacao:"Metálica",
+
+descricao:"Elemento radioativo.",
+
+aplicacao:"Pesquisas científicas.",
+
+curiosidade:"Não ocorre naturalmente em grandes quantidades."
+},
+
+Sm:{
+massa:"150.36",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁶ 6s²",
+configCamadas:"2-8-18-24-8-2",
+valencia:3,
+
+eletronegatividade:1.17,
+raio:180,
+energiaIonizacao:"544 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,52 g/cm³",
+fusao:"1072°C",
+ebulicao:"1794°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em ímãs.",
+
+aplicacao:"Ímãs e lasers.",
+
+curiosidade:"Importante em tecnologia magnética."
+},
+
+Eu:{
+massa:"151.96",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁷ 6s²",
+configCamadas:"2-8-18-25-8-2",
+valencia:2,
+
+eletronegatividade:1.20,
+raio:204,
+energiaIonizacao:"547 kJ/mol",
+
+estado:"Sólido",
+densidade:"5,24 g/cm³",
+fusao:"822°C",
+ebulicao:"1529°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal reativo.",
+
+aplicacao:"Telas de TV e LEDs.",
+
+curiosidade:"Responsável pela cor vermelha em telas."
+},
+
+Gd:{
+massa:"157.25",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁷ 5d¹ 6s²",
+configCamadas:"2-8-18-25-9-2",
+valencia:3,
+
+eletronegatividade:1.20,
+raio:180,
+energiaIonizacao:"593 kJ/mol",
+
+estado:"Sólido",
+densidade:"7,90 g/cm³",
+fusao:"1312°C",
+ebulicao:"3273°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal magnético.",
+
+aplicacao:"Ressonância magnética.",
+
+curiosidade:"Usado como contraste em exames."
+},
+
+Tb:{
+massa:"158.93",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f⁹ 6s²",
+configCamadas:"2-8-18-27-8-2",
+valencia:3,
+
+eletronegatividade:1.2,
+raio:177,
+energiaIonizacao:"565 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,23 g/cm³",
+fusao:"1356°C",
+ebulicao:"3230°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em dispositivos eletrônicos.",
+
+aplicacao:"Telas e sensores.",
+
+curiosidade:"Produz cor verde em telas."
+},
+
+Dy:{
+massa:"162.50",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹⁰ 6s²",
+configCamadas:"2-8-18-28-8-2",
+valencia:3,
+
+eletronegatividade:1.22,
+raio:178,
+energiaIonizacao:"573 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,55 g/cm³",
+fusao:"1407°C",
+ebulicao:"2567°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal magnético.",
+
+aplicacao:"Ímãs de alto desempenho.",
+
+curiosidade:"Melhora estabilidade térmica de ímãs."
+},
+
+Ho:{
+massa:"164.93",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹¹ 6s²",
+configCamadas:"2-8-18-29-8-2",
+valencia:3,
+
+eletronegatividade:1.23,
+raio:176,
+energiaIonizacao:"581 kJ/mol",
+
+estado:"Sólido",
+densidade:"8,80 g/cm³",
+fusao:"1474°C",
+ebulicao:"2700°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal raro.",
+
+aplicacao:"Lasers e equipamentos médicos.",
+
+curiosidade:"Usado em lasers especiais."
+},
+
+Er:{
+massa:"167.26",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹² 6s²",
+configCamadas:"2-8-18-30-8-2",
+valencia:3,
+
+eletronegatividade:1.24,
+raio:176,
+energiaIonizacao:"589 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,07 g/cm³",
+fusao:"1529°C",
+ebulicao:"2868°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal usado em fibras ópticas.",
+
+aplicacao:"Telecomunicações.",
+
+curiosidade:"Amplifica sinais de fibra óptica."
+},
+
+Tm:{
+massa:"168.93",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹³ 6s²",
+configCamadas:"2-8-18-31-8-2",
+valencia:3,
+
+eletronegatividade:1.25,
+raio:175,
+energiaIonizacao:"597 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,32 g/cm³",
+fusao:"1545°C",
+ebulicao:"1950°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal raro.",
+
+aplicacao:"Equipamentos médicos.",
+
+curiosidade:"Um dos lantanídeos mais raros."
+},
+
+Yb:{
+massa:"173.05",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹⁴ 6s²",
+configCamadas:"2-8-18-32-8-2",
+valencia:2,
+
+eletronegatividade:1.1,
+raio:194,
+energiaIonizacao:"603 kJ/mol",
+
+estado:"Sólido",
+densidade:"6,90 g/cm³",
+fusao:"819°C",
+ebulicao:"1196°C",
+
+ligacao:"Metálica",
+
+descricao:"Metal macio.",
+
+aplicacao:"Lasers e ligas.",
+
+curiosidade:"Pode ter valência 2 ou 3."
+},
+
+Lu:{
+massa:"174.97",
+tipo:"Lantanídeo",
+bloco:"f",
+
+configCompleta:"[Xe] 4f¹⁴ 5d¹ 6s²",
+configCamadas:"2-8-18-32-9-2",
+valencia:3,
+
+eletronegatividade:1.27,
+raio:174,
+energiaIonizacao:"523 kJ/mol",
+
+estado:"Sólido",
+densidade:"9,84 g/cm³",
+fusao:"1663°C",
+ebulicao:"3402°C",
+
+ligacao:"Metálica",
+
+descricao:"Último dos lantanídeos.",
+
+aplicacao:"Catalisadores e tecnologia médica.",
+
+curiosidade:"Um dos mais densos do grupo."
+}
+
+};
+
+
+
+function montarTabela(lista){
+const tabela = document.getElementById("tabela");
+tabela.innerHTML = "";
+
+lista.forEach(el=>{
+const div = document.createElement("div");
+
+div.className = "elemento "+el.fam;
+div.style.gridColumn = el.x;
+div.style.gridRow = el.y;
+
+if(el.n === 57){
+div.className = "elemento placeholder-f";
+
+div.setAttribute("data-info",
+"Bloco f: Lantanídeos (57–71). Elementos internos, exibidos abaixo para manter a tabela compacta."
+);
+
+div.innerHTML = `
+<div>57–71</div>
+<div>Lantanídeos</div>
+`;
+}
+
+else if(el.n === 89){
+div.className = "elemento placeholder-f";
+
+div.setAttribute("data-info",
+"Bloco f: Actinídeos (89–103). Elementos radioativos, também exibidos fora da tabela principal."
+);
+
+div.innerHTML = `
+<div>89–103</div>
+<div>Actinídeos</div>
+`;
+}
+
+else{
+div.innerHTML = `
+<div class="numero">${el.n}</div>
+<div class="simbolo">${el.s}</div>
+<div class="nome">${el.nome}</div>
+`;
+
+div.onclick = ()=>mostrar(el);
+}
+
+div.onclick = ()=>mostrar(el);
+
+tabela.appendChild(div);
+});
+}
+
+function mostrar(el){
+
+const extra = dadosExtras[el.s] || {};
+
+document.getElementById("infoElemento").innerHTML = `
+
+<h2>${el.nome} (${el.s})</h2>
+
+<b>Número atômico:</b> ${el.n}<br>
+<b>Família:</b> ${el.fam}<br>
+<b>Tipo:</b> ${extra.tipo || "-"}<br>
+<b>Bloco:</b> ${extra.bloco || "-"}<br>
+
+<hr>
+
+<b>Massa atômica:</b> ${extra.massa || "-"}<br>
+
+<b>Configuração eletrônica:</b> ${extra.configCompleta || "-"}<br>
+<b>Distribuição por camadas:</b> ${extra.configCamadas || "-"}<br>
+<b>Elétrons de valência:</b> ${extra.valencia || "-"}<br>
+
+<hr>
+
+<b>Eletronegatividade:</b> ${extra.eletronegatividade || "-"}<br>
+<b>Raio atômico:</b> ${extra.raio || "-"} pm<br>
+<b>Energia de ionização:</b> ${extra.energiaIonizacao || "-"}<br>
+
+<hr>
+
+<b>Estado físico:</b> ${extra.estado || "-"}<br>
+<b>Densidade:</b> ${extra.densidade || "-"}<br>
+<b>Ponto de fusão:</b> ${extra.fusao || "-"}<br>
+<b>Ponto de ebulição:</b> ${extra.ebulicao || "-"}<br>
+
+<hr>
+
+<b>Ligação predominante:</b> ${extra.ligacao || "-"}<br>
+
+<div class="destaque">
+⚡ ${extra.curiosidade || "Sem curiosidade"}
+</div>
+
+<br>
+
+<b>Descrição:</b><br>
+${extra.descricao || "-"}
+
+<br><br>
+
+<b>Aplicação:</b><br>
+${extra.aplicacao || "-"}
+
+`;
+}
+
+function filtrar(tipo){
+if(tipo==="todos") montarTabela(elementos);
+else montarTabela(elementos.filter(e=>e.fam===tipo));
+}
+
+const questoes = [
+{p:"Famílias são:",a:["Linhas","Colunas","Blocos","Camadas"],c:1},
+{p:"Períodos são:",a:["Linhas","Colunas","Grupos","Átomos"],c:0},
+{p:"Sódio é:",a:["Ametal","Alcalino","Gás","Base"],c:1},
+{p:"Oxigênio é:",a:["Metal","Ametal","Base","Sal"],c:1},
+{p:"Gases nobres:",a:["Reativos","Pouco reativos","Metais","Ácidos"],c:1},
+{p:"Carbono é:",a:["Metal","Ametal","Base","Sal"],c:1},
+{p:"Tabela usa:",a:["Massa","Número atômico","Cor","Nome"],c:1},
+{p:"Hélio é:",a:["Metal","Ametal","Gás nobre","Sal"],c:2},
+{p:"Família indica:",a:["Cor","Propriedade","Nome","Tamanho"],c:1},
+{p:"Lítio é:",a:["Ametal","Alcalino","Gás","Base"],c:1}
+];
+
+let respondidas = 0;
+
+function carregarQuestoes(){
+const div = document.getElementById("exercicios");
+let html="";
+
+questoes.forEach((q,i)=>{
+html+=`<div class="questao"><p>${i+1}) ${q.p}</p>`;
+
+q.a.forEach((alt,j)=>{
+html+=`<div><input type="radio" name="q${i}" value="${j}"> ${alt}</div>`;
+});
+
+html+=`<button onclick="corrigir(${i})">Responder</button>`;
+html+=`<div id="r${i}" class="resultado"></div></div>`;
+});
+
+div.innerHTML=html;
+}
+
+function corrigir(i){
+const radios = document.getElementsByName("q"+i);
+let escolha;
+
+radios.forEach(r=>{
+if(r.checked) escolha=parseInt(r.value);
+});
+
+if(escolha===undefined) return;
+
+if(escolha===questoes[i].c){
+document.getElementById("r"+i).innerHTML="✅ Correto";
+}else{
+document.getElementById("r"+i).innerHTML="❌ Errado";
+}
+
+respondidas++;
+atualizar();
+}
+
+function atualizar(){
+let p = (respondidas/questoes.length)*100;
+document.getElementById("barra").style.width = p+"%";
+document.getElementById("info").innerText = `${respondidas}/10`;
+}
+
+// =============================
+// LINHAS EXTRAS (PADRÃO IGUAL)
+// =============================
+
+const lantanideos = elementos.filter(e => e.n >= 57 && e.n <= 71);
+const actinideos = elementos.filter(e => e.n >= 89 && e.n <= 103);
+
+function renderLinha(lista, containerId){
+const container = document.getElementById(containerId);
+container.innerHTML = "";
+
+lista.forEach(el=>{
+
+const div = document.createElement("div");
+
+div.className = "elemento " + el.fam;
+
+div.innerHTML = `
+<div class="numero">${el.n}</div>
+<div class="simbolo">${el.s}</div>
+<div class="nome">${el.nome}</div>
+`;
+
+div.onclick = ()=>mostrar(el);
+
+container.appendChild(div);
+
+});
+}
+
+// 🔥 CHAMADAS
+renderLinha(lantanideos,"linhaLantanideos");
+renderLinha(actinideos,"linhaActinideos");
+
+
+// =============================
+// INICIALIZAÇÃO
+// =============================
+montarTabela(elementos);
+carregarQuestoes();
+
+</script>
+
+</body>
+</html>

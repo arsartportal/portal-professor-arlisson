@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Onde Parei | Portal do Professor</title>
+
+<style>
+
+*{box-sizing:border-box;}
+
+body{
+font-family:'Segoe UI',system-ui;
+background:linear-gradient(135deg,#eef2ff,#f7f9ff);
+margin:0;
+padding:40px;
+color:#1f2937;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+h1{
+margin-bottom:30px;
+font-size:28px;
+}
+
+/* BOTÃO VOLTAR */
+
+.btn-voltar{
+
+background:white;
+border:1px solid #e5e7eb;
+padding:8px 16px;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+font-size:13px;
+margin-bottom:20px;
+display:inline-flex;
+align-items:center;
+gap:6px;
+transition:0.2s;
+
+}
+
+.btn-voltar:hover{
+background:#f3f4f6;
+transform:translateY(-1px);
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:420px 1fr;
+gap:25px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:28px;
+border-radius:18px;
+box-shadow:0 12px 35px rgba(0,0,0,0.08);
+border:1px solid rgba(0,0,0,0.04);
+}
+
+/* LABEL */
+
+label{
+font-weight:600;
+font-size:14px;
+display:block;
+margin-top:12px;
+margin-bottom:5px;
+}
+
+/* INPUT */
+
+select, textarea{
+width:100%;
+padding:11px 12px;
+border-radius:10px;
+border:1px solid #d1d5db;
+font-size:14px;
+background:#fafafa;
+}
+
+select:focus, textarea:focus{
+outline:none;
+border-color:#4c6ef5;
+background:white;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+/* TURMAS */
+
+.turmas{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:8px;
+}
+
+.turmas label{
+background:#f3f4f6;
+padding:7px 10px;
+border-radius:8px;
+cursor:pointer;
+font-weight:500;
+font-size:13px;
+transition:0.15s;
+}
+
+.turmas label:hover{
+background:#e5e7eb;
+}
+
+/* BOTÃO SALVAR */
+
+#btnSalvar{
+margin-top:15px;
+background:#4c6ef5;
+color:white;
+border:none;
+padding:11px 18px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+font-size:14px;
+}
+
+#btnSalvar:hover{
+background:#364fc7;
+transform:translateY(-1px);
+}
+
+/* HISTÓRICO */
+
+.historico{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.registro{
+background:white;
+padding:18px;
+border-radius:14px;
+border-left:5px solid #4c6ef5;
+box-shadow:0 5px 18px rgba(0,0,0,0.05);
+position:relative;
+}
+
+.data{
+font-size:12px;
+color:#6b7280;
+margin-bottom:4px;
+}
+
+.info{
+font-weight:600;
+font-size:14px;
+margin-bottom:4px;
+}
+
+.anotacao{
+font-size:14px;
+}
+
+.remover{
+position:absolute;
+top:12px;
+right:14px;
+color:#ef4444;
+font-size:13px;
+cursor:pointer;
+}
+
+.historico-container{
+max-height:650px;
+overflow:auto;
+padding-right:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<button class="btn-voltar" onclick="window.location.href='./professor.html'">
+⬅ Voltar
+</button>
+
+<h1>📍 Onde Parei na Aula</h1>
+
+<div class="grid">
+
+<!-- CARD REGISTRO -->
+
+<div class="card">
+
+<label>Escola</label>
+
+<select id="escola">
+<option value="">Selecione</option>
+<option value="Audiocomunicacao">Audiocomunicação</option>
+<option value="Boto">Boto de Menezes</option>
+<option value="Geny">Maria Geny</option>
+</select>
+
+<label>Disciplina</label>
+
+<select id="disciplina">
+<option>Física</option>
+<option>Matemática</option>
+<option>Química</option>
+</select>
+
+<label>Turmas</label>
+
+<div id="turmas" class="turmas"></div>
+
+<label>Anotação</label>
+
+<textarea id="anotacao" placeholder="Digite onde você parou na aula..."></textarea>
+
+<button id="btnSalvar">Salvar registro</button>
+
+</div>
+
+<!-- CARD HISTÓRICO -->
+
+<div class="card">
+
+<h2>📜 Histórico</h2>
+
+<div class="historico-container">
+<div id="historico" class="historico"></div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script type="module">
+
+import { db } from "../js/firebase.js"
+
+import {
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc,
+serverTimestamp,
+query,
+orderBy
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js"
+
+/* TURMAS POR ESCOLA */
+
+const turmasPorEscola = {
+
+Audiocomunicacao:[
+"1º A","1º B","1º C","1º D",
+"2º A",
+"3º A","3º B"
+],
+
+Boto:[
+"1º","2º","3º",
+"Ciclo V","Ciclo VI"
+],
+
+Geny:[
+"1º D",
+"Ciclo V",
+"Ciclo VI"
+]
+
+}
+
+/* ELEMENTOS */
+
+const escola = document.getElementById("escola")
+const turmasDiv = document.getElementById("turmas")
+const historico = document.getElementById("historico")
+const btnSalvar = document.getElementById("btnSalvar")
+
+/* CARREGAR TURMAS */
+
+function carregarTurmas(){
+
+const lista = turmasPorEscola[escola.value]
+
+turmasDiv.innerHTML=""
+
+if(!lista) return
+
+lista.forEach(turma => {
+
+const label = document.createElement("label")
+
+label.innerHTML = `
+<input type="checkbox" value="${turma}">
+${turma}
+`
+
+turmasDiv.appendChild(label)
+
+})
+
+}
+
+escola.addEventListener("change", carregarTurmas)
+
+/* SALVAR */
+
+async function salvar(){
+
+if(!escola.value){
+alert("Selecione a escola")
+return
+}
+
+const disciplina = document.getElementById("disciplina").value
+const anotacao = document.getElementById("anotacao").value
+
+const checks = turmasDiv.querySelectorAll("input:checked")
+
+if(checks.length === 0){
+alert("Selecione pelo menos uma turma")
+return
+}
+
+for(const c of checks){
+
+await addDoc(collection(db,"ondeParei"),{
+
+escola: escola.value,
+turma: c.value,
+disciplina: disciplina,
+anotacao: anotacao,
+data: serverTimestamp()
+
+})
+
+}
+
+document.getElementById("anotacao").value=""
+
+carregarHistorico()
+
+}
+
+btnSalvar.addEventListener("click", salvar)
+
+/* HISTÓRICO */
+
+async function carregarHistorico(){
+
+historico.innerHTML=""
+
+const q = query(collection(db,"ondeParei"),orderBy("data","desc"))
+
+const snapshot = await getDocs(q)
+
+snapshot.forEach(docSnap=>{
+
+const d = docSnap.data()
+
+const dataFormatada = d.data
+? new Date(d.data.seconds * 1000).toLocaleDateString("pt-BR")
+: ""
+
+const div = document.createElement("div")
+
+div.className="registro"
+
+div.innerHTML = `
+
+<div class="data">
+${d.escola} • ${dataFormatada}
+</div>
+
+<div class="info">${d.disciplina} — ${d.turma}</div>
+
+<div class="anotacao">${d.anotacao}</div>
+
+<span class="remover" data-id="${docSnap.id}">
+🗑 remover
+</span>
+
+`
+
+historico.appendChild(div)
+
+})
+
+}
+
+historico.addEventListener("click", async (e)=>{
+
+if(e.target.classList.contains("remover")){
+
+const id = e.target.dataset.id
+
+await deleteDoc(doc(db,"ondeParei",id))
+
+carregarHistorico()
+
+}
+
+})
+
+carregarHistorico()
+
+</script>
+
+</body>
+</html>

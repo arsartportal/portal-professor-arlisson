@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Atualizar senha • Portal</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="trocar-senha.css">
+</head>
+<body>
+
+<main class="container">
+
+  <h1>Atualize sua senha</h1>
+  <p class="subtitle">
+    Por segurança, você precisa definir uma nova senha para continuar
+  </p>
+
+  <form id="formTroca">
+
+    <div class="input-group">
+      <label>Nova senha</label>
+      <input type="password" id="novaSenha" required minlength="6">
+    </div>
+
+    <div class="input-group">
+      <label>Confirmar senha</label>
+      <input type="password" id="confirmarSenha" required minlength="6">
+    </div>
+
+    <button type="submit" id="btnTrocar">
+      <span class="text">Atualizar senha</span>
+      <span class="loader"></span>
+    </button>
+
+  </form>
+
+  <div id="msg"></div>
+
+</main>
+
+<script type="module" src="trocar-senha.js"></script>
+
+</body>
+</html>

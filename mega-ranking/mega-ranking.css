@@ -1,0 +1,2594 @@
+/* =========================================
+🌌 FUNDO CINEMATOGRÁFICO
+========================================= */
+body{
+margin:0;
+color:#fff;
+font-family:'Segoe UI',sans-serif;
+overflow-x:hidden;
+
+background:
+radial-gradient(circle at 15% 15%, rgba(0, 0, 0, 0.65), transparent 30%),
+radial-gradient(circle at 85% 20%, rgba(16, 16, 16, 0.22), transparent 35%),
+radial-gradient(circle at 50% 85%, rgba(34,197,94,.18), transparent 38%),
+#020617;
+}
+
+/* camada enorme animada para não repetir */
+body::before{
+content:"";
+position:fixed;
+inset:-25%;
+z-index:-2;
+pointer-events:none;
+
+background:
+radial-gradient(circle at 20% 30%, rgba(250,204,21,.08), transparent 32%),
+radial-gradient(circle at 75% 25%, rgba(56,189,248,.08), transparent 36%),
+radial-gradient(circle at 50% 80%, rgba(34,197,94,.07), transparent 40%),
+radial-gradient(circle at 90% 90%, rgba(168,85,247,.08), transparent 30%);
+
+background-size:1800px 1800px;
+animation:fundoMove 26s ease-in-out infinite alternate;
+}
+
+@keyframes fundoMove{
+from{
+transform:translate3d(-30px,-20px,0) scale(1);
+}
+to{
+transform:translate3d(30px,20px,0) scale(1.08);
+}
+}
+
+/* partículas suaves */
+body::after{
+content:"";
+position:fixed;
+inset:0;
+z-index:-1;
+pointer-events:none;
+
+background-image:
+radial-gradient(circle at 10% 20%, rgba(250,204,21,.18) 0 2px, transparent 3px),
+radial-gradient(circle at 80% 30%, rgba(56,189,248,.16) 0 2px, transparent 3px),
+radial-gradient(circle at 60% 80%, rgba(34,197,94,.15) 0 2px, transparent 3px),
+radial-gradient(circle at 30% 70%, rgba(168,85,247,.14) 0 2px, transparent 3px);
+
+background-size:220px 220px;
+animation:particlesMove 32s linear infinite;
+}
+
+@keyframes particlesMove{
+from{ transform:translateY(0); }
+to{ transform:translateY(-120px); }
+}
+
+/* =========================================
+📦 CONTAINER PRINCIPAL
+========================================= */
+.ranking-container{
+max-width:1100px;
+margin:auto;
+padding:42px 20px 60px;
+position:relative;
+isolation:isolate;
+}
+
+/* =========================================
+🏆 CABEÇALHO
+========================================= */
+.ranking-header{
+text-align:center;
+margin-bottom:34px;
+}
+
+.ranking-header h1{
+position:relative;
+display:inline-block;
+margin:0 0 10px;
+
+font-size:2.6rem;
+font-weight:800;
+letter-spacing:-2px;
+
+background:linear-gradient(90deg,#facc15,#38bdf8,#22c55e);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+filter:drop-shadow(0 0 30px rgba(250,204,21,.18));
+}
+
+.ranking-header h1::after{
+content:"";
+position:absolute;
+left:50%;
+bottom:-12px;
+transform:translateX(-50%);
+
+width:180px;
+height:4px;
+border-radius:999px;
+
+background:linear-gradient(90deg,transparent,#facc15,#38bdf8,transparent);
+box-shadow:0 0 22px rgba(56,189,248,.4);
+}
+
+.ranking-header p{
+margin-top:18px;
+color:rgba(255,255,255,.72);
+font-size:1rem;
+}
+
+/* =========================================
+🎯 TABS PRINCIPAIS
+========================================= */
+.ranking-tabs,
+.lista-professores,
+.lista-escolas,
+.lista-series,
+.lista-turmas{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:30px;
+}
+
+.ranking-tabs{
+margin-bottom:28px;
+}
+
+.lista-professores,
+.lista-escolas,
+.lista-series,
+.lista-turmas{
+margin-bottom:20px;
+display:none;
+}
+
+.tab,
+.tab-prof,
+.tab-escola,
+.tab-serie,
+.tab-turma{
+position:relative;
+overflow:hidden;
+
+border:none;
+cursor:pointer;
+
+padding:11px 18px;
+border-radius:14px;
+
+color:#fff;
+font-size:.92rem;
+font-weight:700;
+
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+
+transition:.28s ease;
+}
+
+.tab::before,
+.tab-prof::before,
+.tab-escola::before,
+.tab-serie::before,
+.tab-turma::before{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:70%;
+height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+transform:skewX(-22deg);
+transition:.7s;
+}
+
+.tab:hover::before,
+.tab-prof:hover::before,
+.tab-escola:hover::before,
+.tab-serie:hover::before,
+.tab-turma:hover::before{
+left:140%;
+}
+
+.tab:hover,
+.tab-prof:hover,
+.tab-escola:hover,
+.tab-serie:hover,
+.tab-turma:hover{
+transform:translateY(-2px);
+}
+
+.tab.active,
+.tab-prof.active,
+.tab-turma.active{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+box-shadow:0 0 18px rgba(34,197,94,.45);
+}
+
+.tab-escola.active{
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+box-shadow:0 0 18px rgba(59,130,246,.45);
+}
+
+.tab-serie{
+background:rgba(250,204,21,.08);
+color:#fde68a;
+}
+
+.tab-serie.active{
+background:linear-gradient(135deg,#facc15,#eab308);
+color:#111827;
+box-shadow:0 0 18px rgba(250,204,21,.45);
+}
+
+/* =========================================
+🥇 PÓDIO TOP 3
+========================================= */
+.top3{
+display:flex;
+justify-content:center;
+align-items:flex-end;
+gap:22px;
+flex-wrap:wrap;
+
+margin:48px 0 34px;
+}
+
+.card-top{
+position:relative;
+overflow:visible;
+
+min-width:150px;
+padding:26px 20px;
+border-radius:24px;
+
+text-align:center;
+
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+
+box-shadow:0 18px 40px rgba(0,0,0,.25);
+
+transition:.3s ease;
+}
+
+.card-top::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:24px;
+background:linear-gradient(180deg, rgba(255,255,255,.12), transparent 45%);
+pointer-events:none;
+}
+
+.card-top .pos{
+display:block;
+font-size:2.5rem;
+margin-bottom:8px;
+}
+
+.card-top h3{
+margin:10px 0 6px;
+font-size:1rem;
+}
+
+.card-top span{
+opacity:.85;
+font-size:.85rem;
+}
+
+.second{
+transform:scale(1.04);
+}
+
+.first{
+transform:scale(1.18);
+padding-top:46px;
+
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#111827;
+
+box-shadow:
+0 18px 50px rgba(250,204,21,.45),
+0 0 24px rgba(250,204,21,.35);
+}
+
+.first::after{
+content:"👑";
+position:absolute;
+top:8px;
+left:50%;
+transform:translateX(-50%);
+font-size:2.2rem;
+filter:drop-shadow(0 0 14px rgba(250,204,21,.8));
+animation:crownFloat 2.6s ease-in-out infinite;
+}
+
+.third{
+transform:scale(.95);
+}
+
+@keyframes crownFloat{
+0%,100%{ transform:translateX(-50%) translateY(0); }
+50%{ transform:translateX(-50%) translateY(-6px); }
+}
+
+.ranking-patente{
+width:42px;
+height:42px;
+object-fit:contain;
+filter:drop-shadow(0 0 8px rgba(255,255,255,.25));
+}
+
+.first .ranking-patente{ width:60px; }
+.second .ranking-patente{ width:50px; }
+.third .ranking-patente{ width:46px; }
+
+#top1-nome,
+#top2-nome,
+#top3-nome{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+}
+
+/* =========================================
+📊 PAINEL "SUA POSIÇÃO"
+========================================= */
+.card-minha-posicao{
+position:relative;
+overflow:hidden;
+
+margin-bottom:24px;
+padding:22px;
+border-radius:22px;
+
+background:linear-gradient(135deg,#111827,#1f2937);
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 14px 40px rgba(0,0,0,.32);
+}
+
+.card-minha-posicao::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#facc15,#38bdf8,#22c55e);
+}
+
+.card-minha-posicao h3{
+margin:0 0 14px;
+font-size:1.15rem;
+}
+
+.card-minha-posicao p{
+margin:8px 0;
+color:rgba(255,255,255,.88);
+}
+
+.ultima-semana{
+margin-top:14px !important;
+font-weight:700;
+color:#facc15 !important;
+}
+
+/* =========================================
+⏳ INFORMAÇÃO DE ATUALIZAÇÃO
+========================================= */
+.ranking-info-atualizacao{
+margin:0 0 28px;
+padding:16px 18px;
+
+border-radius:18px;
+text-align:center;
+
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.ranking-info-atualizacao p{
+margin:6px 0;
+color:#dbe4ff;
+}
+
+#contador-ranking{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+margin-left:8px;
+padding:6px 12px;
+border-radius:999px;
+
+background:rgba(250,204,21,.12);
+border:1px solid rgba(250,204,21,.28);
+
+color:#facc15;
+font-weight:800;
+
+box-shadow:0 0 18px rgba(250,204,21,.18);
+}
+
+/* =========================================
+📋 LISTA DO RANKING
+========================================= */
+.ranking-lista{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.ranking-item{
+position:relative;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+gap:12px;
+
+padding:16px 18px;
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+
+transition:.28s ease;
+animation:fadeUp .35s ease;
+}
+
+.ranking-item::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:5px;
+height:100%;
+opacity:0;
+
+background:linear-gradient(180deg,#38bdf8,#22c55e,#facc15);
+transition:.3s;
+}
+
+.ranking-item:hover::before{
+opacity:1;
+}
+
+.ranking-item::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.08) 50%, transparent 100%);
+transform:translateX(-120%);
+transition:.7s;
+}
+
+.ranking-item:hover::after{
+transform:translateX(120%);
+}
+
+.ranking-item:hover{
+transform:translateY(-3px) scale(1.01);
+background:rgba(255,255,255,.09);
+border-color:rgba(255,255,255,.12);
+box-shadow:0 12px 32px rgba(0,0,0,.28);
+}
+
+.ranking-item.top10{
+background:linear-gradient(90deg, rgba(250,204,21,.12), rgba(255,255,255,.04));
+border-left:4px solid #facc15;
+}
+
+.ranking-item:nth-child(1){
+box-shadow:0 0 24px rgba(250,204,21,.22);
+}
+
+.ranking-item:nth-child(2){
+box-shadow:0 0 20px rgba(203,213,225,.18);
+}
+
+.ranking-item:nth-child(3){
+box-shadow:0 0 18px rgba(251,146,60,.18);
+}
+
+.ranking-pos{
+width:54px;
+flex-shrink:0;
+font-weight:800;
+font-size:1rem;
+}
+
+.ranking-item.top10 .ranking-pos::before{
+content:"⭐ ";
+color:#facc15;
+}
+
+.ranking-posicao-wrapper{
+width:66px;
+display:flex;
+justify-content:center;
+flex-shrink:0;
+}
+
+.ranking-nome{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.ranking-nome strong{
+font-size:1.05rem;
+letter-spacing:.2px;
+}
+
+.info-linha{
+color:#facc15;
+font-size:.76rem;
+}
+
+.professor{
+color:#38bdf8;
+font-size:.73rem;
+}
+
+.aluno-info{
+color:rgba(255,255,255,.66);
+font-size:.73rem;
+}
+
+.ranking-xp{
+white-space:nowrap;
+font-weight:800;
+color:#22c55e;
+font-size:1.02rem;
+
+text-shadow:
+0 0 10px rgba(34,197,94,.45),
+0 0 18px rgba(34,197,94,.22);
+}
+
+/* =========================================
+📈 MOVIMENTO NO RANKING
+========================================= */
+.movimento{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+min-width:62px;
+padding:6px 10px;
+border-radius:999px;
+
+font-size:.82rem;
+font-weight:800;
+
+border:1px solid transparent;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.movimento.subiu{
+color:#22c55e;
+background:rgba(34,197,94,.15);
+border-color:rgba(34,197,94,.35);
+}
+
+.movimento.desceu{
+color:#ef4444;
+background:rgba(239,68,68,.15);
+border-color:rgba(239,68,68,.35);
+}
+
+.movimento.neutro{
+color:#60a5fa;
+background:rgba(96,165,250,.15);
+border-color:rgba(96,165,250,.35);
+}
+
+/* =========================================
+✨ ANIMAÇÕES
+========================================= */
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* =========================================
+🖱️ SCROLLBAR
+========================================= */
+::-webkit-scrollbar{
+width:12px;
+}
+
+::-webkit-scrollbar-track{
+background:#071126;
+}
+
+::-webkit-scrollbar-thumb{
+border-radius:999px;
+background:linear-gradient(180deg,#38bdf8,#22c55e,#facc15);
+border:2px solid #071126;
+}
+
+/* =========================================
+📱 RESPONSIVO
+========================================= */
+@media (max-width:700px){
+
+.ranking-header h1{
+font-size:2rem;
+}
+
+.top3{
+flex-direction:column;
+align-items:center;
+gap:16px;
+}
+
+.first,
+.second,
+.third{
+transform:none;
+width:100%;
+max-width:320px;
+}
+
+.ranking-item{
+padding:16px 14px;
+border-radius:16px;
+gap:10px;
+}
+
+.ranking-posicao-wrapper{
+width:56px;
+}
+
+.ranking-patente{
+width:34px;
+height:34px;
+}
+
+.ranking-xp{
+font-size:.92rem;
+}
+
+.tab,
+.tab-prof,
+.tab-escola,
+.tab-serie,
+.tab-turma{
+width:100%;
+max-width:320px;
+justify-content:center;
+}
+}
+
+/* =========================================
+🌌 FUNDO CINEMATOGRÁFICO
+========================================= */
+body{
+margin:0;
+color:#fff;
+font-family:'Segoe UI',sans-serif;
+overflow-x:hidden;
+
+background:
+radial-gradient(circle at 15% 15%, rgba(30,58,138,.65), transparent 30%),
+radial-gradient(circle at 85% 20%, rgba(56,189,248,.22), transparent 35%),
+radial-gradient(circle at 50% 85%, rgba(34,197,94,.18), transparent 38%),
+#020617;
+}
+
+/* camada enorme animada para não repetir */
+body::before{
+content:"";
+position:fixed;
+inset:-25%;
+z-index:-2;
+pointer-events:none;
+
+background:
+radial-gradient(circle at 20% 30%, rgba(250,204,21,.08), transparent 32%),
+radial-gradient(circle at 75% 25%, rgba(56,189,248,.08), transparent 36%),
+radial-gradient(circle at 50% 80%, rgba(34,197,94,.07), transparent 40%),
+radial-gradient(circle at 90% 90%, rgba(168,85,247,.08), transparent 30%);
+
+background-size:1800px 1800px;
+animation:fundoMove 26s ease-in-out infinite alternate;
+}
+
+@keyframes fundoMove{
+from{
+transform:translate3d(-30px,-20px,0) scale(1);
+}
+to{
+transform:translate3d(30px,20px,0) scale(1.08);
+}
+}
+
+/* partículas suaves */
+body::after{
+content:"";
+position:fixed;
+inset:0;
+z-index:-1;
+pointer-events:none;
+
+background-image:
+radial-gradient(circle at 10% 20%, rgba(250,204,21,.18) 0 2px, transparent 3px),
+radial-gradient(circle at 80% 30%, rgba(56,189,248,.16) 0 2px, transparent 3px),
+radial-gradient(circle at 60% 80%, rgba(34,197,94,.15) 0 2px, transparent 3px),
+radial-gradient(circle at 30% 70%, rgba(168,85,247,.14) 0 2px, transparent 3px);
+
+background-size:220px 220px;
+animation:particlesMove 32s linear infinite;
+}
+
+@keyframes particlesMove{
+from{ transform:translateY(0); }
+to{ transform:translateY(-120px); }
+}
+
+/* =========================================
+📦 CONTAINER PRINCIPAL
+========================================= */
+.ranking-container{
+max-width:1100px;
+margin:auto;
+padding:42px 20px 60px;
+position:relative;
+isolation:isolate;
+}
+
+/* =========================================
+🏆 CABEÇALHO
+========================================= */
+.ranking-header{
+text-align:center;
+margin-bottom:34px;
+}
+
+.ranking-header h1{
+position:relative;
+display:inline-block;
+margin:0 0 10px;
+
+font-size:2.6rem;
+font-weight:800;
+letter-spacing:-2px;
+
+background:linear-gradient(90deg,#facc15,#38bdf8,#22c55e);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+filter:drop-shadow(0 0 30px rgba(250,204,21,.18));
+}
+
+.ranking-header h1::after{
+content:"";
+position:absolute;
+left:50%;
+bottom:-12px;
+transform:translateX(-50%);
+
+width:180px;
+height:4px;
+border-radius:999px;
+
+background:linear-gradient(90deg,transparent,#facc15,#38bdf8,transparent);
+box-shadow:0 0 22px rgba(56,189,248,.4);
+}
+
+.ranking-header p{
+margin-top:18px;
+color:rgba(255,255,255,.72);
+font-size:1rem;
+}
+
+/* =========================================
+🎯 TABS PRINCIPAIS
+========================================= */
+.ranking-tabs,
+.lista-professores,
+.lista-escolas,
+.lista-series,
+.lista-turmas{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.ranking-tabs{
+margin-bottom:28px;
+}
+
+.lista-professores,
+.lista-escolas,
+.lista-series,
+.lista-turmas{
+margin-bottom:20px;
+display:none;
+}
+
+.tab,
+.tab-prof,
+.tab-escola,
+.tab-serie,
+.tab-turma{
+position:relative;
+overflow:hidden;
+
+border:none;
+cursor:pointer;
+
+padding:11px 18px;
+border-radius:14px;
+
+color:#fff;
+font-size:.92rem;
+font-weight:700;
+
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+
+transition:.28s ease;
+}
+
+.tab::before,
+.tab-prof::before,
+.tab-escola::before,
+.tab-serie::before,
+.tab-turma::before{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:70%;
+height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+transform:skewX(-22deg);
+transition:.7s;
+}
+
+.tab:hover::before,
+.tab-prof:hover::before,
+.tab-escola:hover::before,
+.tab-serie:hover::before,
+.tab-turma:hover::before{
+left:140%;
+}
+
+.tab:hover,
+.tab-prof:hover,
+.tab-escola:hover,
+.tab-serie:hover,
+.tab-turma:hover{
+transform:translateY(-2px);
+}
+
+.tab.active,
+.tab-prof.active,
+.tab-turma.active{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+box-shadow:0 0 18px rgba(34,197,94,.45);
+}
+
+.tab-escola.active{
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+box-shadow:0 0 18px rgba(59,130,246,.45);
+}
+
+.tab-serie{
+background:rgba(250,204,21,.08);
+color:#fde68a;
+}
+
+.tab-serie.active{
+background:linear-gradient(135deg,#facc15,#eab308);
+color:#111827;
+box-shadow:0 0 18px rgba(250,204,21,.45);
+}
+
+/* =========================================
+🥇 PÓDIO TOP 3
+========================================= */
+.top3{
+display:flex;
+justify-content:center;
+align-items:flex-end;
+gap:22px;
+flex-wrap:wrap;
+
+margin:48px 0 34px;
+}
+
+.card-top{
+position:relative;
+overflow:visible;
+
+min-width:150px;
+padding:26px 20px;
+border-radius:24px;
+
+text-align:center;
+
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+
+box-shadow:0 18px 40px rgba(0,0,0,.25);
+
+transition:.3s ease;
+}
+
+.card-top::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:24px;
+background:linear-gradient(180deg, rgba(255,255,255,.12), transparent 45%);
+pointer-events:none;
+}
+
+.card-top .pos{
+display:block;
+font-size:2.5rem;
+margin-bottom:8px;
+}
+
+.card-top h3{
+margin:10px 0 6px;
+font-size:1rem;
+}
+
+.card-top span{
+opacity:.85;
+font-size:.85rem;
+}
+
+.second{
+transform:scale(1.04);
+}
+
+.first{
+transform:scale(1.18);
+padding-top:46px;
+
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#111827;
+
+box-shadow:
+0 18px 50px rgba(250,204,21,.45),
+0 0 24px rgba(250,204,21,.35);
+}
+
+.first::after{
+content:"👑";
+position:absolute;
+top:8px;
+left:50%;
+transform:translateX(-50%);
+font-size:2.2rem;
+filter:drop-shadow(0 0 14px rgba(250,204,21,.8));
+animation:crownFloat 2.6s ease-in-out infinite;
+}
+
+.third{
+transform:scale(.95);
+}
+
+@keyframes crownFloat{
+0%,100%{ transform:translateX(-50%) translateY(0); }
+50%{ transform:translateX(-50%) translateY(-6px); }
+}
+
+.ranking-patente{
+width:42px;
+height:42px;
+object-fit:contain;
+filter:drop-shadow(0 0 8px rgba(255,255,255,.25));
+}
+
+.first .ranking-patente{ width:60px; }
+.second .ranking-patente{ width:50px; }
+.third .ranking-patente{ width:46px; }
+
+#top1-nome,
+#top2-nome,
+#top3-nome{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+}
+
+/* =========================================
+📊 PAINEL "SUA POSIÇÃO"
+========================================= */
+.card-minha-posicao{
+position:relative;
+overflow:hidden;
+
+margin-bottom:24px;
+padding:22px;
+border-radius:22px;
+
+background:linear-gradient(135deg,#111827,#1f2937);
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 14px 40px rgba(0,0,0,.32);
+}
+
+.card-minha-posicao::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#facc15,#38bdf8,#22c55e);
+}
+
+.card-minha-posicao h3{
+margin:0 0 14px;
+font-size:1.15rem;
+}
+
+.card-minha-posicao p{
+margin:8px 0;
+color:rgba(255,255,255,.88);
+}
+
+.ultima-semana{
+margin-top:14px !important;
+font-weight:700;
+color:#facc15 !important;
+}
+
+/* =========================================
+⏳ INFORMAÇÃO DE ATUALIZAÇÃO
+========================================= */
+.ranking-info-atualizacao{
+margin:0 0 28px;
+padding:16px 18px;
+
+border-radius:18px;
+text-align:center;
+
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.ranking-info-atualizacao p{
+margin:6px 0;
+color:#dbe4ff;
+}
+
+#contador-ranking{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+margin-left:8px;
+padding:6px 12px;
+border-radius:999px;
+
+background:rgba(250,204,21,.12);
+border:1px solid rgba(250,204,21,.28);
+
+color:#facc15;
+font-weight:800;
+
+box-shadow:0 0 18px rgba(250,204,21,.18);
+}
+
+/* =========================================
+📋 LISTA DO RANKING
+========================================= */
+.ranking-lista{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.ranking-item{
+position:relative;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+gap:12px;
+
+padding:16px 18px;
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+
+transition:.28s ease;
+animation:fadeUp .35s ease;
+}
+
+.ranking-item::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:5px;
+height:100%;
+opacity:0;
+
+background:linear-gradient(180deg,#38bdf8,#22c55e,#facc15);
+transition:.3s;
+}
+
+.ranking-item:hover::before{
+opacity:1;
+}
+
+.ranking-item::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.08) 50%, transparent 100%);
+transform:translateX(-120%);
+transition:.7s;
+}
+
+.ranking-item:hover::after{
+transform:translateX(120%);
+}
+
+.ranking-item:hover{
+transform:translateY(-3px) scale(1.01);
+background:rgba(255,255,255,.09);
+border-color:rgba(255,255,255,.12);
+box-shadow:0 12px 32px rgba(0,0,0,.28);
+}
+
+.ranking-item.top10{
+background:linear-gradient(90deg, rgba(250,204,21,.12), rgba(255,255,255,.04));
+border-left:4px solid #facc15;
+}
+
+.ranking-item:nth-child(1){
+box-shadow:0 0 24px rgba(250,204,21,.22);
+}
+
+.ranking-item:nth-child(2){
+box-shadow:0 0 20px rgba(203,213,225,.18);
+}
+
+.ranking-item:nth-child(3){
+box-shadow:0 0 18px rgba(251,146,60,.18);
+}
+
+.ranking-pos{
+width:54px;
+flex-shrink:0;
+font-weight:800;
+font-size:1rem;
+}
+
+.ranking-item.top10 .ranking-pos::before{
+content:"⭐ ";
+color:#facc15;
+}
+
+.ranking-posicao-wrapper{
+width:66px;
+display:flex;
+justify-content:center;
+flex-shrink:0;
+}
+
+.ranking-nome{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.ranking-nome strong{
+font-size:1.05rem;
+letter-spacing:.2px;
+}
+
+.info-linha{
+color:#facc15;
+font-size:.76rem;
+}
+
+.professor{
+color:#38bdf8;
+font-size:.73rem;
+}
+
+.aluno-info{
+color:rgba(255,255,255,.66);
+font-size:.73rem;
+}
+
+.ranking-xp{
+white-space:nowrap;
+font-weight:800;
+color:#22c55e;
+font-size:1.02rem;
+
+text-shadow:
+0 0 10px rgba(34,197,94,.45),
+0 0 18px rgba(34,197,94,.22);
+}
+
+/* =========================================
+📈 MOVIMENTO NO RANKING
+========================================= */
+.movimento{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+min-width:62px;
+padding:6px 10px;
+border-radius:999px;
+
+font-size:.82rem;
+font-weight:800;
+
+border:1px solid transparent;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.movimento.subiu{
+color:#22c55e;
+background:rgba(34,197,94,.15);
+border-color:rgba(34,197,94,.35);
+}
+
+.movimento.desceu{
+color:#ef4444;
+background:rgba(239,68,68,.15);
+border-color:rgba(239,68,68,.35);
+}
+
+.movimento.neutro{
+color:#60a5fa;
+background:rgba(96,165,250,.15);
+border-color:rgba(96,165,250,.35);
+}
+
+/* =========================================
+✨ ANIMAÇÕES
+========================================= */
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* =========================================
+🖱️ SCROLLBAR
+========================================= */
+::-webkit-scrollbar{
+width:12px;
+}
+
+::-webkit-scrollbar-track{
+background:#071126;
+}
+
+::-webkit-scrollbar-thumb{
+border-radius:999px;
+background:linear-gradient(180deg,#38bdf8,#22c55e,#facc15);
+border:2px solid #071126;
+}
+
+/* =========================================
+📱 RESPONSIVO
+========================================= */
+@media (max-width:700px){
+
+.ranking-header h1{
+font-size:2rem;
+}
+
+.top3{
+flex-direction:column;
+align-items:center;
+gap:16px;
+}
+
+.first,
+.second,
+.third{
+transform:none;
+width:100%;
+max-width:320px;
+}
+
+.ranking-item{
+padding:16px 14px;
+border-radius:16px;
+gap:10px;
+}
+
+.ranking-posicao-wrapper{
+width:56px;
+}
+
+.ranking-patente{
+width:34px;
+height:34px;
+}
+
+.ranking-xp{
+font-size:.92rem;
+}
+
+.tab,
+.tab-prof,
+.tab-escola,
+.tab-serie,
+.tab-turma{
+width:100%;
+max-width:320px;
+justify-content:center;
+}
+}
+
+/* =========================================
+🎯 AJUSTES FINAIS DO TOPO DO RANKING
+Troque no HTML o título por:
+
+<h1><span class="ranking-icon">🏆</span> Ranking</h1>
+<p class="ranking-subtitulo">
+  Os melhores alunos da plataforma. Atualizado 4 vezes ao dia.
+</p>
+========================================= */
+
+.ranking-header{
+margin-bottom: 54px;
+}
+
+.ranking-header h1{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:18px;
+
+font-size:3rem;
+font-weight:900;
+letter-spacing:-2px;
+}
+
+.ranking-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:78px;
+  height:78px;
+  border-radius:22px;
+
+  background:linear-gradient(135deg,#facc15,#eab308);
+
+  font-size:2.5rem;
+  line-height:1;
+
+  color:#111827;
+  -webkit-text-fill-color:#111827;
+
+  box-shadow:
+    0 0 24px rgba(250,204,21,.45),
+    0 10px 30px rgba(250,204,21,.28);
+
+  animation:rankingIconFloat 3s ease-in-out infinite;
+}
+
+.ranking-subtitulo{
+max-width:620px;
+margin:18px auto 0;
+
+color:rgba(255,255,255,.72);
+font-size:1.05rem;
+line-height:1.6;
+}
+
+/* mais espaço antes do pódio */
+.top3{
+margin-top:72px;
+margin-bottom:46px;
+gap:34px;
+}
+
+.first{
+margin-top:-12px;
+}
+
+.second,
+.third{
+margin-top:24px;
+}
+
+@media (max-width:700px){
+
+.ranking-header h1{
+flex-direction:column;
+gap:12px;
+font-size:2.3rem;
+}
+
+.ranking-icon{
+width:64px;
+height:64px;
+font-size:2rem;
+}
+
+.ranking-subtitulo{
+font-size:.95rem;
+padding:0 10px;
+}
+
+.top3{
+margin-top:48px;
+gap:18px;
+}
+}
+
+/* =========================================
+🌌 FUNDO CINEMATOGRÁFICO
+========================================= */
+body{
+margin:0;
+color:#fff;
+font-family:'Segoe UI',sans-serif;
+overflow-x:hidden;
+
+background:
+radial-gradient(circle at 15% 15%, rgba(30,58,138,.65), transparent 30%),
+radial-gradient(circle at 85% 20%, rgba(56,189,248,.22), transparent 35%),
+radial-gradient(circle at 50% 85%, rgba(34,197,94,.18), transparent 38%),
+#020617;
+}
+
+/* camada enorme animada para não repetir */
+body::before{
+content:"";
+position:fixed;
+inset:-25%;
+z-index:-2;
+pointer-events:none;
+
+background:
+radial-gradient(circle at 20% 30%, rgba(250,204,21,.08), transparent 32%),
+radial-gradient(circle at 75% 25%, rgba(56,189,248,.08), transparent 36%),
+radial-gradient(circle at 50% 80%, rgba(34,197,94,.07), transparent 40%),
+radial-gradient(circle at 90% 90%, rgba(168,85,247,.08), transparent 30%);
+
+background-size:1800px 1800px;
+animation:fundoMove 26s ease-in-out infinite alternate;
+}
+
+@keyframes fundoMove{
+from{
+transform:translate3d(-30px,-20px,0) scale(1);
+}
+to{
+transform:translate3d(30px,20px,0) scale(1.08);
+}
+}
+
+/* partículas suaves */
+body::after{
+content:"";
+position:fixed;
+inset:0;
+z-index:-1;
+pointer-events:none;
+
+background-image:
+radial-gradient(circle at 10% 20%, rgba(250,204,21,.18) 0 2px, transparent 3px),
+radial-gradient(circle at 80% 30%, rgba(56,189,248,.16) 0 2px, transparent 3px),
+radial-gradient(circle at 60% 80%, rgba(34,197,94,.15) 0 2px, transparent 3px),
+radial-gradient(circle at 30% 70%, rgba(168,85,247,.14) 0 2px, transparent 3px);
+
+background-size:220px 220px;
+animation:particlesMove 32s linear infinite;
+}
+
+@keyframes particlesMove{
+from{ transform:translateY(0); }
+to{ transform:translateY(-120px); }
+}
+
+/* =========================================
+📦 CONTAINER PRINCIPAL
+========================================= */
+.ranking-container{
+max-width:1100px;
+margin:auto;
+padding:42px 20px 60px;
+position:relative;
+isolation:isolate;
+}
+
+/* =========================================
+🏆 CABEÇALHO
+========================================= */
+.ranking-header{
+text-align:center;
+margin-bottom:34px;
+}
+
+.ranking-header h1{
+position:relative;
+display:inline-block;
+margin:0 0 10px;
+
+font-size:2.6rem;
+font-weight:800;
+letter-spacing:-2px;
+
+background:linear-gradient(90deg,#facc15,#38bdf8,#22c55e);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+filter:drop-shadow(0 0 30px rgba(250,204,21,.18));
+}
+
+.ranking-header h1::after{
+content:"";
+position:absolute;
+left:50%;
+bottom:-12px;
+transform:translateX(-50%);
+
+width:180px;
+height:4px;
+border-radius:999px;
+
+background:linear-gradient(90deg,transparent,#facc15,#38bdf8,transparent);
+box-shadow:0 0 22px rgba(56,189,248,.4);
+}
+
+.ranking-header p{
+margin-top:18px;
+color:rgba(255,255,255,.72);
+font-size:1rem;
+}
+
+/* =========================================
+🎯 TABS PRINCIPAIS
+========================================= */
+.ranking-tabs,
+.lista-professores,
+.lista-escolas,
+.lista-series,
+.lista-turmas{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.ranking-tabs{
+margin-bottom:28px;
+}
+
+.lista-professores,
+.lista-escolas,
+.lista-series,
+.lista-turmas{
+margin-bottom:20px;
+display:none;
+}
+
+.tab,
+.tab-prof,
+.tab-escola,
+.tab-serie,
+.tab-turma{
+position:relative;
+overflow:hidden;
+
+border:none;
+cursor:pointer;
+
+padding:11px 18px;
+border-radius:14px;
+
+color:#fff;
+font-size:.92rem;
+font-weight:700;
+
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+
+transition:.28s ease;
+}
+
+.tab::before,
+.tab-prof::before,
+.tab-escola::before,
+.tab-serie::before,
+.tab-turma::before{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:70%;
+height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+transform:skewX(-22deg);
+transition:.7s;
+}
+
+.tab:hover::before,
+.tab-prof:hover::before,
+.tab-escola:hover::before,
+.tab-serie:hover::before,
+.tab-turma:hover::before{
+left:140%;
+}
+
+.tab:hover,
+.tab-prof:hover,
+.tab-escola:hover,
+.tab-serie:hover,
+.tab-turma:hover{
+transform:translateY(-2px);
+}
+
+.tab.active,
+.tab-prof.active,
+.tab-turma.active{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+box-shadow:0 0 18px rgba(34,197,94,.45);
+}
+
+.tab-escola.active{
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+box-shadow:0 0 18px rgba(59,130,246,.45);
+}
+
+.tab-serie{
+background:rgba(250,204,21,.08);
+color:#fde68a;
+}
+
+.tab-serie.active{
+background:linear-gradient(135deg,#facc15,#eab308);
+color:#111827;
+box-shadow:0 0 18px rgba(250,204,21,.45);
+}
+
+/* =========================================
+🥇 PÓDIO TOP 3
+========================================= */
+.top3{
+display:flex;
+justify-content:center;
+align-items:flex-end;
+gap:22px;
+flex-wrap:wrap;
+
+margin:48px 0 34px;
+}
+
+.card-top{
+position:relative;
+overflow:visible;
+
+min-width:150px;
+padding:26px 20px;
+border-radius:24px;
+
+text-align:center;
+
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+
+box-shadow:0 18px 40px rgba(0,0,0,.25);
+
+transition:.3s ease;
+}
+
+.card-top::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:24px;
+background:linear-gradient(180deg, rgba(255,255,255,.12), transparent 45%);
+pointer-events:none;
+}
+
+.card-top .pos{
+display:block;
+font-size:2.5rem;
+margin-bottom:8px;
+}
+
+.card-top h3{
+margin:10px 0 6px;
+font-size:1rem;
+}
+
+.card-top span{
+opacity:.85;
+font-size:.85rem;
+}
+
+.second{
+transform:scale(1.04);
+}
+
+.first{
+transform:scale(1.18);
+padding-top:46px;
+
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#111827;
+
+box-shadow:
+0 18px 50px rgba(250,204,21,.45),
+0 0 24px rgba(250,204,21,.35);
+}
+
+.first::after{
+content:"👑";
+position:absolute;
+top:8px;
+left:50%;
+transform:translateX(-50%);
+font-size:2.2rem;
+filter:drop-shadow(0 0 14px rgba(250,204,21,.8));
+animation:crownFloat 2.6s ease-in-out infinite;
+}
+
+.third{
+transform:scale(.95);
+}
+
+@keyframes crownFloat{
+0%,100%{ transform:translateX(-50%) translateY(0); }
+50%{ transform:translateX(-50%) translateY(-6px); }
+}
+
+.ranking-patente{
+width:42px;
+height:42px;
+object-fit:contain;
+filter:drop-shadow(0 0 8px rgba(255,255,255,.25));
+}
+
+.first .ranking-patente{ width:60px; }
+.second .ranking-patente{ width:50px; }
+.third .ranking-patente{ width:46px; }
+
+#top1-nome,
+#top2-nome,
+#top3-nome{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+}
+
+/* =========================================
+📊 PAINEL "SUA POSIÇÃO"
+========================================= */
+.card-minha-posicao{
+position:relative;
+overflow:hidden;
+
+margin-bottom:24px;
+padding:22px;
+border-radius:22px;
+
+background:linear-gradient(135deg,#111827,#1f2937);
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 14px 40px rgba(0,0,0,.32);
+}
+
+.card-minha-posicao::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#facc15,#38bdf8,#22c55e);
+}
+
+.card-minha-posicao h3{
+margin:0 0 14px;
+font-size:1.15rem;
+}
+
+.card-minha-posicao p{
+margin:8px 0;
+color:rgba(255,255,255,.88);
+}
+
+.ultima-semana{
+margin-top:14px !important;
+font-weight:700;
+color:#facc15 !important;
+}
+
+/* =========================================
+⏳ INFORMAÇÃO DE ATUALIZAÇÃO
+========================================= */
+.ranking-info-atualizacao{
+margin:0 0 28px;
+padding:16px 18px;
+
+border-radius:18px;
+text-align:center;
+
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.ranking-info-atualizacao p{
+margin:6px 0;
+color:#dbe4ff;
+}
+
+#contador-ranking{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+margin-left:8px;
+padding:6px 12px;
+border-radius:999px;
+
+background:rgba(250,204,21,.12);
+border:1px solid rgba(250,204,21,.28);
+
+color:#facc15;
+font-weight:800;
+
+box-shadow:0 0 18px rgba(250,204,21,.18);
+}
+
+/* =========================================
+📋 LISTA DO RANKING
+========================================= */
+.ranking-lista{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.ranking-item{
+position:relative;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+gap:12px;
+
+padding:16px 18px;
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+
+transition:.28s ease;
+animation:fadeUp .35s ease;
+}
+
+.ranking-item::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:5px;
+height:100%;
+opacity:0;
+
+background:linear-gradient(180deg,#38bdf8,#22c55e,#facc15);
+transition:.3s;
+}
+
+.ranking-item:hover::before{
+opacity:1;
+}
+
+.ranking-item::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.08) 50%, transparent 100%);
+transform:translateX(-120%);
+transition:.7s;
+}
+
+.ranking-item:hover::after{
+transform:translateX(120%);
+}
+
+.ranking-item:hover{
+transform:translateY(-3px) scale(1.01);
+background:rgba(255,255,255,.09);
+border-color:rgba(255,255,255,.12);
+box-shadow:0 12px 32px rgba(0,0,0,.28);
+}
+
+.ranking-item.top10{
+background:linear-gradient(90deg, rgba(250,204,21,.12), rgba(255,255,255,.04));
+border-left:4px solid #facc15;
+}
+
+.ranking-item:nth-child(1){
+box-shadow:0 0 24px rgba(250,204,21,.22);
+}
+
+.ranking-item:nth-child(2){
+box-shadow:0 0 20px rgba(203,213,225,.18);
+}
+
+.ranking-item:nth-child(3){
+box-shadow:0 0 18px rgba(251,146,60,.18);
+}
+
+.ranking-pos{
+width:54px;
+flex-shrink:0;
+font-weight:800;
+font-size:1rem;
+}
+
+.ranking-item.top10 .ranking-pos::before{
+content:"⭐ ";
+color:#facc15;
+}
+
+.ranking-posicao-wrapper{
+width:66px;
+display:flex;
+justify-content:center;
+flex-shrink:0;
+}
+
+.ranking-nome{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.ranking-nome strong{
+font-size:1.05rem;
+letter-spacing:.2px;
+}
+
+.info-linha{
+color:#facc15;
+font-size:.76rem;
+}
+
+.professor{
+color:#38bdf8;
+font-size:.73rem;
+}
+
+.aluno-info{
+color:rgba(255,255,255,.66);
+font-size:.73rem;
+}
+
+.ranking-xp{
+white-space:nowrap;
+font-weight:800;
+color:#22c55e;
+font-size:1.02rem;
+
+text-shadow:
+0 0 10px rgba(34,197,94,.45),
+0 0 18px rgba(34,197,94,.22);
+}
+
+/* =========================================
+📈 MOVIMENTO NO RANKING
+========================================= */
+.movimento{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+min-width:62px;
+padding:6px 10px;
+border-radius:999px;
+
+font-size:.82rem;
+font-weight:800;
+
+border:1px solid transparent;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.movimento.subiu{
+color:#22c55e;
+background:rgba(34,197,94,.15);
+border-color:rgba(34,197,94,.35);
+}
+
+.movimento.desceu{
+color:#ef4444;
+background:rgba(239,68,68,.15);
+border-color:rgba(239,68,68,.35);
+}
+
+.movimento.neutro{
+color:#60a5fa;
+background:rgba(96,165,250,.15);
+border-color:rgba(96,165,250,.35);
+}
+
+/* =========================================
+✨ ANIMAÇÕES
+========================================= */
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* =========================================
+🖱️ SCROLLBAR
+========================================= */
+::-webkit-scrollbar{
+width:12px;
+}
+
+::-webkit-scrollbar-track{
+background:#071126;
+}
+
+::-webkit-scrollbar-thumb{
+border-radius:999px;
+background:linear-gradient(180deg,#38bdf8,#22c55e,#facc15);
+border:2px solid #071126;
+}
+
+/* =========================================
+📱 RESPONSIVO
+========================================= */
+@media (max-width:700px){
+
+.ranking-header h1{
+font-size:2rem;
+}
+
+.top3{
+flex-direction:column;
+align-items:center;
+gap:16px;
+}
+
+.first,
+.second,
+.third{
+transform:none;
+width:100%;
+max-width:320px;
+}
+
+.ranking-item{
+padding:16px 14px;
+border-radius:16px;
+gap:10px;
+}
+
+.ranking-posicao-wrapper{
+width:56px;
+}
+
+.ranking-patente{
+width:34px;
+height:34px;
+}
+
+.ranking-xp{
+font-size:.92rem;
+}
+
+.tab,
+.tab-prof,
+.tab-escola,
+.tab-serie,
+.tab-turma{
+width:100%;
+max-width:320px;
+justify-content:center;
+}
+}
+
+/* =========================================
+🎯 TOPO MINIMALISTA PREMIUM
+Substitua o HTML do cabeçalho por:
+
+<header class="ranking-header">
+
+  <div class="ranking-badge">
+    <span class="ranking-badge-icon">🏆</span>
+    <span class="ranking-badge-text">RANKING</span>
+  </div>
+
+  <h1>Os melhores alunos da plataforma</h1>
+
+  <p class="ranking-subtitulo">
+    Atualizado automaticamente às 00:00, 06:00, 12:00 e 18:00.
+  </p>
+
+</header>
+========================================= */
+
+.ranking-header{
+margin-bottom:72px;
+text-align:center;
+}
+
+.ranking-badge{
+display:inline-flex;
+align-items:center;
+gap:14px;
+
+padding:14px 22px;
+margin-bottom:24px;
+
+border-radius:999px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.18),
+inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.ranking-badge-icon{
+display:flex;
+align-items:center;
+justify-content:center;
+
+width:42px;
+height:42px;
+border-radius:14px;
+
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#111827;
+font-size:1.45rem;
+
+box-shadow:
+0 6px 18px rgba(250,204,21,.35),
+inset 0 1px 0 rgba(255,255,255,.3);
+}
+
+.ranking-badge-text{
+font-size:.82rem;
+font-weight:800;
+letter-spacing:.28em;
+color:rgba(255,255,255,.78);
+}
+
+.ranking-header h1{
+margin:0;
+font-size:3.4rem;
+font-weight:800;
+line-height:1.05;
+letter-spacing:-.04em;
+
+background:linear-gradient(180deg,#ffffff 0%, rgba(255,255,255,.76) 100%);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+filter:none;
+}
+
+.ranking-header h1::after{
+display:none;
+}
+
+.ranking-subtitulo{
+margin:18px auto 0;
+max-width:620px;
+
+font-size:1.02rem;
+line-height:1.7;
+color:rgba(255,255,255,.56);
+}
+
+.top3{
+margin-top:88px;
+margin-bottom:54px;
+gap:40px;
+}
+
+.first{
+margin-top:-16px;
+}
+
+@media (max-width:700px){
+
+.ranking-header{
+margin-bottom:52px;
+}
+
+.ranking-badge{
+padding:12px 18px;
+gap:10px;
+margin-bottom:18px;
+}
+
+.ranking-badge-icon{
+width:38px;
+height:38px;
+font-size:1.2rem;
+}
+
+.ranking-badge-text{
+font-size:.74rem;
+letter-spacing:.22em;
+}
+
+.ranking-header h1{
+font-size:2.35rem;
+}
+
+.ranking-subtitulo{
+font-size:.92rem;
+padding:0 14px;
+}
+
+.top3{
+margin-top:56px;
+gap:20px;
+}
+}
+
+.ranking-fichas-status{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+
+  margin:-18px 0 32px;
+}
+
+.ranking-fichas-chip{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:12px 18px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+
+  color:#fff;
+  font-size:.92rem;
+  font-weight:700;
+
+  backdrop-filter:blur(16px);
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.ranking-fichas-tempo{
+  color:#fde68a;
+  background:rgba(250,204,21,.08);
+  border-color:rgba(250,204,21,.22);
+}
+
+.confirmacao-ficha-card{
+  position:relative;
+  overflow:hidden;
+
+  max-width:760px;
+  margin:80px auto;
+  padding:42px;
+
+  border-radius:34px;
+
+  background:
+    linear-gradient(145deg,
+      rgba(15,23,42,.96),
+      rgba(15,23,42,.88));
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.05);
+
+  backdrop-filter:blur(24px);
+}
+
+.confirmacao-ficha-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(circle at top right,
+      rgba(250,204,21,.10),
+      transparent 28%),
+    radial-gradient(circle at bottom left,
+      rgba(56,189,248,.10),
+      transparent 30%);
+}
+
+.confirmacao-ficha-topo{
+  display:flex;
+  align-items:center;
+  gap:22px;
+
+  margin-bottom:34px;
+  position:relative;
+  z-index:2;
+}
+
+.confirmacao-ficha-icone{
+  width:86px;
+  height:86px;
+  flex-shrink:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:26px;
+
+  background:linear-gradient(135deg,#facc15,#f59e0b);
+
+  font-size:2.8rem;
+
+  box-shadow:
+    0 16px 40px rgba(250,204,21,.28),
+    0 0 28px rgba(250,204,21,.18);
+}
+
+.confirmacao-ficha-topo h1{
+  margin:0 0 10px;
+  color:#fff;
+  font-size:2.4rem;
+  font-weight:900;
+  letter-spacing:-.03em;
+}
+
+.confirmacao-ficha-topo p{
+  margin:0;
+  color:rgba(255,255,255,.68);
+  font-size:1rem;
+  line-height:1.7;
+}
+
+.confirmacao-ficha-topo strong{
+  color:#facc15;
+}
+
+.confirmacao-ficha-regras{
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+
+  margin-bottom:34px;
+}
+
+.regra-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+
+  padding:18px 18px;
+  border-radius:20px;
+
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
+
+  transition:.25s ease;
+}
+
+.regra-item:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.12);
+}
+
+.regra-item span{
+  font-size:1.35rem;
+  width:28px;
+  flex-shrink:0;
+}
+
+.regra-item p{
+  margin:0;
+  color:rgba(255,255,255,.82);
+  line-height:1.65;
+}
+
+.confirmacao-ficha-botoes{
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  gap:14px;
+}
+
+.btn-usar-ficha,
+.btn-voltar-ranking{
+  flex:1;
+  border:none;
+  cursor:pointer;
+
+  padding:18px 20px;
+  border-radius:18px;
+
+  font-size:1rem;
+  font-weight:800;
+
+  transition:.25s ease;
+}
+
+.btn-usar-ficha{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#fff;
+
+  box-shadow:
+    0 16px 32px rgba(34,197,94,.28),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.btn-usar-ficha:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 20px 36px rgba(34,197,94,.34),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.btn-voltar-ranking{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  color:#fff;
+}
+
+.btn-voltar-ranking:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.10);
+}
+
+.sem-fichas-card{
+  max-width:620px;
+  margin:90px auto;
+  padding:42px 36px;
+
+  border-radius:34px;
+  text-align:center;
+
+  background:
+    linear-gradient(145deg,
+      rgba(15,23,42,.96),
+      rgba(15,23,42,.88));
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.sem-fichas-icone{
+  font-size:4.5rem;
+  margin-bottom:18px;
+}
+
+.sem-fichas-card h2{
+  margin:0 0 14px;
+  font-size:2rem;
+  color:#fff;
+}
+
+.sem-fichas-card p{
+  margin:0 0 28px;
+  color:rgba(255,255,255,.68);
+  line-height:1.7;
+}
+
+.btn-comprar-fichas{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:16px 22px;
+  border-radius:18px;
+
+  background:linear-gradient(135deg,#facc15,#f59e0b);
+  color:#111827;
+  text-decoration:none;
+  font-weight:900;
+
+  box-shadow:0 16px 32px rgba(250,204,21,.24);
+
+  transition:.25s ease;
+}
+
+.btn-comprar-fichas:hover{
+  transform:translateY(-3px);
+}
+
+@media (max-width:700px){
+
+  .confirmacao-ficha-card{
+    margin:36px 12px;
+    padding:28px 20px;
+    border-radius:24px;
+  }
+
+  .confirmacao-ficha-topo{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .confirmacao-ficha-icone{
+    width:74px;
+    height:74px;
+    font-size:2.3rem;
+  }
+
+  .confirmacao-ficha-topo h1{
+    font-size:2rem;
+  }
+
+  .confirmacao-ficha-botoes{
+    flex-direction:column;
+  }
+
+  .ranking-fichas-status{
+    margin-top:0;
+  }
+}

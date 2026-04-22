@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Calc3D Pro – Dashboard</title>
+
+<style>
+:root {
+  --primaria: #2563eb;
+  --texto: #0f172a;
+  --cinza: #64748b;
+  --borda: #e5e7eb;
+  --sucesso: #16a34a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #e5e7eb;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--texto);
+}
+
+header {
+  background: #fff;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+
+header .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  color: var(--primaria);
+}
+
+header img {
+  height: 36px;
+}
+
+header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #475569;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+h2 {
+  text-align: center;
+  color: var(--primaria);
+}
+
+label {
+  font-weight: 600;
+  margin-top: 18px;
+  display: block;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--borda);
+  font-size: 15px;
+}
+
+.resultado {
+  background: #f1f5f9;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+.resultado strong {
+  font-size: 20px;
+  color: var(--sucesso);
+}
+
+.botoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+button.action {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-calcular {
+  background: var(--primaria);
+  color: white;
+}
+
+.btn-orcamento {
+  background: #0f172a;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 FIREBASE AUTH -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCs6AGz_yGwLwbMuWQLMkUv0-IJZ84IT2M",
+  authDomain: "calculadora---3d.firebaseapp.com",
+  projectId: "calculadora---3d",
+  storageBucket: "calculadora---3d.firebasestorage.app",
+  messagingSenderId: "53725959441",
+  appId: "1:53725959441:web:2f83316aa37380da0aa8b0",
+  measurementId: "G-1WHG7YB873"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// 🔒 Proteção simples
+onAuthStateChanged(auth, user => {
+  if (!user) window.location.href = "login.html";
+});
+
+window.logout = () => {
+  signOut(auth).then(() => window.location.href = "login.html");
+};
+</script>
+
+<header>
+  <div class="brand">
+    <img src="assets/img/logo.png">
+    <span>Calc3D Pro</span>
+  </div>
+  <button onclick="logout()">Sair</button>
+</header>
+
+<div class="container">
+
+<h2>Calculadora de Custos – Impressão 3D</h2>
+
+<label>Cliente</label>
+<input type="text" id="cliente">
+
+<label>Material</label>
+<select id="material">
+  <option>PLA</option>
+  <option>PETG</option>
+  <option>ABS</option>
+</select>
+
+<label>Peso da peça (g)</label>
+<input type="number" id="peso">
+
+<label>Tempo de impressão (h)</label>
+<input type="number" id="tempo">
+
+<label>Filamento (R$/kg)</label>
+<input type="number" id="filamento" value="120">
+
+<label>Custo da máquina (R$/h)</label>
+<input type="number" id="maquina" value="5">
+
+<label>Potência da impressora (W)</label>
+<input type="number" id="potencia" value="120">
+
+<label>Valor do kWh (R$)</label>
+<input type="number" id="kwh" value="0.90" step="0.01">
+
+<label>Mão de obra (R$)</label>
+<input type="number" id="maoObra" value="10">
+
+<label>Acessórios (R$)</label>
+<input type="number" id="acessorios" value="0">
+
+<label>Perda / Falha (%)</label>
+<input type="number" id="perda" value="10">
+
+<label>Lucro (%)</label>
+<input type="number" id="lucro" value="30">
+
+<div class="botoes">
+  <button class="action btn-calcular" onclick="calcular()">Calcular</button>
+  <button class="action btn-orcamento" onclick="gerarOrcamento()">Gerar orçamento</button>
+</div>
+
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+function calcular() {
+  const peso = Number(document.getElementById("peso").value);
+  const tempo = Number(document.getElementById("tempo").value);
+
+  if (peso <= 0 || tempo <= 0) {
+    resultado.innerHTML = "Preencha peso e tempo corretamente.";
+    return null;
+  }
+
+  const custoMaterial = (filamento.value / 1000) * peso;
+  const custoMaquina = tempo * maquina.value;
+  const custoEnergia = (potencia.value / 1000) * tempo * kwh.value;
+
+  const base =
+    custoMaterial +
+    custoMaquina +
+    custoEnergia +
+    Number(maoObra.value) +
+    Number(acessorios.value);
+
+  const perdaValor = base * (perda.value / 100);
+  const subtotal = base + perdaValor;
+  const precoFinal = subtotal * (1 + lucro.value / 100);
+
+  resultado.innerHTML = `
+    Material: R$ ${custoMaterial.toFixed(2)}<br>
+    Máquina: R$ ${custoMaquina.toFixed(2)}<br>
+    Energia: R$ ${custoEnergia.toFixed(2)}<br>
+    Mão de obra: R$ ${Number(maoObra.value).toFixed(2)}<br>
+    Acessórios: R$ ${Number(acessorios.value).toFixed(2)}<br>
+    Perda: R$ ${perdaValor.toFixed(2)}<br>
+    <strong>Preço final: R$ ${precoFinal.toFixed(2)}</strong>
+  `;
+
+  return {
+    custoMaterial,
+    custoMaquina,
+    custoEnergia,
+    maoObra: Number(maoObra.value),
+    acessorios: Number(acessorios.value),
+    perda: perdaValor,
+    precoFinal
+  };
+}
+
+function gerarOrcamento() {
+  const res = calcular();
+  if (!res) return;
+
+  localStorage.setItem("orcamento", JSON.stringify({
+    cliente: cliente.value,
+    material: material.value,
+    peso: peso.value,
+    tempo: tempo.value,
+    ...res
+  }));
+
+  window.location.href = "orcamento.html";
+}
+</script>
+
+</body>
+</html>

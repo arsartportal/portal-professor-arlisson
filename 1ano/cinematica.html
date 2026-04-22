@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cinemática • Portal do Professor Arlisson</title>
+
+  <!-- Estilos globais do portal -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Estilo específico da aula -->
+  <link rel="stylesheet" href="../css/cinematica.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTEÚDO PRINCIPAL
+===================================================== -->
+<section class="aula">
+
+  <!-- ================= TÍTULO ================= -->
+  <header class="topo">
+    <h1>🎯 Cinemática</h1>
+    <p class="subtitulo">
+      Movimento, velocidade, aceleração e gráficos
+    </p>
+  </header>
+
+  <!-- ================= CONCEITOS ================= -->
+  <div class="bloco">
+
+    <h2>📘 Movimento</h2>
+    <p>
+      Um corpo está em movimento quando sua posição muda em relação
+      a um referencial ao longo do tempo.
+    </p>
+
+    <h2>🚀 Velocidade</h2>
+    <p>
+      Velocidade indica quanto a posição varia em função do tempo.
+    </p>
+
+    <h2>⚡ Aceleração</h2>
+    <p>
+      Aceleração representa a variação da velocidade ao longo do tempo.
+      Sempre que a velocidade muda, há aceleração.
+    </p>
+
+  </div>
+
+  <div class="bloco lab">
+
+  <h2>🧪 Laboratório de Cinemática</h2>
+
+  <div class="lab-grid">
+
+    <!-- =======================
+         COLUNA ESQUERDA
+    ======================== -->
+    <div>
+
+      <h3>🚗 Movimento</h3>
+
+      <div class="simulacao">
+        <div id="carro">🚗</div>
+      </div>
+
+      <div class="controles">
+
+        <label>Velocidade (m/s)</label>
+
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="2"
+          oninput="ajustarVelocidade(this.value)"
+        >
+
+        <span id="velTxt">2 m/s</span>
+
+        <div class="botoes">
+          <button onclick="acelerar()">⚡ Acelerar</button>
+          <button onclick="frear()">🛑 Frear</button>
+          <button onclick="pausar()">⏸ Pausar</button>
+          <button onclick="resetar()">🔄 Resetar</button>
+        </div>
+
+        <div class="painel-dados">
+  <div>⏱ Tempo: <span id="tempoTxt">0.0</span> s</div>
+  <div>🚀 Velocidade: <span id="velAtualTxt">2.0</span> m/s</div>
+  <div>⚡ Aceleração: <span id="accTxt">0.0</span> m/s²</div>
+</div>
+      </div>
+
+    </div>
+
+    <!-- =======================
+         COLUNA DIREITA
+    ======================== -->
+    <div>
+
+      <h3>📊 Gráficos</h3>
+
+      <div class="grafico-box">
+        <strong>Posição × Tempo</strong>
+        <canvas id="grafPos" width="420" height="220"></canvas>
+      </div>
+
+      <div class="grafico-box">
+        <strong>Velocidade × Tempo</strong>
+        <canvas id="grafVel" width="420" height="220"></canvas>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+  <!-- ================= CHECKPOINT ================= -->
+  <div class="bloco checkpoint">
+
+    <h2>🏁 Checkpoint Final</h2>
+
+    <p>
+      Um carro passa de <strong>10 m/s</strong> para
+      <strong>30 m/s</strong> em <strong>10 s</strong>.
+      A aceleração vale:
+    </p>
+
+    <div class="botoes">
+      <button onclick="checkpoint(1)">1 m/s²</button>
+      <button onclick="checkpoint(2)">2 m/s²</button>
+      <button onclick="checkpoint(3)">3 m/s²</button>
+    </div>
+
+    <p id="msgFinal"></p>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<!-- Proteção de rota -->
+<script type="module" src="../js/auth-guard.js"></script>
+
+<!-- Lógica da simulação -->
+<script type="module" src="../js/cinematica.js"></script>
+
+<!-- Sistema de XP -->
+<script src="../js/gamificacao.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Termologia — Transferência de Calor</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔥 Termologia</h1>
+      <p>
+        Neste nível, vamos estudar como o calor é transferido
+        de um corpo para outro.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 2.4 — TRANSFERÊNCIA DE CALOR
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-2-4">
+
+      <h2>📘 Nível 2.4 — Transferência de Calor</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Calor como energia em trânsito</h3>
+        <p>
+          O <strong>calor</strong> é a energia térmica que se transfere
+          de um corpo para outro devido à diferença de temperatura.
+        </p>
+        <p>
+          Essa transferência ocorre sempre do corpo
+          <strong>mais quente para o mais frio</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Condução térmica</h3>
+        <p>
+          A <strong>condução</strong> ocorre principalmente em sólidos
+          e não envolve transporte de matéria.
+        </p>
+        <p>
+          Exemplo: uma colher metálica esquenta ao ser colocada
+          em uma panela quente.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Convecção térmica</h3>
+        <p>
+          A <strong>convecção</strong> ocorre em líquidos e gases
+          e envolve o transporte de matéria.
+        </p>
+        <p>
+          Exemplo: o ar quente sobe e o ar frio desce.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Radiação térmica</h3>
+        <p>
+          A <strong>radiação</strong> é a única forma de transferência
+          de calor que não necessita de um meio material.
+        </p>
+        <p>
+          Exemplo: o calor do Sol chega à Terra através do espaço.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Transferência de calor no cotidiano</h3>
+        <ul>
+          <li>🍳 Aquecimento de panelas no fogão</li>
+          <li>❄️ Funcionamento de geladeiras</li>
+          <li>🌞 Aquecimento da Terra pelo Sol</li>
+          <li>🧊 Troca de calor entre bebidas e o ambiente</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Calor é energia em trânsito</li>
+          <li>Condução ocorre principalmente em sólidos</li>
+          <li>Convecção ocorre em líquidos e gases</li>
+          <li>Radiação não precisa de meio material</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 2.4
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que é calor?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Energia em trânsito
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Medida de temperatura
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Tipo de matéria
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Em qual forma ocorre transporte de matéria?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Condução
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Convecção
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Radiação
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual forma de transferência não precisa de meio material?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Condução
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Convecção
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Radiação
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel24()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_2_4')">
+          ✅ Concluir Nível 2.4
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Termologia.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/termologia.js"></script>
+
+</body>
+</html>

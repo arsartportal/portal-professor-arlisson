@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grandezas Físicas | Portal do Professor</title>
+
+<style>
+
+/* =====================================================
+   ESTILO GLOBAL
+===================================================== */
+
+body{
+font-family:'Segoe UI',Arial;
+background:#eef2f8;
+margin:0;
+padding:40px;
+color:#2c3e50;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 35px rgba(0,0,0,0.12);
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.sub{
+text-align:center;
+color:#6b7c93;
+margin-bottom:40px;
+}
+
+h2{
+margin-top:40px;
+border-bottom:2px solid #e4e9f2;
+padding-bottom:6px;
+}
+
+.card{
+background:#f7f9fc;
+padding:20px;
+border-radius:8px;
+margin-top:15px;
+line-height:1.8;
+}
+
+.formula{
+font-size:28px;
+text-align:center;
+margin:20px 0;
+font-weight:bold;
+}
+
+.exemplo{
+background:#eef6ff;
+border-left:4px solid #3498db;
+padding:15px;
+margin-top:15px;
+}
+
+.tabela{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+background:white;
+border-radius:8px;
+overflow:hidden;
+}
+
+.tabela th,
+.tabela td{
+border:1px solid #dbe4f0;
+padding:12px;
+text-align:left;
+}
+
+.tabela th{
+background:#eaf2ff;
+}
+
+.simulador{
+background:#f7f9ff;
+padding:25px;
+border-radius:8px;
+margin-top:20px;
+}
+
+input, select{
+padding:10px;
+width:170px;
+margin:6px;
+border:1px solid #ccd6e4;
+border-radius:6px;
+font-size:15px;
+}
+
+button{
+padding:10px 18px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1a68d1;
+}
+
+/* =====================================================
+   PAINEL DE RESULTADOS
+===================================================== */
+
+#saidaConversao{
+margin-top:18px;
+font-weight:bold;
+font-size:18px;
+line-height:1.8;
+}
+
+.painel-medidas{
+margin-top:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
+.medida-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.medida-card h4{
+margin:0 0 8px 0;
+font-size:16px;
+color:#2c7be5;
+}
+
+/* =====================================================
+   BARRA VISUAL
+===================================================== */
+
+.visual-box{
+margin-top:22px;
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:18px;
+}
+
+.visual-bar-wrap{
+width:100%;
+height:28px;
+background:#e9eef7;
+border-radius:999px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.visual-bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#2c7be5,#7db7ff);
+border-radius:999px;
+transition:0.4s;
+}
+
+.escala-legenda{
+margin-top:10px;
+font-size:14px;
+color:#5b6b7f;
+}
+
+.referencia{
+margin-top:18px;
+background:#eef6ff;
+border-left:4px solid #2c7be5;
+padding:14px;
+border-radius:6px;
+}
+
+/* =====================================================
+   ESCADA MÉTRICA
+===================================================== */
+
+.escada-box{
+margin-top:22px;
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:12px;
+padding:20px;
+}
+
+.escada-titulo{
+font-weight:bold;
+font-size:18px;
+margin-bottom:15px;
+}
+
+.escada{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+justify-content:center;
+align-items:flex-end;
+margin-top:10px;
+}
+
+.degrau{
+width:120px;
+min-height:88px;
+background:#f7faff;
+border:2px solid #dbe4f0;
+border-radius:12px;
+padding:12px;
+text-align:center;
+box-sizing:border-box;
+transition:0.3s;
+position:relative;
+}
+
+.degrau .sigla{
+font-size:26px;
+font-weight:bold;
+color:#2c7be5;
+}
+
+.degrau .nome{
+font-size:13px;
+color:#607086;
+margin-top:4px;
+}
+
+.degrau .potencia{
+font-size:12px;
+margin-top:8px;
+color:#7a889c;
+}
+
+.degrau.ativo{
+background:#eaf3ff;
+border-color:#2c7be5;
+box-shadow:0 8px 20px rgba(44,123,229,0.15);
+transform:translateY(-6px);
+}
+
+.degrau.destino{
+background:#edfdf2;
+border-color:#27ae60;
+box-shadow:0 8px 20px rgba(39,174,96,0.15);
+transform:translateY(-6px);
+}
+
+.degrau.passagem{
+background:#fff8e8;
+border-color:#f39c12;
+}
+
+.setas-escada{
+margin-top:18px;
+text-align:center;
+font-size:17px;
+font-weight:bold;
+color:#2c3e50;
+line-height:1.8;
+}
+
+#regraConversao{
+margin-top:14px;
+text-align:center;
+font-size:17px;
+font-weight:bold;
+color:#1f4f8c;
+}
+
+#animacaoStatus{
+margin-top:8px;
+text-align:center;
+color:#66788a;
+font-size:14px;
+}
+
+/* =====================================================
+   EXERCÍCIOS
+===================================================== */
+
+.questao{
+background:#fafcff;
+padding:18px;
+margin-top:20px;
+border-left:4px solid #2c7be5;
+border-radius:6px;
+}
+
+.alt{
+margin-top:6px;
+}
+
+.resultado{
+margin-top:10px;
+font-weight:bold;
+}
+
+@media (max-width:768px){
+body{
+padding:20px;
+}
+.container{
+padding:22px;
+}
+input, select{
+width:100%;
+box-sizing:border-box;
+}
+button{
+width:100%;
+margin-top:10px;
+}
+.degrau{
+width:100%;
+max-width:220px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Grandezas Físicas</h1>
+<p class="sub">Física – Ensino Médio</p>
+
+<h2>1. O que são grandezas físicas?</h2>
+
+<div class="card">
+As <b>grandezas físicas</b> são tudo aquilo que pode ser <b>medido</b> e expresso por um <b>valor numérico</b> acompanhado de uma <b>unidade</b>.
+
+<div class="formula">
+valor + unidade
+</div>
+
+Exemplos:
+
+<div class="exemplo">
+3 m → comprimento<br>
+12 s → tempo<br>
+5 kg → massa<br>
+20 °C → temperatura
+</div>
+
+Sem a unidade, a informação fica incompleta. Dizer apenas “5” não basta. É preciso saber se estamos falando de 5 metros, 5 segundos, 5 quilogramas ou outra medida.
+</div>
+
+<h2>2. Classificação das grandezas</h2>
+
+<div class="card">
+<b>Grandezas escalares</b> são definidas apenas por valor e unidade.
+
+<div class="exemplo">
+Exemplos: massa, tempo, temperatura, energia, volume.
+</div>
+
+<b>Grandezas vetoriais</b> precisam de valor, unidade, direção e sentido.
+
+<div class="exemplo">
+Exemplos: força, deslocamento, velocidade vetorial, aceleração.
+</div>
+</div>
+
+<h2>3. Grandezas fundamentais e derivadas</h2>
+
+<div class="card">
+As grandezas <b>fundamentais</b> servem de base para outras. Já as <b>derivadas</b> surgem de combinações matemáticas entre grandezas fundamentais.
+
+<table class="tabela">
+<tr>
+<th>Tipo</th>
+<th>Grandeza</th>
+<th>Unidade no SI</th>
+</tr>
+<tr>
+<td>Fundamental</td>
+<td>Comprimento</td>
+<td>metro (m)</td>
+</tr>
+<tr>
+<td>Fundamental</td>
+<td>Massa</td>
+<td>quilograma (kg)</td>
+</tr>
+<tr>
+<td>Fundamental</td>
+<td>Tempo</td>
+<td>segundo (s)</td>
+</tr>
+<tr>
+<td>Fundamental</td>
+<td>Temperatura</td>
+<td>kelvin (K)</td>
+</tr>
+<tr>
+<td>Derivada</td>
+<td>Velocidade</td>
+<td>m/s</td>
+</tr>
+<tr>
+<td>Derivada</td>
+<td>Aceleração</td>
+<td>m/s²</td>
+</tr>
+<tr>
+<td>Derivada</td>
+<td>Força</td>
+<td>newton (N)</td>
+</tr>
+</table>
+</div>
+
+<h2>4. Unidades de comprimento</h2>
+
+<div class="card">
+As unidades de comprimento mais usadas no sistema métrico decimal são:
+
+<table class="tabela">
+<tr>
+<th>Nome</th>
+<th>Símbolo</th>
+<th>Equivalência em metro</th>
+</tr>
+<tr><td>Quilômetro</td><td>km</td><td>1000 m</td></tr>
+<tr><td>Hectômetro</td><td>hm</td><td>100 m</td></tr>
+<tr><td>Decâmetro</td><td>dam</td><td>10 m</td></tr>
+<tr><td>Metro</td><td>m</td><td>1 m</td></tr>
+<tr><td>Decímetro</td><td>dm</td><td>0,1 m</td></tr>
+<tr><td>Centímetro</td><td>cm</td><td>0,01 m</td></tr>
+<tr><td>Milímetro</td><td>mm</td><td>0,001 m</td></tr>
+</table>
+
+<div class="exemplo">
+No sistema métrico decimal, cada passo para a direita multiplica por 10, e cada passo para a esquerda divide por 10.
+</div>
+</div>
+
+<h2>5. Simulador dinâmico de comprimento</h2>
+
+<div class="simulador">
+
+<p><b>Digite um valor</b>, escolha a unidade e veja a conversão em <b>todas as unidades de comprimento</b>, além de uma comparação visual.</p>
+
+Valor =
+<input type="number" id="valorMedida" value="1" step="any">
+
+Unidade de origem =
+<select id="unidadeOrigem">
+<option value="km">quilômetro (km)</option>
+<option value="hm">hectômetro (hm)</option>
+<option value="dam">decâmetro (dam)</option>
+<option value="m" selected>metro (m)</option>
+<option value="dm">decímetro (dm)</option>
+<option value="cm">centímetro (cm)</option>
+<option value="mm">milímetro (mm)</option>
+</select>
+
+<button onclick="atualizarSimulador()">Atualizar</button>
+
+<div id="saidaConversao"></div>
+
+<div class="painel-medidas" id="painelMedidas"></div>
+
+<div class="visual-box">
+<b>Representação visual aproximada em metros</b>
+<div class="visual-bar-wrap">
+<div class="visual-bar" id="barraVisual"></div>
+</div>
+<div class="escala-legenda" id="legendaEscala"></div>
+</div>
+
+<div class="referencia" id="referenciaPratica"></div>
+
+<div class="escada-box">
+<div class="escada-titulo">Escada métrica animada</div>
+
+<p>Escolha a unidade inicial e a unidade final para ver o caminho da conversão.</p>
+
+De:
+<select id="unidadeEscadaOrigem">
+<option value="km">quilômetro (km)</option>
+<option value="hm">hectômetro (hm)</option>
+<option value="dam">decâmetro (dam)</option>
+<option value="m" selected>metro (m)</option>
+<option value="dm">decímetro (dm)</option>
+<option value="cm">centímetro (cm)</option>
+<option value="mm">milímetro (mm)</option>
+</select>
+
+Para:
+<select id="unidadeEscadaDestino">
+<option value="km">quilômetro (km)</option>
+<option value="hm">hectômetro (hm)</option>
+<option value="dam">decâmetro (dam)</option>
+<option value="m">metro (m)</option>
+<option value="dm">decímetro (dm)</option>
+<option value="cm" selected>centímetro (cm)</option>
+<option value="mm">milímetro (mm)</option>
+</select>
+
+<button onclick="animarEscada()">Animar conversão</button>
+
+<div class="escada" id="escadaMetrica"></div>
+<div class="setas-escada" id="passosEscada"></div>
+<div id="regraConversao"></div>
+<div id="animacaoStatus"></div>
+</div>
+
+</div>
+
+<h2>6. Exemplos do cotidiano</h2>
+
+<div class="card">
+As grandezas físicas aparecem em várias situações reais:
+
+<div class="exemplo">
+Altura de uma porta → cerca de 2 m<br>
+Espessura de um caderno → alguns milímetros<br>
+Distância entre cidades → quilômetros<br>
+Largura de uma mesa → centímetros ou metros<br>
+Comprimento de um lápis → centímetros
+</div>
+
+Isso mostra que a escolha da unidade depende do tamanho do objeto ou da distância observada.
+</div>
+
+<h2>7. Exercícios</h2>
+
+<div id="exercicios"></div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   BASE DE CONVERSÃO
+===================================================== */
+
+const fatores = {
+km: 1000,
+hm: 100,
+dam: 10,
+m: 1,
+dm: 0.1,
+cm: 0.01,
+mm: 0.001
+};
+
+const nomes = {
+km: "quilômetro",
+hm: "hectômetro",
+dam: "decâmetro",
+m: "metro",
+dm: "decímetro",
+cm: "centímetro",
+mm: "milímetro"
+};
+
+const unidadesOrdem = ["km","hm","dam","m","dm","cm","mm"];
+
+/* =====================================================
+   FUNÇÕES DE CONVERSÃO
+===================================================== */
+
+function paraMetro(valor, unidade){
+return valor * fatores[unidade];
+}
+
+function deMetro(valor, unidade){
+return valor / fatores[unidade];
+}
+
+function formatarNumero(valor){
+return Number(valor).toLocaleString("pt-BR", {
+maximumFractionDigits: 6
+});
+}
+
+/* =====================================================
+   REFERÊNCIA PRÁTICA
+===================================================== */
+
+function gerarReferencia(metros){
+
+const abs = Math.abs(metros);
+
+if(abs < 0.01){
+return "Essa medida é muito pequena, próxima da espessura de objetos finos, como uma folha ou pequenos detalhes.";
+}
+if(abs < 0.3){
+return "Essa medida é parecida com objetos pequenos do dia a dia, como um lápis, uma borracha ou a largura de um caderno.";
+}
+if(abs < 1){
+return "Essa medida é próxima do tamanho de objetos que cabem nas mãos ou sobre uma mesa.";
+}
+if(abs < 3){
+return "Essa medida se aproxima da altura de pessoas, portas ou móveis maiores.";
+}
+if(abs < 20){
+return "Essa medida lembra o comprimento de uma sala, de um ônibus pequeno ou de um espaço interno amplo.";
+}
+if(abs < 1000){
+return "Essa medida já representa distâncias maiores, como quarteirões, ruas ou trajetos locais.";
+}
+
+return "Essa medida representa uma distância grande, como percursos entre bairros, cidades ou trechos rodoviários.";
+}
+
+/* =====================================================
+   BARRA VISUAL
+===================================================== */
+
+function atualizarBarraVisual(metros){
+
+const barra = document.getElementById("barraVisual");
+const legenda = document.getElementById("legendaEscala");
+
+let percentual = 0;
+let escalaTexto = "";
+
+if(metros <= 1){
+percentual = metros * 100;
+escalaTexto = "Escala atual: 1 metro = barra completa";
+}else if(metros <= 10){
+percentual = metros * 10;
+escalaTexto = "Escala atual: 10 metros = barra completa";
+}else if(metros <= 100){
+percentual = metros;
+escalaTexto = "Escala atual: 100 metros = barra completa";
+}else if(metros <= 1000){
+percentual = metros / 10;
+escalaTexto = "Escala atual: 1000 metros = barra completa";
+}else{
+percentual = 100;
+escalaTexto = "Escala atual: acima de 1000 metros";
+}
+
+percentual = Math.max(0, Math.min(percentual, 100));
+barra.style.width = percentual + "%";
+legenda.innerHTML = `Comprimento aproximado em metros: <b>${formatarNumero(metros)} m</b><br>${escalaTexto}`;
+}
+
+/* =====================================================
+   ATUALIZAR SIMULADOR
+===================================================== */
+
+function atualizarSimulador(){
+
+const valor = parseFloat(document.getElementById("valorMedida").value);
+const origem = document.getElementById("unidadeOrigem").value;
+const saida = document.getElementById("saidaConversao");
+const painel = document.getElementById("painelMedidas");
+const referencia = document.getElementById("referenciaPratica");
+
+if(isNaN(valor)){
+saida.innerHTML = "Digite um valor válido.";
+painel.innerHTML = "";
+referencia.innerHTML = "";
+document.getElementById("barraVisual").style.width = "0%";
+document.getElementById("legendaEscala").innerHTML = "";
+return;
+}
+
+const metros = paraMetro(valor, origem);
+
+saida.innerHTML = `Valor informado: <b>${formatarNumero(valor)} ${origem}</b> = <b>${formatarNumero(metros)} m</b>`;
+
+let html = "";
+
+Object.keys(fatores).forEach(unidade => {
+const convertido = deMetro(metros, unidade);
+html += `
+<div class="medida-card">
+<h4>${nomes[unidade]} (${unidade})</h4>
+<div><b>${formatarNumero(convertido)}</b> ${unidade}</div>
+</div>
+`;
+});
+
+painel.innerHTML = html;
+
+atualizarBarraVisual(metros);
+referencia.innerHTML = `<b>Comparação prática:</b> ${gerarReferencia(metros)}`;
+}
+
+/* =====================================================
+   ESCADA MÉTRICA
+===================================================== */
+
+function renderizarEscada(origem = null, destino = null, caminho = []){
+
+const escada = document.getElementById("escadaMetrica");
+let html = "";
+
+unidadesOrdem.forEach(unidade => {
+
+let classe = "degrau";
+
+if(caminho.includes(unidade)) classe += " passagem";
+if(unidade === origem) classe += " ativo";
+if(unidade === destino) classe += " destino";
+
+let potencia = "";
+
+if(unidade === "km") potencia = "10³ m";
+if(unidade === "hm") potencia = "10² m";
+if(unidade === "dam") potencia = "10¹ m";
+if(unidade === "m") potencia = "10⁰ m";
+if(unidade === "dm") potencia = "10⁻¹ m";
+if(unidade === "cm") potencia = "10⁻² m";
+if(unidade === "mm") potencia = "10⁻³ m";
+
+html += `
+<div class="${classe}">
+<div class="sigla">${unidade}</div>
+<div class="nome">${nomes[unidade]}</div>
+<div class="potencia">${potencia}</div>
+</div>
+`;
+});
+
+escada.innerHTML = html;
+}
+
+function sleep(ms){
+return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function animarEscada(){
+
+const origem = document.getElementById("unidadeEscadaOrigem").value;
+const destino = document.getElementById("unidadeEscadaDestino").value;
+const passosEl = document.getElementById("passosEscada");
+const regraEl = document.getElementById("regraConversao");
+const statusEl = document.getElementById("animacaoStatus");
+
+const iOrigem = unidadesOrdem.indexOf(origem);
+const iDestino = unidadesOrdem.indexOf(destino);
+
+renderizarEscada(origem, destino, []);
+passosEl.innerHTML = "";
+regraEl.innerHTML = "";
+statusEl.innerHTML = "Preparando animação...";
+
+if(iOrigem === iDestino){
+passosEl.innerHTML = `Você permaneceu na mesma unidade: <b>${origem}</b>.`;
+regraEl.innerHTML = "Não há deslocamento na escada. O valor numérico não muda.";
+statusEl.innerHTML = "Conversão direta concluída.";
+renderizarEscada(origem, destino, []);
+return;
+}
+
+const direcao = iDestino > iOrigem ? 1 : -1;
+const caminho = [];
+const textoPassos = [];
+
+for(let i = iOrigem; direcao === 1 ? i <= iDestino : i >= iDestino; i += direcao){
+caminho.push(unidadesOrdem[i]);
+}
+
+for(let i = 0; i < caminho.length; i++){
+renderizarEscada(origem, destino, caminho.slice(0, i + 1));
+statusEl.innerHTML = `Passando por: <b>${caminho[i]}</b>`;
+await sleep(450);
+}
+
+const quantidadePassos = Math.abs(iDestino - iOrigem);
+
+for(let i = 0; i < quantidadePassos; i++){
+if(direcao === 1){
+textoPassos.push(`1 passo à direita → ×10`);
+}else{
+textoPassos.push(`1 passo à esquerda → ÷10`);
+}
+}
+
+passosEl.innerHTML = textoPassos.join("<br>");
+
+if(direcao === 1){
+regraEl.innerHTML = `De <b>${origem}</b> para <b>${destino}</b>: mover ${quantidadePassos} casa(s) à direita → <b>multiplicar por 10<sup>${quantidadePassos}</sup></b>.`;
+}else{
+regraEl.innerHTML = `De <b>${origem}</b> para <b>${destino}</b>: mover ${quantidadePassos} casa(s) à esquerda → <b>dividir por 10<sup>${quantidadePassos}</sup></b>.`;
+}
+
+statusEl.innerHTML = "Animação concluída.";
+}
+
+/* =====================================================
+   EXERCÍCIOS
+===================================================== */
+
+const questoes = [
+{p:"Uma grandeza física é algo que pode ser:",a:["apagado","medido","imaginado apenas","desenhado"],c:1},
+{p:"Qual das opções abaixo é uma grandeza física?",a:["cor favorita","comprimento","humor","saudade"],c:1},
+{p:"A unidade padrão de comprimento no SI é:",a:["litro","metro","quilo","hora"],c:1},
+{p:"A unidade padrão de massa no SI é:",a:["grama","tonelada","quilograma","newton"],c:2},
+{p:"O tempo, no SI, é medido em:",a:["minuto","hora","segundo","dia"],c:2},
+{p:"Velocidade é uma grandeza:",a:["derivada","fundamental","inexistente","química"],c:0},
+{p:"Força é medida, no SI, em:",a:["joule","pascal","newton","watt"],c:2},
+{p:"Qual destas é uma grandeza vetorial?",a:["massa","temperatura","força","tempo"],c:2},
+{p:"Qual destas é uma grandeza escalar?",a:["deslocamento","força","aceleração","massa"],c:3},
+{p:"2,5 m equivalem a:",a:["250 cm","25 cm","2500 cm","0,25 cm"],c:0}
+];
+
+const tentativas = {};
+
+function carregar(){
+
+const div = document.getElementById("exercicios");
+let html = "";
+
+questoes.forEach((q,i)=>{
+
+tentativas[i] = 0;
+
+html += "<div class='questao'>";
+html += "<p>"+(i+1)+") "+q.p+"</p>";
+
+q.a.forEach((alt,j)=>{
+html += "<div class='alt'>";
+html += "<input type='radio' name='q"+i+"' value='"+j+"'> "+alt;
+html += "</div>";
+});
+
+html += "<button onclick='corrigir("+i+")'>Responder</button>";
+html += "<div class='resultado' id='r"+i+"'></div>";
+html += "</div>";
+
+});
+
+div.innerHTML = html;
+}
+
+function corrigir(i){
+
+let radios = document.getElementsByName("q"+i);
+let escolha;
+
+for(let r of radios){
+if(r.checked) escolha = parseInt(r.value);
+}
+
+if(escolha === undefined) return;
+
+if(escolha === questoes[i].c){
+document.getElementById("r"+i).innerHTML = "✅ Correto!";
+}else{
+tentativas[i]++;
+
+if(tentativas[i] >= 3){
+document.getElementById("r"+i).innerHTML = "❌ Resposta correta: " + questoes[i].a[questoes[i].c];
+}else{
+document.getElementById("r"+i).innerHTML = "❌ Tente novamente (" + (3 - tentativas[i]) + " tentativas restantes)";
+}
+}
+}
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+atualizarSimulador();
+renderizarEscada("m", "cm", []);
+carregar();
+
+</script>
+
+</body>
+</html>

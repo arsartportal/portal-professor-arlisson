@@ -1,0 +1,236 @@
+body{
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+  padding:30px;
+  color:white;
+  background:#020617;
+  overflow-x:hidden;
+}
+
+/* partículas animadas */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  top:-50%;
+  left:-50%;
+
+  background-image:
+    radial-gradient(circle, rgba(59,130,246,0.15) 2px, transparent 2px),
+    radial-gradient(circle, rgba(147,197,253,0.12) 2px, transparent 2px),
+    radial-gradient(circle, rgba(59,130,246,0.08) 2px, transparent 2px);
+
+  background-size: 180px 180px, 220px 220px, 260px 260px;
+
+  animation: moverParticulas 60s linear infinite;
+
+  z-index:-1;
+}
+
+/* container */
+.faq-container{
+  max-width:800px;
+  margin:auto;
+
+  background:rgba(255,255,255,0.03);
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter:blur(12px);
+}
+
+/* título */
+h1{
+  text-align:center;
+  font-size:2.5rem;
+}
+
+.sub{
+  text-align:center;
+  opacity:0.7;
+  margin-bottom:30px;
+}
+
+/* item */
+.faq-item{
+  margin-bottom:15px;
+  border-radius:15px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+/* pergunta */
+.faq-question{
+  width:100%;
+  background:none;
+  border:none;
+  color:white;
+  padding:20px;
+  font-size:1.1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+/* hover */
+.faq-question:hover{
+  background:rgba(255,255,255,0.08);
+}
+
+/* resposta */
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  padding:0 20px;
+  opacity:0;
+  transition:all 0.4s ease;
+}
+
+/* ativo */
+.faq-item.active .faq-answer{
+  max-height:200px;
+  padding:20px;
+  opacity:1;
+}
+
+/* animação símbolo */
+.faq-item.active span{
+  transform:rotate(45deg);
+}
+
+@keyframes moverParticulas{
+  0%{
+    transform: translate(0,0);
+  }
+  50%{
+    transform: translate(-200px,-150px);
+  }
+  100%{
+    transform: translate(0,0);
+  }
+}
+
+@keyframes moverParticulas2{
+  0%{
+    transform: translate(0,0);
+  }
+  100%{
+    transform: translate(150px,100px);
+  }
+}
+
+/* botão voltar */
+.btn-voltar{
+  background:rgba(255,255,255,0.08);
+  border:none;
+  color:white;
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
+  margin-bottom:20px;
+  transition:0.3s;
+}
+
+.btn-voltar:hover{
+  background:rgba(255,255,255,0.15);
+}
+
+/* aviso */
+.aviso{
+  background:rgba(255, 193, 7, 0.1);
+  border:1px solid rgba(255, 193, 7, 0.3);
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:25px;
+  font-size:0.95rem;
+}
+
+/* botão flutuante */
+.btn-chat{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#3b82f6;
+  border:none;
+  color:white;
+  padding:15px 20px;
+  border-radius:30px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+
+.btn-chat:hover{
+  transform:scale(1.05);
+}
+
+/* caixa do chat */
+.chat-box{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  width:300px;
+  height:400px;
+  background:#0f172a;
+  border-radius:15px;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* header */
+.chat-header{
+  background:#1e293b;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+}
+
+/* mensagens */
+.chat-messages{
+  flex:1;
+  padding:10px;
+  overflow-y:auto;
+  font-size:0.9rem;
+}
+
+/* mensagens */
+.bot{
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.user{
+  background:#3b82f6;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+  text-align:right;
+}
+
+/* input */
+.chat-input{
+  display:flex;
+}
+
+.chat-input input{
+  flex:1;
+  border:none;
+  padding:10px;
+  outline:none;
+}
+
+.chat-input button{
+  background:#3b82f6;
+  border:none;
+  color:white;
+  padding:10px;
+  cursor:pointer;
+}

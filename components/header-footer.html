@@ -1,0 +1,109 @@
+<!-- ===================================================== -->
+<!-- HEADER PADRÃO DO PORTAL DO PROFESSOR ARLISSON         -->
+<!-- ===================================================== -->
+<header class="header">
+
+  <!-- HUD / XP -->
+  <div class="mini-hud">
+    <img id="patente-img" class="mini-patente" src="" alt="Patente do usuário">
+
+    <div class="mini-xp">
+      <div id="xp-preenchimento"></div>
+    </div>
+
+    <div class="mini-detalhes">
+      <img id="patente-img-detalhe" class="patente-grande" src="" alt="Patente detalhada">
+
+      <div class="info-texto">
+        <strong>Nível <span id="nivel-usuario">0</span></strong>
+        <span id="xp-texto">XP 0 / 100</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Título -->
+  <div class="header-centro">
+    <a href="/index.html" class="portal-title">
+      <span class="portal-brand">Portal</span>
+      <span class="portal-name">Professor Arlisson</span>
+    </a>
+
+    <p class="hero-subtitle animated-lines">
+      Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)
+    </p>
+  </div>
+
+  <!-- Botões -->
+  <div class="header-direita">
+    <div class="header-botoes">
+      <button id="toggle-tema" title="Alternar tema">🌙</button>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+</header>
+
+<!-- ===================================================== -->
+<!-- FOOTER                                                -->
+<!-- ===================================================== -->
+<footer class="footer">
+
+  <div class="container footer-box">
+
+    <div class="footer-brand">
+      <a href="/index.html" class="footer-logo">
+        <span>Portal</span> Professor Arlisson
+      </a>
+
+      <p>
+        Plataforma educacional com materiais, exercícios, desafios e recursos
+        para Física, Química e Matemática.
+      </p>
+    </div>
+
+    <div class="footer-links-coluna">
+      <h4>Navegação</h4>
+
+      <a href="/index.html">Início</a>
+      <a href="/materiais/materiais.html">Materiais</a>
+      <a href="/biblioteca/biblioteca.html">Biblioteca</a>
+      <a href="/avisos/avisos.html">Avisos</a>
+    </div>
+
+    <div class="footer-links-coluna">
+      <h4>Informações</h4>
+
+      <a href="/sobre/sobre.html">Sobre o projeto</a>
+      <a href="/contato/contato.html">Contato</a>
+      <a href="/politica-de-privacidade/politicadeprivacidade.html">
+        Política de Privacidade
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Portal do Professor Arlisson • Aprender transforma.
+  </div>
+
+</footer>
+
+<!-- ===================================================== -->
+<!-- SCRIPT                                                -->
+<!-- ===================================================== -->
+<script>
+  function sair() {
+    localStorage.clear();
+    window.location.href = "/index.html";
+  }
+
+  const menuBtn = document.getElementById("menuMobileBtn");
+  const menu = document.getElementById("menuPrincipal");
+
+  menuBtn?.addEventListener("click", () => {
+    menu.classList.toggle("ativo");
+
+    const aberto = menu.classList.contains("ativo");
+    menuBtn.setAttribute("aria-expanded", aberto);
+  });
+</script>

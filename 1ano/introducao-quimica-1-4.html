@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Química — Nível 1.4</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/introducao-quimica.css" />
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+<header id="header"></header>
+
+<main class="conteudo-quimica">
+
+  <!-- CABEÇALHO -->
+  <section class="cabecalho-modulo">
+    <h1>🧪 Introdução à Química</h1>
+    <p>
+      Vamos entender como a matéria pode se transformar e quais são os tipos de transformações.
+    </p>
+  </section>
+
+  <!-- NÍVEL 1.4 -->
+  <section class="nivel-conteudo" id="nivel-1-4">
+
+    <h2>📘 Nível 1.4 — Transformações da Matéria</h2>
+
+    <!-- BLOCO 1 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 O que é uma transformação?</h3>
+      <p>
+        Uma <strong>transformação</strong> ocorre quando a matéria sofre alguma mudança.
+      </p>
+      <p>
+        Essa mudança pode alterar apenas o estado físico ou pode formar uma nova substância.
+      </p>
+    </article>
+
+    <!-- BLOCO 2 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Transformação Física</h3>
+      <p>
+        Na transformação física, a substância continua sendo a mesma.
+      </p>
+      <ul>
+        <li>Não há formação de nova substância</li>
+        <li>Geralmente envolve mudança de estado físico</li>
+        <li>Exemplo: gelo derretendo, água evaporando</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 3 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Transformação Química</h3>
+      <p>
+        Na transformação química, ocorre formação de novas substâncias.
+      </p>
+      <ul>
+        <li>Há alteração na composição da matéria</li>
+        <li>Pode haver liberação ou absorção de energia</li>
+        <li>Exemplo: ferrugem no ferro, queima do papel</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 4 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Como identificar uma reação química?</h3>
+      <p>
+        Alguns indícios de transformação química:
+      </p>
+      <ul>
+        <li>Mudança de cor</li>
+        <li>Liberação de gás</li>
+        <li>Formação de precipitado</li>
+        <li>Liberação de calor ou luz</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 5 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Energia nas transformações</h3>
+      <p>
+        Muitas transformações químicas envolvem energia.
+      </p>
+      <ul>
+        <li>Exotérmica → libera energia</li>
+        <li>Endotérmica → absorve energia</li>
+      </ul>
+    </article>
+
+    <!-- RESUMO -->
+    <article class="bloco-resumo">
+      <h3>🧠 Resumo do Nível</h3>
+      <ul>
+        <li>Transformações podem ser físicas ou químicas</li>
+        <li>Transformação física não altera a substância</li>
+        <li>Transformação química forma novas substâncias</li>
+        <li>Reações químicas podem envolver energia</li>
+      </ul>
+    </article>
+
+    <!-- CHECKPOINT -->
+    <section class="checkpoint">
+
+      <h3>✅ Checkpoint — Teste rápido</h3>
+
+      <!-- QUESTÃO 1 -->
+      <div class="questao">
+        <p><strong>1)</strong> Em uma transformação física:</p>
+        <label><input type="radio" name="q1" value="a"> Forma-se nova substância</label>
+        <label><input type="radio" name="q1" value="b"> A substância continua sendo a mesma</label>
+        <label><input type="radio" name="q1" value="c"> Sempre há explosão</label>
+      </div>
+
+      <!-- QUESTÃO 2 -->
+      <div class="questao">
+        <p><strong>2)</strong> A queima do papel é exemplo de:</p>
+        <label><input type="radio" name="q2" value="a"> Transformação química</label>
+        <label><input type="radio" name="q2" value="b"> Transformação física</label>
+        <label><input type="radio" name="q2" value="c"> Mudança de estado</label>
+      </div>
+
+      <!-- QUESTÃO 3 -->
+      <div class="questao">
+        <p><strong>3)</strong> Uma reação exotérmica:</p>
+        <label><input type="radio" name="q3" value="a"> Absorve energia</label>
+        <label><input type="radio" name="q3" value="b"> Libera energia</label>
+        <label><input type="radio" name="q3" value="c"> Não envolve energia</label>
+      </div>
+
+      <button class="btn-checkpoint" onclick="verificarCheckpointNivel14()">
+        Verificar respostas
+      </button>
+
+      <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+    </section>
+
+    <!-- BOTÃO CONCLUIR -->
+    <div class="acoes-nivel">
+      <button
+        class="btn-concluir"
+        disabled
+        style="opacity: 0.5"
+        onclick="concluirNivel('nivel_1_4')">
+        ✅ Concluir Nível 1.4
+      </button>
+    </div>
+
+  </section>
+
+  <!-- MODAL -->
+  <div id="nivel-concluido-modal" class="modal hidden">
+    <div class="modal-conteudo">
+      <h3>✅ Nível concluído!</h3>
+      <p>Você avançou na trilha de Introdução à Química.</p>
+
+      <div class="modal-acoes">
+        <button class="btn-primario" onclick="irParaProximoNivel()">
+          ➡️ Próximo nível
+        </button>
+
+        <button class="btn-secundario" onclick="voltarParaQuimica()">
+          🧭 Trilha de Química
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="status-bar">
+  Sistema online • Progresso salvo automaticamente
+</footer>
+
+<script type="module" src="/js/introducao-quimica.js"></script>
+<script type="module" src="/js/patentes.js"></script>
+
+</body>
+</html>

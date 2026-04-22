@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aula – Função Afim</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* =====================================================
+   ESTILO GERAL
+===================================================== */
+body{
+font-family:'Segoe UI',Arial,sans-serif;
+background:#eef2f8;
+margin:0;
+padding:40px;
+color:#2c3e50;
+}
+
+.container{
+max-width:1150px;
+margin:auto;
+background:#ffffff;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 35px rgba(0,0,0,0.12);
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.sub{
+text-align:center;
+color:#6b7c93;
+margin-bottom:40px;
+}
+
+h2{
+margin-top:40px;
+border-bottom:2px solid #e4e9f2;
+padding-bottom:6px;
+}
+
+.card{
+background:#f7f9fc;
+padding:20px;
+border-radius:8px;
+margin-top:15px;
+line-height:1.8;
+}
+
+.formula{
+font-size:28px;
+text-align:center;
+margin:20px 0;
+font-weight:bold;
+}
+
+.exemplo{
+background:#eef6ff;
+border-left:4px solid #3498db;
+padding:15px;
+margin-top:15px;
+border-radius:6px;
+}
+
+.simulador{
+background:#f7f9ff;
+padding:25px;
+border-radius:8px;
+margin-top:20px;
+}
+
+input{
+padding:10px;
+width:100px;
+margin:6px;
+border:1px solid #ccd6e4;
+border-radius:6px;
+font-size:15px;
+}
+
+button{
+padding:10px 18px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+transition:background .2s ease, transform .2s ease;
+}
+
+button:hover{
+background:#1a68d1;
+transform:translateY(-1px);
+}
+
+button:disabled{
+background:#9fb7da;
+cursor:not-allowed;
+transform:none;
+}
+
+canvas{
+margin-top:20px;
+background:#fff;
+border-radius:10px;
+border:1px solid #dbe4f0;
+padding:10px;
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+margin-top:20px;
+}
+
+.info-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.info-card h4{
+margin:0 0 8px 0;
+font-size:16px;
+color:#2c7be5;
+}
+
+.painel-etapas{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:16px;
+}
+
+.etapa{
+background:#f7fbff;
+border:1px solid #d6e7fb;
+padding:12px 14px;
+border-radius:10px;
+font-size:18px;
+line-height:1.7;
+opacity:0;
+transform:translateY(8px);
+animation:aparecer 0.45s ease forwards;
+}
+
+.etapa strong{
+color:#2c7be5;
+}
+
+.etapa-final{
+background:#edfdf2;
+border:1px solid #cdeed8;
+}
+
+@keyframes aparecer{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.comparacao-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+margin-top:18px;
+}
+
+.comparacao-card{
+background:#ffffff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.comparacao-card h4{
+margin:0 0 8px 0;
+font-size:16px;
+color:#2c7be5;
+}
+
+.destaque{
+font-size:18px;
+font-weight:bold;
+margin-top:15px;
+line-height:1.8;
+}
+
+.questao{
+background:#fafcff;
+padding:18px;
+margin-top:20px;
+border-left:4px solid #2c7be5;
+border-radius:6px;
+}
+
+.alt{
+margin-top:6px;
+}
+
+.resultado{
+margin-top:10px;
+font-weight:bold;
+}
+
+.painel-progresso{
+background:#f7f9fc;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:18px;
+margin-bottom:25px;
+}
+
+.progresso-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-top:15px;
+}
+
+.progresso-item{
+background:#fff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:14px;
+}
+
+.progresso-item h4{
+margin:0 0 8px 0;
+font-size:15px;
+color:#2c7be5;
+}
+
+.barra{
+width:100%;
+height:14px;
+background:#dde6f2;
+border-radius:999px;
+overflow:hidden;
+margin-top:14px;
+}
+
+.barra-fill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#2c7be5,#27ae60);
+transition:width .35s ease;
+}
+
+.status-texto{
+margin-top:10px;
+font-weight:bold;
+color:#2c3e50;
+}
+
+.loading-box{
+background:#fff8e1;
+border:1px solid #f0d98a;
+color:#8a6d1d;
+padding:14px;
+border-radius:8px;
+margin-bottom:20px;
+}
+
+.recompensa-box{
+margin-top:18px;
+background:linear-gradient(135deg,#fff8e1,#fff3c4);
+border:1px solid #f0d98a;
+border-radius:14px;
+padding:20px;
+text-align:center;
+box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.recompensa-box h3{
+margin:0 0 10px 0;
+font-size:24px;
+color:#8a6d1d;
+}
+
+.recompensa-box p{
+margin:0 0 14px 0;
+font-size:16px;
+line-height:1.6;
+}
+
+.recompensa-box.sucesso{
+background:linear-gradient(135deg,#edfdf2,#dff8e8);
+border:1px solid #cdeed8;
+}
+
+.btn-recompensa{
+background:linear-gradient(90deg,#f39c12,#f1c40f);
+color:#fff;
+font-weight:bold;
+padding:12px 22px;
+border-radius:999px;
+box-shadow:0 8px 20px rgba(243,156,18,0.25);
+}
+
+.btn-recompensa:hover{
+background:linear-gradient(90deg,#e67e22,#f1c40f);
+}
+
+.efeito-xp{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,0.35);
+z-index:9999;
+padding:20px;
+}
+
+.efeito-xp-card{
+background:#ffffff;
+border-radius:22px;
+padding:34px 34px;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.25);
+transform:scale(0.8);
+opacity:0;
+transition:all .35s ease;
+max-width:420px;
+width:100%;
+}
+
+.efeito-xp-emoji{
+font-size:56px;
+margin-bottom:8px;
+}
+
+.efeito-xp-card h2{
+margin:0 0 10px 0;
+font-size:30px;
+}
+
+.efeito-xp-card p{
+margin:0;
+font-size:20px;
+font-weight:bold;
+color:#27ae60;
+}
+
+@media (max-width:768px){
+body{
+padding:20px;
+}
+.container{
+padding:22px;
+}
+input{
+width:100%;
+box-sizing:border-box;
+}
+button{
+width:100%;
+margin-top:10px;
+}
+.btn-recompensa{
+width:100%;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Função Afim</h1>
+<p class="sub">Matemática – Ensino Médio</p>
+
+<div class="loading-box" id="statusLogin">Carregando progresso do aluno...</div>
+
+<div class="painel-progresso">
+<h2 style="margin-top:0;border-bottom:none;padding-bottom:0;">Progresso da Lista</h2>
+
+<div class="progresso-grid">
+<div class="progresso-item">
+<h4>Respondidas</h4>
+<div id="infoRespondidas">0/10</div>
+</div>
+
+<div class="progresso-item">
+<h4>Acertos</h4>
+<div id="infoAcertos">0</div>
+</div>
+
+<div class="progresso-item">
+<h4>Erros finais</h4>
+<div id="infoErros">0</div>
+</div>
+
+<div class="progresso-item">
+<h4>Status</h4>
+<div id="infoStatus">Não iniciada</div>
+</div>
+</div>
+
+<div class="barra">
+<div class="barra-fill" id="barraFill"></div>
+</div>
+
+<div class="status-texto" id="infoProgressoTexto">Progresso: 0%</div>
+<div id="areaRecompensa"></div>
+</div>
+
+<div class="painel-recompensa" id="painelRecompensa">
+<h2 style="margin-top:0;border-bottom:none;padding-bottom:0;">Recompensa da Lista</h2>
+<p id="textoRecompensa">Conclua toda a lista para liberar sua recompensa.</p>
+<button id="btnResgatarXP" type="button" onclick="resgatarRecompensa()" disabled>Resgatar XP</button>
+</div>
+
+<h2>1. Definição</h2>
+<div class="card">
+A <b>função afim</b>, também chamada de <b>função do 1º grau</b>, é toda função escrita na forma:
+
+<div class="formula">
+f(x) = ax + b
+</div>
+
+em que:
+
+<br><br>
+<b>a</b> e <b>b</b> são números reais, com <b>a ≠ 0</b>.
+
+<br><br>
+O gráfico dessa função é sempre uma <b>reta</b>.
+
+<div class="exemplo">
+Exemplos:
+<br><br>
+f(x) = 2x + 3
+<br>
+f(x) = -x + 4
+<br>
+f(x) = 5x - 1
+</div>
+</div>
+
+<h2>2. Significado dos coeficientes</h2>
+<div class="card">
+
+<b>Coeficiente angular (a)</b>
+<br>
+Indica a inclinação da reta e o comportamento da função.
+
+<div class="exemplo">
+Se <b>a > 0</b>, a função é <b>crescente</b>.
+<br>
+Se <b>a < 0</b>, a função é <b>decrescente</b>.
+<br>
+Quanto maior o valor absoluto de <b>a</b>, mais inclinada é a reta.
+</div>
+
+<b>Coeficiente linear (b)</b>
+<br>
+Indica o ponto onde a reta corta o eixo <b>y</b>.
+
+<div class="exemplo">
+Se f(x)=2x+3, então:
+<br>
+f(0)=3
+<br>
+Logo, a reta intercepta o eixo y no ponto <b>(0,3)</b>.
+</div>
+
+</div>
+
+<h2>3. Raiz da função afim</h2>
+<div class="card">
+A raiz da função é o valor de <b>x</b> que faz:
+
+<div class="formula">
+f(x) = 0
+</div>
+
+Então:
+
+<div class="formula">
+ax + b = 0
+</div>
+
+<div class="formula">
+x = -b / a
+</div>
+
+<div class="exemplo">
+Se f(x)=2x+4:
+<br>
+2x+4=0
+<br>
+2x=-4
+<br>
+x=-2
+</div>
+</div>
+
+<h2>4. Exemplo resolvido</h2>
+<div class="card">
+Considere a função:
+
+<div class="formula">
+f(x) = 3x - 6
+</div>
+
+Temos:
+<br>
+<b>a = 3</b>
+<br>
+<b>b = -6</b>
+
+<div class="exemplo">
+<b>Raiz:</b>
+<br>
+3x - 6 = 0
+<br>
+3x = 6
+<br>
+x = 2
+<br><br>
+
+<b>Intercepto em y:</b>
+<br>
+f(0)= -6
+<br>
+Logo, a reta passa por <b>(0,-6)</b>.
+<br><br>
+
+<b>Comportamento:</b>
+<br>
+Como a = 3 > 0, a função é <b>crescente</b>.
+</div>
+</div>
+
+<h2>5. Simulador da função afim</h2>
+<div class="simulador">
+
+<p>Escolha os valores de <b>a</b> e <b>b</b> e observe o gráfico, a raiz, o intercepto e o comportamento da função.</p>
+
+a =
+<input type="number" id="a" value="2">
+
+b =
+<input type="number" id="b" value="3">
+
+<button onclick="gerar()">Gerar gráfico</button>
+
+<div class="destaque" id="funcao"></div>
+
+<div class="info-grid" id="infos"></div>
+
+<div class="comparacao-box" id="comparacao"></div>
+
+<div class="painel-etapas" id="passosRaiz"></div>
+
+<canvas id="grafico" height="110"></canvas>
+
+</div>
+
+<h2>6. Exercícios</h2>
+<div id="exercicios"></div>
+
+</div>
+
+<div class="efeito-xp" id="efeitoXp">
+  <div class="efeito-xp-card" id="efeitoXpCard">
+    <div class="efeito-xp-emoji">🎉</div>
+    <h2>Recompensa recebida!</h2>
+    <p id="efeitoXpTexto">+50 XP</p>
+  </div>
+</div>
+
+<script type="module">
+import { auth, db } from "./js/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+/* =====================================================
+   CONFIG DA LISTA
+===================================================== */
+const LISTA_ID = 1;
+const LISTA_SLUG = "funcao-afim";
+const LISTA_TITULO = "Função Afim";
+const DISCIPLINA = "Matemática";
+const XP_RECOMPENSA_PADRAO = 50;
+
+/* =====================================================
+   VARIÁVEIS GLOBAIS
+===================================================== */
+let chart;
+let alunoUid = null;
+let progressoAtual = null;
+
+/* =====================================================
+   QUESTÕES
+===================================================== */
+const questoes = [
+  {p:"Qual é a forma geral da função afim?",a:["f(x)=ax+b","f(x)=ax²+bx+c","f(x)=a/x","f(x)=x³+b"],c:0},
+  {p:"Na função afim, o coeficiente angular é:",a:["a","b","x","y"],c:0},
+  {p:"Na função f(x)=2x+3, o coeficiente linear é:",a:["2","3","5","0"],c:1},
+  {p:"Se a > 0, a função é:",a:["decrescente","constante","crescente","quadrática"],c:2},
+  {p:"Se a < 0, a função é:",a:["crescente","decrescente","constante","exponencial"],c:1},
+  {p:"Na função f(x)=3x-6, a raiz é:",a:["1","2","3","-2"],c:1},
+  {p:"Na função f(x)=x+4, o valor de f(0) é:",a:["0","1","4","5"],c:2},
+  {p:"A raiz da função afim é encontrada fazendo:",a:["f(x)=1","f(x)=x","f(x)=0","a=0"],c:2},
+  {p:"Na função f(x)=-2x+8, a raiz é:",a:["2","4","6","8"],c:1},
+  {p:"O gráfico da função afim é uma:",a:["parábola","reta","circunferência","hipérbole"],c:1}
+];
+
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
+function formatarNumero(n){
+  if(Number.isInteger(n)) return n.toString();
+  return n.toFixed(2).replace(".",",");
+}
+
+function traduzirStatus(status){
+  const mapa = {
+    "nao-iniciada": "Não iniciada",
+    "em-andamento": "Em andamento",
+    "concluida": "Concluída"
+  };
+  return mapa[status] || status;
+}
+
+/* =====================================================
+   CAMINHO DO FIRESTORE
+===================================================== */
+function obterDocRef(){
+  return doc(db, "usuarios", alunoUid, "progresso_listas", `lista_${LISTA_ID}`);
+}
+
+function obterAlunoRef(){
+  return doc(db, "usuarios", alunoUid);
+}
+
+/* =====================================================
+   MODELO PADRÃO
+===================================================== */
+function criarProgressoInicial(){
+  return {
+    listaId: LISTA_ID,
+    listaSlug: LISTA_SLUG,
+    titulo: LISTA_TITULO,
+    disciplina: DISCIPLINA,
+    totalQuestoes: questoes.length,
+    respondidas: 0,
+    acertos: 0,
+    erros: 0,
+    progresso: 0,
+    status: "nao-iniciada",
+    respostas: {},
+    xpRecompensa: XP_RECOMPENSA_PADRAO,
+    recompensaResgatada: false,
+    dataRecompensa: null,
+    ultimaAtualizacao: null
+  };
+}
+
+/* =====================================================
+   CÁLCULO DO PROGRESSO
+===================================================== */
+function recalcularResumo(){
+  const respostas = progressoAtual.respostas || {};
+  let respondidas = 0;
+  let acertos = 0;
+  let erros = 0;
+
+  for(let i = 0; i < questoes.length; i++){
+    const item = respostas[`q${i}`];
+    if(!item) continue;
+
+    const acertou = item.correta === true;
+    const esgotouTentativas = item.tentativas >= 3 && item.correta === false;
+
+    if(acertou || esgotouTentativas){
+      respondidas++;
+    }
+
+    if(acertou){
+      acertos++;
+    }
+
+    if(esgotouTentativas){
+      erros++;
+    }
+  }
+
+  const progresso = Math.round((respondidas / questoes.length) * 100);
+
+  let status = "nao-iniciada";
+  if(progresso > 0 && progresso < 100) status = "em-andamento";
+  if(progresso === 100) status = "concluida";
+
+  progressoAtual.respondidas = respondidas;
+  progressoAtual.acertos = acertos;
+  progressoAtual.erros = erros;
+  progressoAtual.progresso = progresso;
+  progressoAtual.status = status;
+  progressoAtual.totalQuestoes = questoes.length;
+}
+
+/* =====================================================
+   PAINEL E RECOMPENSA
+===================================================== */
+function atualizarPainelProgresso(){
+  recalcularResumo();
+
+  document.getElementById("infoRespondidas").textContent = `${progressoAtual.respondidas}/${questoes.length}`;
+  document.getElementById("infoAcertos").textContent = progressoAtual.acertos;
+  document.getElementById("infoErros").textContent = progressoAtual.erros;
+  document.getElementById("infoStatus").textContent = traduzirStatus(progressoAtual.status);
+  document.getElementById("infoProgressoTexto").textContent = `Progresso: ${progressoAtual.progresso}%`;
+  document.getElementById("barraFill").style.width = `${progressoAtual.progresso}%`;
+
+  atualizarAreaRecompensa();
+}
+
+function atualizarAreaRecompensa(){
+  const area = document.getElementById("areaRecompensa");
+  if(!area || !progressoAtual) return;
+
+  if(progressoAtual.status !== "concluida"){
+    area.innerHTML = "";
+    return;
+  }
+
+  if(progressoAtual.recompensaResgatada){
+    area.innerHTML = `
+      <div class="recompensa-box sucesso">
+        <h3>✅ Recompensa já recebida</h3>
+        <p>Você já resgatou <strong>${progressoAtual.xpRecompensa} XP</strong> nesta lista.</p>
+      </div>
+    `;
+    return;
+  }
+
+  area.innerHTML = `
+    <div class="recompensa-box">
+      <h3>🎉 Lista concluída!</h3>
+      <p>Parabéns! Você liberou uma recompensa de <strong>${progressoAtual.xpRecompensa} XP</strong>.</p>
+      <button type="button" class="btn-recompensa" onclick="receberRecompensa()">Receber recompensa</button>
+    </div>
+  `;
+}
+
+function mostrarEfeitoRecompensa(xp){
+  const overlay = document.getElementById("efeitoXp");
+  const card = document.getElementById("efeitoXpCard");
+  const texto = document.getElementById("efeitoXpTexto");
+
+  texto.textContent = `+${xp} XP para sua conta`;
+  overlay.style.display = "flex";
+
+  requestAnimationFrame(() => {
+    card.style.transform = "scale(1)";
+    card.style.opacity = "1";
+  });
+
+  setTimeout(() => {
+    card.style.transform = "scale(0.8)";
+    card.style.opacity = "0";
+
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 300);
+  }, 2200);
+}
+
+/* =====================================================
+   SALVAR NO FIRESTORE
+===================================================== */
+async function salvarProgresso(){
+  if(!alunoUid || !progressoAtual) return;
+
+  recalcularResumo();
+
+  const payload = {
+    ...progressoAtual,
+    ultimaAtualizacao: serverTimestamp()
+  };
+
+  await setDoc(obterDocRef(), payload, { merge: true });
+}
+
+/* =====================================================
+   CARREGAR DO FIRESTORE
+===================================================== */
+async function carregarProgresso(){
+  const snap = await getDoc(obterDocRef());
+
+  if(snap.exists()){
+    progressoAtual = {
+      ...criarProgressoInicial(),
+      ...snap.data()
+    };
+  }else{
+    progressoAtual = criarProgressoInicial();
+    await salvarProgresso();
+  }
+
+  atualizarPainelProgresso();
+}
+
+/* =====================================================
+   RESGATAR RECOMPENSA
+===================================================== */
+window.receberRecompensa = async function receberRecompensa(){
+  if(!alunoUid || !progressoAtual) return;
+  if(progressoAtual.status !== "concluida") return;
+  if(progressoAtual.recompensaResgatada) return;
+
+  try{
+    await updateDoc(obterAlunoRef(), {
+      xp: increment(progressoAtual.xpRecompensa)
+    });
+
+    progressoAtual.recompensaResgatada = true;
+    progressoAtual.dataRecompensa = new Date().toISOString();
+
+    await salvarProgresso();
+    atualizarPainelProgresso();
+    mostrarEfeitoRecompensa(progressoAtual.xpRecompensa);
+  }catch(error){
+    console.error("Erro ao resgatar recompensa:", error);
+    alert("Não foi possível entregar a recompensa agora.");
+  }
+};
+
+/* =====================================================
+   GRÁFICO
+===================================================== */
+window.gerar = function gerar(){
+  let a = parseFloat(document.getElementById("a").value);
+  let b = parseFloat(document.getElementById("b").value);
+
+  if(a === 0){
+    document.getElementById("funcao").innerHTML = "O valor de <b>a</b> deve ser diferente de zero.";
+    document.getElementById("infos").innerHTML = "";
+    document.getElementById("comparacao").innerHTML = "";
+    document.getElementById("passosRaiz").innerHTML = "";
+    if(chart) chart.destroy();
+    return;
+  }
+
+  let textoFuncao = `f(x) = ${a}x ${b >= 0 ? "+ " + b : "- " + Math.abs(b)}`;
+  document.getElementById("funcao").innerHTML = textoFuncao;
+
+  let raiz = -b / a;
+  let interceptoY = b;
+  let comportamento = "";
+  let inclinacao = "";
+
+  if(a > 0){
+    comportamento = "Crescente";
+  }else{
+    comportamento = "Decrescente";
+  }
+
+  if(Math.abs(a) > 3){
+    inclinacao = "Reta mais inclinada";
+  }else if(Math.abs(a) === 1){
+    inclinacao = "Inclinação padrão";
+  }else if(Math.abs(a) < 1){
+    inclinacao = "Reta menos inclinada";
+  }else{
+    inclinacao = "Inclinação moderada";
+  }
+
+  document.getElementById("infos").innerHTML = `
+  <div class="info-card">
+  <h4>Coeficiente angular (a)</h4>
+  <div>${formatarNumero(a)}</div>
+  </div>
+
+  <div class="info-card">
+  <h4>Coeficiente linear (b)</h4>
+  <div>${formatarNumero(b)}</div>
+  </div>
+
+  <div class="info-card">
+  <h4>Raiz da função</h4>
+  <div>${formatarNumero(raiz)}</div>
+  </div>
+
+  <div class="info-card">
+  <h4>Intercepto em y</h4>
+  <div>(0, ${formatarNumero(interceptoY)})</div>
+  </div>
+
+  <div class="info-card">
+  <h4>Comportamento</h4>
+  <div>${comportamento}</div>
+  </div>
+
+  <div class="info-card">
+  <h4>Inclinação</h4>
+  <div>${inclinacao}</div>
+  </div>
+  `;
+
+  document.getElementById("comparacao").innerHTML = `
+  <div class="comparacao-card">
+  <h4>Se x = 0</h4>
+  <div>f(0) = ${formatarNumero(b)}</div>
+  </div>
+
+  <div class="comparacao-card">
+  <h4>Se x = 1</h4>
+  <div>f(1) = ${formatarNumero(a + b)}</div>
+  </div>
+
+  <div class="comparacao-card">
+  <h4>Se x = 2</h4>
+  <div>f(2) = ${formatarNumero(2*a + b)}</div>
+  </div>
+
+  <div class="comparacao-card">
+  <h4>Raiz</h4>
+  <div>x = ${formatarNumero(raiz)}</div>
+  </div>
+  `;
+
+  document.getElementById("passosRaiz").innerHTML = `
+  <div class="etapa" style="animation-delay:0s;">
+  <strong>Etapa 1:</strong> f(x) = 0
+  </div>
+
+  <div class="etapa" style="animation-delay:0.2s;">
+  <strong>Etapa 2:</strong> ${formatarNumero(a)}x ${b >= 0 ? "+ " + formatarNumero(b) : "- " + formatarNumero(Math.abs(b))} = 0
+  </div>
+
+  <div class="etapa" style="animation-delay:0.4s;">
+  <strong>Etapa 3:</strong> ${formatarNumero(a)}x = ${formatarNumero(-b)}
+  </div>
+
+  <div class="etapa etapa-final" style="animation-delay:0.6s;">
+  <strong>Etapa 4:</strong> x = ${formatarNumero(raiz)}
+  </div>
+  `;
+
+  let pontosFuncao = [];
+  for(let x = -10; x <= 10; x += 1){
+    pontosFuncao.push({x:x, y:a*x+b});
+  }
+
+  if(chart) chart.destroy();
+
+  chart = new Chart(document.getElementById("grafico"), {
+    type:'line',
+    data:{
+      datasets:[
+        {
+          label:'f(x)',
+          data:pontosFuncao,
+          borderColor:'#2c7be5',
+          borderWidth:3,
+          fill:false,
+          pointRadius:0,
+          tension:0
+        },
+        {
+          label:'Eixo X',
+          data:[{x:-10,y:0},{x:10,y:0}],
+          borderColor:'#000',
+          borderWidth:2,
+          pointRadius:0
+        },
+        {
+          label:'Eixo Y',
+          data:[{x:0,y:-20},{x:0,y:20}],
+          borderColor:'#000',
+          borderWidth:2,
+          pointRadius:0
+        },
+        {
+          label:'Intercepto Y',
+          data:[{x:0,y:b}],
+          borderColor:'#27ae60',
+          backgroundColor:'#27ae60',
+          pointRadius:6,
+          showLine:false
+        },
+        {
+          label:'Raiz',
+          data:[{x:raiz,y:0}],
+          borderColor:'#e74c3c',
+          backgroundColor:'#e74c3c',
+          pointRadius:6,
+          showLine:false
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{display:false}
+      },
+      scales:{
+        x:{
+          type:'linear',
+          min:-10,
+          max:10,
+          title:{display:true,text:'x'},
+          grid:{color:'#ddd'}
+        },
+        y:{
+          min:-20,
+          max:20,
+          title:{display:true,text:'f(x)'},
+          grid:{color:'#ddd'}
+        }
+      }
+    }
+  });
+};
+
+/* =====================================================
+   RENDERIZAR EXERCÍCIOS
+===================================================== */
+function carregarQuestoes(){
+  const div = document.getElementById("exercicios");
+  let html = "";
+
+  questoes.forEach((q,i)=>{
+    const chave = `q${i}`;
+    const salvo = progressoAtual?.respostas?.[chave] || null;
+    const tentativas = salvo?.tentativas || 0;
+    const concluida = salvo?.correta === true || (salvo?.tentativas >= 3 && salvo?.correta === false);
+    const respostaMarcada = Number.isInteger(salvo?.respostaMarcada) ? salvo.respostaMarcada : null;
+
+    html += `<div class="questao">`;
+    html += `<p>${i+1}) ${q.p}</p>`;
+
+    q.a.forEach((alt,j)=>{
+      const checked = respostaMarcada === j ? "checked" : "";
+      const disabled = concluida ? "disabled" : "";
+      html += `<div class="alt">`;
+      html += `<input type="radio" name="q${i}" value="${j}" ${checked} ${disabled}> ${alt}`;
+      html += `</div>`;
+    });
+
+    html += `<button type="button" onclick="corrigir(${i})" ${concluida ? "disabled" : ""}>Responder</button>`;
+    html += `<div class="resultado" id="r${i}">`;
+
+    if(salvo){
+      if(salvo.correta === true){
+        html += `✅ Correto!`;
+      }else if(salvo.tentativas >= 3){
+        html += `❌ Resposta correta: ${q.a[q.c]}`;
+      }else if(tentativas > 0){
+        html += `❌ Tente novamente (${3 - tentativas} tentativas restantes)`;
+      }
+    }
+
+    html += `</div>`;
+    html += `</div>`;
+  });
+
+  div.innerHTML = html;
+}
+
+/* =====================================================
+   CORRIGIR QUESTÃO
+===================================================== */
+window.corrigir = async function corrigir(i){
+  if(!alunoUid || !progressoAtual) return;
+
+  const radios = document.getElementsByName(`q${i}`);
+  let escolha;
+
+  for(const r of radios){
+    if(r.checked){
+      escolha = parseInt(r.value);
+      break;
+    }
+  }
+
+  if(escolha === undefined) return;
+
+  const chave = `q${i}`;
+  const atual = progressoAtual.respostas[chave] || {
+    respostaMarcada: null,
+    correta: false,
+    tentativas: 0,
+    concluida: false
+  };
+
+  if(atual.correta === true || (atual.tentativas >= 3 && atual.correta === false)){
+    return;
+  }
+
+  const acertou = escolha === questoes[i].c;
+  const novasTentativas = atual.tentativas + 1;
+
+  progressoAtual.respostas[chave] = {
+    respostaMarcada: escolha,
+    correta: acertou,
+    tentativas: novasTentativas,
+    concluida: acertou || novasTentativas >= 3
+  };
+
+  const resultadoEl = document.getElementById(`r${i}`);
+
+  if(acertou){
+    resultadoEl.innerHTML = "✅ Correto!";
+  }else if(novasTentativas >= 3){
+    resultadoEl.innerHTML = `❌ Resposta correta: ${questoes[i].a[questoes[i].c]}`;
+  }else{
+    resultadoEl.innerHTML = `❌ Tente novamente (${3 - novasTentativas} tentativas restantes)`;
+  }
+
+  await salvarProgresso();
+  atualizarPainelProgresso();
+  carregarQuestoes();
+};
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+window.addEventListener("DOMContentLoaded", () => {
+  gerar();
+});
+
+onAuthStateChanged(auth, async (user) => {
+  const statusLogin = document.getElementById("statusLogin");
+
+  if (!user) {
+    statusLogin.textContent = "Aluno não autenticado. Faça login para salvar o progresso.";
+    return;
+  }
+
+  alunoUid = user.uid;
+  await carregarProgresso();
+  carregarQuestoes();
+
+  statusLogin.textContent = "Progresso carregado com sucesso.";
+  setTimeout(() => {
+    statusLogin.style.display = "none";
+  }, 1800);
+});
+</script>
+
+</body>
+</html>

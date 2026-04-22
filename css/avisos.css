@@ -1,0 +1,504 @@
+/* =====================================================
+📢 AVISOS — SISTEMA GLOBAL (HOME + PÁGINA COMPLETA)
+- 1 único CSS
+- reutilizável
+- escalável
+===================================================== */
+
+
+/* =========================
+BASE (somente se página isolada)
+========================= */
+
+body{
+  background:#0b0f14;
+  color:#e2e8f0;
+  font-family:system-ui;
+}
+
+
+/* =========================
+TOPO (avisos.html)
+========================= */
+
+.topo-premium{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:20px 30px;
+
+  background:linear-gradient(135deg,#020617,#0f172a);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.subtitulo{
+  font-size:0.85rem;
+  color:#94a3b8;
+}
+
+.btn-voltar{
+  background:rgba(255,255,255,0.08);
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn-voltar:hover{
+  background:rgba(255,255,255,0.15);
+}
+
+
+/* =========================
+CONTROLE (busca/filtros)
+========================= */
+
+.controle-avisos{
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+#buscaAvisos{
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#020617;
+  color:white;
+  outline:none;
+  transition:.2s;
+}
+
+#buscaAvisos:focus{
+  border:1px solid #6366f1;
+  box-shadow:0 0 0 2px rgba(99,102,241,0.2);
+}
+
+
+/* =========================
+FILTROS
+========================= */
+
+.filtros{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.filtro{
+  padding:6px 14px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  background:#1e293b;
+  color:#cbd5e1;
+  transition:.2s;
+}
+
+.filtro:hover{
+  transform:translateY(-1px);
+  background:#334155;
+}
+
+.filtro.ativo{
+  background:#6366f1;
+  color:white;
+  box-shadow:0 4px 12px rgba(99,102,241,0.3);
+}
+
+
+/* =========================
+RESUMO (opcional)
+========================= */
+
+.resumo-avisos{
+  display:flex;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.card-resumo{
+  flex:1;
+  padding:12px;
+  border-radius:12px;
+  background:#020617;
+  text-align:center;
+}
+
+.card-resumo strong{
+  font-size:1.2rem;
+  display:block;
+}
+
+.card-resumo span{
+  font-size:0.75rem;
+  color:#94a3b8;
+}
+
+.card-resumo.destaque{
+  background:#6366f1;
+  color:white;
+}
+
+
+/* =========================
+LISTA
+========================= */
+
+.lista-premium{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+
+/* =========================
+CARD DE AVISO
+========================= */
+
+.aviso-card{
+  position:relative;
+  padding:18px;
+  border-radius:18px;
+
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+
+  backdrop-filter: blur(16px);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  transition:.25s ease;
+  cursor:pointer;
+
+  overflow:hidden;
+}
+
+.aviso-card:hover{
+  transform:translateY(-6px) scale(1.015);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 25px rgba(59,130,246,0.25);
+}
+
+.aviso-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,0.08),
+    transparent 80%
+  );
+  opacity:0;
+  transition:.4s;
+}
+
+.aviso-card:hover::before{
+  opacity:1;
+}
+
+/* =========================
+TIPOS (prioridade)
+========================= */
+
+.aviso-urgente .badge-tipo{
+  background:rgba(239,68,68,0.15);
+  color:#f87171;
+}
+
+.aviso-importante .badge-tipo{
+  background:rgba(245,158,11,0.15);
+  color:#fbbf24;
+}
+
+.aviso-info .badge-tipo{
+  background:rgba(59,130,246,0.15);
+  color:#60a5fa;
+}
+
+
+/* =========================
+HEADER
+========================= */
+
+.aviso-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.badge-tipo{
+  font-size:0.7rem;
+
+  background:rgba(239,68,68,0.15); /* vermelho suave */
+  color:#f87171; /* vermelho vivo */
+
+  padding:5px 10px;
+  border-radius:999px;
+
+  font-weight:600;
+  letter-spacing:.4px;
+}
+
+.fixado-badge{
+  font-size:0.8rem;
+}
+
+
+/* =========================
+CONTEÚDO
+========================= */
+
+.aviso-titulo{
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.aviso-texto{
+  font-size:0.92rem;
+  color:#cbd5e1;
+  line-height:1.4;
+}
+
+
+/* =========================
+FOOTER
+========================= */
+
+.aviso-footer{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  font-size:0.75rem;
+  color:#64748b;
+}
+
+
+/* =========================
+STATUS
+========================= */
+
+.status-lido{
+  font-weight:500;
+}
+
+.aviso-card:not(.lido){
+  border-left:4px solid #22c55e;
+
+  background:
+    linear-gradient(135deg, rgba(34,197,94,0.18), rgba(255,255,255,0.02));
+}
+
+/* bolinha indicadora */
+.aviso-card:not(.lido)::after{
+  content:"";
+  position:absolute;
+  top:12px;
+  right:12px;
+
+  width:8px;
+  height:8px;
+  border-radius:50%;
+
+  background:#22c55e;
+  box-shadow:0 0 10px #22c55e;
+}
+
+.aviso-card.lido .status-lido{
+  opacity:0.4;
+}
+
+
+/* =========================
+FIXADO
+========================= */
+
+.aviso-card.fixado{
+  border:1px solid rgba(255,255,255,0.2);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 10px 30px rgba(0,0,0,0.4);
+}
+
+
+/* =========================
+ANIMAÇÃO
+========================= */
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+/* =====================================================
+🏠 HOME — PREVIEW (USANDO MESMO DESIGN)
+===================================================== */
+
+.avisos-home{
+  padding:22px;
+  border-radius:20px;
+  display: none;
+  background:
+    linear-gradient(135deg,#020617,#0f172a);
+
+  border:1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45);
+}
+
+/* lista mais compacta */
+.avisos-home .lista-premium{
+  gap:10px;
+}
+
+/* cards menores */
+.avisos-home .aviso-card{
+  padding:12px;
+  border-radius:12px;
+}
+
+/* limitar texto */
+.avisos-home .aviso-texto{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* header do home */
+.avisos-home .avisos-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+/* badge */
+.badge-avisos{
+  background:#ef4444;
+
+  padding:5px 11px;
+  border-radius:999px;
+
+  font-size:0.75rem;
+  font-weight:600;
+
+  box-shadow:
+    0 0 10px rgba(239,68,68,0.6),
+    0 0 20px rgba(239,68,68,0.3);
+}
+
+/* footer */
+.avisos-home-footer{
+  margin-top:12px;
+  text-align:right;
+  font-size:0.8rem;
+  color:#60a5fa;
+}
+
+.avisos-home-footer a{
+  color:#60a5fa;
+  text-decoration:none;
+}
+
+.avisos-home-footer a:hover{
+  text-decoration:underline;
+}
+
+.avisos-home .avisos-header h2{
+  color:#f8fafc;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.15);
+}
+
+/* aaaaaaaaaaaa botão estiloso */
+
+.avisos-home-footer a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+
+  padding:8px 14px;
+  border-radius:999px;
+
+  font-size:0.8rem;
+  font-weight:500;
+
+  color:#93c5fd;
+
+  background:rgba(59,130,246,0.08);
+  border:1px solid rgba(59,130,246,0.15);
+
+  backdrop-filter: blur(6px);
+
+  text-decoration:none;
+
+  transition:.25s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.avisos-home-footer a::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+
+  opacity:0;
+  transition:.4s;
+}
+
+.avisos-home-footer a:hover::before{
+  opacity:1;
+}
+
+.avisos-home-footer a:hover{
+  transform:translateY(-2px);
+
+  color:#dbeafe;
+
+  background:rgba(59,130,246,0.15);
+
+  box-shadow:
+    0 8px 20px rgba(59,130,246,0.25);
+}
+
+.avisos-home-footer a span{
+  transition:.25s;
+}
+
+.avisos-home-footer a:hover span{
+  transform:translateX(4px);
+}

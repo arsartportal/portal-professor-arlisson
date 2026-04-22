@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<!-- =====================================================
+     META CONFIGURAÇÃO
+===================================================== -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🏆 Ranking dos Alunos</title>
+
+<!-- =====================================================
+     CSS
+===================================================== -->
+
+<link rel="stylesheet" href="css/ranking.css">
+
+</head>
+
+
+
+<body>
+
+<!-- =====================================================
+     PALCO 3D / EFEITOS VISUAIS
+===================================================== -->
+
+<canvas id="stage3d"></canvas>
+
+<div class="arena-lights"></div>
+<div class="stage-floor"></div>
+
+
+
+<!-- =====================================================
+     CONTAINER PRINCIPAL
+===================================================== -->
+
+<div class="container">
+
+<!-- =====================================================
+     TÍTULO
+===================================================== -->
+
+<h1>🏆 Ranking dos Alunos</h1>
+
+<div id="status-ranking" class="status-ranking"></div>
+
+
+
+<!-- =====================================================
+     POSIÇÃO DO ALUNO LOGADO
+===================================================== -->
+
+<div id="minha-posicao" class="minha-posicao"></div>
+
+
+
+<!-- =====================================================
+     PODIO TOP 3
+===================================================== -->
+
+<div class="podio">
+
+<!-- 2º LUGAR -->
+<div id="segundo" class="card"></div>
+
+<!-- 1º LUGAR -->
+<div id="primeiro" class="card"></div>
+
+<!-- 3º LUGAR -->
+<div id="terceiro" class="card"></div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TABELA DE RANKING
+===================================================== -->
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>#</th>
+<th>Aluno</th>
+<th>Série</th>
+<th>XP</th>
+<th>Nível</th>
+<th>🔥 Streak</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ranking"></tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCRIPT DO RANKING
+===================================================== -->
+
+<script type="module" src="js/ranking.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mega Ranking</title>
+
+  <!-- =========================================
+  🎨 CSS
+  ========================================= -->
+  <link rel="stylesheet" href="./mega-ranking.css">
+</head>
+
+<body>
+
+  <main class="ranking-container">
+
+    <!-- =========================================
+    🏆 CABEÇALHO
+    ========================================= -->
+    <header class="ranking-header">
+
+  <h1>
+    <span class="ranking-icon">🏆</span>
+    Ranking
+  </h1>
+
+  <p class="ranking-subtitulo">
+    Os melhores alunos da plataforma.
+  </p>
+
+</header>
+
+
+    <!-- =========================================
+    🎯 TABS PRINCIPAIS
+    ========================================= -->
+    <section class="ranking-tabs">
+
+      <!-- Ranking geral -->
+      <button class="tab active" data-tab="geral">
+        🏆 Geral
+      </button>
+
+      <!-- Ranking separado por professor -->
+      <button class="tab" data-tab="professor">
+        👨‍🏫 Professor
+      </button>
+
+      <!-- Funil Escola → Série → Turma -->
+      <button class="tab" data-tab="turma">
+        🏫 Escola
+      </button>
+
+    </section>
+
+
+    <!-- =========================================
+    👨‍🏫 SUBABAS DE PROFESSORES
+    Só aparecem na aba Professor
+    ========================================= -->
+    <section
+      id="lista-professores"
+      class="lista-professores">
+    </section>
+
+
+    <!-- =========================================
+    🏫 FUNIL: ESCOLA
+    Primeiro nível da aba Escola
+    ========================================= -->
+    <section
+      id="lista-escolas"
+      class="lista-escolas">
+    </section>
+
+
+    <!-- =========================================
+    📚 FUNIL: SÉRIE
+    Segundo nível da aba Escola
+    ========================================= -->
+    <section
+      id="lista-series"
+      class="lista-series">
+    </section>
+
+
+    <!-- =========================================
+    👥 FUNIL: TURMA
+    Terceiro nível da aba Escola
+    ========================================= -->
+    <section
+      id="lista-turmas"
+      class="lista-turmas">
+    </section>
+
+
+    <!-- =========================================
+    🥇 TOP 3
+    ========================================= -->
+    <section class="top3">
+
+      <!-- 🥈 Segundo -->
+      <div class="card-top second">
+        <span class="pos">🥈</span>
+        <h3 id="top2-nome">---</h3>
+        <span id="top2-xp">0 XP</span>
+      </div>
+
+      <!-- 🥇 Primeiro -->
+      <div class="card-top first">
+        <span class="pos">🥇</span>
+        <h3 id="top1-nome">---</h3>
+        <span id="top1-xp">0 XP</span>
+      </div>
+
+      <!-- 🥉 Terceiro -->
+      <div class="card-top third">
+        <span class="pos">🥉</span>
+        <h3 id="top3-nome">---</h3>
+        <span id="top3-xp">0 XP</span>
+      </div>
+
+    </section>
+
+    <div id="minha-posicao"></div>
+
+    <div class="ranking-info-atualizacao">
+  <p>
+    O ranking é atualizado todos os dias às 00:00, 06:00, 12:00 e 18:00.
+  </p>
+
+  <p>
+    Próxima atualização do ranking em:
+    <span id="contador-ranking">--:--:--</span>
+  </p>
+</div>
+
+
+    <!-- =========================================
+    📊 LISTA DO RANKING
+    ========================================= -->
+    <section
+      id="ranking-lista"
+      class="ranking-lista">
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+  🚀 SCRIPT PRINCIPAL
+  ========================================= -->
+  <script type="module" src="./mega-ranking.js"></script>
+
+</body>
+</html>

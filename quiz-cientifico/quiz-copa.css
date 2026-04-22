@@ -1,0 +1,370 @@
+/* ======================================================
+🌍 BASE (COPA DO MUNDO 2026 - ESTÁTICO)
+====================================================== */
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+  padding:30px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  box-sizing:border-box;
+  min-height:100vh;
+
+  color:white;
+
+  /* 🏆 IMAGEM DA COPA */
+  background:
+    linear-gradient(rgba(2,6,23,0.5), rgba(2,6,23,0.7)),
+    url("backgroundcopa2026.png");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  /* 🔥 deixa fixo (efeito premium) */
+  background-attachment:fixed;
+
+  overflow-x:hidden;
+}
+
+
+/* ======================================================
+🌍 OVERLAY BANDEIRAS (SUAVE)
+====================================================== */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background-image:
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/320px-Flag_of_the_United_States.svg.png'),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/320px-Flag_of_Canada.svg.png'),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/320px-Flag_of_Mexico.svg.png');
+
+  background-repeat:no-repeat;
+  background-size:120px;
+  background-position:
+    5% 10%,
+    90% 20%,
+    50% 90%;
+
+  opacity:0.06;
+  pointer-events:none;
+  z-index:0;
+}
+
+
+/* ❌ REMOVIDO: animações e elementos flutuando */
+
+
+/* ======================================================
+📦 CONTAINER
+====================================================== */
+
+.quiz-container{
+  width:100%;
+  max-width:480px;
+  margin:auto;
+
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+
+/* ======================================================
+🧊 CARD (GLASS + FIFA PREMIUM)
+====================================================== */
+
+.card{
+  position:relative;
+  backdrop-filter: blur(14px);
+  background: rgba(2,6,23,0.75);
+  padding:20px;
+  border-radius:20px;
+
+  
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px) scale(1.01);
+}
+
+
+/* ======================================================
+🎟️ INGRESSOS
+====================================================== */
+
+.fichas-info{
+  text-align:center;
+  font-size:14px;
+  padding:10px;
+  border-radius:10px;
+  background:rgba(34,197,94,0.15);
+}
+
+
+/* ======================================================
+🎮 BOTÕES (ESTILO FIFA)
+====================================================== */
+
+button{
+  border:none;
+  border-radius:14px;
+  padding:12px;
+
+  cursor:pointer;
+  font-weight:700;
+  letter-spacing:.5px;
+
+  transition:.2s;
+
+  background:rgba(255,255,255,0.08);
+  color:white;
+}
+
+button:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.5),
+    0 0 12px rgba(34,197,94,0.5);
+}
+
+/* botão principal */
+#btnIniciar{
+  background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+
+/* ======================================================
+🛒 LOJA
+====================================================== */
+
+.btn-loja-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:12px;
+  border-radius:14px;
+
+  background:linear-gradient(135deg,#facc15,#eab308);
+  color:#111;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.btn-loja-link:hover{
+  transform:scale(1.05);
+}
+
+
+/* ======================================================
+🎯 QUIZ
+====================================================== */
+
+.topo{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+}
+
+.barra{
+  height:10px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.1);
+}
+
+#progresso{
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg,#22c55e,#ef4444);
+  transition:width 1s linear;
+}
+
+#pergunta{
+  margin:10px 0;
+  text-align:center;
+}
+
+#opcoes button{
+  width:100%;
+  margin:6px 0;
+}
+
+.correta{ background:#22c55e !important; }
+.errada{ background:#ef4444 !important; }
+
+
+/* ======================================================
+🏁 RESULTADO
+====================================================== */
+
+#resultado{
+  text-align:center;
+}
+
+.resultado-botoes{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.btn-replay{
+  background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.btn-loja{
+  background:linear-gradient(135deg,#facc15,#eab308);
+  color:#111;
+}
+
+
+/* ======================================================
+🏆 RECOMPENSA
+====================================================== */
+
+.loot-box{
+  position:relative;
+  padding:20px;
+  border-radius:16px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+
+  background:rgba(255,255,255,0.06);
+  text-align:center;
+}
+
+.loot-anim{
+  font-size:45px;
+}
+
+
+/* ======================================================
+🏆 RANKING
+====================================================== */
+
+.tabs{
+  display:flex;
+  gap:8px;
+}
+
+.tab{
+  flex:1;
+  padding:8px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.1);
+  cursor:pointer;
+}
+
+.tab.active{
+  background:#22c55e;
+}
+
+.ranking-item{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+
+/* ======================================================
+📱 RESPONSIVO
+====================================================== */
+
+@media(max-width:500px){
+
+  body{
+    padding:15px;
+  }
+
+  .resultado-botoes{
+    flex-direction:column;
+  }
+}
+
+
+/* ======================================================
+🔒 UTILIDADES
+====================================================== */
+
+.hidden{
+  display:none;
+}
+
+.botoes{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:15px;
+}
+
+.botoes button,
+.botoes .btn-loja-link{
+  flex:1;
+  text-align:center;
+}
+
+.quiz-container,
+.card{
+  position:relative;
+  z-index:1;
+}
+
+.btn-voltar{
+  background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+  color:white;
+}
+
+/* =========================================
+🌍 ESTATÍSTICAS DA COMUNIDADE
+========================================= */
+
+.stats-comunidade{
+  margin-top:12px;
+  padding:10px;
+
+  border-radius:12px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(34,197,94,0.15),
+    rgba(59,130,246,0.15)
+  );
+
+  text-align:center;
+  font-size:13px;
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  backdrop-filter: blur(6px);
+}
+
+/* destaque nos números */
+.stats-comunidade b{
+  color:#facc15;
+  font-size:15px;
+}

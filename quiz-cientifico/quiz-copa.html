@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Copa do Mundo 2026</title>
+  <link rel="stylesheet" href="quiz-copa.css">
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+  <h1>🏆 Quiz Copa do Mundo 2026</h1>
+
+  <!-- 📘 INSTRUÇÕES -->
+  <div id="instrucoes" class="card">
+    <h2>⚽ Como funciona</h2>
+
+    <ul>
+      <li>🎟️ Cada partida custa <b>1 ingresso</b></li>
+      <li>⏳ Você tem <b>5</b> segundos por pergunta</li>
+      <li>❌ Errou ou acabou o tempo → eliminado</li>
+      <li>🏆 3+ acertos → ganha recompensa</li>
+      <li>🔥 5 acertos → prêmio máximo</li>
+    </ul>
+
+    <!-- 🎟️ INGRESSOS -->
+    <div class="fichas-info">
+      🎟️ Ingressos: <b id="fichas">0</b>
+    </div>
+
+    <div class="stats-comunidade">
+  🌍 <b>Comunidade</b><br>
+
+  🎟️ Hoje: <b id="gastasHoje">0</b><br>
+  🧾 Total: <b id="gastasTotal">0</b>
+</div>
+
+    <!-- 🔥 BOTÕES -->
+    <div class="botoes">
+      <button id="btnIniciar">Entrar em campo</button>
+      <a href="/loja.html" class="btn-loja-link">🛒 Resgatar ingressos</a>
+    </div>
+
+  </div>
+
+  <!-- 🎮 QUIZ -->
+  <div id="quizArea" class="card hidden">
+
+    <div class="topo">
+      <span>Pergunta <b id="numPergunta">1</b>/5</span>
+      <span>⏳ <b id="tempo">5</b>s</span>
+    </div>
+
+    <div class="barra">
+      <div id="progresso"></div>
+    </div>
+
+    <h2 id="pergunta"></h2>
+
+    <div id="opcoes"></div>
+
+    <div id="resultado" class="hidden"></div>
+
+  </div>
+
+  <!-- 🏆 LEADERBOARD -->
+  <div class="card">
+    <h2>🏆 Ranking da Copa</h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="total">Geral</button>
+      <button class="tab" data-tab="semanal">Semana</button>
+    </div>
+
+    <div id="ranking"></div>
+  </div>
+
+</div>
+
+<script type="module" src="quiz-copa.js"></script>
+
+</body>
+</html>

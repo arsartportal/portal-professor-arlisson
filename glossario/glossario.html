@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Glossário da Aprendizagem</title>
+  <link rel="stylesheet" href="glossario.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>📚 Glossário da Aprendizagem</h1>
+
+    <h2 id="termoTitulo">Carregando...</h2>
+    <p id="faseInfo"></p>
+    <p id="descricaoDesafio"></p>
+
+    <!-- ÁREA DE CRIAÇÃO -->
+    <div id="areaCriacao" class="card">
+      <textarea id="inputDefinicao" placeholder="Escreva sua definição + exemplo"></textarea>
+      <button onclick="enviarDefinicao()">Enviar definição</button>
+    </div>
+
+    <!-- LISTA DE DEFINIÇÕES -->
+    <div id="listaDefinicoes"></div>
+
+  </div>
+
+  <script type="module" src="glossario.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📘 Listas de Exercícios | Portal do Professor</title>
+  <link rel="stylesheet" href="./css/listas.css" />
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="./home.html" class="btn-voltar">← Voltar</a>
+
+      <div class="brand-area">
+        <span class="brand-badge">📘 Área de Prática</span>
+        <h1>Listas de Exercícios</h1>
+        <p>Escolha uma lista, pratique os conteúdos e acompanhe sua evolução.</p>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="mini-stat">
+        <span class="mini-stat-label">Listas</span>
+        <strong id="totalListas">0</strong>
+      </div>
+
+      <div class="mini-stat">
+        <span class="mini-stat-label">Concluídas</span>
+        <strong id="totalConcluidas">0</strong>
+      </div>
+
+      <div class="mini-stat">
+        <span class="mini-stat-label">XP Total</span>
+        <strong id="xpTotal">0</strong>
+      </div>
+    </div>
+  </header>
+
+  <main class="pagina-listas">
+    <section class="hero-listas">
+      <div class="hero-texto">
+        <span class="hero-tag">Portal do Professor</span>
+        <h2>Central de exercícios e revisões</h2>
+        <p>
+          Aqui você organiza suas listas por disciplina, assunto e andamento.
+          Uma área pensada para prática, revisão e acompanhamento do progresso dos alunos.
+        </p>
+      </div>
+
+      <div class="hero-card-destaque">
+        <span class="hero-card-label">🔥 Destaque</span>
+        <h3 id="tituloDestaque">Nenhuma lista em destaque</h3>
+        <p id="descricaoDestaque">Adicione listas no JavaScript para exibir o destaque automaticamente.</p>
+        <div class="hero-card-meta">
+          <span id="questoesDestaque">0 questões</span>
+          <span id="xpDestaque">0 XP</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="painel-filtros">
+      <div class="campo campo-busca">
+        <label for="buscaLista">Buscar lista</label>
+        <input
+          type="text"
+          id="buscaLista"
+          placeholder="Digite o nome da lista, assunto ou disciplina..."
+        />
+      </div>
+
+      <div class="campo">
+        <label>Disciplina</label>
+        <div class="custom-select" data-filter="disciplina">
+          <button class="custom-select-trigger" type="button">
+            <span class="custom-select-value">Todas</span>
+            <span class="custom-select-arrow">⌄</span>
+          </button>
+          <div class="custom-select-menu">
+            <button class="custom-option selected" type="button" data-value="">Todas</button>
+            <button class="custom-option" type="button" data-value="matematica">Matemática</button>
+            <button class="custom-option" type="button" data-value="fisica">Física</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Status</label>
+        <div class="custom-select" data-filter="status">
+          <button class="custom-select-trigger" type="button">
+            <span class="custom-select-value">Todos</span>
+            <span class="custom-select-arrow">⌄</span>
+          </button>
+          <div class="custom-select-menu">
+            <button class="custom-option selected" type="button" data-value="">Todos</button>
+            <button class="custom-option" type="button" data-value="nao-iniciada">Não iniciada</button>
+            <button class="custom-option" type="button" data-value="em-andamento">Em andamento</button>
+            <button class="custom-option" type="button" data-value="concluida">Concluída</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Dificuldade</label>
+        <div class="custom-select" data-filter="dificuldade">
+          <button class="custom-select-trigger" type="button">
+            <span class="custom-select-value">Todas</span>
+            <span class="custom-select-arrow">⌄</span>
+          </button>
+          <div class="custom-select-menu">
+            <button class="custom-option selected" type="button" data-value="">Todas</button>
+            <button class="custom-option" type="button" data-value="facil">Fácil</button>
+            <button class="custom-option" type="button" data-value="media">Média</button>
+            <button class="custom-option" type="button" data-value="dificil">Difícil</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Série</label>
+        <div class="custom-select" data-filter="serie">
+          <button class="custom-select-trigger" type="button">
+            <span class="custom-select-value">Todas</span>
+            <span class="custom-select-arrow">⌄</span>
+          </button>
+          <div class="custom-select-menu">
+            <button class="custom-option selected" type="button" data-value="">Todas</button>
+            <button class="custom-option" type="button" data-value="1ano">1º ano</button>
+            <button class="custom-option" type="button" data-value="2ano">2º ano</button>
+            <button class="custom-option" type="button" data-value="3ano">3º ano</button>
+            <button class="custom-option" type="button" data-value="eja">EJA</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-limpar" id="btnLimparFiltros" type="button">Limpar filtros</button>
+    </section>
+
+    <section class="resumo-faixa">
+      <div class="resumo-card">
+        <span class="resumo-label">Em andamento</span>
+        <strong id="totalAndamento">0</strong>
+      </div>
+
+      <div class="resumo-card">
+        <span class="resumo-label">Não iniciadas</span>
+        <strong id="totalNaoIniciadas">0</strong>
+      </div>
+
+      <div class="resumo-card">
+        <span class="resumo-label">Questões disponíveis</span>
+        <strong id="totalQuestoes">0</strong>
+      </div>
+
+      <div class="resumo-card">
+        <span class="resumo-label">XP disponível</span>
+        <strong id="totalXpDisponivel">0</strong>
+      </div>
+    </section>
+
+    <section class="secao-listas">
+      <div class="secao-titulo">
+        <div>
+          <span class="secao-tag">📚 Banco de listas</span>
+          <h2>Suas listas disponíveis</h2>
+        </div>
+        <p id="contadorResultados">0 listas encontradas</p>
+      </div>
+
+      <div class="grid-listas" id="gridListas"></div>
+
+      <div class="estado-vazio oculto" id="estadoVazio">
+        <div class="estado-vazio-box">
+          <span class="emoji-vazio">📝</span>
+          <h3>Nenhuma lista encontrada</h3>
+          <p>Tente ajustar os filtros ou alterar o termo da busca.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./js/listas.js"></script>
+</body>
+</html>

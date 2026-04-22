@@ -1,0 +1,229 @@
+/* =====================================================
+   🎯 CONTAINER PRINCIPAL
+   Centraliza e limita largura do conteúdo
+===================================================== */
+.conquistas-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+
+
+/* =====================================================
+   📊 BLOCO DE PROGRESSO
+   Contador + barra de progresso
+===================================================== */
+.progresso-conquistas {
+  margin-bottom: 2rem;
+}
+
+/* Texto: "3/10 conquistas" */
+#contador-conquistas {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Fundo da barra */
+.barra {
+  width: 100%;
+  height: 10px;
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Barra preenchida */
+#barra-progresso {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00ffae, #00c3ff);
+  transition: width 0.4s ease;
+}
+
+
+/* =====================================================
+   🧱 GRID DE BADGES
+   Layout responsivo automático
+===================================================== */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+
+/* =====================================================
+   🏅 CARD BASE (BADGE)
+===================================================== */
+.badge-card {
+  background: #111;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+/* Efeito hover (somente para desbloqueadas) */
+.badge-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+
+/* =====================================================
+   ✅ BADGE DESBLOQUEADO
+   Destaque visual (brilho leve)
+===================================================== */
+.badge-card.ativa {
+  background: linear-gradient(135deg, #161616, #222);
+  border: 1px solid #00ffae;
+  box-shadow:
+    0 0 12px rgba(0, 255, 174, 0.3),
+    0 0 25px rgba(0, 255, 174, 0.15);
+  animation: brilho 2.5s infinite alternate;
+  transform: scale(1.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-card.ativa .badge-icon {
+  filter: none;
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+@keyframes brilho {
+  from {
+    box-shadow:
+      0 0 10px rgba(0, 255, 174, 0.2),
+      0 0 20px rgba(0, 255, 174, 0.1);
+  }
+  to {
+    box-shadow:
+      0 0 18px rgba(0, 255, 174, 0.35),
+      0 0 35px rgba(0, 255, 174, 0.2);
+  }
+}
+
+.badge-card.ativa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0,255,174,0.15), transparent);
+  pointer-events: none;
+}
+
+.badge-card.ativa:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.badge-card.ativa .badge-nome {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.badge-card.ativa .badge-descricao {
+  color: #cccccc;
+  opacity: 1;
+}
+
+.badge-card.ativa .badge-data {
+  color: #aaaaaa;
+  opacity: 1;
+}
+
+/* =====================================================
+   🔒 BADGE BLOQUEADO (APAGADO)
+   Visual reduzido para indicar não desbloqueado
+===================================================== */
+.badge-card.bloqueada {
+  opacity: 0.65; /* antes 0.35 */
+  filter: grayscale(0.5); /* menos agressivo */
+  transform: scale(0.98);
+  background: #181818; /* melhora contraste */
+  border: 1px solid #2a2a2a;
+}
+
+.badge-card.bloqueada .badge-icon {
+  filter: grayscale(0.7);
+  opacity: 0.8;
+}
+
+.badge-card.bloqueada .badge-nome {
+  opacity: 0.9;
+}
+
+.badge-card.bloqueada .badge-descricao {
+  opacity: 0.75;
+}
+
+.badge-card.bloqueada .badge-data {
+  opacity: 0.7;
+}
+
+
+/* =====================================================
+   🔐 ÍCONE DE CADEADO
+===================================================== */
+.badge-lock {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+
+/* =====================================================
+   🎨 ÍCONE PRINCIPAL
+===================================================== */
+.badge-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+
+/* =====================================================
+   📝 TEXTOS
+===================================================== */
+
+/* Nome da conquista */
+.badge-nome {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Descrição */
+.badge-descricao {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.4rem;
+}
+
+/* Data ou status */
+.badge-data {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}
+
+
+/* =====================================================
+   ⚠️ ESTADO VAZIO (fallback)
+===================================================== */
+.sem-conquistas {
+  text-align: center;
+  opacity: 0.8;
+}
+
+
+/* =====================================================
+   🧰 UTILITÁRIOS
+===================================================== */
+.hidden {
+  display: none;
+}
+
+

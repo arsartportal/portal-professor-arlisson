@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estatística Dinâmica</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./estatistica-dinamica.css">
+</head>
+<body>
+
+<main class="pagina-estatistica">
+
+  <!-- ============================================
+       HERO
+  ============================================= -->
+  <section class="hero-estatistica">
+
+    <a href="../ferramentas-pedagogicas.html" class="voltar">
+      ← Voltar para Ferramentas
+    </a>
+
+    <div class="hero-box">
+      <span class="tag">📊 Matemática Dinâmica</span>
+
+      <h1>Estatística Dinâmica</h1>
+
+      <p>
+        Digite uma sequência de valores e acompanhe automaticamente
+        a média, mediana, moda, amplitude e gráfico.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================
+       PAINEL PRINCIPAL
+  ============================================= -->
+  <section class="painel-estatistica">
+
+    <!-- ========================================
+         ENTRADA DE DADOS
+    ========================================= -->
+<div class="entrada-estatistica">
+
+  <div class="topo-entrada">
+    <label for="dados">
+      Digite os valores separados por vírgula
+    </label>
+
+    <button id="gerar-aleatorio" class="botao-secundario">
+      🎲 Gerar conjunto aleatório
+    </button>
+  </div>
+
+  <textarea
+    id="dados"
+    placeholder="Ex.: 5, 8, 8, 10, 12, 15"
+  >5, 8, 8, 10, 12, 15</textarea>
+
+  <button id="analisar" class="botao-analisar">
+    Analisar Dados
+  </button>
+
+</div>
+
+    </div>
+
+
+    <!-- ========================================
+         RESULTADOS
+    ========================================= -->
+    <div class="cards-resultados">
+
+      <div class="resultado-card">
+        <span>Média</span>
+
+        <div class="campo-revelavel oculto" id="campo-media">
+          <strong id="media">9,67</strong>
+        </div>
+      </div>
+
+      <div class="resultado-card">
+        <span>Mediana</span>
+
+        <div class="campo-revelavel oculto" id="campo-mediana">
+          <strong id="mediana">9</strong>
+        </div>
+      </div>
+
+      <div class="resultado-card">
+        <span>Moda</span>
+
+        <div class="campo-revelavel oculto" id="campo-moda">
+          <strong id="moda">8</strong>
+        </div>
+      </div>
+
+      <div class="resultado-card">
+        <span>Amplitude</span>
+
+        <div class="campo-revelavel oculto" id="campo-amplitude">
+          <strong id="amplitude">10</strong>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ========================================
+         DADOS ORGANIZADOS
+    ========================================= -->
+    <section class="dados-organizados">
+
+      <div class="titulo-bloco">
+        <h2>Dados em ordem crescente</h2>
+        <p>Observe como os valores ficam organizados para calcular mediana e moda.</p>
+      </div>
+
+      <div class="lista-dados" id="lista-dados">
+        <!-- itens inseridos pelo JS -->
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         TABELA DE FREQUÊNCIA
+    ========================================= -->
+    <section class="tabela-frequencia-box">
+
+      <div class="titulo-bloco">
+        <h2>Tabela de frequência</h2>
+        <p>Veja quantas vezes cada valor aparece.</p>
+      </div>
+
+      <div class="campo-revelavel oculto" id="campo-tabela-frequencia">
+
+        <table class="tabela-frequencia">
+          <thead>
+            <tr>
+              <th>Valor</th>
+              <th>Frequência</th>
+            </tr>
+          </thead>
+
+          <tbody id="corpo-tabela-frequencia">
+            <!-- preenchido pelo JS -->
+          </tbody>
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         GRÁFICO
+    ========================================= -->
+    <section class="grafico-estatistica">
+
+      <div class="titulo-bloco">
+        <h2>Gráfico dos dados</h2>
+        <p>Visualize rapidamente a distribuição dos valores.</p>
+      </div>
+
+      <div class="controles-grafico">
+
+          <div class="seletor-grafico">
+          <label for="tipo-grafico">Tipo de gráfico</label>
+
+          <select id="tipo-grafico">
+  <option value="bar">Gráfico de barras</option>
+  <option value="line">Gráfico de linhas</option>
+  <option value="pie">Gráfico de pizza</option>
+</select>
+        </div>
+
+      </div>
+
+      <div class="campo-revelavel oculto grafico-oculto" id="campo-grafico">
+        <canvas id="graficoEstatistica"></canvas>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         FÓRMULAS IMPORTANTES
+    ========================================= -->
+    <section class="formulas-estatistica">
+
+      <div class="titulo-bloco">
+        <h2>Fórmulas importantes</h2>
+        <p>Utilize como consulta rápida durante a aula.</p>
+      </div>
+
+      <div class="formula-grid">
+
+        <article class="formula-item">
+          <span>Média</span>
+
+          <div class="campo-revelavel oculto">
+            <strong>Média = soma dos valores / quantidade</strong>
+          </div>
+
+          <p>Representa o valor médio do conjunto.</p>
+        </article>
+
+        <article class="formula-item">
+          <span>Mediana</span>
+
+          <div class="campo-revelavel oculto">
+            <strong>Valor central após ordenar os dados</strong>
+          </div>
+
+          <p>Divide o conjunto em duas partes iguais.</p>
+        </article>
+
+        <article class="formula-item">
+          <span>Moda</span>
+
+          <div class="campo-revelavel oculto">
+            <strong>Valor que mais aparece</strong>
+          </div>
+
+          <p>Pode existir mais de uma moda.</p>
+        </article>
+
+        <article class="formula-item">
+          <span>Amplitude</span>
+
+          <div class="campo-revelavel oculto">
+            <strong>Amplitude = maior valor − menor valor</strong>
+          </div>
+
+          <p>Mostra a variação dos dados.</p>
+        </article>
+
+        <article class="formula-item destaque-formula">
+          <span>Desafio rápido</span>
+
+          <div class="campo-revelavel oculto">
+            <strong>Nos dados 4, 7, 7, 10, 12, qual é a média e a moda?</strong>
+          </div>
+
+          <p>
+            Tente descobrir antes de clicar em revelar.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./estatistica-dinamica.js"></script>
+
+</body>
+</html>

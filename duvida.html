@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💬 Dúvida | Portal do Professor</title>
+
+<style>
+
+body{
+font-family:'Segoe UI',Arial;
+background:#f4f6fb;
+margin:0;
+padding:40px;
+color:#333;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+margin-bottom:25px;
+}
+
+/* ========================================
+   DESTAQUE DOURADO PROFESSOR
+======================================== */
+
+.professor{
+border-left:4px solid #d4af37;
+background:linear-gradient(to right,#fffdf6,#ffffff);
+position:relative;
+}
+
+.professor::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:10px;
+pointer-events:none;
+box-shadow:
+0 0 0 1px rgba(212,175,55,0.25),
+0 0 12px rgba(212,175,55,0.12);
+}
+
+.professor:hover{
+transform:translateY(-2px);
+box-shadow:
+0 4px 16px rgba(0,0,0,0.06),
+0 0 10px rgba(212,175,55,0.18);
+}
+
+.pergunta{
+font-size:22px;
+font-weight:600;
+margin-bottom:10px;
+}
+
+.info{
+font-size:13px;
+color:#777;
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.patente{
+width:22px;
+}
+
+/* BADGES */
+
+.badge-prof{
+background:linear-gradient(135deg,#d4af37,#f4d03f);
+color:#4a3a00;
+font-size:11px;
+padding:3px 8px;
+border-radius:20px;
+font-weight:700;
+letter-spacing:0.4px;
+}
+
+.badge-melhor{
+background:#16a34a;
+color:white;
+font-size:11px;
+padding:3px 8px;
+border-radius:20px;
+font-weight:600;
+}
+
+.resposta{
+border-top:1px solid #eee;
+padding-top:15px;
+margin-top:15px;
+}
+
+.melhor{
+border-left:4px solid #16a34a;
+background:#f0fdf4;
+}
+
+/* INPUT */
+
+textarea{
+width:100%;
+height:90px;
+border-radius:8px;
+border:1px solid #ddd;
+padding:10px;
+font-size:15px;
+resize:none;
+}
+
+/* BOTÕES ESTILO IOS */
+
+button{
+margin-top:10px;
+padding:8px 14px;
+border:none;
+background:#4f46e5;
+color:white;
+border-radius:20px;
+cursor:pointer;
+font-weight:600;
+font-size:12px;
+}
+
+button:hover{
+background:#4338ca;
+}
+
+.btn{
+background:#f1f5f9;
+color:#333;
+}
+
+.btn:hover{
+background:#e2e8f0;
+}
+
+.btn-success{
+background:#16a34a;
+color:white;
+}
+
+.btn-danger{
+background:#dc2626;
+color:white;
+}
+
+.btn-danger:hover{
+background:#b91c1c;
+}
+
+.action-bar{
+display:flex;
+gap:8px;
+margin-top:8px;
+flex-wrap:wrap;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="duvidaCard" class="card">
+Carregando dúvida...
+</div>
+
+<div class="card">
+
+<h3>💬 Respostas</h3>
+
+<div id="listaRespostas"></div>
+
+</div>
+
+<div class="card">
+
+<h3>✍️ Responder</h3>
+
+<textarea id="respostaTexto" placeholder="Escreva sua resposta..."></textarea>
+
+<button onclick="enviarResposta()">Responder</button>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { db, auth } from "./js/firebase.js";
+
+import {
+doc,
+getDoc,
+collection,
+addDoc,
+query,
+orderBy,
+getDocs,
+serverTimestamp,
+updateDoc,
+increment,
+deleteDoc
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+import { onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+import { obterPatentePorNivel }
+from "./js/patentes.js";
+
+const params = new URLSearchParams(window.location.search);
+const duvidaId = params.get("id");
+
+let usuarioAtual=null;
+
+/* BUSCAR USUÁRIO */
+
+async function buscarUsuario(uid){
+
+if(!uid) return {nome:"Aluno",nivel:0};
+
+const ref=doc(db,"usuarios",uid);
+const snap=await getDoc(ref);
+
+if(!snap.exists()) return {nome:"Aluno",nivel:0};
+
+return snap.data();
+
+}
+
+/* LOGIN */
+
+onAuthStateChanged(auth,async(user)=>{
+
+if(!user){
+window.location="login.html";
+return;
+}
+
+usuarioAtual=user;
+
+await carregarDuvida();
+await carregarRespostas();
+
+});
+
+/* CARREGAR DÚVIDA */
+
+async function carregarDuvida(){
+
+const card=document.getElementById("duvidaCard");
+
+const ref=doc(db,"duvidas",duvidaId);
+const snap=await getDoc(ref);
+
+if(!snap.exists()){
+card.innerHTML="Dúvida não encontrada.";
+return;
+}
+
+const d=snap.data();
+
+const usuario=await buscarUsuario(d.uid);
+
+const patente=obterPatentePorNivel(usuario.nivel||0);
+
+const data=d.timestamp?.toDate();
+
+const hora=data
+? data.toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"})
+: "";
+
+const isProfessor=usuario?.tipo==="professor";
+
+card.className="card";
+
+if(isProfessor) card.classList.add("professor");
+
+let html=`
+
+<div class="pergunta">${isProfessor?"👨‍🏫 ":""}${d.pergunta}</div>
+
+<div class="info">
+
+<img class="patente" src="${patente.imagem}">
+
+<span>${usuario.nome}</span>
+
+${isProfessor?`<span class="badge-prof">PROFESSOR</span>`:""}
+
+<span>Nv.${usuario.nivel||0}</span>
+
+<span>🕒 ${hora}</span>
+
+<span>👍 ${d.likes||0}</span>
+
+</div>
+
+`;
+
+const atual=await buscarUsuario(usuarioAtual.uid);
+
+if(atual.tipo==="professor"){
+
+html+=`
+<div class="action-bar">
+<button class="btn-danger" onclick="apagarPergunta()">🗑 Apagar pergunta</button>
+</div>
+`;
+
+}
+
+card.innerHTML=html;
+
+}
+
+/* CARREGAR RESPOSTAS */
+
+async function carregarRespostas(){
+
+const lista=document.getElementById("listaRespostas");
+
+lista.innerHTML="";
+
+const q=query(
+collection(db,"duvidas",duvidaId,"respostas"),
+orderBy("timestamp","asc")
+);
+
+const snapshot=await getDocs(q);
+
+let respostas=[];
+
+snapshot.forEach(docu=>{
+respostas.push({id:docu.id,...docu.data()});
+});
+
+/* FIXAR MELHOR */
+
+respostas.sort((a,b)=>{
+if(a.melhor) return -1;
+if(b.melhor) return 1;
+return 0;
+});
+
+for(const r of respostas){
+
+const usuario=await buscarUsuario(r.uid);
+
+const patente=obterPatentePorNivel(usuario.nivel||0);
+
+const data=r.timestamp?.toDate();
+
+const hora=data
+? data.toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"})
+: "";
+
+const isProfessor=usuario?.tipo==="professor";
+
+let classe="resposta";
+
+if(isProfessor) classe+=" professor";
+if(r.melhor) classe+=" melhor";
+
+const div=document.createElement("div");
+
+div.className=classe;
+
+div.innerHTML=`
+
+<div>${r.texto}</div>
+
+<div class="info">
+
+<img class="patente" src="${patente.imagem}">
+
+<span>${usuario.nome}</span>
+
+${isProfessor?`<span class="badge-prof">PROFESSOR</span>`:""}
+
+<span>Nv.${usuario.nivel||0}</span>
+
+${r.melhor?`<span class="badge-melhor">⭐ Melhor resposta escolhida pelo professor</span>`:""}
+
+<span>🕒 ${hora}</span>
+
+</div>
+
+`;
+
+const atual=await buscarUsuario(usuarioAtual.uid);
+
+if(atual.tipo==="professor"){
+
+const bar=document.createElement("div");
+bar.className="action-bar";
+
+if(!r.melhor){
+
+const btn=document.createElement("button");
+btn.className="btn-success";
+btn.innerText="⭐ Melhor resposta";
+btn.onclick=()=>marcarMelhor(r.id);
+
+bar.appendChild(btn);
+
+}
+
+if(r.melhor){
+
+const btn2=document.createElement("button");
+btn2.className="btn";
+btn2.innerText="❌ Remover melhor";
+btn2.onclick=()=>desmarcarMelhor(r.id);
+
+bar.appendChild(btn2);
+
+}
+
+const btn3=document.createElement("button");
+btn3.className="btn-danger";
+btn3.innerText="🗑 Apagar";
+btn3.onclick=()=>apagarResposta(r.id);
+
+bar.appendChild(btn3);
+
+div.appendChild(bar);
+
+}
+
+lista.appendChild(div);
+
+}
+
+}
+
+/* MARCAR MELHOR */
+
+window.marcarMelhor=async function(respostaId){
+
+const refRespostas=collection(db,"duvidas",duvidaId,"respostas");
+
+const snapshot=await getDocs(refRespostas);
+
+for(const docu of snapshot.docs){
+
+if(docu.data().melhor){
+
+await updateDoc(
+doc(db,"duvidas",duvidaId,"respostas",docu.id),
+{melhor:false}
+);
+
+}
+
+}
+
+await updateDoc(
+doc(db,"duvidas",duvidaId,"respostas",respostaId),
+{melhor:true}
+);
+
+carregarRespostas();
+
+}
+
+/* REMOVER MELHOR */
+
+window.desmarcarMelhor=async function(respostaId){
+
+await updateDoc(
+doc(db,"duvidas",duvidaId,"respostas",respostaId),
+{melhor:false}
+);
+
+carregarRespostas();
+
+}
+
+/* APAGAR RESPOSTA */
+
+window.apagarResposta=async function(respostaId){
+
+const confirmar=confirm("Apagar esta resposta?");
+
+if(!confirmar) return;
+
+await deleteDoc(
+doc(db,"duvidas",duvidaId,"respostas",respostaId)
+);
+
+carregarRespostas();
+
+}
+
+/* APAGAR PERGUNTA */
+
+window.apagarPergunta=async function(){
+
+const confirmar=confirm("Apagar pergunta e todas as respostas?");
+
+if(!confirmar) return;
+
+const refRespostas=collection(db,"duvidas",duvidaId,"respostas");
+
+const snapshot=await getDocs(refRespostas);
+
+for(const docu of snapshot.docs){
+
+await deleteDoc(doc(db,"duvidas",duvidaId,"respostas",docu.id));
+
+}
+
+await deleteDoc(doc(db,"duvidas",duvidaId));
+
+alert("Pergunta removida");
+
+window.location="central-duvidas.html";
+
+}
+
+/* ENVIAR RESPOSTA */
+
+window.enviarResposta=async function(){
+
+const campo=document.getElementById("respostaTexto");
+
+const texto=campo.value.trim();
+
+if(!texto) return;
+
+await addDoc(
+collection(db,"duvidas",duvidaId,"respostas"),
+{
+texto,
+uid:usuarioAtual.uid,
+timestamp:serverTimestamp()
+}
+);
+
+await updateDoc(
+doc(db,"duvidas",duvidaId),
+{
+respostas:increment(1)
+}
+);
+
+campo.value="";
+
+carregarRespostas();
+
+}
+
+</script>
+
+</body>
+</html>

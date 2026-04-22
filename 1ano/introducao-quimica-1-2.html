@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Química — Nível 1.2</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/introducao-quimica.css" />
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+<header id="header"></header>
+
+<main class="conteudo-quimica">
+
+  <!-- CABEÇALHO -->
+  <section class="cabecalho-modulo">
+    <h1>🧪 Introdução à Química</h1>
+    <p>
+      Agora vamos entender o que é matéria e quais são suas principais propriedades.
+    </p>
+  </section>
+
+  <!-- NÍVEL 1.2 -->
+  <section class="nivel-conteudo" id="nivel-1-2">
+
+    <h2>📘 Nível 1.2 — Matéria e suas Propriedades</h2>
+
+    <!-- BLOCO 1 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 O que é matéria?</h3>
+      <p>
+        <strong>Matéria</strong> é tudo aquilo que tem massa e ocupa lugar no espaço.
+      </p>
+      <p>
+        Ou seja, tudo o que podemos tocar, sentir, medir ou pesar é matéria.
+      </p>
+    </article>
+
+    <!-- BLOCO 2 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Exemplos de matéria</h3>
+      <ul>
+        <li>🌊 Água</li>
+        <li>🪨 Pedra</li>
+        <li>💨 Ar</li>
+        <li>🪵 Madeira</li>
+        <li>🧍 Corpo humano</li>
+      </ul>
+      <p>
+        Mesmo o ar, que não vemos, é matéria porque tem massa e ocupa espaço.
+      </p>
+    </article>
+
+    <!-- BLOCO 3 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Propriedades da matéria</h3>
+      <p>
+        A matéria possui características chamadas <strong>propriedades</strong>.
+      </p>
+      <ul>
+        <li><strong>Massa</strong> → quantidade de matéria</li>
+        <li><strong>Volume</strong> → espaço ocupado</li>
+        <li><strong>Densidade</strong> → relação entre massa e volume</li>
+        <li><strong>Ponto de fusão</strong> → temperatura em que derrete</li>
+        <li><strong>Ponto de ebulição</strong> → temperatura em que ferve</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 4 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Propriedades gerais e específicas</h3>
+      <p>
+        Algumas propriedades valem para qualquer matéria (gerais),
+        enquanto outras ajudam a identificar substâncias (específicas).
+      </p>
+      <p>
+        Exemplo: massa é geral. Já densidade pode identificar uma substância.
+      </p>
+    </article>
+
+    <!-- RESUMO -->
+    <article class="bloco-resumo">
+      <h3>🧠 Resumo do Nível</h3>
+      <ul>
+        <li>Matéria é tudo que tem massa e ocupa espaço</li>
+        <li>A matéria possui propriedades</li>
+        <li>Algumas propriedades são gerais</li>
+        <li>Outras são específicas e ajudam na identificação</li>
+      </ul>
+    </article>
+
+    <!-- CHECKPOINT -->
+    <section class="checkpoint">
+
+      <h3>✅ Checkpoint — Teste rápido</h3>
+      <p>Responda corretamente para concluir o nível.</p>
+
+      <!-- QUESTÃO 1 -->
+      <div class="questao">
+        <p><strong>1)</strong> O que é matéria?</p>
+        <label><input type="radio" name="q1" value="a"> Tudo que tem massa e ocupa espaço</label>
+        <label><input type="radio" name="q1" value="b"> Apenas sólidos</label>
+        <label><input type="radio" name="q1" value="c"> Apenas líquidos</label>
+      </div>
+
+      <!-- QUESTÃO 2 -->
+      <div class="questao">
+        <p><strong>2)</strong> Qual é uma propriedade geral da matéria?</p>
+        <label><input type="radio" name="q2" value="a"> Cor específica</label>
+        <label><input type="radio" name="q2" value="b"> Massa</label>
+        <label><input type="radio" name="q2" value="c"> Cheiro específico</label>
+      </div>
+
+      <!-- QUESTÃO 3 -->
+      <div class="questao">
+        <p><strong>3)</strong> A densidade é importante porque:</p>
+        <label><input type="radio" name="q3" value="a"> Não serve para nada</label>
+        <label><input type="radio" name="q3" value="b"> Só existe em líquidos</label>
+        <label><input type="radio" name="q3" value="c"> Pode ajudar a identificar substâncias</label>
+      </div>
+
+      <button class="btn-checkpoint" onclick="verificarCheckpointNivel12()">
+        Verificar respostas
+      </button>
+
+      <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+    </section>
+
+    <!-- BOTÃO CONCLUIR -->
+    <div class="acoes-nivel">
+      <button
+        class="btn-concluir"
+        disabled
+        style="opacity: 0.5"
+        onclick="concluirNivel('nivel_1_2')">
+        ✅ Concluir Nível 1.2
+      </button>
+    </div>
+
+  </section>
+
+  <!-- MODAL -->
+  <div id="nivel-concluido-modal" class="modal hidden">
+    <div class="modal-conteudo">
+      <h3>✅ Nível concluído!</h3>
+      <p>Você avançou na trilha de Introdução à Química.</p>
+
+      <div class="modal-acoes">
+        <button class="btn-primario" onclick="irParaProximoNivel()">
+          ➡️ Próximo nível
+        </button>
+
+        <button class="btn-secundario" onclick="voltarParaQuimica()">
+          🧭 Trilha de Química
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="status-bar">
+  Sistema online • Progresso salvo automaticamente
+</footer>
+
+<script type="module" src="/js/introducao-quimica.js"></script>
+<script type="module" src="/js/patentes.js"></script>
+
+</body>
+</html>

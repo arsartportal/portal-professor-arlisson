@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Física — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔰 Introdução à Física</h1>
+      <p>
+        Antes de estudar movimento, forças e energia, é fundamental
+        entender o que a Física estuda e como ela observa o mundo.
+      </p>
+    </section>
+
+    <!-- ===============================
+     NÍVEL 1.5 — MÉTODO CIENTÍFICO
+================================ -->
+<section class="nivel-conteudo" id="nivel-1-5">
+
+  <h2>📘 Nível 1.5 — Método Científico</h2>
+
+  <!-- BLOCO 1 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 O que é o método científico?</h3>
+    <p>
+      O <strong>método científico</strong> é um conjunto de etapas usadas
+      pela ciência para estudar fenômenos e construir conhecimento confiável.
+    </p>
+  </article>
+
+  <!-- BLOCO 2 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Observação</h3>
+    <p>
+      Tudo começa com a <strong>observação</strong> de um fenômeno.
+      Algo chama a atenção e gera uma pergunta.
+    </p>
+  </article>
+
+  <!-- BLOCO 3 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Hipótese</h3>
+    <p>
+      A <strong>hipótese</strong> é uma possível explicação para o fenômeno.
+      Ela precisa ser testável.
+    </p>
+  </article>
+
+  <!-- BLOCO 4 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Experimento</h3>
+    <p>
+      No <strong>experimento</strong>, a hipótese é testada de forma controlada,
+      observando resultados e coletando dados.
+    </p>
+  </article>
+
+  <!-- BLOCO 5 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Conclusão</h3>
+    <p>
+      A <strong>conclusão</strong> analisa os resultados e verifica
+      se a hipótese foi confirmada ou não.
+    </p>
+  </article>
+
+  <!-- BLOCO 6 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Importância do método científico</h3>
+    <p>
+      O método científico evita achismos e garante que o conhecimento
+      seja baseado em evidências.
+    </p>
+  </article>
+
+  <!-- RESUMO -->
+  <article class="bloco-resumo">
+    <h3>🧠 Resumo do Nível</h3>
+    <ul>
+      <li>O método científico organiza o estudo da natureza</li>
+      <li>Começa com observação</li>
+      <li>Passa por hipótese e experimento</li>
+      <li>Termina com análise e conclusão</li>
+    </ul>
+  </article>
+
+</section>
+
+
+<!-- ===============================
+     CHECKPOINT — NÍVEL 1.5
+================================ -->
+<section class="checkpoint">
+
+  <h3>✅ Checkpoint — Método Científico</h3>
+
+  <!-- Q1 -->
+  <div class="questao">
+    <p><strong>1)</strong> Qual é a primeira etapa do método científico?</p>
+    <label><input type="radio" name="q1" value="a"> Hipótese</label>
+    <label><input type="radio" name="q1" value="b"> Observação</label>
+    <label><input type="radio" name="q1" value="c"> Conclusão</label>
+  </div>
+
+  <!-- Q2 -->
+  <div class="questao">
+    <p><strong>2)</strong> O que é uma hipótese?</p>
+    <label><input type="radio" name="q2" value="a"> Um resultado final</label>
+    <label><input type="radio" name="q2" value="b"> Uma opinião pessoal</label>
+    <label><input type="radio" name="q2" value="c"> Uma explicação testável</label>
+  </div>
+
+  <!-- Q3 -->
+  <div class="questao">
+    <p><strong>3)</strong> Qual é a função do experimento?</p>
+    <label><input type="radio" name="q3" value="a"> Confirmar achismos</label>
+    <label><input type="radio" name="q3" value="b"> Testar a hipótese</label>
+    <label><input type="radio" name="q3" value="c"> Criar leis científicas</label>
+  </div>
+
+  <button class="btn-checkpoint" onclick="verificarCheckpointNivel15()">
+    Verificar respostas
+  </button>
+
+  <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+</section>
+
+<!-- BOTÃO (bloqueado) -->
+  <button
+    class="btn-concluir"
+    disabled
+    style="opacity:0.5"
+    onclick="concluirNivel('nivel_1_5')">
+    🏁 Concluir Módulo — Introdução à Física
+  </button>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/introducao-fisica.js"></script>
+
+</body>
+</html>

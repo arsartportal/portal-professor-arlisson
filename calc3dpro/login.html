@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Login • Calc3D Pro</title>
+
+<style>
+:root {
+  --azul: #2563eb;
+  --azul-escuro: #020617;
+  --cinza: #64748b;
+  --borda: #e5e7eb;
+  --erro: #dc2626;
+  --bg-card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #020617, #1e3a8a);
+  font-family: "Segoe UI", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CARD */
+.login-box {
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 420px;
+  padding: 44px;
+  border-radius: 18px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.35);
+}
+
+/* BRAND */
+.brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.brand img {
+  height: 64px;
+  margin-bottom: 12px;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: .5px;
+  color: var(--azul-escuro);
+}
+
+/* TITULO */
+.login-box h2 {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 32px;
+}
+
+/* FORM */
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--borda);
+  font-size: 15px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 2px rgba(37,99,235,.15);
+}
+
+/* BOTÃO */
+button {
+  width: 100%;
+  padding: 16px;
+  background: var(--azul);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+button:disabled {
+  opacity: .75;
+  cursor: not-allowed;
+}
+
+/* LINKS */
+.toggle {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.toggle span {
+  color: var(--azul);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* MENSAGENS */
+.msg {
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.msg.erro {
+  color: var(--erro);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--cinza);
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <div class="brand">
+    <img src="assets/img/logo.png" alt="Calc3D Pro">
+    <h1>Calc3D Pro</h1>
+  </div>
+
+  <h2>Acesso ao painel profissional</h2>
+
+  <label>Email</label>
+  <input type="email" id="email" placeholder="usuario@empresa.com">
+
+  <label>Senha</label>
+  <input type="password" id="senha" placeholder="••••••••••">
+
+  <button id="btn" onclick="login()">Entrar</button>
+
+  <div class="toggle">
+    <span onclick="recuperarSenha()">Esqueci minha senha</span>
+  </div>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="footer">
+    Ambiente seguro • Autenticação protegida
+  </div>
+
+</div>
+
+<!-- 🔐 FIREBASE AUTH -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCs6AGz_yGwLwbMuWQLMkUv0-IJZ84IT2M",
+  authDomain: "calculadora---3d.firebaseapp.com",
+  projectId: "calculadora---3d",
+  storageBucket: "calculadora---3d.firebasestorage.app",
+  messagingSenderId: "53725959441",
+  appId: "1:53725959441:web:2f83316aa37380da0aa8b0",
+  measurementId: "G-1WHG7YB873"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* REDIRECIONA SE JÁ LOGADO */
+onAuthStateChanged(auth, user => {
+  if (user) {
+    window.location.href = "dashboard.html";
+  }
+});
+
+window.login = function () {
+  msg.textContent = "";
+  msg.classList.remove("erro");
+  btn.disabled = true;
+  btn.textContent = "Verificando...";
+
+  signInWithEmailAndPassword(auth, email.value, senha.value)
+    .then(() => {
+      window.location.href = "dashboard.html";
+    })
+    .catch(e => {
+
+      // 🔁 NÃO TEM ACESSO → PLANOS
+      if (e.code === "auth/invalid-credential") {
+        window.location.href = "planos.html";
+        return;
+      }
+
+      msg.textContent = traduzirErro(e.code);
+      msg.classList.add("erro");
+      btn.disabled = false;
+      btn.textContent = "Entrar";
+    });
+};
+
+window.recuperarSenha = function () {
+  if (!email.value) {
+    msg.textContent = "Informe o email para recuperar a senha.";
+    msg.classList.add("erro");
+    return;
+  }
+
+  sendPasswordResetEmail(auth, email.value)
+    .then(() => {
+      msg.textContent =
+        "Email de recuperação enviado. Verifique sua caixa de entrada.";
+      msg.classList.remove("erro");
+    })
+    .catch(e => {
+      msg.textContent = traduzirErro(e.code);
+      msg.classList.add("erro");
+    });
+};
+
+function traduzirErro(code) {
+  const erros = {
+    "auth/invalid-email": "Email inválido.",
+    "auth/too-many-requests": "Muitas tentativas. Tente novamente mais tarde."
+  };
+  return erros[code] || "Erro ao autenticar.";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+Crie uma aula completa em HTML seguindo o padrão oficial do Portal do Professor.
+
+Obrigatório:
+- Conteúdo aprofundado nível 10/10
+- Explicação conceitual forte
+- Fórmulas organizadas
+- Exemplo resolvido passo a passo
+- Aplicações reais
+- Erros comuns
+- Conexão com o próximo assunto
+- 10 questões objetivas (ou 20 se for revisão)
+- Script com 3 tentativas
+- LocalStorage com chave única
+- Destaque verde para acertos
+- Destaque vermelho para erros
+- Melhor desempenho exibido
+- Bloqueio após 3 tentativas
+- Layout profissional (container centralizado + box shadow)
+- Nome: Professor Arlisson Ferreira
+- Arquivo HTML completo em um único bloco

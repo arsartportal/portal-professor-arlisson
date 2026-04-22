@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🧠 Central de Recompensas</title>
+
+  <link rel="stylesheet" href="./css/patentes.css">
+  <link rel="stylesheet" href="./css/loja.css">
+  <link rel="stylesheet" href="./js/plugins/global-alert/globalAlert.css">
+</head>
+
+<body id="topo">
+
+  <!-- ======================================================
+       HERO / TÍTULO DA PÁGINA
+       ====================================================== -->
+  <section class="hero-loja">
+    <h1>🧠 Central de Recompensas</h1>
+    <p>Use seus SciencePoints (SP), conquistados em atividades, para resgatar itens exclusivos.
+    <br>SP não possui valor monetário e é utilizado apenas dentro da plataforma.</p>
+  </section>
+
+  <!-- 🔥 GASTO GLOBAL -->
+  <div class="card-sp-global">
+  <div class="sp-global-header">
+    🔥 Comunidade
+  </div>
+
+  <div class="sp-global-valor" id="sp-global">
+    0
+  </div>
+
+  <div class="sp-global-label">
+    SP já gastos na central de recompensas
+  </div>
+  <br>
+  <!-- 🔥 META GLOBAL -->
+<div class="meta-global">
+
+  <div class="meta-info">
+    🎯 Meta Global: <span id="meta-valor">0</span> / <span id="meta-max">10.000</span>
+  </div>
+
+  <div class="barra-meta">
+    <div class="barra-fill" id="barra-meta-fill"></div>
+  </div>
+
+  <div class="meta-recompensa">
+    🎁 Recompensa: +1000 XP para todos
+  </div>
+</div>
+  <!-- 🏆 RANKING DE GASTADORES -->
+<div class="ranking-sp">
+  <h2>🏆 Top Resgatadores</h2>
+  <div id="ranking-sp"></div>
+</div>
+
+</div>
+
+  
+</div>
+
+  <!-- ======================================================
+       TOPO DA LOJA
+       - menu de navegação por seções
+       - saldo de SciencePoints
+       - atalho para inventário
+       ====================================================== -->
+  <div class="topbar-loja">
+  <nav class="menu-loja">
+    <div class="sp-menu">
+      <span>🔬 SP:</span>
+      <span id="sp">0</span>
+    </div>
+
+    <div class="menu-links">
+      <a href="#secao-comum" data-target="secao-comum">Comum</a>
+      <a href="#secao-raro" data-target="secao-raro">Raro</a>
+      <a href="#secao-epico" data-target="secao-epico">Épico</a>
+      <a href="#secao-lendario" data-target="secao-lendario">Lendário</a>
+      <a href="#historico" data-target="historico">Histórico</a>
+    </div>
+
+    <a href="/inventario/inventario.html" class="btn-inventario-loja">
+      🎒 Inventário
+    </a>
+  </nav>
+</div>
+
+  <!-- ======================================================
+       LISTAGEM DINÂMICA DA LOJA
+       ====================================================== -->
+  <div id="loja"></div>
+
+  <!-- ======================================================
+       MODAIS
+       ====================================================== -->
+  <div id="modal"></div>
+  <div id="roletaModal"></div>
+
+  <!-- ======================================================
+       HISTÓRICO GLOBAL DE COMPRAS
+       ====================================================== -->
+  <div class="historico-loja" id="historico">
+    <h2>📜 Histórico de Compras</h2>
+    <div id="feedCompras"></div>
+  </div>
+
+  <!-- ======================================================
+       POPUP DE RECOMPENSA
+       ====================================================== -->
+  <div id="popupRecompensa" class="popup-overlay">
+    <div class="popup-card">
+      <div id="popupAnimacao" class="popup-animacao"></div>
+      <h2 id="popupTitulo"></h2>
+      <p id="popupDescricao"></p>
+
+      <button onclick="fecharPopup()" class="popup-btn">
+        Continuar
+      </button>
+    </div>
+  </div>
+
+  <script type="module">
+    /* ======================================================
+       IMPORTS
+    ====================================================== */
+    import { auth, db } from "./js/firebase.js";
+    import { obterPatentePorNivel } from "./js/patentes.js";
+    import { atualizarHeaderInterno } from "./js/header-interno.js";
+    import {
+      initGlobalAlert as iniciarAlertaGlobal,
+      globalAlert as mostrarAlertaGlobal
+    } from "./js/plugins/global-alert/globalAlert.js";
+
+    import {
+      logCompraXP,
+      logCompraRanking,
+      logAberturaCaixa,
+      logRoleta,
+      logPremioFisico,
+      adicionarAoInventario,
+      salvarBeneficioInventario
+    } from "./js/inventario-log.js";
+
+    import {
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      collection,
+      addDoc,
+      serverTimestamp,
+      query,
+      orderBy,
+      limit,
+      onSnapshot,
+      Timestamp,
+      increment,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+    import { liberarPrimeiraCompra } from "./js/conquistas.js";
+    /* ======================================================
+       CONFIGURAÇÃO DA LOJA
+    ====================================================== */
+    const recompensas = [
+
+  // ⚡ XP (sempre primeiro)
+  { id: "xp20", nome: "⚡ +20 XP", preco: 1, xp: 20, raridade: "comum", ordem: 1, descricao: "Pequeno ganho de experiência." },
+  { id: "xp50", nome: "⚡ +50 XP", preco: 2, xp: 50, raridade: "raro", ordem: 2, descricao: "Bônus médio de experiência." },
+  { id: "xp100", nome: "⚡ +100 XP", preco: 3, xp: 100, raridade: "epico", ordem: 3, descricao: "Grande avanço científico." },
+  { id: "xp1000", nome: "⚡ +1000 XP", preco: 25, xp: 1000, raridade: "lendario", ordem: 4, descricao: "Salto massivo de experiência." },
+
+  // 🎟️ FICHAS DO QUIZ (MINIGAME)
+{ id: "ficha1", nome: "🎟️ 1 Ingresso", preco: 5, fichas: 1, raridade: "comum", ordem: 42, descricao: "Acesso a 1 partida do Quiz Científico." },
+
+{ id: "ficha3", nome: "🎟️ Pacote 3 Ingressos", preco: 12, fichas: 3, raridade: "raro", ordem: 70, descricao: "Leve desconto para múltiplas tentativas." },
+
+{ id: "ficha7", nome: "🎟️ Pacote 7 ingressos", preco: 25, fichas: 7, raridade: "epico", ordem: 71, descricao: "Melhor custo-benefício." },
+
+{ id: "ficha15", nome: "🎟️ Pacote 15 ingressos", preco: 45, fichas: 15, raridade: "lendario", ordem: 49, descricao: "Pacote máximo para dominar o ranking." },
+
+  // 🎯 BÔNUS DE PROVA (sempre após XP)
+  { id: "bonus-05", nome: "⚪ +0,5 ponto", preco: 50, tipo: "prova", valor: 0.5, raridade: "comum", ordem: 10, descricao: "Adiciona +0,5 ponto na prova." },
+  { id: "bonus-10", nome: "🔵 +1,0 ponto", preco: 90, tipo: "prova", valor: 1.0, raridade: "raro", ordem: 11, descricao: "Adiciona +1,0 ponto na prova." },
+  { id: "bonus-15", nome: "🟣 +1,5 ponto", preco: 130, tipo: "prova", valor: 1.5, raridade: "epico", ordem: 12, descricao: "Grande vantagem na prova." },
+  { id: "bonus-20", nome: "🟡 +2,0 pontos", preco: 170, tipo: "prova", valor: 2.0, raridade: "lendario", ordem: 13, descricao: "Bônus máximo permitido na prova." },
+
+  // 📦 CAIXAS
+  {
+  id: "caixa-basica",
+  nome: "🧪 Caixa Básica",
+  preco: 5,
+  raridade: "comum",
+  ordem: 20,
+  descricao: `
+    Ideal para quem está começando a juntar XP.
+
+    <span class="titulo-prob">Possíveis recompensas</span>
+
+    <div class="linha-prob comum">
+      <span>⚡ 100 XP</span>
+      <strong>40%</strong>
+    </div>
+
+    <div class="linha-prob comum">
+      <span>⚡ 150 XP</span>
+      <strong>35%</strong>
+    </div>
+
+    <div class="linha-prob raro">
+      <span>⚡ 200 XP</span>
+      <strong>20%</strong>
+    </div>
+
+    <div class="linha-prob raro">
+      <span>⚡ 250 XP</span>
+      <strong>5%</strong>
+    </div>
+
+    <div class="aviso-caixa">
+      As recompensas são aleatórias e utilizam apenas SP da plataforma.
+    </div>
+  `
+},
+
+{
+  id: "caixa-cientifica",
+  nome: "⚛ Caixa Científica",
+  preco: 10,
+  raridade: "raro",
+  ordem: 21,
+  descricao: `
+    Uma caixa mais avançada, com chance de recompensas épicas.
+
+    <span class="titulo-prob">Possíveis recompensas</span>
+
+    <div class="linha-prob raro">
+      <span>⚡ 200 XP</span>
+      <strong>45%</strong>
+    </div>
+
+    <div class="linha-prob raro">
+      <span>⚡ 300 XP</span>
+      <strong>35%</strong>
+    </div>
+
+    <div class="linha-prob epico">
+      <span>⚡ 400 XP</span>
+      <strong>15%</strong>
+    </div>
+
+    <div class="linha-prob epico">
+      <span>⚡ 500 XP</span>
+      <strong>5%</strong>
+    </div>
+
+    <div class="aviso-caixa">
+      Recompensas aleatórias utilizando apenas SP da plataforma.
+      Esta caixa possui chance de itens épicos.
+    </div>
+  `
+},
+
+{
+  id: "caixa-lendaria",
+  nome: "👑 Caixa Lendária",
+  preco: 20,
+  raridade: "lendario",
+  ordem: 22,
+  descricao: `
+    A caixa mais poderosa da Central de Recompensas.
+
+    <span class="titulo-prob">Possíveis recompensas</span>
+
+    <div class="linha-prob epico">
+      <span>⚡ 600 XP</span>
+      <strong>60%</strong>
+    </div>
+
+    <div class="linha-prob lendario">
+      <span>⚡ 800 XP</span>
+      <strong>30%</strong>
+    </div>
+
+    <div class="linha-prob lendario">
+      <span>⚡ 1000 XP</span>
+      <strong>10%</strong>
+    </div>
+
+    <div class="aviso-caixa">
+      Recompensas aleatórias utilizando apenas SP da plataforma.
+      Esta caixa possui chance de recompensas lendárias.
+    </div>
+  `
+},
+
+  // 🎡 ROLETA
+  { id: "roleta-cientifica", nome: "🎡 Roleta Científica", preco: 100, raridade: "epico", ordem: 43, descricao: "Gire para ganhar XP aleatório." },
+
+  // 🏆 RANKING
+  { 
+  id: "ranking-1ficha",
+  nome: "🎟️ 1 Ficha de Ranking",
+  preco: 5,
+  tipo: "ranking-fichas",
+  quantidade: 1,
+  raridade: "comum",
+  ordem: 39,
+  descricao: "Permite 1 acesso ao ranking por 3 minutos."
+},
+  
+  { 
+  id: "ranking-5fichas",
+  nome: "🏆 Pacote 5 Fichas de Ranking",
+  preco: 20,
+  tipo: "ranking-fichas",
+  quantidade: 5,
+  raridade: "raro",
+  ordem: 40,
+  descricao: "Permite 5 acessos ao ranking."
+},
+
+{ 
+  id: "ranking-15fichas",
+  nome: "🥈 Pacote 15 Fichas de Ranking",
+  preco: 45,
+  tipo: "ranking-fichas",
+  quantidade: 15,
+  raridade: "epico",
+  ordem: 41,
+  descricao: "Melhor custo-benefício para acompanhar o ranking."
+},
+
+{ 
+  id: "ranking-50fichas",
+  nome: "👑 Pacote 50 Fichas de Ranking",
+  preco: 120,
+  tipo: "ranking-fichas",
+  quantidade: 50,
+  raridade: "lendario",
+  ordem: 42,
+  descricao: "Pacote máximo para acessar o ranking sempre que quiser."
+},
+
+  // 🔑 PRÊMIO FÍSICO
+  { id: "chaveiro-univers3d", nome: "🔑 Chaveiro 3D", preco: 1500, lendario: true, raridade: "lendario", ordem: 50, descricao: "Prêmio físico exclusivo." }
+
+];
+
+    // 🚀 DATA DE INAUGURAÇÃO
+    const dataInauguracao = new Date("2026-04-15T00:00:00");
+    // 🗓️ DATAS DE LIBERAÇÃO POR TIPO
+    const datasLiberacao = {
+    caixas: new Date("2026-04-25T10:00:00"),
+    ranking: new Date("2026-05-15T10:00:00"),
+    roleta: new Date("2026-05-30T12:00:00"),
+    chaveiro: new Date("2026-11-23T18:00:00"),
+    prova: new Date("2026-04-10T08:00:00"),
+    fichas: new Date("2026-06-15T13:30:00")
+};
+
+    function lojaEmPreLancamento() {
+    return new Date() < dataInauguracao;
+    }
+
+    /* ======================================================
+       ESTADO GLOBAL
+    ====================================================== */
+    let spAluno = 0;
+    let userRef = null;
+    let estoqueChaveiro = 0;
+    let girando = false;
+    let unsubscribeHistorico = null;
+    let bonusProvaDisponivel = 0;
+    // 🧠 DIFERENÇA ENTRE TEMPO DO SERVIDOR E DO CLIENTE
+    let serverTimeOffset = 0;
+    let compraEmAndamento = false;
+
+    /* ======================================================
+       HEADER INTERNO
+       Observação:
+       esta função tenta carregar o componente do header interno,
+       mas só fará algo se existir um container com o id:
+       #header-interno-container
+    ====================================================== */
+    async function carregarHeaderInterno() {
+      const container = document.getElementById("header-interno-container");
+      if (!container) return;
+
+      try {
+        const resposta = await fetch("./components/header-interno.html");
+        const html = await resposta.text();
+        container.innerHTML = html;
+      } catch (erro) {
+        console.error("Erro ao carregar header interno:", erro);
+      }
+    }
+
+    function calcularXpMaxDoNivel(nivel) {
+      const nivelSeguro = Number(nivel) || 0;
+
+      if (nivelSeguro <= 0) return 100;
+      return 100;
+    }
+
+    async function atualizarHeaderComDadosDoUsuario() {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        const ref = doc(db, "usuarios", user.uid);
+        const snap = await getDoc(ref);
+        if (!snap.exists()) return;
+
+        const dados = snap.data();
+
+        const nivel = dados.nivel || 0;
+        const xpAtual = dados.xp || 0;
+        const xpMax = calcularXpMaxDoNivel(nivel);
+
+        atualizarHeaderInterno({
+          titulo: "Loja de Recompensas",
+          nivel,
+          xpAtual,
+          xpMax
+        });
+      } catch (erro) {
+        console.error("Erro ao atualizar header da loja:", erro);
+      }
+    }
+
+    /* ======================================================
+       UTILITÁRIOS
+    ====================================================== */
+    function atualizarSPNaTela() {
+  const el = document.getElementById("sp");
+  if (!el) return;
+
+  // 🧠 pega bônus atual (se já tiver carregado)
+  const bonus = window.bonusProvaDisponivel || 0;
+
+  el.innerText = spAluno + (bonus > 0 ? ` • 🎯 +${bonus}` : "");
+}
+
+// SP GLOBAL (TOTAL GASTO PELA COMUNIDADE) - REGISTRA NOVO GASTO
+
+async function registrarSPGlobal(valor) {
+  try {
+    const ref = doc(db, "config", "lojaStats");
+
+    await setDoc(ref, {
+  totalSPGasto: increment(valor)
+}, { merge: true });
+  } catch (erro) {
+    console.error("Erro ao atualizar SP global:", erro);
+  }
+}
+
+
+// SP GLOBAL (TOTAL GASTO PELA COMUNIDADE) - ATUALIZA EM TEMPO REAL
+function carregarSPGlobal() {
+  const ref = doc(db, "config", "lojaStats");
+
+  onSnapshot(ref, (snap) => {
+    if (!snap.exists()) return;
+
+    const total = snap.data().totalSPGasto || 0;
+
+    const el = document.getElementById("sp-global");
+    if (el) {
+      el.innerText = total.toLocaleString("pt-BR");
+    }
+  });
+}
+
+// 🔥 CARREGAR META GLOBAL (BARRA + TEXTO)
+function carregarMetaGlobal() {
+  const ref = doc(db, "config", "lojaStats");
+
+  onSnapshot(ref, (snap) => {
+    if (!snap.exists()) return;
+
+    const dados = snap.data();
+
+    const total = dados.totalSPGasto || 0;
+    const meta = dados.meta || 10000;
+
+    const progresso = (total / meta) * 100;
+
+    const barra = document.getElementById("barra-meta-fill");
+    if (barra) barra.style.width = progresso + "%";
+
+    document.getElementById("meta-valor").innerText = total.toLocaleString("pt-BR");
+    document.getElementById("meta-max").innerText = meta.toLocaleString("pt-BR");
+  });
+}
+
+// 🎁 DAR RECOMPENSA PARA TODOS
+// 🎁 RECOMPENSA GLOBAL + TOP 3
+async function darRecompensaGlobal() {
+  try {
+    const usuariosRef = collection(db, "usuarios");
+    const rankingRef = collection(db, "rankingGasto");
+
+    // 🔥 1. DAR XP PRA TODOS
+    const snapshot = await getDocs(usuariosRef);
+
+    const promises = [];
+
+    snapshot.forEach((docSnap) => {
+      const ref = doc(db, "usuarios", docSnap.id);
+
+      promises.push(
+        updateDoc(ref, {
+          xp: increment(1000)
+        })
+      );
+    });
+
+    await Promise.all(promises);
+
+    // 🏆 2. PEGAR TOP 3 DO RANKING
+    const q = query(
+      rankingRef,
+      orderBy("totalGasto", "desc"),
+      limit(3)
+    );
+
+    const rankingSnap = await getDocs(q);
+
+    const bonusTop = [1000, 500, 300];
+
+    const promisesRanking = [];
+
+    rankingSnap.forEach((docSnap, index) => {
+      const userId = docSnap.id;
+      const bonus = bonusTop[index];
+
+      const ref = doc(db, "usuarios", userId);
+
+      promisesRanking.push(
+        updateDoc(ref, {
+          xp: increment(bonus)
+        })
+      );
+    });
+
+    await Promise.all(promisesRanking);
+
+    alert("🔥 META ATINGIDA! Todos ganharam +1000 XP + bônus para o TOP 3!");
+    
+  } catch (erro) {
+    console.error("Erro recompensa global:", erro);
+  }
+}
+
+// 🔥 VERIFICA META GLOBAL
+async function verificarMetaGlobal() {
+  const ref = doc(db, "config", "lojaStats");
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return;
+
+  const dados = snap.data();
+
+  if (dados.metaAtingida) return;
+
+  if (dados.totalSPGasto >= (dados.meta || 10000)) {
+
+    await updateDoc(ref, {
+      metaAtingida: true
+    });
+
+    await darRecompensaGlobal();
+  }
+}
+
+// 🏆 REGISTRAR NO RANKING DE GASTO
+async function registrarRankingGasto(valor) {
+  try {
+    const user = auth.currentUser;
+    const snap = await getDoc(userRef);
+    const dados = snap.data();
+
+    const ref = doc(db, "rankingGasto", user.uid);
+
+    await setDoc(ref, {
+      nome: dados.nome || user.email,
+      totalGasto: increment(valor),
+      escola: dados.escola,
+      serie: dados.serie,
+      turma: dados.turma
+    }, { merge: true });
+
+  } catch (erro) {
+    console.error("Erro ranking gasto:", erro);
+  }
+}
+
+function carregarRankingGasto() {
+  const q = query(
+    collection(db, "rankingGasto"),
+    orderBy("totalGasto", "desc"),
+    limit(10)
+  );
+
+  const el = document.getElementById("ranking-sp");
+
+  onSnapshot(q, (snapshot) => {
+    if (!el) return;
+
+    el.innerHTML = "";
+
+    snapshot.docs.forEach((docSnap, index) => {
+  const d = docSnap.data();
+
+  const posicoes = ["🥇", "🥈", "🥉"];
+  const bonus = [1000, 500, 300];
+
+  const medalha = posicoes[index] || `#${index + 1}`;
+  const bonusTexto = index < 3 ? ` (+${bonus[index]} XP)` : "";
+
+  el.innerHTML += `
+    <div class="ranking-item">
+      <span>${medalha} ${d.nome}${bonusTexto}</span>
+      <span>💰 ${(d.totalGasto || 0).toLocaleString("pt-BR")} SP</span>
+    </div>
+  `;
+});
+  });
+}
+
+
+    function mostrarErro(msg) {
+      console.error(msg);
+      alert(msg);
+    }
+
+    // 🧠 IDENTIFICA O TIPO DO ITEM PRA SABER QUAL CONTADOR USAR
+    function getTipoItem(item) {
+    if (item.id.includes("caixa")) return "caixas";
+    if (item.tipo === "ranking-fichas") return "ranking";
+    if (item.id === "roleta-cientifica") return "roleta";
+    if (item.id === "chaveiro-univers3d") return "chaveiro";
+    if (item.tipo === "prova") return "prova";
+    if (item.fichas) return "fichas";
+    return null;
+    }
+    // 🌐 PEGA HORÁRIO REAL DO SERVIDOR FIREBASE
+    async function getServerTime() {
+    const ref = doc(db, "config", "tempo");
+
+    // escreve um timestamp do servidor
+  await setDoc(ref, {
+  lastUpdate: serverTimestamp()
+}, { merge: true });
+
+    // lê o valor salvo (agora com horário do servidor)
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) return new Date();
+
+    return snap.data().lastUpdate.toDate();
+  }
+    
+
+    // 🔄 SINCRONIZA TEMPO LOCAL COM SERVIDOR
+  async function sincronizarTempo() {
+    try {
+      const serverNow = await getServerTime();
+      const localNow = new Date();
+
+      serverTimeOffset = serverNow - localNow;
+
+      console.log("⏳ Offset do servidor:", serverTimeOffset, "ms");
+    } catch (erro) {
+      console.warn("Erro ao sincronizar tempo, usando local");
+      serverTimeOffset = 0;
+  }
+}
+
+    /* ======================================================
+       ESTOQUE DO CHAVEIRO
+    ====================================================== */
+    async function carregarEstoque() {
+      try {
+        const ref = doc(db, "loja", "chaveiro-univers3d");
+        const snap = await getDoc(ref);
+
+        if (snap.exists()) {
+          estoqueChaveiro = snap.data().estoque || 0;
+        } else {
+          estoqueChaveiro = 0;
+        }
+      } catch (erro) {
+        console.error("Erro ao carregar estoque:", erro);
+        estoqueChaveiro = 0;
+      }
+    }
+
+    /* ======================================================
+       CARREGAR SCIENCE POINTS DO USUÁRIO
+    ====================================================== */
+    // 🔥 CARREGAR SP EM TEMPO REAL (ATUALIZA AUTOMÁTICO)
+function carregarSPTempoReal(userRef) {
+
+  onSnapshot(userRef, (snap) => {
+
+    if (!snap.exists()) return;
+
+    const dados = snap.data();
+
+    // 🔬 SP
+    spAluno = dados.sciencePoints || 0;
+
+    // 🎯 BÔNUS
+    bonusProvaDisponivel = dados.bonusProvaDisponivel || 0;
+    window.bonusProvaDisponivel = bonusProvaDisponivel;
+
+    // 🔄 ATUALIZA TELA
+    atualizarSPNaTela();
+
+    // 🔥 GARANTE QUE A LOJA ATUALIZA COM OS DADOS
+    renderLoja();
+
+  });
+
+}
+
+    /* ======================================================
+       HISTÓRICO GLOBAL DE COMPRA
+    ====================================================== */
+    async function registrarCompra(item) {
+      try {
+        const user = auth.currentUser;
+        if (!user || !userRef) return;
+
+        const snap = await getDoc(userRef);
+        if (!snap.exists()) return;
+
+        const dados = snap.data();
+
+        await addDoc(collection(db, "lojaHistorico"), {
+          uid: user.uid,
+          aluno: dados.nome || user.email,
+          escola: dados.escola || "-",
+          serie: dados.serie || "-",
+          turma: dados.turma || "-",
+          item,
+          data: serverTimestamp()
+        });
+      } catch (erro) {
+        console.error("Erro ao registrar resgate:", erro);
+      }
+    }
+
+    /* ======================================================
+       CARREGAR HISTÓRICO GLOBAL
+    ====================================================== */
+    async function carregarHistorico() {
+      try {
+        if (unsubscribeHistorico) {
+          unsubscribeHistorico();
+        }
+
+        const q = query(
+          collection(db, "lojaHistorico"),
+          orderBy("data", "desc"),
+          limit(20)
+        );
+
+        const feed = document.getElementById("feedCompras");
+        if (!feed) return;
+
+        unsubscribeHistorico = onSnapshot(q, async (snapshot) => {
+          feed.innerHTML = "";
+
+          snapshot.docChanges().forEach(change => {
+            if (change.type !== "added") return;
+
+            const c = change.doc.data();
+            if (!c.item) return;
+
+            if (c.item.includes("Caixa Lendária")) {
+              mostrarAlertaGlobal(`🔥 ${c.aluno} abriu uma CAIXA LENDÁRIA!`);
+            }
+
+            if (c.item.includes("Chaveiro")) {
+              mostrarAlertaGlobal(`👑 ${c.aluno} ganhou um Chaveiro Univers3D!`);
+            }
+
+            if (c.item.includes("+800 XP")) {
+              mostrarAlertaGlobal(`⚡ ${c.aluno} ganhou +800 XP na roleta!`);
+            }
+          });
+
+          const docsOrdenados = snapshot.docs
+            .filter(d => d.data().data)
+            .sort((a, b) => b.data().data.toMillis() - a.data().data.toMillis());
+
+          for (const documento of docsOrdenados) {
+            const c = documento.data();
+            if (!c.data) continue;
+
+            const data = c.data.toDate();
+            const dia = data.toLocaleDateString("pt-BR");
+            const hora = data.toLocaleTimeString("pt-BR");
+            const dataFormatada = `${dia} • ${hora}`;
+
+            let patenteImg = "./assets/ranks/SeasonalRank0-0.png";
+
+            if (c.uid) {
+              try {
+                const userDoc = await getDoc(doc(db, "usuarios", c.uid));
+
+                if (userDoc.exists()) {
+                  const dadosUser = userDoc.data();
+                  const nivel = dadosUser.nivel || 0;
+                  patenteImg = obterPatentePorNivel(nivel).imagem;
+                }
+              } catch (erro) {
+                console.warn("Erro ao carregar patente do usuário:", erro);
+              }
+            }
+
+            let classe = "feed-item";
+            if (c.item.includes("Roleta")) classe += " feed-roleta";
+            if (c.item.includes("Caixa")) classe += " feed-caixa";
+            if (c.item.includes("Chaveiro")) classe += " feed-lendario";
+            if (patenteImg.includes("Top")) classe += " patente-top";
+
+            feed.innerHTML += `
+              <div class="${classe}">
+                <div class="feed-avatar">
+                  <img src="${patenteImg}" alt="Patente">
+                </div>
+
+                <div class="feed-msg">
+                  <b>${c.aluno}</b> ${c.item}
+
+                  <div class="feed-info">
+                    🏫 ${c.escola} • ${c.serie} ${c.turma}
+                    <br>
+                    🕒 ${dataFormatada}
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+
+          feed.scrollTop = 0;
+        });
+      } catch (erro) {
+        console.error("Erro ao carregar histórico:", erro);
+      }
+    }
+
+    /* ======================================================
+       RENDER DA LOJA
+    ====================================================== */
+    function renderLoja() {
+      const loja = document.getElementById("loja");
+      if (!loja) return;
+
+      loja.innerHTML = "";
+
+      const configRaridades = [
+        {
+          id: "comum",
+          titulo: "⚪ Comum",
+          subtitulo: "Itens básicos para progresso rápido.",
+          classeTitulo: "titulo-comum"
+        },
+        {
+          id: "raro",
+          titulo: "🔵 Raro",
+          subtitulo: "Recompensas melhores e benefícios valiosos.",
+          classeTitulo: "titulo-raro"
+        },
+        {
+          id: "epico",
+          titulo: "🟣 Épico",
+          subtitulo: "Itens especiais e recompensas poderosas.",
+          classeTitulo: "titulo-epico"
+        },
+        {
+          id: "lendario",
+          titulo: "🟡 Lendário",
+          subtitulo: "Os itens mais raros e desejados da loja.",
+          classeTitulo: "titulo-lendario"
+        }
+      ];
+
+      configRaridades.forEach(secao => {
+        const itens = recompensas
+          .filter(item => (item.raridade || "comum") === secao.id)
+          .sort((a, b) => (a.ordem || 999) - (b.ordem || 999));
+
+        if (!itens.length) return;
+
+        const wrapper = document.createElement("section");
+        wrapper.className = `secao-raridade ${secao.id}`;
+        wrapper.id = `secao-${secao.id}`;
+
+        wrapper.innerHTML = `
+          <div class="titulo-raridade ${secao.classeTitulo}">
+            <span>${secao.titulo}</span>
+          </div>
+
+          <p class="subtitulo-raridade">${secao.subtitulo}</p>
+
+          <div class="faixa-raridade"></div>
+          <br>
+
+          <div class="grid-raridade"></div>
+        `;
+
+        const grid = wrapper.querySelector(".grid-raridade");
+
+        itens.forEach(item => {
+        // 🧠 DEFINE O TIPO DO ITEM
+        const tipo = getTipoItem(item);
+        const dataLiberacao = datasLiberacao[tipo];
+
+        // 🧠 VERIFICA SE ESTÁ BLOQUEADO
+        const agora = new Date(Date.now() + serverTimeOffset);
+        const preLancamento = dataLiberacao && agora < dataLiberacao;
+
+        // libera só XP
+        const itemLiberado = item.id.startsWith("xp");
+
+        const bloqueado = preLancamento && !itemLiberado;
+
+        const podeComprar = !bloqueado && spAluno >= item.preco;
+
+          const card = document.createElement("div");
+
+          if (bloqueado) {
+          card.classList.add("bloqueado");
+          }
+          card.classList.add("card");
+          card.classList.add("raridade-" + (item.raridade || "comum"));
+
+          if (item.lendario) {
+            card.classList.add("lendario");
+          }
+
+          card.innerHTML = `
+            ${item.lendario ? '<div class="badge">LENDÁRIO</div>' : ""}
+
+            <h3>${item.nome}</h3>
+            <div class="desc">${item.descricao}</div>
+            ${bloqueado ? `
+            <div class="contador-loja" data-tipo="${tipo}">
+            ⏳ Carregando...
+            </div>
+            ` : ""}
+
+            ${item.id === "chaveiro-univers3d" ? `
+              <div class="estoque-baixo">
+                🔥 Restam apenas ${estoqueChaveiro} unidades
+              </div>
+            ` : ""}
+
+            <div class="preco">🔬 ${item.preco} SP</div>
+
+            <button
+  ${!podeComprar ? "disabled" : ""}
+  onclick="${bloqueado ? "" : `comprar('${item.id}')`}"
+>
+  ${
+    bloqueado
+      ? "Disponível em breve"
+      : item.id === "chaveiro-univers3d" && estoqueChaveiro <= 0
+      ? "Esgotado"
+      : podeComprar
+      ? "Resgatar"
+      : "SP insuficiente"
+  }
+</button>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        loja.appendChild(wrapper);
+      });
+    }
+
+    
+    /* ======================================================
+       ROLETA
+    ====================================================== */
+    function abrirRoleta() {
+      const premios = [
+        { label: "⚡ +200 XP", xp: 200 },
+        { label: "⚡ +300 XP", xp: 300 },
+        { label: "⚡ +400 XP", xp: 400 },
+        { label: "⚡ +500 XP", xp: 500 },
+        { label: "⚡ +600 XP", xp: 600 },
+        { label: "⚡ +800 XP", xp: 800 }
+      ];
+
+      const modal = document.getElementById("roletaModal");
+      if (!modal) return;
+
+      modal.innerHTML = `
+        <div class="roleta-overlay">
+          <div class="roleta-container">
+            <div style="position:relative;width:420px;margin:auto">
+              <div class="seta">🔻</div>
+              <div id="roleta" class="roleta"></div>
+
+              <button class="btn-girar" onclick="girarRoleta()">
+                🎯 Girar Roleta
+              </button>
+
+              <div class="resultado-final"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const roleta = document.getElementById("roleta");
+      if (!roleta) return;
+
+      premios.forEach((p, i) => {
+        const ang = (360 / premios.length) * i + (360 / premios.length) / 2;
+
+        const label = document.createElement("div");
+        label.className = "roleta-label";
+        label.style.transform = `rotate(${ang}deg) translateY(-180px)`;
+        label.innerText = p.label;
+
+        roleta.appendChild(label);
+      });
+    }
+
+    async function girarRoleta() {
+      if (girando) return;
+      girando = true;
+
+      const roleta = document.getElementById("roleta");
+      const botao = document.querySelector(".btn-girar");
+
+      if (!roleta || !botao) {
+        girando = false;
+        return;
+      }
+
+      botao.style.display = "none";
+
+      const premios = [
+        { label: "⚡ +200 XP", xp: 200 },
+        { label: "⚡ +300 XP", xp: 300 },
+        { label: "⚡ +400 XP", xp: 400 },
+        { label: "⚡ +500 XP", xp: 500 },
+        { label: "⚡ +600 XP", xp: 600 },
+        { label: "⚡ +800 XP", xp: 800 }
+      ];
+
+      const premioIndex = Math.floor(Math.random() * premios.length);
+      const anguloPorItem = 360 / premios.length;
+      const anguloFinal = (360 - (premioIndex * anguloPorItem)) - (anguloPorItem / 2);
+      const voltas = 360 * 10;
+      const rotacao = voltas + anguloFinal;
+
+      roleta.style.transition = "transform 9s cubic-bezier(0.12,0.8,0.2,1)";
+      roleta.style.transform = `rotate(${rotacao}deg)`;
+
+      setTimeout(() => {
+        roleta.style.transition = "transform 0.4s ease-out";
+        roleta.style.transform = `rotate(${rotacao - 8}deg)`;
+
+        setTimeout(() => {
+          roleta.style.transform = `rotate(${rotacao}deg)`;
+        }, 200);
+      }, 9000);
+
+      setTimeout(async () => {
+        try {
+          const user = auth.currentUser;
+          const premio = premios[premioIndex];
+
+          const snap = await getDoc(userRef);
+          const dados = snap.data();
+
+          const xpAntes = dados.xp || 0;
+          const nivelAntes = dados.nivel || 0;
+          const sciencePointsAntes = dados.sciencePoints || 0;
+
+          const xpDepois = xpAntes + premio.xp;
+          const sciencePointsDepois = sciencePointsAntes;
+
+          await updateDoc(userRef, {
+            xp: xpDepois
+          });
+
+          await registrarCompra(`girou a Roleta Científica e recebeu +${premio.xp} XP`);
+
+          await logRoleta({
+            uid: user.uid,
+            itemId: "roleta-cientifica",
+            itemNome: "🎡 Roleta Científica",
+            sciencePointsAntes,
+            sciencePointsDepois,
+            xpAntes,
+            xpDepois,
+            nivelAntes,
+            nivelDepois: nivelAntes,
+            premioXp: premio.xp
+          });
+
+          await atualizarHeaderComDadosDoUsuario();
+
+          const resultado = document.querySelector(".resultado-final");
+          if (resultado) {
+            resultado.innerHTML = `
+              <h2>🎉 Resultado</h2>
+
+              <p style="font-size:26px;margin:20px 0;">
+                Você recebeu <b>${premio.xp} XP</b>
+              </p>
+
+              <button onclick="fecharRoleta()">Fechar</button>
+            `;
+          }
+        } catch (erro) {
+          console.error("Erro ao girar roleta:", erro);
+          mostrarErro("Erro ao concluir a roleta.");
+        } finally {
+          girando = false;
+        }
+      }, 9400);
+    }
+
+    /* ======================================================
+       CAIXAS
+    ====================================================== */
+    function abrirCaixa(tipo) {
+
+  let premios = [];
+
+  if (tipo === "caixa-basica") {
+    premios = [
+      { xp: 100, raridade: "comum", chance: 40 },
+      { xp: 150, raridade: "comum", chance: 35 },
+      { xp: 200, raridade: "raro", chance: 20 },
+      { xp: 250, raridade: "raro", chance: 5 }
+    ];
+  }
+
+  if (tipo === "caixa-cientifica") {
+    premios = [
+      { xp: 200, raridade: "raro", chance: 45 },
+      { xp: 300, raridade: "raro", chance: 35 },
+      { xp: 400, raridade: "epico", chance: 15 },
+      { xp: 500, raridade: "epico", chance: 5 }
+    ];
+  }
+
+  if (tipo === "caixa-lendaria") {
+    premios = [
+      { xp: 600, raridade: "epico", chance: 60 },
+      { xp: 800, raridade: "lendario", chance: 30 },
+      { xp: 1000, raridade: "lendario", chance: 10 }
+    ];
+  }
+
+  // =========================================
+  // ESCOLHA COM PROBABILIDADE
+  // =========================================
+
+  const totalChance = premios.reduce((soma, item) => soma + item.chance, 0);
+  const numero = Math.random() * totalChance;
+
+  let acumulado = 0;
+  let premio = premios[0];
+
+  for (const item of premios) {
+    acumulado += item.chance;
+
+    if (numero <= acumulado) {
+      premio = item;
+      break;
+    }
+  }
+
+  const nomesCaixas = {
+    "caixa-basica": "🧪 Caixa Básica",
+    "caixa-cientifica": "⚛ Caixa Científica",
+    "caixa-lendaria": "👑 Caixa Lendária"
+  };
+
+  const modal = document.getElementById("modal");
+  if (!modal) return;
+
+  modal.innerHTML = `
+    <div class="modal">
+      <div class="modal-box abertura-caixa">
+
+        <div class="caixa-nome">
+          ${nomesCaixas[tipo]}
+        </div>
+
+        <div id="caixaIcon" class="caixa-loot">
+          📦
+        </div>
+
+        <h2>Abrindo recompensa...</h2>
+
+        <p class="texto-probabilidade">
+          Recompensas possíveis:
+        </p>
+
+        <div class="lista-probabilidades">
+          ${premios.map(item => `
+            <div class="linha-probabilidade raridade-${item.raridade}">
+              <span>⚡ ${item.xp} XP</span>
+              <strong>${item.chance}%</strong>
+            </div>
+          `).join("")}
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+
+    const caixaIcon = document.getElementById("caixaIcon");
+
+    if (caixaIcon) {
+      caixaIcon.classList.add("abrindo");
+      caixaIcon.innerHTML = "💥";
+    }
+
+  }, 1500);
+
+  setTimeout(() => {
+
+    const box = document.querySelector(".modal-box");
+    if (!box) return;
+
+    for (let i = 0; i < 24; i++) {
+
+      const p = document.createElement("div");
+      p.className = `particulas particula-${premio.raridade}`;
+
+      p.style.left = "50%";
+      p.style.top = "50%";
+
+      p.style.setProperty("--x", `${Math.random() * 420 - 210}px`);
+      p.style.setProperty("--y", `${Math.random() * 420 - 210}px`);
+
+      box.appendChild(p);
+    }
+
+  }, 1700);
+
+  setTimeout(async () => {
+
+    try {
+
+      const user = auth.currentUser;
+      const snap = await getDoc(userRef);
+      const dados = snap.data();
+
+      const xpAntes = dados.xp || 0;
+      const nivelAntes = dados.nivel || 0;
+      const xpDepois = xpAntes + premio.xp;
+
+      await updateDoc(userRef, {
+        xp: xpDepois
+      });
+
+      await registrarCompra(
+        `abriu ${nomesCaixas[tipo]} e recebeu +${premio.xp} XP`
+      );
+
+      await logAberturaCaixa({
+        uid: user.uid,
+        itemId: tipo,
+        itemNome: nomesCaixas[tipo],
+        xpAntes,
+        xpDepois,
+        nivelAntes,
+        nivelDepois: nivelAntes,
+        premioXp: premio.xp,
+        raridade: premio.raridade
+      });
+
+      await atualizarHeaderComDadosDoUsuario();
+
+      const tituloRaridade = {
+        comum: "Comum",
+        raro: "Raro",
+        epico: "Épico",
+        lendario: "Lendário"
+      };
+
+      const emojiRaridade = {
+        comum: "🟦",
+        raro: "🟪",
+        epico: "✨",
+        lendario: "👑"
+      };
+
+      modal.innerHTML = `
+        <div class="modal">
+          <div class="modal-box resultado-caixa resultado-${premio.raridade}">
+
+            <div class="premio-emoji">
+              ${emojiRaridade[premio.raridade]}
+            </div>
+
+            <h2 class="titulo-raridade raridade-${premio.raridade}-premio">
+              ${tituloRaridade[premio.raridade]}
+            </h2>
+
+            <p class="premio-descricao">
+              Você recebeu:
+            </p>
+
+            <div class="premio-xp">
+              ⚡ +${premio.xp} XP
+            </div>
+
+            <div class="premio-chance">
+              Chance desta recompensa: ${premio.chance}%
+            </div>
+
+            <button onclick="fecharCaixa()">
+              Continuar
+            </button>
+
+          </div>
+        </div>
+      `;
+
+    } catch (erro) {
+
+      console.error("Erro ao abrir caixa:", erro);
+      mostrarErro("Erro ao concluir a abertura da caixa.");
+
+    }
+
+  }, 2600);
+}
+
+    /* ======================================================
+       PRÊMIO FÍSICO
+    ====================================================== */
+    async function premioChaveiro() {
+      try {
+        const user = auth.currentUser;
+        const ref = doc(db, "loja", "chaveiro-univers3d");
+
+        const [snapEstoque, snapUser] = await Promise.all([
+          getDoc(ref),
+          getDoc(userRef)
+        ]);
+
+        const dadosEstoque = snapEstoque.data();
+        const dadosUser = snapUser.data();
+
+        if (!dadosEstoque || dadosEstoque.estoque <= 0) {
+          alert("❌ Chaveiros esgotados!");
+          return;
+        }
+
+        const sciencePointsAntes = dadosUser.sciencePoints || 0;
+        const sciencePointsDepois = sciencePointsAntes - 1500;
+
+        await updateDoc(userRef, {
+          sciencePoints: sciencePointsDepois
+        });
+
+        spAluno = sciencePointsDepois;
+        atualizarSPNaTela();
+
+        await updateDoc(ref, {
+          estoque: dadosEstoque.estoque - 1
+        });
+
+        estoqueChaveiro--;
+
+        await adicionarAoInventario(user.uid, {
+          tipo: "premio-fisico",
+          itemId: "chaveiro-univers3d",
+          nome: "🔑 Chaveiro Univers3D",
+          origem: "loja",
+          status: "resgatado",
+          descricao: "Prêmio físico resgatado na loja.",
+          detalhes: {
+            estoqueConsumido: 1
+          }
+        });
+
+        await logPremioFisico({
+          uid: user.uid,
+          itemId: "chaveiro-univers3d",
+          itemNome: "🔑 Chaveiro Univers3D",
+          sciencePointsAntes,
+          sciencePointsDepois
+        });
+
+        await registrarCompra("resgatou 🔑 Chaveiro Univers3D");
+
+        renderLoja();
+        await atualizarHeaderComDadosDoUsuario();
+
+        const modal = document.getElementById("modal");
+        if (!modal) return;
+
+        modal.innerHTML = `
+          <div class="modal">
+            <div class="modal-box lendario-bg">
+              <div class="chaveiro-anim">🔑</div>
+
+              <h2>🏆 PRÊMIO LENDÁRIO</h2>
+              <h3>Chaveiro Univers3D</h3>
+
+              <p>Você ganhou um prêmio físico!</p>
+
+              <div class="selo-patrocinio">
+                Patrocinado por @univers3d
+              </div>
+
+              <br>
+
+              <button onclick="fecharCaixa()">Continuar</button>
+            </div>
+          </div>
+        `;
+      } catch (erro) {
+        console.error("Erro ao resgatar chaveiro:", erro);
+        mostrarErro("Erro ao resgatar o chaveiro.");
+      }
+    }
+
+    function atualizarContadores() {
+      // 🧠 USA TEMPO DO SERVIDOR
+      const agora = new Date(Date.now() + serverTimeOffset);
+  
+
+  document.querySelectorAll(".contador-loja").forEach(el => {
+    const tipo = el.dataset.tipo;
+    const data = datasLiberacao[tipo];
+
+    if (!data || !tipo) return;
+
+    const diff = data - agora;
+
+    // 🔓 LIBERADO
+    if (diff <= 0) {
+      el.innerText = "✅ Liberado!";
+      return;
+    }
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diff / (1000 * 60)) % 60);
+    const segundos = Math.floor((diff / 1000) % 60);
+
+    const format = n => String(n).padStart(2, '0');
+
+    el.innerText =
+      `⏳ ${dias}d ${format(horas)}:${format(minutos)}:${format(segundos)}`;
+  });
+}
+
+    /* ======================================================
+       COMPRAR ITENS
+    ====================================================== */
+    window.comprar = async function(id) {
+      try {
+        const item = recompensas.find(r => r.id === id);
+        if (compraEmAndamento) return;
+
+compraEmAndamento = true;
+
+if (!item) {
+  compraEmAndamento = false;
+  return;
+}
+
+const modal = document.getElementById("modal");
+
+modal.innerHTML = `
+  <div class="modal">
+    <div class="modal-box">
+
+      <div class="explosao">🛒</div>
+
+      <h2>Confirmar resgate</h2>
+
+      <p style="margin-top:16px;">
+        Deseja resgatar <b>${item.nome}</b>?
+      </p>
+
+      <p style="opacity:.75;margin-top:8px;">
+        Custo: <b>${item.preco} SP</b>
+      </p>
+
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button id="confirmarCompraBtn">
+          Confirmar
+        </button>
+
+        <button id="cancelarCompraBtn" style="background:#444;">
+          Cancelar
+        </button>
+      </div>
+
+    </div>
+  </div>
+`;
+
+const confirmou = await new Promise(resolve => {
+
+  document.getElementById("confirmarCompraBtn")
+    .addEventListener("click", () => resolve(true));
+
+  document.getElementById("cancelarCompraBtn")
+    .addEventListener("click", () => resolve(false));
+});
+
+modal.innerHTML = "";
+
+if (!confirmou) {
+  compraEmAndamento = false;
+  return;
+}
+
+        // 🧠 CONTROLE DE LIMITE DE BÔNUS NA PROVA
+      if (item.tipo === "prova") {
+      const snap = await getDoc(userRef);
+      const dados = snap.data();
+
+      const bonusAtual = dados.bonusProvaDisponivel || 0;
+
+        // 🔒 LIMITE MÁXIMO (AJUSTE AQUI SE QUISER)
+      if (bonusAtual + item.valor > 2) {
+      alert("❌ Limite de bônus da prova atingido!");
+      return;
+    }
+}
+        if (!item) return;
+
+        if (spAluno < item.preco) {
+          alert("SciencePoints insuficientes!");
+          return;
+        }
+
+        mostrarAlertaGlobal(`🛒 Resgatando ${item.nome}...`);
+
+        if (
+          id === "caixa-basica" ||
+          id === "caixa-cientifica" ||
+          id === "caixa-lendaria"
+        ) {
+          spAluno -= item.preco;
+
+          await registrarSPGlobal(item.preco);
+          await verificarMetaGlobal();
+          await registrarRankingGasto(item.preco);
+          await updateDoc(userRef, {
+            sciencePoints: spAluno
+          });
+
+          atualizarSPNaTela();
+          abrirCaixa(id);
+          await liberarPrimeiraCompra(auth.currentUser.uid);
+          return;
+        }
+
+        if (id === "chaveiro-univers3d") {
+          await premioChaveiro();
+          await liberarPrimeiraCompra(auth.currentUser.uid);
+          await liberarPrimeiraCompra(auth.currentUser.uid);
+          await registrarSPGlobal(1500);
+          await verificarMetaGlobal();
+          await registrarRankingGasto(1500);
+          return;
+        }
+
+        if (id === "roleta-cientifica") {
+          spAluno -= item.preco;
+          await registrarSPGlobal(item.preco);
+          await verificarMetaGlobal();
+          await registrarRankingGasto(item.preco);
+          await updateDoc(userRef, {
+            sciencePoints: spAluno
+          });
+
+          atualizarSPNaTela();
+          abrirRoleta();
+          await liberarPrimeiraCompra(auth.currentUser.uid);
+          return;
+        }
+
+        if (item.tipo === "ranking-fichas") {
+
+  const user = auth.currentUser;
+  const snap = await getDoc(userRef);
+  const dados = snap.data();
+
+  const sciencePointsAntes = dados.sciencePoints || 0;
+  const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+  const fichasAntes = dados.rankingFichas || 0;
+  const fichasDepois = fichasAntes + item.quantidade;
+
+  await registrarSPGlobal(item.preco);
+  await verificarMetaGlobal();
+  await registrarRankingGasto(item.preco);
+
+  await updateDoc(userRef, {
+    sciencePoints: sciencePointsDepois,
+    rankingFichas: fichasDepois
+  });
+
+  spAluno = sciencePointsDepois;
+  atualizarSPNaTela();
+
+  await registrarCompra(
+    `comprou ${item.quantidade} ficha${item.quantidade > 1 ? "s" : ""} de ranking`
+  );
+
+  await liberarPrimeiraCompra(auth.currentUser.uid);
+
+  renderLoja();
+
+  const modal = document.getElementById("modal");
+
+  modal.innerHTML = `
+    <div class="modal">
+      <div class="modal-box">
+
+        <div class="explosao">🎟️</div>
+
+        <h2>Fichas adicionadas!</h2>
+
+        <p style="font-size:20px;margin-top:15px;">
+          Você recebeu <b>${item.quantidade}</b>
+          ficha${item.quantidade > 1 ? "s" : ""} de ranking.
+        </p>
+
+        <p style="opacity:.7;margin-top:10px;">
+          Agora você possui <b>${fichasDepois}</b>
+          ficha${fichasDepois > 1 ? "s" : ""}.
+        </p>
+
+        <br>
+
+        <button onclick="fecharCaixa()">Continuar</button>
+      </div>
+    </div>
+  `;
+
+  return;
+}
+
+        // 🎟️ COMPRA DE FICHAS DO QUIZ
+if (item.fichas) {
+
+  const user = auth.currentUser;
+  const snap = await getDoc(userRef);
+  const dados = snap.data();
+
+  const sciencePointsAntes = dados.sciencePoints || 0;
+  const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+  const fichasAntes = dados.fichasLab || 0;
+  const fichasDepois = fichasAntes + item.fichas;
+
+  // 🔥 economia global
+  await registrarSPGlobal(item.preco);
+  await verificarMetaGlobal();
+  await registrarRankingGasto(item.preco);
+
+  // 💾 salva
+  await updateDoc(userRef, {
+    sciencePoints: sciencePointsDepois,
+    fichasLab: fichasDepois
+  });
+
+  spAluno = sciencePointsDepois;
+  atualizarSPNaTela();
+
+  await registrarCompra(`comprou ${item.nome} (+${item.fichas} fichas)`);
+
+  await liberarPrimeiraCompra(auth.currentUser.uid);
+
+  renderLoja();
+
+  alert(`🎟️ Você recebeu ${item.fichas} ficha(s)!`);
+
+  return;
+}
+
+        // 📝 COMPRA DE BÔNUS DE PROVA
+if (item.tipo === "prova") {
+  const user = auth.currentUser;
+  const snap = await getDoc(userRef);
+  const dados = snap.data();
+
+  const sciencePointsAntes = dados.sciencePoints || 0;
+  const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+  const bonusAtual = dados.bonusProvaDisponivel || 0;
+  const novoBonus = bonusAtual + item.valor;
+  await registrarSPGlobal(item.preco);
+  await verificarMetaGlobal();
+  await registrarRankingGasto(item.preco);
+
+  // 🔥 ATUALIZA NA MEMÓRIA (SEM PRECISAR RECARREGAR)
+  bonusProvaDisponivel = novoBonus;
+  window.bonusProvaDisponivel = novoBonus;
+
+  // 💾 SALVA NO FIREBASE
+  await updateDoc(userRef, {
+    sciencePoints: sciencePointsDepois,
+    bonusProvaDisponivel: novoBonus
+  });
+
+  spAluno = sciencePointsDepois;
+  atualizarSPNaTela();
+
+  await registrarCompra(`comprou bônus de prova (+${item.valor})`);
+  await liberarPrimeiraCompra(auth.currentUser.uid);
+
+  renderLoja();
+  await atualizarHeaderComDadosDoUsuario();
+
+  alert(`🎯 Bônus de +${item.valor} ponto adicionado!`);
+
+  return;
+}
+
+
+        if (item.xp) {
+
+          const user = auth.currentUser;
+          const snap = await getDoc(userRef);
+          const dados = snap.data();
+
+          const xpAntes = dados.xp || 0;
+          const nivelAntes = dados.nivel || 0;
+          const sciencePointsAntes = dados.sciencePoints || 0;
+
+          const xpDepois = xpAntes + item.xp;
+          const sciencePointsDepois = sciencePointsAntes - item.preco;
+          await registrarSPGlobal(item.preco);
+          await verificarMetaGlobal();
+          await registrarRankingGasto(item.preco);
+          await updateDoc(userRef, {
+            sciencePoints: sciencePointsDepois,
+            xp: xpDepois
+          });
+
+          spAluno = sciencePointsDepois;
+          atualizarSPNaTela();
+
+          await registrarCompra(`comprou ${item.nome}`);
+
+          await liberarPrimeiraCompra(auth.currentUser.uid);
+
+          await logCompraXP({
+            uid: user.uid,
+            itemId: item.id,
+            itemNome: item.nome,
+            sciencePointsAntes,
+            sciencePointsDepois,
+            xpAntes,
+            xpDepois,
+            nivelAntes,
+            nivelDepois: nivelAntes
+          });
+
+          renderLoja();
+          await atualizarHeaderComDadosDoUsuario();
+          mostrarPopup(id);
+        }
+      } catch (erro) {
+  console.error("Erro no resgate:", erro);
+  mostrarErro("Erro ao processar o resgate.");
+} finally {
+  compraEmAndamento = false;
+}
+
+
+    };
+    /* Liberar Conquistas*/
+    async function finalizarCompraComConquista(uid) {
+    await liberarPrimeiraCompra(uid);
+    }
+
+
+
+    /* ======================================================
+       POPUP DE RECOMPENSAS
+    ====================================================== */
+    function mostrarPopup(tipo) {
+      const overlay = document.getElementById("popupRecompensa");
+      const anim = document.getElementById("popupAnimacao");
+      const titulo = document.getElementById("popupTitulo");
+      const desc = document.getElementById("popupDescricao");
+
+      if (!overlay || !anim || !titulo || !desc) return;
+
+      overlay.classList.add("ativo");
+
+      if (tipo === "xp20") {
+        anim.innerHTML = "⚡";
+        titulo.innerHTML = "+20 XP";
+        desc.innerHTML = "Seu conhecimento aumentou!";
+      }
+
+      if (tipo === "xp50") {
+        anim.innerHTML = "⚡⚡";
+        titulo.innerHTML = "+50 XP";
+        desc.innerHTML = "Bônus científico médio!";
+      }
+
+      if (tipo === "xp100") {
+        anim.innerHTML = "⚡⚡⚡";
+        titulo.innerHTML = "+100 XP";
+        desc.innerHTML = "Grande avanço científico!";
+      }
+
+      if (tipo === "xp1000") {
+
+  anim.innerHTML = `
+    <div class="xp1000-container">
+
+      <div class="xp1000-aura"></div>
+
+      <div class="xp1000-icon">⚡</div>
+
+      <div class="xp1000-particulas">
+        ${Array.from({length: 12}).map(() => `<span></span>`).join("")}
+      </div>
+
+    </div>
+  `;
+
+  titulo.innerHTML = `
+    <span class="xp1000-titulo">
+      +1000 XP
+    </span>
+  `;
+
+  desc.innerHTML = `
+    <span class="xp1000-desc">
+      ULTRA AVANÇO CIENTÍFICO ⚡
+    </span>
+  `;
+}
+
+      if (tipo === "caixa-basica") {
+        anim.innerHTML = "📦";
+        titulo.innerHTML = "Caixa Básica";
+        desc.innerHTML = "Abrindo recompensas...";
+      }
+
+      if (tipo === "caixa-cientifica") {
+        anim.innerHTML = "⚛";
+        titulo.innerHTML = "Caixa Científica";
+        desc.innerHTML = "Recompensas raras!";
+      }
+
+      if (tipo === "caixa-lendaria") {
+        anim.innerHTML = "👑";
+        titulo.innerHTML = "Caixa Lendária";
+        desc.innerHTML = "Recompensa épica!";
+      }
+
+      if (tipo === "chaveiro-univers3d") {
+        anim.innerHTML = "🔑";
+        titulo.innerHTML = "Chaveiro 3D";
+        desc.innerHTML = "Você ganhou um prêmio físico!";
+      }
+    }
+
+    /* ======================================================
+       FUNÇÕES GLOBAIS
+    ====================================================== */
+    window.fecharPopup = function() {
+      const popup = document.getElementById("popupRecompensa");
+      if (popup) popup.classList.remove("ativo");
+    };
+
+    window.fecharCaixa = function() {
+      const modal = document.getElementById("modal");
+      if (modal) modal.innerHTML = "";
+      renderLoja();
+    };
+
+    window.fecharRoleta = function() {
+      const modal = document.getElementById("roletaModal");
+      if (modal) modal.innerHTML = "";
+      renderLoja();
+    };
+
+    window.girarRoleta = girarRoleta;
+
+    /* ======================================================
+       MENU ATIVO
+    ====================================================== */
+    function iniciarMenuAtivo() {
+      const links = document.querySelectorAll(".menu-loja a[data-target]");
+      if (!links.length) return;
+
+      const secoesIds = Array.from(links).map(link => link.dataset.target);
+      const secoes = secoesIds
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      if (!secoes.length) return;
+
+      function ativarLink(idAtivo) {
+        links.forEach(link => {
+          const ativo = link.dataset.target === idAtivo;
+          link.classList.toggle("ativo", ativo);
+        });
+      }
+
+      function detectarSecaoAtiva() {
+        const linhaReferencia = window.innerHeight * 0.30;
+        let secaoAtual = "topo";
+
+        for (const secao of secoes) {
+          const rect = secao.getBoundingClientRect();
+
+          if (rect.top <= linhaReferencia) {
+            secaoAtual = secao.id;
+          }
+        }
+
+        ativarLink(secaoAtual);
+      }
+
+      links.forEach(link => {
+        link.addEventListener("click", () => {
+          const alvo = link.dataset.target;
+          ativarLink(alvo);
+        });
+      });
+
+      window.addEventListener("scroll", detectarSecaoAtiva, { passive: true });
+      window.addEventListener("resize", detectarSecaoAtiva);
+
+      detectarSecaoAtiva();
+    }
+
+    /* ======================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+    auth.onAuthStateChanged(async user => {
+      if (!user) return;
+
+      await carregarHeaderInterno();
+      iniciarAlertaGlobal();
+
+      // 🔥 SINCRONIZA TEMPO ANTES DE TUDO
+      await sincronizarTempo();
+
+      userRef = doc(db, "usuarios", user.uid);
+
+      // 🔥 TEMPO REAL
+      carregarSPTempoReal(userRef);
+      carregarHistorico();
+      carregarSPGlobal();
+      carregarMetaGlobal();
+      carregarRankingGasto();
+      // 🔥 RENDERIZA LOJA
+      await carregarEstoque(); // importante pro chaveiro
+      renderLoja();
+
+      setTimeout(() => {
+        iniciarMenuAtivo();
+      }, 300);
+
+      // 🔄 mantém tempo sempre correto
+      setInterval(sincronizarTempo, 5 * 60 * 1000);
+
+      setInterval(atualizarContadores, 1000);
+      atualizarContadores();
+    });
+
+    function mostrarPopupConquista() {
+  const popup = document.getElementById("popupConquista");
+  if (!popup) return;
+
+  popup.classList.remove("hidden");
+
+  // fecha automaticamente depois de 3s
+  setTimeout(() => {
+    popup.classList.add("hidden");
+  }, 3000);
+}
+
+window.addEventListener("conquista-primeira-compra", () => {
+  mostrarPopupConquista();
+});
+  </script>
+
+  <script type="module" src="js/perfil.js"></script>
+  <script type="module" src="js/hud.js"></script>
+  <script src="js/tema.js"></script>
+
+  <div id="popupConquista" class="popup-conquista hidden">
+  <div class="popup-conquista-card">
+
+    <div class="conquista-icon">🏅</div>
+
+    <h2 class="conquista-titulo">CONQUISTA DESBLOQUEADA</h2>
+
+    <h3 class="conquista-nome">Primeiro Resgate</h3>
+
+    <p class="conquista-desc">
+      Você realizou seu primeiro resgate na central de recompensas 🛒
+    </p>
+
+  </div>
+</div>
+</body>
+</html>

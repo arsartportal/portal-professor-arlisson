@@ -1,0 +1,907 @@
+/* =========================================================
+PROGRESSÃO ARITMÉTICA DINÂMICA
+Arquivo: progressao-aritmetica-dinamica.css
+========================================================= */
+
+/* =========================================================
+RESET
+========================================================= */
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+:root{
+--bg-1: #020617;
+--bg-2: #081223;
+--bg-3: #10203a;
+
+--azul: #38bdf8;
+--azul-forte: #0ea5e9;
+--ciano: #67e8f9;
+--roxo: #7c3aed;
+
+--verde: #22c55e;
+--vermelho: #ef4444;
+
+--texto: #f8fafc;
+--texto-soft: rgba(255,255,255,.72);
+
+--glass: rgba(255,255,255,.05);
+--glass-2: rgba(255,255,255,.08);
+--borda: rgba(255,255,255,.10);
+
+--radius: 30px;
+--sombra: 0 24px 60px rgba(0,0,0,.35);
+}
+
+body{
+min-height: 100vh;
+overflow-x: hidden;
+
+font-family: 'Inter', sans-serif;
+color: var(--texto);
+
+background:
+radial-gradient(circle at 15% 20%, rgba(56,189,248,.18), transparent 25%),
+radial-gradient(circle at 85% 10%, rgba(124,58,237,.18), transparent 28%),
+radial-gradient(circle at 50% 100%, rgba(14,165,233,.10), transparent 35%),
+linear-gradient(145deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+}
+
+body::before,
+body::after{
+content: '';
+position: fixed;
+border-radius: 50%;
+filter: blur(90px);
+pointer-events: none;
+z-index: 0;
+}
+
+body::before{
+width: 420px;
+height: 420px;
+top: -120px;
+left: -120px;
+background: rgba(56,189,248,.12);
+}
+
+body::after{
+width: 460px;
+height: 460px;
+right: -140px;
+bottom: -140px;
+background: rgba(124,58,237,.10);
+}
+
+/* =========================================================
+CONTAINER PRINCIPAL
+========================================================= */
+
+.pagina-pg{
+position: relative;
+z-index: 2;
+
+width: min(1450px, 92%);
+margin: 0 auto;
+padding: 60px 0 90px;
+}
+
+.painel-pg-completo{
+display: grid;
+gap: 28px;
+}
+
+/* =========================================================
+HERO
+========================================================= */
+
+.hero-pg{
+margin-bottom: 42px;
+}
+
+.voltar{
+display: inline-flex;
+align-items: center;
+gap: 10px;
+
+margin-bottom: 22px;
+padding: 12px 18px;
+
+border-radius: 999px;
+border: 1px solid rgba(255,255,255,.08);
+
+background: rgba(255,255,255,.05);
+color: #dbeafe;
+
+text-decoration: none;
+backdrop-filter: blur(14px);
+
+transition: .3s ease;
+}
+
+.voltar:hover{
+transform: translateX(-4px);
+border-color: rgba(103,232,249,.35);
+background: rgba(56,189,248,.10);
+}
+
+.hero-box{
+position: relative;
+overflow: hidden;
+
+padding: 56px 60px;
+border-radius: 36px;
+
+background: linear-gradient(
+145deg,
+rgba(255,255,255,.08),
+rgba(255,255,255,.03)
+);
+
+border: 1px solid rgba(255,255,255,.12);
+backdrop-filter: blur(26px);
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.45),
+inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.hero-box::before{
+content: '';
+position: absolute;
+top: -100px;
+right: -100px;
+
+width: 300px;
+height: 300px;
+border-radius: 50%;
+
+background: radial-gradient(circle, rgba(56,189,248,.25), transparent 70%);
+}
+
+.hero-box::after{
+content: 'a₁  a₂  a₃  a₄  a₅';
+position: absolute;
+right: 28px;
+bottom: 24px;
+
+font-size: 2rem;
+font-weight: 900;
+letter-spacing: 12px;
+
+opacity: .05;
+}
+
+.tag{
+display: inline-flex;
+align-items: center;
+
+margin-bottom: 20px;
+padding: 10px 18px;
+
+border-radius: 999px;
+border: 1px solid rgba(103,232,249,.25);
+
+background: rgba(56,189,248,.10);
+color: #baf4ff;
+
+font-size: .9rem;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: .8px;
+}
+
+.hero-box h1{
+max-width: 900px;
+margin-bottom: 18px;
+
+font-size: clamp(3rem, 6vw, 5rem);
+line-height: .95;
+letter-spacing: -2px;
+}
+
+.hero-box p{
+max-width: 760px;
+
+color: var(--texto-soft);
+font-size: 1.08rem;
+line-height: 1.9;
+}
+
+/* =========================================================
+CAMPOS DE ENTRADA
+========================================================= */
+
+.entrada-pg{
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 22px;
+}
+
+.entrada-pg label{
+display: flex;
+flex-direction: column;
+gap: 12px;
+
+padding: 24px;
+border-radius: var(--radius);
+
+background: var(--glass);
+border: 1px solid var(--borda);
+
+color: #dbeafe;
+font-weight: 700;
+
+backdrop-filter: blur(18px);
+box-shadow: var(--sombra);
+}
+
+.entrada-pg input,
+#termos-visiveis{
+width: 100%;
+padding: 16px 18px;
+
+border-radius: 18px;
+border: 1px solid rgba(255,255,255,.08);
+
+background: rgba(255,255,255,.05);
+color: white;
+
+font-size: 1rem;
+font-family: inherit;
+
+outline: none;
+transition: .3s ease;
+}
+
+.entrada-pg input::placeholder,
+#termos-visiveis::placeholder{
+color: rgba(255,255,255,.42);
+}
+
+.entrada-pg input:focus,
+#termos-visiveis:focus{
+border-color: rgba(103,232,249,.45);
+box-shadow:
+0 0 0 4px rgba(56,189,248,.12),
+0 12px 24px rgba(14,165,233,.12);
+}
+
+/* =========================================================
+RESULTADOS
+========================================================= */
+
+.cards-resultados{
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 22px;
+}
+
+.resultado-card{
+position: relative;
+overflow: hidden;
+
+padding: 28px;
+border-radius: var(--radius);
+
+background: linear-gradient(
+145deg,
+rgba(255,255,255,.08),
+rgba(255,255,255,.03)
+);
+
+border: 1px solid rgba(255,255,255,.10);
+backdrop-filter: blur(20px);
+
+box-shadow: var(--sombra);
+}
+
+.resultado-card::before{
+content: '';
+position: absolute;
+inset: 0;
+
+background: linear-gradient(
+135deg,
+rgba(56,189,248,.16),
+transparent 45%,
+rgba(124,58,237,.10)
+);
+}
+
+.resultado-card span,
+.resultado-card strong{
+position: relative;
+z-index: 2;
+}
+
+.resultado-card span{
+display: block;
+margin-bottom: 14px;
+
+color: var(--texto-soft);
+font-size: .95rem;
+}
+
+.resultado-card strong{
+display: block;
+font-size: clamp(2rem, 3vw, 3rem);
+font-weight: 900;
+}
+
+.formula-card strong{
+font-size: 1.4rem;
+color: #c4f1ff;
+}
+
+/* =========================================================
+BLOCO DA SEQUÊNCIA
+========================================================= */
+
+.sequencia-box,
+.grafico-pg,
+.formulas-pg{
+padding: 34px;
+border-radius: 34px;
+
+background: rgba(255,255,255,.04);
+border: 1px solid rgba(255,255,255,.08);
+
+backdrop-filter: blur(18px);
+box-shadow: var(--sombra);
+}
+
+.sequencia-topo{
+display: flex;
+justify-content: space-between;
+gap: 24px;
+
+margin-bottom: 28px;
+}
+
+.sequencia-topo h2,
+.titulo-formulas h2{
+margin-bottom: 10px;
+font-size: 2rem;
+}
+
+.sequencia-info,
+.titulo-formulas p{
+color: var(--texto-soft);
+line-height: 1.8;
+}
+
+.controles-ocultacao{
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.botao-sequencia{
+border: none;
+border-radius: 18px;
+
+padding: 14px 22px;
+
+background: linear-gradient(
+135deg,
+var(--azul-forte),
+var(--azul),
+var(--roxo)
+);
+
+color: white;
+font-size: .95rem;
+font-weight: 800;
+
+cursor: pointer;
+white-space: nowrap;
+
+transition: .3s ease;
+
+box-shadow:
+0 16px 32px rgba(14,165,233,.22),
+inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.botao-sequencia:hover{
+transform: translateY(-3px);
+box-shadow:
+0 20px 40px rgba(14,165,233,.28),
+0 0 20px rgba(103,232,249,.18);
+}
+
+#sequencia{
+display: flex;
+flex-wrap: wrap;
+gap: 14px;
+}
+
+.termo{
+position: relative;
+overflow: hidden;
+
+min-width: 74px;
+padding: 15px 18px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+border-radius: 18px;
+border: 1px solid rgba(255,255,255,.08);
+
+background: linear-gradient(
+135deg,
+rgba(14,165,233,.18),
+rgba(124,58,237,.16)
+);
+
+color: white;
+font-size: 1rem;
+font-weight: 800;
+
+transition: .3s ease;
+}
+
+.termo:hover{
+transform: translateY(-3px);
+}
+
+/* =========================================================
+TERMOS OCULTOS E REVELADOS
+========================================================= */
+
+.termo.oculto{
+position: relative;
+cursor: pointer;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+min-width: 74px;
+min-height: 56px;
+
+background: linear-gradient(
+135deg,
+rgba(239,68,68,.18),
+rgba(124,58,237,.18)
+);
+
+border: 1px solid rgba(248,113,113,.25);
+}
+
+.termo.oculto:hover{
+transform: translateY(-4px) scale(1.03);
+
+border-color: rgba(248,113,113,.45);
+
+box-shadow:
+0 10px 24px rgba(239,68,68,.18);
+}
+
+/* o número continua no HTML, apenas invisível */
+
+.termo.oculto span{
+opacity: 0;
+visibility: hidden;
+}
+
+/* texto que aparece no lugar do número */
+
+.termo.oculto::after{
+content: 'Revelar';
+
+position: absolute;
+inset: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+color: #ffffff;
+font-size: .82rem;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: .8px;
+
+z-index: 10;
+}
+
+/* após clicar no termo */
+
+.termo.revelado{
+background: linear-gradient(
+135deg,
+rgba(34,197,94,.18),
+rgba(14,165,233,.18)
+);
+
+border-color: rgba(74,222,128,.30);
+}
+
+.termo.revelado::after{
+display: none;
+}
+
+.termo.revelado span{
+opacity: 1;
+visibility: visible;
+}
+
+/* =========================================================
+   GRÁFICO
+   ========================================================= */
+
+.grafico-container{
+  position: relative;
+
+  width: 100%;
+  height: 420px;
+  margin-top: 24px;
+
+  border-radius: 24px;
+  overflow: hidden;
+
+  background: transparent;
+  border: none;
+}
+
+/* área que cobre exatamente o gráfico */
+
+.grafico-oculto{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  inset: 0;
+  margin-top: 24px;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  transition: .3s ease;
+}
+
+.grafico-oculto canvas{
+  display: block;
+
+  flex: 1;
+
+  width: 100% !important;
+  height: 90% !important;
+
+  margin: 0;
+  padding: 0;
+}
+
+/* gráfico escondido */
+
+.grafico-oculto.oculto{
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    rgba(239,68,68,.18),
+    rgba(124,58,237,.18)
+  );
+
+  border: 1px solid rgba(248,113,113,.25);
+}
+
+/* o canvas fica borrado mas continua alinhado */
+
+.grafico-oculto.oculto canvas{
+  width: 100% !important;
+  height: 100% !important;
+
+  opacity: .05;
+  filter: blur(12px);
+
+  transition: .3s ease;
+}
+
+/* texto Revelar centralizado corretamente */
+
+.grafico-oculto.oculto::after{
+  content: 'Revelar';
+
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  z-index: 5;
+}
+
+/* quando revelado */
+
+.grafico-oculto.revelado{
+  background: transparent;
+  border: none;
+}
+
+.grafico-oculto.revelado::after{
+  display: none;
+}
+
+.grafico-oculto.revelado canvas{
+  opacity: 1;
+  filter: blur(0);
+}
+
+.grafico-oculto.revelado{
+  display: flex;
+}
+/* =========================================================
+FÓRMULAS
+========================================================= */
+
+.titulo-formulas{
+margin-bottom: 28px;
+}
+
+.formula-grid{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 22px;
+}
+
+.formula-item{
+padding: 24px;
+border-radius: 26px;
+
+background: rgba(255,255,255,.04);
+border: 1px solid rgba(255,255,255,.08);
+
+transition: .3s ease;
+}
+
+.formula-item:hover{
+transform: translateY(-5px);
+border-color: rgba(103,232,249,.30);
+}
+
+.formula-item span{
+display: block;
+margin-bottom: 12px;
+
+color: var(--texto-soft);
+font-size: .88rem;
+font-weight: 700;
+text-transform: uppercase;
+}
+
+.formula-item strong{
+display: block;
+margin-bottom: 14px;
+
+color: #c4f1ff;
+font-size: 1.3rem;
+}
+
+.formula-item p{
+color: var(--texto-soft);
+line-height: 1.75;
+}
+
+.destaque-formula{
+border-color: rgba(250,204,21,.18);
+
+background: linear-gradient(
+145deg,
+rgba(250,204,21,.10),
+rgba(249,115,22,.05)
+);
+}
+
+/* =========================================================
+REVELAÇÃO INDIVIDUAL DOS CAMPOS
+Cole este bloco SUBSTITUINDO o trecho antigo de
+.campo-revelavel no final do arquivo CSS
+========================================================= */
+
+.campo-revelavel{
+position: relative;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+width: 100%;
+min-height: 72px;
+
+margin-top: 8px;
+border-radius: 18px;
+
+transition: .3s ease;
+}
+
+/* =========================================================
+ESTADO OCULTO
+========================================================= */
+
+.campo-revelavel.oculto{
+cursor: pointer;
+
+background: linear-gradient(
+135deg,
+rgba(239,68,68,.18),
+rgba(124,58,237,.18)
+);
+
+border: 1px solid rgba(248,113,113,.25);
+
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.campo-revelavel.oculto:hover{
+transform: translateY(-2px);
+
+border-color: rgba(248,113,113,.42);
+
+box-shadow:
+0 10px 24px rgba(239,68,68,.16),
+inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+/* esconde apenas o conteúdo interno */
+
+.campo-revelavel.oculto > *{
+opacity: 0;
+visibility: hidden;
+
+filter: blur(8px);
+transition: .25s ease;
+}
+
+/* botão visual "Revelar" */
+
+.campo-revelavel.oculto::after{
+content: 'Revelar';
+
+position: absolute;
+inset: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+color: #ffffff;
+font-size: .82rem;
+font-weight: 800;
+letter-spacing: .9px;
+text-transform: uppercase;
+
+z-index: 3;
+}
+
+/* =========================================================
+ESTADO REVELADO
+========================================================= */
+
+.campo-revelavel.revelado{
+background: linear-gradient(
+135deg,
+rgba(34,197,94,.10),
+rgba(14,165,233,.10)
+);
+
+border: 1px solid rgba(74,222,128,.22);
+}
+
+.campo-revelavel.revelado::after{
+display: none;
+}
+
+.campo-revelavel.revelado > *{
+opacity: 1;
+visibility: visible;
+
+filter: blur(0);
+}
+
+/* =========================================================
+AJUSTES DOS RESULTADOS
+========================================================= */
+
+.resultado-card .campo-revelavel{
+min-height: 86px;
+}
+
+.resultado-card .campo-revelavel strong{
+position: relative;
+z-index: 2;
+
+text-align: center;
+}
+
+/* =========================================================
+AJUSTE ESPECIAL PARA A FÓRMULA DO TERMO GERAL
+========================================================= */
+
+.formula-card .campo-revelavel{
+min-height: 86px;
+padding: 0 16px;
+}
+
+.formula-card .campo-revelavel strong{
+font-size: 1.4rem;
+line-height: 1.4;
+}
+
+/* =========================================================
+RESPONSIVO
+========================================================= */
+
+@media (max-width: 1050px){
+
+.entrada-pg,
+.cards-resultados{
+grid-template-columns: 1fr;
+}
+
+.sequencia-topo,
+.controles-ocultacao{
+flex-direction: column;
+align-items: stretch;
+}
+
+.botao-sequencia{
+width: 100%;
+}
+}
+
+@media (max-width: 700px){
+
+.formula-grid{
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 640px){
+
+.pagina-pg{
+width: 94%;
+padding-top: 34px;
+}
+
+.hero-box,
+.sequencia-box,
+.grafico-pg,
+.formulas-pg{
+padding: 24px;
+border-radius: 28px;
+}
+
+.hero-box h1{
+font-size: 2.5rem;
+}
+
+.termo{
+min-width: 62px;
+padding: 13px 14px;
+font-size: .92rem;
+}
+}

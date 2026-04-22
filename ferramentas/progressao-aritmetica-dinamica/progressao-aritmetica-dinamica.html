@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Progressão Aritmética Dinâmica</title>
+
+  <!-- Fonte principal -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="./progressao-aritmetica-dinamica.css">
+</head>
+<body>
+
+  <main class="pagina-pa">
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<section class="hero-pa">
+
+  <a href="../ferramentas-pedagogicas.html" class="voltar">
+    ← Voltar para Ferramentas
+  </a>
+
+  <div class="hero-box">
+    <span class="tag">📈 Matemática Dinâmica</span>
+
+    <h1>Progressão Aritmética Dinâmica</h1>
+
+    <p>
+      Modifique os valores abaixo e acompanhe instantaneamente
+      a sequência, a soma, o termo geral e o gráfico da
+      Progressão Aritmética.
+    </p>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     PAINEL PRINCIPAL
+     ===================================================== -->
+<section class="painel-pa-completo">
+
+  <!-- ===================================================
+       ENTRADAS
+       =================================================== -->
+  <div class="entrada-pa">
+
+    <label>
+      Primeiro termo (a₁)
+      <input type="number" id="a1" value="2" placeholder="Ex.: 2">
+    </label>
+
+    <label>
+      Razão (r)
+      <input type="number" id="r" value="3" placeholder="Ex.: 3">
+    </label>
+
+    <label>
+      Número de termos (n)
+      <input type="number" id="n" value="10" min="1" max="100" placeholder="Ex.: 10">
+    </label>
+
+  </div>
+
+
+  <!-- ===================================================
+       RESULTADOS COM REVELAÇÃO INDIVIDUAL
+       =================================================== -->
+  <div class="cards-resultados" id="bloco-resultados">
+
+    <div class="resultado-card">
+      <span>Último termo</span>
+
+      <div class="campo-revelavel oculto" id="campo-ultimo-termo">
+        <strong id="ultimo-termo">29</strong>
+      </div>
+    </div>
+
+    <div class="resultado-card">
+      <span>Soma da PA</span>
+
+      <div class="campo-revelavel oculto" id="campo-soma-pa">
+        <strong id="soma-pa">155</strong>
+      </div>
+    </div>
+
+    <div class="resultado-card formula-card">
+      <span>Fórmula do termo geral</span>
+
+      <div class="campo-revelavel oculto" id="campo-formula-pa">
+        <strong id="formula-pa">aₙ = 2 + (n - 1) · 3</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       SEQUÊNCIA GERADA
+       =================================================== -->
+  <section class="sequencia-box">
+
+    <div class="sequencia-topo">
+
+      <div>
+        <h2>Sequência gerada</h2>
+
+        <p class="sequencia-info">
+          Digite as posições que devem começar visíveis.
+          Os demais termos aparecerão com a palavra “Revelar”.
+        </p>
+      </div>
+
+      <div class="controles-ocultacao">
+        <input
+          type="text"
+          id="termos-visiveis"
+          placeholder="Ex.: 1, 4, 8"
+        >
+
+        <button id="aplicar-visiveis" class="botao-sequencia">
+          Aplicar
+        </button>
+      </div>
+
+    </div>
+
+    <div id="sequencia"></div>
+
+  </section>
+
+
+  <!-- ===================================================
+       GRÁFICO COM REVELAÇÃO INDIVIDUAL
+       =================================================== -->
+  <section class="grafico-pa" id="bloco-grafico">
+
+    <div class="titulo-formulas">
+      <h2>Gráfico da Progressão Aritmética</h2>
+
+      <p>
+        Observe visualmente se a PA está crescendo,
+        diminuindo ou permanecendo constante.
+      </p>
+    </div>
+
+    <div class="grafico-container">
+
+      <div class="campo-revelavel oculto grafico-oculto" id="campo-grafico">
+        <canvas id="graficoPA"></canvas>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       FÓRMULAS IMPORTANTES COM REVELAÇÃO INDIVIDUAL
+       =================================================== -->
+  <section class="formulas-pa" id="bloco-formulas">
+
+    <div class="titulo-formulas">
+      <h2>Fórmulas importantes da Progressão Aritmética</h2>
+      <p>Utilize esta área como consulta rápida durante a aula.</p>
+    </div>
+
+    <div class="formula-grid">
+
+      <article class="formula-item">
+        <span>Termo geral</span>
+
+        <div class="campo-revelavel oculto">
+          <strong>aₙ = a₁ + (n - 1) · r</strong>
+        </div>
+
+        <p>Permite descobrir qualquer termo da progressão.</p>
+      </article>
+
+      <article class="formula-item">
+        <span>Razão</span>
+
+        <div class="campo-revelavel oculto">
+          <strong>r = aₙ - aₙ₋₁</strong>
+        </div>
+
+        <p>
+          A razão é a diferença constante entre dois termos consecutivos.
+        </p>
+      </article>
+
+      <article class="formula-item">
+        <span>Soma dos termos</span>
+
+        <div class="campo-revelavel oculto">
+          <strong>Sₙ = n(a₁ + aₙ) / 2</strong>
+        </div>
+
+        <p>Fórmula usada para calcular rapidamente a soma da PA.</p>
+      </article>
+
+      <article class="formula-item">
+        <span>Número de termos</span>
+
+        <div class="campo-revelavel oculto">
+          <strong>n = ((aₙ - a₁) / r) + 1</strong>
+        </div>
+
+        <p>Descobre quantos termos existem na progressão.</p>
+      </article>
+
+      <article class="formula-item">
+        <span>Último termo</span>
+
+        <div class="campo-revelavel oculto">
+          <strong>aₙ = a₁ + (n - 1) · r</strong>
+        </div>
+
+        <p>Encontra diretamente o último termo da sequência.</p>
+      </article>
+
+      <article class="formula-item destaque-formula">
+        <span>Desafio rápido</span>
+
+        <div class="campo-revelavel oculto">
+          <strong>Se a₁ = 4 e r = 5, qual é o 8º termo?</strong>
+        </div>
+
+        <p>
+          Experimente inserir os valores nos campos acima para descobrir.
+        </p>
+      </article>
+
+    </div>
+
+  </section>
+
+</section>
+
+  </main>
+
+  <!-- Chart.js -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- JavaScript -->
+
+  <script src="./progressao-aritmetica-dinamica.js"></script>
+
+</body>
+</html>

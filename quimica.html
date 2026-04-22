@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <!-- =========================
+       META / CONFIGURAÇÕES
+  ========================== -->
+  <meta charset="UTF-8">
+  <title>Portal do Professor Arlisson • Química</title>
+
+    <!-- Estilo global do portal -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Estilo específico do módulo Química -->
+<link rel="stylesheet" href="css/fisica.css">
+
+<!-- Estilo específico da animação da patente -->
+<link rel="stylesheet" href="./css/patentes.css">
+</head>
+
+<!-- 
+  data-theme controla o modo claro/escuro
+-->
+<body data-theme="light">
+
+<!-- =========================
+     HEADER / HUD SUPERIOR
+========================== -->
+<header class="header">
+
+  <!-- MINI HUD DO USUÁRIO -->
+  <div class="mini-hud">
+
+    <img
+      id="patente-img"
+      class="mini-patente"
+      src=""
+      alt="Patente do usuário"
+    />
+
+    <div class="mini-xp">
+      <div id="xp-preenchimento"></div>
+    </div>
+
+    <div class="mini-detalhes">
+
+      <img
+        id="patente-img-detalhe"
+        class="patente-grande"
+        src=""
+        alt="Patente detalhada"
+      />
+
+      <div class="info-texto">
+        <strong>Nível <span id="nivel-usuario">0</span></strong>
+        <span id="xp-texto">XP 0 / 100</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TÍTULO CENTRAL -->
+  <div class="header-centro">
+    <h1 class="portal-title">
+      <span class="portal-brand">Portal</span>
+      <span class="portal-name">Professor Arlisson</span>
+    </h1>
+    <p>Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)</p>
+  </div>
+
+  <!-- AÇÕES -->
+  <div class="header-direita">
+    <div class="header-botoes">
+      <button id="toggle-tema" title="Alternar tema">🌙</button>
+      <button onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+</header>
+
+<!-- =========================
+     CONTEÚDO PRINCIPAL
+========================== -->
+<main data-modulo="quimica">
+
+  <!-- TÍTULO DO MÓDULO -->
+  <section class="welcome-user">
+    <h2>
+      📘 Química —
+      <span id="nome-usuario">Aluno</span>, bora aprender? ⚡
+    </h2>
+  </section>
+
+  <!-- AQUI ENTRARÃO:
+       • Conteúdos
+       • Listas
+       • Vídeos
+       • PDFs
+       • Exercícios
+  -->
+
+  <section class="trilhas">
+  <h3>📚 Trilhas de Aprendizagem</h3>
+
+  <!-- Aqui o JS vai inserir os cards -->
+  <div id="lista-trilhas" class="cards-trilhas"></div>
+</section>
+
+
+</main>
+
+<!-- =========================
+     SCRIPT: LOGOUT
+========================== -->
+<script>
+function sair() {
+  localStorage.clear();
+
+  if (window.firebase && firebase.auth) {
+    firebase.auth().signOut().finally(() => {
+      window.location.href = "index.html";
+    });
+  } else {
+    window.location.href = "index.html";
+  }
+}
+</script>
+
+<!-- =========================
+     SCRIPTS DO SISTEMA
+========================== -->
+<script type="module" src="js/auth-guard.js"></script>
+<script type="module" src="js/perfil.js"></script>
+<script src="js/tema.js"></script>
+<script type="module" src="js/hud.js"></script>
+<script src="js/gamificacao.js"></script>
+<!-- JS ESPECÍFICO DA QUÍMICA -->
+<script type="module" src="js/quimica.js"></script>
+<script src="./js/patentes.js" type="module"></script>
+
+
+
+<script type="module">
+  import { getAuth, onAuthStateChanged } 
+    from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+  import { 
+    getFirestore, 
+    doc, 
+    updateDoc, 
+    increment 
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+  import { app } from "./js/firebase.js";
+
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+
+    const raw = localStorage.getItem("checkpointConcluido");
+    if (!raw) return;
+
+    const evento = JSON.parse(raw);
+
+    if (!evento.trilha || !evento.xp) return;
+
+    const userRef = doc(db, "usuarios", user.uid);
+
+    // 🔥 XP REAL (Firestore)
+    await updateDoc(userRef, {
+      xp: increment(evento.xp)
+    });
+
+    // 🔥 XP VISUAL
+    if (window.adicionarXPVisual) {
+      window.adicionarXPVisual(evento.xp);
+    }
+
+    // 🧹 Anti-duplicação
+    localStorage.removeItem("checkpointConcluido");
+  });
+</script>
+
+<!-- OVERLAY DE MUDANÇA DE PATENTE -->
+<div id="patente-overlay" class="hidden">
+  <div class="patente-card">
+
+    <h2>🎉 Nova Patente!</h2>
+
+    <div class="patentes-container">
+      <img id="patente-antiga" class="patente antiga" />
+      <img id="patente-nova" class="patente nova" />
+    </div>
+
+    <button onclick="fecharPatente()">Continuar</button>
+
+  </div>
+</div>
+</body>
+</html>

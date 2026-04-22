@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Orçamento – Calc3D Pro</title>
+
+<style>
+:root {
+  --primaria: #2563eb;
+  --texto: #0f172a;
+  --cinza: #64748b;
+  --borda: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #e5e7eb;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--texto);
+}
+
+.folha {
+  max-width: 820px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 50px 60px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--borda);
+  padding-bottom: 20px;
+}
+
+.cabecalho .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cabecalho img {
+  height: 48px;
+}
+
+.cabecalho h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--primaria);
+}
+
+.cabecalho small {
+  color: var(--cinza);
+  display: block;
+}
+
+.info {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+  font-size: 15px;
+}
+
+.tabela {
+  margin-top: 35px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th {
+  text-align: left;
+  font-size: 14px;
+  color: var(--cinza);
+  border-bottom: 2px solid var(--borda);
+  padding-bottom: 8px;
+}
+
+.tabela td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--borda);
+  font-size: 15px;
+}
+
+.tabela td.valor {
+  text-align: right;
+}
+
+.total {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.total span {
+  color: var(--primaria);
+}
+
+.rodape {
+  margin-top: 40px;
+  font-size: 14px;
+  color: var(--cinza);
+  display: flex;
+  justify-content: space-between;
+}
+
+.acoes {
+  margin-top: 40px;
+}
+
+.acoes button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--primaria);
+  color: #fff;
+}
+
+@media print {
+  body { background: white; }
+  .folha { box-shadow: none; margin: 0; padding: 40px; }
+  .acoes { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 PROTEÇÃO FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCs6AGz_yGwLwbMuWQLMkUv0-IJZ84IT2M",
+  authDomain: "calculadora---3d.firebaseapp.com",
+  projectId: "calculadora---3d",
+  storageBucket: "calculadora---3d.firebasestorage.app",
+  messagingSenderId: "53725959441",
+  appId: "1:53725959441:web:2f83316aa37380da0aa8b0",
+  measurementId: "G-1WHG7YB873"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// 🔒 Bloqueia acesso sem login
+onAuthStateChanged(auth, user => {
+  if (!user) window.location.href = "login.html";
+});
+</script>
+
+<div class="folha">
+
+  <div class="cabecalho">
+    <div class="brand">
+      <img src="assets/img/logo.png" alt="Logo">
+      <h1>ORÇAMENTO DE IMPRESSÃO 3D</h1>
+    </div>
+    <div>
+      <strong>Data:</strong><br>
+      <span id="data"></span>
+    </div>
+  </div>
+
+  <div class="info">
+    <div><strong>Cliente:</strong> <span id="cliente"></span></div>
+    <div><strong>Material:</strong> <span id="material"></span></div>
+    <div><strong>Peso da peça:</strong> <span id="peso"></span> g</div>
+    <div><strong>Tempo de impressão:</strong> <span id="tempo"></span> h</div>
+  </div>
+
+  <table class="tabela">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th class="valor">Valor (R$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Custo do material</td><td class="valor" id="custoMaterial"></td></tr>
+      <tr><td>Custo da máquina</td><td class="valor" id="custoMaquina"></td></tr>
+      <tr><td>Custo de energia</td><td class="valor" id="custoEnergia"></td></tr>
+      <tr><td>Mão de obra</td><td class="valor" id="maoObra"></td></tr>
+      <tr><td>Acessórios</td><td class="valor" id="acessorios"></td></tr>
+      <tr><td>Perda / Falha</td><td class="valor" id="perda"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="total">
+    <div>VALOR TOTAL</div>
+    <span id="total"></span>
+  </div>
+
+  <div class="rodape">
+    <div>Prazo estimado: 3 dias úteis</div>
+    <div>Validade: 7 dias</div>
+  </div>
+
+  <div class="acoes">
+    <button onclick="window.print()">Imprimir / Salvar PDF</button>
+  </div>
+
+</div>
+
+<script>
+// 📦 Dados vindos do dashboard
+const dados = JSON.parse(localStorage.getItem("orcamento"));
+
+if (!dados) {
+  window.location.href = "dashboard.html";
+}
+
+// Data
+document.getElementById("data").textContent =
+  new Date().toLocaleDateString("pt-BR");
+
+// Informações
+document.getElementById("cliente").textContent = dados.cliente || "—";
+document.getElementById("material").textContent = dados.material;
+document.getElementById("peso").textContent = dados.peso;
+document.getElementById("tempo").textContent = dados.tempo;
+
+// Custos
+document.getElementById("custoMaterial").textContent =
+  "R$ " + dados.custoMaterial.toFixed(2);
+document.getElementById("custoMaquina").textContent =
+  "R$ " + dados.custoMaquina.toFixed(2);
+document.getElementById("custoEnergia").textContent =
+  "R$ " + dados.custoEnergia.toFixed(2);
+document.getElementById("maoObra").textContent =
+  "R$ " + dados.maoObra.toFixed(2);
+document.getElementById("acessorios").textContent =
+  "R$ " + dados.acessorios.toFixed(2);
+document.getElementById("perda").textContent =
+  "R$ " + dados.perda.toFixed(2);
+
+// Total
+document.getElementById("total").textContent =
+  "R$ " + dados.precoFinal.toFixed(2);
+</script>
+
+</body>
+</html>

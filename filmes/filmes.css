@@ -1,0 +1,1002 @@
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root{
+  --bg: #07111f;
+  --bg-2: #050b15;
+
+  --text: #f8fafc;
+  --muted: rgba(255,255,255,.72);
+
+  --primary: #5aa7ff;
+  --primary-2: #7d5cff;
+
+  --card: rgba(15,24,40,.92);
+  --card-hover: rgba(18,30,50,.96);
+
+  --border: rgba(255,255,255,.08);
+
+  --shadow:
+    0 22px 50px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,255,255,.03);
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+
+  background:
+    radial-gradient(circle at top left, rgba(90,167,255,.15), transparent 35%),
+    radial-gradient(circle at top right, rgba(127,123,255,.15), transparent 30%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+
+  font-family:'Inter', sans-serif;
+  color:var(--text);
+
+  overflow-x:hidden;
+  position:relative;
+}
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  border-radius:50%;
+  filter:blur(120px);
+  pointer-events:none;
+  z-index:0;
+}
+
+body::before{
+  width:420px;
+  height:420px;
+  background:rgba(46,143,255,.14);
+  top:-120px;
+  left:-120px;
+}
+
+body::after{
+  width:360px;
+  height:360px;
+  background:rgba(125,92,255,.14);
+  top:220px;
+  right:-100px;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.pagina-filmes{
+  position:relative;
+  z-index:2;
+
+  width:min(1450px, 92%);
+  margin:auto;
+
+  padding:48px 0 90px;
+}
+
+/* =========================================================
+   GLOWS
+========================================================= */
+
+.background-glow{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(90px);
+  z-index:0;
+  opacity:.45;
+  pointer-events:none;
+}
+
+.glow-1{
+  width:320px;
+  height:320px;
+  background:#2e8fff;
+  top:40px;
+  left:-100px;
+}
+
+.glow-2{
+  width:280px;
+  height:280px;
+  background:#7d5cff;
+  top:280px;
+  right:-80px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-filmes{
+  position:relative;
+  z-index:1;
+
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:48px;
+
+  padding:58px;
+  margin-bottom:38px;
+
+  border-radius:34px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(17,31,53,.95),
+      rgba(10,18,32,.92)
+    );
+
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.hero-filmes::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.05) 40%,
+      transparent 80%
+    );
+
+  pointer-events:none;
+}
+
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:10px 18px;
+  margin-bottom:24px;
+
+  border-radius:999px;
+
+  background:rgba(90,167,255,.12);
+  border:1px solid rgba(90,167,255,.25);
+
+  color:#8dc2ff;
+  font-size:.92rem;
+  font-weight:700;
+}
+
+.hero-filmes h1{
+  max-width:850px;
+  margin-bottom:22px;
+
+  font-size:clamp(2.8rem, 5vw, 5rem);
+  line-height:.98;
+  letter-spacing:-2px;
+  font-weight:900;
+}
+
+.hero-filmes h1 span{
+  display:block;
+  margin-top:10px;
+
+  background:linear-gradient(90deg, #8bc5ff, #b5a6ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-filmes p{
+  max-width:700px;
+
+  color:var(--muted);
+  font-size:1.08rem;
+  line-height:1.8;
+}
+
+.hero-actions{
+  display:flex;
+  gap:16px;
+  margin-top:34px;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.btn{
+  border:none;
+  cursor:pointer;
+
+  padding:15px 24px;
+  border-radius:18px;
+
+  font-weight:700;
+  font-size:.96rem;
+
+  transition:.28s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg, var(--primary), var(--primary-2));
+  color:white;
+
+  box-shadow:0 12px 30px rgba(90,167,255,.35);
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px) scale(1.02);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+
+  border:1px solid var(--border);
+}
+
+.btn-secondary:hover{
+  background:rgba(255,255,255,.09);
+  transform:translateY(-3px);
+}
+
+/* =========================================================
+   CARD DESTAQUE
+========================================================= */
+
+.hero-destaque{
+  position:relative;
+
+  min-height:340px;
+  padding:32px;
+
+  display:flex;
+  align-items:flex-end;
+
+  border-radius:30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7,17,31,.08) 0%,
+      rgba(7,17,31,.40) 45%,
+      rgba(7,17,31,.94) 100%
+    ),
+    url('https://img.youtube.com/vi/2igfLjjBuZw/maxresdefault.jpg') center/cover;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  overflow:hidden;
+
+  transition:.35s ease;
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.30),
+    inset 0 -70px 90px rgba(0,0,0,.55);
+}
+
+.hero-destaque:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.40),
+    0 0 0 1px rgba(90,167,255,.08);
+}
+
+.hero-destaque::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(90,167,255,.10),
+      transparent 40%,
+      rgba(125,92,255,.12)
+    );
+
+  pointer-events:none;
+}
+
+.hero-destaque::after{
+  content:"▶";
+  position:absolute;
+
+  top:22px;
+  right:22px;
+
+  width:54px;
+  height:54px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
+
+  backdrop-filter:blur(10px);
+
+  color:white;
+  font-size:1.1rem;
+
+  box-shadow:0 10px 20px rgba(0,0,0,.22);
+}
+
+.hero-destaque-conteudo{
+  position:relative;
+  z-index:2;
+
+  max-width:480px;
+}
+
+.mini-tag{
+  display:inline-flex;
+
+  padding:8px 14px;
+  margin-bottom:14px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.08);
+
+  color:#dbeafe;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+
+.hero-destaque h2{
+  font-size:2rem;
+  line-height:1.15;
+  margin-bottom:14px;
+
+  text-shadow:0 6px 20px rgba(0,0,0,.45);
+}
+
+.hero-destaque p{
+  color:rgba(255,255,255,.76);
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+.hero-tags{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+
+  margin-bottom:22px;
+}
+
+.hero-tags span{
+  padding:8px 12px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+
+  font-size:.8rem;
+  font-weight:600;
+  color:#dfeeff;
+}
+
+.hero-actions-destaque{
+  display:flex;
+}
+
+.hero-actions-destaque .btn{
+  min-width:220px;
+}
+
+@media (max-width:768px){
+
+  .hero-destaque{
+    min-height:300px;
+    padding:24px;
+  }
+
+  .hero-destaque h2{
+    font-size:1.6rem;
+  }
+
+  .hero-actions-destaque .btn{
+    width:100%;
+    min-width:0;
+  }
+}
+
+/* =========================================================
+   ESTATÍSTICAS
+========================================================= */
+
+.estatisticas-biblioteca{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:18px;
+
+  margin-bottom:32px;
+}
+
+.estatistica-card{
+  padding:24px;
+  border-radius:24px;
+
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+
+  backdrop-filter:blur(10px);
+
+  transition:.28s;
+}
+
+.estatistica-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(90,167,255,.25);
+}
+
+.estatistica-icone{
+  width:54px;
+  height:54px;
+  margin-bottom:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:18px;
+
+  background:rgba(90,167,255,.14);
+
+  font-size:1.4rem;
+}
+
+.estatistica-card strong{
+  display:block;
+  margin-bottom:6px;
+
+  font-size:2rem;
+  font-weight:800;
+}
+
+.estatistica-card span{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.busca-filmes{
+  margin-bottom:24px;
+}
+
+.campo-busca{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:18px 22px;
+
+  border-radius:22px;
+
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+
+  backdrop-filter:blur(12px);
+}
+
+.icone-busca{
+  font-size:1.1rem;
+  opacity:.7;
+}
+
+.campo-busca input{
+  flex:1;
+
+  border:none;
+  outline:none;
+  background:transparent;
+
+  color:white;
+  font-size:1rem;
+  font-family:'Inter', sans-serif;
+}
+
+.campo-busca input::placeholder{
+  color:rgba(255,255,255,.45);
+}
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.barra-filtros{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+
+  margin:0 0 36px;
+}
+
+.filtro{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+
+  color:var(--muted);
+
+  padding:12px 18px;
+  border-radius:14px;
+
+  font-weight:600;
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.filtro:hover,
+.filtro.ativo{
+  background:rgba(90,167,255,.16);
+  border-color:rgba(90,167,255,.35);
+
+  color:#dfeeff;
+
+  transform:translateY(-2px);
+}
+
+/* =========================================================
+   CABEÇALHO DA GRADE
+========================================================= */
+
+.cabecalho-grade{
+  margin-bottom:24px;
+}
+
+.cabecalho-grade h2{
+  font-size:2rem;
+  margin-bottom:8px;
+}
+
+.cabecalho-grade p{
+  color:var(--muted);
+}
+
+/* =========================================================
+   GRADE DE FILMES
+========================================================= */
+
+.grid-filmes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(310px, 1fr));
+  gap:24px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card-filme{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+
+  min-height:520px;
+
+  background:linear-gradient(180deg, var(--card), #0b1526);
+  border:1px solid var(--border);
+
+  border-radius:28px;
+  overflow:hidden;
+
+  transition:.35s;
+  box-shadow:var(--shadow);
+}
+
+.card-filme:hover{
+  transform:translateY(-10px);
+
+  background:linear-gradient(180deg, var(--card-hover), #0d1930);
+  border-color:rgba(90,167,255,.25);
+
+  box-shadow:
+    0 24px 50px rgba(0,0,0,.38),
+    0 0 0 1px rgba(90,167,255,.08);
+}
+
+/* =========================================================
+   IMAGEM DO CARD
+========================================================= */
+
+.card-banner{
+  height:220px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card-banner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+
+  transition:transform .45s ease;
+}
+
+.card-filme:hover .card-banner img{
+  transform:scale(1.06);
+}
+
+.card-banner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 20%,
+      rgba(7,17,31,.92)
+    );
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge-disciplina,
+.badge-tempo{
+  position:absolute;
+  z-index:2;
+
+  padding:8px 12px;
+  border-radius:999px;
+
+  font-size:.78rem;
+  font-weight:700;
+
+  backdrop-filter:blur(10px);
+}
+
+.badge-disciplina{
+  top:14px;
+  left:14px;
+
+  background:rgba(90,167,255,.18);
+  border:1px solid rgba(90,167,255,.30);
+
+  color:#dfeeff;
+}
+
+.badge-disciplina.matematica{
+  background:rgba(127,123,255,.18);
+  border-color:rgba(127,123,255,.30);
+}
+
+.badge-disciplina.ciencias{
+  background:rgba(52,211,153,.16);
+  border-color:rgba(52,211,153,.28);
+}
+
+.badge-disciplina.documentario{
+  background:rgba(245,158,11,.16);
+  border-color:rgba(245,158,11,.28);
+}
+
+.badge-tempo{
+  top:14px;
+  right:14px;
+
+  background:rgba(7,17,31,.65);
+  border:1px solid rgba(255,255,255,.08);
+
+  color:white;
+}
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.card-conteudo{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+
+  padding:22px;
+}
+
+.card-conteudo h3{
+  font-size:1.45rem;
+  line-height:1.2;
+  margin-bottom:12px;
+}
+
+.card-conteudo h3 a,
+.card-conteudo h3{
+  color:white;
+  text-decoration:none;
+}
+
+/* =========================================================
+   DESCRIÇÃO
+========================================================= */
+
+.descricao-filme{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:18px;
+
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.tags-filme{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+
+  margin-bottom:22px;
+}
+
+.tags-filme span{
+  padding:8px 12px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
+
+  color:#d7e7ff;
+  font-size:.8rem;
+  font-weight:600;
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.acoes-filme{
+  display:flex;
+  gap:12px;
+
+  margin-top:auto;
+}
+
+.btn-card{
+  flex:1;
+
+  min-height:46px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:none;
+  cursor:pointer;
+
+  padding:12px 14px;
+  border-radius:14px;
+
+  background:rgba(90,167,255,.14);
+  border:1px solid rgba(90,167,255,.20);
+
+  color:white;
+  font-size:.92rem;
+  font-weight:700;
+  text-align:center;
+  white-space:nowrap;
+
+  transition:.25s;
+}
+
+.btn-card:hover{
+  transform:translateY(-2px);
+  background:rgba(90,167,255,.22);
+}
+
+.btn-card.secundario{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.btn-card.secundario:hover{
+  background:rgba(255,255,255,.10);
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width:768px){
+
+  .grid-filmes{
+    grid-template-columns:1fr;
+  }
+
+  .card-filme{
+    min-height:auto;
+  }
+
+  .acoes-filme{
+    flex-direction:column;
+  }
+
+  .btn-card{
+    width:100%;
+  }
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px){
+
+  .hero-filmes{
+    grid-template-columns:1fr;
+    padding:42px 34px;
+  }
+
+  .estatisticas-biblioteca{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
+@media (max-width:768px){
+
+  .pagina-filmes{
+    width:min(94%, 100%);
+    padding:30px 0 70px;
+  }
+
+  .hero-filmes{
+    padding:34px 22px;
+    border-radius:28px;
+  }
+
+  .hero-filmes h1{
+    font-size:2.6rem;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .estatisticas-biblioteca{
+    grid-template-columns:1fr;
+  }
+
+  .barra-filtros{
+    gap:10px;
+  }
+
+  .filtro{
+    flex:1 1 calc(50% - 10px);
+    text-align:center;
+  }
+
+  .grid-filmes{
+    grid-template-columns:1fr;
+  }
+
+  .acoes-filme{
+    flex-direction:column;
+  }
+}
+
+/* =========================================================
+   MODAL DE VÍDEO
+========================================================= */
+
+.modal-video{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:30px;
+}
+
+.modal-video-overlay{
+  position:absolute;
+  inset:0;
+
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(8px);
+}
+
+.modal-video-box{
+  position:relative;
+  z-index:2;
+
+  width:min(1000px, 92vw);
+  aspect-ratio:16 / 9;
+
+  border-radius:24px;
+  overflow:hidden;
+
+  background:#000;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.5),
+    0 0 0 1px rgba(255,255,255,.08);
+}
+
+.modal-video-box iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.fechar-video{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:3;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(0,0,0,.65);
+  color:white;
+
+  font-size:1.1rem;
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.fechar-video:hover{
+  transform:scale(1.08);
+  background:rgba(255,255,255,.15);
+}
+
+@media (max-width:768px){
+
+  .modal-video{
+    padding:14px;
+  }
+
+  .modal-video-box{
+    width:100%;
+    border-radius:18px;
+  }
+}
+
+.hero-actions-destaque{
+  margin-top:22px;
+}
+
+.hero-actions-destaque .btn{
+  min-width:220px;
+}

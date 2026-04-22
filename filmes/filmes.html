@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🎬 Dancinha com Pipoca 🍿</title>
+
+  <!-- =====================================================
+       FONTES
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
+  <link rel="stylesheet" href="./filmes.css">
+</head>
+<body>
+
+  <main class="pagina-filmes">
+
+    <!-- =====================================================
+         EFEITOS DE FUNDO
+    ====================================================== -->
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+    <header class="hero-filmes">
+
+      <div class="hero-conteudo">
+
+        <div class="tag">
+          🎬 Dancinha com Pipoca 🍿
+        </div>
+
+        <h1>
+          Filmes e Documentários
+          <span>para transformar suas aulas</span>
+        </h1>
+
+        <p>
+          Explore sugestões organizadas por disciplina, encontre atividades,
+          descubra ideias para debates e transforme suas aulas em experiências
+          muito mais envolventes.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary">
+            Explorar Biblioteca
+          </button>
+
+          <button class="btn btn-secondary">
+            Ver Atividades
+          </button>
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CARD DE DESTAQUE
+      ================================================== -->
+<div class="hero-destaque">
+
+  <div class="hero-destaque-conteudo">
+
+    <span class="mini-tag">
+      ✨ Destaque da Semana
+    </span>
+
+    <h2>O estranho caso da vida confortável e sem sentido</h2>
+
+    <p>
+      Emanuel Aragão discute por que, mesmo em uma vida cada vez mais confortável,
+      muitas pessoas acabam se sentindo vazias, cansadas e sem propósito.
+    </p>
+
+    <div class="hero-tags">
+      <span>Sentido da vida</span>
+      <span>Conforto</span>
+      <span>Dopamina</span>
+    </div>
+
+    <div class="hero-actions-destaque">
+      <button
+        class="btn btn-primary"
+        onclick="abrirVideo('https://www.youtube.com/watch?v=2igfLjjBuZw&list=PLsRNoUx8w3rOwHx4kVJL5ksS9vTxj5hXn&index=1')"
+      >
+        ▶ Assistir palestra
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+    </header>
+
+
+    <!-- =====================================================
+         ESTATÍSTICAS
+    ====================================================== -->
+    <section class="estatisticas-biblioteca">
+
+      <article class="estatistica-card">
+        <div class="estatistica-icone">🎬</div>
+        <strong>48</strong>
+        <span>Filmes cadastrados</span>
+      </article>
+
+      <article class="estatistica-card">
+        <div class="estatistica-icone">📚</div>
+        <strong>12</strong>
+        <span>Disciplinas</span>
+      </article>
+
+      <article class="estatistica-card">
+        <div class="estatistica-icone">📝</div>
+        <strong>36</strong>
+        <span>Atividades prontas</span>
+      </article>
+
+      <article class="estatistica-card">
+        <div class="estatistica-icone">⭐</div>
+        <strong>4.9</strong>
+        <span>Avaliação média</span>
+      </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         BARRA DE BUSCA
+    ====================================================== -->
+    <section class="busca-filmes">
+
+      <div class="campo-busca">
+        <span class="icone-busca">🔎</span>
+
+        <input
+          type="text"
+          id="buscarFilme"
+          placeholder="Buscar filme, conteúdo, disciplina..."
+        >
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTROS
+    ====================================================== -->
+    <section class="barra-filtros">
+
+      <button class="filtro ativo" data-filtro="todos">
+        Todos
+      </button>
+
+      <button class="filtro" data-filtro="fisica">
+        Física
+      </button>
+
+      <button class="filtro" data-filtro="matematica">
+        Matemática
+      </button>
+
+      <button class="filtro" data-filtro="ciencias">
+        Ciências
+      </button>
+
+      <button class="filtro" data-filtro="historia">
+        História
+      </button>
+
+      <button class="filtro" data-filtro="documentarios">
+        Documentários
+      </button>
+
+      <button class="filtro" data-filtro="palestras">
+        Palestras
+      </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         CABEÇALHO DA GRADE
+    ====================================================== -->
+    <section class="cabecalho-grade">
+
+      <div>
+        <h2>Biblioteca de Filmes</h2>
+
+        <p>
+          Escolha um filme e descubra como utilizá-lo em sala de aula.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GRADE DE FILMES
+    ====================================================== -->
+    <section class="grid-filmes" id="gridFilmes">
+
+      <!-- =================================================
+           CARD EXEMPLO 1
+      ================================================== -->
+      <article class="card-filme">
+
+        <div class="card-banner">
+          <img src="./img/interestelar.jpg" alt="Interestelar">
+
+          <div class="badge-disciplina">
+            Física
+          </div>
+
+          <div class="badge-tempo">
+            2h49
+          </div>
+        </div>
+
+        <div class="card-conteudo">
+
+          <h3>:contentReference[oaicite:1]{index=1}</h3>
+
+          <p class="descricao-filme">
+            Excelente para discutir gravidade, relatividade,
+            buracos negros e exploração espacial.
+          </p>
+
+          <div class="tags-filme">
+            <span>Relatividade</span>
+            <span>Espaço</span>
+            <span>Gravidade</span>
+          </div>
+
+          <div class="acoes-filme">
+
+            <button class="btn-card">
+              Ver detalhes
+            </button>
+
+            <button class="btn-card secundario">
+              Atividade
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           CARD EXEMPLO 2
+      ================================================== -->
+      <article class="card-filme">
+
+        <div class="card-banner">
+          <img src="./img/uma-mente-brilhante.jpg" alt="Uma Mente Brilhante">
+
+          <div class="badge-disciplina matematica">
+            Matemática
+          </div>
+
+          <div class="badge-tempo">
+            2h15
+          </div>
+        </div>
+
+        <div class="card-conteudo">
+
+          <h3>:contentReference[oaicite:2]{index=2}</h3>
+
+          <p class="descricao-filme">
+            Ideal para trabalhar lógica, raciocínio e teoria dos jogos.
+          </p>
+
+          <div class="tags-filme">
+            <span>Lógica</span>
+            <span>Teoria dos Jogos</span>
+            <span>Matemática</span>
+          </div>
+
+          <div class="acoes-filme">
+
+            <button class="btn-card">
+              Ver detalhes
+            </button>
+
+            <button class="btn-card secundario">
+              Atividade
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+  <script src="./filmes.js"></script>
+</body>
+</html>

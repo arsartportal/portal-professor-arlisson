@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 Estatística | 3º Ano | Prof. Arlisson Ferreira</title>
+
+<style>
+body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:linear-gradient(135deg,#eef2f7,#dfe9f3);
+    margin:0;
+    padding:30px;
+    color:#333;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    padding:60px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+h1{text-align:center;font-size:38px;}
+.subtitulo{text-align:center;color:#555;margin-bottom:40px;}
+h2{
+    margin-top:50px;
+    color:#1a237e;
+    border-left:6px solid #3949ab;
+    padding-left:12px;
+}
+p{
+    text-align:justify;
+    line-height:1.9;
+    font-size:17px;
+}
+.destaque{
+    background:#e8eaf6;
+    padding:25px;
+    border-left:6px solid #5c6bc0;
+    border-radius:12px;
+    margin:35px 0;
+}
+.questao{
+    margin-top:25px;
+    padding:20px;
+    background:#f4f7ff;
+    border-radius:12px;
+    border:1px solid #d9e3ff;
+}
+button{
+    margin-top:35px;
+    padding:14px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2e7d32;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover{background:#1b5e20;}
+button:disabled{background:#999;}
+.resultado{
+    margin-top:30px;
+    font-size:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>📊 Estatística</h1>
+<p class="subtitulo">
+Matemática • 3º Ano • Professor: <strong>Arlisson Ferreira</strong>
+</p>
+
+<div class="destaque">
+🎯 Compreender, interpretar e analisar dados estatísticos de forma crítica.
+</div>
+
+<h2>1️⃣ Conceitos Fundamentais</h2>
+<p>
+Estatística é o ramo da matemática que coleta, organiza, analisa e interpreta dados.
+</p>
+<p>
+✔ População  
+✔ Amostra  
+✔ Variável qualitativa  
+✔ Variável quantitativa  
+</p>
+
+<h2>2️⃣ Tabelas e Gráficos</h2>
+<p>
+✔ Gráfico de barras  
+✔ Gráfico de setores  
+✔ Histograma  
+✔ Polígono de frequência  
+</p>
+
+<h2>3️⃣ Média Aritmética</h2>
+<p>
+Média = (soma dos valores) / (quantidade de dados)
+</p>
+
+<h2>4️⃣ Mediana</h2>
+<p>
+Valor central quando os dados estão ordenados.
+</p>
+
+<h2>5️⃣ Moda</h2>
+<p>
+Valor que mais se repete.
+</p>
+
+<h2>6️⃣ Variância</h2>
+<p>
+Mede a dispersão dos dados em relação à média.
+</p>
+
+<h2>7️⃣ Desvio Padrão</h2>
+<p>
+É a raiz quadrada da variância.
+Indica o quanto os dados se afastam da média.
+</p>
+
+<h2>8️⃣ Interpretação Crítica</h2>
+<p>
+✔ Comparar médias  
+✔ Avaliar dispersão  
+✔ Identificar manipulação de gráficos  
+</p>
+
+<h2>9️⃣ Exemplo</h2>
+<p>
+Notas: 6, 7, 8  
+Média = 7  
+Mediana = 7  
+Moda = inexistente  
+</p>
+
+<h2>🔟 Aplicações</h2>
+<p>
+✔ Pesquisas eleitorais  
+✔ Economia  
+✔ Saúde pública  
+✔ Educação  
+</p>
+
+<hr>
+
+<h2>📝 Avaliação – 10 Questões</h2>
+
+<div class="questao">
+<p><strong>1.</strong> Estatística estuda:</p>
+<label><input type="radio" name="q1" value="a"> Funções</label><br>
+<label><input type="radio" name="q1" value="b"> Dados</label><br>
+<label><input type="radio" name="q1" value="c"> Equações</label><br>
+<label><input type="radio" name="q1" value="d"> Vetores</label><br>
+<label><input type="radio" name="q1" value="e"> Matrizes</label>
+</div>
+
+<div class="questao">
+<p><strong>2.</strong> Média é:</p>
+<label><input type="radio" name="q2" value="a"> Valor central</label><br>
+<label><input type="radio" name="q2" value="b"> Valor mais frequente</label><br>
+<label><input type="radio" name="q2" value="c"> Soma dividida pela quantidade</label><br>
+<label><input type="radio" name="q2" value="d"> Diferença máxima</label><br>
+<label><input type="radio" name="q2" value="e"> Raiz da soma</label>
+</div>
+
+<div class="questao">
+<p><strong>3.</strong> Mediana é:</p>
+<label><input type="radio" name="q3" value="a"> Valor central</label><br>
+<label><input type="radio" name="q3" value="b"> Valor máximo</label><br>
+<label><input type="radio" name="q3" value="c"> Média</label><br>
+<label><input type="radio" name="q3" value="d"> Moda</label><br>
+<label><input type="radio" name="q3" value="e"> Variância</label>
+</div>
+
+<div class="questao">
+<p><strong>4.</strong> Moda é:</p>
+<label><input type="radio" name="q4" value="a"> Valor central</label><br>
+<label><input type="radio" name="q4" value="b"> Valor mais frequente</label><br>
+<label><input type="radio" name="q4" value="c"> Média</label><br>
+<label><input type="radio" name="q4" value="d"> Soma</label><br>
+<label><input type="radio" name="q4" value="e"> Raiz</label>
+</div>
+
+<div class="questao">
+<p><strong>5.</strong> Desvio padrão mede:</p>
+<label><input type="radio" name="q5" value="a"> Média</label><br>
+<label><input type="radio" name="q5" value="b"> Dispersão</label><br>
+<label><input type="radio" name="q5" value="c"> Soma</label><br>
+<label><input type="radio" name="q5" value="d"> Frequência</label><br>
+<label><input type="radio" name="q5" value="e"> Moda</label>
+</div>
+
+<div class="questao">
+<p><strong>6.</strong> Variância é relacionada ao:</p>
+<label><input type="radio" name="q6" value="a"> Desvio padrão</label><br>
+<label><input type="radio" name="q6" value="b"> Log</label><br>
+<label><input type="radio" name="q6" value="c"> Expoente</label><br>
+<label><input type="radio" name="q6" value="d"> PA</label><br>
+<label><input type="radio" name="q6" value="e"> PG</label>
+</div>
+
+<div class="questao">
+<p><strong>7.</strong> População é:</p>
+<label><input type="radio" name="q7" value="a"> Parte do grupo</label><br>
+<label><input type="radio" name="q7" value="b"> Grupo total</label><br>
+<label><input type="radio" name="q7" value="c"> Média</label><br>
+<label><input type="radio" name="q7" value="d"> Moda</label><br>
+<label><input type="radio" name="q7" value="e"> Amostra</label>
+</div>
+
+<div class="questao">
+<p><strong>8.</strong> Amostra é:</p>
+<label><input type="radio" name="q8" value="a"> Grupo total</label><br>
+<label><input type="radio" name="q8" value="b"> Parte da população</label><br>
+<label><input type="radio" name="q8" value="c"> Média</label><br>
+<label><input type="radio" name="q8" value="d"> Soma</label><br>
+<label><input type="radio" name="q8" value="e"> Desvio</label>
+</div>
+
+<div class="questao">
+<p><strong>9.</strong> Histograma representa:</p>
+<label><input type="radio" name="q9" value="a"> Funções</label><br>
+<label><input type="radio" name="q9" value="b"> Frequência</label><br>
+<label><input type="radio" name="q9" value="c"> Log</label><br>
+<label><input type="radio" name="q9" value="d"> PG</label><br>
+<label><input type="radio" name="q9" value="e"> PA</label>
+</div>
+
+<div class="questao">
+<p><strong>10.</strong> Estatística é usada em:</p>
+<label><input type="radio" name="q10" value="a"> Física</label><br>
+<label><input type="radio" name="q10" value="b"> Economia</label><br>
+<label><input type="radio" name="q10" value="c"> Saúde</label><br>
+<label><input type="radio" name="q10" value="d"> Educação</label><br>
+<label><input type="radio" name="q10" value="e"> Todas as alternativas</label>
+</div>
+
+<button onclick="corrigir()">🏆 Corrigir Avaliação</button>
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+
+const MAX_TENTATIVAS = 3;
+const CHAVE = "estatistica_3ano_tentativas";
+
+function corrigir(){
+
+let tentativas = JSON.parse(localStorage.getItem(CHAVE)) || [];
+
+if(tentativas.length >= MAX_TENTATIVAS){
+document.getElementById("resultado").innerHTML =
+"🚫 Você já utilizou as 3 tentativas permitidas.";
+return;
+}
+
+const respostas = {
+q1:"b",
+q2:"c",
+q3:"a",
+q4:"b",
+q5:"b",
+q6:"a",
+q7:"b",
+q8:"b",
+q9:"b",
+q10:"e"
+};
+
+let total = 0;
+
+for(let q in respostas){
+
+let marcada = document.querySelector('input[name="'+q+'"]:checked');
+let opcoes = document.querySelectorAll('input[name="'+q+'"]');
+
+opcoes.forEach(opcao=>{
+opcao.parentElement.style.color="#333";
+opcao.parentElement.style.fontWeight="normal";
+});
+
+if(marcada){
+if(marcada.value===respostas[q]){
+marcada.parentElement.style.color="#1b5e20";
+marcada.parentElement.style.fontWeight="bold";
+total++;
+}else{
+marcada.parentElement.style.color="#c62828";
+marcada.parentElement.style.fontWeight="bold";
+}
+}
+}
+
+tentativas.push(total);
+localStorage.setItem(CHAVE,JSON.stringify(tentativas));
+
+let melhor=Math.max(...tentativas);
+
+let html="<br><strong>📊 Desempenho:</strong><br>";
+
+tentativas.forEach((nota,index)=>{
+html+="Tentativa "+(index+1)+": "+nota+"/10<br>";
+});
+
+html+="<br>🏆 Melhor desempenho: <strong>"+melhor+"/10</strong><br><br>";
+
+if(melhor===10){
+html+="🔥 Excelente desempenho!";
+}else if(melhor>=7){
+html+="👏 Ótimo resultado!";
+}else if(melhor>=5){
+html+="👍 Resultado regular.";
+}else{
+html+="📚 Revise o conteúdo.";
+}
+
+if(tentativas.length>=MAX_TENTATIVAS){
+html+="<br><br>🔒 Limite de tentativas atingido.";
+document.querySelector("button").disabled=true;
+}
+
+document.getElementById("resultado").innerHTML=html;
+}
+
+</script>
+
+</body>
+</html>

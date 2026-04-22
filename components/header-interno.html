@@ -1,0 +1,45 @@
+<!-- =====================================================
+     HEADER INTERNO — PORTAL DO PROFESSOR
+     Componente reutilizável para páginas internas
+
+     Estrutura:
+     - esquerda: botão voltar
+     - centro: título da página
+     - direita: mini HUD de patente / XP
+
+     Observação:
+     - usa as classes visuais globais do mini HUD já existentes no style.css
+     - usa IDs exclusivos para evitar conflito com a home
+===================================================== -->
+
+<header class="header-interno">
+  <div class="header-interno-esquerda">
+    <a href="home.html" class="btn-voltar-interno">
+      <span class="btn-voltar-icone">←</span>
+      <span class="btn-voltar-texto">Voltar</span>
+    </a>
+  </div>
+
+  <div class="header-interno-centro">
+    <h1 class="header-interno-titulo">🛒 Loja de Recompensas</h1>
+  </div>
+
+  <div class="header-interno-direita">
+    <div class="mini-hud">
+      <img id="patente-img" class="mini-patente" src="" alt="Patente">
+
+      <div class="mini-xp">
+        <div id="xp-preenchimento"></div>
+      </div>
+
+      <div class="mini-detalhes">
+        <img id="patente-img-grande" class="patente-grande" src="" alt="Patente grande">
+
+        <div class="info-texto">
+          <span id="patente-nome">Carregando patente...</span>
+          <span id="xp-texto">XP: 0 / 100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

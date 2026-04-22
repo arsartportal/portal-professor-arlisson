@@ -1,0 +1,539 @@
+/* =====================================================
+   DASHBOARD CSS PREMIUM
+   Portal do Professor
+===================================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Segoe UI',Arial,sans-serif;
+background:#f4f6fb;
+color:#2c3e50;
+
+}
+
+
+
+/* =====================================================
+   BARRA SUPERIOR
+===================================================== */
+
+.barra-superior{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:15px 30px;
+
+background:white;
+border-bottom:1px solid #e6e9f0;
+
+}
+
+.btn-voltar{
+
+background:#6c7ae0;
+color:white;
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.2s;
+
+}
+
+.btn-voltar:hover{
+background:#5866c6;
+}
+
+.btn-exportar{
+
+background:#27ae60;
+color:white;
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.2s;
+
+}
+
+.btn-exportar:hover{
+background:#1e8f4d;
+}
+
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topo{
+
+padding:25px 30px;
+
+}
+
+.topo h1{
+
+font-size:28px;
+font-weight:700;
+
+}
+
+
+
+/* =====================================================
+   CARDS RESUMO
+===================================================== */
+
+.cards-resumo{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:20px;
+
+padding:0 30px 30px;
+
+}
+
+.card{
+
+background:white;
+
+padding:20px;
+
+border-radius:12px;
+
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+
+font-size:22px;
+
+font-weight:700;
+
+display:flex;
+
+flex-direction:column;
+
+gap:6px;
+
+}
+
+.card small{
+
+font-size:13px;
+
+font-weight:500;
+
+color:#7f8c8d;
+
+}
+
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros{
+
+display:flex;
+
+gap:15px;
+
+padding:0 30px 30px;
+
+flex-wrap:wrap;
+
+}
+
+.filtros select{
+
+padding:10px 14px;
+
+border-radius:8px;
+
+border:1px solid #dcdfe6;
+
+background:white;
+
+font-size:14px;
+
+cursor:pointer;
+
+}
+
+
+
+/* =====================================================
+   TABELA PRINCIPAL
+===================================================== */
+
+.tabela-container{
+
+padding:0 30px 40px;
+
+overflow-x:auto;
+
+}
+
+.tabela-dashboard{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:white;
+
+border-radius:12px;
+
+overflow:hidden;
+
+box-shadow:0 4px 14px rgba(0,0,0,0.05);
+
+}
+
+.tabela-dashboard thead{
+
+background:#eef2ff;
+
+}
+
+.tabela-dashboard th{
+
+text-align:left;
+
+padding:14px;
+
+font-size:14px;
+
+color:#2c3e50;
+
+}
+
+.tabela-dashboard td{
+
+padding:12px 14px;
+
+border-top:1px solid #f1f2f6;
+
+font-size:14px;
+
+}
+
+.tabela-dashboard tr:hover{
+
+background:#f8f9ff;
+
+}
+
+
+
+/* =====================================================
+   PATENTES
+===================================================== */
+
+.coluna-patente{
+
+text-align:center;
+
+}
+
+.icone-patente{
+
+width:28px;
+
+height:28px;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-ativo{
+
+color:#27ae60;
+font-weight:600;
+
+}
+
+.status-regular{
+
+color:#f39c12;
+font-weight:600;
+
+}
+
+.status-inativo{
+
+color:#e74c3c;
+font-weight:600;
+
+}
+
+
+
+/* =====================================================
+   BOTÕES AÇÕES
+===================================================== */
+
+.coluna-acoes{
+
+text-align:center;
+
+}
+
+.btn-bonus{
+
+background:#3498db;
+color:white;
+
+border:none;
+
+padding:6px 10px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-size:13px;
+
+margin-right:5px;
+
+}
+
+.btn-bonus:hover{
+
+background:#2980b9;
+
+}
+
+.btn-science{
+
+background:#9b59b6;
+color:white;
+
+border:none;
+
+padding:6px 10px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-size:13px;
+
+}
+
+.btn-science:hover{
+
+background:#7d3c98;
+
+}
+
+
+
+/* =====================================================
+   RANKING POR ESCOLA
+===================================================== */
+
+.ranking-escolas{
+
+padding:0 30px 40px;
+
+}
+
+.ranking-escolas h2{
+
+margin-bottom:15px;
+
+}
+
+.bloco-escola{
+
+background:white;
+
+padding:18px;
+
+border-radius:12px;
+
+margin-bottom:20px;
+
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+
+}
+
+.tabela-ranking-escola{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:10px;
+
+}
+
+.tabela-ranking-escola th,
+.tabela-ranking-escola td{
+
+padding:10px;
+
+border-top:1px solid #f1f2f6;
+
+font-size:14px;
+
+}
+
+
+
+/* =====================================================
+   RANKING POR TURMA
+===================================================== */
+
+.ranking-turmas{
+
+padding:0 30px 60px;
+
+}
+
+.ranking-turmas h2{
+
+margin-bottom:15px;
+
+}
+
+.bloco-turma{
+
+background:white;
+
+padding:18px;
+
+border-radius:12px;
+
+margin-bottom:20px;
+
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+
+}
+
+.tabela-ranking-turma{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:10px;
+
+}
+
+.tabela-ranking-turma th,
+.tabela-ranking-turma td{
+
+padding:10px;
+
+border-top:1px solid #f1f2f6;
+
+font-size:14px;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media(max-width:900px){
+
+.cards-resumo{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.cards-resumo{
+
+grid-template-columns:1fr;
+
+}
+
+.filtros{
+
+flex-direction:column;
+
+}
+
+}
+
+.streak-alto{
+color:#e67e22;
+font-weight:700;
+}
+
+.streak-epico{
+color:#e74c3c;
+font-weight:800;
+}
+
+/* =====================================================
+   BOTÃO RESET (PADRÃO IGUAL XP E SP)
+===================================================== */
+
+.btn-reset-bonus {
+
+  background:#e74c3c; /* vermelho padrão */
+  color:white;
+
+  border:none;
+
+  padding:6px 10px;
+
+  border-radius:6px;
+
+  cursor:pointer;
+
+  font-size:13px;
+
+  margin-left:5px;
+
+}
+
+.btn-reset-bonus:hover{
+
+  background:#c0392b;
+
+}
+
+.coluna-acoes button{
+  display:inline-block;
+  vertical-align:middle;
+}

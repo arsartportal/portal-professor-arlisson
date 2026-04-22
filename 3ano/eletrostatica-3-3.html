@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eletrostática — Processos de Eletrização</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>⚡ Eletrostática</h1>
+      <p>
+        Neste nível, vamos estudar como os corpos podem adquirir
+        carga elétrica por diferentes processos.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 3.3 — PROCESSOS DE ELETRIZAÇÃO
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-3-3">
+
+      <h2>📘 Nível 3.3 — Processos de Eletrização</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é eletrização?</h3>
+        <p>
+          A <strong>eletrização</strong> é o processo pelo qual
+          um corpo passa a possuir <strong>carga elétrica</strong>.
+        </p>
+        <p>
+          Isso ocorre devido à <strong>transferência de elétrons</strong>
+          entre corpos.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Eletrização por atrito</h3>
+        <p>
+          Na eletrização por <strong>atrito</strong>, dois corpos
+          inicialmente neutros são esfregados entre si.
+        </p>
+        <p>
+          Um corpo perde elétrons e o outro ganha,
+          ficando ambos eletrizados.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Eletrização por contato</h3>
+        <p>
+          Na eletrização por <strong>contato</strong>, um corpo eletrizado
+          toca um corpo neutro.
+        </p>
+        <p>
+          Após o contato, os corpos passam a ter
+          <strong>cargas de mesmo sinal</strong>.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Eletrização por indução</h3>
+        <p>
+          Na <strong>indução</strong>, um corpo eletrizado aproxima-se
+          de um corpo neutro <strong>sem contato</strong>.
+        </p>
+        <p>
+          O corpo neutro tem suas cargas separadas,
+          tornando-se eletrizado após o aterramento.
+        </p>
+      </article>
+
+      <!-- BLOCO 5 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Conservação da carga</h3>
+        <p>
+          Em todos os processos de eletrização,
+          a <strong>carga elétrica total se conserva</strong>.
+        </p>
+        <p>
+          Apenas ocorre redistribuição de elétrons.
+        </p>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>Eletrização é o processo de aquisição de carga elétrica</li>
+          <li>Pode ocorrer por atrito, contato ou indução</li>
+          <li>Elétrons são transferidos entre corpos</li>
+          <li>A carga elétrica total se conserva</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 3.3
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> O que ocorre na eletrização?</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Criação de elétrons
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Transferência de elétrons
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Aumento de massa
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Qual processo ocorre sem contato?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Atrito
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Contato
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Indução
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Qual princípio vale para todos os processos?</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Conservação da massa
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Conservação da carga elétrica
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Lei da gravidade
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpointNivel33()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_3_3')">
+          ✅ Concluir Nível 3.3
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL DE CONCLUSÃO -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Eletrostática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaFisica()">
+            🧭 Trilha de Física
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/eletrostatica.js"></script>
+
+</body>
+</html>

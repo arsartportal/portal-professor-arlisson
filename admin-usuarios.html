@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin • Usuários | Portal do Professor</title>
+
+  <link rel="stylesheet" href="./css/admin-usuarios.css" />
+</head>
+<body>
+  <div class="admin-shell">
+
+    <!-- =========================================
+         TOPO
+    ========================================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-badge">Admin</div>
+        <div>
+          <h1>Painel Administrativo de Usuários</h1>
+          <p>Gerencie a coleção <strong>usuarios</strong> do Firebase com filtros, edição e visão geral.</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="btn-recarregar" class="btn btn-secundario">Recarregar</button>
+        <button id="btn-exportar" class="btn btn-primario">Exportar CSV</button>
+      </div>
+    </header>
+
+    <!-- =========================================
+         STATUS / ACESSO
+    ========================================== -->
+    <section class="status-box" id="status-box">
+      <span class="status-dot"></span>
+      <span id="status-text">Verificando acesso administrativo...</span>
+    </section>
+
+    <!-- =========================================
+         CARDS DE RESUMO
+    ========================================== -->
+    <section class="cards-grid">
+      <article class="card-resumo">
+        <span class="card-label">Total de usuários</span>
+        <strong id="total-usuarios">0</strong>
+      </article>
+
+      <article class="card-resumo">
+        <span class="card-label">Usuários ativos</span>
+        <strong id="usuarios-ativos">0</strong>
+      </article>
+
+      <article class="card-resumo">
+        <span class="card-label">Maior XP</span>
+        <strong id="maior-xp">0</strong>
+      </article>
+
+      <article class="card-resumo">
+        <span class="card-label">Média de XP</span>
+        <strong id="media-xp">0</strong>
+      </article>
+    </section>
+
+    <!-- =========================================
+         FILTROS
+    ========================================== -->
+    <section class="painel-filtros">
+      <div class="filtro-grupo busca-grande">
+        <label for="busca">Buscar</label>
+        <input
+          type="text"
+          id="busca"
+          placeholder="Digite nome, email, escola, série..."
+        />
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-escola">Escola</label>
+        <select id="filtro-escola">
+          <option value="">Todas</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-serie">Série</label>
+        <select id="filtro-serie">
+          <option value="">Todas</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-turma">Turma</label>
+        <select id="filtro-turma">
+          <option value="">Todas</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-status">Status</label>
+        <select id="filtro-status">
+          <option value="">Todos</option>
+          <option value="ativo">Ativo</option>
+          <option value="inativo">Inativo</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="ordenacao">Ordenar por</label>
+        <select id="ordenacao">
+          <option value="nome-asc">Nome (A-Z)</option>
+          <option value="xp-desc">XP (maior primeiro)</option>
+          <option value="xp-asc">XP (menor primeiro)</option>
+          <option value="nivel-desc">Nível (maior primeiro)</option>
+          <option value="ultimoLogin-desc">Último login (mais recente)</option>
+          <option value="escola-asc">Escola (A-Z)</option>
+        </select>
+      </div>
+
+      <div class="filtro-acoes">
+        <button id="btn-limpar-filtros" class="btn btn-secundario">Limpar filtros</button>
+      </div>
+    </section>
+
+    <!-- =========================================
+         TABELA
+    ========================================== -->
+    <section class="tabela-section">
+      <div class="tabela-topo">
+        <div>
+          <h2>Usuários cadastrados</h2>
+          <p id="contador-filtrados">0 usuários encontrados</p>
+        </div>
+      </div>
+
+      <div class="tabela-wrapper">
+        <table class="tabela-usuarios">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Escola</th>
+              <th>Série</th>
+              <th>Turma</th>
+              <th>XP</th>
+              <th>Nível</th>
+              <th>Patente</th>
+              <th>Status</th>
+              <th>Último login</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-body">
+            <tr>
+              <td colspan="11" class="linha-vazia">Carregando usuários...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- =========================================
+       MODAL DE EDIÇÃO
+  ========================================== -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h3>Editar usuário</h3>
+          <p>Atualize os dados do usuário selecionado.</p>
+        </div>
+        <button id="btn-fechar-modal" class="modal-close">×</button>
+      </div>
+
+      <form id="form-edicao" class="modal-form">
+        <input type="hidden" id="edit-id" />
+
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label for="edit-nome">Nome</label>
+            <input type="text" id="edit-nome" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-email">Email</label>
+            <input type="email" id="edit-email" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-escola">Escola</label>
+            <input type="text" id="edit-escola" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-serie">Série</label>
+            <input type="text" id="edit-serie" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-turma">Turma</label>
+            <input type="text" id="edit-turma" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-status">Status</label>
+            <select id="edit-status">
+              <option value="ativo">Ativo</option>
+              <option value="inativo">Inativo</option>
+            </select>
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-xp">XP</label>
+            <input type="number" id="edit-xp" min="0" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-nivel">Nível</label>
+            <input type="number" id="edit-nivel" min="0" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-patente">Patente</label>
+            <input type="text" id="edit-patente" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="edit-ultimo-login">Último login</label>
+            <input type="text" id="edit-ultimo-login" disabled />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="btn-cancelar" class="btn btn-secundario">Cancelar</button>
+          <button type="submit" class="btn btn-primario">Salvar alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./js/admin-usuarios.js"></script>
+</body>
+</html>

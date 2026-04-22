@@ -1,0 +1,501 @@
+
+/* =====================================================
+   BACKGROUND ARENA
+===================================================== */
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+background:
+radial-gradient(circle at top,#1e293b,#020617);
+
+color:white;
+
+margin:0;
+padding:10px 40px 40px 40px;
+
+overflow-x:hidden;
+
+}
+
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+
+max-width:1100px;
+margin:auto;
+
+}
+
+
+
+/* =====================================================
+   TITULO
+===================================================== */
+
+h1{
+
+text-align:center;
+
+font-size:34px;
+
+margin-bottom:30px;
+
+letter-spacing:1px;
+
+text-shadow:0 2px 8px rgba(0,0,0,0.5);
+
+}
+
+
+
+/* =====================================================
+   POSIÇÃO DO ALUNO
+===================================================== */
+
+.minha-posicao{
+
+text-align:center;
+
+font-size:20px;
+
+margin-bottom:50px;
+
+color:#38bdf8;
+
+}
+
+
+
+/* =====================================================
+   PODIO
+===================================================== */
+
+.podio{
+
+display:flex;
+justify-content:center;
+align-items:flex-end;
+
+gap:36px;
+
+margin-bottom:80px;
+
+}
+
+
+
+/* =====================================================
+   CARDS DO PODIO
+===================================================== */
+
+.card{
+
+width:220px;
+
+border-radius:16px;
+
+padding:26px 24px;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+
+gap:10px;
+
+text-align:center;
+
+box-shadow:
+0 18px 36px rgba(0,0,0,0.55);
+
+position:relative;
+
+transition:transform .25s ease;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+
+
+/* =====================================================
+   SOMBRA DO PEDESTAL
+===================================================== */
+
+.card::after{
+
+content:"";
+
+position:absolute;
+
+bottom:-14px;
+left:50%;
+
+transform:translateX(-50%);
+
+width:70%;
+height:10px;
+
+background:rgba(0,0,0,0.35);
+
+border-radius:50%;
+
+filter:blur(6px);
+
+}
+
+
+
+/* =====================================================
+   IMAGEM DA PATENTE
+===================================================== */
+
+.card img{
+
+width:80px;
+
+margin:8px 0;
+
+filter:drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+
+}
+
+
+
+/* =====================================================
+   NOME
+===================================================== */
+
+.card .nome{
+
+font-size:20px;
+
+font-weight:600;
+
+margin-top:6px;
+
+max-width:180px;
+
+word-break:break-word;
+
+}
+
+
+
+/* =====================================================
+   XP
+===================================================== */
+
+.card .xp{
+
+font-size:15px;
+
+opacity:.9;
+
+margin-top:2px;
+
+}
+
+
+
+/* =====================================================
+   PRIMEIRO LUGAR
+===================================================== */
+
+#primeiro{
+
+height:260px;
+
+background:
+linear-gradient(
+180deg,
+#fde047 0%,
+#f59e0b 55%,
+#b45309 100%
+);
+
+}
+
+
+
+/* =====================================================
+   SEGUNDO LUGAR
+===================================================== */
+
+#segundo{
+
+height:230px;
+
+background:
+linear-gradient(
+180deg,
+#f8fafc 0%,
+#cbd5f5 50%,
+#94a3b8 100%
+);
+
+}
+
+
+
+/* =====================================================
+   TERCEIRO LUGAR
+===================================================== */
+
+#terceiro{
+
+height:210px;
+
+background:
+linear-gradient(
+180deg,
+#fbbf24 0%,
+#b45309 60%,
+#7c2d12 100%
+);
+
+}
+
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:rgba(30,41,59,0.92);
+
+border-radius:10px;
+
+overflow:hidden;
+
+}
+
+
+
+/* CABEÇALHO */
+
+th{
+
+background:#334155;
+
+padding:14px;
+
+font-size:13px;
+
+text-transform:uppercase;
+
+letter-spacing:.8px;
+
+}
+
+
+
+/* CELULAS */
+
+td{
+
+padding:14px;
+
+text-align:center;
+
+font-size:15px;
+
+}
+
+
+
+/* LINHAS */
+
+tr:nth-child(even){
+
+background:rgba(30,41,59,0.92);
+
+}
+
+tr:nth-child(odd){
+
+background:rgba(15,23,42,0.96);
+
+}
+
+
+
+/* HOVER */
+
+tr:hover{
+
+background:#1e40af;
+
+transition:.15s;
+
+}
+
+
+
+/* =====================================================
+   DESTAQUE DO ALUNO LOGADO
+===================================================== */
+
+tr[style]{
+
+background:#1d4ed8 !important;
+
+box-shadow:0 0 12px rgba(56,189,248,.5) inset;
+
+font-weight:600;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:900px){
+
+.podio{
+
+flex-direction:column;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.card{
+
+width:90%;
+height:auto !important;
+
+}
+
+}
+
+/* =====================================================
+   FUNDO ANIMADO (ELÉTRONS INFINITOS)
+===================================================== */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+pointer-events:none;
+
+background-image:
+
+radial-gradient(circle,#38bdf8 1px, transparent 2px),
+radial-gradient(circle,#60a5fa 1px, transparent 2px),
+radial-gradient(circle,#a78bfa 1px, transparent 2px);
+
+background-size:
+180px 180px,
+240px 240px,
+300px 300px;
+
+background-position:
+0 0,
+40px 60px,
+100px 120px;
+
+opacity:.35;
+
+animation:electronMove 60s linear infinite;
+
+}
+
+
+
+/* =====================================================
+   MOVIMENTO INFINITO
+===================================================== */
+
+@keyframes electronMove{
+
+0%{
+background-position:
+0 0,
+40px 60px,
+100px 120px;
+}
+
+100%{
+background-position:
+0 -800px,
+40px -740px,
+100px -680px;
+}
+
+}
+
+#stage3d{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+z-index:-1;
+
+}
+
+.status-ranking{
+margin:18px auto 24px;
+padding:14px 18px;
+max-width:700px;
+text-align:center;
+font-weight:700;
+font-size:16px;
+color:#e2e8f0;
+background:rgba(15,23,42,0.72);
+border:1px solid rgba(56,189,248,0.28);
+border-radius:14px;
+box-shadow:
+0 0 20px rgba(56,189,248,0.12),
+inset 0 0 16px rgba(255,255,255,0.03);
+backdrop-filter:blur(8px);
+}
+
+.status-ranking.bloqueado{
+color:#fecaca;
+border:1px solid rgba(248,113,113,0.35);
+box-shadow:
+0 0 20px rgba(248,113,113,0.12),
+inset 0 0 16px rgba(255,255,255,0.03);
+}
+
+.status-ranking.liberado{
+color:#bbf7d0;
+border:1px solid rgba(34,197,94,0.35);
+box-shadow:
+0 0 20px rgba(34,197,94,0.12),
+inset 0 0 16px rgba(255,255,255,0.03);
+}

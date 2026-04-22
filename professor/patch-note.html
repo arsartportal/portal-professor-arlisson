@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Patch Notes | Portal do Professor</title>
+
+<style>
+
+body{
+font-family:'Segoe UI',system-ui;
+background:#f4f6fb;
+margin:0;
+padding:40px;
+color:#1f2937;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.patch-header{
+margin-bottom:30px;
+}
+
+.patch-header h2{
+margin:0;
+font-size:28px;
+}
+
+.patch-subtitle{
+color:#6b7280;
+font-size:14px;
+}
+
+.patch-version{
+background:white;
+border-radius:12px;
+margin-bottom:14px;
+box-shadow:0 6px 20px rgba(0,0,0,0.06);
+border:1px solid #e5e7eb;
+overflow:hidden;
+}
+
+.patch-version summary{
+cursor:pointer;
+padding:16px 20px;
+display:flex;
+gap:15px;
+align-items:center;
+font-weight:600;
+}
+
+.version{
+background:#4c6ef5;
+color:white;
+padding:4px 8px;
+border-radius:6px;
+font-size:12px;
+}
+
+.date{
+font-size:12px;
+color:#6b7280;
+}
+
+.title{
+font-size:14px;
+}
+
+.patch-content{
+padding:18px 22px;
+border-top:1px solid #f1f5f9;
+}
+
+.patch-content h4{
+margin-top:0;
+margin-bottom:8px;
+}
+
+.patch-content ul{
+margin-top:5px;
+padding-left:18px;
+}
+
+.patch-content li{
+margin-bottom:6px;
+}
+
+.btn-voltar{
+margin-bottom:25px;
+background:white;
+border:1px solid #e5e7eb;
+padding:8px 16px;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn-voltar:hover{
+background:#f3f4f6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<button class="btn-voltar" onclick="location.href='professor.html'">⬅ Voltar</button>
+
+<!-- ===================================================
+PATCH NOTES
+=================================================== -->
+
+<section class="patch-notes">
+
+<div class="patch-header">
+<h2>📢 Patch Notes do Portal</h2>
+<span class="patch-subtitle">
+Atualizações e melhorias do sistema
+</span>
+</div>
+
+<!-- ===============================
+v1.3.0
+=============================== -->
+<details class="patch-version" open>
+<summary>
+<span class="version">v1.3.0</span>
+<span class="date">07 de Março de 2026</span>
+<span class="title">Controle de Progresso de Aula</span>
+</summary>
+
+<div class="patch-content">
+
+  <h4>🧪 Atividades de pesquisa</h4>
+<ul>
+<li>Implementação de pesquisas científicas</li>
+<li>Pesquisas por série</li>
+<li>Atividades de curiosidade científica</li>
+</ul>
+
+<h4>📍 Nova Ferramenta</h4>
+<ul>
+<li>Implementação da página <strong>Onde Parei</strong></li>
+<li>Registro rápido de progresso de aula</li>
+<li>Seleção automática de turmas por escola</li>
+<li>Histórico de registros exibido em cards</li>
+<li>Conversão automática de data do Firestore</li>
+<li>Botão para remover registros</li>
+</ul>
+
+<h4>🏫 Suporte a múltiplas escolas</h4>
+<ul>
+<li>Audiocomunicação</li>
+<li>Boto de Menezes</li>
+<li>Maria Geny</li>
+</ul>
+
+<h4>⚙ Infraestrutura</h4>
+<ul>
+<li>Integração completa com Firestore</li>
+<li>Correção de caminhos do Firebase</li>
+<li>Padronização da versão do Firebase (12.8)</li>
+</ul>
+
+</div>
+</details>
+
+<!-- ===============================
+v1.2.0
+=============================== -->
+<details class="patch-version">
+<summary>
+<span class="version">v1.2.0</span>
+<span class="date">22 de Janeiro de 2026</span>
+<span class="title">Conquistas, Estabilidade e Infra</span>
+</summary>
+
+<div class="patch-content">
+
+<h4>🏅 Gamificação (NOVO)</h4>
+<ul>
+<li>Sistema de conquistas por módulo</li>
+<li>Persistência de badges no Firestore</li>
+<li>Registro automático da data de conclusão</li>
+<li>Página <strong>Minhas Conquistas</strong></li>
+</ul>
+
+<h4>🚀 Infraestrutura</h4>
+<ul>
+<li>Domínio <strong>exatas.site</strong> integrado ao Cloudflare</li>
+<li>Padronização de caminhos absolutos</li>
+<li>Correção de fallback de páginas</li>
+</ul>
+
+<h4>🔐 Segurança</h4>
+<ul>
+<li>Revisão das regras do Firestore</li>
+<li>Proteção por UID</li>
+</ul>
+
+<h4>🚀 Novidades</h4>
+<ul>
+<li>Sistema de patentes visuais</li>
+<li>HUD gamificado</li>
+</ul>
+
+<h4>🐞 Correções</h4>
+<ul>
+<li>Diferenças entre ambiente local e produção</li>
+</ul>
+
+</div>
+</details>
+
+
+<!-- ===============================
+v1.1.0
+=============================== -->
+<details class="patch-version">
+<summary>
+<span class="version">v1.1.0</span>
+<span class="date">15 de Janeiro de 2026</span>
+<span class="title">Dashboard do Professor</span>
+</summary>
+
+<div class="patch-content">
+
+<h4>📊 Painel do professor</h4>
+<ul>
+<li>Criação do dashboard principal</li>
+<li>Cards informativos do sistema</li>
+<li>Estrutura para múltiplas escolas</li>
+</ul>
+
+<h4>📈 Dados de alunos</h4>
+<ul>
+<li>Registro de XP</li>
+<li>Registro de nível</li>
+<li>Registro de escola, série e turma</li>
+</ul>
+
+</div>
+</details>
+
+
+<!-- ===============================
+v1.0.0
+=============================== -->
+<details class="patch-version">
+<summary>
+<span class="version">v1.0.0</span>
+<span class="date">Início do Projeto</span>
+<span class="title">Fundação do Portal</span>
+</summary>
+
+<div class="patch-content">
+
+<h4>🚀 Primeira versão</h4>
+<ul>
+<li>Estrutura inicial do Portal do Professor</li>
+<li>Integração com Firebase</li>
+<li>Autenticação de usuários</li>
+<li>Base do dashboard</li>
+</ul>
+
+</div>
+</details>
+
+</section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Química — Nível 1.5</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/introducao-quimica.css" />
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+<header id="header"></header>
+
+<main class="conteudo-quimica">
+
+  <!-- CABEÇALHO -->
+  <section class="cabecalho-modulo">
+    <h1>🧪 Introdução à Química</h1>
+    <p>
+      Para compreender as transformações da matéria, a Química utiliza o método científico.
+    </p>
+  </section>
+
+  <!-- NÍVEL 1.5 -->
+  <section class="nivel-conteudo" id="nivel-1-5">
+
+    <h2>📘 Nível 1.5 — Método Científico</h2>
+
+    <!-- BLOCO 1 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 O que é o método científico?</h3>
+      <p>
+        O <strong>método científico</strong> é um conjunto de etapas usadas para investigar
+        fenômenos e produzir conhecimento confiável.
+      </p>
+    </article>
+
+    <!-- BLOCO 2 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Etapas do método científico</h3>
+      <ul>
+        <li><strong>1. Observação</strong> → perceber um fenômeno</li>
+        <li><strong>2. Problema</strong> → formular uma pergunta</li>
+        <li><strong>3. Hipótese</strong> → propor uma explicação</li>
+        <li><strong>4. Experimento</strong> → testar a hipótese</li>
+        <li><strong>5. Análise</strong> → avaliar os resultados</li>
+        <li><strong>6. Conclusão</strong> → confirmar ou refutar a hipótese</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 3 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Método científico na Química</h3>
+      <p>
+        Na Química, o método científico é fundamental para:
+      </p>
+      <ul>
+        <li>Descobrir novas substâncias</li>
+        <li>Testar reações químicas</li>
+        <li>Desenvolver medicamentos</li>
+        <li>Criar novos materiais</li>
+      </ul>
+    </article>
+
+    <!-- BLOCO 4 -->
+    <article class="bloco-conteudo">
+      <h3>🔹 Importância da experimentação</h3>
+      <p>
+        A experimentação permite verificar se uma hipótese está correta.
+      </p>
+      <p>
+        Sem testes e evidências, não há ciência.
+      </p>
+    </article>
+
+    <!-- RESUMO -->
+    <article class="bloco-resumo">
+      <h3>🧠 Resumo do Nível</h3>
+      <ul>
+        <li>O método científico organiza a investigação científica</li>
+        <li>Começa com observação e termina com conclusão</li>
+        <li>É essencial para o avanço da Química</li>
+      </ul>
+    </article>
+
+    <!-- CHECKPOINT -->
+    <section class="checkpoint">
+
+      <h3>✅ Checkpoint Final — Encerramento da Trilha</h3>
+
+      <!-- QUESTÃO 1 -->
+      <div class="questao">
+        <p><strong>1)</strong> A primeira etapa do método científico é:</p>
+        <label><input type="radio" name="q1" value="a"> Experimento</label>
+        <label><input type="radio" name="q1" value="b"> Observação</label>
+        <label><input type="radio" name="q1" value="c"> Conclusão</label>
+      </div>
+
+      <!-- QUESTÃO 2 -->
+      <div class="questao">
+        <p><strong>2)</strong> A hipótese é:</p>
+        <label><input type="radio" name="q2" value="a"> Um resultado final</label>
+        <label><input type="radio" name="q2" value="b"> Um palpite sem lógica</label>
+        <label><input type="radio" name="q2" value="c"> Uma explicação provisória</label>
+      </div>
+
+      <!-- QUESTÃO 3 -->
+      <div class="questao">
+        <p><strong>3)</strong> O experimento serve para:</p>
+        <label><input type="radio" name="q3" value="a"> Testar a hipótese</label>
+        <label><input type="radio" name="q3" value="b"> Ignorar o problema</label>
+        <label><input type="radio" name="q3" value="c"> Encerrar a pesquisa sem análise</label>
+      </div>
+
+      <button class="btn-checkpoint" onclick="verificarCheckpointNivel15()">
+        Verificar respostas
+      </button>
+
+      <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+    </section>
+
+    <!-- BOTÃO CONCLUIR -->
+    <div class="acoes-nivel">
+      <button
+        class="btn-concluir"
+        disabled
+        style="opacity: 0.5"
+        onclick="concluirNivel('nivel_1_5')">
+        🎓 Concluir Trilha
+      </button>
+    </div>
+
+  </section>
+
+  <!-- MODAL -->
+  <div id="nivel-concluido-modal" class="modal hidden">
+    <div class="modal-conteudo">
+      <h3>🎉 Trilha Concluída!</h3>
+      <p>Você finalizou a Introdução à Química.</p>
+
+      <div class="modal-acoes">
+        <button class="btn-primario" onclick="voltarParaQuimica()">
+          🧭 Voltar à Trilha
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="status-bar">
+  Sistema online • Progresso salvo automaticamente
+</footer>
+
+<script type="module" src="/js/introducao-quimica.js"></script>
+<script type="module" src="/js/patentes.js"></script>
+
+</body>
+</html>

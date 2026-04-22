@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fundamentos da Matemática — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Matemática -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+  <!-- Estilo específico da animação da patente -->
+  <link rel="stylesheet" href="/css/patentes.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-matematica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔰 Fundamentos da Matemática</h1>
+      <p>
+        Antes de estudar equações, funções e gráficos,
+        é essencial entender o papel da Matemática
+        na organização do pensamento e na resolução de problemas.
+      </p>
+    </section>
+
+    <!-- ===============================
+         NÍVEL 1.1 — O QUE É MATEMÁTICA?
+    ================================ -->
+    <section class="nivel-conteudo" id="nivel-1-1">
+
+      <h2>📘 Nível 1.1 — O que é Matemática?</h2>
+
+      <!-- BLOCO 1 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que é Matemática?</h3>
+        <p>
+          A <strong>Matemática</strong> é a ciência que estuda
+          <strong>números, padrões, quantidades e relações</strong>.
+        </p>
+        <p>
+          Ela nos ajuda a organizar o raciocínio e resolver problemas
+          de forma lógica e estruturada.
+        </p>
+      </article>
+
+      <!-- BLOCO 2 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Matemática é só conta?</h3>
+        <p>
+          Muitas pessoas acreditam que Matemática é apenas fazer contas.
+          Essa ideia está incompleta.
+        </p>
+        <p>
+          A Matemática é principalmente
+          <strong>raciocínio lógico</strong>.
+        </p>
+        <p>
+          👉 Antes do cálculo, vem a interpretação.<br />
+          👉 Antes da fórmula, vem o entendimento do problema.
+        </p>
+      </article>
+
+      <!-- BLOCO 3 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 Matemática no cotidiano</h3>
+        <p>A Matemática aparece em situações simples:</p>
+        <ul>
+          <li>💰 Calcular troco</li>
+          <li>🛒 Comparar preços</li>
+          <li>📊 Interpretar gráficos</li>
+          <li>⏱️ Organizar horários</li>
+          <li>📱 Controlar gastos</li>
+        </ul>
+        <p>
+          Mesmo sem perceber, você usa Matemática todos os dias.
+        </p>
+      </article>
+
+      <!-- BLOCO 4 -->
+      <article class="bloco-conteudo">
+        <h3>🔹 O que a Matemática desenvolve?</h3>
+        <ul>
+          <li>🧠 Raciocínio lógico</li>
+          <li>📐 Organização mental</li>
+          <li>🎯 Capacidade de resolver problemas</li>
+          <li>📊 Interpretação de informações</li>
+        </ul>
+      </article>
+
+      <!-- RESUMO -->
+      <article class="bloco-resumo">
+        <h3>🧠 Resumo do Nível</h3>
+        <ul>
+          <li>A Matemática estuda números e padrões</li>
+          <li>Não é apenas fazer contas</li>
+          <li>Está presente no cotidiano</li>
+          <li>Desenvolve o raciocínio lógico</li>
+        </ul>
+      </article>
+
+      <!-- ===============================
+           CHECKPOINT — NÍVEL 1.1
+      ================================ -->
+      <section class="checkpoint">
+
+        <h3>✅ Checkpoint — Teste rápido</h3>
+        <p>Responda às questões abaixo para concluir este nível.</p>
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+          <p><strong>1)</strong> A Matemática estuda principalmente:</p>
+          <label>
+            <input type="radio" name="q1" value="a">
+            Apenas contas difíceis
+          </label>
+          <label>
+            <input type="radio" name="q1" value="b">
+            Números, padrões e relações
+          </label>
+          <label>
+            <input type="radio" name="q1" value="c">
+            Somente fórmulas prontas
+          </label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+          <p><strong>2)</strong> Qual situação envolve Matemática?</p>
+          <label>
+            <input type="radio" name="q2" value="a">
+            Calcular o troco
+          </label>
+          <label>
+            <input type="radio" name="q2" value="b">
+            Dormir à noite
+          </label>
+          <label>
+            <input type="radio" name="q2" value="c">
+            Ouvir música
+          </label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+          <p><strong>3)</strong> Antes de resolver um problema matemático devemos:</p>
+          <label>
+            <input type="radio" name="q3" value="a">
+            Fazer a conta rapidamente
+          </label>
+          <label>
+            <input type="radio" name="q3" value="b">
+            Interpretar o problema
+          </label>
+          <label>
+            <input type="radio" name="q3" value="c">
+            Decorar uma fórmula
+          </label>
+        </div>
+
+        <button class="btn-checkpoint" onclick="verificarCheckpoint()">
+          Verificar respostas
+        </button>
+
+        <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+      </section>
+
+      <!-- AÇÃO FINAL -->
+      <div class="acoes-nivel">
+        <button
+          class="btn-concluir"
+          disabled
+          style="opacity: 0.5"
+          onclick="concluirNivel('nivel_1_1_matematica')">
+          ✅ Concluir Nível 1.1
+        </button>
+      </div>
+
+    </section>
+
+    <!-- MODAL -->
+    <div id="nivel-concluido-modal" class="modal hidden">
+      <div class="modal-conteudo">
+        <h3>✅ Nível concluído!</h3>
+        <p class="modal-subtitulo">
+          Você avançou na trilha de Fundamentos da Matemática.
+        </p>
+
+        <div class="modal-acoes">
+          <button class="btn-primario" onclick="irParaProximoNivel()">
+            ➡️ Próximo nível
+          </button>
+
+          <button class="btn-secundario" onclick="voltarParaMatematica()">
+            🧭 Trilha de Matemática
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <script type="module" src="/js/introducao-matematica.js"></script>
+  <script src="/js/patentes.js" type="module"></script>
+
+</body>
+</html>

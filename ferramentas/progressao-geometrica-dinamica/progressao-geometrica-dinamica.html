@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Progressão Geométrica Dinâmica</title>
+
+  <!-- Fonte principal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./progressao-geometrica-dinamica.css">
+</head>
+<body>
+
+  <main class="pagina-pg">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero-pg">
+
+      <a href="../ferramentas-pedagogicas.html" class="voltar">
+        ← Voltar para Ferramentas
+      </a>
+
+      <div class="hero-box">
+        <span class="tag">📈 Matemática Dinâmica</span>
+
+        <h1>Progressão Geométrica Dinâmica</h1>
+
+        <p>
+          Modifique os valores abaixo e acompanhe instantaneamente
+          a sequência, a soma, o termo geral e o gráfico da
+          Progressão Geométrica.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         PAINEL PRINCIPAL
+         ===================================================== -->
+    <section class="painel-pg-completo">
+
+      <!-- ===================================================
+           ENTRADAS
+           =================================================== -->
+      <div class="entrada-pg">
+
+        <label>
+          Primeiro termo (a₁)
+          <input type="number" id="a1" value="2" placeholder="Ex.: 2">
+        </label>
+
+        <label>
+          Razão (q)
+          <input type="number" id="q" value="2" placeholder="Ex.: 2">
+        </label>
+
+        <label>
+          Número de termos (n)
+          <input type="number" id="n" value="10" min="1" max="100" placeholder="Ex.: 10">
+        </label>
+
+      </div>
+
+
+      <!-- ===================================================
+           RESULTADOS COM REVELAÇÃO INDIVIDUAL
+           =================================================== -->
+      <div class="cards-resultados" id="bloco-resultados">
+
+        <div class="resultado-card">
+          <span>Último termo</span>
+
+          <div class="campo-revelavel oculto" id="campo-ultimo-termo">
+            <strong id="ultimo-termo">1024</strong>
+          </div>
+        </div>
+
+        <div class="resultado-card">
+          <span>Soma da PG</span>
+
+          <div class="campo-revelavel oculto" id="campo-soma-pg">
+            <strong id="soma-pg">2046</strong>
+          </div>
+        </div>
+
+        <div class="resultado-card formula-card">
+          <span>Fórmula do termo geral</span>
+
+          <div class="campo-revelavel oculto" id="campo-formula-pg">
+            <strong id="formula-pg">aₙ = 2 · 2^(n - 1)</strong>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           SEQUÊNCIA GERADA
+           =================================================== -->
+      <section class="sequencia-box">
+
+        <div class="sequencia-topo">
+
+          <div>
+            <h2>Sequência gerada</h2>
+
+            <p class="sequencia-info">
+              Digite as posições que devem começar visíveis.
+              Os demais termos aparecerão com a palavra “Revelar”.
+            </p>
+          </div>
+
+          <div class="controles-ocultacao">
+            <input
+              type="text"
+              id="termos-visiveis"
+              placeholder="Ex.: 1, 4, 8"
+            >
+
+            <button id="aplicar-visiveis" class="botao-sequencia">
+              Aplicar
+            </button>
+          </div>
+
+        </div>
+
+        <div id="sequencia"></div>
+
+      </section>
+
+
+      <!-- ===================================================
+           GRÁFICO COM REVELAÇÃO INDIVIDUAL
+           =================================================== -->
+      <section class="grafico-pg" id="bloco-grafico">
+
+        <div class="titulo-formulas">
+          <h2>Gráfico da Progressão Geométrica</h2>
+
+          <p>
+            Observe visualmente se a PG está crescendo,
+            diminuindo ou permanecendo constante.
+          </p>
+        </div>
+
+        <div class="grafico-container">
+
+          <div class="campo-revelavel oculto grafico-oculto" id="campo-grafico">
+            <canvas id="graficoPG"></canvas>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           FÓRMULAS IMPORTANTES COM REVELAÇÃO INDIVIDUAL
+           =================================================== -->
+      <section class="formulas-pg" id="bloco-formulas">
+
+        <div class="titulo-formulas">
+          <h2>Fórmulas importantes da Progressão Geométrica</h2>
+          <p>Utilize esta área como consulta rápida durante a aula.</p>
+        </div>
+
+        <div class="formula-grid">
+
+          <article class="formula-item">
+            <span>Termo geral</span>
+
+            <div class="campo-revelavel oculto">
+              <strong>aₙ = a₁ · q^(n - 1)</strong>
+            </div>
+
+            <p>Permite descobrir qualquer termo da progressão.</p>
+          </article>
+
+          <article class="formula-item">
+            <span>Razão</span>
+
+            <div class="campo-revelavel oculto">
+              <strong>q = aₙ / aₙ₋₁</strong>
+            </div>
+
+            <p>
+              A razão é o número pelo qual cada termo é multiplicado.
+            </p>
+          </article>
+
+          <article class="formula-item">
+            <span>Soma dos termos</span>
+
+            <div class="campo-revelavel oculto">
+              <strong>Sₙ = a₁(qⁿ - 1) / (q - 1)</strong>
+            </div>
+
+            <p>Fórmula usada para calcular rapidamente a soma da PG.</p>
+          </article>
+
+          <article class="formula-item">
+            <span>Quando q = 1</span>
+
+            <div class="campo-revelavel oculto">
+              <strong>Sₙ = a₁ · n</strong>
+            </div>
+
+            <p>
+              Caso especial em que todos os termos da PG são iguais.
+            </p>
+          </article>
+
+          <article class="formula-item">
+            <span>Último termo</span>
+
+            <div class="campo-revelavel oculto">
+              <strong>aₙ = a₁ · q^(n - 1)</strong>
+            </div>
+
+            <p>Encontra diretamente o último termo da sequência.</p>
+          </article>
+
+          <article class="formula-item destaque-formula">
+            <span>Desafio rápido</span>
+
+            <div class="campo-revelavel oculto">
+              <strong>Se a₁ = 3 e q = 2, qual é o 6º termo?</strong>
+            </div>
+
+            <p>
+              Experimente inserir os valores nos campos acima para descobrir.
+            </p>
+          </article>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- JavaScript -->
+  <script src="./progressao-geometrica-dinamica.js"></script>
+
+</body>
+</html>

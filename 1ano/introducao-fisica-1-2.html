@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introdução à Física — 1º Ano</title>
+
+  <!-- CSS global do portal -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- CSS específico da Física -->
+  <link rel="stylesheet" href="/css/introducao-fisica.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body data-theme="light">
+
+  <!-- HEADER / HUD -->
+  <header id="header"></header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="conteudo-fisica">
+
+    <!-- ===============================
+         CABEÇALHO DO MÓDULO
+    ================================ -->
+    <section class="cabecalho-modulo">
+      <h1>🔰 Introdução à Física</h1>
+      <p>
+        Antes de estudar movimento, forças e energia, é fundamental
+        entender o que a Física estuda e como ela observa o mundo.
+      </p>
+    </section>
+
+    <!-- ===============================
+     NÍVEL 1.2 — FENÔMENOS E GRANDEZAS
+================================ -->
+<section class="nivel-conteudo" id="nivel-1-2">
+
+  <h2>📘 Nível 1.2 — Fenômenos e Grandezas</h2>
+
+  <!-- BLOCO 1 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 O que é um fenômeno?</h3>
+    <p>
+      Um <strong>fenômeno</strong> é qualquer acontecimento que pode ser
+      observado na natureza.
+    </p>
+    <p>
+      Sempre que algo muda, se transforma ou acontece,
+      estamos diante de um fenômeno.
+    </p>
+  </article>
+
+  <!-- BLOCO 2 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Fenômenos físicos</h3>
+    <p>
+      Os <strong>fenômenos físicos</strong> são aqueles em que
+      <strong>não ocorre transformação da matéria</strong>.
+    </p>
+
+    <ul>
+      <li>Uma bola caindo</li>
+      <li>O gelo derretendo</li>
+      <li>Um carro acelerando</li>
+      <li>Um espelho refletindo a luz</li>
+    </ul>
+
+    <p>
+      Nesses casos, a substância continua sendo a mesma.
+    </p>
+  </article>
+
+  <!-- BLOCO 3 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 O que são grandezas?</h3>
+    <p>
+      Para estudar os fenômenos, a Física utiliza
+      <strong>grandezas físicas</strong>.
+    </p>
+
+    <p>
+      Uma <strong>grandeza</strong> é tudo aquilo que pode ser
+      <strong>medido</strong> ou comparado.
+    </p>
+
+    <ul>
+      <li>Tempo</li>
+      <li>Massa</li>
+      <li>Comprimento</li>
+      <li>Temperatura</li>
+      <li>Velocidade</li>
+    </ul>
+  </article>
+
+  <!-- BLOCO 4 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Medir é comparar</h3>
+    <p>
+      Medir uma grandeza significa compará-la com um
+      <strong>padrão</strong>.
+    </p>
+
+    <p>
+      Por exemplo:
+    </p>
+
+    <ul>
+      <li>Comparar um comprimento com o metro</li>
+      <li>Comparar um tempo com o segundo</li>
+      <li>Comparar uma massa com o quilograma</li>
+    </ul>
+  </article>
+
+  <!-- BLOCO 5 -->
+  <article class="bloco-conteudo">
+    <h3>🔹 Por que grandezas são importantes?</h3>
+    <p>
+      As grandezas permitem que a Física:
+    </p>
+
+    <ul>
+      <li>Descreva fenômenos</li>
+      <li>Compare situações diferentes</li>
+      <li>Faça previsões</li>
+    </ul>
+
+    <p>
+      Sem grandezas, a Física seria apenas opinião.
+    </p>
+  </article>
+
+  <!-- RESUMO -->
+  <article class="bloco-resumo">
+    <h3>🧠 Resumo do Nível</h3>
+    <ul>
+      <li>Fenômenos são acontecimentos observáveis</li>
+      <li>Fenômenos físicos não transformam a matéria</li>
+      <li>Grandezas são aquilo que pode ser medido</li>
+      <li>Medir é comparar com um padrão</li>
+    </ul>
+  </article>
+
+</section>
+
+<!-- ===============================
+     CHECKPOINT — NÍVEL 1.2
+================================ -->
+<section class="checkpoint">
+
+  <h3>✅ Checkpoint — Fenômenos e Grandezas</h3>
+
+  <!-- Q1 -->
+  <div class="questao">
+    <p><strong>1)</strong> O que é um fenômeno?</p>
+    <label><input type="radio" name="q1" value="a"> Algo que só acontece em laboratório</label>
+    <label><input type="radio" name="q1" value="b"> Um acontecimento observável</label>
+    <label><input type="radio" name="q1" value="c"> Uma fórmula matemática</label>
+  </div>
+
+  <!-- Q2 -->
+  <div class="questao">
+    <p><strong>2)</strong> Qual é um fenômeno físico?</p>
+    <label><input type="radio" name="q2" value="a"> Queima de papel</label>
+    <label><input type="radio" name="q2" value="b"> Ferrugem</label>
+    <label><input type="radio" name="q2" value="c"> Gelo derretendo</label>
+  </div>
+
+  <!-- Q3 -->
+  <div class="questao">
+    <p><strong>3)</strong> O que é uma grandeza física?</p>
+    <label><input type="radio" name="q3" value="a"> Algo que pode ser medido</label>
+    <label><input type="radio" name="q3" value="b"> Um tipo de energia</label>
+    <label><input type="radio" name="q3" value="c"> Um fenômeno químico</label>
+  </div>
+
+  <button class="btn-checkpoint" onclick="verificarCheckpointNivel12()">
+    Verificar respostas
+  </button>
+
+  <p id="resultado-checkpoint" class="resultado-checkpoint"></p>
+
+</section>
+
+<!-- BOTÃO (inicialmente bloqueado) -->
+  <button
+    class="btn-concluir"
+    disabled
+    style="opacity:0.5"
+    onclick="concluirNivel('nivel_1_2')">
+    ✅ Concluir Nível 1.2
+  </button>
+
+<div id="nivel-concluido-modal" class="modal hidden">
+
+  <div class="modal-conteudo">
+    <h3>✅ Nível concluído!</h3>
+<p class="modal-subtitulo">
+  Você avançou na trilha de Introdução à Física.
+</p>
+
+    <div class="modal-acoes">
+  <button class="btn-primario" onclick="irParaProximoNivel()">
+    ➡️ Próximo nível
+  </button>
+
+  <button class="btn-secundario" onclick="voltarParaFisica()">
+    🧭 Trilha de Física
+  </button>
+</div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="status-bar">
+    Sistema online • Progresso salvo automaticamente
+  </footer>
+
+  <!-- JS DO MÓDULO -->
+  <script type="module" src="/js/introducao-fisica.js"></script>
+
+</body>
+</html>

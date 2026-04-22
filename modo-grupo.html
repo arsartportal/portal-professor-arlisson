@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👥 Modo Grupo</title>
+
+<link rel="stylesheet" href="./css/modo-grupo.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>👥 Modo Grupo</h1>
+  <span class="badge">Firebase Ativo</span>
+</header>
+
+<main class="grid">
+
+  <!-- CONTROLES -->
+  <div class="card">
+    <h2>⚙️ Configuração</h2>
+
+    <label>Turma</label>
+    <select id="turma">
+      <option value="2anoA">2º Ano A</option>
+      <option value="1anoA">1º Ano A</option>
+    </select>
+
+    <label>Nomes dos grupos</label>
+    <input id="nomesGrupos" placeholder="Newton, Einstein, Tesla">
+
+    <button class="btn" onclick="gerarGrupos()">Gerar Grupos</button>
+    <button class="btn danger" onclick="resetarTudo()">Resetar Grupos</button>
+  </div>
+
+  <!-- GRUPOS -->
+  <div class="card">
+    <h2>👥 Grupos</h2>
+    <ul id="listaGrupos"></ul>
+  </div>
+
+  <!-- RANKING -->
+  <div class="card">
+    <h2>🏆 Ranking</h2>
+    <ul id="ranking"></ul>
+  </div>
+
+</main>
+
+<script type="module" src="./js/modo-grupo.js"></script>
+</body>
+</html>

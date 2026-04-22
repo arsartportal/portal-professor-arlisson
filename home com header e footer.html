@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal do Professor Arlisson</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/patentes.css">
+<link rel="stylesheet" href="css/contador.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/avisos.css">
+<link rel="stylesheet" href="./components/header-footer.css">
+</head>
+
+<body data-theme="light">
+
+<div id="site-header"></div>
+
+<main>
+
+<section class="welcome-user">
+<h2>Bem-vindo, <span id="nome-usuario">Aluno</span> 👋</h2>
+</section>
+
+<!-- ================================================= -->
+<!-- DASHBOARD SUPERIOR -->
+<!-- ================================================= -->
+<!-- 🎯 CARD DESAFIOS DINÂMICO -->
+ <!-- 🎯 CARD DESAFIOS DINÂMICO -->
+<section>
+
+  <div id="cardDesafiosHome" class="card card-desafio-home full">
+
+    <!-- ✨ fundo animado -->
+    <div class="desafio-bg"></div>
+
+    <div class="desafio-header-home">
+      <h2>🎯 Desafios →</h2>
+      <span id="statusDesafiosHome">Carregando...</span>
+    </div>
+
+    <div class="desafio-body-home">
+
+      <div class="desafio-info-bloco">
+        <span>🔥 Streak</span>
+        <strong id="streakHome">0 dias</strong>
+      </div>
+
+      <div class="desafio-info-bloco">
+        <span>🏆 Recompensa hoje</span>
+        <strong id="xpDesafioHome">+0 XP</strong>
+      </div>
+
+      <div class="desafio-info-bloco">
+        <span>📊 Missão semanal</span>
+        <strong id="progressoSemanalHome">0/5</strong>  
+      </div>
+
+      <div class="barra-mini">
+        <div id="barraMiniFill"></div>
+      </div>
+
+      <div class="desafio-info-bloco">
+        <span>🎁 Recompensa diária</span>
+        <strong id="rewardStatusHome">Carregando...</strong>
+      </div>
+
+    </div>
+
+    <button id="btnIrDesafio">
+      🚀 Resolver desafio agora
+    </button>
+
+  </div>
+
+</section>
+</div>
+<!-- ================================================= -->
+<!-- AVISOS (PREVIEW) -->
+<!-- ================================================= -->
+
+<section>
+  
+  <div class="avisos-home">
+
+    <div class="avisos-header">
+      <h2>📢 Avisos</h2>
+      <span id="badgeAvisos" class="badge-avisos">0</span>
+    </div>
+
+    <div id="previewAvisos" class="lista-premium"></div>
+
+    <div class="avisos-home-footer">
+      <a href="avisos.html">
+  Ver todos <span>→</span>
+</a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- 🎯 GRID DE BANNERS -->
+<!-- ================================================= -->
+<section class="banners-grid">
+
+  <!-- 🛍️ LOJA -->
+  <div class="banner-loja">
+    <div class="particles">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1>Central de Recompensas</h1>
+        <p>Troque seus <strong>SciencePoints</strong> por itens exclusivos</p>
+        <a href="loja.html" class="btn-loja">Acessar</a>
+      </div>
+
+      <div class="banner-icon">🛒</div>
+    </div>
+  </div>
+
+  <!-- 🎒 INVENTÁRIO -->
+  <div class="banner-inventario">
+
+    <span class="badge-novo">NOVO</span>
+
+    <div class="particles">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1>Inventário</h1>
+        <p>Gerencie seus itens e tenha acesso ao ScienceBank.</p>
+        <a href="/inventario/inventario.html" class="btn-loja">Acessar</a>
+      </div>
+
+      <div class="banner-icon">🎁</div>
+    </div>
+
+  </div>
+
+  <!-- ❓ FAQ -->
+  <div class="banner-faq">
+
+    <span class="badge-novo">NOVO</span>
+
+    <div class="particles">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1>Dúvidas Frequentes</h1>
+        <p>Encontre respostas rápidas sobre o Portal</p>
+        <a href="./faq/faq.html" class="btn-loja">Acessar</a>
+      </div>
+
+      <div class="banner-icon">❓</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- 🎯 GRID DE DISCIPLINAS -->
+<!-- ================================================= -->
+<section class="disciplinas-grid">
+
+  <!-- ⚡ FÍSICA -->
+  <div class="banner-fisica">
+
+    <div class="fisica-bg">
+      <span>F = ma</span>
+      <span>E = mc²</span>
+      <span>v = Δs/Δt</span>
+      <span>Q = mcΔT</span>
+      <span>W = Fd</span>
+      <span>a = Δv/Δt</span>
+      <span>p = mv</span>
+      <span>V = RI</span>
+    </div>
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1> Física</h1>
+        <p>Explore conceitos, leis e fenômenos da natureza</p>
+        <a href="fisica.html" class="btn-fisica">Acessar</a>
+      </div>
+
+      <div class="banner-icon">⚡</div>
+    </div>
+
+  </div>
+
+  <!-- ⚛️ QUÍMICA -->
+  <div class="banner-quimica">
+
+    <div class="atomos-bg">
+      <span>H₂O</span>
+      <span>CO₂</span>
+      <span>NaCl</span>
+      <span>O₂</span>
+      <span>CH₄</span>
+      <span>NH₃</span>
+      <span>Fe</span>
+      <span>Cl₂</span>
+      <span>pH</span>
+      <span>H₂SO₄</span>
+    </div>
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1> Química</h1>
+        <p>Descubra reações, substâncias e a matéria</p>
+        <a href="quimica.html" class="btn-quimica">Acessar</a>
+      </div>
+
+      <div class="banner-icon">🧪</div>
+    </div>
+
+  </div>
+
+  <!-- 📐 MATEMÁTICA -->
+  <div class="banner-matematica">
+
+    <div class="math-bg">
+      <span>π</span>
+      <span>√16</span>
+      <span>2x+5</span>
+      <span>9²</span>
+      <span>log</span>
+      <span>Δ</span>
+      <span>1/2</span>
+      <span>x²</span>
+      <span>∑</span>
+      <span>∞</span>
+    </div>
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1> Matemática</h1>
+        <p>Domine cálculos, lógica e resolução de problemas</p>
+        <a href="matematica.html" class="btn-math">Acessar</a>
+      </div>
+
+      <div class="banner-icon">📐</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- Biblioteca -->
+<section class="banner-biblioteca">
+
+  <span class="badge-biblioteca">CONTEÚDO</span>
+
+  <!-- 📚 fundo com palavras -->
+  <div class="biblioteca-bg">
+    <span>Fórmulas</span>
+    <span>Leis</span>
+    <span>Conceitos</span>
+    <span>Teoria</span>
+    <span>Exercícios</span>
+    <span>Resumo</span>
+    <span>Aprender</span>
+    <span>Conhecimento</span>
+    <span>Ciência</span>
+    <span>Educação</span>
+  </div>
+
+  <div class="banner-content">
+
+    <div class="banner-text">
+      <h1>📚 Biblioteca</h1>
+      <p>Acesse conteúdos, resumos e materiais para estudar</p>
+
+      <a href="biblioteca.html" class="btn-biblioteca">Acessar</a>
+    </div>
+
+    <div class="banner-icon">📖</div>
+
+  </div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- 📂 BANNER MATERIAIS DA AULA -->
+<!-- ================================================= -->
+<section class="banner-biblioteca banner-materiais">
+
+  <span class="badge-biblioteca">MATERIAIS</span>
+
+  <!-- mesmo fundo -->
+  <div class="biblioteca-bg">
+    <span>PDF</span>
+    <span>Lista</span>
+    <span>Exercícios</span>
+    <span>Aula</span>
+    <span>Conteúdo</span>
+    <span>Revisão</span>
+    <span>Questões</span>
+    <span>Teoria</span>
+    <span>Prática</span>
+    <span>Download</span>
+  </div>
+
+  <div class="banner-content">
+    <div class="banner-text">
+      <h1>📂 Materiais da Aula</h1>
+      <p>Acesse conteúdos, listas e PDFs utilizados em sala</p>
+
+      <a href="materiais/materiais.html" class="btn-biblioteca">
+        Acessar
+      </a>
+    </div>
+
+    <div class="banner-icon">📄</div>
+  </div>
+
+</section>
+
+<section class="banner-breve">
+
+  <span class="badge-breve">EM BREVE</span>
+
+  <!-- efeito diagonal -->
+  <div class="stripes"></div>
+
+  <div class="banner-content">
+
+    <div class="banner-text">
+      <h1>🚧 Em desenvolvimento</h1>
+      <p>Novas funcionalidades estão sendo preparadas para você</p>
+    </div>
+
+    <div class="banner-icon">🔒</div>
+
+  </div>
+
+</section>
+
+<section class="banner-professor">
+
+  <!-- 👑 badge -->
+  <span class="badge-professor">ADMIN</span>
+
+  <!-- ✨ partículas douradas -->
+  <div class="prof-bg"></div>
+
+  <div class="banner-content">
+
+    <div class="banner-text">
+      <h1>👨‍🏫 Área do Professor</h1>
+      <p>Gerencie turmas, acompanhe alunos e controle o sistema</p>
+
+      <a href="./professor/professor.html" class="btn-professor">
+        ⚙️ Acessar Painel
+      </a>
+    </div>
+
+    <div class="banner-icon">🎓</div>
+
+  </div>
+
+</section>
+<!-- ESCONDENDO TUDO
+
+
+<section class="cards-wrapper">
+
+<div class="cards">
+
+
+
+<a href="/em-construcao.html" class="card card-breve">
+🏆 Ranking
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🎤 TED-Ed & TED Talks
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+📰 Notícias
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🧪 Laboratório Virtual
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🎒 Inventário
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+
+<a href="/em-construcao.html" class="card card-breve">
+🏅 Minhas Conquistas
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🎯 Central de Dúvidas
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+📚 Glossário
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🔒 Gabaritos
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🎬 Filmes
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+📝 Listas de Exercícios
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+👥 Modo Grupo
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<a href="/em-construcao.html" class="card card-breve">
+🎓 Professor por um Dia
+<span class="ribbon-pro">EM BREVE</span>
+</a>
+
+<div id="painelEventos" style="
+display:none;
+position:fixed;
+bottom:20px;
+left:20px;
+background:#0f172a;
+padding:15px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+z-index:999;
+min-width:240px;
+">
+
+<h4 style="color:white; margin-bottom:12px;">⚙️ Painel Admin</h4>
+
+<div class="evento-item" >
+  <span>🔥 XP Dobro</span>
+  <button id="xp_dobro" class="toggle-btn off">OFF</button>
+</div>
+
+<div class="evento-item">
+  <span>🎁 Loja</span>
+  <button id="loja_liberada" class="toggle-btn off">OFF</button>
+</div>
+
+<div class="evento-item">
+  <span>🏆 Ranking</span>
+  <button id="ranking_ativo" class="toggle-btn off">OFF</button>
+</div>
+
+<div class="evento-item">
+  <span>⚡ Desafio</span>
+  <button id="desafio_relampago" class="toggle-btn off">OFF</button>
+</div>
+
+</div>
+
+</div>
+-->
+<!-- ================================================= -->
+<!-- CONTADOR DE VISITAS -->
+<!-- ================================================= -->
+
+<div class="contador-visitas">
+  <div class="contador-card">
+
+    <div class="contador-header">
+      <span class="icone-olho">👁️</span>
+      <span class="contador-titulo">Estatísticas do Portal</span>
+    </div>
+
+    <div class="contador-grid">
+
+      <!-- HOJE -->
+      <div class="contador-bloco">
+        <span id="visitasHoje" class="contador-numero">000</span>
+        <span class="contador-label">Hoje</span>
+      </div>
+
+      <div class="contador-divisor"></div>
+
+      <!-- MÊS -->
+      <div class="contador-bloco">
+        <span id="visitasMes" class="contador-numero">0000</span>
+        <span class="contador-label">Mês</span>
+      </div>
+
+      <div class="contador-divisor"></div>
+
+      <!-- TOTAL -->
+      <div class="contador-bloco">
+        <span id="contadorVisitas" class="contador-numero">000000</span>
+        <span class="contador-label">Total</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+function sair(){
+localStorage.clear();
+window.location.href = "index.html";
+}
+</script>
+
+<div id="patente-overlay" class="hidden">
+<div class="patente-card">
+
+<h2>🎉 Nova Patente!</h2>
+
+<div class="patentes-container">
+<img id="patente-antiga" class="patente antiga" alt="Patente antiga"/>
+<img id="patente-nova" class="patente nova" alt="Nova patente"/>
+</div>
+
+<button onclick="fecharPatente()">Continuar</button>
+
+</div>
+</div>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/auth-guard.js"></script>
+<script type="module" src="js/perfil.js"></script>
+<script type="module" src="js/hud.js"></script>
+<script src="js/tema.js"></script>
+<script type="module" src="js/home.js"></script>
+<script src="js/gamificacao.js"></script>
+<script type="module" src="js/visitas.js"></script>
+<script type="module" src="js/avisos.js"></script>
+
+<script type="module">
+import { iniciarContador } from "./js/contador.js";
+
+// contador grande (seção lançamento)
+iniciarContador("contadorDuvidas", "2026-04-15T13:30:00", "completo");
+
+// contador pequeno abaixo da loja
+iniciarContador("contador", "2026-04-01T13:30:00", "inline");
+
+</script>
+
+<script>
+fetch("/components/header-footer.html")
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    // HEADER
+    const header = doc.querySelector("header");
+    const siteHeader = document.getElementById("site-header");
+
+    if (header && siteHeader) {
+      siteHeader.appendChild(header);
+    }
+
+    // FOOTER
+    const footer = doc.querySelector("footer");
+    const siteFooter = document.getElementById("site-footer");
+
+    if (footer && siteFooter) {
+      siteFooter.appendChild(footer);
+    }
+
+    // MENU MOBILE
+    const menuBtn = document.getElementById("menuMobileBtn");
+    const menu = document.getElementById("menuPrincipal");
+
+    menuBtn?.addEventListener("click", () => {
+      menu.classList.toggle("ativo");
+
+      const aberto = menu.classList.contains("ativo");
+      menuBtn.setAttribute("aria-expanded", aberto);
+    });
+  });
+
+function sair() {
+  localStorage.clear();
+  window.location.href = "/index.html";
+}
+</script>
+
+
+</body>
+</html>
