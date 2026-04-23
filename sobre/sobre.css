@@ -1,6 +1,10 @@
+/* ===================================================== */
+/* BASE GLOBAL                                            */
+/* ===================================================== */
+
 body {
-  background: #0b0f14;
-  color: #fff;
+  background: linear-gradient(180deg, #020617 0%, #0b1120 100%);
+  color: #e2e8f0;
   font-family: Arial, sans-serif;
 }
 
@@ -10,7 +14,10 @@ body {
   padding: 40px 20px;
 }
 
-/* HERO */
+/* ===================================================== */
+/* HERO                                                   */
+/* ===================================================== */
+
 .hero {
   text-align: center;
   margin-bottom: 60px;
@@ -19,14 +26,19 @@ body {
 .hero h1 {
   font-size: 2.8rem;
   margin-bottom: 15px;
+  font-weight: 800;
+  letter-spacing: -1px;
 }
 
 .hero p {
-  color: #aaa;
+  color: #94a3b8;
   font-size: 1.2rem;
 }
 
-/* MÉTRICAS */
+/* ===================================================== */
+/* MÉTRICAS                                               */
+/* ===================================================== */
+
 .metricas {
   display: flex;
   justify-content: space-between;
@@ -34,25 +46,57 @@ body {
   margin-bottom: 50px;
 }
 
+/* CARD BASE */
 .card {
   flex: 1;
   background: #111827;
   padding: 25px;
   border-radius: 14px;
   text-align: center;
-  transition: 0.3s;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* HOVER */
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
+/* NÚMERO */
 .card h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #00d4ff;
+  margin-bottom: 6px;
 }
 
-/* BLOCOS */
+/* TEXTO */
+.card span {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* ===================================================== */
+/* CARD ESPECIAL — MÉDIA DE NÍVEL                         */
+/* ===================================================== */
+
+.card.media {
+  background: linear-gradient(135deg, #0f172a, #022c22);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.card.media h2 {
+  color: #22c55e;
+}
+
+.card.media span {
+  color: #a7f3d0;
+}
+
+/* ===================================================== */
+/* BLOCOS                                                 */
+/* ===================================================== */
+
 .bloco {
   margin-bottom: 40px;
 }
@@ -63,18 +107,24 @@ body {
 }
 
 .bloco p {
-  color: #ccc;
+  color: #cbd5f5;
   line-height: 1.6;
 }
 
-/* DESTAQUE */
+/* ===================================================== */
+/* DESTAQUE                                               */
+/* ===================================================== */
+
 .destaque {
   background: rgba(0, 212, 255, 0.08);
   padding: 25px;
   border-radius: 12px;
 }
 
-/* FEATURES */
+/* ===================================================== */
+/* FEATURES                                               */
+/* ===================================================== */
+
 .features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -86,9 +136,27 @@ body {
   background: #111827;
   padding: 20px;
   border-radius: 12px;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* CTA */
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.feature h3 {
+  margin-bottom: 8px;
+}
+
+.feature p {
+  color: #94a3b8;
+}
+
+/* ===================================================== */
+/* CTA                                                    */
+/* ===================================================== */
+
 .cta {
   text-align: center;
   margin-top: 50px;
@@ -98,15 +166,28 @@ body {
   display: inline-block;
   margin-top: 15px;
   padding: 12px 25px;
+
   background: #00d4ff;
   color: #000;
+
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
+
+  transition: 0.2s ease;
 }
 
-/* RESPONSIVO */
+.btn-cta:hover {
+  background: #38bdf8;
+  transform: scale(1.05);
+}
+
+/* ===================================================== */
+/* RESPONSIVO                                             */
+/* ===================================================== */
+
 @media (max-width: 768px) {
+
   .metricas {
     flex-direction: column;
   }
@@ -114,4 +195,13 @@ body {
   .features {
     grid-template-columns: 1fr;
   }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
 }

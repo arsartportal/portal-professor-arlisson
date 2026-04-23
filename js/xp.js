@@ -9,9 +9,7 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-import {
-  getAuth
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 import { app, db } from "./firebase.js";
 import { mostrarAnimacaoMudancaPatente } from "./patentes.js";
@@ -19,7 +17,7 @@ import { mostrarAnimacaoMudancaPatente } from "./patentes.js";
 const auth = getAuth(app);
 
 /* =====================================================
-   CONFIGURAÇÃO DE NÍVEL
+   CONFIGURAÇÃO DE NÍVEL (MANTIDA COMO VOCÊ QUER)
 ===================================================== */
 
 export function limiteXP(nivel) {
@@ -37,7 +35,11 @@ export async function validarNivelUsuario(uid) {
 
   if (!snap.exists()) return null;
 
-  let { xp = 0, nivel = 0 } = snap.data();
+  let { xp = 0, nivel = 0, xpTotal = 0 } = snap.data();
+
+  xp = Number(xp) || 0;
+  nivel = Number(nivel) || 0;
+  xpTotal = Number(xpTotal) || 0;
 
   let limite = limiteXP(nivel);
   let subiuNivel = false;
@@ -50,14 +52,22 @@ export async function validarNivelUsuario(uid) {
     subiuNivel = true;
   }
 
+  if (xp < 0) xp = 0;
+  if (xpTotal < 0) xpTotal = 0;
+
   if (subiuNivel) {
-    await updateDoc(ref, { xp, nivel });
+    await updateDoc(ref, { 
+      xp, 
+      nivel,
+      xpTotal,
+      xpNecessario: limite
+    });
 
     console.log("🔄 Nível corrigido automaticamente:", nivelOriginal, "→", nivel);
     mostrarAnimacaoMudancaPatente(nivelOriginal, nivel);
   }
 
-  return { xp, nivel };
+  return { xp, nivel, xpTotal, limite };
 }
 
 /* =====================================================
@@ -69,11 +79,17 @@ async function processarXP(uid, ganhoXP) {
   const ref = doc(db, "usuarios", uid);
   const snap = await getDoc(ref);
 
+  ganhoXP = Number(ganhoXP) || 0;
+
+  if (ganhoXP <= 0) return null;
+
+  /* ================= PRIMEIRO ACESSO ================= */
+
   if (!snap.exists()) {
 
-    let xp = Number(ganhoXP);
-    if(isNaN(xp)) xp = 0;
-    
+    let xp = ganhoXP;
+    let xpTotal = ganhoXP;
+
     let nivel = 0;
     let limite = limiteXP(nivel);
 
@@ -83,34 +99,34 @@ async function processarXP(uid, ganhoXP) {
       limite = limiteXP(nivel);
     }
 
-  await setDoc(ref, {
-  xp,
-  nivel,
+    await setDoc(ref, {
+      xp,
+      nivel,
+      xpTotal,
+      xpNecessario: limite,
+      criadoEm: new Date()
+    });
 
-  // 🆕 XP TOTAL (primeira vez = tudo que ele ganhou)
-  xpTotal: ganhoXP,
-
-  criadoEm: new Date()
-});
-
-    return { xp, nivel, limite, subiuNivel: nivel > 0, nivelOriginal: 0 };
+    return {
+      xp,
+      nivel,
+      xpTotal,
+      limite,
+      subiuNivel: nivel > 0,
+      nivelOriginal: 0
+    };
   }
+
+  /* ================= USUÁRIO EXISTENTE ================= */
 
   let { xp = 0, nivel = 0, xpTotal = 0 } = snap.data();
 
-  // 🔥 primeiro converte
-xp = Number(xp);
-ganhoXP = Number(ganhoXP);
+  xp = Number(xp) || 0;
+  nivel = Number(nivel) || 0;
+  xpTotal = Number(xpTotal) || 0;
 
-if(isNaN(xp)) xp = 0;
-if(isNaN(ganhoXP)) ganhoXP = 0;
-
-// ✅ AGORA soma (uma vez só)
-xp += ganhoXP;
-xpTotal += ganhoXP;
-
-  if(isNaN(xp)) xp = 0;
-  if(isNaN(ganhoXP)) ganhoXP = 0;
+  xp += ganhoXP;
+  xpTotal += ganhoXP;
 
   let limite = limiteXP(nivel);
   let subiuNivel = false;
@@ -123,17 +139,17 @@ xpTotal += ganhoXP;
     subiuNivel = true;
   }
 
+  if (xp < 0) xp = 0;
+  if (xpTotal < 0) xpTotal = 0;
+
   await updateDoc(ref, { 
+    xp,
+    nivel,
+    xpTotal,
+    xpNecessario: limite
+  });
 
-  xp,
-  nivel,
-
-  // 🆕 salva o XP total
-  xpTotal
-
-});
-
-  return { xp, nivel, limite, subiuNivel, nivelOriginal };
+  return { xp, nivel, xpTotal, limite, subiuNivel, nivelOriginal };
 }
 
 /* =====================================================
@@ -152,6 +168,8 @@ export async function adicionarXPImediato(valor, motivo = "") {
   try {
 
     const resultado = await processarXP(user.uid, valor);
+
+    if (!resultado) return null;
 
     console.log(
       `[XP] +${valor} XP`,
@@ -186,13 +204,11 @@ export async function adicionarXPManualProfessor(uid, valor) {
 
     const resultado = await processarXP(uid, valor);
 
+    if (!resultado) throw new Error("Falha ao adicionar XP");
+
     console.log(`🎓 Professor adicionou ${valor} XP`, resultado);
 
-    if (!resultado) {
-  throw new Error("Falha ao adicionar XP");
-}
-
-return resultado;
+    return resultado;
 
   } catch (e) {
     console.error("Erro ao adicionar XP manual:", e);
@@ -200,24 +216,20 @@ return resultado;
   }
 }
 
+/* =====================================================
+   QUIZ (XP POR MELHORIA)
+===================================================== */
+
 export async function registrarAtividadeQuiz(atividadeId, acertos, totalQuestoes) {
 
   const user = auth.currentUser;
+  if (!user) return null;
 
-  if (!user) {
-    console.warn("Usuário não logado.");
-    return null;
-  }
-
-  const uid = user.uid;
-
-  const ref = doc(db, "usuarios", uid);
+  const ref = doc(db, "usuarios", user.uid);
   const snap = await getDoc(ref);
-
   if (!snap.exists()) return null;
 
   const dados = snap.data();
-
   let atividades = dados.atividades || {};
 
   const atividade = atividades[atividadeId] || {
@@ -230,9 +242,7 @@ export async function registrarAtividadeQuiz(atividadeId, acertos, totalQuestoes
   let xpGanho = 0;
 
   if (acertos > atividade.melhor) {
-
     xpGanho = (acertos - atividade.melhor) * 10;
-
     atividade.melhor = acertos;
   }
 
@@ -244,10 +254,7 @@ export async function registrarAtividadeQuiz(atividadeId, acertos, totalQuestoes
   await updateDoc(ref, { atividades });
 
   if (xpGanho > 0) {
-    await adicionarXPImediato(
-      xpGanho,
-      `Quiz: ${atividadeId}`
-    );
+    await adicionarXPImediato(xpGanho, `Quiz: ${atividadeId}`);
   }
 
   return {
@@ -258,41 +265,25 @@ export async function registrarAtividadeQuiz(atividadeId, acertos, totalQuestoes
 }
 
 /* =====================================================
-   DEV TOOL
-===================================================== */
-
-window.addXP = async (valor = 1000) => {
-  return await adicionarXPImediato(valor, "Teste via console");
-};
-
-/* =====================================================
-   QUIZ COM CONTROLE DE TENTATIVAS (FIRESTORE)
+   QUIZ COM LIMITE DE TENTATIVAS
 ===================================================== */
 
 export async function registrarTentativaQuiz(atividadeId, acertos, totalQuestoes){
 
   const user = auth.currentUser;
-
-  if(!user){
-    console.warn("Usuário não logado");
-    return null;
-  }
+  if(!user) return null;
 
   const ref = doc(db,"usuarios",user.uid);
   const snap = await getDoc(ref);
-
   if(!snap.exists()) return null;
 
   const dados = snap.data();
-
   let atividades = dados.atividades || {};
 
   let atividade = atividades[atividadeId] || {
     tentativas: [],
     melhor: 0
   };
-
-  /* limitar tentativas */
 
   if(atividade.tentativas.length >= 3){
     return {
@@ -307,9 +298,7 @@ export async function registrarTentativaQuiz(atividadeId, acertos, totalQuestoes
   let xpGanho = 0;
 
   if(acertos > atividade.melhor){
-
     xpGanho = (acertos - atividade.melhor) * 10;
-
     atividade.melhor = acertos;
 
     await adicionarXPImediato(
@@ -331,5 +320,12 @@ export async function registrarTentativaQuiz(atividadeId, acertos, totalQuestoes
     tentativas:atividade.tentativas,
     melhor:atividade.melhor
   };
-
 }
+
+/* =====================================================
+   DEV TOOL
+===================================================== */
+
+window.addXP = async (valor = 1000) => {
+  return await adicionarXPImediato(valor, "Teste via console");
+};
