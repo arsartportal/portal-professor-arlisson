@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sobre • Portal do Professor Arlisson</title>
+
+  <!-- CSS CORRETO -->
+  <link rel="stylesheet" href="sobre.css">
+  <link rel="stylesheet" href="/components/header-footer.css">
+</head>
+
+<body data-header="simples">
+
+<!-- HEADER -->
+<div id="header-container"></div>
+
+<main class="sobre">
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Educação que evolui com você</h1>
+    <p>
+      Um portal gamificado que transforma estudo em progresso real,
+      com tecnologia, desafios e acompanhamento individual.
+    </p>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section class="metricas">
+    <div class="card">
+      <h2 id="contador-alunos">0</h2>
+      <span>Alunos ativos</span>
+    </div>
+
+    <div class="card">
+      <h2 id="contador-xp">0</h2>
+      <span>XP gerado</span>
+    </div>
+
+    <div class="card">
+      <h2>2026</h2>
+      <span>Em evolução constante</span>
+    </div>
+  </section>
+
+  <!-- MISSÃO -->
+  <section class="bloco destaque">
+    <h2>🎯 Missão</h2>
+    <p>
+      Transformar o aprendizado em uma experiência envolvente,
+      onde o aluno participa ativamente do próprio desenvolvimento.
+    </p>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+
+    <div class="feature">
+      <h3>🎮 Gamificação real</h3>
+      <p>XP, níveis, ranking e recompensas para manter o aluno engajado.</p>
+    </div>
+
+    <div class="feature">
+      <h3>📚 Conteúdo estruturado</h3>
+      <p>Materiais organizados por série, com foco em clareza e progressão.</p>
+    </div>
+
+    <div class="feature">
+      <h3>📊 Acompanhamento</h3>
+      <p>Controle de desempenho e evolução individual dos alunos.</p>
+    </div>
+
+    <div class="feature">
+      <h3>⚡ Plataforma dinâmica</h3>
+      <p>Interface moderna, rápida e pensada para facilitar o aprendizado.</p>
+    </div>
+
+  </section>
+
+  <!-- PROFESSOR -->
+  <section class="bloco">
+    <h2>👨‍🏫 Sobre o professor</h2>
+    <p>
+      Professor de Física e Matemática com atuação no Ensino Médio e EJA,
+      focado em tecnologia educacional, gamificação e metodologias ativas.
+    </p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Pronto para evoluir?</h2>
+    <a href="/index.html" class="btn-cta">Começar agora</a>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer-container"></div>
+
+<script>
+  async function carregarComponente(id, arquivo) {
+  const resp = await fetch(arquivo);
+  const html = await resp.text();
+  document.getElementById(id).innerHTML = html;
+
+  // 🔥 AQUI É O SEGREDO
+  if (id === "header-container") {
+    controlarHUD();
+  }
+}
+
+function controlarHUD() {
+  const tipo = document.body.dataset.header;
+  const hud = document.getElementById("miniHud");
+  const usuarioLogado = localStorage.getItem("usuario");
+
+  if (tipo === "simples" || !usuarioLogado) {
+    hud?.remove();
+  }
+}
+
+  // ✅ AGORA CORRETO (SEPARADO)
+  carregarComponente("header-container", "/components/superheader.html");
+  carregarComponente("footer-container", "/components/superfooter.html");
+
+  // MÉTRICAS ANIMADAS
+  function animarContador(id, valorFinal) {
+    let atual = 0;
+    const el = document.getElementById(id);
+    const incremento = valorFinal / 50;
+
+    const intervalo = setInterval(() => {
+      atual += incremento;
+      if (atual >= valorFinal) {
+        el.innerText = valorFinal;
+        clearInterval(intervalo);
+      } else {
+        el.innerText = Math.floor(atual);
+      }
+    }, 30);
+  }
+
+  animarContador("contador-alunos", 120);
+  animarContador("contador-xp", 50000);
+</script>
+
+</body>
+</html>

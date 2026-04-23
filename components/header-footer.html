@@ -1,10 +1,11 @@
 <!-- ===================================================== -->
 <!-- HEADER PADRÃO DO PORTAL DO PROFESSOR ARLISSON         -->
+<!-- (COM CONTROLE DE HUD AUTOMÁTICO)                      -->
 <!-- ===================================================== -->
 <header class="header">
 
   <!-- HUD / XP -->
-  <div class="mini-hud">
+  <div class="mini-hud" id="miniHud">
     <img id="patente-img" class="mini-patente" src="" alt="Patente do usuário">
 
     <div class="mini-xp">
@@ -97,6 +98,27 @@
     window.location.href = "/index.html";
   }
 
+  // ==========================================
+  // CONTROLE INTELIGENTE DO HEADER
+  // ==========================================
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const tipo = document.body.dataset.header; // "simples" ou "completo"
+    const hud = document.getElementById("miniHud");
+
+    // Simulação de login (ajusta depois com Firebase)
+    const usuarioLogado = localStorage.getItem("usuario");
+
+    // REGRA:
+    // - Página simples => remove HUD
+    // - Sem usuário logado => remove HUD
+    if (tipo === "simples" || !usuarioLogado) {
+      hud?.remove();
+    }
+
+  });
+
+  // MENU MOBILE (mantido)
   const menuBtn = document.getElementById("menuMobileBtn");
   const menu = document.getElementById("menuPrincipal");
 

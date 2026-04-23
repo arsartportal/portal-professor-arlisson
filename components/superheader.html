@@ -1,0 +1,53 @@
+<!-- ===================================================== -->
+<!-- HEADER PADRÃO DO PORTAL DO PROFESSOR ARLISSON         -->
+<!-- ===================================================== -->
+<header class="header">
+
+  <!-- HUD / XP -->
+  <div class="mini-hud" id="miniHud">
+    <img id="patente-img" class="mini-patente" src="" alt="Patente do usuário">
+
+    <div class="mini-xp">
+      <div id="xp-preenchimento"></div>
+    </div>
+
+    <div class="mini-detalhes">
+      <img id="patente-img-detalhe" class="patente-grande" src="" alt="Patente detalhada">
+
+      <div class="info-texto">
+        <strong>Nível <span id="nivel-usuario">0</span></strong>
+        <span id="xp-texto">XP 0 / 100</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Título -->
+  <div class="header-centro">
+    <a href="/index.html" class="portal-title">
+      <span class="portal-brand">Portal</span>
+      <span class="portal-name">Professor Arlisson</span>
+    </a>
+
+    <p class="hero-subtitle animated-lines">
+      Materiais de Física, Química e Matemática • Ensino Médio e EJA (2026)
+    </p>
+  </div>
+
+  <!-- Botões -->
+  <div class="header-direita">
+    <div class="header-botoes">
+      <button id="toggle-tema" title="Alternar tema">🌙</button>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+</header>
+
+<script>
+  function sair() {
+    localStorage.clear();
+    window.location.href = "/index.html";
+  }
+
+
+</script>

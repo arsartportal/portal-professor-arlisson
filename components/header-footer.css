@@ -352,3 +352,39 @@
     margin-right: auto;
   }
 }
+
+.header-simples {
+  position: relative;
+}
+
+.header-simples .header-centro {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===================================================== */
+/* HEADER SEM HUD (AUTO AJUSTE)                          */
+/* ===================================================== */
+
+/* Quando NÃO tiver HUD */
+.header:not(:has(.mini-hud)) {
+  grid-template-columns: 1fr auto;
+}
+
+/* Centralização premium do título */
+.header:not(:has(.mini-hud)) .header-centro {
+  grid-column: 1 / -1;
+  justify-self: center;
+  text-align: center;
+}
+
+/* Garante que os botões continuem à direita */
+.header:not(:has(.mini-hud)) .header-direita {
+  position: absolute;
+  right: 28px;
+}
+
+.header:not(:has(.mini-hud)) .portal-name {
+  font-size: 3.2rem;
+}
