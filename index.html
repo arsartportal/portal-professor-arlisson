@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
 
-  <!-- RESPONSIVIDADE -->
+  <!-- ===================================================== -->
+  <!-- META                                                   -->
+  <!-- ===================================================== -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
@@ -11,22 +13,31 @@
 
   <title>Portal do Professor Arlisson • Acesso</title>
 
-  <!-- FONTE PREMIUM (estilo Apple) -->
+  <!-- ===================================================== -->
+  <!-- FONT                                                   -->
+  <!-- ===================================================== -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- ESTILO -->
+  <!-- ===================================================== -->
+  <!-- CSS                                                    -->
+  <!-- ===================================================== -->
   <link rel="stylesheet" href="css/index.css">
+
 </head>
 
 <body class="login-body">
 
-  <!-- 🌫️ FUNDO ANIMADO -->
+  <!-- ===================================================== -->
+  <!-- FUNDO ANIMADO                                         -->
+  <!-- ===================================================== -->
   <canvas id="particles"></canvas>
 
-  <!-- 🌑 OVERLAY (efeito glass + profundidade) -->
+  <!-- OVERLAY -->
   <div class="bg-overlay"></div>
 
-  <!-- 📦 CONTAINER PRINCIPAL -->
+  <!-- ===================================================== -->
+  <!-- CONTAINER PRINCIPAL                                   -->
+  <!-- ===================================================== -->
   <main class="login-wrapper">
 
     <!-- =========================
@@ -64,7 +75,9 @@
           Utilize o usuário e senha fornecidos em sala.
         </p>
 
-        <!-- FORMULÁRIO -->
+        <!-- ===================================================== -->
+        <!-- FORMULÁRIO DE LOGIN                                   -->
+        <!-- ===================================================== -->
         <form
           class="login-form"
           id="formLogin"
@@ -95,26 +108,46 @@
             required
           >
 
+          <!-- ===================================================== -->
+          <!-- ACEITE LGPD (OBRIGATÓRIO)                             -->
+          <!-- ===================================================== -->
+          <div class="termos">
+            <label>
+  <input type="checkbox" id="aceite-termos">
+  <span>
+    Li e aceito os 
+    <a href="termos-de-uso/termos-de-uso.html" target="_blank">Termos de Uso</a> 
+    e a 
+    <a href="politica-de-privacidade/politica-de-privacidade.html" target="_blank">Política de Privacidade</a>
+  </span>
+</label>
+          </div>
+
           <!-- BOTÃO -->
           <button type="submit" id="btnLogin">
             <span>Entrar no Portal</span>
           </button>
 
-                    <!-- ERRO -->
+          <!-- ERRO -->
           <p id="erro" role="alert" aria-live="assertive"></p>
 
         </form>
 
-        <!-- LINKS SECUNDÁRIOS -->
+        <!-- ===================================================== -->
+        <!-- LINKS SECUNDÁRIOS                                     -->
+        <!-- ===================================================== -->
         <div class="login-links">
-  <a href="sobre/sobre.html">Sobre</a>
-  <span class="separator">•</span>
+          <a href="sobre/sobre.html">Sobre</a>
+          <span class="separator">•</span>
 
-  <a href="./contato.html">Contato</a>
-  <span class="separator">•</span>
+          <a href="contato/contato.html">Contato</a>
+          <span class="separator">•</span>
 
-  <a href="./privacidade.html">Política de Privacidade</a>
-</div>
+          <a href="politica/politica-de-privacidade.html">Política</a>
+          <span class="separator">•</span>
+
+          <a href="termos-de-uso/termos-de-uso.html">Termos</a>
+        </div>
 
         <!-- RODAPÉ -->
         <p class="login-footer">
@@ -127,10 +160,11 @@
 
   </main>
 
-  <!-- JS -->
+  <!-- ===================================================== -->
+  <!-- JS                                                     -->
+  <!-- ===================================================== -->
   <script type="module" src="./js/index.js"></script>
   <script src="./js/particles.js"></script>
 
-  
 </body>
 </html>

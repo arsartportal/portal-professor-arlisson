@@ -603,14 +603,21 @@ if(snapUser.exists()){
       maiorStreak = streakAtual;
     }
 
-    transaction.update(ref,{
-      streakAtual,
-      maiorStreak,
-      ultimoQuizDiario: {
-        data: hoje,
-        resultado
-      }
-    });
+transaction.update(ref, {
+  streakAtual,
+  maiorStreak,
+
+  // 🎯 DESAFIOS
+  totalDesafiosConcluidos: increment(1),
+
+  // 🔬 SP GERADO (histórico)
+  totalSPGerados: increment(sp),
+
+  ultimoQuizDiario: {
+    data: hoje,
+    resultado
+  }
+});
 
   });
 

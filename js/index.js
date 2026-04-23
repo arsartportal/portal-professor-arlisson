@@ -1,6 +1,6 @@
 /* =====================================================
    INDEX.JS — PORTAL DO PROFESSOR ARLISSON
-   Login com Firebase + UX PREMIUM (VERSÃO FINAL)
+   Login com Firebase + UX PREMIUM + LGPD + FEEDBACK VISUAL
 ===================================================== */
 
 import {
@@ -29,11 +29,25 @@ const db = getFirestore(app);
 const form = document.getElementById("formLogin");
 const erro = document.getElementById("erro");
 const btn  = document.getElementById("btnLogin");
+const checkbox = document.getElementById("aceite-termos");
+const termosBox = document.querySelector(".termos");
 
 // =============================
 // ✨ ESTADO INICIAL
 // =============================
 erro.innerText = "";
+
+// =============================
+// 🎯 EVENTO CHECKBOX (UX)
+// =============================
+checkbox.addEventListener("change", () => {
+  if (checkbox.checked) {
+    termosBox.classList.remove("invalido");
+    termosBox.classList.add("valido");
+  } else {
+    termosBox.classList.remove("valido");
+  }
+});
 
 // =============================
 // 🚀 EVENTO DE LOGIN
@@ -46,12 +60,26 @@ form.addEventListener("submit", async (e) => {
 
   erro.innerText = "";
 
+  // =====================================================
+  // 🔒 VALIDAÇÃO LGPD (COM HIGHLIGHT)
+  // =====================================================
+  if (!checkbox.checked) {
+    mostrarErro("Você precisa aceitar os Termos de Uso e a Política de Privacidade.");
+
+    termosBox.classList.add("invalido");
+    termosBox.classList.remove("valido");
+
+    return;
+  }
+
+  // =====================================================
+  // 🔐 VALIDAÇÃO BÁSICA
+  // =====================================================
   if (!usuario || !senha) {
     mostrarErro("Informe usuário e senha.");
     return;
   }
 
-  // 🔥 monta email padrão do sistema
   const email = `${usuario}@exatas.site`;
 
   try {
@@ -59,18 +87,26 @@ form.addEventListener("submit", async (e) => {
 
     const cred = await signInWithEmailAndPassword(auth, email, senha);
 
-    // 🔥 atualiza último acesso
+    // =====================================================
+    // 🧠 ATUALIZA DADOS DO USUÁRIO
+    // =====================================================
     await updateDoc(doc(db, "usuarios", cred.user.uid), {
-      ultimoAcesso: serverTimestamp()
+      ultimoAcesso: serverTimestamp(),
+
+      // 🔥 LGPD
+      aceitouTermos: true,
+      dataAceiteTermos: serverTimestamp()
     });
 
-    // 💾 salva sessão local
+    // =====================================================
+    // 💾 SESSÃO LOCAL
+    // =====================================================
     localStorage.setItem("uid", cred.user.uid);
     localStorage.setItem("usuario", usuario);
+    localStorage.setItem("aceitouTermos", "true");
 
     sucessoLogin();
 
-    // delay suave estilo app
     setTimeout(() => {
       window.location.href = "home.html";
     }, 600);
@@ -82,7 +118,7 @@ form.addEventListener("submit", async (e) => {
 });
 
 /* =====================================================
-   UX FUNCTIONS (NÍVEL APP)
+   UX FUNCTIONS
 ===================================================== */
 
 // 🔴 erro elegante
@@ -95,7 +131,7 @@ function mostrarErro(msg) {
   }, 50);
 }
 
-// ⏳ loading bonito
+// ⏳ loading
 function setLoading(estado) {
   if (estado) {
     btn.innerHTML = "Entrando...";
@@ -108,17 +144,16 @@ function setLoading(estado) {
   }
 }
 
-// ✅ sucesso visual
+// ✅ sucesso
 function sucessoLogin() {
   btn.innerHTML = "✓ Acesso liberado";
   btn.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
 }
 
-// ❌ tratamento profissional (ATUALIZADO FIREBASE v12)
+// ❌ tratamento erro
 function tratarErro(e) {
   console.error("Erro no login:", e);
 
-  // 🔐 erros agrupados (segurança + padrão moderno)
   const errosLogin = [
     "auth/invalid-credential",
     "auth/wrong-password",

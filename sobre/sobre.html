@@ -49,31 +49,66 @@
       <span>XP gerado</span>
     </div>
 
+    <div class="card sp">
+  <h2 id="total-sp">0</h2>
+  <span>Science Points gerados</span>
+</div>
+
   <div class="card media">
-  <h2 id="media-nivel">0</h2>
-  <span>Nível médio dos alunos</span>
+  <h2 id="total-desafios">0</h2>
+  <span>Desafios concluídos</span>
 </div>
 
   </section>
 
-  <!-- ===================================================== -->
-  <!-- 🏆 ALUNO DESTAQUE                                     -->
-  <!-- ===================================================== -->
-  <section class="bloco destaque">
-    <h2>🏆 Aluno destaque</h2>
-    <p id="top-aluno">Carregando...</p>
-  </section>
+ 
+<!-- ===================================================== -->
+<!-- PROPÓSITO EDUCACIONAL                                 -->
+<!-- ===================================================== -->
+<section class="bloco destaque">
+  <h2>🎯 Propósito Educacional</h2>
 
-  <!-- ===================================================== -->
-  <!-- MISSÃO                                                 -->
-  <!-- ===================================================== -->
-  <section class="bloco destaque">
-    <h2>🎯 Missão</h2>
-    <p>
-      Transformar o aprendizado em uma experiência envolvente,
-      onde o aluno participa ativamente do próprio desenvolvimento.
-    </p>
-  </section>
+  <div class="grid-proposito">
+
+    <!-- MISSÃO -->
+    <div class="card-proposito">
+      <h3>🎯 Missão</h3>
+      <p>
+        Promover uma aprendizagem significativa, desenvolvendo
+        <strong>autonomia</strong>, <strong>autoconfiança</strong> e
+        <strong>pensamento crítico</strong>, por meio de práticas que incentivam
+        o <strong>engajamento</strong>, a <strong>participação ativa</strong> e
+        a <strong>resolução de problemas</strong>.
+      </p>
+    </div>
+
+    <!-- VISÃO -->
+    <div class="card-proposito">
+      <h3>🚀 Visão</h3>
+      <p>
+        Ser referência em um ensino claro, acessível e eficiente, onde o aluno
+        assume o <strong>protagonismo</strong> do próprio aprendizado,
+        desenvolvendo <strong>raciocínio lógico</strong>,
+        <strong>responsabilidade</strong> e capacidade de aplicar o conhecimento
+        em situações reais.
+      </p>
+    </div>
+
+    <!-- VALORES -->
+    <div class="card-proposito">
+      <h3>💡 Valores</h3>
+      <p>
+        Valorizamos o <strong>engajamento</strong>, a <strong>disciplina</strong>
+        e a <strong>persistência</strong>, respeitando o ritmo de cada aluno e
+        incentivando a <strong>curiosidade</strong>, a <strong>colaboração</strong>
+        e o <strong>respeito</strong>. Acreditamos na construção sólida do
+        conhecimento, com foco na <strong>clareza</strong> e na
+        <strong>aplicação prática</strong>.
+      </p>
+    </div>
+
+  </div>
+</section>
 
   <!-- ===================================================== -->
   <!-- FEATURES                                               -->
@@ -197,9 +232,9 @@
   </p>
 
   <p class="extra">
-    Apaixonado por tecnologia, jogos e motos, acredita que aprender pode ser
+    "Apaixonado por tecnologia, jogos e motos, acredito que aprender pode ser
     tão envolvente quanto evoluir em um jogo ou dominar uma nova habilidade —
-    e é essa mentalidade que traz para dentro da sala de aula.
+    e é essa mentalidade que trago para dentro da sala de aula."
   </p>
 
 </section>
@@ -300,56 +335,44 @@ async function carregarMetricas() {
 
     let totalAlunos = 0;
     let totalXP = 0;
-    let somaNiveis = 0;
-
-    let topXP = 0;
-    let topNome = "—";
+    let totalDesafios = 0;
+    let totalSP = 0; // 🆕 NOVO
 
     snapshot.forEach(doc => {
       const data = doc.data();
 
-      // ✅ conta todos os usuários
+      // 👥 alunos
       totalAlunos++;
 
-      // ✅ XP seguro (compatível com dados antigos)
+      // ⚡ XP
       const xp = Number(data.xpTotal ?? data.xp ?? 0);
       totalXP += xp;
 
-      // ✅ soma níveis
-      const nivel = Number(data.nivel ?? 0);
-      somaNiveis += nivel;
+      // 🎯 desafios
+      const desafios = Number(data.totalDesafiosConcluidos ?? 0);
+      totalDesafios += desafios;
 
-      // ✅ top aluno
-      if (xp > topXP) {
-        topXP = xp;
-        topNome = data.nome || data.displayName || "Aluno";
-      }
+      // 🔬 SP (Science Points)
+      const sp = Number(data.totalSPGerados ?? 0);
+      totalSP += sp;
     });
 
-    // ✅ média de nível
-    const mediaNivel = totalAlunos > 0
-      ? (somaNiveis / totalAlunos).toFixed(1)
-      : 0;
-
-    // 🔥 atualiza UI
+    // 🔥 UI
     animarContador("contador-alunos", totalAlunos);
     animarContador("contador-xp", totalXP);
-
-    document.getElementById("media-nivel").innerText = mediaNivel;
-    document.getElementById("top-aluno").innerText = topNome;
+    animarContador("total-desafios", totalDesafios);
+    animarContador("total-sp", totalSP); // 🆕
 
   } catch (erro) {
     console.error("Erro ao carregar métricas:", erro);
 
     animarContador("contador-alunos", 0);
     animarContador("contador-xp", 0);
-    document.getElementById("media-nivel").innerText = "0";
+    animarContador("total-desafios", 0);
+    animarContador("total-sp", 0); // 🆕
   }
 }
 
-/* =========================
-INICIAR
-========================= */
 carregarMetricas();
 
 </script>
