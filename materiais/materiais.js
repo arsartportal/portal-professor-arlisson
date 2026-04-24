@@ -2,10 +2,7 @@
 // 📦 COMPONENTES GLOBAIS (HEADER / FOOTER)
 // =====================================================
 
-/**
- * Carrega um componente HTML externo (header/footer)
- */
-async function loadComponent(id, path) {
+async function loadComponent(id, path, callback) {
   const el = document.getElementById(id);
   if (!el) return;
 
@@ -13,6 +10,9 @@ async function loadComponent(id, path) {
     const res = await fetch(path);
     const html = await res.text();
     el.innerHTML = html;
+
+    if (callback) callback();
+
   } catch (err) {
     console.error("Erro ao carregar componente:", path);
   }
@@ -25,14 +25,14 @@ async function loadComponent(id, path) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 🔷 Componentes reutilizáveis
-  loadComponent("superheader", "/components/superheader.html");
-  loadComponent("superfooter", "/components/superfooter.html");
+  loadComponent("superheader", "../components/superheader.html", () => {
+    window.iniciarSuperHeader();
+  });
 
-  // 📑 Inicializações da página
+  loadComponent("superfooter", "../components/superfooter.html");
+
   iniciarTabs();
   iniciarMateriais();
-
 });
 
 
@@ -48,73 +48,158 @@ function iniciarTabs() {
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
 
-      // remove estados ativos
-      tabs.forEach(t => t.classList.remove("active"));
+      tabs.forEach(t => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+
       contents.forEach(c => c.classList.remove("active"));
 
-      // ativa aba clicada
       tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
 
       const target = document.getElementById(tab.dataset.tab);
       if (target) target.classList.add("active");
-
     });
   });
-
 }
 
 
 // =====================================================
-// 📂 BASE DE DADOS (ESTRUTURA ESCALÁVEL)
+// 📂 BASE DE DADOS (ESCALÁVEL)
 // =====================================================
 
-/**
- * Estrutura:
- * Disciplina → Série → Lista de arquivos
- */
 const materiais = {
 
+  // =====================================================
+  // ⚛️ FÍSICA
+  // =====================================================
   fisica: {
-
-    "1ano": [
-      "Notação Científica.pdf",
-      "Ordem de Grandeza.pdf",
-      "Conceitos Básicos de Cinemática.pdf"
-    ],
-
-    "2ano": [
-      "Escalas Termométricas - Parte 1.pdf",
-      "Escalas Termométricas - Parte 2.pdf"
-    ],
-
-    "3ano": [
-      "Cargas Elétricas e Processos de Eletrização.pdf",
-      "Lei de Coulomb.pdf"
-    ],
-
-    "eja": []
-
+    tipo: "serie",
+    pasta: "Física",
+    dados: {
+      "1ano": [
+        "Notação Científica.pdf",
+        "Ordem de Grandeza.pdf",
+        "Conceitos Básicos de Cinemática.pdf"
+      ],
+      "2ano": [
+        "Escalas Termométricas - Parte 01.pdf",
+        "Escalas Termométricas - Parte 02.pdf"
+      ],
+      "3ano": [
+        "Cargas Elétricas e Processos de Eletrização.pdf",
+        "Lei de Coulomb.pdf"
+      ]
+    }
   },
 
+  // =====================================================
+  // 📐 MATEMÁTICA
+  // =====================================================
   matematica: {
-    "1ano": [],
-    "2ano": [],
-    "3ano": [],
-    "eja": []
+    tipo: "serie",
+    pasta: "Matemática",
+    dados: {
+      "1ano": [
+        "Função do 1º Grau.pdf"
+      ],
+      "2ano": [],
+      "3ano": []
+    }
   },
 
+  // =====================================================
+  // 🧪 QUÍMICA
+  // =====================================================
   quimica: {
-    "1ano": [],
-    "2ano": [],
-    "3ano": [],
-    "eja": []
+    tipo: "serie",
+    pasta: "Química",
+    dados: {
+      "1ano": [
+        "Tabela Periódica - Parte 01.pdf",
+        "Tabela Periódica - Parte 02.pdf",
+        "Tabela Periódica - Parte 03.pdf",
+        "Tabela Periódica - Parte 04.pdf",
+        "Tabela Periódica - Parte 05.pdf",
+        "Tabela Periódica - Parte 06.pdf",
+        "Tabela Periódica - Parte 07.pdf",
+        "Tabela Periódica - Parte 08.pdf",
+        "Tabela Periódica - Parte 09.pdf",
+        "Tabela Periódica - Parte 10.pdf"
+      ],
+      "2ano": [],
+      "3ano": []
+    }
   },
 
-  interdisciplinar: {},
-  letramento: {},
-  recomposicao: {},
-  revisoes: {}
+  // =====================================================
+  // 🧠 APROFUNDAMENTO (GERAL)
+  // =====================================================
+  interdisciplinar: {
+    tipo: "direto",
+    pasta: "Aprofundamento Interdisciplinar",
+    arquivos: [
+      "Obsolescência programada.pdf"
+    ]
+  },
 
+  // =====================================================
+  // 📖 LETRAMENTO
+  // =====================================================
+  letramento: {
+    tipo: "serie",
+    pasta: "Clube de Letramento - Matemática",
+    dados: {
+      "6ano": [
+        "Atividade 01.pdf",
+        "Atividade 02.pdf",
+        "Atividade 03.pdf",
+        "Atividade 04.pdf",
+        "Atividade 05.pdf",
+        "Atividade 06.pdf",
+        "Atividade 07.pdf",
+        "Atividade 08.pdf",
+        "Atividade 09.pdf",
+        "Atividade 10.pdf"
+      ]
+    }
+  },
+
+  // =====================================================
+  // 🔄 RECOMPOSIÇÃO
+  // =====================================================
+  recomposicao: {
+    tipo: "direto",
+    pasta: "Recomposição da Aprendizagem - Matemática",
+    arquivos: [
+      "Atividade 01 - Recomposição da Aprendizagem - Matemática.pdf",
+      "Atividade 02 - Recomposição da Aprendizagem - Matemática.pdf"
+    ]
+  },
+
+  // =====================================================
+  // 📝 REVISÕES
+  // =====================================================
+  revisoes: {
+    tipo: "direto",
+    pasta: "Revisões Matemáticas",
+    arquivos: [
+      "Operações com Potências de Base 10.pdf"
+    ]
+  }
+
+};
+
+
+// =====================================================
+// 🗺️ MAPEAMENTO DE PASTAS REAIS
+// =====================================================
+
+const mapaPastas = {
+  fisica: "Física",
+  matematica: "Matemática",
+  quimica: "Química"
 };
 
 
@@ -122,9 +207,6 @@ const materiais = {
 // 🔤 UTILIDADES
 // =====================================================
 
-/**
- * Formata nome da série para exibição
- */
 function formatarSerie(serie) {
   switch (serie) {
     case "1ano": return "1º Ano";
@@ -135,9 +217,6 @@ function formatarSerie(serie) {
   }
 }
 
-/**
- * Remove extensão e melhora leitura do nome
- */
 function formatarNomeArquivo(arquivo) {
   return arquivo
     .replace(".pdf", "")
@@ -146,12 +225,9 @@ function formatarNomeArquivo(arquivo) {
 
 
 // =====================================================
-// 📄 RENDERIZAÇÃO DOS MATERIAIS
+// 📄 INICIALIZA MATERIAIS
 // =====================================================
 
-/**
- * Inicializa renderização de todas as abas
- */
 function iniciarMateriais() {
   Object.keys(materiais).forEach(area => {
     carregarMateriais(area);
@@ -159,9 +235,10 @@ function iniciarMateriais() {
 }
 
 
-/**
- * Renderiza materiais por disciplina
- */
+// =====================================================
+// 📄 RENDERIZAÇÃO PRINCIPAL
+// =====================================================
+
 function carregarMateriais(area) {
 
   const container = document.getElementById(area);
@@ -169,78 +246,145 @@ function carregarMateriais(area) {
 
   container.innerHTML = "";
 
-  const dados = materiais[area];
-
-  // fallback caso não exista conteúdo
-  if (!dados || Object.keys(dados).length === 0) {
-    container.innerHTML = "<p>Nenhum material disponível ainda.</p>";
+  const config = materiais[area];
+  if (!config) {
+    renderEmpty(container);
     return;
   }
 
   let temConteudo = false;
 
-  // percorre séries
-  Object.keys(dados).forEach(serie => {
+  // =====================================================
+  // 🔹 CASO 1: COM SÉRIE (1ano, 2ano, 6ano...)
+  // =====================================================
 
-    const lista = dados[serie];
+  if (config.tipo === "serie") {
 
-    // ignora séries vazias
-    if (!lista || lista.length === 0) return;
+    const pastaBase = config.pasta || mapaPastas[area] || area;
 
-    temConteudo = true;
+    Object.keys(config.dados).forEach(serie => {
 
-    // =====================================================
-    // 🔷 BLOCO DA SÉRIE
-    // =====================================================
+      const lista = config.dados[serie];
+      if (!lista || lista.length === 0) return;
 
-    const bloco = document.createElement("div");
-    bloco.className = "bloco-serie";
+      temConteudo = true;
 
-    const titulo = document.createElement("h2");
-    titulo.className = "titulo-serie";
-    titulo.textContent = formatarSerie(serie);
+      const bloco = document.createElement("div");
+      bloco.className = "bloco-serie";
 
-    bloco.appendChild(titulo);
+      const titulo = document.createElement("h2");
+      titulo.className = "titulo-serie";
+      titulo.textContent = formatarSerie(serie);
 
-    // =====================================================
-    // 📦 GRID DE MATERIAIS
-    // =====================================================
+      bloco.appendChild(titulo);
+
+      const grid = document.createElement("div");
+      grid.className = "grid-serie";
+
+      lista.forEach(arquivo => {
+
+        const card = criarCard(
+          arquivo,
+          `/materiais/atividades-site/${pastaBase}/${serie}/${encodeURIComponent(arquivo)}`
+        );
+
+        grid.appendChild(card);
+      });
+
+      bloco.appendChild(grid);
+      container.appendChild(bloco);
+    });
+  }
+
+
+  // =====================================================
+  // 🔹 CASO 2: DIRETO (SEM SÉRIE)
+  // =====================================================
+
+  if (config.tipo === "direto") {
 
     const grid = document.createElement("div");
     grid.className = "grid-serie";
 
-    lista.forEach(arquivo => {
+    config.arquivos.forEach(arquivo => {
 
-      const nomeBonito = formatarNomeArquivo(arquivo);
+      temConteudo = true;
 
-      const card = document.createElement("div");
-      card.className = "material-card";
-
-      card.innerHTML = `
-        <div class="material-type">PDF</div>
-
-        <div class="material-info">
-          <h3>${nomeBonito}</h3>
-          <span>Material de estudo</span>
-        </div>
-
-        <a href="/materiais/${area}/${arquivo}" target="_blank">
-          <button class="btn-download">Abrir</button>
-        </a>
-      `;
+      const card = criarCard(
+        arquivo,
+        `/materiais/atividades-site/${config.pasta}/${encodeURIComponent(arquivo)}`
+      );
 
       grid.appendChild(card);
-
     });
 
-    bloco.appendChild(grid);
-    container.appendChild(bloco);
-
-  });
-
-  // se nenhuma série tiver conteúdo
-  if (!temConteudo) {
-    container.innerHTML = "<p>Nenhum material disponível ainda.</p>";
+    container.appendChild(grid);
   }
 
+  if (!temConteudo) {
+    renderEmpty(container);
+  }
 }
+
+
+// =====================================================
+// 📭 ESTADO VAZIO
+// =====================================================
+
+function renderEmpty(container) {
+  container.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">📂</div>
+      <h3>Nenhum material disponível</h3>
+      <p>Estamos preparando novos conteúdos para você.</p>
+      <span>Volte em breve 🚀</span>
+    </div>
+  `;
+}
+
+
+function criarCard(arquivo, url) {
+
+  const nomeBonito = formatarNomeArquivo(arquivo);
+
+  const card = document.createElement("div");
+  card.className = "material-card";
+
+  const tipo = document.createElement("div");
+  tipo.className = "material-type";
+  tipo.textContent = "PDF";
+
+  const info = document.createElement("div");
+  info.className = "material-info";
+
+  const titulo = document.createElement("h3");
+  titulo.textContent = nomeBonito;
+
+  const span = document.createElement("span");
+  span.textContent = "Material de estudo";
+
+  info.appendChild(titulo);
+  info.appendChild(span);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = "_blank";
+
+  const botao = document.createElement("button");
+  botao.className = "btn-download";
+  botao.textContent = "Abrir";
+
+  botao.addEventListener("click", () => {
+    botao.textContent = "Abrindo...";
+    setTimeout(() => botao.textContent = "Abrir", 1200);
+  });
+
+  link.appendChild(botao);
+
+  card.appendChild(tipo);
+  card.appendChild(info);
+  card.appendChild(link);
+
+  return card;
+}
+

@@ -129,6 +129,168 @@ const perguntas = [
 
 ];
 
+const perguntasDificeis = [
+
+/* =========================
+🧠 REGRAS AVANÇADAS
+========================= */
+
+{ pergunta:"Em qual situação o impedimento NÃO é marcado?", opcoes:["Passe para frente","Recebimento de lateral","Passe em profundidade","Rebote do goleiro"], correta:1 },
+
+{ pergunta:"Um jogador em posição de impedimento só é penalizado quando:", opcoes:["Está parado","Participa da jogada","Corre rápido","Recebe cartão"], correta:1 },
+
+{ pergunta:"Se o goleiro segura a bola por mais de 6 segundos:", opcoes:["Nada acontece","Escanteio","Tiro livre indireto","Pênalti"], correta:2 },
+
+{ pergunta:"Um gol direto de lateral é:", opcoes:["Válido","Anulado","Depende do árbitro","Só vale com desvio"], correta:1 },
+
+{ pergunta:"Se um jogador comete falta dentro da própria área:", opcoes:["Escanteio","Tiro livre","Pênalti","Lateral"], correta:2 },
+
+/* =========================
+🌍 HISTÓRIA PROFUNDA
+========================= */
+
+{ pergunta:"Qual seleção foi vice-campeã da Copa de 1950?", opcoes:["Brasil","Uruguai","Espanha","Suécia"], correta:0 },
+
+{ pergunta:"Quem marcou o gol do título da Alemanha em 2014?", opcoes:["Müller","Klose","Götze","Kroos"], correta:2 },
+
+{ pergunta:"Qual seleção eliminou o Brasil na Copa de 2006?", opcoes:["França","Alemanha","Itália","Holanda"], correta:0 },
+
+{ pergunta:"Quem foi o artilheiro da Copa de 2010?", opcoes:["Villa","Forlán","Sneijder","Müller"], correta:3 },
+
+{ pergunta:"Qual país sediou a Copa de 1934?", opcoes:["França","Itália","Alemanha","Espanha"], correta:1 },
+
+/* =========================
+📊 RECORDES E ESTATÍSTICAS
+========================= */
+
+{ pergunta:"Qual seleção tem mais jogos em Copas do Mundo?", opcoes:["Brasil","Alemanha","Argentina","Itália"], correta:0 },
+
+{ pergunta:"Quem foi o jogador mais jovem a marcar em uma final de Copa?", opcoes:["Pelé","Mbappé","Messi","Ronaldo"], correta:0 },
+
+{ pergunta:"Qual foi a única seleção a vencer todas as partidas de uma Copa (formato moderno)?", opcoes:["Brasil 1970","Alemanha 2014","França 1998","Argentina 2022"], correta:0 },
+
+{ pergunta:"Maior número de gols em uma única Copa por um jogador:", opcoes:["10","11","12","13"], correta:3 },
+
+{ pergunta:"Quem detém esse recorde?", opcoes:["Pelé","Klose","Just Fontaine","Ronaldo"], correta:2 },
+
+/* =========================
+⭐ JOGADORES (NÍVEL HARD)
+========================= */
+
+{ pergunta:"Qual jogador tem mais assistências na história das Copas?", opcoes:["Messi","Pelé","Maradona","Beckham"], correta:1 },
+
+{ pergunta:"Quem perdeu pênalti na final de 1994?", opcoes:["Baggio","Romário","Bebeto","Maldini"], correta:0 },
+
+{ pergunta:"Qual jogador ganhou Bola de Ouro em 2006 mesmo sendo expulso na final?", opcoes:["Zidane","Cannavaro","Pirlo","Henry"], correta:0 },
+
+{ pergunta:"Quem foi o melhor jogador da Copa de 2014?", opcoes:["Messi","Neymar","Robben","Müller"], correta:0 },
+
+{ pergunta:"Qual desses jogadores NUNCA jogou uma final de Copa?", opcoes:["Cristiano Ronaldo","Messi","Zidane","Ronaldo"], correta:0 },
+
+/* =========================
+🏟️ TÁTICA E JOGO
+========================= */
+
+{ pergunta:"O sistema 4-3-3 possui quantos atacantes?", opcoes:["2","3","4","1"], correta:1 },
+
+{ pergunta:"Um 'falso 9' é:", opcoes:["Zagueiro","Meia defensivo","Atacante que recua","Goleiro"], correta:2 },
+
+{ pergunta:"Linha alta significa:", opcoes:["Defesa recuada","Defesa avançada","Time lento","Jogo parado"], correta:1 },
+
+{ pergunta:"Pressão alta é:", opcoes:["Marcação no campo de defesa","Marcação no campo adversário","Jogo defensivo","Contra-ataque"], correta:1 },
+
+{ pergunta:"Posse de bola NÃO garante:", opcoes:["Controle do jogo","Vitória","Domínio territorial","Criação de chances"], correta:1 },
+
+];
+
+const perguntasInsanas = [
+
+/* =========================
+🧠 REGRAS ULTRA DETALHADAS
+========================= */
+
+{ pergunta:"Se a bola estoura durante uma jogada clara de gol, o árbitro deve:", opcoes:["Dar gol","Marcar escanteio","Parar o jogo e reiniciar com bola ao chão","Mandar repetir a jogada"], correta:2 },
+
+{ pergunta:"Um jogador pode ser expulso ANTES do jogo começar?", opcoes:["Não","Sim, durante o aquecimento","Só após o apito inicial","Só no intervalo"], correta:1 },
+
+{ pergunta:"Se um reserva invade o campo e impede um gol:", opcoes:["Nada acontece","Cartão amarelo","Pênalti e expulsão","Só tiro livre"], correta:2 },
+
+{ pergunta:"Gol direto de tiro de meta:", opcoes:["Não vale","Vale","Depende do árbitro","Só com desvio"], correta:1 },
+
+{ pergunta:"Se a bola bate no árbitro e muda a posse:", opcoes:["Segue o jogo","Interrompe e bola ao chão","Escanteio","Falta"], correta:1 },
+
+/* =========================
+📜 HISTÓRIA OCULTA DAS COPAS
+========================= */
+
+{ pergunta:"Qual seleção foi campeã invicta SEM sofrer gols em uma Copa?", opcoes:["Brasil 1970","Itália 1982","Suíça 2006","Nenhuma"], correta:3 },
+
+{ pergunta:"Quem foi o técnico do Brasil na Copa de 1958?", opcoes:["Zagallo","Feola","Telê Santana","Parreira"], correta:1 },
+
+{ pergunta:"Qual foi a primeira final decidida nos pênaltis?", opcoes:["1974","1982","1994","1978"], correta:2 },
+
+{ pergunta:"Qual jogador participou de MAIS Copas como atleta?", opcoes:["Pelé","Maradona","Matthäus","Buffon"], correta:2 },
+
+{ pergunta:"Qual país já sediou Copa e NÃO participou dela?", opcoes:["Qatar","Uruguai","Itália","Nenhum"], correta:3 },
+
+/* =========================
+📊 ESTATÍSTICAS ABSURDAS
+========================= */
+
+{ pergunta:"Maior tempo sem sofrer gols em Copas (seleção):", opcoes:["Brasil","Itália","Suíça","Alemanha"], correta:2 },
+
+{ pergunta:"Qual seleção ficou MAIS TEMPO sem perder em Copas?", opcoes:["Brasil","Alemanha","Argentina","Itália"], correta:1 },
+
+{ pergunta:"Jogador com MAIS minutos em Copas:", opcoes:["Messi","Maldini","Matthäus","Klose"], correta:2 },
+
+{ pergunta:"Maior número de finais consecutivas disputadas:", opcoes:["Brasil","Alemanha","Argentina","Itália"], correta:1 },
+
+{ pergunta:"Maior público já registrado em uma final de Copa:", opcoes:["Maracanã 1950","Wembley 1966","Azteca 1986","França 1998"], correta:0 },
+
+/* =========================
+🎯 JOGADORES (NÍVEL ABSURDO)
+========================= */
+
+{ pergunta:"Quem foi campeão do mundo como jogador e técnico?", opcoes:["Zidane","Beckenbauer","Maradona","Cruyff"], correta:1 },
+
+{ pergunta:"Qual jogador fez gol em MAIS Copas diferentes?", opcoes:["Pelé","Ronaldo","Klose","Messi"], correta:0 },
+
+{ pergunta:"Quem perdeu duas finais seguidas (2014 e 2018)?", opcoes:["Messi","Modrić","Mbappé","Nenhum"], correta:3 },
+
+{ pergunta:"Qual goleiro ficou MAIS TEMPO sem sofrer gol em Copas?", opcoes:["Buffon","Neuer","Zenga","Casillas"], correta:2 },
+
+{ pergunta:"Quem fez hat-trick em final de Copa?", opcoes:["Pelé","Mbappé","Ronaldo","Klose"], correta:1 },
+
+/* =========================
+🧩 TÁTICA PROFUNDA
+========================= */
+
+{ pergunta:"O 'gegenpressing' é:", opcoes:["Defesa baixa","Pressão imediata após perda da bola","Contra-ataque lento","Posse longa"], correta:1 },
+
+{ pergunta:"Um 'terceiro homem' na jogada é:", opcoes:["Árbitro","Jogador que aparece para dar continuidade","Reserva","Zagueiro"], correta:1 },
+
+{ pergunta:"Bloco médio significa:", opcoes:["Time recuado","Time avançado","Linha intermediária de marcação","Sem marcação"], correta:2 },
+
+{ pergunta:"Amplitude no jogo ofensivo refere-se a:", opcoes:["Velocidade","Uso das laterais","Chutes de longe","Marcação"], correta:1 },
+
+{ pergunta:"Transição defensiva ocorre quando:", opcoes:["Time ataca","Perde a bola","Faz gol","Bola parada"], correta:1 },
+
+/* =========================
+🤯 PEGADINHAS INSANAS
+========================= */
+
+{ pergunta:"Quantos jogadores um time pode ter em campo no MÍNIMO para o jogo continuar?", opcoes:["7","8","6","5"], correta:0 },
+
+{ pergunta:"Se todos os jogadores forem expulsos:", opcoes:["Jogo continua","Vitória automática","Partida encerrada","Pênaltis"], correta:2 },
+
+{ pergunta:"Um jogador pode tirar a camisa ao comemorar?", opcoes:["Sim","Não","Sim, sem punição","Só se fizer gol importante"], correta:1 },
+
+{ pergunta:"Se o goleiro faz gol com a mão:", opcoes:["Vale","Não vale","Depende","Revisão VAR"], correta:1 },
+
+{ pergunta:"Um jogador pode marcar gol diretamente do escanteio?", opcoes:["Não","Sim","Só com desvio","Só na prorrogação"], correta:1 },
+
+];
+
 /* ======================================================
 🎮 ESTADO
 ====================================================== */
@@ -186,7 +348,8 @@ async function iniciar(){
   atual = 0;
   acertos = 0;
 
-  perguntasSelecionadas = embaralhar([...perguntas]).slice(0,5);
+  perguntasSelecionadas = gerarQuiz()
+  .map(p => embaralharOpcoes(p));
 
   btnIniciar.style.display = "none";
   resultado.classList.add("hidden");
@@ -205,21 +368,39 @@ function proximaPergunta(){
   }
 
   const p = perguntasSelecionadas[atual];
-if(!p){
-  finalizar();
-  return;
-}
+  if(!p){
+    finalizar();
+    return;
+  }
+
+  // 🔒 evita bug de múltiplos timers
+  clearInterval(intervalo);
 
   perguntaEl.innerText = p.pergunta;
   opcoesEl.innerHTML = "";
+
+  // 🔥 reset do clique
+  opcoesEl.classList.remove("respondido");
+
   numPergunta.innerText = atual + 1;
 
   p.opcoes.forEach((op,i)=>{
     const btn = document.createElement("button");
     btn.innerText = op;
+
     btn.onclick = ()=>responder(i);
+
+    // 💡 acessibilidade
+    btn.tabIndex = 0;
+    btn.onkeydown = (e)=>{
+      if(e.key === "Enter") responder(i);
+    };
+
     opcoesEl.appendChild(btn);
   });
+
+  // 💡 UX
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   iniciarTimer();
 }
@@ -248,10 +429,11 @@ function iniciarTimer(){
   },1000);
 }
 
-/* ======================================================
-✅ RESPOSTA
-====================================================== */
 function responder(index){
+
+  // 🚫 evita clique duplo
+  if(opcoesEl.classList.contains("respondido")) return;
+  opcoesEl.classList.add("respondido");
 
   clearInterval(intervalo);
 
@@ -259,12 +441,12 @@ function responder(index){
   const botoes = opcoesEl.querySelectorAll("button");
 
   botoes.forEach((btn,i)=>{
-    if(i===correta) btn.classList.add("correta");
-    else if(i===index) btn.classList.add("errada");
+    if(i === correta) btn.classList.add("correta");
+    if(i === index && i !== correta) btn.classList.add("errada");
     btn.disabled = true;
   });
 
-  if(index===correta) acertos++;
+  if(index === correta) acertos++;
 
   setTimeout(()=>{
     atual++;
@@ -387,9 +569,6 @@ function animarNumero(id,valor,label){
   },30);
 }
 
-/* ======================================================
-🔁 REINICIAR
-====================================================== */
 window.reiniciar = async function(){
 
   recompensaColetada = false;
@@ -401,18 +580,24 @@ window.reiniciar = async function(){
   if(!snap.data().fichasLab) return alert("Sem ingressos!");
 
   await updateDoc(ref,{
-  fichasLab: increment(-1),
-  quizJogos: increment(1)
-});
+    fichasLab: increment(-1),
+    quizJogos: increment(1)
+  });
 
-await atualizarStatsGlobais();
+  await atualizarStatsGlobais();
 
   atualizarFichas();
 
-  atual=0;
-  acertos=0;
+  atual = 0;
+  acertos = 0;
+
+  // 🔥 ESSA LINHA É A CHAVE
+  perguntasSelecionadas = gerarQuiz()
+    .map(p => embaralharOpcoes(p));
 
   resultado.classList.add("hidden");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
   proximaPergunta();
 };
 
@@ -533,7 +718,40 @@ function getSemana(data){
 }
 
 function embaralhar(array){
-  return array.sort(() => Math.random() - 0.5);
+  for(let i = array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function embaralharOpcoes(pergunta){
+
+  const opcoes = pergunta.opcoes.map((texto, index) => ({
+    texto,
+    correta: index === pergunta.correta
+  }));
+
+  const embaralhadas = embaralhar([...opcoes]);
+
+  return {
+    pergunta: pergunta.pergunta,
+    opcoes: embaralhadas.map(o => o.texto),
+    correta: embaralhadas.findIndex(o => o.correta)
+  };
+}
+
+function gerarQuiz(){
+
+  const faceis = embaralhar([...perguntas]).slice(0,2);
+  const dificeis = embaralhar([...perguntasDificeis]).slice(0,2);
+  const insanas = embaralhar([...perguntasInsanas]).slice(0,1);
+
+  return embaralhar([
+    ...faceis,
+    ...dificeis,
+    ...insanas
+  ]);
 }
 
 /* ======================================================

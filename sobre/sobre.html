@@ -271,6 +271,8 @@ IMPORTS FIREBASE
 import { db } from "../js/firebase.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+import { iniciarSuperHeader } from "../../components/superheader.js";
+
 /* =========================
 CARREGAR HEADER / FOOTER
 ========================= */
@@ -279,9 +281,10 @@ async function carregarComponente(id, arquivo) {
   const html = await resp.text();
   document.getElementById(id).innerHTML = html;
 
-  // controla HUD após carregar header
+  // 🔥 SE FOR HEADER → INICIALIZA TUDO
   if (id === "header-container") {
     controlarHUD();
+    iniciarSuperHeader(); // 👈 ESSA LINHA É A CHAVE
   }
 }
 

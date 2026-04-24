@@ -380,3 +380,17 @@
 .header:not(:has(.mini-hud)) .portal-name {
   font-size: 3rem;
 }
+
+.btn-voltar {
+  background: rgba(255,255,255,0.05);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-voltar:hover {
+  background: rgba(255,255,255,0.1);
+}

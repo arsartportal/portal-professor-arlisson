@@ -7,6 +7,7 @@
 <title>Materiais • Portal do Professor Arlisson</title>
 
 <link rel="stylesheet" href="materiais.css">
+<link rel="stylesheet" href="../components/header-footer.css">
 </head>
 
 <body>
@@ -47,6 +48,11 @@
 <!-- 🔻 FOOTER GLOBAL -->
 <div id="superfooter"></div>
 
+
+<script type="module">
+  import { iniciarSuperHeader } from "../components/superheader.js";
+  window.iniciarSuperHeader = iniciarSuperHeader;
+</script>
 <script src="materiais.js"></script>
 
 </body>
