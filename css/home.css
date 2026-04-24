@@ -1990,3 +1990,168 @@ CONTEÚDO
   position: relative;
   z-index: 2;
 }
+
+.hero-quiz-copa {
+  position: relative;
+  overflow: hidden;
+  margin: 30px 0;
+  border-radius: 24px;
+  padding: 40px;
+  background: linear-gradient(135deg, #020617, #0f172a, #065f46);
+  color: white;
+}
+
+/* 🔥 FUNDO ANIMADO */
+.hero-bg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 70%);
+  animation: girarHero 12s linear infinite;
+}
+
+@keyframes girarHero {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* TEXTO */
+.hero-text h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.hero-text h1 span {
+  color: #22c55e;
+}
+
+.hero-text p {
+  margin: 15px 0;
+  opacity: 0.9;
+}
+
+.badge-hero {
+  display: inline-block;
+  background: #22c55e;
+  color: #022c22;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* BOTÃO */
+.btn-hero {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #22c55e;
+  color: #022c22;
+  font-weight: bold;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-hero:hover {
+  background: #16a34a;
+  transform: scale(1.05);
+}
+
+/* INFO */
+.hero-info {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* VISUAL */
+.hero-visual {
+  font-size: 80px;
+  opacity: 0.9;
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+  .hero-content{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-visual{
+    font-size: 60px;
+  }
+}
+
+/* =========================================
+⚽🏆 HERO VISUAL ANIMADO
+========================================= */
+
+.hero-visual {
+  font-size: 80px;
+  display: flex;
+  gap: 20px;
+}
+
+/* cada item separado */
+.hero-visual span {
+  display: inline-block;
+}
+
+/* ⚽ bola */
+.hero-visual span:nth-child(1) {
+  animation: floatBola 2.5s ease-in-out infinite;
+}
+
+/* 🏆 troféu */
+.hero-visual span:nth-child(2) {
+  animation: floatTrofeu 3s ease-in-out infinite;
+}
+
+/* animações */
+@keyframes floatBola {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes floatTrofeu {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-18px); }
+  100% { transform: translateY(0); }
+}
+
+.hero-visual span {
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
+/* =========================================
+🔒 BOTÃO DESATIVADO
+========================================= */
+
+.btn-disabled{
+  background: linear-gradient(135deg, #334155, #1e293b) !important;
+  color: #94a3b8 !important;
+
+  cursor: not-allowed;
+  pointer-events: none;
+
+  opacity: 0.6;
+
+  box-shadow: none;
+}
+
+/* opcional: tira efeito hover */
+.btn-disabled:hover{
+  transform: none;
+  box-shadow: none;
+}

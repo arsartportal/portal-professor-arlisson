@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Copa do Mundo 2026 • ULTRA</title>
+  <link rel="stylesheet" href="quiz-copa-ultra.css">
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+  <h1>🏆 Quiz Copa do Mundo 2026</h1>
+
+  <!-- 📘 INSTRUÇÕES -->
+  <div id="instrucoes" class="card">
+    <h2>⚽ Modo Copa</h2>
+
+    <ul>
+      <li>🎟️ Cada partida custa <b>1 ingresso</b></li>
+      <li>⏳ Tempo limitado por pergunta</li>
+      <li>💀 Errou → eliminado</li>
+      <li>🏆 Avance pelas fases até a final</li>
+    </ul>
+
+    <div class="fichas-info">
+      🎟️ Ingressos: <b id="fichas">0</b>
+    </div>
+
+    <div class="stats-comunidade">
+      🌍 <b>Comunidade</b><br>
+      🎟️ Hoje: <b id="gastasHoje">0</b><br>
+      🧾 Total: <b id="gastasTotal">0</b>
+    </div>
+
+    <div class="botoes">
+      <button id="btnIniciar">Entrar em campo</button>
+      <a href="/loja.html" class="btn-loja-link">🛒 Resgatar ingressos</a>
+    </div>
+  </div>
+
+  <!-- 🎮 QUIZ -->
+  <div id="quizArea" class="card hidden">
+
+    <!-- 🏆 FASE -->
+    <div id="faseAtual" class="fase-label"></div>
+
+    <!-- 🧭 PROGRESSO COPA -->
+    <div class="fase-barra">
+      <span>Grupos</span>
+      <span>Oitavas</span>
+      <span>Quartas</span>
+      <span>Semi</span>
+      <span>Final</span>
+    </div>
+
+    <div class="topo">
+      <span>Pergunta <b id="numPergunta">1</b></span>
+      <span>⏳ <b id="tempo">5</b>s</span>
+    </div>
+
+    <div class="barra">
+      <div id="progresso"></div>
+    </div>
+
+    <h2 id="pergunta"></h2>
+
+    <div id="opcoes"></div>
+
+    <div id="resultado" class="hidden"></div>
+
+  </div>
+
+  <!-- 🏆 LEADERBOARD -->
+  <div class="card">
+    <h2>🏆 Ranking da Copa</h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="total">Geral</button>
+      <button class="tab" data-tab="semanal">Semana</button>
+    </div>
+
+    <div id="ranking"></div>
+  </div>
+
+</div>
+
+<script type="module" src="quiz-copa-ultra.js"></script>
+
+</body>
+</html>

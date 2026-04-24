@@ -1,0 +1,274 @@
+/* ======================================================
+🌍 BASE (MANTIDA + REFINADA)
+====================================================== */
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+  padding:30px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  box-sizing:border-box;
+  min-height:100vh;
+
+  color:white;
+
+  background:
+    linear-gradient(rgba(2,6,23,0.6), rgba(2,6,23,0.8)),
+    url("backgroundcopa2026.png");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+  overflow-x:hidden;
+}
+
+/* ======================================================
+🏆 BARRA DE FASES (ULTRA)
+====================================================== */
+
+.fase-label{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#facc15;
+  font-size:1.1rem;
+}
+
+.fase-barra{
+  display:flex;
+  justify-content:space-between;
+  gap:6px;
+  margin-bottom:12px;
+}
+
+.fase-barra span{
+  flex:1;
+  text-align:center;
+  padding:6px 4px;
+  border-radius:8px;
+  font-size:12px;
+
+  background:rgba(255,255,255,0.08);
+  opacity:0.5;
+  transition:.3s;
+}
+
+/* 🔥 fase atual */
+.fase-barra span.ativa{
+  background:linear-gradient(135deg,#facc15,#eab308);
+  color:#111;
+  font-weight:bold;
+  opacity:1;
+  transform:scale(1.05);
+}
+
+/* ✅ fases concluídas */
+.fase-barra span.completa{
+  background:linear-gradient(135deg,#22c55e,#15803d);
+  opacity:1;
+}
+
+/* ======================================================
+📦 CONTAINER
+====================================================== */
+
+.quiz-container{
+  width:100%;
+  max-width:480px;
+  margin:auto;
+
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+/* ======================================================
+🧊 CARD
+====================================================== */
+
+.card{
+  backdrop-filter: blur(14px);
+  background: rgba(2,6,23,0.75);
+  padding:20px;
+  border-radius:20px;
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px) scale(1.01);
+}
+
+/* ======================================================
+🎮 BOTÕES
+====================================================== */
+
+button{
+  border:none;
+  border-radius:14px;
+  padding:12px;
+
+  cursor:pointer;
+  font-weight:700;
+
+  transition:.2s;
+
+  background:rgba(255,255,255,0.08);
+  color:white;
+}
+
+button:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.5),
+    0 0 12px rgba(34,197,94,0.5);
+}
+
+#btnIniciar{
+  background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+/* ======================================================
+🎯 QUIZ
+====================================================== */
+
+.topo{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+}
+
+.barra{
+  height:10px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.1);
+}
+
+#progresso{
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg,#22c55e,#ef4444);
+  transition:width 1s linear;
+}
+
+#pergunta{
+  margin:10px 0;
+  text-align:center;
+}
+
+#opcoes button{
+  width:100%;
+  margin:6px 0;
+}
+
+/* feedback */
+.correta{ background:#22c55e !important; }
+.errada{ background:#ef4444 !important; }
+
+/* ======================================================
+🏁 RESULTADO (UPGRADE)
+====================================================== */
+
+#resultado{
+  text-align:center;
+  animation:fadeIn .4s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ======================================================
+🏆 CAMPEÃO (DESTAQUE)
+====================================================== */
+
+.loot-box{
+  padding:20px;
+  border-radius:16px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(250,204,21,0.2),
+    rgba(34,197,94,0.2)
+  );
+
+  box-shadow:0 0 30px rgba(250,204,21,0.3);
+}
+
+/* ======================================================
+🏆 RANKING
+====================================================== */
+
+.tabs{
+  display:flex;
+  gap:8px;
+}
+
+.tab{
+  flex:1;
+  padding:8px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.1);
+  cursor:pointer;
+}
+
+.tab.active{
+  background:#22c55e;
+}
+
+.ranking-item{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* ======================================================
+📱 RESPONSIVO
+====================================================== */
+
+@media(max-width:500px){
+  body{ padding:15px; }
+}
+
+/* ======================================================
+🔒 UTILIDADES
+====================================================== */
+
+.hidden{ display:none; }
+
+.botoes{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:15px;
+}
+
+.fase-barra span.completa {
+  color: #22c55e;
+  opacity: 1;
+}
+
+.fase-barra span.ativa {
+  color: #facc15;
+  font-weight: bold;
+}
