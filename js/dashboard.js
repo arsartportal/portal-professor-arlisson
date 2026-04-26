@@ -36,6 +36,11 @@ const auth = getAuth(app);
 let alunosOriginais = [];
 let alunosFiltrados = [];
 
+let ordemAtual = {
+  campo: null,
+  asc: true
+};
+
 
 /* =====================================================
    UTILITÁRIOS
@@ -108,6 +113,47 @@ function ordenarPorPatente(lista) {
 
 }
 
+/* =====================================================
+   ORDENAÇÃO POR CAMPO (CRESCENTE/DECRESCENTE)
+===================================================== */
+
+function ordenarPorCampo(campo){
+
+  if(campo === "posicao"){
+  ordenarPorPatente(alunosFiltrados);
+  renderizarTabela(alunosFiltrados);
+  return;
+}
+
+  if(ordemAtual.campo === campo){
+    ordemAtual.asc = !ordemAtual.asc;
+  } else {
+    ordemAtual.campo = campo;
+    ordemAtual.asc = true;
+  }
+
+  alunosFiltrados.sort((a,b)=>{
+
+    let A = a[campo];
+    let B = b[campo];
+
+    // texto
+    if(typeof A === "string"){
+      return ordemAtual.asc
+        ? A.localeCompare(B)
+        : B.localeCompare(A);
+    }
+
+    // número
+    return ordemAtual.asc
+      ? (A||0) - (B||0)
+      : (B||0) - (A||0);
+
+  });
+
+  renderizarTabela(alunosFiltrados);
+}
+
 
 /* =====================================================
    RENDERIZAÇÃO TABELA PRINCIPAL
@@ -127,55 +173,79 @@ function renderizarTabela(lista) {
 
     tr.innerHTML = `
 
-      <td>${medalha(index + 1)}</td>
-      <td>${aluno.nome}</td>
-      <td>${aluno.escola}</td>
-      <td>${aluno.serie}</td>
-      <td>${aluno.turma}</td>
+  <td>${medalha(index + 1)}</td>
+  <td>${aluno.nome}</td>
+  <td>${aluno.escola}</td>
+  <td>${aluno.serie}</td>
+  <td>${aluno.turma}</td>
 
-      <td>${aluno.xp}</td>
-      <td>${aluno.xpTotal}</td>
-      <td>🔥 ${aluno.streakAtual}</td>
-      <td>🏆 ${aluno.maiorStreak}</td>
-      <td>${aluno.sciencePoints}</td>
-      <td style="font-weight:bold; color:${aluno.bonusProvaDisponivel > 0 ? '#00ff88' : '#999'}">
-      🎯 ${aluno.bonusProvaDisponivel}
-      </td>
+  <!-- XP -->
+  <td>${aluno.xp}</td>
 
-      <td class="coluna-patente">
-        <img src="${patente.imagem}"
-             class="icone-patente"
-             title="Nível ${aluno.nivel} • ${aluno.xp} XP">
-      </td>
+  <!-- XP TOTAL (melhor visual) -->
+  <td>
+    <div class="xp-total-box">
+      ${aluno.xpTotal}
+    </div>
+  </td>
 
-      <td class="${status.classe}">
-        ${status.texto}
-      </td>
+  <!-- XP SEMANA -->
+  <td style="color:#4ade80; font-weight:bold;">
+    ${aluno.xpSemana}
+  </td>
 
-      <td>
-        ${formatarData(aluno.ultimoLogin)}
-      </td>
+  <!-- STREAK -->
+  <td>🔥 ${aluno.streakAtual}</td>
+  <td>🏆 ${aluno.maiorStreak}</td>
 
-      <td>
+  <!-- SP -->
+  <td>${aluno.sciencePoints}</td>
 
-        <button class="btn-bonus"
-                data-uid="${aluno.id}">
-          ➕ XP
-        </button>
+  <!-- SP GERADOS -->
+  <td style="color:#38bdf8; font-weight:bold;">
+    ${aluno.totalSPGerados}
+  </td>
 
-        <button class="btn-science"
-                data-uid="${aluno.id}">
-          🔬 SP
-        </button>
+  <!-- BONUS -->
+  <td style="font-weight:bold; color:${aluno.bonusProvaDisponivel > 0 ? '#00ff88' : '#999'}">
+    🎯 ${aluno.bonusProvaDisponivel}
+  </td>
 
-        <button class="btn-reset-bonus"
-        data-uid="${aluno.id}">
-        🎯 Reset
-        </button>
+  <!-- PATENTE -->
+  <td class="coluna-patente">
+    <img src="${patente.imagem}"
+         class="icone-patente"
+         title="Nível ${aluno.nivel} • ${aluno.xp} XP">
+  </td>
 
-      </td>
+  <!-- STATUS -->
+  <td class="${status.classe}">
+    ${status.texto}
+  </td>
 
-    `;
+  <!-- LOGIN -->
+  <td>
+    ${formatarData(aluno.ultimoLogin)}
+  </td>
+
+  <!-- AÇÕES -->
+  <td>
+
+    <button class="btn-bonus" data-uid="${aluno.id}">
+      ➕ XP
+    </button>
+
+    <button class="btn-science" data-uid="${aluno.id}">
+      🔬 SP
+    </button>
+
+    <button class="btn-reset-bonus" data-uid="${aluno.id}">
+      🎯 Reset
+    </button>
+
+  </td>
+
+`;
 
     tabela.appendChild(tr);
 
@@ -183,183 +253,9 @@ function renderizarTabela(lista) {
 
   atualizarCards(lista);
 
-  renderizarRankingPorEscola(lista);
 
-  renderizarRankingPorTurma(lista);
 
 }
-
-
-/* =====================================================
-   RANKING POR ESCOLA
-===================================================== */
-
-function renderizarRankingPorEscola(lista) {
-
-  const container =
-    document.getElementById("ranking-escolas-container");
-
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  const escolas = {};
-
-  lista.forEach(aluno => {
-
-    if (!escolas[aluno.escola])
-      escolas[aluno.escola] = [];
-
-    escolas[aluno.escola].push(aluno);
-
-  });
-
-  Object.keys(escolas)
-  .sort()
-  .forEach(nomeEscola => {
-
-    const alunosDaEscola =
-      ordenarPorPatente([...escolas[nomeEscola]]);
-
-    const bloco = document.createElement("div");
-    bloco.classList.add("bloco-escola");
-
-    let html = `
-      <h3>🏫 ${nomeEscola}</h3>
-
-      <table class="tabela-ranking-escola">
-
-      <tr>
-        <th>#</th>
-        <th>Aluno</th>
-        <th>XP</th>
-        <th>🎖️</th>
-      </tr>
-    `;
-
-    alunosDaEscola.forEach((aluno, index) => {
-
-      const patente = obterPatentePorNivel(aluno.nivel ?? 0);
-
-      html += `
-        <tr>
-          <td>${medalha(index + 1)}</td>
-          <td>${aluno.nome}</td>
-          <td>${aluno.xp}</td>
-
-          <td>
-            <img src="${patente.imagem}"
-                 class="icone-patente">
-          </td>
-        </tr>
-      `;
-
-    });
-
-    html += `</table>`;
-
-    bloco.innerHTML = html;
-
-    container.appendChild(bloco);
-
-  });
-
-}
-
-
-/* =====================================================
-   RANKING POR TURMA
-===================================================== */
-
-function renderizarRankingPorTurma(lista) {
-
-  const container =
-    document.getElementById("ranking-turmas-container");
-
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  const turmas = {};
-
-  lista.forEach(aluno => {
-
-    const chave =
-      aluno.escola +
-      "|" +
-      aluno.serie +
-      "|" +
-      aluno.turma;
-
-    if (!turmas[chave])
-      turmas[chave] = [];
-
-    turmas[chave].push(aluno);
-
-  });
-
-  Object.keys(turmas).forEach(chave => {
-
-    const alunosDaTurma =
-      ordenarPorPatente([...turmas[chave]]);
-
-    const [escola, serie, turma] = chave.split("|");
-
-    const bloco = document.createElement("div");
-
-    bloco.classList.add("bloco-turma");
-
-    let html = `
-
-      <h3>
-      🏫 ${escola} • ${serie} • Turma ${turma}
-      </h3>
-
-      <table class="tabela-ranking-turma">
-
-      <tr>
-        <th>#</th>
-        <th>Aluno</th>
-        <th>XP</th>
-        <th>🎖️</th>
-      </tr>
-    `;
-
-    alunosDaTurma.forEach((aluno, index) => {
-
-      const patente = obterPatentePorNivel(aluno.nivel ?? 0);
-
-      html += `
-
-        <tr>
-
-          <td>${medalha(index + 1)}</td>
-
-          <td>${aluno.nome}</td>
-
-          <td>${aluno.xp}</td>
-
-          <td>
-            <img src="${patente.imagem}"
-                 class="icone-patente">
-          </td>
-
-        </tr>
-
-      `;
-
-    });
-
-    html += `</table>`;
-
-    bloco.innerHTML = html;
-
-    container.appendChild(bloco);
-
-  });
-
-}
-
 
 /* =====================================================
    CARDS RESUMO
@@ -590,40 +486,61 @@ async function carregarAlunos() {
 
     if (dados.tipo !== "aluno") return;
 
+    const nivel =
+      Number.isInteger(dados.nivel) ? dados.nivel : 0;
+
+    const xpAtual =
+      Number.isFinite(dados.xp) ? dados.xp : 0;
+
     alunosOriginais.push({
 
       id: docSnap.id,
 
       nome: dados.nome || "-",
-
       escola: dados.escola || "-",
-
       serie: dados.serie || "-",
-
       turma: dados.turma || "-",
 
-      xp: Number.isFinite(dados.xp) ? dados.xp : 0,
-      xpTotal: Number.isFinite(dados.xpTotal) ? dados.xpTotal : 0,
+      // 🎯 XP
+      xp: xpAtual,
 
-      streakAtual: Number.isFinite(dados.streakAtual)
+      xpTotal: calcularXpTotal(nivel, xpAtual),
+
+      xpSemana:
+        Number.isFinite(dados.xpSemana)
+        ? dados.xpSemana
+        : 0,
+
+      // 🔥 STREAK
+      streakAtual:
+        Number.isFinite(dados.streakAtual)
         ? dados.streakAtual
         : 0,
 
-      maiorStreak: Number.isFinite(dados.maiorStreak)
+      maiorStreak:
+        Number.isFinite(dados.maiorStreak)
         ? dados.maiorStreak
-      : 0,
-
-      sciencePoints: Number.isFinite(dados.sciencePoints)
-        ? dados.sciencePoints
-      : 0,
-
-      bonusProvaDisponivel: Number(dados.bonusProvaDisponivel) || 0,
-
-      nivel:
-        Number.isInteger(dados.nivel)
-        ? dados.nivel
         : 0,
 
+      // 🔬 SCIENCE POINTS
+      sciencePoints:
+        Number.isFinite(dados.sciencePoints)
+        ? dados.sciencePoints
+        : 0,
+
+      totalSPGerados:
+        Number.isFinite(dados.totalSPGerados)
+        ? dados.totalSPGerados
+        : 0,
+
+      // 🎯 BONUS
+      bonusProvaDisponivel:
+        Number(dados.bonusProvaDisponivel) || 0,
+
+      // 📊 PROGRESSÃO
+      nivel: nivel,
+
+      // 🕒 ATIVIDADE
       ultimoLogin:
         dados.ultimoAcesso || null
 
@@ -636,7 +553,21 @@ async function carregarAlunos() {
   alunosFiltrados = [...alunosOriginais];
 
   renderizarTabela(alunosFiltrados);
+}
 
+
+/* =====================================================
+   CALCULAR XP TOTAL (NÍVEL + ATUAL)
+===================================================== */
+function calcularXpTotal(nivel, xpAtual){
+
+  let total = 0;
+
+  for(let i = 0; i < nivel; i++){
+    total += 100 * Math.pow(2, i);
+  }
+
+  return total + xpAtual;
 }
 
 
@@ -678,22 +609,33 @@ onAuthStateChanged(auth, async (user) => {
 
   }
 
-  await carregarAlunos();
+await carregarAlunos();
 
-  document.getElementById("filtro-escola")
-  ?.addEventListener("change", aplicarFiltros);
+// 🔥 ATIVA ORDENAÇÃO NAS COLUNAS
+document.querySelectorAll("th[data-sort]")
+.forEach(th => {
 
-  document.getElementById("filtro-serie")
-  ?.addEventListener("change", aplicarFiltros);
+  th.style.cursor = "pointer";
 
-  document.getElementById("filtro-turma")
-  ?.addEventListener("change", aplicarFiltros);
+  th.addEventListener("click", () => {
+    ordenarPorCampo(th.dataset.sort);
+  });
 
-  document.getElementById("exportar-csv")
-  ?.addEventListener("click", exportarCSV);
+});
 
-  console.log("Dashboard 4.0 carregado.");
+document.getElementById("filtro-escola")
+?.addEventListener("change", aplicarFiltros);
 
+document.getElementById("filtro-serie")
+?.addEventListener("change", aplicarFiltros);
+
+document.getElementById("filtro-turma")
+?.addEventListener("change", aplicarFiltros);
+
+document.getElementById("exportar-csv")
+?.addEventListener("click", exportarCSV);
+
+console.log("Dashboard 5.0 carregado.");
 });
 
 

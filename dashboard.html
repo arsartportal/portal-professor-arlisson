@@ -161,38 +161,44 @@
 
 <tr>
 
-  <!-- POSIÇÃO -->
-  <th>#</th>
+  <!-- POSIÇÃO (RESETA O RANKING) -->
+  <th data-sort="posicao">#</th>
 
   <!-- NOME -->
-  <th>Aluno</th>
+  <th data-sort="nome">Aluno</th>
 
   <!-- ESCOLA -->
-  <th>Escola</th>
+  <th data-sort="escola">Escola</th>
 
   <!-- SÉRIE -->
-  <th>Série</th>
+  <th data-sort="serie">Série</th>
 
   <!-- TURMA -->
-  <th>Turma</th>
+  <th data-sort="turma">Turma</th>
 
   <!-- XP ATUAL -->
-  <th>XP</th>
+  <th data-sort="xp">XP</th>
 
   <!-- XP TOTAL -->
-  <th>XP Total</th>
+  <th data-sort="xpTotal">XP Total</th>
+
+  <!-- XP SEMANA -->
+  <th data-sort="xpSemana">📅 XP Semana</th>
 
   <!-- STREAK -->
-  <th>🔥 Streak</th>
+  <th data-sort="streakAtual">🔥 Streak</th>
 
   <!-- MAIOR STREAK -->
-  <th>🏆 Maior Streak</th>
+  <th data-sort="maiorStreak">🏆 Maior Streak</th>
 
-  <!-- SCIENCE POINTS -->
-  <th>🔬 SciencePoints</th>
+  <!-- SP -->
+  <th data-sort="sciencePoints">🔬 SciencePoints</th>
 
-  <!-- BÔNUS PROVA -->
-  <th>🎯 Bônus Prova</th>
+  <!-- SP GERADOS -->
+  <th data-sort="totalSPGerados">🌍 SP Gerados</th>
+
+  <!-- BÔNUS -->
+  <th data-sort="bonusProvaDisponivel">🎯 Bônus Prova</th>
 
   <!-- PATENTE -->
   <th class="coluna-patente">
@@ -200,10 +206,10 @@
   </th>
 
   <!-- STATUS -->
-  <th>Status</th>
+  <th data-sort="status">Status</th>
 
   <!-- ÚLTIMO LOGIN -->
-  <th>Último acesso</th>
+  <th data-sort="ultimoLogin">Último acesso</th>
 
   <!-- AÇÕES -->
   <th class="coluna-acoes">
@@ -230,55 +236,7 @@
 
 
 
-<!-- =====================================================
-     RANKING POR ESCOLA
-===================================================== -->
 
-<section class="ranking-escolas">
-
-<h2>
-🏫 Ranking por Escola
-</h2>
-
-<!--
-Cada escola terá seu próprio ranking
-Gerado automaticamente pelo dashboard.js
--->
-
-<div id="ranking-escolas-container">
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     RANKING POR TURMA
-     Escola + Série + Turma
-===================================================== -->
-
-<section class="ranking-turmas">
-
-<h2>
-🎓 Ranking por Turma
-</h2>
-
-<!--
-Exemplo de bloco gerado pelo JS:
-
-🏫 Audiocomunicação • 1ano • Turma A
-
-🥇 João
-🥈 Maria
-🥉 Pedro
--->
-
-<div id="ranking-turmas-container">
-
-</div>
-
-</section>
 
 
 

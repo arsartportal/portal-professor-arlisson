@@ -665,11 +665,25 @@ button:disabled{
   background:linear-gradient(145deg,#1f2937,#111827);
   padding:40px;
   border-radius:16px;
-  text-align:center;
+  
   animation:pop 0.3s ease;
   box-shadow:0 30px 80px rgba(0,0,0,0.8);
   max-width:100%;
   box-sizing:border-box;
+  align-items: center; /* 🔥 centraliza tudo horizontalmente */
+  text-align: center;  /* 🔥 centraliza textos */
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center; /* CENTRALIZA */
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  min-width: 140px;
 }
 
 @keyframes pop{
@@ -765,8 +779,6 @@ button:disabled{
 }
 
 .premio-xp{
-  font-size:34px;
-  margin-top:15px;
   font-weight:bold;
   color:#38bdf8;
   text-shadow:
@@ -774,6 +786,13 @@ button:disabled{
     0 0 25px #38bdf8,
     0 0 45px #0ea5e9;
   animation:xpGlow 1.2s infinite alternate;
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.premio-emoji {
+  font-size: 60px;
+  margin-bottom: 10px;
 }
 
 @keyframes xpGlow{
@@ -2132,6 +2151,7 @@ BOTÃO
   box-shadow:
     0 16px 34px rgba(14,165,233,.22),
     inset 0 1px 0 rgba(255,255,255,.12);
+  margin-top: 20px;
 }
 
 .modal-box button:hover{
@@ -2310,4 +2330,63 @@ AVISO DA CAIXA
   color: rgba(255,255,255,.55);
   font-size: .78rem;
   line-height: 1.5;
+}
+
+.barra-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #22c55e, #38bdf8);
+  border-radius: 10px;
+  transition: width 1.2s ease-in-out;
+}
+
+.meta-recompensa {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.meta-recompensa .xp {
+  color: #38bdf8;
+  font-weight: bold;
+}
+
+.meta-recompensa .quiz {
+  margin-left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  color: #022c22;
+  font-weight: bold;
+  animation: pulseQuiz 1.5s infinite;
+}
+
+@keyframes pulseQuiz {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.meta-recompensa .quiz {
+  margin-left: 10px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  color: #022c22;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(34,197,94,0.6);
+  animation: pulseQuiz 1.4s infinite;
+}
+
+@keyframes pulseQuiz {
+  0% { transform: scale(1); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 0 18px rgba(34,197,94,0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+}
+
+.btn-confirmar {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+}
+
+.btn-cancelar {
+  background: #374151;
 }

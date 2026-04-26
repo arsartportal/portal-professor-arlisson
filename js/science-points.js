@@ -1,159 +1,152 @@
 // =======================================
-// SCIENCE-POINTS.JS
-// Sistema de moeda SciencePoints (SP)
-// Usado para loja, roleta e recompensas
+// 🔬 SCIENCE-POINTS.JS
+// Sistema de moeda Science Points (SP)
+// Responsável por:
+// - Saldo do usuário
+// - Histórico de SP gerados
+// - Gastos na loja
+// - Integração com eventos comunitários
 // =======================================
 
-// Firebase
+
+// =======================================
+// 🔥 IMPORTS
+// =======================================
+
 import { auth, db } from "./firebase.js";
 
 import {
-doc,
-getDoc,
-setDoc
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 
 // =======================================
-// CARREGAR SCIENCE POINTS DO USUÁRIO
+// 📥 CARREGAR SP DO USUÁRIO
 // =======================================
 
 export async function carregarSP(){
 
   const user = auth.currentUser;
-
-  // se não estiver logado, sai
   if(!user) return;
 
   try{
 
     const ref = doc(db,"usuarios",user.uid);
-
     const snap = await getDoc(ref);
 
     if(!snap.exists()) return;
 
     const dados = snap.data();
-
-    // se não existir, assume 0
     const sp = dados.sciencePoints || 0;
 
-    // elemento da interface
-    const el = document.getElementById("spValor");
-
-    if(el){
-      el.textContent = sp;
-    }
+    atualizarSPNaTela(sp);
 
   }catch(erro){
-
-    console.error("Erro ao carregar SciencePoints:",erro);
-
+    console.error("❌ Erro ao carregar SciencePoints:", erro);
   }
 
 }
 
 
-
 // =======================================
-// ADICIONAR SCIENCE POINTS
+// ➕ ADICIONAR SP
+// (USAR SEMPRE ESSA FUNÇÃO)
 // =======================================
 
 export async function adicionarSP(valor){
 
   const user = auth.currentUser;
-
   if(!user) return;
 
   try{
 
-    const ref = doc(db,"usuarios",user.uid);
+    const refUser = doc(db,"usuarios",user.uid);
 
-    const snap = await getDoc(ref);
+    // 🔥 Atualização atômica (evita bugs concorrentes)
+    await updateDoc(refUser,{
+      sciencePoints: increment(valor),
 
-    let atual = 0;
+      // 🔬 HISTÓRICO INDIVIDUAL (engajamento)
+      totalSPGerados: increment(valor)
+    });
 
-    // pega SP atual
-    if(snap.exists()){
-      atual = snap.data().sciencePoints || 0;
-    }
+    // 🌍 (OPCIONAL) GLOBAL - para eventos comunitários
+    const refGlobal = doc(db,"config","lojaStats");
 
-    const novo = atual + valor;
+    await updateDoc(refGlobal,{
+      totalSPGeradoGlobal: increment(valor)
+    });
 
-    // salva usando merge (não sobrescreve outros campos)
-    await setDoc(ref,{
-      sciencePoints: novo
-    },{merge:true});
+    // 🔄 Atualiza UI
+    carregarSP();
 
-    // atualiza interface
-    atualizarSPNaTela(novo);
-
-    console.log(`⚛️ +${valor} SciencePoints`);
+    console.log(`⚛️ +${valor} SP adicionados`);
 
   }catch(erro){
-
-    console.error("Erro ao adicionar SciencePoints:",erro);
-
+    console.error("❌ Erro ao adicionar SP:", erro);
   }
 
 }
 
 
-
 // =======================================
-// GASTAR SCIENCE POINTS
-// (usado na loja futuramente)
+// ➖ GASTAR SP
 // =======================================
 
 export async function gastarSP(valor){
 
   const user = auth.currentUser;
-
   if(!user) return false;
 
   try{
 
-    const ref = doc(db,"usuarios",user.uid);
+    const refUser = doc(db,"usuarios",user.uid);
+    const refGlobal = doc(db,"config","lojaStats");
 
-    const snap = await getDoc(ref);
+    const snap = await getDoc(refUser);
 
     if(!snap.exists()) return false;
 
     const atual = snap.data().sciencePoints || 0;
 
-    // impedir saldo negativo
+    // 🚫 Bloqueia saldo negativo
     if(atual < valor){
-
-      console.warn("SP insuficiente");
-
+      console.warn("⚠️ SP insuficiente");
       return false;
-
     }
 
     const novo = atual - valor;
 
-    await setDoc(ref,{
+    // 💰 Atualiza saldo
+    await setDoc(refUser,{
       sciencePoints: novo
     },{merge:true});
 
+    // 🌍 Atualiza gasto global (EVENTO)
+    await updateDoc(refGlobal,{
+      totalSPGasto: increment(valor)
+    });
+
     atualizarSPNaTela(novo);
+
+    console.log(`🛒 -${valor} SP gastos`);
 
     return true;
 
   }catch(erro){
-
-    console.error("Erro ao gastar SciencePoints:",erro);
-
+    console.error("❌ Erro ao gastar SP:", erro);
     return false;
-
   }
 
 }
 
 
-
 // =======================================
-// ATUALIZAR SP NA INTERFACE
+// 🔄 ATUALIZAR SP NA INTERFACE
 // =======================================
 
 function atualizarSPNaTela(valor){

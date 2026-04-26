@@ -610,9 +610,6 @@ transaction.update(ref, {
   // 🎯 DESAFIOS
   totalDesafiosConcluidos: increment(1),
 
-  // 🔬 SP GERADO (histórico)
-  totalSPGerados: increment(sp),
-
   ultimoQuizDiario: {
     data: hoje,
     resultado

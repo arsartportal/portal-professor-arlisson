@@ -10,11 +10,10 @@ box-sizing:border-box;
 }
 
 body{
+  font-family:'Segoe UI',Arial,sans-serif;
 
-font-family:'Segoe UI',Arial,sans-serif;
-background:#f4f6fb;
-color:#2c3e50;
-
+  background: radial-gradient(circle at top, #0f172a, #020617 70%);
+  color:#e2e8f0;
 }
 
 
@@ -24,16 +23,16 @@ color:#2c3e50;
 ===================================================== */
 
 .barra-superior{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+  padding:18px 30px;
 
-padding:15px 30px;
+  background: rgba(15,23,42,0.7);
+  backdrop-filter: blur(12px);
 
-background:white;
-border-bottom:1px solid #e6e9f0;
-
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
 .btn-voltar{
@@ -120,25 +119,33 @@ padding:0 30px 30px;
 }
 
 .card{
+  background: rgba(15,23,42,0.8);
+  backdrop-filter: blur(10px);
 
-background:white;
+  padding:22px;
+  border-radius:16px;
 
-padding:20px;
+  border:1px solid rgba(255,255,255,0.05);
 
-border-radius:12px;
+  box-shadow:
+    0 0 30px rgba(0,0,0,0.3),
+    inset 0 0 20px rgba(255,255,255,0.02);
 
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  font-size:22px;
+  font-weight:700;
 
-font-size:22px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 
-font-weight:700;
+  transition:0.3s;
+}
 
-display:flex;
+.card:hover{
+  transform: translateY(-5px) scale(1.02);
 
-flex-direction:column;
-
-gap:6px;
-
+  box-shadow:
+    0 0 40px rgba(34,197,94,0.15);
 }
 
 .card small{
@@ -170,19 +177,15 @@ flex-wrap:wrap;
 }
 
 .filtros select{
+  padding:10px 14px;
 
-padding:10px 14px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
 
-border-radius:8px;
+  background:#020617;
+  color:white;
 
-border:1px solid #dcdfe6;
-
-background:white;
-
-font-size:14px;
-
-cursor:pointer;
-
+  font-size:14px;
 }
 
 
@@ -197,58 +200,57 @@ padding:0 30px 40px;
 
 overflow-x:auto;
 
+scroll-behavior: smooth
+
 }
 
 .tabela-dashboard{
+  width:100%;
+  border-collapse:collapse;
 
-width:100%;
+  background: rgba(2,6,23,0.9);
+  border-radius:16px;
 
-border-collapse:collapse;
+  
+  border:1px solid rgba(255,255,255,0.06);
 
-background:white;
-
-border-radius:12px;
-
-overflow:hidden;
-
-box-shadow:0 4px 14px rgba(0,0,0,0.05);
-
+  box-shadow:0 0 40px rgba(0,0,0,0.4);
 }
 
 .tabela-dashboard thead{
-
-background:#eef2ff;
-
+  background: rgba(15,23,42,0.9);
 }
 
 .tabela-dashboard th{
-
-text-align:left;
-
-padding:14px;
-
-font-size:14px;
-
-color:#2c3e50;
-
+  padding:14px;
+  font-size:13px;
+  color:#94a3b8;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
 .tabela-dashboard td{
-
-padding:12px 14px;
-
-border-top:1px solid #f1f2f6;
-
-font-size:14px;
-
+  padding:13px;
+  border-top:1px solid rgba(255,255,255,0.04);
 }
 
 .tabela-dashboard tr:hover{
-
-background:#f8f9ff;
-
+  background: rgba(34,197,94,0.08);
 }
 
+
+.tabela-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabela-container::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
+.tabela-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  border-radius: 10px;
+}
 
 
 /* =====================================================
@@ -267,6 +269,23 @@ width:28px;
 
 height:28px;
 
+}
+
+td:nth-child(7){ /* XP Total */
+  color:#4ade80;
+  font-weight:600;
+}
+
+td:nth-child(8){ /* XP Semana */
+  color:#22c55e;
+}
+
+td:nth-child(11){ /* SP */
+  color:#a78bfa;
+}
+
+td:nth-child(12){ /* SP Gerados */
+  color:#38bdf8;
 }
 
 
@@ -308,54 +327,48 @@ text-align:center;
 
 }
 
+.btn-bonus,
+.btn-science,
+.btn-reset-bonus{
+
+  border:none;
+  padding:7px 12px;
+  border-radius:8px;
+
+  font-size:13px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.25s;
+}
+
 .btn-bonus{
-
-background:#3498db;
-color:white;
-
-border:none;
-
-padding:6px 10px;
-
-border-radius:6px;
-
-cursor:pointer;
-
-font-size:13px;
-
-margin-right:5px;
-
+  background:#3b82f6;
 }
 
 .btn-bonus:hover{
-
-background:#2980b9;
-
+  box-shadow:0 0 12px #3b82f6;
+  transform:scale(1.05);
 }
 
 .btn-science{
-
-background:#9b59b6;
-color:white;
-
-border:none;
-
-padding:6px 10px;
-
-border-radius:6px;
-
-cursor:pointer;
-
-font-size:13px;
-
+  background:#a855f7;
 }
 
 .btn-science:hover{
-
-background:#7d3c98;
-
+  box-shadow:0 0 12px #a855f7;
+  transform:scale(1.05);
 }
 
+.btn-reset-bonus{
+  background:#ef4444;
+}
+
+.btn-reset-bonus:hover{
+  box-shadow:0 0 12px #ef4444;
+  transform:scale(1.05);
+}
 
 
 /* =====================================================
@@ -536,4 +549,85 @@ font-weight:800;
 .coluna-acoes button{
   display:inline-block;
   vertical-align:middle;
+}
+
+.xp-total-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 4px 8px;
+  display: inline-block;
+}
+
+/* fixa posição (#) */
+.tabela-dashboard td:first-child,
+.tabela-dashboard th:first-child {
+  position: sticky;
+  left: 0;
+  background: #020617;
+  z-index: 2;
+}
+
+/* fixa nome */
+.tabela-dashboard td:nth-child(2),
+.tabela-dashboard th:nth-child(2) {
+  position: sticky;
+  left: 50px;
+  background: #020617;
+  z-index: 2;
+}
+
+.tabela-dashboard th,
+.tabela-dashboard td {
+  white-space: nowrap;
+}
+
+@media(max-width:1200px){
+
+  /* esconde XP total */
+  th:nth-child(7),
+  td:nth-child(7){
+    display:none;
+  }
+
+  /* esconde SP gerados */
+  th:nth-child(12),
+  td:nth-child(12){
+    display:none;
+  }
+
+}
+
+/* Centraliza tudo por padrão */
+.tabela-dashboard th,
+.tabela-dashboard td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Nome */
+.tabela-dashboard td:nth-child(2),
+.tabela-dashboard th:nth-child(2) {
+  text-align: left;
+  padding-left: 16px;
+}
+
+/* Escola */
+.tabela-dashboard td:nth-child(3),
+.tabela-dashboard th:nth-child(3) {
+  text-align: left;
+}  
+
+th[data-sort] {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+th[data-sort]:hover {
+  color: #4ade80;
+}
+
+th[data-sort]::after {
+  content: " ⬍";
+  opacity: 0.3;
+  font-size: 12px;
 }

@@ -48,8 +48,10 @@
   </div>
 
   <div class="meta-recompensa">
-    🎁 Recompensa: +1000 XP para todos
-  </div>
+  🎁 Recompensa:
+  <span class="xp">+1000 XP para todos</span>
+  <span class="quiz">+ Quiz Copa do Mundo</span>
+</div>
 </div>
   <!-- 🏆 RANKING DE GASTADORES -->
 <div class="ranking-sp">
@@ -298,6 +300,17 @@
   `
 },
 
+// Revanche do Acadêmica (prova extra)
+{
+  id: "revanche-academica",
+  nome: "🔁 Revanche Acadêmica",
+  preco: 120,
+  tipo: "prova-extra",
+  raridade: "epico",
+  ordem: 15,
+  descricao: "Permite realizar uma prova extra para aumentar sua nota."
+},
+
   // 🎡 ROLETA
   { id: "roleta-cientifica", nome: "🎡 Roleta Científica", preco: 100, raridade: "epico", ordem: 43, descricao: "Gire para ganhar XP aleatório." },
 
@@ -310,7 +323,7 @@
   quantidade: 1,
   raridade: "comum",
   ordem: 39,
-  descricao: "Permite 1 acesso ao ranking por 3 minutos."
+  descricao: "Permite 1 acesso ao ranking."
 },
   
   { 
@@ -356,7 +369,7 @@
     // 🗓️ DATAS DE LIBERAÇÃO POR TIPO
     const datasLiberacao = {
     caixas: new Date("2026-04-25T10:00:00"),
-    ranking: new Date("2026-05-15T10:00:00"),
+    ranking: new Date("2026-04-30T10:00:00"),
     roleta: new Date("2026-05-30T12:00:00"),
     chaveiro: new Date("2026-11-23T18:00:00"),
     prova: new Date("2026-04-10T08:00:00"),
@@ -472,7 +485,7 @@ function carregarSPGlobal() {
 
     const el = document.getElementById("sp-global");
     if (el) {
-      el.innerText = total.toLocaleString("pt-BR");
+      animarNumero(el, total);
     }
   });
 }
@@ -497,6 +510,31 @@ function carregarMetaGlobal() {
     document.getElementById("meta-valor").innerText = total.toLocaleString("pt-BR");
     document.getElementById("meta-max").innerText = meta.toLocaleString("pt-BR");
   });
+}
+
+function animarNumero(el, valorFinal, duracao = 1200) {
+  if (el._animando) return; // evita múltiplas animações
+
+  el._animando = true;
+
+  let inicio = 0;
+  const startTime = performance.now();
+
+  function animar(tempoAtual) {
+    const progresso = Math.min((tempoAtual - startTime) / duracao, 1);
+    const valor = Math.floor(progresso * valorFinal);
+
+    el.innerText = valor.toLocaleString("pt-BR");
+
+    if (progresso < 1) {
+      requestAnimationFrame(animar);
+    } else {
+      el.innerText = valorFinal.toLocaleString("pt-BR");
+      el._animando = false;
+    }
+  }
+
+  requestAnimationFrame(animar);
 }
 
 // 🎁 DAR RECOMPENSA PARA TODOS
@@ -551,7 +589,7 @@ async function darRecompensaGlobal() {
 
     await Promise.all(promisesRanking);
 
-    alert("🔥 META ATINGIDA! Todos ganharam +1000 XP + bônus para o TOP 3!");
+    mostrarAlertaGlobal("🔥 META GLOBAL ATINGIDA! +1000 XP + QUIZ LIBERADO!");
     
   } catch (erro) {
     console.error("Erro recompensa global:", erro);
@@ -1507,15 +1545,10 @@ modal.innerHTML = `
         Custo: <b>${item.preco} SP</b>
       </p>
 
-      <div style="display:flex;gap:12px;margin-top:24px;">
-        <button id="confirmarCompraBtn">
-          Confirmar
-        </button>
-
-        <button id="cancelarCompraBtn" style="background:#444;">
-          Cancelar
-        </button>
-      </div>
+      <div class="modal-actions">
+  <button id="confirmarCompraBtn" class="btn-confirmar">Confirmar</button>
+  <button id="cancelarCompraBtn" class="btn-cancelar">Cancelar</button>
+</div>
 
     </div>
   </div>
@@ -1703,6 +1736,74 @@ if (item.fichas) {
 
   return;
 }
+
+// 🔁 REVANCHE ACADÊMICA
+if (item.tipo === "prova-extra") {
+
+  const user = auth.currentUser;
+  const snap = await getDoc(userRef);
+  const dados = snap.data();
+
+  const jaTem = dados.provaExtraDisponivel || 0;
+
+  // 🚫 LIMITE
+  if (jaTem >= 1) {
+    alert("❌ Você já possui uma prova extra disponível!");
+    return;
+  }
+
+  const sciencePointsAntes = dados.sciencePoints || 0;
+  const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+  await registrarSPGlobal(item.preco);
+  await verificarMetaGlobal();
+  await registrarRankingGasto(item.preco);
+
+  await updateDoc(userRef, {
+    sciencePoints: sciencePointsDepois,
+    provaExtraDisponivel: increment(1)
+  });
+
+  spAluno = sciencePointsDepois;
+  atualizarSPNaTela();
+
+  await registrarCompra("adquiriu 🔁 Revanche Acadêmica");
+
+  renderLoja();
+
+  const modal = document.getElementById("modal");
+
+modal.innerHTML = `
+  <div class="modal">
+    <div class="modal-box resultado-caixa resultado-epico">
+
+      <div class="premio-emoji">
+        🔁
+      </div>
+
+       <p class="premio-descricao">
+        Você desbloqueou:
+      </p>
+
+      <div class="premio-xp">
+        Revanche Acadêmica
+      </div>
+
+      <p class="premio-chance">
+        Agora você pode refazer uma prova para melhorar sua nota.
+      </p>
+
+      <button onclick="fecharCaixa()">
+        Continuar
+      </button>
+
+    </div>
+  </div>
+`;
+
+  return;
+}
+
 
         // 📝 COMPRA DE BÔNUS DE PROVA
 if (item.tipo === "prova") {
