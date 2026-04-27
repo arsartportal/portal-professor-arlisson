@@ -778,18 +778,111 @@ section {
 }
 
 /* 🔥 BADGE NOVO */
+/* =================================================
+🧰 HERO FERRAMENTAS (VERSÃO FINAL)
+================================================= */
+
+.hero-ferramentas {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  margin-bottom: 28px;
+
+  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* FUNDO */
+.hero-ferramentas .hero-bg {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56,189,248,.25), transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(124,58,237,.25), transparent 30%);
+
+  opacity: .8;
+}
+
+/* CONTEÚDO */
+.hero-ferramentas .hero-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  gap: 30px;
+}
+
+/* TEXTO */
+.hero-ferramentas h1 {
+  color: #e2e8f0;
+}
+
+.hero-ferramentas h1 span {
+  color: #38bdf8;
+
+  text-shadow:
+    0 0 10px rgba(56,189,248,.4),
+    0 0 25px rgba(56,189,248,.2);
+}
+
+.hero-ferramentas p {
+  color: rgba(255,255,255,.75);
+}
+
+/* VISUAL */
+.hero-ferramentas .hero-visual span {
+  font-size: 3rem;
+  animation: flutuar 3s infinite ease-in-out alternate;
+}
+
+.hero-ferramentas .hero-visual span:nth-child(2){
+  animation-delay: .3s;
+}
+
+.hero-ferramentas .hero-visual span:nth-child(3){
+  animation-delay: .6s;
+}
+
+/* =================================================
+🏷️ BADGE NOVO (POSICIONAMENTO)
+================================================= */
+
 .badge-novo {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #ff3b3b;
-  color: white;
-  font-size: 0.7rem;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255,59,59,0.6);
-  animation: pulse 1.5s infinite;
+  top: 20px;
+  left: 20px;
+
+  background: linear-gradient(135deg, #38bdf8, #22d3ee);
+  color: #020617;
+
+  font-weight: 800;
+  font-size: 12px;
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  box-shadow: 0 0 12px rgba(56,189,248,.4);
+
+  z-index: 5;
+}
+
+/* 👉 NOVO DO LADO DIREITO */
+.badge-novo.direita {
+  left: auto;
+  right: 20px;
+}
+
+/* =================================================
+✨ ANIMAÇÃO
+================================================= */
+
+@keyframes flutuar {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
 }
 
 @keyframes pulse {
@@ -2235,166 +2328,5 @@ CONTEÚDO
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-15px) scale(1.08); }
   100% { transform: translateY(0); }
-}
-
-.hero-ferramentas {
-  position: relative;
-  border-radius: 32px;
-  overflow: hidden;
-  margin-bottom: 28px;
-
-  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
-  border: 1px solid rgba(255,255,255,.08);
-}
-
-.hero-ferramentas p {
-  color: rgba(255,255,255,.75);
-}
-
-.hero-ferramentas .hero-bg {
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(circle at 20% 30%, rgba(56,189,248,.25), transparent 30%),
-    radial-gradient(circle at 80% 70%, rgba(124,58,237,.25), transparent 30%);
-  opacity: .8;
-}
-
-.hero-ferramentas .hero-content {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px;
-  gap: 30px;
-}
-
-/* linha 1 (Ferramentas) */
-.hero-ferramentas h1 {
-  color: #e2e8f0; /* branco suave elegante */
-}
-
-/* linha 2 (Pedagógicas) */
-.hero-ferramentas h1 span {
-  color: #38bdf8;
-
-  text-shadow:
-    0 0 10px rgba(56,189,248,.4),
-    0 0 25px rgba(56,189,248,.2);
-}
-
-.hero-ferramentas .hero-visual span {
-  font-size: 3rem;
-  animation: flutuar 3s infinite ease-in-out alternate;
-}
-
-.hero-ferramentas .hero-visual span:nth-child(2){
-  animation-delay: .3s;
-}
-
-.hero-ferramentas .hero-visual span:nth-child(3){
-  animation-delay: .6s;
-}
-
-@keyframes flutuar {
-  from { transform: translateY(0); }
-  to { transform: translateY(-10px); }
-}
-
-/* =================================================
-📱 RESPONSIVO - HERO FERRAMENTAS
-================================================= */
-
-@media (max-width: 768px) {
-
-  .hero-ferramentas .hero-content {
-    flex-direction: column; /* empilha */
-    align-items: flex-start;
-    padding: 24px; /* reduz espaço */
-    gap: 20px;
-  }
-
-  .hero-ferramentas {
-    border-radius: 20px; /* menos exagerado no mobile */
-  }
-
-  /* esconde os ícones flutuantes (causam overflow) */
-  .hero-ferramentas .hero-visual {
-    display: none;
-  }
-
-  /* título menor */
-  .hero-ferramentas h1 {
-    font-size: 1.8rem;
-    line-height: 1.2;
-  }
-
-  /* texto mais compacto */
-  .hero-ferramentas p {
-    font-size: 0.95rem;
-  }
-
-}
-
-/* =================================================
-🚫 CORREÇÃO OVERFLOW MOBILE (SOLUÇÃO DEFINITIVA)
-================================================= */
-
-@media (max-width: 768px) {
-
-  /* 🔥 corrige fundo gigante */
-  .hero-bg {
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  /* 🔥 evita vazamento de animação */
-  .hero-ferramentas {
-    overflow: hidden;
-  }
-
-  /* 🔥 remove animação no mobile (performance + bug fix) */
-  .hero-ferramentas .hero-visual span {
-    animation: none;
-  }
-
-}
-
-/* =========================================
-🔥 CORREÇÃO FINAL DEFINITIVA (SEM SCROLL BUG)
-========================================= */
-
-html, body {
-  overflow-x: hidden;
-}
-
-@media (max-width: 768px) {
-
-  /* trava qualquer vazamento invisível */
-  body {
-    overflow-x: hidden;
-  }
-
-  /* impede elementos animados de "escaparem" */
-  .particles,
-  .math-bg,
-  .fisica-bg,
-  .atomos-bg,
-  .biblioteca-bg {
-    overflow: hidden;
-  }
-
-  /* reduz agressividade das animações */
-  .particles span,
-  .math-bg span,
-  .fisica-bg span,
-  .atomos-bg span,
-  .biblioteca-bg span {
-    animation-duration: 12s !important;
-  }
-
 }
 
