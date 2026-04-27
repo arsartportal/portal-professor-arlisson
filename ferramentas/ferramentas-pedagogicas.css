@@ -476,3 +476,134 @@ RESPONSIVO
     font-size: 1.35rem;
   }
 }
+
+/* =================================================
+🔙 TOPO
+================================================= */
+.topo-ferramentas{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.btn-voltar{
+  color: var(--texto-soft);
+  text-decoration: none;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.btn-voltar:hover{
+  color: var(--azul);
+}
+
+.btn-ir-loja{
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: #022c22;
+
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+
+  box-shadow: 0 10px 20px rgba(34,197,94,.25);
+}
+
+/* =================================================
+💡 AVISO
+================================================= */
+.aviso-ferramentas{
+  margin-top: 28px;
+  padding: 20px;
+
+  border-radius: 18px;
+
+  background: rgba(56,189,248,.08);
+  border: 1px solid rgba(56,189,248,.18);
+}
+
+.aviso-ferramentas strong{
+  display: block;
+  margin-bottom: 8px;
+  color: var(--azul);
+}
+
+.aviso-ferramentas p{
+  color: var(--texto-soft);
+  margin-bottom: 12px;
+}
+
+.btn-loja{
+  display: inline-block;
+
+  background: linear-gradient(135deg, var(--azul-forte), var(--azul));
+  color: white;
+
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+
+  box-shadow: 0 10px 25px rgba(14,165,233,.25);
+}
+
+/* =================================================
+✨ DESTAQUE DO TÍTULO
+================================================= */
+.hero-conteudo h1 .destaque{
+  color: var(--azul);
+
+  text-shadow:
+    0 0 12px rgba(56,189,248,.35),
+    0 0 30px rgba(56,189,248,.15);
+}
+
+/* =================================================
+🔒 BLOQUEIO LIMPO (SEM BUG)
+================================================= */
+
+.card-ferramenta.bloqueado {
+  pointer-events: none;
+}
+
+/* overlay invisível por padrão */
+.overlay-bloqueio {
+  display: none;
+}
+
+/* quando bloqueado aparece */
+.card-ferramenta.bloqueado .overlay-bloqueio {
+  display: flex;
+
+  position: absolute;
+  inset: 0;
+
+  background: rgba(2, 6, 23, 0.65);
+  backdrop-filter: blur(4px);
+
+  border-radius: inherit;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+}
+
+/* label */
+.overlay-bloqueio span {
+  background: rgba(15,23,42,.9);
+  border: 1px solid rgba(255,255,255,.1);
+
+  padding: 10px 16px;
+  border-radius: 12px;
+
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* botão bloqueado */
+.card-ferramenta.bloqueado button {
+  background: #334155;
+  color: rgba(255,255,255,.6);
+}

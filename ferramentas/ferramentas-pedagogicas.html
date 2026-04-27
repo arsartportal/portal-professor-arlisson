@@ -7,77 +7,99 @@
 
   <link rel="stylesheet" href="./ferramentas-pedagogicas.css">
 </head>
+
 <body>
 
-  <main class="pagina-ferramentas">
+<main class="pagina-ferramentas">
 
-    <section class="hero-ferramentas">
-      <div class="hero-conteudo">
-        <span class="tag">🛠️ Área do Professor</span>
+  <!-- 🔙 TOPO -->
+  <div class="topo-ferramentas">
+    <a href="../home.html" class="btn-voltar">← Voltar ao Portal</a>
+  </div>
 
-        <h1>Ferramentas Pedagógicas</h1>
+  <!-- 🎯 HERO -->
+  <section class="hero-ferramentas">
+    <div class="hero-conteudo">
+
+      <span class="tag">🛠️ Área do Professor</span>
+
+      <h1>
+        Ferramentas<br>
+        <span class="destaque">Pedagógicas</span>
+      </h1>
+
+      <p>
+        Utilize ferramentas interativas para enriquecer suas aulas.
+      </p>
+
+      <div class="aviso-ferramentas">
+        <strong>🔒 As ferramentas precisam ser desbloqueadas</strong>
 
         <p>
-          Um espaço com calculadoras, geradores, recursos de sala de aula e
-          utilidades para facilitar o planejamento e a rotina do professor.
+          Utilize seus SciencePoints na Central de Recompensas.
         </p>
+
+        <a href="../loja.html" class="btn-loja">
+          🚀 Ir para a Central de Recompensas
+        </a>
       </div>
-    </section>
 
-    <section class="grid-ferramentas">
+    </div>
+  </section>
 
-  <article class="card-ferramenta">
-    <div class="icone">📈</div>
-    <h2>Progressão Aritmética Dinâmica</h2>
-    <p>
-      Explore termos, soma, fórmula e gráfico de uma PA de forma interativa.
-    </p>
+  <!-- 🧩 GRID -->
+  <section class="grid-ferramentas">
 
-    <button onclick="window.location.href='./progressao-aritmetica-dinamica/progressao-aritmetica-dinamica.html'">
-      Abrir
-    </button>
-  </article>
+    <!-- CARD -->
+    <article class="card-ferramenta" data-tool="pa">
+      <div class="icone">📈</div>
+      <h2>Progressão Aritmética Dinâmica</h2>
+      <p>Explore termos e gráficos.</p>
+      <button>Carregando...</button>
 
-  <article class="card-ferramenta">
-    <div class="icone">📉</div>
-    <h2>Progressão Geométrica Dinâmica</h2>
-    <p>
-      Descubra rapidamente os termos, razão, soma e gráfico de uma PG.
-    </p>
+      <div class="overlay-bloqueio">
+        <span>🔒 Bloqueado</span>
+      </div>
+    </article>
 
-    <button onclick="window.location.href='./progressao-geometrica-dinamica/progressao-geometrica-dinamica.html'">
-      Abrir
-    </button>
-  </article>
+    <article class="card-ferramenta" data-tool="pg">
+      <div class="icone">📉</div>
+      <h2>Progressão Geométrica Dinâmica</h2>
+      <p>Descubra termos e razão.</p>
+      <button>Carregando...</button>
 
-  <article class="card-ferramenta">
-    <div class="icone">⚖️</div>
-    <h2>Comparador PA × PG</h2>
-    <p>
-      Compare lado a lado o crescimento de uma PA e de uma PG.
-    </p>
+      <div class="overlay-bloqueio">
+        <span>🔒 Bloqueado</span>
+      </div>
+    </article>
 
-    <button onclick="window.location.href='./paxpg/paxpg.html'">
-      Abrir
-    </button>
-  </article>
+    <article class="card-ferramenta" data-tool="paxpg">
+      <div class="icone">⚖️</div>
+      <h2>Comparador PA × PG</h2>
+      <p>Compare crescimento.</p>
+      <button>Carregando...</button>
 
-  <article class="card-ferramenta">
-    <div class="icone">📊</div>
-    <h2>Estatística Dinâmica</h2>
-    <p>
-      Calcule média, mediana, moda, amplitude e visualize gráficos.
-    </p>
+      <div class="overlay-bloqueio">
+        <span>🔒 Bloqueado</span>
+      </div>
+    </article>
 
-    <button onclick="window.location.href='./estatistica-dinamica/estatistica-dinamica.html'">
-      Abrir
-    </button>
-  </article>
+    <article class="card-ferramenta destaque" data-tool="estatistica">
+      <div class="icone">📊</div>
+      <h2>Estatística Dinâmica</h2>
+      <p>Visualize gráficos.</p>
+      <button>Carregando...</button>
 
-</section>
+      <div class="overlay-bloqueio">
+        <span>🔒 Bloqueado</span>
+      </div>
+    </article>
 
-  </main>
+  </section>
 
-  <script type="module" src="./ferramentas-pedagogicas.js"></script>
+</main>
+
+<script type="module" src="./ferramentas-pedagogicas.js"></script>
+
 </body>
 </html>

@@ -815,3 +815,10 @@ RESPONSIVO
     width: 100%;
   }
 }
+
+.modo-histograma {
+  box-shadow: 
+    0 0 0 2px rgba(56,189,248,.15),
+    0 10px 30px rgba(56,189,248,.10);
+}
+

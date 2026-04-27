@@ -359,6 +359,54 @@
   descricao: "Pacote máximo para acessar o ranking sempre que quiser."
 },
 
+// ======================================================
+// 🧰 FERRAMENTAS PEDAGÓGICAS
+// ======================================================
+
+{
+  id: "tool-pa",
+  nome: "📈 Ferramenta PA",
+  preco: 80,
+  tipo: "ferramenta",
+  tool: "pa",
+  raridade: "comum",
+  ordem: 90,
+  descricao: "Desbloqueia a ferramenta de Progressão Aritmética."
+},
+
+{
+  id: "tool-pg",
+  nome: "📉 Ferramenta PG",
+  preco: 100,
+  tipo: "ferramenta",
+  tool: "pg",
+  raridade: "raro",
+  ordem: 91,
+  descricao: "Desbloqueia a ferramenta de Progressão Geométrica."
+},
+
+{
+  id: "tool-paxpg",
+  nome: "⚖️ Comparador PA × PG",
+  preco: 130,
+  tipo: "ferramenta",
+  tool: "paxpg",
+  raridade: "epico",
+  ordem: 92,
+  descricao: "Compare crescimento de PA e PG lado a lado."
+},
+
+{
+  id: "tool-estatistica",
+  nome: "📊 Estatística Dinâmica",
+  preco: 160,
+  tipo: "ferramenta",
+  tool: "estatistica",
+  raridade: "lendario",
+  ordem: 93,
+  descricao: "Desbloqueia gráficos e análises estatísticas."
+},
+
   // 🔑 PRÊMIO FÍSICO
   { id: "chaveiro-univers3d", nome: "🔑 Chaveiro 3D", preco: 1500, lendario: true, raridade: "lendario", ordem: 50, descricao: "Prêmio físico exclusivo." }
 
@@ -1521,6 +1569,47 @@ function carregarSPTempoReal(userRef) {
         if (compraEmAndamento) return;
 
 compraEmAndamento = true;
+
+// ======================================================
+// 🧰 COMPRA DE FERRAMENTA
+// ======================================================
+
+if (item.tipo === "ferramenta") {
+
+  const user = auth.currentUser;
+  const snap = await getDoc(userRef);
+  const dados = snap.data();
+
+  const sciencePointsAntes = dados.sciencePoints || 0;
+  const sciencePointsDepois = sciencePointsAntes - item.preco;
+
+  // 💰 registra economia global
+  await registrarSPGlobal(item.preco);
+  await verificarMetaGlobal();
+  await registrarRankingGasto(item.preco);
+
+  // 💾 salva no usuário
+  await updateDoc(userRef, {
+    sciencePoints: sciencePointsDepois
+  });
+
+  // 🔓 salva a ferramenta no Firebase
+  await setDoc(
+    doc(db, "usuarios", user.uid, "ferramentas", item.tool),
+    { liberado: true }
+  );
+
+  spAluno = sciencePointsDepois;
+  atualizarSPNaTela();
+
+  await registrarCompra(`desbloqueou ${item.nome}`);
+
+  renderLoja();
+
+  alert("🎉 Ferramenta desbloqueada!");
+
+  return;
+}
 
 if (!item) {
   compraEmAndamento = false;

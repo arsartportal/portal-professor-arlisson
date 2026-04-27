@@ -2074,10 +2074,33 @@ CONTEÚDO
   opacity: 0.8;
 }
 
+.hero-info {
+  font-weight: 500;
+}
+
+/* 📈 gráficos */
+.hero-info .grafico {
+  color: #38bdf8;
+}
+
+/* 🧠 estatística */
+.hero-info .estatistica {
+  color: #a855f7;
+}
+
+/* ⚡ interatividade */
+.hero-info .interatividade {
+  color: #f59e0b;
+}
+
 /* VISUAL */
 .hero-visual {
   font-size: 80px;
   opacity: 0.9;
+}
+
+.hero-info span {
+  text-shadow: 0 0 10px currentColor;
 }
 
 /* RESPONSIVO */
@@ -2227,3 +2250,71 @@ CONTEÚDO
   50%  { transform: translateY(-15px) scale(1.08); }
   100% { transform: translateY(0); }
 }
+
+.hero-ferramentas {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  margin-bottom: 28px;
+
+  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.hero-ferramentas p {
+  color: rgba(255,255,255,.75);
+}
+
+.hero-ferramentas .hero-bg {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56,189,248,.25), transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(124,58,237,.25), transparent 30%);
+  opacity: .8;
+}
+
+.hero-ferramentas .hero-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  gap: 30px;
+}
+
+/* linha 1 (Ferramentas) */
+.hero-ferramentas h1 {
+  color: #e2e8f0; /* branco suave elegante */
+}
+
+/* linha 2 (Pedagógicas) */
+.hero-ferramentas h1 span {
+  color: #38bdf8;
+
+  text-shadow:
+    0 0 10px rgba(56,189,248,.4),
+    0 0 25px rgba(56,189,248,.2);
+}
+
+.hero-ferramentas .hero-visual span {
+  font-size: 3rem;
+  animation: flutuar 3s infinite ease-in-out alternate;
+}
+
+.hero-ferramentas .hero-visual span:nth-child(2){
+  animation-delay: .3s;
+}
+
+.hero-ferramentas .hero-visual span:nth-child(3){
+  animation-delay: .6s;
+}
+
+@keyframes flutuar {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+

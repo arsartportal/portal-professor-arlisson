@@ -160,31 +160,93 @@ function analisarDados() {
   // GRÁFICO
   // -------------------------------------------------------
 
-  atualizarGrafico(frequencias);
+  atualizarGrafico(frequencias, valores);
 }
 
+function gerarHistograma(valores) {
+
+  const min = Math.min(...valores);
+  const max = Math.max(...valores);
+
+  const k = Math.ceil(Math.sqrt(valores.length)); // regra simples
+  const largura = Math.ceil((max - min) / k);
+
+  const classes = [];
+  const frequencias = [];
+
+  for (let i = 0; i < k; i++) {
+    const inicio = min + i * largura;
+    const fim = inicio + largura;
+
+    classes.push(`${inicio}–${fim}`);
+
+    const freq = valores.filter(v => v >= inicio && v < fim).length;
+    frequencias.push(freq);
+  }
+
+  return { classes, frequencias };
+}
 
 /* =========================================================
    ATUALIZA O GRÁFICO
 ========================================================= */
 
-/* =========================================================
-   ATUALIZA O GRÁFICO
-========================================================= */
+function atualizarGrafico(frequencias, valores = []) {
 
-function atualizarGrafico(frequencias) {
-
-  // -------------------------------------------------------
-  // DADOS DO GRÁFICO
-  // -------------------------------------------------------
-
-  const labels = Object.keys(frequencias);
-  const dados = Object.values(frequencias);
-
-  // Tipo selecionado: bar, line ou pie
+  // Tipo selecionado
   const tipo = seletorGrafico.value;
 
-  // Paleta de cores usada nos gráficos
+  let labels;
+  let dados;
+
+  const containerGrafico = canvasGrafico.parentElement;
+
+if (tipo === 'histogram') {
+  containerGrafico.classList.add('modo-histograma');
+} else {
+  containerGrafico.classList.remove('modo-histograma');
+}
+
+  // =====================================================
+  // 📊 HISTOGRAMA (NOVO)
+  // =====================================================
+
+  if (tipo === 'histogram') {
+
+    const min = Math.min(...valores);
+    const max = Math.max(...valores);
+
+    const k = Math.ceil(Math.sqrt(valores.length)); // nº de classes
+    const largura = Math.ceil((max - min) / k) || 1;
+
+    labels = [];
+    dados = [];
+
+    for (let i = 0; i < k; i++) {
+
+      const inicio = min + i * largura;
+      const fim = inicio + largura;
+
+      labels.push(`${inicio}–${fim}`);
+
+      const freq = valores.filter(v => v >= inicio && v < fim).length;
+      dados.push(freq);
+    }
+
+  } else {
+
+    // =====================================================
+    // 📊 PADRÃO (já existente)
+    // =====================================================
+
+    labels = Object.keys(frequencias);
+    dados = Object.values(frequencias);
+  }
+
+  // -------------------------------------------------------
+  // CORES
+  // -------------------------------------------------------
+
   const cores = [
     '#38bdf8',
     '#818cf8',
@@ -197,7 +259,7 @@ function atualizarGrafico(frequencias) {
   ];
 
   // -------------------------------------------------------
-  // REMOVE O GRÁFICO ANTERIOR
+  // REMOVE GRÁFICO ANTERIOR
   // -------------------------------------------------------
 
   if (grafico) {
@@ -205,7 +267,7 @@ function atualizarGrafico(frequencias) {
   }
 
   // -------------------------------------------------------
-  // CONFIGURAÇÕES ESPECÍFICAS DE CADA TIPO
+  // CONFIGURAÇÕES
   // -------------------------------------------------------
 
   let backgroundColor;
@@ -221,23 +283,20 @@ function atualizarGrafico(frequencias) {
   let pointBorderWidth = 0;
 
   // ----------------------------
-  // GRÁFICO DE BARRAS
+  // BARRAS
   // ----------------------------
 
   if (tipo === 'bar') {
-
     backgroundColor = cores;
     borderColor = cores;
     borderRadius = 12;
-
   }
 
   // ----------------------------
-  // GRÁFICO DE LINHAS
+  // LINHAS
   // ----------------------------
 
   if (tipo === 'line') {
-
     backgroundColor = 'rgba(56,189,248,.18)';
     borderColor = '#38bdf8';
     borderWidth = 4;
@@ -250,48 +309,59 @@ function atualizarGrafico(frequencias) {
     pointBackgroundColor = '#67e8f9';
     pointBorderColor = '#ffffff';
     pointBorderWidth = 2;
-
   }
 
   // ----------------------------
-  // GRÁFICO DE PIZZA
+  // PIZZA
   // ----------------------------
 
   if (tipo === 'pie') {
-
     backgroundColor = cores;
     borderColor = '#ffffff';
-
   }
 
-  // -------------------------------------------------------
-  // CRIA O NOVO GRÁFICO
-  // -------------------------------------------------------
+  // ----------------------------
+  // HISTOGRAMA
+  // ----------------------------
+
+  if (tipo === 'histogram') {
+    backgroundColor = '#38bdf8';
+    borderColor = '#0ea5e9';
+    borderWidth = 1;
+    borderRadius = 0;
+  }
+
+  // =====================================================
+  // CRIA GRÁFICO
+  // =====================================================
 
   grafico = new Chart(canvasGrafico, {
-    type: tipo,
+    type: tipo === 'histogram' ? 'bar' : tipo,
 
     data: {
       labels,
+     datasets: [{
+  label: 'Frequência',
+  data: dados,
 
-      datasets: [{
-        label: 'Frequência',
-        data: dados,
+  backgroundColor,
+  borderColor,
+  borderWidth,
+  borderRadius,
 
-        backgroundColor,
-        borderColor,
-        borderWidth,
-        borderRadius,
+  // 👉 ESSENCIAL PRO HISTOGRAMA
+  barPercentage: tipo === 'histogram' ? 1.0 : 0.8,
+  categoryPercentage: tipo === 'histogram' ? 1.0 : 0.8,
 
-        fill,
-        tension,
+  fill,
+  tension,
 
-        pointRadius,
-        pointHoverRadius,
-        pointBackgroundColor,
-        pointBorderColor,
-        pointBorderWidth
-      }]
+  pointRadius,
+  pointHoverRadius,
+  pointBackgroundColor,
+  pointBorderColor,
+  pointBorderWidth
+}]
     },
 
     options: {
@@ -303,28 +373,16 @@ function atualizarGrafico(frequencias) {
       },
 
       plugins: {
-
-        // -------------------------------------------------
-        // LEGENDA
-        // Só aparece no gráfico de pizza
-        // -------------------------------------------------
-
         legend: {
           display: tipo === 'pie',
-
           labels: {
             color: '#f8fafc',
-
             font: {
               size: 14,
               weight: '700'
             }
           }
         },
-
-        // -------------------------------------------------
-        // TOOLTIP
-        // -------------------------------------------------
 
         tooltip: {
           backgroundColor: '#0f172a',
@@ -335,23 +393,12 @@ function atualizarGrafico(frequencias) {
         }
       },
 
-      // ---------------------------------------------------
-      // ESCALAS
-      // Barras e linhas possuem eixos
-      // Pizza não
-      // ---------------------------------------------------
-
       scales: tipo !== 'pie' ? {
-
         x: {
           ticks: {
             color: 'rgba(255,255,255,.75)',
-
-            font: {
-              weight: '600'
-            }
+            font: { weight: '600' }
           },
-
           grid: {
             color: 'rgba(255,255,255,.05)'
           }
@@ -359,16 +406,11 @@ function atualizarGrafico(frequencias) {
 
         y: {
           beginAtZero: true,
-
           ticks: {
             color: 'rgba(255,255,255,.75)',
             stepSize: 1,
-
-            font: {
-              weight: '600'
-            }
+            font: { weight: '600' }
           },
-
           grid: {
             color: 'rgba(255,255,255,.05)'
           }
