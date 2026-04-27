@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cinemática Interativa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./cinematica-interativa.css">
+</head>
+
+<body>
+
+<main class="pagina-cinematica">
+
+  <!-- HERO -->
+  <section class="hero-cinematica">
+    <a href="../ferramentas-pedagogicas.html" class="voltar">← Voltar</a>
+
+    <div class="hero-box">
+      <span class="tag">🚀 Física Interativa</span>
+      <h1>Cinemática Dinâmica</h1>
+
+      <p>
+        Explore o movimento e compreenda os conceitos fundamentais da cinemática.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ================= CONCEITOS ================= -->
+  <section class="conceitos-cinematica">
+
+    <div class="titulo-formulas">
+      <h2>Conceitos básicos da Cinemática</h2>
+      <p>Clique para revelar</p>
+    </div>
+
+    <div class="conceitos-grid">
+
+      <article class="conceito-item">
+        <span>Ponto material</span>
+        <div class="campo-revelavel oculto">
+          <strong>Dimensões desprezíveis no estudo do movimento.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Corpo extenso</span>
+        <div class="campo-revelavel oculto">
+          <strong>Dimensões influenciam o movimento.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Referencial</span>
+        <div class="campo-revelavel oculto">
+          <strong>Base para observar movimento ou repouso.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Posição</span>
+        <div class="campo-revelavel oculto">
+          <strong>Localização do corpo no espaço.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Trajetória</span>
+        <div class="campo-revelavel oculto">
+          <strong>Caminho percorrido pelo corpo.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Movimento</span>
+        <div class="campo-revelavel oculto">
+          <strong>Quando a posição muda no tempo.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Repouso</span>
+        <div class="campo-revelavel oculto">
+          <strong>Quando a posição não muda.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Distância percorrida</span>
+        <div class="campo-revelavel oculto">
+          <strong>Total do caminho percorrido.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item">
+        <span>Deslocamento</span>
+        <div class="campo-revelavel oculto">
+          <strong>Posição final menos inicial.</strong>
+        </div>
+      </article>
+
+      <article class="conceito-item destaque-formula">
+        <span>Diferença</span>
+        <div class="campo-revelavel oculto">
+          <strong>
+            Distância depende do caminho.<br>
+            Deslocamento depende só do início e fim.
+          </strong>
+        </div>
+        <p>Ex: ida e volta → deslocamento = 0</p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTROLE -->
+  <section class="controle-professor">
+    <button id="modo-aluno" class="btn-controle">👨‍🎓 Modo Aluno</button>
+    <button id="modo-professor" class="btn-controle">👨‍🏫 Modo Professor</button>
+  </section>
+
+
+  <!-- PAINEL -->
+  <section class="painel-cinematica">
+
+    <!-- ENTRADAS -->
+    <div class="entrada-cinematica">
+      <label>Posição inicial (S₀)<input type="number" id="s0" value="0"></label>
+      <label>Velocidade (v)<input type="number" id="v" value="10"></label>
+      <label>Tempo (t)<input type="number" id="t" value="5"></label>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="cards-resultados">
+
+      <div class="resultado-card">
+        <span>Posição final</span>
+        <div class="campo-revelavel oculto"><strong id="posicao"></strong></div>
+      </div>
+
+      <div class="resultado-card">
+        <span>Velocidade</span>
+        <div class="campo-revelavel oculto"><strong id="velocidade"></strong></div>
+      </div>
+
+      <div class="resultado-card">
+        <span>Tipo de movimento</span>
+        <div class="campo-revelavel oculto"><strong id="movimento"></strong></div>
+      </div>
+
+    </div>
+
+    <!-- SIMULAÇÃO -->
+    <section class="simulacao-box">
+      <h2>Evolução do movimento</h2>
+      <div id="linha-movimento"></div>
+    </section>
+
+    <!-- GRÁFICO -->
+    <section class="grafico-cinematica">
+      <h2>Gráfico posição × tempo</h2>
+
+      <div class="grafico-container">
+        <div class="campo-revelavel oculto grafico-oculto">
+          <canvas id="grafico"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= QUIZ ================= -->
+<section class="quiz-box">
+
+  <h2>Teste rápido</h2>
+
+  <p class="pergunta">
+    Se a velocidade de um corpo é negativa, o movimento é:
+  </p>
+
+  <div class="quiz-opcoes">
+
+    <button class="opcao" data-correta="false">
+      Progressivo
+    </button>
+
+    <button class="opcao" data-correta="true">
+      Retrógrado
+    </button>
+
+    <button class="opcao" data-correta="false">
+      Uniforme crescente
+    </button>
+
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="quiz-feedback" id="feedback-quiz">
+    <span class="mensagem"></span>
+  </div>
+
+  <!-- CONTROLES -->
+  <div class="quiz-controles">
+    <button id="btn-tentar" class="btn-quiz">Tentar novamente</button>
+  </div>
+
+</section>
+
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./cinematica-interativa.js"></script>
+
+</body>
+</html>
