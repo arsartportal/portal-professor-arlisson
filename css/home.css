@@ -2376,3 +2376,38 @@ CONTEÚDO
   }
 
 }
+
+/* =========================================
+🔥 CORREÇÃO FINAL DEFINITIVA (SEM SCROLL BUG)
+========================================= */
+
+html, body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+
+  /* trava qualquer vazamento invisível */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* impede elementos animados de "escaparem" */
+  .particles,
+  .math-bg,
+  .fisica-bg,
+  .atomos-bg,
+  .biblioteca-bg {
+    overflow: hidden;
+  }
+
+  /* reduz agressividade das animações */
+  .particles span,
+  .math-bg span,
+  .fisica-bg span,
+  .atomos-bg span,
+  .biblioteca-bg span {
+    animation-duration: 12s !important;
+  }
+
+}
