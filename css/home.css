@@ -2318,3 +2318,61 @@ CONTEÚDO
   to { transform: translateY(-10px); }
 }
 
+/* =================================================
+📱 RESPONSIVO - HERO FERRAMENTAS
+================================================= */
+
+@media (max-width: 768px) {
+
+  .hero-ferramentas .hero-content {
+    flex-direction: column; /* empilha */
+    align-items: flex-start;
+    padding: 24px; /* reduz espaço */
+    gap: 20px;
+  }
+
+  .hero-ferramentas {
+    border-radius: 20px; /* menos exagerado no mobile */
+  }
+
+  /* esconde os ícones flutuantes (causam overflow) */
+  .hero-ferramentas .hero-visual {
+    display: none;
+  }
+
+  /* título menor */
+  .hero-ferramentas h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  /* texto mais compacto */
+  .hero-ferramentas p {
+    font-size: 0.95rem;
+  }
+
+}
+
+/* =================================================
+🚫 CORREÇÃO OVERFLOW MOBILE (SOLUÇÃO DEFINITIVA)
+================================================= */
+
+@media (max-width: 768px) {
+
+  /* 🔥 corrige fundo gigante */
+  .hero-bg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* 🔥 evita vazamento de animação */
+  .hero-ferramentas {
+    overflow: hidden;
+  }
+
+  /* 🔥 remove animação no mobile (performance + bug fix) */
+  .hero-ferramentas .hero-visual span {
+    animation: none;
+  }
+
+}
