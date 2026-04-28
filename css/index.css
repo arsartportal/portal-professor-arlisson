@@ -13,22 +13,33 @@
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
+
+  overflow-y: auto;
+  
 }
+
+
 
 /* =========================================================
    FUNDO (APPLE REAL)
 ========================================================= */
 .login-body {
-  height: 100vh;
+  
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   /* NOVO FUNDO (mais contraste) */
   background: radial-gradient(circle at top, #1e293b, #020617);
 
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+
+  min-height: 100dvh; /* 🔥 resolve bug real de mobile */
+  
+  
+  
+  padding: 60px 10px;
 }
 
 /* =========================================================
@@ -488,3 +499,23 @@ body {
   background: rgba(34, 197, 94, 0.08);
   border: 1px solid rgba(34, 197, 94, 0.3);
 }
+
+@media (max-width: 768px) {
+
+  .login-wrapper {
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .login-brand {
+    display: none;
+    padding: 15px 10px;
+  }
+
+  .login-panel {
+    padding: 20px 18px 30px;
+  }
+
+}
+
