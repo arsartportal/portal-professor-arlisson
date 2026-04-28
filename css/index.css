@@ -508,10 +508,27 @@ body {
     min-height: auto;
   }
 
-  .login-brand {
-    display: none;
-    padding: 15px 10px;
+    .login-brand {
+    display: block;
+    padding: 20px 15px;
+    text-align: center;
   }
+
+  .login-brand h1 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .login-slogan {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  /* 🔥 ESCONDE só a parte pesada */
+  .login-features {
+    display: none;
+  }
+
 
   .login-panel {
     padding: 20px 18px 30px;
