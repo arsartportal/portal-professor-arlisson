@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 🔥 ESSENCIAL -->
   <title>Quiz Copa do Mundo 2026 • ULTRA</title>
   <link rel="stylesheet" href="quiz-copa-ultra.css">
 </head>
@@ -27,11 +28,23 @@
       🎟️ Ingressos: <b id="fichas">0</b>
     </div>
 
-    <div class="stats-comunidade">
-      🌍 <b>Comunidade</b><br>
-      🎟️ Hoje: <b id="gastasHoje">0</b><br>
-      🧾 Total: <b id="gastasTotal">0</b>
-    </div>
+<div class="stats-comunidade">
+
+  <div class="stat-card">
+    <span>🎟</span>
+    <p id="ingressosTotal">0</p>
+    <small>Ingressos usados (total)</small>
+  </div>
+
+  <div class="stat-card">
+    <span>🔥</span>
+    <p id="jogosHoje">0</p>
+    <small>Partidas hoje</small>
+  </div>
+
+</div>
+
+
 
     <div class="botoes">
       <button id="btnIniciar">Entrar em campo</button>
@@ -44,6 +57,8 @@
 
     <!-- 🏆 FASE -->
     <div id="faseAtual" class="fase-label"></div>
+
+    <div id="placar" class="placar"></div>
 
     <!-- 🧭 PROGRESSO COPA -->
     <div class="fase-barra">
