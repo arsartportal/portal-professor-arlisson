@@ -12,369 +12,424 @@
 /* =====================================================
    ESTILO GERAL
 ===================================================== */
+/* =====================================================
+   ESTILO GERAL
+===================================================== */
 body{
-font-family:'Segoe UI',Arial,sans-serif;
-background:#eef2f8;
-margin:0;
-padding:40px;
-color:#2c3e50;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#eef2f8;
+  margin:0;
+  padding:40px;
+  color:#2c3e50;
 }
 
 .container{
-max-width:1150px;
-margin:auto;
-background:#ffffff;
-padding:40px;
-border-radius:12px;
-box-shadow:0 10px 35px rgba(0,0,0,0.12);
+  max-width:1150px;
+  margin:auto;
+  background:#ffffff;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.12);
 }
 
 h1{
-text-align:center;
-font-size:34px;
-margin-bottom:10px;
+  text-align:center;
+  font-size:34px;
+  margin-bottom:10px;
 }
 
 .sub{
-text-align:center;
-color:#6b7c93;
-margin-bottom:40px;
+  text-align:center;
+  color:#6b7c93;
+  margin-bottom:40px;
 }
 
 h2{
-margin-top:40px;
-border-bottom:2px solid #e4e9f2;
-padding-bottom:6px;
+  margin-top:40px;
+  border-bottom:2px solid #e4e9f2;
+  padding-bottom:6px;
 }
 
 .card{
-background:#f7f9fc;
-padding:20px;
-border-radius:8px;
-margin-top:15px;
-line-height:1.8;
+  background:#f7f9fc;
+  padding:20px;
+  border-radius:8px;
+  margin-top:15px;
+  line-height:1.8;
 }
 
 .formula{
-font-size:28px;
-text-align:center;
-margin:20px 0;
-font-weight:bold;
+  font-size:28px;
+  text-align:center;
+  margin:20px 0;
+  font-weight:bold;
 }
 
 .exemplo{
-background:#eef6ff;
-border-left:4px solid #3498db;
-padding:15px;
-margin-top:15px;
-border-radius:6px;
+  background:#eef6ff;
+  border-left:4px solid #3498db;
+  padding:15px;
+  margin-top:15px;
+  border-radius:6px;
 }
 
+/* =====================================================
+   SIMULADORES
+===================================================== */
 .simulador{
-background:#f7f9ff;
-padding:25px;
-border-radius:8px;
-margin-top:20px;
+  background:#f7f9ff;
+  padding:25px;
+  border-radius:8px;
+  margin-top:20px;
 }
 
 input{
-padding:10px;
-width:100px;
-margin:6px;
-border:1px solid #ccd6e4;
-border-radius:6px;
-font-size:15px;
+  padding:10px;
+  width:240px;
+  margin:6px;
+  border:1px solid #ccd6e4;
+  border-radius:6px;
+  font-size:15px;
 }
 
 button{
-padding:10px 18px;
-background:#2c7be5;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-font-size:15px;
-transition:background .2s ease, transform .2s ease;
+  padding:10px 18px;
+  background:#2c7be5;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:15px;
+  transition:background .2s ease, transform .2s ease;
 }
 
 button:hover{
-background:#1a68d1;
-transform:translateY(-1px);
+  background:#1a68d1;
+  transform:translateY(-1px);
 }
 
 button:disabled{
-background:#9fb7da;
-cursor:not-allowed;
-transform:none;
+  background:#9fb7da;
+  cursor:not-allowed;
+  transform:none;
 }
 
-canvas{
-margin-top:20px;
-background:#fff;
-border-radius:10px;
-border:1px solid #dbe4f0;
-padding:10px;
+/* =====================================================
+   RESULTADOS
+===================================================== */
+#resultadoConversao,
+#resultadoOrdem{
+  margin-top:18px;
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.8;
 }
 
-.info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:14px;
-margin-top:20px;
+#explicacaoPassos,
+#explicacaoOrdem{
+  margin-top:16px;
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:16px;
+  line-height:1.8;
 }
 
-.info-card{
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:15px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
+/* =====================================================
+   CONTADORES
+===================================================== */
+.contador-box{
+  margin-top:15px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-.info-card h4{
-margin:0 0 8px 0;
-font-size:16px;
-color:#2c7be5;
+.contador-card{
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:bold;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
+.animacao-box{
+  margin-top:20px;
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:12px;
+  padding:18px;
+}
+
+.animacao-titulo{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:12px;
 }
 
 .painel-etapas{
-display:flex;
-flex-direction:column;
-gap:10px;
-margin-top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:10px;
 }
 
 .etapa{
-background:#f7fbff;
-border:1px solid #d6e7fb;
-padding:12px 14px;
-border-radius:10px;
-font-size:18px;
-line-height:1.7;
-opacity:0;
-transform:translateY(8px);
-animation:aparecer 0.45s ease forwards;
+  background:#f7fbff;
+  border:1px solid #d6e7fb;
+  padding:12px 14px;
+  border-radius:10px;
+  font-size:20px;
+  line-height:1.7;
+  opacity:0;
+  transform:translateY(8px);
+  animation:aparecer 0.45s ease forwards;
 }
 
 .etapa strong{
-color:#2c7be5;
+  color:#2c7be5;
 }
 
 .etapa-final{
-background:#edfdf2;
-border:1px solid #cdeed8;
+  background:#edfdf2;
+  border:1px solid #cdeed8;
 }
 
 @keyframes aparecer{
-to{
-opacity:1;
-transform:translateY(0);
-}
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
+/* =====================================================
+   LINHA DE EXPOENTES
+===================================================== */
+.linha-box{
+  margin-top:22px;
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:12px;
+  padding:20px;
+  overflow-x:auto;
+}
+
+.linha-titulo{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.linha-expoentes{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  min-width:max-content;
+}
+
+.bloco-exp{
+  min-width:90px;
+  padding:12px;
+  text-align:center;
+  background:#f7faff;
+  border:2px solid #dbe4f0;
+  border-radius:10px;
+}
+
+.bloco-exp.ativo{
+  background:#eaf3ff;
+  border-color:#2c7be5;
+  transform:translateY(-4px);
+}
+
+/* =====================================================
+   COMPARAÇÃO
+===================================================== */
 .comparacao-box{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:14px;
-margin-top:18px;
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
 }
 
 .comparacao-card{
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:15px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:15px;
 }
 
-.comparacao-card h4{
-margin:0 0 8px 0;
-font-size:16px;
-color:#2c7be5;
-}
-
-.destaque{
-font-size:18px;
-font-weight:bold;
-margin-top:15px;
-line-height:1.8;
-}
-
+/* =====================================================
+   QUESTÕES
+===================================================== */
 .questao{
-background:#fafcff;
-padding:18px;
-margin-top:20px;
-border-left:4px solid #2c7be5;
-border-radius:6px;
-}
-
-.alt{
-margin-top:6px;
+  background:#fafcff;
+  padding:18px;
+  margin-top:20px;
+  border-left:4px solid #2c7be5;
+  border-radius:6px;
 }
 
 .resultado{
-margin-top:10px;
-font-weight:bold;
+  margin-top:10px;
+  font-weight:bold;
 }
 
+/* =====================================================
+   PROGRESSO (🔥 PRINCIPAL)
+===================================================== */
 .painel-progresso{
-background:#f7f9fc;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:18px;
-margin-bottom:25px;
+  background:#f7f9fc;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:25px;
 }
 
 .progresso-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:12px;
-margin-top:15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:15px;
 }
 
 .progresso-item{
-background:#fff;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:14px;
+  background:#fff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:14px;
 }
 
 .progresso-item h4{
-margin:0 0 8px 0;
-font-size:15px;
-color:#2c7be5;
+  margin:0 0 8px 0;
+  font-size:15px;
+  color:#2c7be5;
+}
+
+.progresso-item div{
+  font-size:18px;
+  font-weight:bold;
 }
 
 .barra{
-width:100%;
-height:14px;
-background:#dde6f2;
-border-radius:999px;
-overflow:hidden;
-margin-top:14px;
+  width:100%;
+  height:14px;
+  background:#dde6f2;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:14px;
 }
 
 .barra-fill{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#2c7be5,#27ae60);
-transition:width .35s ease;
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2c7be5,#27ae60);
+  transition:width .35s ease;
 }
 
 .status-texto{
-margin-top:10px;
-font-weight:bold;
-color:#2c3e50;
+  margin-top:10px;
+  font-weight:bold;
 }
 
-.loading-box{
-background:#fff8e1;
-border:1px solid #f0d98a;
-color:#8a6d1d;
-padding:14px;
-border-radius:8px;
-margin-bottom:20px;
+/* =====================================================
+   RECOMPENSA
+===================================================== */
+.painel-recompensa{
+  background:#f7f9fc;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:25px;
 }
 
 .recompensa-box{
-margin-top:18px;
-background:linear-gradient(135deg,#fff8e1,#fff3c4);
-border:1px solid #f0d98a;
-border-radius:14px;
-padding:20px;
-text-align:center;
-box-shadow:0 8px 24px rgba(0,0,0,0.08);
-}
-
-.recompensa-box h3{
-margin:0 0 10px 0;
-font-size:24px;
-color:#8a6d1d;
-}
-
-.recompensa-box p{
-margin:0 0 14px 0;
-font-size:16px;
-line-height:1.6;
+  margin-top:18px;
+  background:linear-gradient(135deg,#fff8e1,#fff3c4);
+  border:1px solid #f0d98a;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
 }
 
 .recompensa-box.sucesso{
-background:linear-gradient(135deg,#edfdf2,#dff8e8);
-border:1px solid #cdeed8;
+  background:linear-gradient(135deg,#edfdf2,#dff8e8);
 }
 
 .btn-recompensa{
-background:linear-gradient(90deg,#f39c12,#f1c40f);
-color:#fff;
-font-weight:bold;
-padding:12px 22px;
-border-radius:999px;
-box-shadow:0 8px 20px rgba(243,156,18,0.25);
+  background:linear-gradient(90deg,#f39c12,#f1c40f);
+  color:#fff;
+  font-weight:bold;
+  padding:12px 22px;
+  border-radius:999px;
+  margin-top:10px;
 }
 
-.btn-recompensa:hover{
-background:linear-gradient(90deg,#e67e22,#f1c40f);
-}
-
+/* =====================================================
+   EFEITO XP
+===================================================== */
 .efeito-xp{
-position:fixed;
-inset:0;
-display:none;
-align-items:center;
-justify-content:center;
-background:rgba(0,0,0,0.35);
-z-index:9999;
-padding:20px;
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.35);
+  z-index:9999;
 }
 
 .efeito-xp-card{
-background:#ffffff;
-border-radius:22px;
-padding:34px 34px;
-text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.25);
-transform:scale(0.8);
-opacity:0;
-transition:all .35s ease;
-max-width:420px;
-width:100%;
+  background:#ffffff;
+  border-radius:22px;
+  padding:34px;
+  text-align:center;
+  transform:scale(0.8);
 }
 
 .efeito-xp-emoji{
-font-size:56px;
-margin-bottom:8px;
+  font-size:56px;
 }
 
-.efeito-xp-card h2{
-margin:0 0 10px 0;
-font-size:30px;
-}
-
-.efeito-xp-card p{
-margin:0;
-font-size:20px;
-font-weight:bold;
-color:#27ae60;
-}
-
+/* =====================================================
+   RESPONSIVO
+===================================================== */
 @media (max-width:768px){
-body{
-padding:20px;
+  body{
+    padding:20px;
+  }
+
+  .container{
+    padding:22px;
+  }
+
+  input{
+    width:100%;
+  }
+
+  button{
+    width:100%;
+    margin-top:10px;
+  }
+
+  .btn-recompensa{
+    width:100%;
+  }
+
+  .loading-box{
+  background:linear-gradient(135deg,#fff8e1,#fff3c4);
+  border:1px solid #f0d98a;
+  color:#8a6d1d;
+  padding:14px 18px;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
-.container{
-padding:22px;
-}
-input{
-width:100%;
-box-sizing:border-box;
-}
-button{
-width:100%;
-margin-top:10px;
-}
-.btn-recompensa{
-width:100%;
-}
+
 }
 </style>
 </head>

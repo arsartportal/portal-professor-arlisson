@@ -10,292 +10,424 @@
 /* =====================================================
    ESTILO GERAL
 ===================================================== */
+/* =====================================================
+   ESTILO GERAL
+===================================================== */
 body{
-font-family:'Segoe UI',Arial,sans-serif;
-background:#eef2f8;
-margin:0;
-padding:40px;
-color:#2c3e50;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#eef2f8;
+  margin:0;
+  padding:40px;
+  color:#2c3e50;
 }
 
 .container{
-max-width:1150px;
-margin:auto;
-background:#ffffff;
-padding:40px;
-border-radius:12px;
-box-shadow:0 10px 35px rgba(0,0,0,0.12);
+  max-width:1150px;
+  margin:auto;
+  background:#ffffff;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.12);
 }
 
 h1{
-text-align:center;
-font-size:34px;
-margin-bottom:10px;
+  text-align:center;
+  font-size:34px;
+  margin-bottom:10px;
 }
 
 .sub{
-text-align:center;
-color:#6b7c93;
-margin-bottom:40px;
+  text-align:center;
+  color:#6b7c93;
+  margin-bottom:40px;
 }
 
 h2{
-margin-top:40px;
-border-bottom:2px solid #e4e9f2;
-padding-bottom:6px;
+  margin-top:40px;
+  border-bottom:2px solid #e4e9f2;
+  padding-bottom:6px;
 }
 
 .card{
-background:#f7f9fc;
-padding:20px;
-border-radius:8px;
-margin-top:15px;
-line-height:1.8;
+  background:#f7f9fc;
+  padding:20px;
+  border-radius:8px;
+  margin-top:15px;
+  line-height:1.8;
 }
 
 .formula{
-font-size:28px;
-text-align:center;
-margin:20px 0;
-font-weight:bold;
+  font-size:28px;
+  text-align:center;
+  margin:20px 0;
+  font-weight:bold;
 }
 
 .exemplo{
-background:#eef6ff;
-border-left:4px solid #3498db;
-padding:15px;
-margin-top:15px;
-border-radius:6px;
+  background:#eef6ff;
+  border-left:4px solid #3498db;
+  padding:15px;
+  margin-top:15px;
+  border-radius:6px;
 }
 
+/* =====================================================
+   SIMULADORES
+===================================================== */
 .simulador{
-background:#f7f9ff;
-padding:25px;
-border-radius:8px;
-margin-top:20px;
+  background:#f7f9ff;
+  padding:25px;
+  border-radius:8px;
+  margin-top:20px;
 }
 
 input{
-padding:10px;
-width:240px;
-margin:6px;
-border:1px solid #ccd6e4;
-border-radius:6px;
-font-size:15px;
+  padding:10px;
+  width:240px;
+  margin:6px;
+  border:1px solid #ccd6e4;
+  border-radius:6px;
+  font-size:15px;
 }
 
 button{
-padding:10px 18px;
-background:#2c7be5;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-font-size:15px;
+  padding:10px 18px;
+  background:#2c7be5;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:15px;
+  transition:background .2s ease, transform .2s ease;
 }
 
 button:hover{
-background:#1a68d1;
+  background:#1a68d1;
+  transform:translateY(-1px);
 }
 
+button:disabled{
+  background:#9fb7da;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* =====================================================
+   RESULTADOS
+===================================================== */
 #resultadoConversao,
 #resultadoOrdem{
-margin-top:18px;
-font-size:18px;
-font-weight:bold;
-line-height:1.8;
+  margin-top:18px;
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.8;
 }
 
 #explicacaoPassos,
 #explicacaoOrdem{
-margin-top:16px;
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:16px;
-line-height:1.8;
+  margin-top:16px;
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:16px;
+  line-height:1.8;
 }
 
+/* =====================================================
+   CONTADORES
+===================================================== */
 .contador-box{
-margin-top:15px;
-display:flex;
-gap:12px;
-flex-wrap:wrap;
+  margin-top:15px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
 .contador-card{
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:12px 16px;
-font-weight:bold;
-box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:bold;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
 }
 
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
 .animacao-box{
-margin-top:20px;
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:12px;
-padding:18px;
+  margin-top:20px;
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:12px;
+  padding:18px;
 }
 
 .animacao-titulo{
-font-size:18px;
-font-weight:bold;
-margin-bottom:12px;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:12px;
 }
 
 .painel-etapas{
-display:flex;
-flex-direction:column;
-gap:10px;
-margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:10px;
 }
 
 .etapa{
-background:#f7fbff;
-border:1px solid #d6e7fb;
-padding:12px 14px;
-border-radius:10px;
-font-size:20px;
-line-height:1.7;
-opacity:0;
-transform:translateY(8px);
-animation:aparecer 0.45s ease forwards;
+  background:#f7fbff;
+  border:1px solid #d6e7fb;
+  padding:12px 14px;
+  border-radius:10px;
+  font-size:20px;
+  line-height:1.7;
+  opacity:0;
+  transform:translateY(8px);
+  animation:aparecer 0.45s ease forwards;
 }
 
 .etapa strong{
-color:#2c7be5;
+  color:#2c7be5;
 }
 
 .etapa-final{
-background:#edfdf2;
-border:1px solid #cdeed8;
+  background:#edfdf2;
+  border:1px solid #cdeed8;
 }
 
 @keyframes aparecer{
-to{
-opacity:1;
-transform:translateY(0);
-}
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
+/* =====================================================
+   LINHA DE EXPOENTES
+===================================================== */
 .linha-box{
-margin-top:22px;
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:12px;
-padding:20px;
-overflow-x:auto;
+  margin-top:22px;
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:12px;
+  padding:20px;
+  overflow-x:auto;
 }
 
 .linha-titulo{
-font-size:18px;
-font-weight:bold;
-margin-bottom:15px;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:15px;
 }
 
 .linha-expoentes{
-display:flex;
-gap:10px;
-align-items:center;
-min-width:max-content;
-padding-bottom:8px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  min-width:max-content;
 }
 
 .bloco-exp{
-min-width:90px;
-padding:12px 10px;
-text-align:center;
-background:#f7faff;
-border:2px solid #dbe4f0;
-border-radius:10px;
-transition:0.3s;
-}
-
-.bloco-exp .pot{
-font-size:22px;
-font-weight:bold;
-color:#2c7be5;
-}
-
-.bloco-exp .valor{
-font-size:13px;
-color:#6c7a8c;
-margin-top:6px;
+  min-width:90px;
+  padding:12px;
+  text-align:center;
+  background:#f7faff;
+  border:2px solid #dbe4f0;
+  border-radius:10px;
 }
 
 .bloco-exp.ativo{
-background:#eaf3ff;
-border-color:#2c7be5;
-box-shadow:0 8px 18px rgba(44,123,229,0.16);
-transform:translateY(-4px);
+  background:#eaf3ff;
+  border-color:#2c7be5;
+  transform:translateY(-4px);
 }
 
+/* =====================================================
+   COMPARAÇÃO
+===================================================== */
 .comparacao-box{
-margin-top:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:14px;
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
 }
 
 .comparacao-card{
-background:#ffffff;
-border:1px solid #dbe4f0;
-border-radius:10px;
-padding:15px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  background:#ffffff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:15px;
 }
 
-.comparacao-card h4{
-margin:0 0 8px 0;
-font-size:16px;
-color:#2c7be5;
-}
-
-.destaque-menor{
-background:#eef7ff;
-border:2px solid #2c7be5;
-}
-
-.destaque-maior{
-background:#edfdf2;
-border:2px solid #27ae60;
-}
-
+/* =====================================================
+   QUESTÕES
+===================================================== */
 .questao{
-background:#fafcff;
-padding:18px;
-margin-top:20px;
-border-left:4px solid #2c7be5;
-border-radius:6px;
-}
-
-.alt{
-margin-top:6px;
+  background:#fafcff;
+  padding:18px;
+  margin-top:20px;
+  border-left:4px solid #2c7be5;
+  border-radius:6px;
 }
 
 .resultado{
-margin-top:10px;
-font-weight:bold;
+  margin-top:10px;
+  font-weight:bold;
 }
 
+/* =====================================================
+   PROGRESSO (🔥 PRINCIPAL)
+===================================================== */
+.painel-progresso{
+  background:#f7f9fc;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:25px;
+}
+
+.progresso-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:15px;
+}
+
+.progresso-item{
+  background:#fff;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:14px;
+}
+
+.progresso-item h4{
+  margin:0 0 8px 0;
+  font-size:15px;
+  color:#2c7be5;
+}
+
+.progresso-item div{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.barra{
+  width:100%;
+  height:14px;
+  background:#dde6f2;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:14px;
+}
+
+.barra-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2c7be5,#27ae60);
+  transition:width .35s ease;
+}
+
+.status-texto{
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* =====================================================
+   RECOMPENSA
+===================================================== */
+.painel-recompensa{
+  background:#f7f9fc;
+  border:1px solid #dbe4f0;
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:25px;
+}
+
+.recompensa-box{
+  margin-top:18px;
+  background:linear-gradient(135deg,#fff8e1,#fff3c4);
+  border:1px solid #f0d98a;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+}
+
+.recompensa-box.sucesso{
+  background:linear-gradient(135deg,#edfdf2,#dff8e8);
+}
+
+.btn-recompensa{
+  background:linear-gradient(90deg,#f39c12,#f1c40f);
+  color:#fff;
+  font-weight:bold;
+  padding:12px 22px;
+  border-radius:999px;
+  margin-top:10px;
+}
+
+/* =====================================================
+   EFEITO XP
+===================================================== */
+.efeito-xp{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.35);
+  z-index:9999;
+}
+
+.efeito-xp-card{
+  background:#ffffff;
+  border-radius:22px;
+  padding:34px;
+  text-align:center;
+  transform:scale(0.8);
+}
+
+.efeito-xp-emoji{
+  font-size:56px;
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
 @media (max-width:768px){
-body{
-padding:20px;
+  body{
+    padding:20px;
+  }
+
+  .container{
+    padding:22px;
+  }
+
+  input{
+    width:100%;
+  }
+
+  button{
+    width:100%;
+    margin-top:10px;
+  }
+
+  .btn-recompensa{
+    width:100%;
+  }
+
+  .loading-box{
+  background:linear-gradient(135deg,#fff8e1,#fff3c4);
+  border:1px solid #f0d98a;
+  color:#8a6d1d;
+  padding:14px 18px;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
-.container{
-padding:22px;
-}
-input{
-width:100%;
-box-sizing:border-box;
-}
-button{
-width:100%;
-margin-top:10px;
-}
+
 }
 </style>
 </head>
@@ -306,6 +438,46 @@ margin-top:10px;
 
 <h1>Notação Científica e Ordem de Grandeza</h1>
 <p class="sub">Física – Ensino Médio</p>
+
+<div class="loading-box" id="statusLogin">Carregando progresso do aluno...</div>
+
+<div class="painel-progresso">
+<h2 style="margin-top:0;border-bottom:none;padding-bottom:0;">Progresso da Lista</h2>
+
+<div class="progresso-grid">
+<div class="progresso-item">
+<h4>Respondidas</h4>
+<div id="infoRespondidas">0/10</div>
+</div>
+
+<div class="progresso-item">
+<h4>Acertos</h4>
+<div id="infoAcertos">0</div>
+</div>
+
+<div class="progresso-item">
+<h4>Erros finais</h4>
+<div id="infoErros">0</div>
+</div>
+
+<div class="progresso-item">
+<h4>Status</h4>
+<div id="infoStatus">Não iniciada</div>
+</div>
+</div>
+
+<div class="barra">
+<div class="barra-fill" id="barraFill"></div>
+</div>
+
+<div class="status-texto" id="infoProgressoTexto">Progresso: 0%</div>
+<div id="areaRecompensa"></div>
+</div>
+
+<div class="painel-recompensa">
+<h2 style="margin-top:0;border-bottom:none;padding-bottom:0;">Recompensa da Lista</h2>
+<p>Conclua toda a lista para liberar sua recompensa.</p>
+</div>
 
 <h2>1. O que é notação científica?</h2>
 <div class="card">
@@ -465,7 +637,218 @@ Número =
 
 </div>
 
-<script>
+<div class="efeito-xp" id="efeitoXp">
+  <div class="efeito-xp-card" id="efeitoXpCard">
+    <div class="efeito-xp-emoji">🎉</div>
+    <h2>Recompensa recebida!</h2>
+    <p id="efeitoXpTexto">+50 XP</p>
+  </div>
+</div>
+
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+
+const LISTA_ID = 2;
+const LISTA_SLUG = "notacao-cientifica";
+const LISTA_TITULO = "Notação Científica e Ordem de Grandeza";
+const DISCIPLINA = "Física";
+const XP_RECOMPENSA_PADRAO = 50;
+
+let alunoUid = null;
+let progressoAtual = null;
+
+
+/*Progresso Inicial */
+function criarProgressoInicial(){
+  return {
+    listaId: LISTA_ID,
+    listaSlug: LISTA_SLUG,
+    titulo: LISTA_TITULO,
+    disciplina: DISCIPLINA,
+    totalQuestoes: questoes.length,
+    respondidas: 0,
+    acertos: 0,
+    erros: 0,
+    progresso: 0,
+    status: "nao-iniciada",
+    respostas: {},
+    xpRecompensa: XP_RECOMPENSA_PADRAO,
+    recompensaResgatada: false,
+    ultimaAtualizacao: null
+  };
+}
+
+function recalcularResumo(){
+  const respostas = progressoAtual.respostas || {};
+  let respondidas = 0;
+  let acertos = 0;
+  let erros = 0;
+
+  for(let i=0;i<questoes.length;i++){
+    const r = respostas["q"+i];
+    if(!r) continue;
+
+    const acertou = r.correta === true;
+    const esgotou = r.tentativas >= 3 && !r.correta;
+
+    if(acertou || esgotou) respondidas++;
+    if(acertou) acertos++;
+    if(esgotou) erros++;
+  }
+
+  const progresso = Math.round((respondidas/questoes.length)*100);
+
+  let status = "nao-iniciada";
+  if(progresso > 0 && progresso < 100) status = "em-andamento";
+  if(progresso === 100) status = "concluida";
+
+  progressoAtual.respondidas = respondidas;
+  progressoAtual.acertos = acertos;
+  progressoAtual.erros = erros;
+  progressoAtual.progresso = progresso;
+  progressoAtual.status = status;
+}
+
+function obterDocRef(){
+  return doc(db, "usuarios", alunoUid, "progresso_listas", `lista_${LISTA_ID}`);
+}
+
+async function salvarProgresso(){
+  if(!alunoUid) return;
+
+  recalcularResumo();
+
+  await setDoc(obterDocRef(), {
+    ...progressoAtual,
+    ultimaAtualizacao: serverTimestamp()
+  }, { merge:true });
+}
+
+async function carregarProgresso(){
+  const snap = await getDoc(obterDocRef());
+
+  if(snap.exists()){
+    progressoAtual = {
+      ...criarProgressoInicial(),
+      ...snap.data()
+    };
+  }else{
+    progressoAtual = criarProgressoInicial();
+    await salvarProgresso();
+  }
+
+  atualizarPainelProgresso();
+   carregarQuestoes();
+}
+
+
+function traduzirStatus(status){
+  const mapa = {
+    "nao-iniciada": "Não iniciada",
+    "em-andamento": "Em andamento",
+    "concluida": "Concluída"
+  };
+  return mapa[status] || status;
+}
+
+function atualizarPainelProgresso(){
+  recalcularResumo();
+
+  document.getElementById("infoRespondidas").textContent =
+    `${progressoAtual.respondidas}/${questoes.length}`;
+
+  document.getElementById("infoAcertos").textContent =
+    progressoAtual.acertos;
+
+  document.getElementById("infoErros").textContent =
+    progressoAtual.erros;
+
+  document.getElementById("infoStatus").textContent =
+    traduzirStatus(progressoAtual.status);
+
+  document.getElementById("infoProgressoTexto").textContent =
+    `Progresso: ${progressoAtual.progresso}%`;
+
+  document.getElementById("barraFill").style.width =
+    `${progressoAtual.progresso}%`;
+
+  atualizarAreaRecompensa();
+}
+
+function atualizarAreaRecompensa(){
+  const area = document.getElementById("areaRecompensa");
+  if(!area || !progressoAtual) return;
+
+  if(progressoAtual.status !== "concluida"){
+    area.innerHTML = "";
+    return;
+  }
+
+  if(progressoAtual.recompensaResgatada){
+    area.innerHTML = `
+      <div class="recompensa-box sucesso">
+        <h3>✅ Recompensa já recebida</h3>
+        <p>Você já resgatou <strong>${progressoAtual.xpRecompensa} XP</strong>.</p>
+      </div>
+    `;
+    return;
+  }
+
+  area.innerHTML = `
+    <div class="recompensa-box">
+      <h3>🎉 Lista concluída!</h3>
+      <p>Você liberou <strong>${progressoAtual.xpRecompensa} XP</strong>.</p>
+      <button onclick="receberRecompensa()">Receber recompensa</button>
+    </div>
+  `;
+}
+
+function obterAlunoRef(){
+  return doc(db, "usuarios", alunoUid);
+}
+
+window.receberRecompensa = async function(){
+
+  if(progressoAtual.status !== "concluida") return;
+  if(progressoAtual.recompensaResgatada) return;
+
+  await updateDoc(obterAlunoRef(), {
+    xp: increment(progressoAtual.xpRecompensa)
+  });
+
+  progressoAtual.recompensaResgatada = true;
+
+  await salvarProgresso();
+  atualizarPainelProgresso();
+
+  mostrarEfeitoRecompensa(progressoAtual.xpRecompensa);
+};
+
+function mostrarEfeitoRecompensa(xp){
+  const overlay = document.getElementById("efeitoXp");
+  const card = document.getElementById("efeitoXpCard");
+  const texto = document.getElementById("efeitoXpTexto");
+
+  texto.textContent = `+${xp} XP`;
+
+  overlay.style.display = "flex";
+
+  setTimeout(()=>{
+    overlay.style.display = "none";
+  },2000);
+}
+
 /* =====================================================
    FUNÇÕES AUXILIARES
 ===================================================== */
@@ -777,59 +1160,122 @@ const questoes = [
 
 const tentativas = {};
 
-function carregar(){
-const div = document.getElementById("exercicios");
-let html = "";
+function carregarQuestoes(){
+  const div = document.getElementById("exercicios");
+  let html = "";
 
-questoes.forEach((q,i)=>{
-tentativas[i] = 0;
+  questoes.forEach((q,i)=>{
+    const salvo = progressoAtual?.respostas?.["q"+i];
+    const tentativas = salvo?.tentativas || 0;
+    const concluida = salvo?.correta || tentativas >= 3;
 
-html += "<div class='questao'>";
-html += "<p>"+(i+1)+") "+q.p+"</p>";
+    html += "<div class='questao'>";
+    html += "<p>"+(i+1)+") "+q.p+"</p>";
 
-q.a.forEach((alt,j)=>{
-html += "<div class='alt'>";
-html += "<input type='radio' name='q"+i+"' value='"+j+"'> "+alt;
-html += "</div>";
+    q.a.forEach((alt,j)=>{
+      const checked = salvo?.respostaMarcada === j ? "checked" : "";
+      const disabled = concluida ? "disabled" : "";
+
+      html += `<div class="alt">
+        <input type="radio" name="q${i}" value="${j}" ${checked} ${disabled}> ${alt}
+      </div>`;
+    });
+
+    html += `<button onclick="corrigir(${i})" ${concluida ? "disabled" : ""}>Responder</button>`;
+
+    html += `<div class="resultado" id="r${i}">`;
+
+    if(salvo){
+      if(salvo.correta){
+        html += "✅ Correto!";
+      }else if(tentativas >= 3){
+        html += "❌ Resposta correta: " + q.a[q.c];
+      }else{
+        html += `❌ Tente novamente (${3-tentativas} restantes)`;
+      }
+    }
+
+    html += "</div></div>";
+  });
+
+  div.innerHTML = html;
+}
+
+window.corrigir = async function(i){
+
+  if(!alunoUid || !progressoAtual) return;
+
+  const radios = document.getElementsByName("q"+i);
+  let escolha;
+
+  for(const r of radios){
+    if(r.checked) escolha = parseInt(r.value);
+  }
+
+  if(escolha === undefined) return;
+
+  const chave = "q"+i;
+
+  const atual = progressoAtual.respostas[chave] || {
+    respostaMarcada:null,
+    correta:false,
+    tentativas:0
+  };
+
+  if(atual.correta || atual.tentativas >= 3) return;
+
+  const acertou = escolha === questoes[i].c;
+  const tentativas = atual.tentativas + 1;
+
+  progressoAtual.respostas[chave] = {
+    respostaMarcada: escolha,
+    correta: acertou,
+    tentativas: tentativas
+  };
+
+  const el = document.getElementById("r"+i);
+
+  if(acertou){
+    el.innerHTML = "✅ Correto!";
+  }else if(tentativas >= 3){
+    el.innerHTML = "❌ Resposta correta: " + questoes[i].a[questoes[i].c];
+  }else{
+    el.innerHTML = "❌ Tente novamente ("+(3-tentativas)+" tentativas restantes)";
+  }
+
+  await salvarProgresso();
+  carregarQuestoes();
+};
+
+onAuthStateChanged(auth, async (user) => {
+
+  const statusLogin = document.getElementById("statusLogin");
+
+  if (!user) {
+    statusLogin.textContent = "Aluno não autenticado. Faça login para salvar o progresso.";
+    return;
+  }
+
+  alunoUid = user.uid;
+
+  await carregarProgresso();
+  carregarQuestoes();
+  atualizarPainelProgresso();
+
+  statusLogin.textContent = "Progresso carregado com sucesso.";
+
+  setTimeout(() => {
+    statusLogin.style.display = "none";
+  }, 1500);
+
 });
-
-html += "<button onclick='corrigir("+i+")'>Responder</button>";
-html += "<div class='resultado' id='r"+i+"'></div>";
-html += "</div>";
-});
-
-div.innerHTML = html;
-}
-
-function corrigir(i){
-let radios = document.getElementsByName("q"+i);
-let escolha;
-
-for(let r of radios){
-if(r.checked) escolha = parseInt(r.value);
-}
-
-if(escolha === undefined) return;
-
-if(escolha === questoes[i].c){
-document.getElementById("r"+i).innerHTML = "✅ Correto!";
-}else{
-tentativas[i]++;
-
-if(tentativas[i] >= 3){
-document.getElementById("r"+i).innerHTML = "❌ Resposta correta: " + questoes[i].a[questoes[i].c];
-}else{
-document.getElementById("r"+i).innerHTML = "❌ Tente novamente ("+(3-tentativas[i])+" tentativas restantes)";
-}
-}
-}
 
 /* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
 converterNotacao();
 calcularOrdem();
-carregar();
+
 </script>
 
 </body>
