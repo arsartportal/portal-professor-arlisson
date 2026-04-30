@@ -1,0 +1,220 @@
+/* ===============================
+   RESET
+=============================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color:#e2e8f0;
+  min-height:100vh;
+}
+
+/* ===============================
+   CONTAINER
+=============================== */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* ===============================
+   HEADER
+=============================== */
+.topo{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.topo h1{
+  font-size:2.2rem;
+  color:#38bdf8;
+}
+
+.topo .sub{
+  color:#94a3b8;
+  margin-top:5px;
+}
+
+/* ===============================
+   CARDS
+=============================== */
+.card{
+  background:#0f172a;
+  border:1px solid #1e293b;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform: translateY(-3px);
+}
+
+/* ===============================
+   RESUMO
+=============================== */
+.resumo{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.card h3{
+  font-size:0.9rem;
+  color:#94a3b8;
+}
+
+.card p{
+  font-size:1.6rem;
+  margin-top:8px;
+  font-weight:bold;
+}
+
+/* ===============================
+   TABS
+=============================== */
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.tab{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#1e293b;
+  color:#cbd5f5;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.tab:hover{
+  background:#334155;
+}
+
+.tab.active{
+  background:#38bdf8;
+  color:#020617;
+  font-weight:bold;
+}
+
+/* ===============================
+   ABAS
+=============================== */
+.aba{
+  display:none;
+}
+
+.aba.ativa{
+  display:block;
+}
+
+/* ===============================
+   FORM
+=============================== */
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:5px;
+  color:#94a3b8;
+  font-size:0.9rem;
+}
+
+select, input{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+
+  background:#020617;
+  color:#e2e8f0;
+  border:1px solid #1e293b;
+}
+
+input::placeholder{
+  color:#64748b;
+}
+
+/* ===============================
+   BUTTON
+=============================== */
+.btn{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 15px rgba(56,189,248,0.5);
+}
+
+/* ===============================
+   LISTAS
+=============================== */
+ul, ol{
+  margin-top:10px;
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
+}
+
+/* ===============================
+   STATUS
+=============================== */
+#statusAposta{
+  margin-top:10px;
+  color:#22c55e;
+  font-size:0.9rem;
+}
+
+/* ===============================
+   GRÁFICOS
+=============================== */
+canvas{
+  margin-top:15px;
+  max-height:300px;
+}
+
+/* ===============================
+   RESPONSIVO
+=============================== */
+@media (max-width:768px){
+
+  .topo h1{
+    font-size:1.6rem;
+  }
+
+  .card p{
+    font-size:1.3rem;
+  }
+
+  .tabs{
+    flex-direction:column;
+  }
+
+}

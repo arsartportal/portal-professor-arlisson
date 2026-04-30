@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Bolão da Copa • Portal do Professor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 📊 Biblioteca de gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- 🎨 Estilo -->
+  <link rel="stylesheet" href="bolao.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- ================= HEADER ================= -->
+    <header class="topo">
+      <h1>🏆 Bolão da Copa</h1>
+      <p class="sub">Aposte seus SciencePoints e concorra ao prêmio!</p>
+    </header>
+
+    <!-- ================= RESUMO ================= -->
+    <section class="resumo">
+
+      <div class="card">
+        <h3>💰 Prêmio acumulado</h3>
+        <p id="premioTotal">0 XP</p>
+      </div>
+
+      <div class="card">
+        <h3>👥 Total de apostas</h3>
+        <p id="totalApostas">0</p>
+      </div>
+
+      <div class="card">
+        <h3>🔥 Mais apostada</h3>
+        <p id="topSelecao">--</p>
+      </div>
+
+    </section>
+
+    <!-- ================= TABS ================= -->
+    <!-- ⚠️ SEM onclick → controlado pelo bolao.js -->
+    <nav class="tabs">
+      <button class="tab active" data-aba="apostar">Apostar</button>
+      <button class="tab" data-aba="estatisticas">Estatísticas</button>
+      <button class="tab" data-aba="ranking">Ranking</button>
+    </nav>
+
+    <!-- ================= APOSTAR ================= -->
+    <section id="apostar" class="aba ativa">
+
+      <div class="card">
+        <h2>🎯 Fazer aposta</h2>
+
+        <label>Seleção</label>
+        <select id="selecao">
+
+  <!-- 🇦🇷 CONMEBOL -->
+  <option>Brasil</option>
+  <option>Argentina</option>
+  <option>Uruguai</option>
+  <option>Colômbia</option>
+  <option>Chile</option>
+  <option>Peru</option>
+
+  <!-- 🇪🇺 UEFA -->
+  <option>França</option>
+  <option>Inglaterra</option>
+  <option>Espanha</option>
+  <option>Alemanha</option>
+  <option>Portugal</option>
+  <option>Itália</option>
+  <option>Holanda</option>
+  <option>Bélgica</option>
+  <option>Croácia</option>
+  <option>Dinamarca</option>
+  <option>Suíça</option>
+  <option>Polônia</option>
+  <option>Áustria</option>
+  <option>Suécia</option>
+  <option>Turquia</option>
+  <option>Ucrânia</option>
+
+  <!-- 🌎 CONCACAF -->
+  <option>Estados Unidos</option>
+  <option>México</option>
+  <option>Canadá</option>
+  <option>Costa Rica</option>
+  <option>Panamá</option>
+  <option>Honduras</option>
+
+  <!-- 🌍 CAF -->
+  <option>Marrocos</option>
+  <option>Senegal</option>
+  <option>Nigéria</option>
+  <option>Egito</option>
+  <option>Argélia</option>
+  <option>Camarões</option>
+  <option>Gana</option>
+  <option>Costa do Marfim</option>
+  <option>Tunísia</option>
+
+  <!-- 🌏 AFC -->
+  <option>Japão</option>
+  <option>Coreia do Sul</option>
+  <option>Irã</option>
+  <option>Arábia Saudita</option>
+  <option>Austrália</option>
+  <option>Catar</option>
+  <option>Emirados Árabes Unidos</option>
+  <option>Iraque</option>
+
+  <!-- 🌐 EXTRA (disputa / possíveis vagas) -->
+  <option>Nova Zelândia</option>
+
+</select>
+
+        <label>SciencePoints</label>
+        <input type="number" id="pontos" placeholder="Ex: 50">
+
+        <!-- ⚠️ SEM onclick -->
+        <button class="btn">Apostar</button>
+
+        <p id="simulacaoGanho"></p>
+
+        <p id="statusAposta"></p>
+      </div>
+
+      <div class="card">
+        <h2>📌 Suas apostas</h2>
+        <ul id="listaApostas"></ul>
+      </div>
+
+    </section>
+
+    <!-- ================= ESTATÍSTICAS ================= -->
+    <section id="estatisticas" class="aba">
+
+      <div class="card">
+        <h2>📊 Distribuição de apostas</h2>
+        <canvas id="graficoPizza"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>📈 Evolução do prêmio</h2>
+        <canvas id="graficoLinha"></canvas>
+      </div>
+
+    </section>
+
+    <!-- ================= RANKING ================= -->
+    <section id="ranking" class="aba">
+
+      <div class="card">
+        <h2>🏆 Ranking de apostadores</h2>
+        <ol id="rankingLista"></ol>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- ================= SCRIPT PRINCIPAL ================= -->
+  <!-- ⚠️ Tudo acontece dentro do bolao.js -->
+  <script type="module" src="bolao.js"></script>
+
+</body>
+</html>
