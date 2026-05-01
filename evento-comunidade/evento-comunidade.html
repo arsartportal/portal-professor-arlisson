@@ -273,6 +273,179 @@ h2 {
   background: none;
   margin-right: 10px;
 }
+
+/* =========================
+🔥 MODO ENERGIA (50%+)
+========================= */
+
+.evento-comunidade.power-up {
+  box-shadow:
+    0 0 120px rgba(34,197,94,0.25),
+    inset 0 0 60px rgba(34,197,94,0.15);
+}
+
+/* brilho geral aumentando */
+.evento-comunidade.power-up::after {
+  opacity: 0.9;
+  animation: auraPulseFast 3s ease-in-out infinite;
+}
+
+@keyframes auraPulseFast {
+  0%,100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* barra mais intensa */
+.barra.power-up {
+  box-shadow:
+    0 0 30px rgba(34,197,94,1),
+    0 0 80px rgba(34,197,94,0.9),
+    0 0 120px rgba(34,197,94,0.6);
+}
+
+/* quase lá (80%+) */
+.evento-comunidade.almost {
+  animation: tremor 0.4s infinite alternate;
+}
+
+@keyframes tremor {
+  from { transform: scale(1.01); }
+  to { transform: scale(1.015); }
+}
+
+/* barra ultra carregada */
+.barra.max-energy {
+  animation: energia 1s linear infinite;
+}
+
+/* =========================
+⚡ NÍVEIS DE ENERGIA PROGRESSIVOS
+========================= */
+
+.evento-comunidade[class*="nivel-"] {
+  transition: all 0.4s ease;
+}
+
+/* BASE */
+.barra[class*="nivel-"] {
+  transition: all 0.3s ease;
+}
+
+/* LOOP DE INTENSIDADE (simulado manualmente) */
+
+.evento-comunidade.nivel-10 { filter: brightness(1.05); }
+.evento-comunidade.nivel-20 { filter: brightness(1.1); }
+.evento-comunidade.nivel-30 { filter: brightness(1.15); }
+.evento-comunidade.nivel-40 { filter: brightness(1.2); }
+
+.evento-comunidade.nivel-50 {
+  filter: brightness(1.3);
+  box-shadow: 0 0 100px rgba(34,197,94,0.3);
+}
+
+.evento-comunidade.nivel-60 {
+  filter: brightness(1.4);
+  box-shadow: 0 0 120px rgba(34,197,94,0.4);
+}
+
+.evento-comunidade.nivel-70 {
+  filter: brightness(1.5);
+  box-shadow: 0 0 150px rgba(34,197,94,0.5);
+}
+
+.evento-comunidade.nivel-80 {
+  filter: brightness(1.6);
+  animation: vibra 0.6s infinite alternate;
+}
+
+.evento-comunidade.nivel-90 {
+  filter: brightness(1.8);
+  animation: vibra 0.3s infinite alternate;
+}
+
+.evento-comunidade.nivel-95 {
+  filter: brightness(2);
+  animation: vibra 0.15s infinite alternate;
+}
+
+/* vibração */
+@keyframes vibra {
+  from { transform: scale(1.01); }
+  to { transform: scale(1.02); }
+}
+
+/* barra ficando mais insana */
+.barra.nivel-50 { box-shadow: 0 0 30px #22c55e; }
+.barra.nivel-70 { box-shadow: 0 0 60px #22c55e; }
+.barra.nivel-90 {
+  box-shadow: 0 0 120px #22c55e;
+  animation: energia 1s linear infinite;
+}
+
+/* flash no quase final */
+.evento-comunidade.nivel-95::after {
+  animation: auraPulseFast 1.5s infinite;
+}
+
+/* =========================
+📱 FULLSCREEN MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 10px;
+  }
+
+  .evento-comunidade {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+
+    /* 🔥 FAZ CABER NA TELA */
+    max-height: 100vh;
+    overflow: hidden;
+
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  #textoProgresso {
+    font-size: 14px;
+    margin: 12px 0;
+    line-height: 1.4;
+  }
+
+  #textoProgresso b {
+    font-size: 16px;
+  }
+
+  .barra-container {
+    height: 18px;
+    margin: 15px 0;
+  }
+
+  #porcentagem {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .btn-evento {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
 </style>
 </head>
 
@@ -330,36 +503,88 @@ h2 {
   const faltam = Math.max(META - gasto, 0);
   const porcentagem = Math.min((gasto / META) * 100, 100);
 
-  // 🧠 TEXTO PRINCIPAL (NOVO)
+  const container = document.querySelector(".evento-comunidade");
+
+  // =========================
+  // RESET DE CLASSES
+  // =========================
+  container.className = "evento-comunidade";
+  barra.className = "barra";
+
+  // =========================
+  // NÍVEL A CADA 5%
+  // =========================
+  const nivel = Math.floor(porcentagem / 5) * 5;
+
+  container.classList.add(`nivel-${nivel}`);
+  barra.classList.add(`nivel-${nivel}`);
+
+  // =========================
+  // TEXTO PRINCIPAL
+  // =========================
   if (gasto >= META) {
     texto.innerHTML = `
-      🎉 A meta da comunidade foi alcançada!
+      🎉 A COMUNIDADE CONSEGUIU!
       <br><br>
-      O Quiz Científico já está disponível 🚀
+      🚀 O QUIZ DA COPA FOI LIBERADO!
     `;
 
     botao.innerText = "🚀 Jogar Quiz";
     botao.href = "../quiz-cientifico/quiz-copa-ultra.html";
 
   } else {
+
     texto.innerHTML = `
-      O Quiz Científico será liberado quando a meta da comunidade for alcançada ⚽
+      🌍 O QUIZ DA COPA está sendo carregado pela comunidade!
       <br><br>
-      Faltam <b style="color:#4ade80">${faltam}</b> Science Points para a liberação
+      ⚡ Faltam <b>${faltam}</b> Science Points
       <br><br>
-      👥 A comunidade já contribuiu com <b style="color:#4ade80">${gasto}</b> SP
+      👥 Já temos <b>${gasto}</b> SP acumulados
     `;
+
+    // =========================
+    // FRASES DINÂMICAS POR PROGRESSO
+    // =========================
+    if (porcentagem >= 20) {
+      texto.innerHTML += "<br><br>🌱 A comunidade começou a reagir...";
+    }
+
+    if (porcentagem >= 40) {
+      texto.innerHTML += "<br><br>🔥 O evento está ganhando força!";
+    }
+
+    if (porcentagem >= 60) {
+      texto.innerHTML += "<br><br>⚡ Energia subindo rápido!";
+    }
+
+    if (porcentagem >= 75) {
+      texto.innerHTML += "<br><br>🚀 Já dá pra sentir... tá perto!";
+    }
+
+    if (porcentagem >= 85) {
+      texto.innerHTML += "<br><br>💥 Quase lá!!";
+    }
+
+    if (porcentagem >= 95) {
+      texto.innerHTML += "<br><br>🚨 ÚLTIMOS PONTOS! LIBERAÇÃO IMINENTE!";
+    }
   }
 
-  // 🔥 QUASE LÁ
+  // =========================
+  // QUASE LÁ EXTRA
+  // =========================
   if (faltam < 2000 && gasto < META) {
     texto.innerHTML += "<br><br>🔥 Estamos quase lá!";
   }
 
+  // =========================
   // BARRA
+  // =========================
   barra.style.width = porcentagem + "%";
 
-  // %
+  // =========================
+  // PORCENTAGEM
+  // =========================
   porcentagemEl.innerText = porcentagem.toFixed(1) + "% concluído";
 
 });
