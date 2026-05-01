@@ -1,0 +1,375 @@
+/* =========================================================
+🌍 RESET BÁSICO
+========================================================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+}
+
+
+/* =========================================================
+🔝 BARRA SUPERIOR
+========================================================= */
+.topbar {
+  background: #1e293b;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.topbar button,
+.topbar select {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+📄 CONTAINER DAS PÁGINAS
+========================================================= */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+
+/* =========================================================
+📄 FOLHA A4
+========================================================= */
+.folha {
+  width: 210mm;
+  height: 297mm;
+
+  background-image: url('bg1.png');
+  background-size: cover;
+  background-position: center;
+
+  padding: 20mm;
+  box-sizing: border-box;
+
+  background-color: white;
+  position: relative;
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+
+/* =========================================================
+📌 NUMERAÇÃO (RODAPÉ)
+========================================================= */
+.numero-pagina {
+  position: absolute;
+  bottom: 10mm;
+  right: 15mm;
+
+  font-size: 12px;
+  color: #555;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+📚 CABEÇALHO
+========================================================= */
+.cabecalho {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.campo {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.titulo {
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+
+/* =========================================================
+📌 CAMPOS (GRID PROFISSIONAL)
+========================================================= */
+.linha-info {
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr
+    auto 1fr;
+
+  gap: 6px 12px;
+  align-items: center;
+
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+/* aluno maior */
+.linha-info.aluno {
+  grid-template-columns:
+    auto 3fr
+    auto 0.6fr
+    auto 1fr;
+}
+
+/* label */
+.campo-label {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* valor */
+.campo-valor {
+  min-height: 18px;
+  border-bottom: 1px solid #000;
+  padding: 2px 4px;
+}
+
+
+/* =========================================================
+📄 CONTEÚDO
+========================================================= */
+.conteudo {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+🔥 QUESTÃO (SIMPLES E LIMPO)
+========================================================= */
+
+.linha-questao {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* título */
+.titulo-questao {
+  display: block;   /* 🔥 quebra linha */
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+/* enunciado */
+.enunciado {
+  display: block;   /* 🔥 começa embaixo */
+  outline: none;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* placeholder */
+.enunciado[data-placeholder="true"] {
+  color: #999;
+  font-style: italic;
+}
+
+
+/* =========================================================
+📊 TABELAS (NÃO QUEBRAR)
+========================================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+td, th {
+  border: 1px solid #000;
+  padding: 5px;
+}
+
+
+/* =========================================================
+👁️ MODO PREVIEW
+========================================================= */
+.preview-mode .topbar {
+  display: none;
+}
+
+.preview-mode {
+  background: #ccc;
+}
+
+.preview-mode .container {
+  padding: 0;
+}
+
+.preview-mode .folha {
+  margin: auto;
+  box-shadow: none;
+}
+
+.preview-mode [contenteditable="true"] {
+  pointer-events: none;
+}
+
+
+/* =========================================================
+❌ BOTÃO SAIR PREVIEW
+========================================================= */
+#btnSairPreview {
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 20px;
+
+  background: #dc2626;
+  color: white;
+
+  padding: 10px 15px;
+  border-radius: 6px;
+
+  cursor: pointer;
+  font-weight: bold;
+
+  z-index: 999;
+}
+
+.preview-mode #btnSairPreview {
+  display: block;
+}
+
+
+/* =========================================================
+🖨️ IMPRESSÃO
+========================================================= */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+
+  body {
+    margin: 0;
+    background: white;
+  }
+
+  .topbar,
+  #btnSairPreview {
+    display: none !important;
+  }
+
+  .container {
+    padding: 0;
+    gap: 0;
+  }
+
+  .folha {
+    width: 210mm;
+    height: 297mm;
+
+    padding: 20mm;
+    box-sizing: border-box;
+
+    margin: 0;
+    box-shadow: none;
+
+    page-break-after: always;
+  }
+
+  .numero-pagina {
+    position: absolute;
+    bottom: 10mm;
+    right: 15mm;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+td, th {
+  border: 1px solid #000;
+  padding: 6px;
+  min-width: 40px;
+}
+
+.topbar button.ativo {
+  background: #2563eb;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* permite quebrar */
+tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.quebra-manual {
+  width: 100%;
+  height: 1px;
+  margin: 20px 0;
+  border-top: 2px dashed #999;
+}
+
+.topo-questao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-remover {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-remover:hover {
+  background: #b91c1c;
+}
+
+/* =========================================================
+🖨️ ESCONDER BOTÃO NA IMPRESSÃO
+========================================================= */
+@media print {
+  .btn-remover {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+👁️ ESCONDER NO PREVIEW
+========================================================= */
+.preview-mode .btn-remover {
+  display: none !important;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  margin: 100px auto;
+  border-radius: 8px;
+}

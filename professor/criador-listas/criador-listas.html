@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Criador de Listas</title>
+  <link rel="stylesheet" href="criador-listas.css">
+</head>
+
+<body>
+
+<!-- =========================
+🔝 TOPO
+========================= -->
+<div class="topbar">
+  <button onclick="novaLista()">🆕 Nova Lista</button>
+  <button onclick="gerarPDF()">📄 Exportar PDF</button>
+  <button onclick="imprimir()">🖨️ Imprimir</button>
+  <button onclick="abrirModalSalvar()">💾 Salvar</button>
+  <button onclick="abrirHistorico()">📚 Histórico</button>
+  <button id="btnVisualizar" onclick="visualizar()">👁️ Visualizar</button>
+  <button onclick="adicionarQuestao()">➕ Nova Questão</button>
+  <button id="btnBold" onclick="formatar('bold')"><b>B</b></button>
+<button id="btnItalic" onclick="formatar('italic')"><i>I</i></button>
+<button id="btnUnderline" onclick="formatar('underline')"><u>U</u></button>
+<button id="btnLeft" onclick="formatar('justifyLeft')">⬅️</button>
+<button id="btnCenter" onclick="formatar('justifyCenter')">↔️</button>
+<button id="btnRight" onclick="formatar('justifyRight')">➡️</button>
+<button id="btnJustify" onclick="formatar('justifyFull')">☰</button>
+<button onclick="quebrarPagina()">📄 Quebra de Página</button>
+
+<button onclick="inserirTabela()">📊 Tabela</button>
+
+  <select onchange="trocarBg(this.value)">
+    <option value="bg1.png">Background 1</option>
+    <option value="bg2.png">Background 2</option>
+  </select>
+</div>
+
+<!-- =========================
+❌ SAIR DO PREVIEW
+========================= -->
+<div id="btnSairPreview" onclick="sairPreview()">
+  ❌ Sair da Visualização
+</div>
+
+<!-- =========================
+📄 ÁREA DE TRABALHO
+========================= -->
+<div class="container" id="paginas">
+  <!-- 🔥 PÁGINAS SÃO CRIADAS PELO JS -->
+</div>
+
+
+<div id="modalSalvar" class="modal">
+  <div class="modal-content">
+    <h3>Salvar lista</h3>
+
+    <input 
+      type="text" 
+      id="nomeListaInput" 
+      placeholder="Digite o nome da lista"
+      style="width:100%; padding:8px; margin-bottom:10px;"
+    >
+
+    <button onclick="confirmarSalvar()">Salvar</button>
+    <button onclick="fecharModalSalvar()">Cancelar</button>
+  </div>
+</div>
+
+<div id="modalHistorico" class="modal">
+  <div class="modal-content">
+    <h3>Histórico de Listas</h3>
+
+    <div id="listaHistorico"></div>
+
+    <button onclick="fecharHistorico()">Fechar</button>
+  </div>
+</div>
+<!-- =========================
+📜 SCRIPTS
+========================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="criador-listas.js"></script>
+
+</body>
+</html>
