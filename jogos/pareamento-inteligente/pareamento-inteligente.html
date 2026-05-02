@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🧠 Pareamento Inteligente</title>
+
+  <!-- CSS GLOBAL -->
+  <link rel="stylesheet" href="../../components/header-footer.css">
+
+  <!-- CSS DO JOGO -->
+  <link rel="stylesheet" href="./pareamento-inteligente.css">
+</head>
+
+<body>
+
+<!-- ===================================================== -->
+<!-- HEADER DINÂMICO                                       -->
+<!-- ===================================================== -->
+<div id="header"></div>
+
+<!-- ===================================================== -->
+<!-- TOPO DO JOGO                                          -->
+<!-- ===================================================== -->
+<section class="topo">
+  <h1>🧠 Pareamento Inteligente</h1>
+  <p>Associe corretamente os conceitos e fórmulas</p>
+</section>
+
+<!-- STATUS -->
+<section class="status-bar">
+  <div>🎯 Acertos: <span id="acertos">0</span></div>
+  <div>⚡ Combo: <span id="combo">0</span></div>
+  <div>⏱️ Tempo: <span id="tempo">0</span>s</div>
+</section>
+
+<!-- JOGO -->
+<main class="jogo-container">
+
+  <div class="coluna">
+    <h3>Conceitos</h3>
+    <div id="lista-esquerda"></div>
+  </div>
+
+  <div class="coluna">
+    <h3>Respostas</h3>
+    <div id="lista-direita"></div>
+  </div>
+
+</main>
+
+<!-- FEEDBACK -->
+<section class="feedback">
+  <p id="mensagem"></p>
+</section>
+
+<!-- AÇÕES -->
+<section class="acoes">
+  <button onclick="reiniciarJogo()">🔄 Reiniciar</button>
+</section>
+
+<!-- ===================================================== -->
+<!-- 🏆 RANKING                                            -->
+<!-- ===================================================== -->
+<section class="ranking">
+  <h2>🏆 Ranking dos Mais Rápidos</h2>
+  <div id="ranking-lista">Carregando...</div>
+</section>
+
+<!-- ===================================================== -->
+<!-- FOOTER DINÂMICO                                       -->
+<!-- ===================================================== -->
+<div id="footer"></div>
+
+<!-- ===================================================== -->
+<!-- SCRIPTS                                               -->
+<!-- ===================================================== -->
+
+<!-- HEADER + FOOTER + HUD -->
+<script type="module">
+  import { iniciarComponentes } from "../../components/load-components.js";
+  import { iniciarSuperHeader } from "../../components/superheader.js";
+
+  async function init() {
+    await iniciarComponentes();
+    iniciarSuperHeader();
+  }
+
+  init();
+</script>
+
+<!-- JOGO -->
+<script type="module" src="./pareamento-inteligente.js"></script>
+
+</body>
+</html>

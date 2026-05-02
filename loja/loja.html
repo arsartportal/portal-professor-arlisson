@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🧠 Central de Recompensas</title>
+
+  <!-- CSS GLOBAL -->
+  <link rel="stylesheet" href="../css/patentes.css">
+
+  <!-- CSS DA LOJA -->
+  <link rel="stylesheet" href="./loja.css">
+  <!-- CSS COMPONENTES -->
+  <link rel="stylesheet" href="../components/header-footer.css">
+
+  <!-- ALERTA GLOBAL -->
+  <link rel="stylesheet" href="../js/plugins/global-alert/globalAlert.css">
+</head>
+
+<body id="topo">
+
+  <!-- 🔷 HEADER GLOBAL -->
+<div id="superheader"></div>
+
+  <!-- HERO -->
+  <section class="hero-loja">
+    <h1>🧠 Central de Recompensas</h1>
+    <p>
+      Use seus SciencePoints (SP), conquistados em atividades, para resgatar itens exclusivos.
+      <br>
+      SP não possui valor monetário e é utilizado apenas dentro da plataforma.
+    </p>
+  </section>
+
+  <!-- 🔥 COMUNIDADE -->
+  <div class="card-sp-global">
+
+    <div class="sp-global-header">
+      🔥 Comunidade
+    </div>
+
+    <div class="sp-global-valor" id="sp-global">0</div>
+
+    <div class="sp-global-label">
+      SP já gastos na central de recompensas
+    </div>
+
+    <br>
+
+    <!-- META -->
+    <div class="meta-global">
+
+      <div class="meta-info">
+        🎯 Meta Global:
+        <span id="meta-valor">0</span> /
+        <span id="meta-max">10.000</span>
+      </div>
+
+      <div class="barra-meta">
+        <div class="barra-fill" id="barra-meta-fill"></div>
+      </div>
+
+      <div class="meta-recompensa">
+        🎁 Recompensa:
+        <span class="xp">+1000 XP para todos</span>
+        <span class="quiz">+ Quiz Copa do Mundo</span>
+      </div>
+
+    </div>
+
+    <!-- RANKING -->
+    <div class="ranking-sp">
+      <h2>🏆 Top Resgatadores</h2>
+      <div id="ranking-sp"></div>
+    </div>
+
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar-loja">
+    <nav class="menu-loja">
+
+      <div class="sp-menu">
+        <span>🔬 SP:</span>
+        <span id="sp">0</span>
+      </div>
+
+  <div class="menu-links">
+  <a href="#secao-caixa">Caixas</a>
+  <a href="#secao-xp">XP</a>
+  <a href="#secao-ficha">Ingressos</a>
+  <a href="#secao-beneficios">Benefícios</a>
+  <a href="#secao-ferramenta">Ferramentas</a>
+</div>
+
+      <a href="../inventario/inventario.html" class="btn-inventario-loja">
+        🎒 Inventário
+      </a>
+
+    </nav>
+  </div>
+
+  <!-- LOJA DINÂMICA -->
+  <div id="loja"></div>
+
+  <!-- MODAIS -->
+  <div id="modal"></div>
+  <div id="roletaModal"></div>
+
+  <!-- HISTÓRICO -->
+  <div class="historico-loja" id="historico">
+    <h2>📜 Histórico de Compras</h2>
+    <div id="feedCompras"></div>
+  </div>
+
+  <!-- POPUP RECOMPENSA -->
+  <div id="popupRecompensa" class="popup-overlay">
+    <div class="popup-card">
+      <div id="popupAnimacao"></div>
+      <h2 id="popupTitulo"></h2>
+      <p id="popupDescricao"></p>
+
+      <button onclick="fecharPopup()">Continuar</button>
+    </div>
+  </div>
+
+  <!-- POPUP CONQUISTA -->
+  <div id="popupConquista" class="popup-conquista hidden">
+    <div class="popup-conquista-card">
+      <div class="conquista-icon">🏅</div>
+      <h2>CONQUISTA DESBLOQUEADA</h2>
+      <h3>Primeiro Resgate</h3>
+      <p>Você realizou seu primeiro resgate 🛒</p>
+    </div>
+  </div>
+
+  <!-- =========================
+     OVERLAY DE PATENTE
+========================== -->
+<div id="patente-overlay" class="hidden">
+  <div class="patente-card">
+
+    <h2>🎉 Nova Patente!</h2>
+
+    <div class="patentes-container">
+      <img id="patente-antiga" class="patente antiga" />
+      <img id="patente-nova" class="patente nova" />
+    </div>
+
+    <button onclick="fecharPatente()">Continuar</button>
+
+  </div>
+</div>
+
+<!-- 🔻 FOOTER GLOBAL -->
+<div id="superfooter"></div>
+
+  <!-- ===================================== -->
+  <!-- 🔥 SCRIPTS -->
+  <!-- ===================================== -->
+
+  <!-- SUPERHEADER PRIMEIRO -->
+  <script type="module">
+  import { iniciarSuperHeader } from "../components/superheader.js";
+  window.iniciarSuperHeader = iniciarSuperHeader;
+  </script>
+
+  <!-- DEPOIS A LOJA -->
+  <script type="module" src="./loja.js"></script>
+
+  
+  <!-- SISTEMAS GLOBAIS -->
+  <script type="module" src="../js/perfil.js"></script>
+  <script type="module" src="../js/hud.js"></script>
+  <script src="../js/tema.js"></script>
+  <script src="../js/patentes.js" type="module"></script>
+
+ 
+</body>
+</html>

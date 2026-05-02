@@ -1,0 +1,304 @@
+/* =========================
+🎯 RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+🌐 BODY
+========================= */
+body {
+  background: radial-gradient(circle at top, #1e293b, #020617);
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+/* =========================
+📦 CONTEÚDO CENTRAL
+========================= */
+.topo,
+.status-bar,
+.jogo-container,
+.feedback,
+.acoes {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* =========================
+🔝 TOPO
+========================= */
+.topo {
+  text-align: center;
+  padding: 30px 20px 10px;
+}
+
+.topo h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.topo p {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* =========================
+📊 STATUS BAR (melhorado)
+========================= */
+.status-bar {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px auto;
+
+  padding: 10px;
+  border-radius: 16px;
+
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* chips individuais */
+.status-bar div {
+  background: rgba(30, 41, 59, 0.8);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* =========================
+🎮 JOGO
+========================= */
+.jogo-container {
+  display: flex;
+  gap: 25px;
+  padding: 10px 20px 30px;
+}
+
+/* =========================
+🧱 COLUNAS
+========================= */
+.coluna {
+  flex: 1;
+
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+
+  padding: 18px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  box-shadow: 
+    0 15px 40px rgba(0,0,0,0.5),
+    inset 0 0 25px rgba(255,255,255,0.02);
+}
+
+.coluna h3 {
+  text-align: center;
+  margin-bottom: 14px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* =========================
+📋 LISTAS
+========================= */
+#lista-esquerda,
+#lista-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =========================
+🧩 ITENS
+========================= */
+.item {
+  padding: 14px;
+  border-radius: 14px;
+
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255,255,255,0.05);
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  text-align: center;
+  font-weight: 500;
+
+  box-shadow: 0 5px 12px rgba(0,0,0,0.5);
+}
+
+/* hover */
+.item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+}
+
+/* selecionado */
+.item.selecionado {
+  border: 1px solid #facc15;
+  background: linear-gradient(145deg, #92400e, #78350f);
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.5);
+}
+
+/* correto */
+.item.correto {
+  background: linear-gradient(145deg, #065f46, #064e3b);
+  border: 1px solid #10b981;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+  animation: pop 0.3s ease;
+}
+
+/* erro */
+.item.errado {
+  background: linear-gradient(145deg, #7f1d1d, #450a0a);
+  border: 1px solid #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.5);
+  animation: shake 0.3s;
+}
+
+/* =========================
+💬 FEEDBACK (melhorado)
+========================= */
+.feedback {
+  text-align: center;
+  margin-top: 10px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+🔘 BOTÕES (efeito premium)
+========================= */
+.acoes {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.6);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* =========================
+📱 RESPONSIVO
+========================= */
+@media (max-width: 768px) {
+
+  .jogo-container {
+    flex-direction: column;
+  }
+
+  .status-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .topo h1 {
+    font-size: 24px;
+  }
+}
+
+/* =========================
+✨ ANIMAÇÕES
+========================= */
+@keyframes pop {
+  0% { transform: scale(0.8); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+.ranking {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.ranking h2 {
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 16px;
+  margin: 8px 0;
+
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+
+  transition: 0.2s;
+}
+
+.ranking-item:hover {
+  transform: scale(1.02);
+}
+
+.posicao {
+  font-weight: bold;
+  width: 50px;
+}
+
+.nome {
+  flex: 1;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.tempo {
+  font-weight: bold;
+  color: #38bdf8;
+}

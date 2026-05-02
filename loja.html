@@ -847,103 +847,129 @@ function carregarSPTempoReal(userRef) {
     /* ======================================================
        CARREGAR HISTÓRICO GLOBAL
     ====================================================== */
-    async function carregarHistorico() {
-      try {
-        if (unsubscribeHistorico) {
-          unsubscribeHistorico();
+    // ======================================================
+// 📜 HISTÓRICO GLOBAL DE COMPRAS (VERSÃO CORRIGIDA)
+// ======================================================
+async function carregarHistorico() {
+  try {
+
+    if (unsubscribeHistorico) {
+      unsubscribeHistorico();
+    }
+
+    const q = query(
+      collection(db, "lojaHistorico"),
+      orderBy("data", "desc"),
+      limit(20)
+    );
+
+    const feed = document.getElementById("feedCompras");
+    if (!feed) return;
+
+    unsubscribeHistorico = onSnapshot(q, async (snapshot) => {
+
+      feed.innerHTML = "";
+
+      // 🔥 ALERTAS (COM PROTEÇÃO DE TIPO)
+      snapshot.docChanges().forEach(change => {
+        if (change.type !== "added") return;
+
+        const c = change.doc.data();
+
+        const itemTexto = typeof c.item === "string"
+          ? c.item
+          : c.item?.nome || "";
+
+        if (itemTexto.includes("Caixa Lendária")) {
+          mostrarAlertaGlobal(`🔥 ${c.aluno} abriu uma CAIXA LENDÁRIA!`);
         }
 
-        const q = query(
-          collection(db, "lojaHistorico"),
-          orderBy("data", "desc"),
-          limit(20)
-        );
+        if (itemTexto.includes("Chaveiro")) {
+          mostrarAlertaGlobal(`👑 ${c.aluno} ganhou um Chaveiro Univers3D!`);
+        }
 
-        const feed = document.getElementById("feedCompras");
-        if (!feed) return;
+        if (itemTexto.includes("+800 XP")) {
+          mostrarAlertaGlobal(`⚡ ${c.aluno} ganhou +800 XP na roleta!`);
+        }
+      });
 
-        unsubscribeHistorico = onSnapshot(q, async (snapshot) => {
-          feed.innerHTML = "";
+      // 🔽 ORDENAÇÃO SEGURA
+      const docsOrdenados = snapshot.docs
+        .filter(d => d.data().data)
+        .sort((a, b) => b.data().data.toMillis() - a.data().data.toMillis());
 
-          snapshot.docChanges().forEach(change => {
-            if (change.type !== "added") return;
+      for (const documento of docsOrdenados) {
 
-            const c = change.doc.data();
-            if (!c.item) return;
+        const c = documento.data();
+        if (!c.data) continue;
 
-            if (c.item.includes("Caixa Lendária")) {
-              mostrarAlertaGlobal(`🔥 ${c.aluno} abriu uma CAIXA LENDÁRIA!`);
+        // 🔒 TEXTO DO ITEM (ANTI-BUG)
+        const itemTexto = typeof c.item === "string"
+          ? c.item
+          : c.item?.nome || "item";
+
+        // 🕒 DATA
+        const data = c.data.toDate();
+        const dia = data.toLocaleDateString("pt-BR");
+        const hora = data.toLocaleTimeString("pt-BR");
+        const dataFormatada = `${dia} • ${hora}`;
+
+        // 🎖️ PATENTE REAL (DO FIREBASE)
+        let patenteImg = "./assets/ranks/SeasonalRank0-0.png";
+
+        if (c.uid) {
+          try {
+            const userDoc = await getDoc(doc(db, "usuarios", c.uid));
+
+            if (userDoc.exists()) {
+              const dadosUser = userDoc.data();
+              const nivel = dadosUser.nivel || 0;
+
+              // 🔥 USA SEU SISTEMA OFICIAL
+              patenteImg = obterPatentePorNivel(nivel).imagem;
             }
-
-            if (c.item.includes("Chaveiro")) {
-              mostrarAlertaGlobal(`👑 ${c.aluno} ganhou um Chaveiro Univers3D!`);
-            }
-
-            if (c.item.includes("+800 XP")) {
-              mostrarAlertaGlobal(`⚡ ${c.aluno} ganhou +800 XP na roleta!`);
-            }
-          });
-
-          const docsOrdenados = snapshot.docs
-            .filter(d => d.data().data)
-            .sort((a, b) => b.data().data.toMillis() - a.data().data.toMillis());
-
-          for (const documento of docsOrdenados) {
-            const c = documento.data();
-            if (!c.data) continue;
-
-            const data = c.data.toDate();
-            const dia = data.toLocaleDateString("pt-BR");
-            const hora = data.toLocaleTimeString("pt-BR");
-            const dataFormatada = `${dia} • ${hora}`;
-
-            let patenteImg = "./assets/ranks/SeasonalRank0-0.png";
-
-            if (c.uid) {
-              try {
-                const userDoc = await getDoc(doc(db, "usuarios", c.uid));
-
-                if (userDoc.exists()) {
-                  const dadosUser = userDoc.data();
-                  const nivel = dadosUser.nivel || 0;
-                  patenteImg = obterPatentePorNivel(nivel).imagem;
-                }
-              } catch (erro) {
-                console.warn("Erro ao carregar patente do usuário:", erro);
-              }
-            }
-
-            let classe = "feed-item";
-            if (c.item.includes("Roleta")) classe += " feed-roleta";
-            if (c.item.includes("Caixa")) classe += " feed-caixa";
-            if (c.item.includes("Chaveiro")) classe += " feed-lendario";
-            if (patenteImg.includes("Top")) classe += " patente-top";
-
-            feed.innerHTML += `
-              <div class="${classe}">
-                <div class="feed-avatar">
-                  <img src="${patenteImg}" alt="Patente">
-                </div>
-
-                <div class="feed-msg">
-                  <b>${c.aluno}</b> ${c.item}
-
-                  <div class="feed-info">
-                    🏫 ${c.escola} • ${c.serie} ${c.turma}
-                    <br>
-                    🕒 ${dataFormatada}
-                  </div>
-                </div>
-              </div>
-            `;
+          } catch (erro) {
+            console.warn("Erro ao carregar patente:", erro);
           }
+        }
 
-          feed.scrollTop = 0;
-        });
-      } catch (erro) {
-        console.error("Erro ao carregar histórico:", erro);
+        // 🎨 CLASSES DINÂMICAS
+        let classe = "feed-item";
+
+        if (itemTexto.includes("Roleta")) classe += " feed-roleta";
+        if (itemTexto.includes("Caixa")) classe += " feed-caixa";
+        if (itemTexto.includes("Chaveiro")) classe += " feed-lendario";
+        if (patenteImg.includes("Top")) classe += " patente-top";
+
+        // 🧱 RENDER
+        feed.innerHTML += `
+          <div class="${classe}">
+
+            <div class="feed-avatar">
+              <img src="${patenteImg}" alt="Patente">
+            </div>
+
+            <div class="feed-msg">
+              <b>${c.aluno}</b> ${itemTexto}
+
+              <div class="feed-info">
+                🏫 ${c.escola || "—"} • ${c.serie || "—"} ${c.turma || ""}
+                <br>
+                🕒 ${dataFormatada}
+              </div>
+            </div>
+
+          </div>
+        `;
       }
-    }
+
+      feed.scrollTop = 0;
+    });
+
+  } catch (erro) {
+    console.error("Erro ao carregar histórico:", erro);
+  }
+}
 
     /* ======================================================
        RENDER DA LOJA
