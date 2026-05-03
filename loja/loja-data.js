@@ -16,19 +16,19 @@ export const recompensas = [
   // ======================================================
   // 🎟️ FICHAS QUIZ
   // ======================================================
-  { id: "ficha1", nome: "🎟️ 1 Ingresso", preco: 5, fichas: 1, raridade: "comum", ordem: 1, descricao: "Acesso a 1 partida do Quiz Científico." },
-  { id: "ficha3", nome: "🎟️ Pacote 3 Ingressos", preco: 12, fichas: 3, raridade: "raro", ordem: 2, descricao: "Leve desconto para múltiplas tentativas." },
-  { id: "ficha7", nome: "🎟️ Pacote 7 Ingressos", preco: 25, fichas: 7, raridade: "epico", ordem: 3, descricao: "Melhor custo-benefício." },
-  { id: "ficha15", nome: "🎟️ Pacote 15 Ingressos", preco: 45, fichas: 15, raridade: "lendario", ordem: 4, descricao: "Pacote máximo para dominar o ranking." },
+  { id: "ficha1", nome: "🎟️ 1 Ingresso", preco: 5, fichas: 1, raridade: "comum", ordem: 1, descricao: "Acesso a 1 partida do Quiz - Copa do Mundo." },
+  { id: "ficha3", nome: "🎟️ 3 Ingressos", preco: 12, fichas: 3, raridade: "raro", ordem: 2, descricao: "Acesso a 3 partidas do Quiz - Copa do Mundo." },
+  { id: "ficha7", nome: "🎟️ 7 Ingressos", preco: 25, fichas: 7, raridade: "epico", ordem: 3, descricao: "Acesso a 7 partidas do Quiz - Copa do Mundo." },
+  { id: "ficha15", nome: "🎟️ 15 Ingressos", preco: 45, fichas: 15, raridade: "lendario", ordem: 4, descricao: "Acesso a 15 partidas do Quiz - Copa do Mundo." },
 
 
   // ======================================================
   // 🎯 BÔNUS PROVA
   // ======================================================
-  { id: "bonus-05", nome: "⚪ +0,5 ponto", preco: 50, tipo: "prova", subtipo: "bonus", valor: 0.5, raridade: "comum", ordem: 10, descricao: "Adiciona +0,5 ponto na prova." },
-  { id: "bonus-10", nome: "🔵 +1,0 ponto", preco: 90, tipo: "prova", subtipo: "bonus", valor: 1.0, raridade: "raro", ordem: 11, descricao: "Adiciona +1,0 ponto na prova." },
-  { id: "bonus-15", nome: "🟣 +1,5 ponto", preco: 130, tipo: "prova", subtipo: "bonus", valor: 1.5, raridade: "epico", ordem: 12, descricao: "Grande vantagem na prova." },
-  { id: "bonus-20", nome: "🟡 +2,0 pontos", preco: 170, tipo: "prova", subtipo: "bonus", valor: 2.0, raridade: "lendario", ordem: 13, descricao: "Bônus máximo permitido na prova." },
+  { id: "bonus-05", nome: "+0,5 ponto", preco: 50, tipo: "prova", subtipo: "bonus", valor: 0.5, raridade: "comum", ordem: 10, descricao: "Adiciona +0,5 ponto na prova." },
+  { id: "bonus-10", nome: "+1,0 ponto", preco: 90, tipo: "prova", subtipo: "bonus", valor: 1.0, raridade: "raro", ordem: 11, descricao: "Adiciona +1,0 ponto na prova." },
+  { id: "bonus-15", nome: "+1,5 ponto", preco: 130, tipo: "prova", subtipo: "bonus", valor: 1.5, raridade: "epico", ordem: 12, descricao: "Grande vantagem na prova." },
+  { id: "bonus-20", nome: "+2,0 pontos", preco: 170, tipo: "prova", subtipo: "bonus", valor: 2.0, raridade: "lendario", ordem: 13, descricao: "Bônus máximo permitido na prova." },
 
 
   // ======================================================
@@ -36,7 +36,7 @@ export const recompensas = [
   // ======================================================
   {
     id: "caixa-basica",
-    nome: "🧪 Caixa Básica",
+    nome: "Caixa Básica",
     preco: 5,
     raridade: "comum",
     ordem: 20,
@@ -56,7 +56,7 @@ export const recompensas = [
 
   {
     id: "caixa-cientifica",
-    nome: "⚛ Caixa Científica",
+    nome: "Caixa Científica",
     preco: 10,
     raridade: "raro",
     ordem: 21,
@@ -76,7 +76,7 @@ export const recompensas = [
 
   {
   id: "caixa-epica",
-  nome: "🧬 Caixa Épica",
+  nome: "Caixa Épica",
   preco: 15,
   raridade: "epico",
   ordem: 21.5, // 🔥 ENTRE 21 e 22
@@ -96,7 +96,7 @@ export const recompensas = [
 
   {
     id: "caixa-lendaria",
-    nome: "👑 Caixa Lendária",
+    nome: "Caixa Lendária",
     preco: 20,
     raridade: "lendario",
     ordem: 22,
@@ -119,11 +119,11 @@ export const recompensas = [
   // ======================================================
   {
     id: "revanche-academica",
-    nome: "🔁 Revanche Acadêmica",
+    nome: "Revanche Acadêmica",
     preco: 120,
     tipo: "prova-extra",
     subtipo: "oportunidade",
-    raridade: "epico",
+    raridade: "lendario",
     ordem: 15,
     descricao: "Permite refazer uma prova para melhorar sua nota."
   },
@@ -134,7 +134,7 @@ export const recompensas = [
   // ======================================================
   {
     id: "roleta-cientifica",
-    nome: "🎡 Roleta Científica",
+    nome: "Roleta Científica",
     preco: 100,
     raridade: "epico",
     ordem: 43,
@@ -145,19 +145,19 @@ export const recompensas = [
   // ======================================================
   // 🏆 RANKING
   // ======================================================
-  { id: "ranking-1ficha", nome: "🎟️ 1 Ficha de Ranking", preco: 5, tipo: "ranking-fichas", quantidade: 1, raridade: "comum", ordem: 39, descricao: "Permite 1 acesso ao ranking." },
-  { id: "ranking-5fichas", nome: "🏆 Pacote 5 Fichas", preco: 20, tipo: "ranking-fichas", quantidade: 5, raridade: "raro", ordem: 40, descricao: "Pacote econômico de acesso ao ranking." },
-  { id: "ranking-15fichas", nome: "🥈 Pacote 15 Fichas", preco: 45, tipo: "ranking-fichas", quantidade: 15, raridade: "epico", ordem: 41, descricao: "Pacote avançado para múltiplas tentativas." },
-  { id: "ranking-50fichas", nome: "👑 Pacote 50 Fichas", preco: 120, tipo: "ranking-fichas", quantidade: 50, raridade: "lendario", ordem: 42, descricao: "Pacote máximo para dominar o ranking." },
+  { id: "ranking-1ficha", nome: "1 Ficha - Ranking", preco: 5, tipo: "ranking-fichas", quantidade: 1, raridade: "comum", ordem: 39, descricao: "Permite 1 acesso ao ranking." },
+  { id: "ranking-5fichas", nome: "5 Fichas - Ranking", preco: 20, tipo: "ranking-fichas", quantidade: 5, raridade: "raro", ordem: 40, descricao: "Permite 5 acessos ao ranking." },
+  { id: "ranking-15fichas", nome: "15 Fichas - Ranking", preco: 45, tipo: "ranking-fichas", quantidade: 15, raridade: "epico", ordem: 41, descricao: "Permite 15 acessos ao ranking." },
+  { id: "ranking-50fichas", nome: "50 Fichas - Ranking", preco: 120, tipo: "ranking-fichas", quantidade: 50, raridade: "lendario", ordem: 42, descricao: "Permite 50 acessos ao ranking." },
 
 
   // ======================================================
   // 🧰 FERRAMENTAS
   // ======================================================
-  { id: "tool-pa", nome: "📈 Ferramenta PA", preco: 80, tipo: "ferramenta", tool: "pa", raridade: "comum", ordem: 90, descricao: "Desbloqueia Progressão Aritmética." },
-  { id: "tool-pg", nome: "📉 Ferramenta PG", preco: 100, tipo: "ferramenta", tool: "pg", raridade: "raro", ordem: 91, descricao: "Desbloqueia Progressão Geométrica." },
-  { id: "tool-paxpg", nome: "⚖️ Comparador PA x PG", preco: 130, tipo: "ferramenta", tool: "paxpg", raridade: "epico", ordem: 92, descricao: "Compare PA e PG lado a lado." },
-  { id: "tool-estatistica", nome: "📊 Estatística", preco: 160, tipo: "ferramenta", tool: "estatistica", raridade: "lendario", ordem: 93, descricao: "Gráficos e análises estatísticas." },
+  { id: "tool-pa", nome: "Progressão Aritmética ", preco: 80, tipo: "ferramenta", tool: "pa", raridade: "lendario", ordem: 90, descricao: "Desbloqueia Progressão Aritmética." },
+  { id: "tool-pg", nome: "Progressão Geométrica", preco: 100, tipo: "ferramenta", tool: "pg", raridade: "lendario", ordem: 91, descricao: "Desbloqueia Progressão Geométrica." },
+  { id: "tool-paxpg", nome: "Comparador PA x PG", preco: 130, tipo: "ferramenta", tool: "paxpg", raridade: "lendario", ordem: 92, descricao: "Compare PA e PG lado a lado." },
+  { id: "tool-estatistica", nome: "Estatística", preco: 160, tipo: "ferramenta", tool: "estatistica", raridade: "lendario", ordem: 93, descricao: "Gráficos e análises estatísticas." },
 
 
   // ======================================================

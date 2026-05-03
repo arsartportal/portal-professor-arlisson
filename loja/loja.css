@@ -19,9 +19,8 @@ body{
     linear-gradient(135deg,#0f172a,#1e293b);
   color:#ffffff;
   margin:0;
-  padding-top: 90px;
-  /* espaço superior para o menu fixo não cobrir o conteúdo */
-  padding:120px 40px 40px;
+
+  padding: 0 ;
 }
 
 /* =====================================================
@@ -85,13 +84,13 @@ h1{
    Container externo do menu fixo
    ===================================================== */
 .topbar-loja{
-  position:fixed;
-  top:14px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:9999;
-  width:min(1200px, calc(100% - 32px));
-  margin:0;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* =====================================================
@@ -256,6 +255,7 @@ h1{
     0 0 18px rgba(14,165,233,0.15);
   transition:0.25s;
   white-space:nowrap;
+  align-self:center;
 }
 
 .btn-inventario-loja:hover{
@@ -1275,12 +1275,13 @@ button:disabled{
   .btn-inventario-loja{
     width:100%;
     justify-content:center;
+    align-self:center;
   }
 }
 
 @media (max-width: 900px){
   body{
-    padding:110px 24px 24px;
+    padding:0;
   }
 
   h1{
@@ -1320,7 +1321,7 @@ button:disabled{
 
 @media (max-width: 640px){
   body{
-    padding:105px 18px 18px;
+    padding:0;
   }
 
   h1{
@@ -2448,7 +2449,7 @@ AVISO DA CAIXA
 
 .grid-raridade {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
 }
 
@@ -2463,6 +2464,7 @@ AVISO DA CAIXA
   border-radius: 12px;
   padding: 15px;
   border: 1px solid #334155;
+  z-index: 1;
 
   /* 🔥 ISSO ARRUMA O LAYOUT INTERNO */
   display: flex;
@@ -2490,38 +2492,9 @@ AVISO DA CAIXA
   font-weight: bold;
   padding: 4px 8px;
   border-radius: 8px;
+  z-index: 1;
   text-transform: uppercase;
 }
-
-
-/* ======================================================
-   🎨 RARIDADES
-====================================================== */
-
-.raridade-comum::after {
-  content: "Comum";
-  background: #22c55e;
-  color: #022c22;
-}
-
-.raridade-raro::after {
-  content: "Raro";
-  background: #3b82f6;
-  color: white;
-}
-
-.raridade-epico::after {
-  content: "Épico";
-  background: #a855f7;
-  color: white;
-}
-
-.raridade-lendario::after {
-  content: "Lendário";
-  background: #facc15;
-  color: #1e293b;
-}
-
 
 /* ======================================================
    ✨ BORDA POR RARIDADE
@@ -2613,6 +2586,8 @@ AVISO DA CAIXA
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  position: relative;
+  z-index: 2;
 }
 
 .badge-recomendado {
@@ -2622,6 +2597,8 @@ AVISO DA CAIXA
   padding: 4px 6px;
   border-radius: 6px;
   font-weight: bold;
+  position: relative;
+  z-index: 3;
 }
 
 .mini-tag {
@@ -2635,5 +2612,350 @@ AVISO DA CAIXA
   margin: 15px 0 10px;
   font-size: 16px;
   color: #94a3b8;
+}
+
+.recomendado {
+  border: 2px solid #22c55e;
+  box-shadow: 0 0 15px #22c55e55;
+  transform: scale(1.03);
+}
+
+.titulo-card{
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* label base */
+.raridade-label{
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+
+/* cores por raridade */
+.raridade-label.comum{
+  background: #22c55e22;
+  color: #22c55e;
+}
+
+.raridade-label.raro{
+  background: #3b82f622;
+  color: #3b82f6;
+}
+
+.raridade-label.epico{
+  background: #a855f722;
+  color: #a855f7;
+}
+
+.raridade-label.lendario{
+  background: #facc1522;
+  color: #facc15;
+}
+
+/* =========================
+   🏆 RANKING COMPACTO
+========================= */
+
+#ranking-sp {
+  margin-top: 10px;
+}
+
+.item-ranking {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 14px;
+  margin-bottom: 6px;
+
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.item-ranking:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.item-ranking .left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-ranking .pos {
+  font-size: 16px;
+}
+
+.item-ranking .nome {
+  font-weight: 500;
+}
+
+.item-ranking .xp {
+  font-size: 12px;
+  opacity: 0.7;
+  color: #22c55e;
+}
+
+.item-ranking .right {
+  font-weight: bold;
+  color: #facc15;
+}
+
+/* 🥇🥈🥉 destaque real */
+.top-1 {
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid #facc1555;
+}
+
+.top-2 {
+  background: rgba(148, 163, 184, 0.15);
+  border: 1px solid #94a3b855;
+}
+
+.top-3 {
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid #f9731655;
+}
+
+.container-loja {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   🧠 CONTAINER CENTRAL
+========================= */
+
+.container-loja {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   🧩 CARD GERAL (IGUAL RANKING)
+========================= */
+
+.card-loja {
+  margin-top: 20px;
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.9),
+    rgba(15, 23, 42, 0.9)
+  );
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+#header{
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+}
+
+.loja-wrapper{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+}
+
+/* ======================================================
+📱 MOBILE PACK PRO — LOJA
+====================================================== */
+
+/* 🔥 RESET MOBILE BASE */
+@media (max-width: 900px){
+
+  body{
+    padding:0 !important;
+  }
+
+  .container-loja{
+    padding:0 12px !important;
+  }
+
+  .topbar-loja{
+    max-width:100% !important;
+    padding:0 6px;
+  }
+}
+
+
+/* ======================================================
+📱 TABLET / TRANSIÇÃO
+====================================================== */
+
+@media (max-width: 768px){
+
+  .hero-loja{
+    padding:20px 14px;
+    border-radius:16px;
+  }
+
+  .titulo-raridade{
+    font-size:24px;
+  }
+
+  .grid-raridade{
+    gap:16px;
+  }
+
+}
+
+
+/* ======================================================
+📱 CELULAR PADRÃO
+====================================================== */
+
+@media (max-width: 640px){
+
+  body{
+    padding:0 !important;
+  }
+
+  .container-loja{
+    padding:0 10px !important;
+  }
+
+  .hero-loja{
+    padding:18px 12px;
+  }
+
+  .menu-loja{
+    border-radius:14px;
+  }
+
+  .menu-links{
+    gap:6px;
+  }
+
+  .menu-links a{
+    font-size:0.85rem;
+    padding:8px 10px;
+  }
+
+  .card{
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .grid-raridade{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+/* ======================================================
+📱 CELULAR PEQUENO
+====================================================== */
+
+@media (max-width: 480px){
+
+  body{
+    padding:0 !important;
+  }
+
+  .container-loja{
+    padding:0 8px !important;
+  }
+
+  .topbar-loja{
+    width:calc(100% - 12px);
+  }
+
+  .menu-loja{
+    padding:8px;
+  }
+
+  .menu-links{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+  }
+
+  .menu-links a{
+    flex:0 0 auto;
+  }
+
+  .btn-inventario-loja{
+    width:100%;
+    font-size:14px;
+    padding:10px;
+    align-self:center;
+  }
+
+  .card{
+    padding:14px;
+  }
+
+}
+
+
+/* ======================================================
+📱 UX EXTRA (DEIXA COM CARA DE APP)
+====================================================== */
+
+/* remove zoom estranho em input no iOS */
+input, button {
+  font-size:16px;
+}
+
+/* scroll mais suave */
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* cards mais “clicáveis” */
+.card:active{
+  transform:scale(0.98);
+}
+
+/* botão ocupa tudo */
+.card button{
+  width:100%;
+}
+
+
+/* ======================================================
+🔥 BONUS — CORREÇÃO DO BUG PRINCIPAL
+====================================================== */
+
+/* remove compressão lateral */
+body{
+  max-width:100vw;
+  overflow-x:hidden;
+}
+
+@media (max-width: 640px){
+
+  .btn-inventario-loja{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 10px auto;
+    width: 80%;
+    max-width: 220px;
+
+    border-radius: 12px;
+  }
+
 }
 

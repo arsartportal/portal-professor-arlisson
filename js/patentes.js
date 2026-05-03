@@ -102,20 +102,27 @@ export function mostrarAnimacaoMudancaPatente(nivelAntigo, nivelNovo) {
 
   // reset estado
   card.classList.remove("animar");
-  overlay.classList.remove("hidden");
+  mostrarOverlay(overlay);
 
   imgAntiga.src = patenteAntiga.imagem;
   imgNova.src = patenteNova.imagem;
 
   // Se a imagem já estiver em cache, onload pode não disparar
-  const iniciarAnimacao = () => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        card.classList.add("animar");
-        soltarConfetes();
-      });
-    });
-  };
+ const iniciarAnimacao = () => {
+
+  // ⏳ 1. pausa dramática
+  setTimeout(() => {
+
+    // 🎬 2. começa animação
+    card.classList.add("animar");
+
+    // 🎉 3. confete no auge da animação
+    setTimeout(() => {
+      soltarConfetes();
+    }, 600); // ⬅️ momento ideal (meio da animação)
+
+  }, 1000); // ⬅️ pausa inicial (igual CSS)
+};
 
   if (imgNova.complete) {
     iniciarAnimacao();
@@ -132,7 +139,7 @@ export function mostrarAnimacaoMudancaPatente(nivelAntigo, nivelNovo) {
 export function fecharPatente(destino = null) {
 
   const overlay = document.getElementById("patente-overlay");
-  if (overlay) overlay.classList.add("hidden");
+  if (overlay) esconderOverlay(overlay);
 
   if (destino) {
     window.location.href = destino;
@@ -141,3 +148,24 @@ export function fecharPatente(destino = null) {
 
 // disponível para onclick HTML
 window.fecharPatente = fecharPatente;
+
+/* =========================================================
+   CONTROLE UNIVERSAL DE OVERLAY
+   Compatível com .hidden e .ativo
+========================================================= */
+
+function mostrarOverlay(el) {
+  if (!el) return;
+
+  el.classList.remove("hidden"); // compatibilidade antiga
+  el.classList.add("ativo");     // padrão novo
+}
+
+function esconderOverlay(el) {
+  if (!el) return;
+
+  el.classList.add("hidden");    // compatibilidade antiga
+  el.classList.remove("ativo");  // padrão novo
+}
+
+window.mostrarAnimacaoMudancaPatente = mostrarAnimacaoMudancaPatente;

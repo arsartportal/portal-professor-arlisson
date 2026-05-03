@@ -107,7 +107,7 @@ export function carregarMetaGlobal() {
 
 
 // ======================================================
-// 🏆 RANKING
+// 🏆 RANKING (TOP 10 ORGANIZADO)
 // ======================================================
 
 export function carregarRankingGasto() {
@@ -130,24 +130,28 @@ export function carregarRankingGasto() {
     snap.docs.forEach((docSnap, i) => {
 
       const d = docSnap.data();
-
       const pos = medalhas[i] || `#${i+1}`;
-      const extra = i < 3 ? ` (+${bonus[i]} XP)` : "";
 
       el.innerHTML += `
-  <div class="ranking-item ${i < 3 ? "top3" : ""}">
+        <div class="item-ranking top-${i+1}">
 
-    <span class="ranking-nome">
-      ${pos} ${d.nome}
-      ${i < 3 ? `<span class="bonus">+${bonus[i]} XP</span>` : ""}
-    </span>
+          <div class="left">
+            <span class="pos">${pos}</span>
+            <span class="nome">${d.nome}</span>
 
-    <span class="ranking-sp">
-      🪙 ${(d.totalGasto || 0).toLocaleString("pt-BR")} SP
-    </span>
+            ${
+              i < 3
+                ? `<span class="xp">+${bonus[i]} XP</span>`
+                : ""
+            }
+          </div>
 
-  </div>
-`;
+          <div class="right">
+            ${(d.totalGasto || 0).toLocaleString("pt-BR")} SP
+          </div>
+
+        </div>
+      `;
     });
   });
 }

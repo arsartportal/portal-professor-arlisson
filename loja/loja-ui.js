@@ -69,26 +69,21 @@ function badge(item) {
 // 🎨 DESCRIÇÃO INTELIGENTE
 // ======================================================
 
-function descricao(item) {
+function descricao(item){
 
-  if (item.id.includes("caixa")) return item.descricao;
+  // ✅ prioridade total para descrição definida no data
+  if (item.descricao) return item.descricao;
 
-  if (item.id === "roleta-cientifica")
-    return "Gire a roleta e receba recompensas aleatórias.";
-
-  if (item.tipo === "ranking-fichas")
-    return `Acesso ao ranking (${item.quantidade} tentativa${item.quantidade > 1 ? "s" : ""})`;
-
-  if (item.tipo === "prova")
-    return `Adiciona +${item.valor} ponto na prova`;
-
-  if (item.tipo === "prova-extra")
-    return "Permite refazer uma prova.";
-
-  if (item.fichas)
+  // fallback automático (caso não tenha descrição)
+  if (item.fichas) {
     return `${item.fichas} acesso(s) ao quiz`;
+  }
 
-  return item.descricao || "";
+  if (item.xp) {
+    return `Ganha ${item.xp} XP`;
+  }
+
+  return "Recompensa especial.";
 }
 
 
@@ -104,19 +99,21 @@ function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
     <div class="card raridade-${raridade} tipo-${tipo} ${recomendado ? "recomendado" : ""}">
 
       <div class="card-header">
-        <h3>
-          ${badge(item)} ${item.nome || "Item"}
-        </h3>
+  <h3 class="titulo-card">
+    ${badge(item)} ${item.nome || "Item"}
+  </h3>
 
-        ${recomendado ? `<span class="badge-top">⭐</span>` : ""}
-      </div>
+  <span class="raridade-label ${raridade}">
+    ${raridade.toUpperCase()}
+  </span>
+</div>
 
       <div class="desc">
         ${descricao(item)}
       </div>
 
       ${
-        // ❗ ranking NÃO mostra texto, só destaque visual
+        // ❗ ranking NÃO mostra texto
         recomendado && tipo !== "ranking"
           ? `<div class="mini-tag">Melhor custo-benefício</div>`
           : ""
