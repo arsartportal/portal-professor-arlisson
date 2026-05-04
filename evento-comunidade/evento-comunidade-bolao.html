@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Evento Comunitário</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+/* =====================================================
+   BASE
+===================================================== */
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #020617, #000814 80%);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   FUNDO COM PARTÍCULAS
+===================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+
+  background:
+    radial-gradient(circle, rgba(34,197,94,0.08) 1px, transparent 1px);
+
+  background-size: 60px 60px;
+
+  animation: particlesMove 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes particlesMove {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(60px,60px); }
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+.evento-comunidade {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 45px;
+  border-radius: 28px;
+
+  background: rgba(2, 6, 23, 0.75);
+  backdrop-filter: blur(25px);
+
+  border: 1px solid rgba(34,197,94,0.15);
+
+  box-shadow:
+    0 0 80px rgba(34,197,94,0.12),
+    inset 0 0 40px rgba(34,197,94,0.05);
+
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  transform: perspective(1000px) rotateX(0deg);
+  transition: transform 0.4s ease;
+}
+
+.evento-comunidade:hover {
+  transform: perspective(1000px) rotateX(2deg) scale(1.01);
+}
+
+/* =====================================================
+   AURA ENERGÉTICA
+===================================================== */
+.evento-comunidade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at 50% -20%,
+    rgba(34,197,94,0.18),
+    transparent 60%
+  );
+
+  filter: blur(80px);
+  opacity: 0.6;
+
+  animation: auraPulse 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes auraPulse {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.evento-comunidade > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+
+  background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
+  background-size: 200%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: titleGlow 4s linear infinite;
+}
+
+@keyframes titleGlow {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+/* =====================================================
+   TEXTO
+===================================================== */
+#textoProgresso {
+  font-size: 18px;
+  margin: 25px 0;
+  line-height: 1.6;
+  color: #cbd5f5;
+}
+
+#textoProgresso b {
+  color: #4ade80;
+  font-size: 21px;
+  text-shadow: 0 0 10px rgba(74,222,128,0.6);
+}
+
+/* =====================================================
+   PORCENTAGEM
+===================================================== */
+#porcentagem {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+}
+
+/* =====================================================
+   BARRA
+===================================================== */
+.barra-container {
+  width: 100%;
+  height: 26px;
+  background: #000814;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 30px 0;
+
+  border: 1px solid rgba(34,197,94,0.2);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+}
+
+.barra {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
+  background-size: 300%;
+
+  animation: energia 2.5s linear infinite;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 0 20px rgba(34,197,94,0.8),
+    0 0 40px rgba(34,197,94,0.5);
+}
+
+@keyframes energia {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
+}
+
+/* efeito de energia passando */
+.barra::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.8),
+    transparent
+  );
+
+  animation: energiaFlash 1.8s infinite;
+}
+
+@keyframes energiaFlash {
+  100% { left: 150%; }
+}
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+.btn-evento {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 16px 30px;
+  border-radius: 16px;
+
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: #022c22;
+
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+
+  box-shadow:
+    0 0 20px rgba(34,197,94,0.7),
+    0 0 40px rgba(34,197,94,0.3);
+}
+
+.btn-evento:hover {
+  transform: translateY(-4px) scale(1.08);
+
+  box-shadow:
+    0 0 30px rgba(34,197,94,1),
+    0 0 60px rgba(34,197,94,0.6);
+}
+
+/* estado bloqueado */
+.desabilitado {
+  background: linear-gradient(135deg, #1f2937, #374151) !important;
+  color: #9ca3af !important;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+@media (max-width: 600px) {
+  .evento-comunidade {
+    margin: 40px 15px;
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
+
+.emoji {
+  -webkit-text-fill-color: initial;
+  background: none;
+  margin-right: 10px;
+}
+
+/* =========================
+🔥 MODO ENERGIA (50%+)
+========================= */
+
+.evento-comunidade.power-up {
+  box-shadow:
+    0 0 120px rgba(34,197,94,0.25),
+    inset 0 0 60px rgba(34,197,94,0.15);
+}
+
+/* brilho geral aumentando */
+.evento-comunidade.power-up::after {
+  opacity: 0.9;
+  animation: auraPulseFast 3s ease-in-out infinite;
+}
+
+@keyframes auraPulseFast {
+  0%,100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* barra mais intensa */
+.barra.power-up {
+  box-shadow:
+    0 0 30px rgba(34,197,94,1),
+    0 0 80px rgba(34,197,94,0.9),
+    0 0 120px rgba(34,197,94,0.6);
+}
+
+/* quase lá (80%+) */
+.evento-comunidade.almost {
+  animation: tremor 0.4s infinite alternate;
+}
+
+@keyframes tremor {
+  from { transform: scale(1.01); }
+  to { transform: scale(1.015); }
+}
+
+/* barra ultra carregada */
+.barra.max-energy {
+  animation: energia 1s linear infinite;
+}
+
+/* =========================
+⚡ NÍVEIS DE ENERGIA PROGRESSIVOS
+========================= */
+
+.evento-comunidade[class*="nivel-"] {
+  transition: all 0.4s ease;
+}
+
+/* BASE */
+.barra[class*="nivel-"] {
+  transition: all 0.3s ease;
+}
+
+/* LOOP DE INTENSIDADE (simulado manualmente) */
+
+.evento-comunidade.nivel-10 { filter: brightness(1.05); }
+.evento-comunidade.nivel-20 { filter: brightness(1.1); }
+.evento-comunidade.nivel-30 { filter: brightness(1.15); }
+.evento-comunidade.nivel-40 { filter: brightness(1.2); }
+
+.evento-comunidade.nivel-50 {
+  filter: brightness(1.3);
+  box-shadow: 0 0 100px rgba(34,197,94,0.3);
+}
+
+.evento-comunidade.nivel-60 {
+  filter: brightness(1.4);
+  box-shadow: 0 0 120px rgba(34,197,94,0.4);
+}
+
+.evento-comunidade.nivel-70 {
+  filter: brightness(1.5);
+  box-shadow: 0 0 150px rgba(34,197,94,0.5);
+}
+
+.evento-comunidade.nivel-80 {
+  filter: brightness(1.6);
+  animation: vibra 0.6s infinite alternate;
+}
+
+.evento-comunidade.nivel-90 {
+  filter: brightness(1.8);
+  animation: vibra 0.3s infinite alternate;
+}
+
+.evento-comunidade.nivel-95 {
+  filter: brightness(2);
+  animation: vibra 0.15s infinite alternate;
+}
+
+/* vibração */
+@keyframes vibra {
+  from { transform: scale(1.01); }
+  to { transform: scale(1.02); }
+}
+
+/* barra ficando mais insana */
+.barra.nivel-50 { box-shadow: 0 0 30px #22c55e; }
+.barra.nivel-70 { box-shadow: 0 0 60px #22c55e; }
+.barra.nivel-90 {
+  box-shadow: 0 0 120px #22c55e;
+  animation: energia 1s linear infinite;
+}
+
+/* flash no quase final */
+.evento-comunidade.nivel-95::after {
+  animation: auraPulseFast 1.5s infinite;
+}
+
+/* =========================
+📱 FULLSCREEN MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 10px;
+  }
+
+  .evento-comunidade {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+
+    /* 🔥 FAZ CABER NA TELA */
+    max-height: 100vh;
+    overflow: hidden;
+
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  #textoProgresso {
+    font-size: 14px;
+    margin: 12px 0;
+    line-height: 1.4;
+  }
+
+  #textoProgresso b {
+    font-size: 16px;
+  }
+
+  .barra-container {
+    height: 18px;
+    margin: 15px 0;
+  }
+
+  #porcentagem {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .btn-evento {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+  <section class="evento-comunidade">
+
+    <h2>
+  <span class="emoji">🌍</span>
+  Evento Comunitário
+</h2>
+
+    <p id="textoProgresso">
+      Carregando progresso...
+    </p>
+
+    <div class="barra-container">
+      <div id="barraProgresso" class="barra"></div>
+    </div>
+
+    <p id="porcentagem"></p>
+
+    <a id="btnEvento" href="../loja.html" class="btn-evento">
+      🎟️ Acessar Central
+    </a>
+
+  </section>
+
+
+  <!-- SCRIPT -->
+  <script type="module">
+
+    // 🔥 IMPORTANDO DO SEU ARQUIVO
+    import { db } from "../js/firebase.js";
+
+    import {
+      doc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+    const META = 10000;
+
+    const texto = document.getElementById("textoProgresso");
+    const barra = document.getElementById("barraProgresso");
+    const porcentagemEl = document.getElementById("porcentagem");
+    const botao = document.getElementById("btnEvento");
+
+    onSnapshot(doc(db, "config", "lojaStats"), (snap) => {
+
+  if (!snap.exists()) return;
+
+  const dados = snap.data();
+  const gasto = dados.totalSPGasto || 0;
+
+  const faltam = Math.max(META - gasto, 0);
+  const porcentagem = Math.min((gasto / META) * 100, 100);
+
+  const container = document.querySelector(".evento-comunidade");
+
+  // =========================
+  // RESET DE CLASSES
+  // =========================
+  container.className = "evento-comunidade";
+  barra.className = "barra";
+
+  // =========================
+  // NÍVEL A CADA 5%
+  // =========================
+  const nivel = Math.floor(porcentagem / 5) * 5;
+
+  container.classList.add(`nivel-${nivel}`);
+  barra.classList.add(`nivel-${nivel}`);
+
+  // =========================
+  // TEXTO PRINCIPAL
+  // =========================
+  if (gasto >= META) {
+    texto.innerHTML = `
+      🎉 A COMUNIDADE CONSEGUIU!
+      <br><br>
+      🚀 O QUIZ DA COPA FOI LIBERADO!
+    `;
+
+    botao.innerText = "🚀 Jogar Quiz";
+    botao.href = "../quiz-cientifico/quiz-copa-ultra.html";
+
+  } else {
+
+    texto.innerHTML = `
+      🌍 O BOLÃO DA COPA está sendo carregado pela comunidade!
+      <br><br>
+      ⚡ Faltam <b>${faltam}</b> Science Points
+      <br><br>
+      👥 Já temos <b>${gasto}</b> SP acumulados
+    `;
+
+    // =========================
+    // FRASES DINÂMICAS POR PROGRESSO
+    // =========================
+    if (porcentagem >= 20) {
+      texto.innerHTML += "<br><br>🌱 A comunidade começou a reagir...";
+    }
+
+    if (porcentagem >= 40) {
+      texto.innerHTML += "<br><br>🔥 O evento está ganhando força!";
+    }
+
+    if (porcentagem >= 60) {
+      texto.innerHTML += "<br><br>⚡ Energia subindo rápido!";
+    }
+
+    if (porcentagem >= 75) {
+      texto.innerHTML += "<br><br>🚀 Já dá pra sentir... tá perto!";
+    }
+
+    if (porcentagem >= 85) {
+      texto.innerHTML += "<br><br>💥 Quase lá!!";
+    }
+
+    if (porcentagem >= 95) {
+      texto.innerHTML += "<br><br>🚨 ÚLTIMOS PONTOS! LIBERAÇÃO IMINENTE!";
+    }
+  }
+
+  // =========================
+  // QUASE LÁ EXTRA
+  // =========================
+  if (faltam < 2000 && gasto < META) {
+    texto.innerHTML += "<br><br>🔥 Estamos quase lá!";
+  }
+
+  // =========================
+  // BARRA
+  // =========================
+  barra.style.width = porcentagem + "%";
+
+  // =========================
+  // PORCENTAGEM
+  // =========================
+  porcentagemEl.innerText = porcentagem.toFixed(1) + "% concluído";
+
+});
+
+  </script>
+
+</body>
+</html>

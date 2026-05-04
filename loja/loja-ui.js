@@ -2,7 +2,8 @@
 // 🧠 IMPORTS
 // ======================================================
 
-import { recompensas, datasLiberacao } from "./loja-data.js";
+import { recompensas, datasLiberacao, getTipoItem } from "./loja-data.js";
+import { getEstoqueChaveiro, getAgora } from "./loja-actions.js";
 
 
 // ======================================================
@@ -30,23 +31,6 @@ export function atualizarSPNaTela(sp, bonus = 0) {
 
 export function setServerTimeOffset(offset) {
   serverTimeOffset = offset;
-}
-
-
-// ======================================================
-// 🧠 IDENTIFICAR TIPO
-// ======================================================
-
-function getTipoItem(item) {
-  if (item.id.includes("caixa")) return "caixa";
-  if (item.id === "roleta-cientifica") return "roleta";
-  if (item.tipo === "ranking-fichas") return "ranking";
-  if (item.tipo === "prova") return "prova";
-  if (item.tipo === "prova-extra") return "revanche";
-  if (item.tipo === "ferramenta") return "ferramenta";
-  if (item.fichas) return "ficha";
-  if (item.xp) return "xp";
-  return "padrao";
 }
 
 
@@ -87,33 +71,34 @@ function descricao(item){
 }
 
 
+
 // ======================================================
-// 🎨 CARD VISUAL
+// 🎨 CARD VISUAL (CORRIGIDO)
 // ======================================================
 
 function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
 
   const tipo = getTipoItem(item);
+  const estoque = getEstoqueChaveiro();
 
   return `
     <div class="card raridade-${raridade} tipo-${tipo} ${recomendado ? "recomendado" : ""}">
 
       <div class="card-header">
-  <h3 class="titulo-card">
-    ${badge(item)} ${item.nome || "Item"}
-  </h3>
+        <h3 class="titulo-card">
+          ${badge(item)} ${item.nome || "Item"}
+        </h3>
 
-  <span class="raridade-label ${raridade}">
-    ${raridade.toUpperCase()}
-  </span>
-</div>
+        <span class="raridade-label ${raridade}">
+          ${raridade.toUpperCase()}
+        </span>
+      </div>
 
       <div class="desc">
         ${descricao(item)}
       </div>
 
       ${
-        // ❗ ranking NÃO mostra texto
         recomendado && tipo !== "ranking"
           ? `<div class="mini-tag">Melhor custo-benefício</div>`
           : ""
@@ -122,6 +107,14 @@ function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
       ${
         bloqueado
           ? `<div class="contador-loja" data-tipo="${tipo}">⏳ Em breve</div>`
+          : ""
+      }
+
+      ${
+        item.id === "chaveiro-univers3d"
+          ? `<div class="estoque-baixo">
+               🔥 Restam ${estoque} unidades
+             </div>`
           : ""
       }
 
@@ -134,6 +127,8 @@ function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
         ${
           bloqueado
             ? "Em breve"
+            : item.id === "chaveiro-univers3d" && estoque <= 0
+            ? "Esgotado"
             : podeComprar
             ? "Resgatar"
             : "SP insuficiente"
@@ -156,7 +151,9 @@ export function renderLoja() {
 
   loja.innerHTML = "";
 
-  const agora = new Date(Date.now() + serverTimeOffset);
+
+const agora = getAgora();
+
 
   // ======================================================
   // 🧠 AGRUPAR POR TIPO
@@ -167,6 +164,10 @@ export function renderLoja() {
   recompensas.forEach(item => {
 
     let tipo = getTipoItem(item);
+
+    // 🔥 força chaveiro ir para Outros
+    
+    if (item.id === "chaveiro-univers3d") { tipo = "padrao"; }
 
     // 🔥 Unifica prova + revanche
     if (tipo === "prova" || tipo === "revanche") {
@@ -181,27 +182,31 @@ export function renderLoja() {
   // 🎨 ORDEM E NOMES
   // ======================================================
 
-  const ordemTipos = [
-    "caixa",
-    "xp",
-    "ficha",
-    "beneficios",
-    "ranking",
-    "roleta",
-    "ferramenta",
-    "padrao"
-  ];
 
-  const nomesTipos = {
-    caixa: "📦 Caixas",
-    xp: "⚡ Experiência",
-    ficha: "🎟️ Ingressos",
-    beneficios: "🎯 Benefícios",
-    ranking: "🏆 Ranking",
-    roleta: "🎡 Roleta",
-    ferramenta: "🧰 Ferramentas",
-    padrao: "📦 Outros"
-  };
+const ordemTipos = [
+  "caixas",     // ✅ corrigido
+  "xp",
+  "fichas",     // ✅ corrigido
+  "beneficios",
+  "ranking",
+  "roleta",
+  "ferramenta",
+  "padrao"
+];
+
+
+const nomesTipos = {
+  caixas: "📦 Caixas",
+  xp: "⚡ Experiência",
+  fichas: "🎟️ Ingressos",
+  beneficios: "🎯 Benefícios",
+  ranking: "🏆 Ranking",
+  roleta: "🎡 Roleta",
+  ferramenta: "🧰 Ferramentas",
+  padrao: "📦 Outros"
+};
+
+
 
   // ======================================================
   // 🔥 LOOP PRINCIPAL
@@ -262,27 +267,35 @@ export function renderLoja() {
 
         const melhorItem = encontrarMelhorItem(itensOrdenados, tipo);
 
-        itensOrdenados.forEach(item => {
+        
+itensOrdenados.forEach(item => {
 
-          const tipoItem = getTipoItem(item);
-          const data = datasLiberacao[tipoItem];
+  const tipoItem = getTipoItem(item);
+  const data = datasLiberacao[tipoItem];
+  const estoque = getEstoqueChaveiro();
 
-          const bloqueado =
-            data && agora < data && !item.id.startsWith("xp");
+  // 🔒 bloqueio por data
+  const bloqueado =
+    data && agora < data && !item.id.startsWith("xp");
 
-          const podeComprar =
-            !bloqueado && spAtual >= item.preco;
+  // 📦 bloqueio por estoque (só chaveiro)
+  const semEstoque =
+    item.id === "chaveiro-univers3d" && estoque <= 0;
 
-          const recomendado = item.id === melhorItem?.id;
+  const podeComprar =
+    !bloqueado && !semEstoque && spAtual >= item.preco;
 
-          grid.innerHTML += criarCard(
-            item,
-            item.raridade || "comum",
-            bloqueado,
-            podeComprar,
-            recomendado
-          );
-        });
+  const recomendado = item.id === melhorItem?.id;
+
+  grid.innerHTML += criarCard(
+    item,
+    item.raridade || "comum",
+    bloqueado,
+    podeComprar,
+    recomendado
+  );
+});
+
 
         secao.appendChild(grid);
       });
@@ -308,28 +321,34 @@ export function renderLoja() {
           ? null
           : encontrarMelhorItem(itensOrdenados, spAtual, tipo);
 
-      itensOrdenados.forEach(item => {
+      
+itensOrdenados.forEach(item => {
 
-        const tipoItem = getTipoItem(item);
-        const data = datasLiberacao[tipoItem];
+  const tipoItem = getTipoItem(item);
+  const data = datasLiberacao[tipoItem];
+  const estoque = getEstoqueChaveiro();
 
-        const bloqueado =
-          data && agora < data && !item.id.startsWith("xp");
+  const bloqueado =
+    data && agora < data && !item.id.startsWith("xp");
 
-        const podeComprar =
-          !bloqueado && spAtual >= item.preco;
+  const semEstoque =
+    item.id === "chaveiro-univers3d" && estoque <= 0;
 
-        const recomendado =
-          melhorItem && item.id === melhorItem.id;
+  const podeComprar =
+    !bloqueado && !semEstoque && spAtual >= item.preco;
 
-        grid.innerHTML += criarCard(
-          item,
-          item.raridade || "comum",
-          bloqueado,
-          podeComprar,
-          recomendado
-        );
-      });
+  const recomendado =
+    melhorItem && item.id === melhorItem.id;
+
+  grid.innerHTML += criarCard(
+    item,
+    item.raridade || "comum",
+    bloqueado,
+    podeComprar,
+    recomendado
+  );
+});
+
 
       secao.appendChild(grid);
     }

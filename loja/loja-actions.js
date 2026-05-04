@@ -1,565 +1,933 @@
-// ======================================================
-// 🧠 IMPORTS
-// ======================================================
+  // ======================================================
+  // 🧠 IMPORTS
+  // ======================================================
 
-import { auth, db } from "../js/firebase.js";
-import { recompensas } from "./loja-data.js";
+  import { auth, db } from "../js/firebase.js";
+  import { recompensas } from "./loja-data.js";
 
-import {
-  doc, getDoc, updateDoc, setDoc,
-  collection, addDoc, query, orderBy, limit,
-  onSnapshot, increment, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import {
+    doc, getDoc, updateDoc, setDoc,
+    collection, addDoc, query, orderBy, limit,
+    onSnapshot, increment, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-import {
-  atualizarSPNaTela,
-  renderLoja,
-  setServerTimeOffset
-} from "./loja-ui.js";
+  import {
+    atualizarSPNaTela,
+    renderLoja
+  } from "./loja-ui.js";
 
-import { obterPatentePorNivel } from "../js/patentes.js";
+  import { obterPatentePorNivel } from "../js/patentes.js";
 
 
-// ======================================================
-// 🧠 ESTADO
-// ======================================================
+  // ======================================================
+  // 🧠 MODAL ENGINE
+  // ======================================================
 
-let userRef = null;
-let spAtual = 0;
-let bonusAtual = 0;
-let serverOffset = 0;
-let compraEmAndamento = false;
+  import {
+    modalConfirmacao,
+    modalXP,
+    modalRecompensa,
+    modalCaixa,
+    modalLendario,
+    modalLoading,
+    fecharModal
+  } from "./loja-modal.js";
 
 
-// ======================================================
-// 🚀 INIT
-// ======================================================
 
-export function iniciarSistemaCompra(ref) {
-  userRef = ref;
-}
 
-export function iniciarEventos() {
-  window.comprar = comprar;
-  window.fecharModal = fecharModal;
-}
+  // ======================================================
+  // 🧠 ESTADO
+  // ======================================================
 
+  let userRef = null;
+  let spAtual = 0;
+  let bonusAtual = 0;
+  let serverOffset = 0;
+  let compraEmAndamento = false;
 
-// ======================================================
-// 🔥 SP REALTIME
-// ======================================================
 
-export function carregarSPTempoReal(ref, callback) {
+  // ======================================================
+  // 🚀 INIT
+  // ======================================================
 
-  onSnapshot(ref, snap => {
-    if (!snap.exists()) return;
-
-    const d = snap.data();
-
-    spAtual = d.sciencePoints || 0;
-    bonusAtual = d.bonusProvaDisponivel || 0;
-
-    callback?.(spAtual, bonusAtual);
-  });
-}
-
-
-// ======================================================
-// 🌍 META GLOBAL
-// ======================================================
-
-export function carregarSPGlobal() {
-
-  const ref = doc(db, "config", "lojaStats");
-
-  onSnapshot(ref, snap => {
-
-    if (!snap.exists()) return;
-
-    const total = snap.data().totalSPGasto || 0;
-    const el = document.getElementById("sp-global");
-
-    if (el) el.innerText = total.toLocaleString("pt-BR");
-  });
-}
-
-export function carregarMetaGlobal() {
-
-  const ref = doc(db, "config", "lojaStats");
-
-  onSnapshot(ref, snap => {
-
-    if (!snap.exists()) return;
-
-    const d = snap.data();
-
-    const total = d.totalSPGasto || 0;
-    const meta = d.meta || 10000;
-
-    const porcentagem = Math.min((total / meta) * 100, 100);
-
-    document.getElementById("meta-valor").innerText = total.toLocaleString("pt-BR");
-    document.getElementById("meta-max").innerText = meta.toLocaleString("pt-BR");
-
-    document.getElementById("barra-meta-fill").style.width = porcentagem + "%";
-  });
-}
-
-
-// ======================================================
-// 🏆 RANKING (TOP 10 ORGANIZADO)
-// ======================================================
-
-export function carregarRankingGasto() {
-
-  const q = query(
-    collection(db, "rankingGasto"),
-    orderBy("totalGasto", "desc"),
-    limit(10)
-  );
-
-  const el = document.getElementById("ranking-sp");
-
-  onSnapshot(q, snap => {
-
-    el.innerHTML = "";
-
-    const medalhas = ["🥇", "🥈", "🥉"];
-    const bonus = [1000, 500, 300];
-
-    snap.docs.forEach((docSnap, i) => {
-
-      const d = docSnap.data();
-      const pos = medalhas[i] || `#${i+1}`;
-
-      el.innerHTML += `
-        <div class="item-ranking top-${i+1}">
-
-          <div class="left">
-            <span class="pos">${pos}</span>
-            <span class="nome">${d.nome}</span>
-
-            ${
-              i < 3
-                ? `<span class="xp">+${bonus[i]} XP</span>`
-                : ""
-            }
-          </div>
-
-          <div class="right">
-            ${(d.totalGasto || 0).toLocaleString("pt-BR")} SP
-          </div>
-
-        </div>
-      `;
-    });
-  });
-}
-
-
-// ======================================================
-// 📜 HISTÓRICO COMPLETO (COM PATENTE CORRETA)
-// ======================================================
-
-
-const cacheUsuarios = {};
-
-export function carregarHistorico() {
-
-  const q = query(
-    collection(db, "lojaHistorico"),
-    orderBy("data", "desc"),
-    limit(20)
-  );
-
-  const el = document.getElementById("feedCompras");
-  if (!el) return;
-
-  onSnapshot(q, async (snap) => {
-
-    el.innerHTML = "";
-
-    for (const docSnap of snap.docs) {
-
-      const d = docSnap.data();
-
-      const data = d.data?.toDate();
-      if (!data) continue;
-
-      const dataFormatada = data.toLocaleString("pt-BR");
-
-      // ==================================================
-      // 🎖️ PATENTE (COM CACHE + XP REAL)
-      // ==================================================
-
-      let patenteImg = "../assets/ranks/SeasonalRank0-0.png";
-
-if (d.uid) {
-
-  if (!cacheUsuarios[d.uid]) {
-    try {
-      const userDoc = await getDoc(doc(db, "usuarios", d.uid));
-
-      cacheUsuarios[d.uid] = userDoc.exists()
-        ? userDoc.data()
-        : {};
-    } catch {
-      cacheUsuarios[d.uid] = {};
-    }
+  export function iniciarSistemaCompra(ref) {
+    userRef = ref;
   }
 
-  const userData = cacheUsuarios[d.uid] || {};
+  export function iniciarEventos() {
+    window.comprar = comprar;
+    window.fecharModal = fecharModal;
+  }
 
-  // ✅ USA O NIVEL REAL DO FIREBASE
-  const nivel = userData.nivel || 0;
 
-  const patente = obterPatentePorNivel(nivel);
+  // ======================================================
+  // 🔥 SP REALTIME
+  // ======================================================
 
-  patenteImg = patente.imagem.replace("/assets", "../assets");
-}
+  export function carregarSPTempoReal(ref, callback) {
 
-      // ==================================================
-      // 🎨 CLASSE DINÂMICA
-      // ==================================================
+    onSnapshot(ref, snap => {
+      if (!snap.exists()) return;
 
-      let classe = "feed-item";
+      const d = snap.data();
 
-      const itemTexto = typeof d.item === "string"
-        ? d.item
-        : d.item?.nome || "item";
+      spAtual = d.sciencePoints || 0;
+      bonusAtual = d.bonusProvaDisponivel || 0;
 
-      if (itemTexto.includes("Caixa")) classe += " feed-caixa";
-      if (itemTexto.includes("Roleta")) classe += " feed-roleta";
-      if (itemTexto.includes("Chaveiro")) classe += " feed-lendario";
+      callback?.(spAtual, bonusAtual);
+    });
+  }
 
-      // ==================================================
-      // 🚨 ALERTAS IMPORTANTES
-      // ==================================================
 
-      if (itemTexto.includes("Lendária")) {
-        window.globalAlert?.(`🔥 ${d.aluno} abriu uma CAIXA LENDÁRIA!`);
+  // ======================================================
+  // 🌍 META GLOBAL
+  // ======================================================
+
+  export function carregarSPGlobal() {
+
+    const ref = doc(db, "config", "lojaStats");
+
+    onSnapshot(ref, snap => {
+
+      if (!snap.exists()) return;
+
+      const total = snap.data().totalSPGasto || 0;
+      const el = document.getElementById("sp-global");
+
+      if (el) el.innerText = total.toLocaleString("pt-BR");
+    });
+  }
+
+  export function carregarMetaGlobal() {
+
+    const ref = doc(db, "config", "lojaStats");
+
+    onSnapshot(ref, snap => {
+
+      if (!snap.exists()) return;
+
+      const d = snap.data();
+
+      const total = d.totalSPGasto || 0;
+      const meta = d.meta || 10000;
+
+      const porcentagem = Math.min((total / meta) * 100, 100);
+
+      document.getElementById("meta-valor").innerText = total.toLocaleString("pt-BR");
+      document.getElementById("meta-max").innerText = meta.toLocaleString("pt-BR");
+
+      document.getElementById("barra-meta-fill").style.width = porcentagem + "%";
+    });
+  }
+
+
+  // ======================================================
+  // 🏆 RANKING (TOP 10 ORGANIZADO)
+  // ======================================================
+
+  export function carregarRankingGasto() {
+
+    const q = query(
+      collection(db, "rankingGasto"),
+      orderBy("totalGasto", "desc"),
+      limit(10)
+    );
+
+    const el = document.getElementById("ranking-sp");
+
+    onSnapshot(q, snap => {
+
+      el.innerHTML = "";
+
+      const medalhas = ["🥇", "🥈", "🥉"];
+      const bonus = [1000, 500, 300];
+
+      snap.docs.forEach((docSnap, i) => {
+
+        const d = docSnap.data();
+        const pos = medalhas[i] || `#${i+1}`;
+
+        el.innerHTML += `
+          <div class="item-ranking top-${i+1}">
+
+            <div class="left">
+              <span class="pos">${pos}</span>
+              <span class="nome">${d.nome}</span>
+
+              ${
+                i < 3
+                  ? `<span class="xp">+${bonus[i]} XP</span>`
+                  : ""
+              }
+            </div>
+
+            <div class="right">
+              ${(d.totalGasto || 0).toLocaleString("pt-BR")} SP
+            </div>
+
+          </div>
+        `;
+      });
+    });
+  }
+
+
+  // ======================================================
+  // 📜 HISTÓRICO COMPLETO (COM PATENTE CORRETA)
+  // ======================================================
+
+
+  const cacheUsuarios = {};
+
+  export function carregarHistorico() {
+
+    const q = query(
+      collection(db, "lojaHistorico"),
+      orderBy("data", "desc"),
+      limit(20)
+    );
+
+    const el = document.getElementById("feedCompras");
+    if (!el) return;
+
+    onSnapshot(q, async (snap) => {
+
+      el.innerHTML = "";
+
+      for (const docSnap of snap.docs) {
+
+        const d = docSnap.data();
+
+        const data = d.data?.toDate();
+        if (!data) continue;
+
+        const dataFormatada = data.toLocaleString("pt-BR");
+
+        // ==================================================
+        // 🎖️ PATENTE (COM CACHE + XP REAL)
+        // ==================================================
+
+        let patenteImg = "../assets/ranks/SeasonalRank0-0.png";
+
+  if (d.uid) {
+
+    if (!cacheUsuarios[d.uid]) {
+      try {
+        const userDoc = await getDoc(doc(db, "usuarios", d.uid));
+
+        cacheUsuarios[d.uid] = userDoc.exists()
+          ? userDoc.data()
+          : {};
+      } catch {
+        cacheUsuarios[d.uid] = {};
+      }
+    }
+
+    const userData = cacheUsuarios[d.uid] || {};
+
+    // ✅ USA O NIVEL REAL DO FIREBASE
+    const nivel = userData.nivel || 0;
+
+    const patente = obterPatentePorNivel(nivel);
+
+    patenteImg = patente.imagem.replace("/assets", "../assets");
+  }
+
+        // ==================================================
+        // 🎨 CLASSE DINÂMICA
+        // ==================================================
+
+        let classe = "feed-item";
+
+        const itemTexto = typeof d.item === "string"
+          ? d.item
+          : d.item?.nome || "item";
+
+        if (itemTexto.includes("Caixa")) classe += " feed-caixa";
+        if (itemTexto.includes("Roleta")) classe += " feed-roleta";
+        if (itemTexto.includes("Chaveiro")) classe += " feed-lendario";
+
+        // ==================================================
+        // 🚨 ALERTAS IMPORTANTES
+        // ==================================================
+
+        if (itemTexto.includes("Lendária")) {
+          window.globalAlert?.(`🔥 ${d.aluno} abriu uma CAIXA LENDÁRIA!`);
+        }
+
+        // ==================================================
+        // 🏫 INFO COMPLETA
+        // ==================================================
+
+        const escola = d.escola || "—";
+        const serie = d.serie || "—";
+        const turma = d.turma || "";
+
+        // ==================================================
+        // 🎨 RENDER
+        // ==================================================
+
+        el.innerHTML += `
+          <div class="${classe}">
+
+            <div class="feed-avatar">
+              <img src="${patenteImg}">
+            </div>
+
+            <div class="feed-msg">
+              <b>${d.aluno}</b> ${itemTexto}
+
+              <div class="feed-info">
+                🏫 ${escola} • ${serie} ${turma}
+                <br>
+                🕒 ${dataFormatada}
+              </div>
+            </div>
+
+          </div>
+        `;
       }
 
-      // ==================================================
-      // 🏫 INFO COMPLETA
-      // ==================================================
+    });
+  }
 
-      const escola = d.escola || "—";
-      const serie = d.serie || "—";
-      const turma = d.turma || "";
+  // ======================================================
+  // 📦 CAIXA (SUPORTE COMPLETO + SAFE)
+  // ======================================================
 
-      // ==================================================
-      // 🎨 RENDER
-      // ==================================================
+  async function abrirCaixa(item) {
 
-      el.innerHTML += `
-        <div class="${classe}">
+    const config = {
 
-          <div class="feed-avatar">
-            <img src="${patenteImg}">
-          </div>
+      "caixa-basica": [
+        { xp: 100, chance: 40 },
+        { xp: 150, chance: 35 },
+        { xp: 200, chance: 20 },
+        { xp: 250, chance: 5 }
+      ],
 
-          <div class="feed-msg">
-            <b>${d.aluno}</b> ${itemTexto}
+      "caixa-cientifica": [
+        { xp: 200, chance: 45 },
+        { xp: 300, chance: 35 },
+        { xp: 400, chance: 15 },
+        { xp: 500, chance: 5 }
+      ],
 
-            <div class="feed-info">
-              🏫 ${escola} • ${serie} ${turma}
-              <br>
-              🕒 ${dataFormatada}
-            </div>
-          </div>
+      // 🆕 NOVA CAIXA ÉPICA
+      "caixa-epica": [
+        { xp: 400, chance: 50 },
+        { xp: 500, chance: 30 },
+        { xp: 700, chance: 15 },
+        { xp: 900, chance: 5 }
+      ],
 
-        </div>
-      `;
+      "caixa-lendaria": [
+        { xp: 600, chance: 60 },
+        { xp: 800, chance: 30 },
+        { xp: 1000, chance: 10 }
+      ]
+    };
+
+    const lista = config[item.id];
+
+    // 🛡️ proteção contra erro
+    if (!lista) {
+      console.error("Caixa não configurada:", item.id);
+
+      modalRecompensa({
+        titulo: "Erro",
+        descricao: "Essa caixa não está disponível.",
+        raridade: "comum"
+      });
+
+      return;
     }
 
+    // 🎲 sorteio
+    let r = Math.random() * 100;
+    let premio = lista[0];
+
+    for (const p of lista) {
+      r -= p.chance;
+      if (r <= 0) {
+        premio = p;
+        break;
+      }
+    }
+
+    // 🎬 loading
+    modalLoading(`Abrindo ${item.nome}...`);
+
+    
+setTimeout(async () => {
+
+  await updateDoc(userRef, {
+    xp: increment(premio.xp)
   });
-}
+
+  // 📝 HISTÓRICO COM RESULTADO REAL
+  const texto = gerarTextoHistorico(item, {
+    premio: premio.xp
+  });
+
+  await registrarCompra(texto);
+
+  modalCaixa({
+    nome: item.nome,
+    premio: premio.xp,
+    raridade: item.raridade
+  });
+
+}, 1500);
+
+  }
 
 
-// ======================================================
-// 🧠 TEMPO
-// ======================================================
-
-export async function sincronizarTempo() {
-
-  const ref = doc(db, "config", "tempo");
-
-  await setDoc(ref, { now: serverTimestamp() }, { merge: true });
-
-  const snap = await getDoc(ref);
-
-  const server = snap.data().now.toDate();
-  const local = new Date();
-
-  serverOffset = server - local;
-
-  setServerTimeOffset(serverOffset);
-}
-
-export function atualizarContadores() {}
-
-export async function carregarEstoque() {}
 
 
-// ======================================================
-// 💬 POPUP
-// ======================================================
+  // ======================================================
+  // 🎡 ROLETA (PADRÃO MODAL ENGINE)
+  // ======================================================
 
-function mostrarPopup(titulo, texto) {
+  async function abrirRoleta() {
 
-  const el = document.getElementById("modal");
+    const premios = [100, 200, 300, 500, 800];
+    const ganho = premios[Math.floor(Math.random() * premios.length)];
 
-  el.innerHTML = `
-    <div class="modal">
-      <div class="modal-box">
-        <h2>${titulo}</h2>
-        <p>${texto}</p>
-        <button onclick="fecharModal()">Continuar</button>
-      </div>
-    </div>
-  `;
-}
-
-function fecharModal() {
-  document.getElementById("modal").innerHTML = "";
-}
+    modalLoading("Girando roleta...");
 
 
-// ======================================================
-// 🎁 CAIXA
-// ======================================================
+setTimeout(async () => {
 
-function abrirCaixa(tipo) {
+  await updateDoc(userRef, {
+    xp: increment(ganho)
+  });
 
-  const config = {
-    "caixa-basica": [
-      { xp: 100, chance: 40 },
-      { xp: 150, chance: 35 },
-      { xp: 200, chance: 20 },
-      { xp: 250, chance: 5 }
-    ],
-    "caixa-cientifica": [
-      { xp: 200, chance: 45 },
-      { xp: 300, chance: 35 },
-      { xp: 400, chance: 15 },
-      { xp: 500, chance: 5 }
-    ],
-    "caixa-lendaria": [
-      { xp: 600, chance: 60 },
-      { xp: 800, chance: 30 },
-      { xp: 1000, chance: 10 }
-    ]
-  };
+  const texto = gerarTextoHistorico(
+    { id: "roleta-cientifica", nome: "Roleta" },
+    { ganho }
+  );
 
-  const lista = config[tipo];
+  await registrarCompra(texto);
 
-  let r = Math.random() * 100;
-  let premio = lista[0];
+  modalXP(ganho);
 
-  for (const item of lista) {
-    r -= item.chance;
-    if (r <= 0) {
-      premio = item;
-      break;
+}, 2000);
+
+  }
+
+  // ======================================================
+  // 💰 REGISTROS (VERSÃO CORRETA E SEGURA)
+  // ======================================================
+
+  async function registrarCompra(itemTexto) {
+
+    const user = auth.currentUser;
+    if (!user) return;
+
+    try {
+
+      // 📄 referência do usuário (sem conflito com variável global)
+      const userDocRef = doc(db, "usuarios", user.uid);
+      const snap = await getDoc(userDocRef);
+
+      if (!snap.exists()) return;
+
+      const dados = snap.data();
+
+      await addDoc(collection(db, "lojaHistorico"), {
+        uid: user.uid,
+        aluno: dados.nome || user.email,
+
+        // 🏫 dados adicionais
+        escola: dados.escola || "Não informado",
+        serie: dados.serie || "—",
+        turma: dados.turma || "—",
+
+        item: itemTexto,
+        data: serverTimestamp()
+      });
+
+    } catch (erro) {
+      console.error("Erro ao registrar compra:", erro);
     }
   }
 
-  mostrarPopup("📦 Abrindo...", "Aguarde...");
+  // ======================================================
+  // 📝 TEXTO DO HISTÓRICO (VERSÃO FINAL COMPLETA)
+  // ======================================================
 
-  setTimeout(async () => {
+  function gerarTextoHistorico(item, extra = {}) {
 
-    await updateDoc(userRef, {
-      xp: increment(premio.xp)
-    });
+    // ==================================================
+    // 📦 CAIXAS (COM RESULTADO)
+    // ==================================================
+    if (item.id?.includes("caixa")) {
 
-    mostrarPopup("🎉 Recompensa!", `⚡ ${premio.xp} XP`);
+      if (extra.premio) {
+        return `Abriu ${item.nome} e recebeu +${extra.premio} XP`;
+      }
 
-  }, 1500);
+      return `Abriu ${item.nome}`;
+    }
+
+    // ==================================================
+    // 🎡 ROLETA (COM RESULTADO)
+    // ==================================================
+    if (item.id === "roleta-cientifica") {
+
+      if (extra.ganho) {
+        return `Girou a roleta científica e ganhou +${extra.ganho} XP`;
+      }
+
+      return `Girou a roleta científica`;
+    }
+
+    // ==================================================
+    // ⚡ XP
+    // ==================================================
+    if (item.xp) {
+      return `Resgatou +${item.xp} XP`;
+    }
+
+    // ==================================================
+    // 🎟️ FICHAS
+    // ==================================================
+    if (item.fichas) {
+      return `Resgatou ${item.fichas} fichas`;
+    }
+
+    // ==================================================
+    // 🎯 BÔNUS PROVA
+    // ==================================================
+    
+if (item.tipo === "prova") {
+  return `Resgatou +${item.valor} ponto${item.valor > 1 ? "s" : ""} para a prova`;
 }
 
 
-// ======================================================
-// 🎡 ROLETA
-// ======================================================
+    // ==================================================
+    // 🏆 RANKING
+    // ==================================================
+    if (item.tipo === "ranking-fichas") {
+      return `Resgatou ${item.quantidade} acessos ao ranking`;
+    }
 
-function abrirRoleta() {
+    // ==================================================
+    // 🔁 REVANCHE
+    // ==================================================
+    if (item.tipo === "prova-extra") {
+      return `Resgatou uma revanche acadêmica`;
+    }
 
-  const premios = [100, 200, 300, 500, 800];
+    // ==================================================
+    // 🧰 FERRAMENTA
+    // ==================================================
+    if (item.tipo === "ferramenta") {
+      return `Desbloqueou ferramenta: ${item.nome}`;
+    }
 
-  const ganho = premios[Math.floor(Math.random() * premios.length)];
+    // ==================================================
+    // 🔑 PRÊMIO FÍSICO
+    // ==================================================
+    if (item.id === "chaveiro-univers3d") {
+      return `Solicitou prêmio físico`;
+    }
 
-  mostrarPopup("🎡 Girando...", "Boa sorte!");
-
-  setTimeout(async () => {
-
-    await updateDoc(userRef, {
-      xp: increment(ganho)
-    });
-
-    mostrarPopup("🎉 Resultado!", `⚡ ${ganho} XP`);
-
-  }, 2000);
-}
-
-
-// ======================================================
-// 💰 REGISTROS
-// ======================================================
-
-async function registrarCompra(itemTexto) {
-
-  const user = auth.currentUser;
-  if (!user) return;
-
-  const userRef = doc(db, "usuarios", user.uid);
-  const snap = await getDoc(userRef);
-
-  if (!snap.exists()) return;
-
-  const dados = snap.data();
-
-  await addDoc(collection(db, "lojaHistorico"), {
-    uid: user.uid,
-    aluno: dados.nome || user.email,
-
-    // 🔥 AQUI É O QUE TÁ FALTANDO
-    escola: dados.escola || "Não informado",
-    serie: dados.serie || "—",
-    turma: dados.turma || "—",
-
-    item: itemTexto,
-    data: serverTimestamp()
-  });
-}
-
-function gerarTextoHistorico(item) {
-
-  if (item.xp) return `comprou ${item.nome}`;
-
-  if (item.fichas) return `comprou ${item.nome}`;
-
-  if (item.tipo === "prova") return `adquiriu bônus de prova (+${item.valor})`;
-
-  if (item.tipo === "ranking-fichas") return `comprou fichas de ranking`;
-
-  if (item.tipo === "prova-extra") return `ativou Revanche Acadêmica`;
-
-  if (item.tipo === "ferramenta") return `desbloqueou ${item.nome}`;
-
-  if (item.id.includes("caixa")) return `abriu ${item.nome}`;
-
-  if (item.id === "roleta-cientifica") return `girou a Roleta Científica`;
-
-  if (item.id === "chaveiro-univers3d") return `resgatou prêmio lendário`;
-
-  return item.nome;
-}
+    // ==================================================
+    // ⚠️ FALLBACK
+    // ==================================================
+    return `Interagiu com ${item.nome || "item desconhecido"}`;
+  }
 
 
-// ======================================================
-// 🛒 COMPRA MASTER
-// ======================================================
 
-async function comprar(id) {
+  // ======================================================
+  // 🛒 COMPRA (APENAS CONFIRMAÇÃO)
+  // ======================================================
 
-  if (compraEmAndamento) return;
-  compraEmAndamento = true;
+  async function comprar(id) {
 
-  try {
+    if (compraEmAndamento) return;
 
     const item = recompensas.find(r => r.id === id);
     if (!item) return;
 
+    // ❌ SP insuficiente
     if (spAtual < item.preco) {
-      mostrarPopup("❌", "SP insuficiente");
+      modalRecompensa({
+        titulo: "❌ SP insuficiente",
+        descricao: "Você não possui pontos suficientes.",
+        raridade: "comum"
+      });
       return;
     }
 
-    const snap = await getDoc(userRef);
-    const d = snap.data();
 
-    const spDepois = d.sciencePoints - item.preco;
+  modalConfirmacao(item, async () => {
 
-    const texto = gerarTextoHistorico(item);
-await registrarCompra(texto);
+    if (compraEmAndamento) return; // 🛡️ proteção extra
 
-    // 🔀 SWITCH
+    await executarCompra(item);
+  });
 
-    if (item.xp) {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        xp: increment(item.xp)
-      });
-      mostrarPopup("⚡ XP", `+${item.xp} XP`);
+
+  }
+
+  // ======================================================
+  // 🚀 EXECUTAR COMPRA (LÓGICA COMPLETA + FAILSAFE)
+  // ======================================================
+
+  async function executarCompra(item) {
+
+    if (compraEmAndamento) return;
+    compraEmAndamento = true;
+
+    try {
+
+      // 🔄 busca dados atualizados
+      const snap = await getDoc(userRef);
+      const d = snap.data();
+
+      // 🛡️ validação extra de saldo (evita inconsistência)
+      if ((d.sciencePoints || 0) < item.preco) {
+
+        modalRecompensa({
+          titulo: "❌ SP insuficiente",
+          descricao: "Seu saldo foi atualizado. Tente novamente.",
+          raridade: "comum"
+        });
+
+        return;
+      }
+
+      const spDepois = d.sciencePoints - item.preco;
+
+      // 📝 HISTÓRICO
+      
+      // ==================================================
+      // ⚡ XP
+      // ==================================================
+      if (item.xp) {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          xp: increment(item.xp)
+        });
+
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        modalXP(item.xp);
+      }
+
+      // ==================================================
+      // 🎟️ FICHAS
+      // ==================================================
+      else if (item.fichas) {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          fichasLab: increment(item.fichas)
+        });
+
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        modalRecompensa({
+          titulo: "🎟️ Fichas recebidas",
+          descricao: `+${item.fichas} fichas`,
+          raridade: item.raridade
+        });
+      }
+
+      // ==================================================
+      // 🎯 BÔNUS PROVA
+      // ==================================================
+      else if (item.tipo === "prova") {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          bonusProvaDisponivel: increment(item.valor)
+        });
+
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        modalRecompensa({
+          titulo: "🎯 Bônus de prova",
+          descricao: `+${item.valor} ponto`,
+          raridade: item.raridade
+        });
+      }
+
+      // ==================================================
+      // 🏆 RANKING
+      // ==================================================
+      else if (item.tipo === "ranking-fichas") {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          rankingFichas: increment(item.quantidade)
+        });
+
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        modalRecompensa({
+          titulo: "🏆 Fichas de ranking",
+          descricao: `+${item.quantidade} acessos`,
+          raridade: item.raridade
+        });
+      }
+
+      // ==================================================
+      // 🔁 REVANCHE
+      // ==================================================
+      else if (item.tipo === "prova-extra") {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          provaExtraDisponivel: increment(1)
+        });
+
+          await atualizarMetaGlobal(item.preco);
+          await atualizarRankingGasto(item.preco);
+
+        modalLendario({
+          titulo: "🔁 Revanche Acadêmica",
+          descricao: "Você pode refazer uma prova!"
+        });
+      }
+
+      // ==================================================
+      // 🧰 FERRAMENTA
+      // ==================================================
+      else if (item.tipo === "ferramenta") {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          [`tools.${item.tool}`]: true
+        });
+
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        modalLendario({
+          titulo: "🧰 Ferramenta desbloqueada",
+          descricao: item.nome
+        });
+      }
+
+      // ==================================================
+      // 📦 CAIXA
+      // ==================================================
+      else if (item.id.includes("caixa")) {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois
+        });
+
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        await abrirCaixa(item);
+      }
+
+      // ==================================================
+      // 🎡 ROLETA
+      // ==================================================
+      else if (item.id === "roleta-cientifica") {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois
+        });
+
+          await atualizarMetaGlobal(item.preco);
+          await atualizarRankingGasto(item.preco);
+
+        await abrirRoleta();
+      }
+
+      // ==================================================
+      // 🔑 PRÊMIO FÍSICO
+      // ==================================================
+      else if (item.id === "chaveiro-univers3d") {
+
+        await updateDoc(userRef, {
+          sciencePoints: spDepois,
+          premioSolicitado: true
+        });
+        
+        await atualizarMetaGlobal(item.preco);
+        await atualizarRankingGasto(item.preco);
+
+        modalLendario({
+          titulo: "🔑 Prêmio solicitado",
+          descricao: "Seu pedido foi enviado com sucesso!"
+        });
+      }
+
+      // ==================================================
+      // ⚠️ FAILSAFE (ITEM NÃO TRATADO)
+      // ==================================================
+      else {
+
+        console.warn("Item não tratado:", item);
+
+        modalRecompensa({
+          titulo: "Erro",
+          descricao: "Esse item ainda não está configurado.",
+          raridade: "comum"
+        });
+      }
+
+
+      
+// ==================================================
+// 📝 REGISTRA HISTÓRICO (EXCETO CAIXA/ROLETA)
+// ==================================================
+
+if (
+  !item.id.includes("caixa") &&
+  item.id !== "roleta-cientifica"
+) {
+  const texto = gerarTextoHistorico(item);
+  await registrarCompra(texto);
+}
+
+
+      // ==================================================
+      // 🔄 ATUALIZA UI
+      // ==================================================
+      spAtual = spDepois;
+
+      atualizarSPNaTela(spAtual, bonusAtual);
+      renderLoja();
+
+    } catch (erro) {
+      console.error("Erro na compra:", erro);
+    } finally {
+      compraEmAndamento = false;
+    }
+  }
+
+  async function atualizarMetaGlobal(valor) {
+    const statsRef = doc(db, "config", "lojaStats");
+
+    await updateDoc(statsRef, {
+      totalSPGasto: increment(valor)
+    });
+  }
+
+
+// ======================================================
+// 📦 ESTOQUE
+// ======================================================
+
+let estoqueChaveiro = 0;
+
+export function getEstoqueChaveiro() {
+  return estoqueChaveiro;
+}
+
+export function carregarEstoque() {
+  const ref = doc(db, "loja", "chaveiro-univers3d");
+
+  onSnapshot(ref, (snap) => {
+    if (!snap.exists()) return;
+
+    estoqueChaveiro = snap.data().estoque || 0;
+
+    renderLoja(); // 🔥 re-render automático
+  });
+}
+
+
+
+// ======================================================
+// ⏳ TEMPO GLOBAL (VERSÃO FINAL)
+// ======================================================
+
+let serverTimeOffset = 0;
+
+export function getAgora() {
+  return new Date(Date.now() + serverTimeOffset);
+}
+
+export async function sincronizarTempo() {
+  try {
+    const ref = doc(db, "config", "tempo");
+
+    await setDoc(ref, { now: serverTimestamp() }, { merge: true });
+
+    const snap = await getDoc(ref);
+    const serverNow = snap.data().now.toDate();
+
+    const localNow = new Date();
+
+    serverTimeOffset = serverNow - localNow;
+
+  } catch {
+    serverTimeOffset = 0;
+  }
+}
+
+
+// ======================================================
+// ⏳ CONTADORES
+// ======================================================
+
+import { datasLiberacao } from "./loja-data.js";
+
+export function atualizarContadores() {
+
+  const agora = getAgora();
+
+  document.querySelectorAll(".contador-loja").forEach(el => {
+
+    const tipo = el.dataset.tipo;
+    const data = datasLiberacao[tipo];
+
+    if (!data) return;
+
+    const diff = data - agora;
+
+    if (diff <= 0) {
+      el.innerText = "✅ Liberado!";
+      return;
     }
 
-    else if (item.fichas) {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        fichasLab: increment(item.fichas)
-      });
-      mostrarPopup("🎟️ Fichas", `+${item.fichas}`);
-    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff / 3600000) % 24);
+    const m = Math.floor((diff / 60000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
 
-    else if (item.tipo === "prova") {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        bonusProvaDisponivel: increment(item.valor)
-      });
-      mostrarPopup("🎯 Bônus", `+${item.valor}`);
-    }
+    el.innerText = `⏳ ${d}d ${h}h ${m}m ${s}s`;
+  });
+}
 
-    else if (item.tipo === "ranking-fichas") {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        rankingFichas: increment(item.quantidade)
-      });
-      mostrarPopup("🏆 Ranking", `+${item.quantidade}`);
-    }
 
-    else if (item.tipo === "prova-extra") {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        provaExtraDisponivel: increment(1)
-      });
-      mostrarPopup("🔁 Revanche", "Liberada!");
-    }
+// ======================================================
+// 🏆 ATUALIZAR RANKING DE GASTO
+// ======================================================
 
-    else if (item.tipo === "ferramenta") {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        [`tools.${item.tool}`]: true
-      });
-      mostrarPopup("🧰 Ferramenta", "Desbloqueada!");
-    }
+async function atualizarRankingGasto(valor) {
 
-    else if (id.includes("caixa")) {
-      await updateDoc(userRef, { sciencePoints: spDepois });
-      abrirCaixa(id);
-    }
+  const user = auth.currentUser;
+  if (!user) return;
 
-    else if (id === "roleta-cientifica") {
-      await updateDoc(userRef, { sciencePoints: spDepois });
-      abrirRoleta();
-    }
+  const ref = doc(db, "rankingGasto", user.uid);
 
-    else if (id === "chaveiro-univers3d") {
-      await updateDoc(userRef, {
-        sciencePoints: spDepois,
-        premioSolicitado: true
-      });
-      mostrarPopup("🔑", "Solicitação enviada!");
-    }
+  try {
 
-    spAtual = spDepois;
+    await setDoc(ref, {
+      nome: user.displayName || user.email,
+      totalGasto: increment(valor)
+    }, { merge: true });
 
-    atualizarSPNaTela(spAtual, bonusAtual);
-    renderLoja();
-
-  } catch (e) {
-    console.error(e);
-  } finally {
-    compraEmAndamento = false;
+  } catch (erro) {
+    console.error("Erro ao atualizar ranking:", erro);
   }
 }

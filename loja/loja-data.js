@@ -176,17 +176,30 @@ export const recompensas = [
 ];
 
 
-// ======================================================
-// 🗓️ DATAS
-// ======================================================
 
-export const dataInauguracao = new Date("2026-04-15T00:00:00");
+// ======================================================
+// 🗓️ DATAS DE LIBERAÇÃO
+// ======================================================
 
 export const datasLiberacao = {
   caixas: new Date("2026-04-25T10:00:00"),
   ranking: new Date("2026-04-30T10:00:00"),
   roleta: new Date("2026-05-30T12:00:00"),
-  chaveiro: new Date("2026-11-23T18:00:00"),
+  chaveiro: new Date("2026-11-17T13:30:00"), // 🔥 corrigido
   prova: new Date("2026-04-10T08:00:00"),
   fichas: new Date("2026-06-15T13:30:00")
 };
+
+// ======================================================
+// 🧠 IDENTIFICAR TIPO DO ITEM
+// ======================================================
+
+export function getTipoItem(item) {
+  if (item.id.includes("caixa")) return "caixas";
+  if (item.tipo === "ranking-fichas") return "ranking";
+  if (item.id === "roleta-cientifica") return "roleta";
+  if (item.id === "chaveiro-univers3d") return "chaveiro";
+  if (item.tipo === "prova") return "prova";
+  if (item.fichas) return "fichas";
+  return null;
+}

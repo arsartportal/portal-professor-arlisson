@@ -24,6 +24,39 @@ import { onAuthStateChanged } from
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
+  // =====================================================
+// ⚽ HERO COPA (INTERAÇÃO MOBILE)
+// =====================================================
+
+const heroCopa = document.querySelector(".hero-copa-duplo");
+
+if (heroCopa) {
+
+  let timeout;
+
+  heroCopa.addEventListener("touchstart", () => {
+
+    heroCopa.classList.add("touch-ativo");
+
+    // vibração leve (se suportado)
+    if (navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      heroCopa.classList.remove("touch-ativo");
+    }, 1500);
+
+  });
+
+}
+
+heroCopa.addEventListener("touchmove", () => {
+  heroCopa.classList.add("touch-ativo");
+});
+
   
   // =====================================================
   // 👇 RESTO DO SEU CÓDIGO (NÃO ALTERA)

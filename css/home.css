@@ -2330,3 +2330,343 @@ CONTEÚDO
   100% { transform: translateY(0); }
 }
 
+/* ===================================================== */
+/* ⚽ HERO DUPLO COPA (QUIZ + BOLÃO) */
+/* ===================================================== */
+
+.hero-copa-duplo {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 30px 0;
+}
+
+
+/* ===================================================== */
+/* 📦 CONTAINER PRINCIPAL (DIVISÃO EM 2 LADOS) */
+/* ===================================================== */
+
+.hero-duplo-container {
+  display: flex;
+  min-height: 320px;
+}
+
+
+/* ===================================================== */
+/* 🧱 LADOS (QUIZ / BOLÃO) */
+/* ===================================================== */
+
+.lado {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  color: white;
+  overflow: hidden;
+
+  transition: all 0.4s ease;
+
+  cursor: pointer; /* 👈 melhora UX */
+}
+
+
+/* ===================================================== */
+/* 🖱️ HOVER (APENAS DESKTOP) */
+/* ===================================================== */
+
+@media (hover: hover) {
+
+  .lado:hover {
+    flex: 1.2;
+  }
+
+  .lado:hover .overlay {
+    opacity: 1;
+  }
+
+}
+
+
+/* ===================================================== */
+/* 🎯 QUIZ (lado esquerdo - verde) */
+/* ===================================================== */
+
+.lado.quiz {
+  background: linear-gradient(135deg, #00c853, #00695c);
+
+  /* profundidade visual */
+  box-shadow: inset -10px 0 30px rgba(0,0,0,0.2);
+}
+
+
+/* ===================================================== */
+/* 🏆 BOLÃO (lado direito - dourado) */
+/* ===================================================== */
+
+.lado.bolao {
+  background: linear-gradient(135deg, #facc15, #78350f);
+
+  /* profundidade visual */
+  box-shadow: inset 10px 0 30px rgba(0,0,0,0.2);
+}
+
+
+/* ===================================================== */
+/* 🌟 OVERLAY DE LUZ */
+/* ===================================================== */
+
+.lado .overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: 0.4s;
+
+  pointer-events: none; /* 👈 evita bloquear clique */
+}
+
+
+/* ===================================================== */
+/* 🧠 CONTEÚDO (TEXTO E BOTÕES) */
+/* ===================================================== */
+
+.conteudo {
+  position: relative;
+  z-index: 2; /* 👈 sempre acima da animação */
+  max-width: 300px;
+}
+
+
+/* ===================================================== */
+/* ➗ DIVISOR ENTRE OS LADOS */
+/* ===================================================== */
+
+.lado.quiz::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 2px;
+  background: rgba(255,255,255,0.2);
+}
+
+
+/* ===================================================== */
+/* ⚽ ANIMAÇÃO GLOBAL (BOLA + TROFÉU) */
+/* ===================================================== */
+
+.anim-copa {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 1; /* 👈 fica entre fundo e conteúdo */
+}
+
+
+/* ===================================================== */
+/* ⚽ BOLA */
+/* ===================================================== */
+
+.bola {
+  position: absolute;
+  top: 60%;
+  left: -60px;
+  font-size: 40px;
+
+  animation: bolaMove 4s linear infinite;
+
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+
+  will-change: transform, left; /* 👈 melhora performance */
+}
+
+
+/* ===================================================== */
+/* 🏆 TROFÉU */
+/* ===================================================== */
+
+.trofeu {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  font-size: 42px;
+
+  opacity: 0;
+  transform: scale(0.5);
+
+  animation: trofeuSurge 4s linear infinite;
+}
+
+
+/* ===================================================== */
+/* 🎬 KEYFRAMES — MOVIMENTO DA BOLA */
+/* ===================================================== */
+
+@keyframes bolaMove {
+
+  0% {
+    left: -60px;
+    transform: rotate(0deg) scale(1);
+  }
+
+  40% {
+    left: 45%;
+    transform: rotate(360deg) scale(1.1);
+  }
+
+  55% {
+    left: 50%;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    left: 50%;
+    opacity: 0;
+  }
+}
+
+
+/* ===================================================== */
+/* 🎬 KEYFRAMES — TROFÉU (SUAVE E PREMIUM) */
+/* ===================================================== */
+
+@keyframes trofeuSurge {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-20deg);
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.2) rotate(10deg);
+  }
+
+  75% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+
+/* ===================================================== */
+/* ✨ GLOW DO TROFÉU */
+/* ===================================================== */
+
+.trofeu::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.4), transparent);
+  z-index: -1;
+
+  animation: glow 1s ease-out infinite;
+}
+
+@keyframes glow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+
+/* ===================================================== */
+/* 🖱️ INTERAÇÃO DESKTOP (ACELERA ANIMAÇÃO) */
+/* ===================================================== */
+
+.hero-copa-duplo:hover .bola {
+  animation-duration: 2s;
+}
+
+.hero-copa-duplo:hover .trofeu {
+  animation-duration: 2s;
+}
+
+
+/* ===================================================== */
+/* 📱 MOBILE (RESPONSIVO + ANIMAÇÃO BASE) */
+/* ===================================================== */
+
+@media (max-width: 768px) {
+
+  .hero-duplo-container {
+    flex-direction: column;
+  }
+
+  .lado {
+    min-height: 220px;
+  }
+
+  .lado.quiz::after {
+    display: none;
+  }
+
+  /* animação mais lenta (economia + fluidez) */
+  .bola {
+    animation-duration: 5s;
+  }
+
+  .trofeu {
+    animation-duration: 5s;
+  }
+
+}
+
+
+/* ===================================================== */
+/* 👆 TOQUE (SIMULA HOVER NO MOBILE) */
+/* ===================================================== */
+
+.hero-copa-duplo.touch-ativo .bola {
+  animation-duration: 1.8s;
+}
+
+.hero-copa-duplo.touch-ativo .trofeu {
+  animation-duration: 1.8s;
+}
+
+.hero-copa-duplo.touch-ativo .lado {
+  flex: 1.1;
+}
+
+
+/* ===================================================== */
+/* 🎮 FEEDBACK DE CLIQUE (EFEITO APP) */
+/* ===================================================== */
+
+.lado:active {
+  transform: scale(0.98);
+}
+
+.hero-desc {
+  line-height: 1.7;
+  margin: 14px 0 20px;
+  font-size: 15px;
+  max-width: 320px; /* controla largura do texto */
+  margin-bottom: 20px;
+}
