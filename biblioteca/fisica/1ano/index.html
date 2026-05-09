@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Física • 1º Ano
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS FRENTE AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../core/frente-aula.css"
+>
+
+<style>
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-serie{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:64px;
+
+  border-radius:32px;
+
+  margin-bottom:42px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-height:360px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #020617 0%,
+      #0f172a 45%,
+      #1d4ed8 100%
+    );
+
+  color:#ffffff;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.24);
+
+}
+
+.hero-serie::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+
+  height:420px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.10),
+      transparent 70%
+    );
+
+  top:-180px;
+
+  right:-100px;
+
+}
+
+.hero-serie h1{
+
+  font-size:4.5rem;
+
+  line-height:1.05;
+
+  color:#ffffff;
+
+  border:none;
+
+  padding:0;
+
+  margin:0 0 22px 0;
+
+}
+
+.hero-serie p{
+
+  width:100%;
+
+  max-width:900px;
+
+  margin:0 auto;
+
+  font-size:1.2rem;
+
+  line-height:1.9;
+
+  color:
+    rgba(255,255,255,0.84);
+
+}
+
+/* =====================================================
+   CONTEÚDO HERO
+===================================================== */
+
+/* =====================================================
+   CONTEÚDO HERO
+===================================================== */
+
+.hero-conteudo{
+
+  position:relative;
+
+  z-index:2;
+
+  width:100%;
+
+  max-width:1100px;
+
+  margin:0 auto;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+}
+
+.hero-badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:12px 18px;
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,0.10);
+
+  border:
+    1px solid rgba(255,255,255,0.14);
+
+  font-weight:700;
+
+  margin-bottom:24px;
+
+  backdrop-filter:blur(10px);
+
+}
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.aulas-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(400px,1fr));
+
+  gap:28px;
+
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.aula-card{
+
+  display:block;
+
+  background:#ffffff;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  border:1px solid #dbe4f0;
+
+  text-decoration:none;
+
+  color:inherit;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+
+}
+
+.aula-card:hover{
+
+  transform:translateY(-6px);
+
+  border-color:#2563eb;
+
+  box-shadow:
+    0 22px 50px rgba(37,99,235,0.15);
+
+}
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.aula-topo{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:
+    22px 34px 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1d4ed8
+    );
+
+  color:#ffffff;
+
+}
+
+.aula-topo::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+
+  height:220px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.10),
+      transparent 70%
+    );
+
+  top:-90px;
+
+  right:-70px;
+
+}
+
+.aula-badge{
+
+  position:relative;
+
+  z-index:2;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  background:
+    rgba(255,255,255,0.10);
+
+  border:
+    1px solid rgba(255,255,255,0.15);
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-weight:700;
+
+  margin-bottom:14px;
+
+}
+
+.aula-topo h2{
+
+  position:relative;
+
+  z-index:2;
+
+  font-size:2rem;
+
+  color:#ffffff;
+
+  border:none;
+
+  padding:0;
+
+  margin-bottom:10px;
+
+  margin-top:0;
+
+}
+
+.aula-topo p{
+
+  position:relative;
+
+  z-index:2;
+
+  color:
+    rgba(255,255,255,0.84);
+
+  line-height:1.8;
+
+}
+
+/* =====================================================
+   BODY
+===================================================== */
+
+.aula-body{
+
+  padding:28px;
+
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-aula{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:18px;
+
+}
+
+.status-pill{
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  font-weight:700;
+
+}
+
+.status-nao{
+
+  background:#e2e8f0;
+
+  color:#475569;
+
+}
+
+.status-andamento{
+
+  background:#fef3c7;
+
+  color:#b45309;
+
+}
+
+.status-ok{
+
+  background:#dcfce7;
+
+  color:#15803d;
+
+}
+
+/* =====================================================
+   BARRA
+===================================================== */
+
+.barra-aula{
+
+  width:100%;
+
+  height:14px;
+
+  border-radius:999px;
+
+  overflow:hidden;
+
+  background:#e2e8f0;
+
+  margin-bottom:26px;
+
+}
+
+.barra-fill-aula{
+
+  height:100%;
+
+  width:0%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #4ade80
+    );
+
+}
+
+/* =====================================================
+   INFOS
+===================================================== */
+
+.aula-infos{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:16px;
+
+}
+
+.info-box{
+
+  background:#f8fafc;
+
+  border:1px solid #dbe4f0;
+
+  border-radius:18px;
+
+  padding:20px;
+
+}
+
+.info-box span{
+
+  display:block;
+
+  color:#64748b;
+
+  margin-bottom:8px;
+
+}
+
+.info-box strong{
+
+  font-size:1.2rem;
+
+  color:#0f172a;
+
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:900px){
+
+  .hero-serie{
+
+    padding:42px 30px;
+
+  }
+
+  .hero-serie h1{
+
+    font-size:2.9rem;
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  .aulas-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="hero-serie">
+
+  <div class="hero-conteudo">
+
+    <span class="hero-badge">
+
+      ⚛️ Física • 1º Ano
+
+    </span>
+
+    <h1>
+
+      Física • 1º Ano
+
+    </h1>
+
+    <p>
+
+      Explore os conteúdos fundamentais da Física
+      através de aulas interativas.
+
+    </p>
+
+  </div>
+
+</section>
+
+  <!-- =====================================================
+       GRID DAS AULAS
+  ====================================================== -->
+
+  <section
+    class="aulas-grid"
+    id="listaAulas"
+  ></section>
+
+</div>
+
+<script type="module">
+
+/* =====================================================
+   FIREBASE AUTH
+===================================================== */
+
+import {
+
+  onAuthStateChanged
+
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+import {
+
+  auth
+
+} from "../../../js/firebase.js";
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+import {
+
+  renderizarFisica1Ano
+
+} from "../../core/frente-cards.js";
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async () => {
+
+    /*
+      Aguarda login
+    */
+    await renderizarFisica1Ano();
+
+  }
+
+);
+
+</script>
+
+</body>
+</html>

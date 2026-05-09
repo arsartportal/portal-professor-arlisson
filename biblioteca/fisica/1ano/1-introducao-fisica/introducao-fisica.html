@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Introdução à Física
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL DA BIBLIOTECA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./introducao-fisica.css"
+>
+
+<!-- =====================================================
+     CSS DO SISTEMA DE PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER PRINCIPAL
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO DA AULA
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <!-- TEXTO -->
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚛️ Física • 1º Ano
+      </span>
+
+      <h1>
+        Introdução à Física
+      </h1>
+
+      <p>
+        Descubra como a Física explica os movimentos,
+        a energia, os fenômenos naturais e as tecnologias
+        presentes no nosso cotidiano.
+      </p>
+
+    </div>
+
+    <!-- EMOJI -->
+    <div class="hero-emoji">
+      🚀
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS DE LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL DE PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <!-- TÍTULO -->
+    <h2 class="progress-title">
+
+      Seu Progresso
+
+    </h2>
+
+    <!-- GRID -->
+    <div class="progress-grid">
+
+      <!-- =================================================
+           CARD RESPONDIDAS
+      ================================================== -->
+      <div class="progress-card">
+
+        <!-- ÍCONE -->
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <!-- TEXTO -->
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/10
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================
+           CARD ACERTOS
+      ================================================== -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================
+           CARD ERROS
+      ================================================== -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================
+           CARD STATUS
+      ================================================== -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         BARRA DE PROGRESSO
+    ====================================================== -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- =====================================================
+         TEXTO DO PROGRESSO
+    ====================================================== -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- =====================================================
+         ÁREA DE RECOMPENSA
+    ====================================================== -->
+    <div class="reward-container">
+
+      <!-- TÍTULO -->
+      <h3 class="reward-title">
+
+        🎁 Recompensa
+
+      </h3>
+
+      <!-- TEXTO -->
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <!-- BOTÃO -->
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       O QUE É FÍSICA
+  ====================================================== -->
+  <h2>
+    1. O que é Física?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      A Física é a ciência que estuda os fenômenos
+      naturais, os movimentos, a energia e as forças
+      presentes no universo.
+    </p>
+
+    <!-- ÁREAS -->
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🚗
+        <span>Movimento</span>
+      </div>
+
+      <div class="area-card">
+        ⚡
+        <span>Energia</span>
+      </div>
+
+      <div class="area-card">
+        🌍
+        <span>Gravidade</span>
+      </div>
+
+      <div class="area-card">
+        🔥
+        <span>Calor</span>
+      </div>
+
+      <div class="area-card">
+        💡
+        <span>Luz</span>
+      </div>
+
+      <div class="area-card">
+        🌊
+        <span>Ondas</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FÍSICA NO COTIDIANO
+  ====================================================== -->
+  <h2>
+    2. Física no cotidiano
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🏍️
+      </div>
+
+      <h3>
+        Curvas de moto
+      </h3>
+
+      <p>
+        Envolvem equilíbrio e atrito.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🌩️
+      </div>
+
+      <h3>
+        Relâmpagos
+      </h3>
+
+      <p>
+        Descargas elétricas naturais.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        📱
+      </div>
+
+      <h3>
+        Celulares
+      </h3>
+
+      <p>
+        Funcionam usando ondas eletromagnéticas.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    3. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Fenômeno físico ou químico?
+    </h3>
+
+    <!-- BOTÕES -->
+    <div class="botoes-simulador">
+
+      <button onclick="analisarFenomeno('gelo')">
+        🧊 Gelo derretendo
+      </button>
+
+      <button onclick="analisarFenomeno('fogos')">
+        🎆 Fogos explodindo
+      </button>
+
+      <button onclick="analisarFenomeno('carro')">
+        🚗 Carro acelerando
+      </button>
+
+    </div>
+
+    <!-- RESULTADO -->
+    <div
+      class="resultado-simulador"
+      id="resultadoFenomeno"
+    >
+
+      Escolha um fenômeno acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    4. Exercícios
+  </h2>
+
+  <!-- QUESTÕES -->
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +50 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+====================================================== -->
+<script
+  type="module"
+  src="./introducao-fisica.js"
+></script>
+
+</body>
+</html>

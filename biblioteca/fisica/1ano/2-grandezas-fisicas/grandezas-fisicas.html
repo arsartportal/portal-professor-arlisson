@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Grandezas Físicas
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL DA BIBLIOTECA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./grandezas-fisicas.css"
+>
+
+<!-- =====================================================
+     CSS DO SISTEMA DE PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER PRINCIPAL
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO DA AULA
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <!-- TEXTO -->
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚛️ Física • 1º Ano
+      </span>
+
+      <h1>
+        Grandezas Físicas
+      </h1>
+
+      <p>
+        Aprenda como a Física mede os fenômenos
+        naturais através das grandezas, unidades
+        e do Sistema Internacional.
+      </p>
+
+    </div>
+
+    <!-- EMOJI -->
+    <div class="hero-emoji">
+      📏
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS DE LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL DE PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/12
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- TEXTO -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- RECOMPENSA -->
+    <div class="reward-container">
+
+      <h3 class="reward-title">
+        🎁 Recompensa
+      </h3>
+
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       O QUE SÃO GRANDEZAS
+  ====================================================== -->
+  <h2>
+    1. O que são Grandezas Físicas?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      Grandezas físicas são propriedades que
+      podem ser medidas, como comprimento,
+      massa, tempo, temperatura e velocidade.
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        📏
+        <span>Comprimento</span>
+      </div>
+
+      <div class="area-card">
+        ⚖️
+        <span>Massa</span>
+      </div>
+
+      <div class="area-card">
+        ⏱️
+        <span>Tempo</span>
+      </div>
+
+      <div class="area-card">
+        🌡️
+        <span>Temperatura</span>
+      </div>
+
+      <div class="area-card">
+        🚗
+        <span>Velocidade</span>
+      </div>
+
+      <div class="area-card">
+        ⚡
+        <span>Energia</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SISTEMA INTERNACIONAL
+  ====================================================== -->
+  <h2>
+    2. Sistema Internacional
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        📏
+      </div>
+
+      <h3>
+        Metro
+      </h3>
+
+      <p>
+        Unidade padrão de comprimento.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        ⚖️
+      </div>
+
+      <h3>
+        Quilograma
+      </h3>
+
+      <p>
+        Unidade padrão de massa.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        ⏱️
+      </div>
+
+      <h3>
+        Segundo
+      </h3>
+
+      <p>
+        Unidade padrão de tempo.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    3. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Identifique a grandeza física
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarGrandeza('massa')">
+        ⚖️ Massa
+      </button>
+
+      <button onclick="analisarGrandeza('tempo')">
+        ⏱️ Tempo
+      </button>
+
+      <button onclick="analisarGrandeza('velocidade')">
+        🚗 Velocidade
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoGrandeza"
+    >
+
+      Escolha uma grandeza acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    4. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +60 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+====================================================== -->
+<script
+  type="module"
+  src="./grandezas-fisicas.js"
+></script>
+
+</body>
+</html>
