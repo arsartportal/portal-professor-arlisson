@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Posição e Deslocamento
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./posicao-deslocamento.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🏎️ Cinemática • Física
+      </span>
+
+      <h1>
+        Posição e Deslocamento
+      </h1>
+
+      <p>
+        Aprenda a localizar corpos no espaço,
+        calcular deslocamentos e interpretar
+        movimentos em diferentes referenciais.
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      📍
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/15
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- TEXTO -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- RECOMPENSA -->
+    <div class="reward-container">
+
+      <h3 class="reward-title">
+        🎁 Recompensa
+      </h3>
+
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       POSIÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Posição?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      Posição é o local onde um corpo se encontra
+      em relação a um referencial.
+    </p>
+
+    <p>
+      Em Cinemática, utilizamos coordenadas
+      para identificar a posição de um objeto.
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        📍
+        <span>Localização</span>
+      </div>
+
+      <div class="area-card">
+        🛣️
+        <span>Estradas</span>
+      </div>
+
+      <div class="area-card">
+        🚗
+        <span>Veículos</span>
+      </div>
+
+      <div class="area-card">
+        📏
+        <span>Distâncias</span>
+      </div>
+
+      <div class="area-card">
+        🌍
+        <span>Referencial</span>
+      </div>
+
+      <div class="area-card">
+        📐
+        <span>Coordenadas</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DESLOCAMENTO
+  ====================================================== -->
+  <h2>
+    2. O que é Deslocamento?
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        ➡️
+      </div>
+
+      <h3>
+        Mudança de posição
+      </h3>
+
+      <p>
+        O deslocamento representa a variação
+        da posição de um corpo.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        📏
+      </div>
+
+      <h3>
+        Distância entre pontos
+      </h3>
+
+      <p>
+        O deslocamento depende apenas da posição
+        inicial e final.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🚶
+      </div>
+
+      <h3>
+        Caminho percorrido
+      </h3>
+
+      <p>
+        A distância percorrida pode ser maior
+        que o deslocamento.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FÓRMULA
+  ====================================================== -->
+  <h2>
+    3. Fórmula do Deslocamento
+  </h2>
+
+  <div class="card">
+
+    <p>
+      O deslocamento pode ser calculado pela diferença
+      entre posição final e posição inicial:
+    </p>
+
+    :contentReference[oaicite:0]{index=0}
+
+    <p>
+      Onde:
+    </p>
+
+    <ul>
+
+      <li>
+        <strong>ΔS</strong> → deslocamento
+      </li>
+
+      <li>
+        <strong>Sf</strong> → posição final
+      </li>
+
+      <li>
+        <strong>Si</strong> → posição inicial
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    4. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise o deslocamento
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarDeslocamento('positivo')">
+        ➡️ Movimento positivo
+      </button>
+
+      <button onclick="analisarDeslocamento('negativo')">
+        ⬅️ Movimento negativo
+      </button>
+
+      <button onclick="analisarDeslocamento('nulo')">
+        🔄 Volta ao início
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoDeslocamento"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    5. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +140 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./posicao-deslocamento.js"
+></script>
+
+</body>
+</html>

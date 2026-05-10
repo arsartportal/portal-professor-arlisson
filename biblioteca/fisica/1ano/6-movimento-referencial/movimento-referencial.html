@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Movimento e Referencial
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL DA BIBLIOTECA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./movimento-referencial.css"
+>
+
+<!-- =====================================================
+     CSS DO SISTEMA DE PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER PRINCIPAL
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <!-- TEXTO -->
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🏎️ Cinemática • Física
+      </span>
+
+      <h1>
+        Movimento e Referencial
+      </h1>
+
+      <p>
+        Entenda como identificar movimentos,
+        repouso e a importância do referencial
+        na descrição dos fenômenos físicos.
+      </p>
+
+    </div>
+
+    <!-- EMOJI -->
+    <div class="hero-emoji">
+      🚗
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/12
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- TEXTO -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- RECOMPENSA -->
+    <div class="reward-container">
+
+      <h3 class="reward-title">
+        🎁 Recompensa
+      </h3>
+
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       O QUE É MOVIMENTO
+  ====================================================== -->
+  <h2>
+    1. O que é Movimento?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      Um corpo está em movimento quando sua
+      posição muda em relação a um referencial
+      ao longo do tempo.
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🚗
+        <span>Carros</span>
+      </div>
+
+      <div class="area-card">
+        ✈️
+        <span>Aviões</span>
+      </div>
+
+      <div class="area-card">
+        🚶
+        <span>Pessoas</span>
+      </div>
+
+      <div class="area-card">
+        🚆
+        <span>Trens</span>
+      </div>
+
+      <div class="area-card">
+        🌍
+        <span>Planetas</span>
+      </div>
+
+      <div class="area-card">
+        🛰️
+        <span>Satélites</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+     REPOUSO
+====================================================== -->
+<h2>
+  2. O que é Repouso?
+</h2>
+
+<div class="card">
+
+  <p>
+    Um corpo está em repouso quando sua
+    posição NÃO muda em relação a um
+    determinado referencial ao longo do tempo.
+  </p>
+
+  <p>
+    Movimento e repouso dependem do
+    referencial adotado.
+  </p>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🪑
+      <span>Pessoa sentada</span>
+    </div>
+
+    <div class="area-card">
+      🚌
+      <span>Passageiro parado</span>
+    </div>
+
+    <div class="area-card">
+      🚦
+      <span>Carro no sinal</span>
+    </div>
+
+    <div class="area-card">
+      🏠
+      <span>Casa</span>
+    </div>
+
+    <div class="area-card">
+      📍
+      <span>Posição fixa</span>
+    </div>
+
+    <div class="area-card">
+      🌎
+      <span>Repouso relativo</span>
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- =====================================================
+       REFERENCIAL
+  ====================================================== -->
+  <h2>
+    3. Referencial
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🚗
+      </div>
+
+      <h3>
+        Carro na estrada
+      </h3>
+
+      <p>
+        Para alguém parado na estrada,
+        o carro está em movimento.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🚌
+      </div>
+
+      <h3>
+        Passageiro sentado
+      </h3>
+
+      <p>
+        Dentro do ônibus, o passageiro
+        pode estar em repouso.
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🌎
+      </div>
+
+      <h3>
+        Terra em movimento
+      </h3>
+
+      <p>
+        Mesmo parados, estamos nos movendo
+        com a Terra.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    4. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise o movimento
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarMovimento('carro')">
+        🚗 Carro na estrada
+      </button>
+
+      <button onclick="analisarMovimento('onibus')">
+        🚌 Passageiro no ônibus
+      </button>
+
+      <button onclick="analisarMovimento('terra')">
+        🌍 Movimento da Terra
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoMovimento"
+    >
+
+      Escolha uma situação acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    5. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +100 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+====================================================== -->
+<script
+  type="module"
+  src="./movimento-referencial.js"
+></script>
+
+</body>
+</html>

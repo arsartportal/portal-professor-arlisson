@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Notação Científica
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL DA BIBLIOTECA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./notacao-cientifica.css"
+>
+
+<!-- =====================================================
+     CSS DO SISTEMA DE PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER PRINCIPAL
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO DA AULA
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <!-- TEXTO -->
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚛️ Física • 1º Ano
+      </span>
+
+      <h1>
+        Notação Científica
+      </h1>
+
+      <p>
+        Aprenda a representar números muito
+        grandes ou muito pequenos utilizando
+        potências de base 10.
+      </p>
+
+    </div>
+
+    <!-- EMOJI -->
+    <div class="hero-emoji">
+      🔬
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS DE LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL DE PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <!-- TÍTULO -->
+    <h2 class="progress-title">
+
+      Seu Progresso
+
+    </h2>
+
+    <!-- GRID -->
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/12
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- TEXTO -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- RECOMPENSA -->
+    <div class="reward-container">
+
+      <h3 class="reward-title">
+
+        🎁 Recompensa
+
+      </h3>
+
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       O QUE É NOTAÇÃO CIENTÍFICA
+  ====================================================== -->
+  <h2>
+    1. O que é Notação Científica?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      A notação científica é uma forma de
+      representar números muito grandes ou
+      muito pequenos usando potências de 10.
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🔭
+        <span>Distâncias espaciais</span>
+      </div>
+
+      <div class="area-card">
+        ⚛️
+        <span>Átomos</span>
+      </div>
+
+      <div class="area-card">
+        🧬
+        <span>Moléculas</span>
+      </div>
+
+      <div class="area-card">
+        🌌
+        <span>Galáxias</span>
+      </div>
+
+      <div class="area-card">
+        🔬
+        <span>Microscopia</span>
+      </div>
+
+      <div class="area-card">
+        📏
+        <span>Medições</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLOS
+  ====================================================== -->
+  <h2>
+    2. Exemplos
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🌍
+      </div>
+
+      <h3>
+        Distância da Terra ao Sol
+      </h3>
+
+      <p>
+        1,5 × 10⁸ km
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        ⚛️
+      </div>
+
+      <h3>
+        Tamanho do átomo
+      </h3>
+
+      <p>
+        1 × 10⁻¹⁰ m
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🔬
+      </div>
+
+      <h3>
+        Massa de elétrons
+      </h3>
+
+      <p>
+        9,1 × 10⁻³¹ kg
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    3. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Conversão para notação científica
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarNumero('terra')">
+        🌍 150000000
+      </button>
+
+      <button onclick="analisarNumero('atomo')">
+        ⚛️ 0,0000000001
+      </button>
+
+      <button onclick="analisarNumero('eletron')">
+        🔬 0,00000000000000000000000000000091
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoNumero"
+    >
+
+      Escolha um número acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    4. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +80 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+====================================================== -->
+<script
+  type="module"
+  src="./notacao-cientifica.js"
+></script>
+
+</body>
+</html>

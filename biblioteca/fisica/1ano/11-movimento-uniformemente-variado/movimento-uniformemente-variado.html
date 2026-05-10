@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Movimento Uniformemente Variado (MUV)
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./movimento-uniformemente-variado.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX • FÓRMULAS
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🚀 Cinemática • Física
+      </span>
+
+      <h1>
+        Movimento Uniformemente Variado
+      </h1>
+
+      <p>
+        Aprenda aceleração, funções horárias,
+        gráficos do MUV e domine um dos temas
+        mais importantes da Física do Ensino Médio.
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🏎️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é MUV?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      O Movimento Uniformemente Variado
+      (MUV) é aquele em que a velocidade
+      varia uniformemente ao longo do tempo.
+    </p>
+
+    <p>
+      Isso significa que existe aceleração
+      constante.
+    </p>
+
+    <p>
+      O móvel pode aumentar ou diminuir
+      sua velocidade em intervalos iguais
+      de tempo.
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       ACELERAÇÃO
+  ====================================================== -->
+  <h2>
+    2. Aceleração Média
+  </h2>
+
+  <div class="formula-layout">
+
+    <!-- CARD -->
+    <div class="card formula-card">
+
+      <p>
+        A aceleração mede a variação
+        da velocidade em determinado
+        intervalo de tempo.
+      </p>
+
+      <div class="formula-box">
+
+        $$a = \frac{\Delta V}{\Delta t}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          <strong>a</strong>
+          → aceleração
+        </li>
+
+        <li>
+          <strong>ΔV</strong>
+          → variação da velocidade
+        </li>
+
+        <li>
+          <strong>Δt</strong>
+          → intervalo de tempo
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- LATERAL -->
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          💡 IMPORTANTE
+        </h3>
+
+        <p>
+          Se a velocidade aumenta,
+          a aceleração é positiva.
+        </p>
+
+      </div>
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🛑 FREANDO
+        </h3>
+
+        <p>
+          Quando a velocidade diminui,
+          a aceleração é negativa.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FUNÇÃO HORÁRIA DA VELOCIDADE
+  ====================================================== -->
+  <h2>
+    3. Função Horária da Velocidade
+  </h2>
+
+  <div class="formula-layout">
+
+    <!-- CARD -->
+    <div class="card formula-card">
+
+      <p>
+        Permite calcular a velocidade
+        do móvel em qualquer instante.
+      </p>
+
+      <div class="formula-box">
+
+        $$V = V_0 + at$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          <strong>V</strong>
+          → velocidade final
+        </li>
+
+        <li>
+          <strong>V₀</strong>
+          → velocidade inicial
+        </li>
+
+        <li>
+          <strong>a</strong>
+          → aceleração
+        </li>
+
+        <li>
+          <strong>t</strong>
+          → tempo
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- LATERAL -->
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ EXEMPLO
+        </h3>
+
+        <div class="mini-formula">
+
+          $$V = 10 + 2 \cdot 5$$
+
+        </div>
+
+        <div class="mini-formula resultado">
+
+          $$V = 20m/s$$
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FUNÇÃO HORÁRIA DA POSIÇÃO
+  ====================================================== -->
+  <h2>
+    4. Função Horária da Posição
+  </h2>
+
+  <div class="formula-layout">
+
+    <!-- CARD -->
+    <div class="card formula-card">
+
+      <p>
+        Essa fórmula permite determinar
+        a posição do móvel no MUV.
+      </p>
+
+      <div class="formula-box">
+
+        $$S = S_0 + V_0t + \frac{at^2}{2}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          <strong>S</strong>
+          → posição final
+        </li>
+
+        <li>
+          <strong>S₀</strong>
+          → posição inicial
+        </li>
+
+        <li>
+          <strong>V₀</strong>
+          → velocidade inicial
+        </li>
+
+        <li>
+          <strong>a</strong>
+          → aceleração
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- LATERAL -->
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          📈 INTERPRETAÇÃO
+        </h3>
+
+        <p>
+          No MUV o deslocamento aumenta
+          rapidamente devido à aceleração.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TORRICELLI
+  ====================================================== -->
+  <h2>
+    5. Equação de Torricelli
+  </h2>
+
+  <div class="formula-layout">
+
+    <!-- CARD -->
+    <div class="card formula-card">
+
+      <p>
+        A equação de Torricelli é usada
+        quando o tempo não aparece no problema.
+      </p>
+
+      <div class="formula-box">
+
+        $$V^2 = V_0^2 + 2a\Delta S$$
+
+      </div>
+
+      <p>
+        Muito utilizada em exercícios
+        de vestibulares e ENEM.
+      </p>
+
+    </div>
+
+    <!-- LATERAL -->
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⭐ DICA
+        </h3>
+
+        <p>
+          Torricelli elimina a variável
+          tempo da equação.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+     GRÁFICO VELOCIDADE X TEMPO
+====================================================== -->
+<h2>
+  6. Gráfico Velocidade × Tempo
+</h2>
+
+<div class="grafico-premium">
+
+  <!-- TEXTO -->
+  <div class="grafico-conteudo">
+
+    <p>
+      No MUV, o gráfico da velocidade
+      em função do tempo é uma reta inclinada.
+    </p>
+
+    <p>
+      Isso acontece porque a velocidade
+      aumenta ou diminui uniformemente.
+    </p>
+
+    <!-- GRÁFICO -->
+    <div class="grafico-real">
+
+      <!-- EIXO Y -->
+      <div class="eixo-y-label">
+        Velocidade (m/s)
+      </div>
+
+      <!-- EIXO X -->
+      <div class="eixo-x-label">
+        Tempo (s)
+      </div>
+
+      <!-- LINHAS -->
+      <div class="linha-horizontal linha-top"></div>
+      <div class="linha-horizontal linha-bottom"></div>
+
+      <div class="linha-vertical linha-right"></div>
+
+      <!-- VALORES -->
+      <span class="valor-v">
+        V
+      </span>
+
+      <span class="valor-v0">
+        V₀
+      </span>
+
+      <span class="valor-t">
+        t
+      </span>
+
+      <span class="valor-zero">
+        0
+      </span>
+
+      <!-- RETA -->
+      <div class="reta-grafico"></div>
+
+      <!-- PONTOS -->
+      <div class="ponto ponto-inicial"></div>
+      <div class="ponto ponto-final"></div>
+
+    </div>
+
+  </div>
+
+  <!-- INTERPRETAÇÃO -->
+  <div class="grafico-info azul">
+
+    <h3>
+      💡 INTERPRETAÇÃO
+    </h3>
+
+    <ul>
+
+      <li>
+        A inclinação da reta representa
+        a aceleração.
+      </li>
+
+      <li>
+        Se a reta sobe:
+        <strong>a > 0</strong>
+      </li>
+
+      <li>
+        Se a reta desce:
+        <strong>a < 0</strong>
+      </li>
+
+      <li>
+        A área sob a reta representa
+        o deslocamento.
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     GRÁFICO POSIÇÃO X TEMPO
+====================================================== -->
+<h2>
+  7. Gráfico Posição × Tempo
+</h2>
+
+<div class="grafico-premium">
+
+  <!-- TEXTO -->
+  <div class="grafico-conteudo">
+
+    <p>
+      No MUV, o gráfico da posição
+      em função do tempo é uma parábola.
+    </p>
+
+    <p>
+      Isso mostra que o deslocamento
+      aumenta cada vez mais rapidamente.
+    </p>
+
+    <!-- GRÁFICO -->
+    <div class="grafico-real">
+
+      <!-- EIXO Y -->
+      <div class="eixo-y-label">
+        Posição (m)
+      </div>
+
+      <!-- EIXO X -->
+      <div class="eixo-x-label">
+        Tempo (s)
+      </div>
+
+      <!-- LINHAS -->
+      <div class="linha-horizontal linha-top"></div>
+
+      <div class="linha-vertical linha-right"></div>
+
+      <!-- VALORES -->
+      <span class="valor-s">
+        S
+      </span>
+
+      <span class="valor-s0">
+        S₀
+      </span>
+
+      <span class="valor-t">
+        t
+      </span>
+
+      <span class="valor-zero">
+        0
+      </span>
+
+      <!-- PARÁBOLA -->
+      <div class="parabola-grafico"></div>
+
+      <!-- PONTOS -->
+      <div class="ponto ponto-inicial-roxo"></div>
+      <div class="ponto ponto-final-roxo"></div>
+
+    </div>
+
+  </div>
+
+  <!-- INTERPRETAÇÃO -->
+  <div class="grafico-info roxo">
+
+    <h3>
+      📈 INTERPRETAÇÃO
+    </h3>
+
+    <ul>
+
+      <li>
+        A parábola indica movimento
+        acelerado.
+      </li>
+
+      <li>
+        A inclinação aumenta
+        com o tempo.
+      </li>
+
+      <li>
+        Concavidade para cima:
+        aceleração positiva.
+      </li>
+
+      <li>
+        Concavidade para baixo:
+        aceleração negativa.
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+  <!-- =====================================================
+       EXEMPLO RESOLVIDO
+  ====================================================== -->
+  <h2>
+    8. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <!-- EXEMPLO -->
+    <div class="card formula-card">
+
+      <p>
+        Um carro parte com velocidade
+        inicial de 5 m/s e aceleração
+        de 3 m/s² durante 4 segundos.
+      </p>
+
+      <div class="resolucao-box">
+
+        <div class="mini-formula">
+
+          $$V = 5 + 3 \cdot 4$$
+
+        </div>
+
+        <div class="mini-formula resultado">
+
+          $$V = 17m/s$$
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🏆 RESULTADO
+        </h3>
+
+        <p>
+          O carro aumentou sua velocidade
+          devido à aceleração positiva.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    9. Aplicações do MUV
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Carros acelerando</span>
+    </div>
+
+    <div class="area-card">
+      ✈️
+      <span>Aviões decolando</span>
+    </div>
+
+    <div class="area-card">
+      🪂
+      <span>Queda livre</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    10. Simulador do MUV
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise diferentes acelerações
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarMUV('carro')">
+        🚗 Carro
+      </button>
+
+      <button onclick="analisarMUV('queda')">
+        🍎 Queda Livre
+      </button>
+
+      <button onclick="analisarMUV('foguete')">
+        🚀 Foguete
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoMUV"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    11. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +350 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./movimento-uniformemente-variado.js"
+></script>
+
+</body>
+</html>

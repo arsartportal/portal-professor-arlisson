@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Trajetória
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./trajetoria.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <!-- TEXTO -->
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🏎️ Cinemática • Física
+      </span>
+
+      <h1>
+        Trajetória
+      </h1>
+
+      <p>
+        Aprenda o conceito de trajetória,
+        descubra os diferentes tipos de caminhos
+        percorridos pelos corpos e entenda sua
+        relação com o movimento.
+      </p>
+
+    </div>
+
+    <!-- EMOJI -->
+    <div class="hero-emoji">
+      🛣️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/15
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- TEXTO -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- RECOMPENSA -->
+    <div class="reward-container">
+
+      <h3 class="reward-title">
+        🎁 Recompensa
+      </h3>
+
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       O QUE É TRAJETÓRIA
+  ====================================================== -->
+  <h2>
+    1. O que é Trajetória?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      Trajetória é o caminho percorrido
+      por um corpo durante seu movimento.
+    </p>
+
+    <p>
+      Dependendo do movimento, a trajetória
+      pode ser reta, curva, circular ou
+      até irregular.
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        ➖
+        <span>Reta</span>
+      </div>
+
+      <div class="area-card">
+        🔄
+        <span>Circular</span>
+      </div>
+
+      <div class="area-card">
+        🌊
+        <span>Curva</span>
+      </div>
+
+      <div class="area-card">
+        🛣️
+        <span>Estradas</span>
+      </div>
+
+      <div class="area-card">
+        ✈️
+        <span>Voos</span>
+      </div>
+
+      <div class="area-card">
+        ⚽
+        <span>Lançamentos</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TIPOS DE TRAJETÓRIA
+  ====================================================== -->
+  <h2>
+    2. Tipos de Trajetória
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- RETILÍNEA -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        ➖
+      </div>
+
+      <h3>
+        Retilínea
+      </h3>
+
+      <p>
+        O corpo percorre uma linha reta.
+      </p>
+
+    </div>
+
+    <!-- CIRCULAR -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🔄
+      </div>
+
+      <h3>
+        Circular
+      </h3>
+
+      <p>
+        O corpo percorre uma circunferência.
+      </p>
+
+    </div>
+
+    <!-- CURVA -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🌊
+      </div>
+
+      <h3>
+        Curvilínea
+      </h3>
+
+      <p>
+        O movimento ocorre em uma curva.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TRAJETÓRIA E REFERENCIAL
+  ====================================================== -->
+  <h2>
+    3. Trajetória depende do Referencial
+  </h2>
+
+  <div class="card">
+
+    <p>
+      A trajetória observada pode mudar
+      dependendo do referencial utilizado.
+    </p>
+
+    <p>
+      Por exemplo: para alguém dentro
+      de um ônibus, uma bola lançada para cima
+      sobe e desce em linha reta.
+    </p>
+
+    <p>
+      Já para alguém parado na rua,
+      a bola faz uma trajetória curva.
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    4. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise a trajetória
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarTrajetoria('reta')">
+        ➖ Linha reta
+      </button>
+
+      <button onclick="analisarTrajetoria('curva')">
+        🌊 Curva
+      </button>
+
+      <button onclick="analisarTrajetoria('circular')">
+        🔄 Circular
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoTrajetoria"
+    >
+
+      Escolha uma trajetória acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    5. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +120 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./trajetoria.js"
+></script>
+
+</body>
+</html>

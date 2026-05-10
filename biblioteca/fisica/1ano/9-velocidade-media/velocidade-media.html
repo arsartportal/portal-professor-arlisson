@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Velocidade Média
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./velocidade-media.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     CONTAINER
+====================================================== -->
+<div class="container">
+
+  <!-- =====================================================
+       HERO CINEMÁTICO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <!-- TEXTO -->
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🏎️ Cinemática • Física
+      </span>
+
+      <h1>
+        Velocidade Média
+      </h1>
+
+      <p>
+        Descubra como calcular a rapidez de um
+        movimento, interpretar deslocamentos,
+        analisar gráficos e compreender uma das
+        grandezas mais importantes da Física.
+      </p>
+
+    </div>
+
+    <!-- EMOJI -->
+    <div class="hero-emoji">
+      ⚡
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PAINEL PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/20
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+    <!-- TEXTO -->
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+    <!-- RECOMPENSA -->
+    <div class="reward-container">
+
+      <h3 class="reward-title">
+        🎁 Recompensa
+      </h3>
+
+      <p class="reward-text">
+
+        Complete toda a lista para desbloquear
+        sua recompensa em XP.
+
+      </p>
+
+      <button
+        class="reward-button"
+        id="botao-xp"
+        disabled
+      >
+
+        Complete a Lista
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Velocidade Média?
+  </h2>
+
+  <div class="card">
+
+    <p>
+      Velocidade média é a razão entre o
+      deslocamento realizado e o tempo gasto
+      durante o movimento.
+    </p>
+
+    <p>
+      Ela indica quão rápido um corpo muda
+      de posição ao longo do tempo.
+    </p>
+
+    <p>
+      Quanto maior a velocidade média,
+      mais rapidamente o corpo percorre
+      determinada distância.
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       FÓRMULA
+  ====================================================== -->
+  <h2>
+    2. Fórmula da Velocidade Média
+  </h2>
+
+  <div class="card">
+
+    <p>
+      A fórmula fundamental da velocidade média é:
+    </p>
+
+    :contentReference[oaicite:0]{index=0}
+
+    <ul>
+
+      <li>
+        <strong>Vm</strong> → velocidade média
+      </li>
+
+      <li>
+        <strong>ΔS</strong> → deslocamento
+      </li>
+
+      <li>
+        <strong>Δt</strong> → intervalo de tempo
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- =====================================================
+       UNIDADES
+  ====================================================== -->
+  <h2>
+    3. Unidades de Medida
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      📏
+      <span>metro (m)</span>
+    </div>
+
+    <div class="area-card">
+      ⏱️
+      <span>segundo (s)</span>
+    </div>
+
+    <div class="area-card">
+      🚗
+      <span>m/s</span>
+    </div>
+
+    <div class="area-card">
+      🛣️
+      <span>km/h</span>
+    </div>
+
+    <div class="area-card">
+      ⚡
+      <span>rapidez</span>
+    </div>
+
+    <div class="area-card">
+      🌍
+      <span>movimento</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO RESOLVIDO
+  ====================================================== -->
+  <h2>
+    4. Exemplo Resolvido
+  </h2>
+
+  <div class="card">
+
+    <p>
+      Um carro percorreu 120 km em 2 horas.
+    </p>
+
+    <p>
+      Aplicando a fórmula:
+    </p>
+
+    :contentReference[oaicite:1]{index=1}
+
+    <p>
+      Resultado:
+    </p>
+
+    :contentReference[oaicite:2]{index=2}
+
+    <p>
+      Portanto, a velocidade média do carro
+      foi de 60 km/h.
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       SITUAÇÕES DO COTIDIANO
+  ====================================================== -->
+  <h2>
+    5. Velocidade Média no Cotidiano
+  </h2>
+
+  <div class="cotidiano-grid">
+
+    <!-- CARRO -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🚗
+      </div>
+
+      <h3>
+        Automóveis
+      </h3>
+
+      <p>
+        Carros utilizam velocidade média
+        constantemente em viagens.
+      </p>
+
+    </div>
+
+    <!-- AVIÃO -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        ✈️
+      </div>
+
+      <h3>
+        Aviões
+      </h3>
+
+      <p>
+        Voos dependem do cálculo de velocidade
+        para prever chegada.
+      </p>
+
+    </div>
+
+    <!-- CORRIDA -->
+    <div class="cotidiano-card">
+
+      <div class="icone-cotidiano">
+        🏃
+      </div>
+
+      <h3>
+        Atletas
+      </h3>
+
+      <p>
+        A velocidade média ajuda a analisar
+        desempenho esportivo.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    6. Simulador de Velocidade
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise diferentes movimentos
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarVelocidade('carro')">
+        🚗 Carro
+      </button>
+
+      <button onclick="analisarVelocidade('ciclista')">
+        🚴 Ciclista
+      </button>
+
+      <button onclick="analisarVelocidade('aviao')">
+        ✈️ Avião
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoVelocidade"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DICAS IMPORTANTES
+  ====================================================== -->
+  <h2>
+    7. Dicas Importantes
+  </h2>
+
+  <div class="card">
+
+    <ul>
+
+      <li>
+        Velocidade média NÃO mostra as variações
+        do movimento.
+      </li>
+
+      <li>
+        Um corpo pode acelerar e desacelerar
+        durante o percurso.
+      </li>
+
+      <li>
+        No SI, a unidade padrão é m/s.
+      </li>
+
+      <li>
+        Em estradas, usamos frequentemente km/h.
+      </li>
+
+      <li>
+        Sempre mantenha as unidades compatíveis
+        nos cálculos.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    8. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +200 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./velocidade-media.js"
+></script>
+
+</body>
+</html>

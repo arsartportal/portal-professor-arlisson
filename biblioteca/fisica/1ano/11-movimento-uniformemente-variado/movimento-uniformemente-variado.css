@@ -1,0 +1,1169 @@
+/* =====================================================
+   HERO
+===================================================== */
+.hero-fisica{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:40px;
+
+  padding:70px;
+
+  border-radius:40px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #020617,
+      #1d4ed8
+    );
+
+  color:#ffffff;
+
+  margin-bottom:40px;
+
+  overflow:hidden;
+
+  position:relative;
+
+}
+
+.hero-texto{
+
+  max-width:760px;
+
+}
+
+.badge-fisica{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:12px 22px;
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  border:
+    1px solid rgba(255,255,255,0.12);
+
+  font-size:15px;
+
+  font-weight:700;
+
+  margin-bottom:26px;
+
+  backdrop-filter:blur(10px);
+
+}
+
+.hero-fisica h1{
+
+  font-size:72px;
+
+  line-height:1.05;
+
+  margin-bottom:24px;
+
+  font-weight:900;
+
+}
+
+.hero-fisica p{
+
+  font-size:23px;
+
+  line-height:1.8;
+
+  color:
+    rgba(255,255,255,0.88);
+
+}
+
+.hero-emoji{
+
+  font-size:150px;
+
+  filter:
+    drop-shadow(
+      0 20px 40px rgba(0,0,0,0.35)
+    );
+
+}
+
+/* =====================================================
+   TÍTULOS
+===================================================== */
+h2{
+
+  font-size:52px;
+
+  margin-top:70px;
+
+  margin-bottom:26px;
+
+  color:#0f172a;
+
+  font-weight:900;
+
+  line-height:1.1;
+
+  border-bottom:
+    2px solid #dbeafe;
+
+  padding-bottom:16px;
+
+}
+
+/* =====================================================
+   CARDS
+===================================================== */
+.card{
+
+  background:#ffffff;
+
+  border-radius:34px;
+
+  padding:42px;
+
+  border:
+    1px solid #dbeafe;
+
+  box-shadow:
+    0 15px 40px rgba(15,23,42,0.05);
+
+}
+
+.card p{
+
+  font-size:20px;
+
+  line-height:2;
+
+  color:#334155;
+
+  margin-bottom:22px;
+
+}
+
+/* =====================================================
+   LAYOUT FÓRMULAS
+===================================================== */
+.formula-layout{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    340px;
+
+  gap:28px;
+
+  margin-bottom:50px;
+
+}
+
+/* =====================================================
+   CARD FÓRMULA
+===================================================== */
+.formula-card{
+
+  padding:45px;
+
+}
+
+/* =====================================================
+   CAIXA FÓRMULA
+===================================================== */
+.formula-box{
+
+  margin:35px auto;
+
+  padding:34px;
+
+  max-width:500px;
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #f8fbff
+    );
+
+  border:
+    1px solid #cfe0ff;
+
+  text-align:center;
+
+  box-shadow:
+    0 10px 30px rgba(37,99,235,0.08);
+
+}
+
+/* =====================================================
+   KATEX
+===================================================== */
+.katex{
+
+  font-size:2.2rem;
+
+}
+
+/* =====================================================
+   MINI FÓRMULAS
+===================================================== */
+.mini-formula{
+
+  margin-top:22px;
+
+  padding:24px;
+
+  border-radius:22px;
+
+  background:#f8fafc;
+
+  border:
+    1px solid #dbeafe;
+
+  text-align:center;
+
+}
+
+.resultado{
+
+  background:#ecfdf5;
+
+  border:
+    1px solid #86efac;
+
+}
+
+/* =====================================================
+   LISTAS
+===================================================== */
+.formula-lista{
+
+  margin-top:35px;
+
+}
+
+.formula-lista li{
+
+  margin-bottom:18px;
+
+  font-size:18px;
+
+  color:#334155;
+
+  line-height:1.8;
+
+}
+
+/* =====================================================
+   LATERAL
+===================================================== */
+.formula-side{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:20px;
+
+}
+
+/* =====================================================
+   INFO BOX
+===================================================== */
+.info-box{
+
+  padding:28px;
+
+  border-radius:28px;
+
+  border:
+    1px solid transparent;
+
+}
+
+.info-box h3{
+
+  font-size:24px;
+
+  margin-bottom:14px;
+
+}
+
+.info-box p{
+
+  font-size:16px;
+
+  line-height:1.9;
+
+}
+
+/* =====================================================
+   CORES
+===================================================== */
+.azul{
+
+  background:#eff6ff;
+
+  border-color:#bfdbfe;
+
+}
+
+.verde{
+
+  background:#ecfdf5;
+
+  border-color:#86efac;
+
+}
+
+.roxo{
+
+  background:#f5f3ff;
+
+  border-color:#c4b5fd;
+
+}
+
+.amarelo{
+
+  background:#fefce8;
+
+  border-color:#fde68a;
+
+}
+
+.vermelho{
+
+  background:#fef2f2;
+
+  border-color:#fca5a5;
+
+}
+
+/* =====================================================
+   RESOLUÇÃO
+===================================================== */
+.resolucao-box{
+
+  margin-top:30px;
+
+}
+
+/* =====================================================
+   GRÁFICOS
+===================================================== */
+.grafico-box{
+
+  margin-top:40px;
+
+  padding:40px;
+
+  border-radius:28px;
+
+  background:#f8fafc;
+
+  border:
+    1px solid #dbeafe;
+
+}
+
+.grafico-eixos{
+
+  position:relative;
+
+  height:340px;
+
+  border-left:
+    4px solid #0f172a;
+
+  border-bottom:
+    4px solid #0f172a;
+
+}
+
+/* =====================================================
+   EIXOS
+===================================================== */
+.eixo-y{
+
+  position:absolute;
+
+  top:10px;
+
+  left:-40px;
+
+  font-weight:700;
+
+  transform:
+    rotate(-90deg);
+
+}
+
+.eixo-x{
+
+  position:absolute;
+
+  right:0;
+
+  bottom:-40px;
+
+  font-weight:700;
+
+}
+
+/* =====================================================
+   RETA MUV
+===================================================== */
+.reta-muv{
+
+  position:absolute;
+
+  left:60px;
+
+  bottom:40px;
+
+  width:75%;
+
+  height:4px;
+
+  background:#2563eb;
+
+  transform:
+    rotate(-20deg);
+
+  border-radius:999px;
+
+  box-shadow:
+    0 0 20px rgba(37,99,235,0.35);
+
+}
+
+/* =====================================================
+   CURVA MUV
+===================================================== */
+.curva-muv{
+
+  position:absolute;
+
+  left:70px;
+
+  bottom:20px;
+
+  width:70%;
+
+  height:70%;
+
+  border-left:
+    6px solid transparent;
+
+  border-bottom:
+    6px solid #7c3aed;
+
+  border-radius:
+    0 0 0 100%;
+
+}
+
+/* =====================================================
+   GRID ÁREAS
+===================================================== */
+.areas-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+  gap:24px;
+
+}
+
+/* =====================================================
+   ÁREA CARD
+===================================================== */
+.area-card{
+
+  background:#ffffff;
+
+  border-radius:28px;
+
+  padding:34px;
+
+  border:
+    1px solid #dbeafe;
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,0.05);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:18px;
+
+  font-size:60px;
+
+  transition:0.3s;
+
+}
+
+.area-card span{
+
+  font-size:18px;
+
+  font-weight:700;
+
+  color:#0f172a;
+
+  text-align:center;
+
+}
+
+.area-card:hover{
+
+  transform:
+    translateY(-8px);
+
+}
+
+/* =====================================================
+   SIMULADOR
+===================================================== */
+.simulador{
+
+  background:#ffffff;
+
+  border-radius:34px;
+
+  padding:42px;
+
+  border:
+    1px solid #dbeafe;
+
+  box-shadow:
+    0 15px 40px rgba(15,23,42,0.05);
+
+}
+
+.simulador h3{
+
+  font-size:34px;
+
+  margin-bottom:28px;
+
+}
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+.botoes-simulador{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:18px;
+
+  margin-bottom:30px;
+
+}
+
+.botoes-simulador button{
+
+  border:none;
+
+  cursor:pointer;
+
+  padding:18px 28px;
+
+  border-radius:18px;
+
+  font-size:17px;
+
+  font-weight:700;
+
+  color:#ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  transition:0.3s;
+
+}
+
+.botoes-simulador button:hover{
+
+  transform:
+    translateY(-4px);
+
+}
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+.resultado-simulador{
+
+  min-height:140px;
+
+  padding:30px;
+
+  border-radius:24px;
+
+  background:#f8fafc;
+
+  border:
+    1px solid #dbeafe;
+
+  font-size:18px;
+
+  line-height:1.9;
+
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+@media(max-width:1100px){
+
+  .formula-layout{
+
+    grid-template-columns:1fr;
+
+  }
+
+}
+
+@media(max-width:900px){
+
+  .hero-fisica{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    padding:50px 30px;
+
+  }
+
+  .hero-fisica h1{
+
+    font-size:52px;
+
+  }
+
+  .hero-fisica p{
+
+    font-size:20px;
+
+  }
+
+}
+
+@media(max-width:700px){
+
+  h2{
+
+    font-size:38px;
+
+  }
+
+  .card{
+
+    padding:28px;
+
+  }
+
+  .formula-card{
+
+    padding:28px;
+
+  }
+
+  .formula-box{
+
+    padding:24px;
+
+  }
+
+  .katex{
+
+    font-size:1.5rem;
+
+  }
+
+  .hero-emoji{
+
+    font-size:100px;
+
+  }
+
+  .hero-fisica h1{
+
+    font-size:42px;
+
+  }
+
+}
+
+/* =====================================================
+   GRÁFICOS PREMIUM
+===================================================== */
+
+.grafico-premium{
+
+  display:flex;
+  gap:30px;
+  align-items:flex-start;
+
+  background:#fff;
+  border:1px solid #dbe7ff;
+
+  border-radius:28px;
+
+  padding:40px;
+
+  margin-top:20px;
+  margin-bottom:50px;
+
+  flex-wrap:wrap;
+
+}
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.grafico-conteudo{
+
+  flex:1;
+  min-width:600px;
+
+}
+
+.grafico-conteudo p{
+
+  font-size:1.1rem;
+  line-height:1.8;
+  color:#334155;
+
+  margin-bottom:18px;
+
+}
+
+/* =====================================================
+   ÁREA DO GRÁFICO
+===================================================== */
+
+.grafico-real{
+
+  position:relative;
+
+  width:100%;
+  height:420px;
+
+  background:#f8fbff;
+
+  border:2px solid #dbe7ff;
+
+  border-radius:24px;
+
+  overflow:hidden;
+
+  margin-top:25px;
+
+}
+
+/* =====================================================
+   EIXOS
+===================================================== */
+
+.grafico-real::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:70px;
+  bottom:40px;
+
+  width:3px;
+  height:280px;
+
+  background:#0f172a;
+
+}
+
+.grafico-real::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:70px;
+  bottom:40px;
+
+  width:82%;
+  height:3px;
+
+  background:#0f172a;
+
+}
+
+/* =====================================================
+   LABELS
+===================================================== */
+
+.eixo-y-label{
+
+  position:absolute;
+
+  top:30px;
+  left:10px;
+
+  font-weight:700;
+
+  transform:rotate(-90deg);
+
+  transform-origin:left top;
+
+  color:#0f172a;
+
+}
+
+.eixo-x-label{
+
+  position:absolute;
+
+  bottom:5px;
+  right:25px;
+
+  font-weight:700;
+
+  color:#0f172a;
+
+}
+
+/* =====================================================
+   LINHAS GUIA
+===================================================== */
+
+.linha-horizontal{
+
+  position:absolute;
+
+  left:70px;
+
+  border-top:3px dashed #cbd5e1;
+
+}
+
+.linha-top{
+
+  top:95px;
+  width:520px;
+
+}
+
+.linha-bottom{
+
+  top:250px;
+  width:520px;
+
+}
+
+.linha-vertical{
+
+  position:absolute;
+
+  top:95px;
+
+  border-left:3px dashed #cbd5e1;
+
+}
+
+.linha-right{
+
+  left:590px;
+  height:160px;
+
+}
+
+/* =====================================================
+   RETA
+===================================================== */
+
+.reta-grafico{
+
+  position:absolute;
+
+  left:75px;
+  top:250px;
+
+  width:540px;
+  height:4px;
+
+  background:#2563eb;
+
+  transform:rotate(-20deg);
+
+  transform-origin:left center;
+
+  border-radius:999px;
+
+}
+
+/* =====================================================
+   PARÁBOLA
+===================================================== */
+
+.parabola-grafico{
+
+  position:absolute;
+
+  left:80px;
+  top:190px;
+
+  width:520px;
+  height:180px;
+
+  border-top:5px solid #7c3aed;
+  border-right:5px solid #7c3aed;
+
+  border-radius:0 100% 0 0;
+
+  transform:rotate(-8deg);
+
+}
+
+/* =====================================================
+   PONTOS
+===================================================== */
+
+.ponto{
+
+  position:absolute;
+
+  width:16px;
+  height:16px;
+
+  border-radius:50%;
+
+}
+
+.ponto-inicial{
+
+  left:63px;
+  top:243px;
+
+  background:#2563eb;
+
+}
+
+.ponto-final{
+
+  left:585px;
+  top:88px;
+
+  background:#2563eb;
+
+}
+
+.ponto-inicial-roxo{
+
+  left:63px;
+  top:243px;
+
+  background:#7c3aed;
+
+}
+
+.ponto-final-roxo{
+
+  left:520px;
+  top:90px;
+
+  background:#7c3aed;
+
+}
+
+/* =====================================================
+   VALORES
+===================================================== */
+
+.valor-v,
+.valor-v0,
+.valor-s,
+.valor-s0,
+.valor-t,
+.valor-zero{
+
+  position:absolute;
+
+  font-weight:800;
+
+}
+
+.valor-v{
+
+  left:35px;
+  top:80px;
+
+  color:#2563eb;
+
+}
+
+.valor-v0{
+
+  left:28px;
+  top:235px;
+
+  color:#2563eb;
+
+}
+
+.valor-s{
+
+  left:35px;
+  top:80px;
+
+  color:#7c3aed;
+
+}
+
+.valor-s0{
+
+  left:20px;
+  top:235px;
+
+  color:#7c3aed;
+
+}
+
+.valor-t{
+
+  left:590px;
+  top:255px;
+
+}
+
+.valor-zero{
+
+  left:55px;
+  top:285px;
+
+}
+
+/* =====================================================
+   BOX INTERPRETAÇÃO
+===================================================== */
+
+.grafico-info{
+
+  width:320px;
+
+  border-radius:24px;
+
+  padding:30px;
+
+  border:2px solid;
+
+}
+
+.grafico-info h3{
+
+  font-size:1.5rem;
+
+  margin-bottom:20px;
+
+}
+
+.grafico-info ul{
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+
+  padding-left:20px;
+
+}
+
+.grafico-info li{
+
+  line-height:1.8;
+  color:#334155;
+
+}
+
+/* =====================================================
+   CORES
+===================================================== */
+
+.grafico-info.azul{
+
+  background:#f5f9ff;
+  border-color:#bfdbfe;
+
+}
+
+.grafico-info.azul h3{
+
+  color:#2563eb;
+
+}
+
+.grafico-info.roxo{
+
+  background:#faf5ff;
+  border-color:#d8b4fe;
+
+}
+
+.grafico-info.roxo h3{
+
+  color:#7c3aed;
+
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:900px){
+
+  .grafico-conteudo{
+
+    min-width:100%;
+
+  }
+
+  .grafico-real{
+
+    overflow:auto;
+
+  }
+
+}

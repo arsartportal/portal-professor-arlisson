@@ -1,0 +1,839 @@
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+
+  <!-- =====================================================
+      CONFIGURAÇÕES
+  ====================================================== -->
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Movimento Uniforme (MU)
+  </title>
+
+  <!-- =====================================================
+      CSS GLOBAL
+  ====================================================== -->
+  <link
+    rel="stylesheet"
+    href="../../../biblioteca.css"
+  >
+
+  <!-- =====================================================
+      CSS DA AULA
+  ====================================================== -->
+  <link
+    rel="stylesheet"
+    href="./movimento-uniforme.css"
+  >
+
+  <!-- =====================================================
+      CSS PROGRESSO
+  ====================================================== -->
+  <link
+    rel="stylesheet"
+    href="../../../core/progresso.css"
+  >
+
+  <!-- =====================================================
+     KATEX • FÓRMULAS MATEMÁTICAS
+====================================================== -->
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+  </head>
+
+  <body>
+
+  <!-- =====================================================
+      CONTAINER
+  ====================================================== -->
+  <div class="container">
+
+    <!-- =====================================================
+        HERO
+    ====================================================== -->
+    <section class="hero-fisica">
+
+      <div class="hero-texto">
+
+        <span class="badge-fisica">
+          🏎️ Cinemática • Física
+        </span>
+
+        <h1>
+          Movimento Uniforme
+        </h1>
+
+        <p>
+          Domine um dos conceitos mais importantes
+          da Cinemática: o movimento realizado
+          com velocidade constante, interpretação
+          gráfica e equações horárias do movimento.
+        </p>
+
+      </div>
+
+      <div class="hero-emoji">
+        🚄
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+        STATUS LOGIN
+    ====================================================== -->
+    <div
+      class="loading-box"
+      id="statusLogin"
+    >
+
+      Carregando progresso...
+
+    </div>
+
+    <!-- =====================================================
+        PROGRESSO
+    ====================================================== -->
+    <section class="progress-container">
+
+      <h2 class="progress-title">
+        Seu Progresso
+      </h2>
+
+      <div class="progress-grid">
+
+        <!-- RESPONDIDAS -->
+        <div class="progress-card">
+
+          <div class="progress-icon icon-blue">
+            📘
+          </div>
+
+          <div class="progress-info">
+
+            <span class="progress-label">
+              Respondidas
+            </span>
+
+            <strong
+              class="progress-value"
+              id="respondidas"
+            >
+              0/25
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- ACERTOS -->
+        <div class="progress-card">
+
+          <div class="progress-icon icon-green">
+            ✅
+          </div>
+
+          <div class="progress-info">
+
+            <span class="progress-label">
+              Acertos
+            </span>
+
+            <strong
+              class="progress-value"
+              id="acertos"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- ERROS -->
+        <div class="progress-card">
+
+          <div class="progress-icon icon-red">
+            ❌
+          </div>
+
+          <div class="progress-info">
+
+            <span class="progress-label">
+              Erros finais
+            </span>
+
+            <strong
+              class="progress-value"
+              id="erros"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- STATUS -->
+        <div class="progress-card">
+
+          <div class="progress-icon icon-purple">
+            🏆
+          </div>
+
+          <div class="progress-info">
+
+            <span class="progress-label">
+              Status
+            </span>
+
+            <strong
+              class="progress-value"
+              id="status"
+            >
+              Não iniciada
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BARRA -->
+      <div class="progress-bar">
+
+        <div class="progress-fill"></div>
+
+      </div>
+
+      <p
+        class="progress-text"
+        id="porcentagem"
+      >
+
+        Progresso: 0%
+
+      </p>
+
+    </section>
+
+    <!-- =====================================================
+        INTRODUÇÃO
+    ====================================================== -->
+    <h2>
+      1. O que é Movimento Uniforme?
+    </h2>
+
+    <div class="card">
+
+      <p>
+        Movimento Uniforme (MU) é aquele em que
+        um corpo percorre deslocamentos iguais
+        em intervalos de tempo iguais.
+      </p>
+
+      <p>
+        Nesse tipo de movimento, a velocidade
+        permanece constante durante todo
+        o percurso.
+      </p>
+
+      <p>
+        Isso significa que não existe aceleração.
+      </p>
+
+      <p>
+        O corpo não aumenta nem reduz
+        sua velocidade ao longo do tempo.
+      </p>
+
+    </div>
+
+    <!-- =====================================================
+        CARACTERÍSTICAS
+    ====================================================== -->
+    <h2>
+      2. Características do MU
+    </h2>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        ⚡
+        <span>Velocidade constante</span>
+      </div>
+
+      <div class="area-card">
+        📏
+        <span>Distâncias iguais</span>
+      </div>
+
+      <div class="area-card">
+        ⏱️
+        <span>Tempos iguais</span>
+      </div>
+
+      <div class="area-card">
+        🚗
+        <span>Sem aceleração</span>
+      </div>
+
+      <div class="area-card">
+        📈
+        <span>Gráfico linear</span>
+      </div>
+
+      <div class="area-card">
+        🛣️
+        <span>Movimento contínuo</span>
+      </div>
+
+    </div>
+
+<!-- =====================================================
+     VELOCIDADE MÉDIA
+====================================================== -->
+<h2>
+  3. Fórmula da Velocidade Média
+</h2>
+
+<div class="formula-layout">
+
+  <!-- ============================================= -->
+  <!-- CONTEÚDO -->
+  <!-- ============================================= -->
+
+  <div class="card formula-card">
+
+    <p>
+      No Movimento Uniforme, a velocidade média
+      coincide com a velocidade do movimento.
+    </p>
+
+    <!-- FÓRMULA -->
+    <div class="formula-box">
+
+      $$V = \frac{\Delta S}{\Delta t}$$
+
+    </div>
+
+    <!-- DEFINIÇÕES -->
+    <ul class="formula-lista">
+
+      <li>
+        <strong>V</strong>
+        → velocidade (m/s ou km/h)
+      </li>
+
+      <li>
+        <strong>ΔS</strong>
+        → deslocamento
+      </li>
+
+      <li>
+        <strong>Δt</strong>
+        → intervalo de tempo
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- ============================================= -->
+  <!-- LATERAL -->
+  <!-- ============================================= -->
+
+  <div class="formula-side">
+
+    <!-- IMPORTANTE -->
+    <div class="info-box azul">
+
+      <h3>
+        💡 IMPORTANTE
+      </h3>
+
+      <p>
+        No MU, a velocidade é constante.
+        Por isso, a velocidade média
+        coincide com a velocidade
+        instantânea.
+      </p>
+
+    </div>
+
+    <!-- EXEMPLO -->
+    <div class="info-box verde">
+
+      <h3>
+        ✅ EXEMPLO RÁPIDO
+      </h3>
+
+      <p>
+        Um carro percorre 120 km
+        em 2 horas:
+      </p>
+
+      <div class="mini-formula">
+
+        $$V = \frac{120}{2}=60km/h$$
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     EQUAÇÃO HORÁRIA
+====================================================== -->
+<h2>
+  4. Equação Horária do MU
+</h2>
+
+<div class="formula-layout">
+
+  <!-- ============================================= -->
+  <!-- CONTEÚDO -->
+  <!-- ============================================= -->
+
+  <div class="card formula-card">
+
+    <p>
+      A equação horária permite calcular
+      a posição do móvel em qualquer instante.
+    </p>
+
+    <!-- FÓRMULA -->
+    <div class="formula-box">
+
+      $$S = S_0 + Vt$$
+
+    </div>
+
+    <!-- DEFINIÇÕES -->
+    <ul class="formula-lista">
+
+      <li>
+        <strong>S</strong>
+        → posição final
+      </li>
+
+      <li>
+        <strong>S₀</strong>
+        → posição inicial
+      </li>
+
+      <li>
+        <strong>V</strong>
+        → velocidade constante
+      </li>
+
+      <li>
+        <strong>t</strong>
+        → tempo
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- ============================================= -->
+  <!-- LATERAL -->
+  <!-- ============================================= -->
+
+  <div class="formula-side">
+
+    <!-- INTERPRETAÇÃO -->
+    <div class="info-box roxo">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <p>
+        A posição final depende da posição
+        inicial mais o deslocamento
+        realizado durante o tempo.
+      </p>
+
+    </div>
+
+    <!-- DICA -->
+    <div class="info-box amarelo">
+
+      <h3>
+        ⭐ DICA DE OURO
+      </h3>
+
+      <p>
+        Sempre mantenha as unidades
+        compatíveis:
+      </p>
+
+      <p>
+        Se a velocidade estiver em m/s,
+        o tempo deve estar em segundos.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     EXEMPLO RESOLVIDO
+====================================================== -->
+<h2>
+  5. Exemplo Resolvido
+</h2>
+
+<div class="formula-layout">
+
+  <!-- ============================================= -->
+  <!-- EXEMPLO -->
+  <!-- ============================================= -->
+
+  <div class="card formula-card">
+
+    <p>
+      Um carro parte da posição inicial
+      <strong>10 m</strong>
+      com velocidade constante
+      de <strong>20 m/s</strong>.
+    </p>
+
+    <p>
+      Determine a posição após
+      <strong>5 segundos</strong>.
+    </p>
+
+    <!-- CONTA -->
+    <div class="resolucao-box">
+
+      <div class="mini-formula">
+
+        $$S = 10 + 20 \cdot 5$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$S = 110m$$
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ============================================= -->
+  <!-- RESULTADO -->
+  <!-- ============================================= -->
+
+  <div class="formula-side">
+
+    <div class="info-box verde">
+
+      <h3>
+        🏆 ANÁLISE
+      </h3>
+
+      <p>
+        Após 5 segundos, o carro estará
+        na posição de 110 metros.
+      </p>
+
+      <div class="observacao">
+
+        Ele percorreu 100 m além
+        da posição inicial.
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- =====================================================
+        GRÁFICO POSIÇÃO X TEMPO
+    ====================================================== -->
+    <h2>
+      6. Gráfico Posição × Tempo
+    </h2>
+
+    <div class="card">
+
+      <p>
+        No MU, o gráfico da posição em função
+        do tempo é uma reta.
+      </p>
+
+      <p>
+        Quanto maior a inclinação da reta,
+        maior a velocidade do móvel.
+      </p>
+
+      <div class="grafico-box">
+
+        <div class="grafico-eixos">
+
+          <div class="eixo-y">
+            Posição
+          </div>
+
+          <div class="reta-grafico"></div>
+
+          <div class="eixo-x">
+            Tempo
+          </div>
+
+        </div>
+
+      </div>
+
+      <p>
+        Uma reta crescente representa movimento
+        progressivo.
+      </p>
+
+    </div>
+
+    <!-- =====================================================
+        GRÁFICO VELOCIDADE X TEMPO
+    ====================================================== -->
+    <h2>
+      7. Gráfico Velocidade × Tempo
+    </h2>
+
+    <div class="card">
+
+      <p>
+        Como a velocidade é constante no MU,
+        o gráfico velocidade × tempo é uma
+        linha horizontal.
+      </p>
+
+      <div class="grafico-box">
+
+        <div class="grafico-eixos">
+
+          <div class="eixo-y">
+            Velocidade
+          </div>
+
+          <div class="linha-horizontal"></div>
+
+          <div class="eixo-x">
+            Tempo
+          </div>
+
+        </div>
+
+      </div>
+
+      <p>
+        Isso mostra que o móvel mantém
+        sempre a mesma velocidade.
+      </p>
+
+    </div>
+
+    <!-- =====================================================
+        MOVIMENTO PROGRESSIVO
+    ====================================================== -->
+    <h2>
+      8. Movimento Progressivo e Retrógrado
+    </h2>
+
+    <div class="cotidiano-grid">
+
+      <!-- PROGRESSIVO -->
+      <div class="cotidiano-card">
+
+        <div class="icone-cotidiano">
+          ➡️
+        </div>
+
+        <h3>
+          Progressivo
+        </h3>
+
+        <p>
+          A posição aumenta com o tempo.
+          Velocidade positiva.
+        </p>
+
+      </div>
+
+      <!-- RETRÓGRADO -->
+      <div class="cotidiano-card">
+
+        <div class="icone-cotidiano">
+          ⬅️
+        </div>
+
+        <h3>
+          Retrógrado
+        </h3>
+
+        <p>
+          A posição diminui com o tempo.
+          Velocidade negativa.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+        SIMULADOR
+    ====================================================== -->
+    <h2>
+      9. Simulador do MU
+    </h2>
+
+    <div class="simulador">
+
+      <h3>
+        Analise diferentes movimentos
+      </h3>
+
+      <div class="botoes-simulador">
+
+        <button onclick="analisarMU('carro')">
+          🚗 Carro
+        </button>
+
+        <button onclick="analisarMU('trem')">
+          🚄 Trem
+        </button>
+
+        <button onclick="analisarMU('moto')">
+          🏍️ Moto
+        </button>
+
+      </div>
+
+      <div
+        class="resultado-simulador"
+        id="resultadoMU"
+      >
+
+        Escolha um exemplo acima.
+
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+        DICAS
+    ====================================================== -->
+    <h2>
+      10. Dicas Importantes
+    </h2>
+
+    <div class="card">
+
+      <ul>
+
+        <li>
+          No MU, a velocidade nunca muda.
+        </li>
+
+        <li>
+          A aceleração é igual a zero.
+        </li>
+
+        <li>
+          O gráfico posição × tempo é uma reta.
+        </li>
+
+        <li>
+          O gráfico velocidade × tempo é horizontal.
+        </li>
+
+        <li>
+          MU é um modelo idealizado muito usado
+          em exercícios de Física.
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- =====================================================
+        EXERCÍCIOS
+    ====================================================== -->
+    <h2>
+      11. Exercícios
+    </h2>
+
+    <div id="exercicios"></div>
+
+  </div>
+
+  <!-- =====================================================
+      EFEITO XP
+  ====================================================== -->
+  <div
+    class="efeito-xp"
+    id="efeitoXp"
+  >
+
+    <div
+      class="efeito-xp-card"
+      id="efeitoXpCard"
+    >
+
+      <div class="efeito-xp-emoji">
+        🎉
+      </div>
+
+      <h2>
+        Recompensa recebida!
+      </h2>
+
+      <p id="efeitoXpTexto">
+        +250 XP
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+      SCRIPT
+  ====================================================== -->
+  <script
+    type="module"
+    src="./movimento-uniforme.js"
+  ></script>
+
+  </body>
+  </html>

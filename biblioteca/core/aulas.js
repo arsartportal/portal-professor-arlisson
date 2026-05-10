@@ -152,12 +152,82 @@ export const AULAS_FISICA_1ANO = [
   },
 
   /* ===================================================
+   SISTEMA INTERNACIONAL DE UNIDADES
+==================================================== */
+
+{
+
+  id:3,
+
+  titulo:
+    "Sistema Internacional de Unidades",
+
+  /*
+    SLUG
+  */
+  slug:
+    "sistema-internacional-unidades",
+
+  /*
+    PASTA
+  */
+  pasta:
+    "3-sistema-internacional-unidades",
+
+  /*
+    Arquivo
+  */
+  arquivo:
+    "sistema-internacional-unidades.html",
+
+  /*
+    Ícone
+  */
+  icone:
+    "📐",
+
+  /*
+    Série
+  */
+  serie:
+    "1º Ano",
+
+  /*
+    Disciplina
+  */
+  disciplina:
+    "Física",
+
+  /*
+    Descrição
+  */
+  descricao:
+
+    "Aprenda as unidades fundamentais do SI e como elas padronizam medições no mundo inteiro.",
+
+  /*
+    XP
+  */
+  xp:
+    70,
+
+  /*
+    Questões
+  */
+  questoes:
+    12
+
+},
+
+
+
+  /* ===================================================
      CINEMÁTICA
   ==================================================== */
 
   {
 
-    id:3,
+    id:4,
 
     titulo:
       "Cinemática",
@@ -172,7 +242,7 @@ export const AULAS_FISICA_1ANO = [
       PASTA
     */
     pasta:
-      "3-cinematica",
+      "4-cinematica",
 
     /*
       Arquivo
@@ -218,8 +288,10 @@ export const AULAS_FISICA_1ANO = [
       15
 
   }
-
 ];
+
+
+
 
 /* =====================================================
    MATEMÁTICA • 1º ANO
