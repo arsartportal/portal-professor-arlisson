@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Vetores
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./vetores.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🧭 Cinemática • Física
+      </span>
+
+      <h1>
+        Vetores
+      </h1>
+
+      <p>
+
+        Aprenda direção, sentido, módulo,
+        decomposição vetorial e operações
+        com vetores, fundamentais para toda
+        a Física do Ensino Médio.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ➡️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que são Vetores?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Vetores são grandezas que possuem:
+
+    </p>
+
+    <ul class="formula-lista">
+
+      <li>
+        Módulo
+      </li>
+
+      <li>
+        Direção
+      </li>
+
+      <li>
+        Sentido
+      </li>
+
+    </ul>
+
+    <p>
+
+      Eles são fundamentais na Física
+      para representar velocidade,
+      aceleração, força e deslocamento.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       ESCALARES
+  ====================================================== -->
+  <h2>
+    2. Grandezas Escalares e Vetoriais
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Grandezas escalares possuem apenas valor numérico.
+
+      </p>
+
+      <div class="mini-formula">
+
+        Massa = 5kg
+
+      </div>
+
+      <p>
+
+        Grandezas vetoriais precisam
+        de direção e sentido.
+
+      </p>
+
+      <div class="mini-formula resultado">
+
+        Velocidade = 20m/s para leste
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          💡 EXEMPLOS
+        </h3>
+
+        <p>
+
+          Força, velocidade e aceleração
+          são grandezas vetoriais.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ELEMENTOS
+  ====================================================== -->
+  <h2>
+    3. Elementos do Vetor
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      📏
+      <span>Módulo</span>
+    </div>
+
+    <div class="area-card">
+      🧭
+      <span>Direção</span>
+    </div>
+
+    <div class="area-card">
+      ➡️
+      <span>Sentido</span>
+    </div>
+
+    <div class="area-card">
+      📍
+      <span>Ponto de aplicação</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       REPRESENTAÇÃO
+  ====================================================== -->
+  <h2>
+    4. Representação Vetorial
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        Vetores são representados por setas.
+
+      </p>
+
+      <p>
+
+        O comprimento indica o módulo
+        e a ponta da seta indica o sentido.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="vetor-horizontal"></div>
+
+        <div class="texto-vetor">
+          Vetor A
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Quanto maior a seta,
+          maior o módulo.
+        </li>
+
+        <li>
+          A orientação define
+          a direção.
+        </li>
+
+        <li>
+          A ponta define
+          o sentido.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SOMA
+  ====================================================== -->
+  <h2>
+    5. Soma de Vetores
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Vetores podem ser somados
+        geometricamente.
+
+      </p>
+
+      <p>
+
+        O método mais comum é
+        ponta com cauda.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$\vec{R} = \vec{A} + \vec{B}$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTANTE
+        </h3>
+
+        <p>
+
+          O vetor resultante representa
+          o efeito combinado dos vetores.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SUBTRAÇÃO
+  ====================================================== -->
+  <h2>
+    6. Subtração de Vetores
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$\vec{R} = \vec{A} - \vec{B}$$
+
+      </div>
+
+      <p>
+
+        Subtrair um vetor equivale
+        a somar o vetor oposto.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⭐ DICA
+        </h3>
+
+        <p>
+
+          O vetor oposto possui
+          mesmo módulo e direção,
+          mas sentido contrário.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DECOMPOSIÇÃO
+  ====================================================== -->
+  <h2>
+    7. Decomposição Vetorial
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um vetor pode ser dividido
+        em componentes horizontal e vertical.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V_x = V \cdot cos\theta$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$V_y = V \cdot sen\theta$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🚀 APLICAÇÃO
+        </h3>
+
+        <p>
+
+          Muito utilizada em
+          lançamento oblíquo
+          e dinâmica.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PITÁGORAS
+  ====================================================== -->
+  <h2>
+    8. Módulo da Resultante
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Quando os vetores são perpendiculares,
+        usamos Pitágoras.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$R = \sqrt{A^2 + B^2}$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          📐 IMPORTANTE
+        </h3>
+
+        <p>
+
+          Essa relação é válida
+          apenas para vetores
+          perpendiculares.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    9. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Dois vetores perpendiculares
+        possuem módulos 6 e 8.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$R = \sqrt{6^2 + 8^2}$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$R = 10$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🏆 RESULTADO
+        </h3>
+
+        <p>
+
+          A resultante possui
+          módulo igual a 10.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    10. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Velocidade</span>
+    </div>
+
+    <div class="area-card">
+      🏋️
+      <span>Força</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Movimento</span>
+    </div>
+
+    <div class="area-card">
+      🌪️
+      <span>Vento</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    11. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise exemplos vetoriais
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarVetores('forca')">
+        🏋️ Força
+      </button>
+
+      <button onclick="analisarVetores('vento')">
+        🌪️ Vento
+      </button>
+
+      <button onclick="analisarVetores('foguete')">
+        🚀 Foguete
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoVetores"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    12. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +550 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./vetores.js"
+></script>
+
+</body>
+</html>

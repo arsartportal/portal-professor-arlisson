@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Gravitação Universal
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./gravitacao.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🌌 Universo • Física
+      </span>
+
+      <h1>
+        Gravitação Universal
+      </h1>
+
+      <p>
+
+        Descubra como os corpos
+        se atraem no Universo,
+        entenda a Lei da Gravitação Universal
+        de Newton e explore fenômenos como
+        órbitas, planetas, luas e satélites.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌍
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Gravitação?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Gravitação é a interação
+      de atração entre corpos
+      que possuem massa.
+
+    </p>
+
+    <p>
+
+      Essa força mantém planetas,
+      luas e satélites em órbita.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🌌 Toda massa atrai outra massa
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       NEWTON
+  ====================================================== -->
+  <h2>
+    2. Lei da Gravitação Universal
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$F = G \frac{m_1m_2}{d^2}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          F = força gravitacional
+        </li>
+
+        <li>
+          G = constante gravitacional
+        </li>
+
+        <li>
+          m₁ e m₂ = massas
+        </li>
+
+        <li>
+          d = distância entre os corpos
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌍 INTERAÇÃO
+        </h3>
+
+        <p>
+
+          Quanto maiores as massas,
+          maior a atração gravitacional.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DISTANCIA
+  ====================================================== -->
+  <h2>
+    3. Influência da Distância
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força gravitacional diminui
+      rapidamente com o aumento da distância.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$F \propto \frac{1}{d^2}$$
+
+    </div>
+
+    <p>
+
+      Se a distância dobra,
+      a força fica quatro vezes menor.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       ORBITAS
+  ====================================================== -->
+  <h2>
+    4. Órbitas e Movimento Planetário
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ☀️
+      <span>Sol</span>
+    </div>
+
+    <div class="area-card">
+      🌍
+      <span>Planetas</span>
+    </div>
+
+    <div class="area-card">
+      🌙
+      <span>Luas</span>
+    </div>
+
+    <div class="area-card">
+      🛰️
+      <span>Satélites</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação da Gravitação
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        A Terra atrai a Lua
+        pela força gravitacional,
+        mantendo-a em órbita.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="espaco"></div>
+
+        <div class="terra"></div>
+
+        <div class="lua"></div>
+
+        <div class="orbita"></div>
+
+        <div class="seta-gravidade"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          A gravidade atua à distância.
+        </li>
+
+        <li>
+          Corpos massivos atraem outros corpos.
+        </li>
+
+        <li>
+          Órbitas dependem da gravidade.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    6. Exemplo Conceitual
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A Terra permanece orbitando o Sol
+      devido à força gravitacional.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ☀️ ⇄ 🌍
+
+    </div>
+
+    <p>
+
+      Sem gravidade,
+      os planetas seguiriam
+      em linha reta pelo espaço.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       PESO
+  ====================================================== -->
+  <h2>
+    7. Gravidade e Peso
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O peso é uma consequência
+      da atração gravitacional da Terra.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$P = m \cdot g$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações da Gravitação
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚀
+      <span>Exploração espacial</span>
+    </div>
+
+    <div class="area-card">
+      🛰️
+      <span>Satélites artificiais</span>
+    </div>
+
+    <div class="area-card">
+      🌊
+      <span>Marés</span>
+    </div>
+
+    <div class="area-card">
+      🌌
+      <span>Galáxias</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise efeitos da gravidade
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarGravidade('massa')">
+        🌍 Grande massa
+      </button>
+
+      <button onclick="analisarGravidade('distancia')">
+        🌌 Grande distância
+      </button>
+
+      <button onclick="analisarGravidade('orbita')">
+        🛰️ Órbita
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoGravidade"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1250 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./gravitacao.js"
+></script>
+
+</body>
+</html>

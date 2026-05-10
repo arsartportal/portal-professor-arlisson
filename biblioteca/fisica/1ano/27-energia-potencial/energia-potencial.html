@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Energia Potencial
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./energia-potencial.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚡ Energia • Física
+      </span>
+
+      <h1>
+        Energia Potencial
+      </h1>
+
+      <p>
+
+        Descubra como a posição
+        e a deformação armazenam energia,
+        aprenda os tipos de energia potencial
+        e entenda aplicações em gravidade,
+        molas e sistemas mecânicos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🏔️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Energia Potencial?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Energia potencial é a energia
+      armazenada devido à posição
+      ou à deformação de um corpo.
+
+    </p>
+
+    <p>
+
+      Diferente da energia cinética,
+      ela pode existir mesmo
+      quando o corpo está parado.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       TIPOS
+  ====================================================== -->
+  <h2>
+    2. Tipos de Energia Potencial
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🌍
+      <span>Gravitacional</span>
+    </div>
+
+    <div class="area-card">
+      🌀
+      <span>Elástica</span>
+    </div>
+
+    <div class="area-card">
+      🏔️
+      <span>Associada à altura</span>
+    </div>
+
+    <div class="area-card">
+      🪀
+      <span>Associada à deformação</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAVITACIONAL
+  ====================================================== -->
+  <h2>
+    3. Energia Potencial Gravitacional
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$E_p = m \cdot g \cdot h$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          Ep = energia potencial gravitacional
+        </li>
+
+        <li>
+          m = massa
+        </li>
+
+        <li>
+          g = gravidade
+        </li>
+
+        <li>
+          h = altura
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌍 GRAVIDADE
+        </h3>
+
+        <p>
+
+          Quanto maior a altura,
+          maior será a energia potencial.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ELASTICA
+  ====================================================== -->
+  <h2>
+    4. Energia Potencial Elástica
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$E_{pel} = \frac{kx^2}{2}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          k = constante elástica
+        </li>
+
+        <li>
+          x = deformação
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🌀 ELASTICIDADE
+        </h3>
+
+        <p>
+
+          Molas armazenam energia
+          quando deformadas.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação da Energia Potencial
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        Quanto maior a altura,
+        maior a energia potencial gravitacional.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="montanha"></div>
+
+        <div class="bola"></div>
+
+        <div class="seta-altura"></div>
+
+        <div class="solo"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Altura armazena energia.
+        </li>
+
+        <li>
+          A gravidade influencia diretamente.
+        </li>
+
+        <li>
+          Corpos elevados possuem maior potencial.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    6. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um corpo possui:
+
+      </p>
+
+      <ul class="formula-lista">
+
+        <li>
+          m = 2kg
+        </li>
+
+        <li>
+          h = 10m
+        </li>
+
+        <li>
+          g = 10m/s²
+        </li>
+
+      </ul>
+
+      <div class="mini-formula">
+
+        $$E_p = m \cdot g \cdot h$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$E_p = 2 \cdot 10 \cdot 10$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$E_p = 200J$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          O corpo possui
+          200 Joules de energia potencial.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TRANSFORMACOES
+  ====================================================== -->
+  <h2>
+    7. Transformações de Energia
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Energia potencial pode transformar-se
+      em energia cinética.
+
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🏔️
+        <span>Altura</span>
+      </div>
+
+      <div class="area-card">
+        ⬇️
+        <span>Queda</span>
+      </div>
+
+      <div class="area-card">
+        🏎️
+        <span>Velocidade</span>
+      </div>
+
+      <div class="area-card">
+        ⚡
+        <span>Energia cinética</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONSERVAÇÃO
+  ====================================================== -->
+  <h2>
+    8. Conservação da Energia Mecânica
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Sem forças dissipativas,
+      a energia mecânica total
+      permanece constante.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$E_m = E_c + E_p$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações de energia potencial
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarPotencial('altura')">
+        🏔️ Alta altura
+      </button>
+
+      <button onclick="analisarPotencial('queda')">
+        ⬇️ Queda
+      </button>
+
+      <button onclick="analisarPotencial('mola')">
+        🌀 Mola deformada
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoPotencial"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1150 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./energia-potencial.js"
+></script>
+
+</body>
+</html>

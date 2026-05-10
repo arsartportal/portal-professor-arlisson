@@ -877,6 +877,66 @@ button:disabled{
 }
 
 /* =====================================================
+   WRAPPER DOS CARDS
+===================================================== */
+
+.card-wrapper{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:12px;
+
+}
+
+/* =====================================================
+   BOTÃO VISIBILIDADE
+===================================================== */
+
+.btn-visibilidade{
+
+  width:100%;
+
+  border:none;
+
+  padding:14px;
+
+  border-radius:16px;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  font-size:15px;
+
+  color:#ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e293b
+    );
+
+  transition:0.3s;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,0.18);
+
+}
+
+.btn-visibilidade:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(15,23,42,0.24);
+
+}
+
+/* =====================================================
    ANIMAÇÕES
 ===================================================== */
 @keyframes aparecer{

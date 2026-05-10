@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Queda Livre
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./queda-livre.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🍎 Cinemática • Física
+      </span>
+
+      <h1>
+        Queda Livre
+      </h1>
+
+      <p>
+
+        Entenda como funciona a ação da gravidade,
+        aprenda as equações da queda livre,
+        lançamento vertical e domine um dos temas
+        mais cobrados da Cinemática.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌍
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Queda Livre?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A queda livre é um movimento em que
+      um corpo se move apenas sob ação
+      da gravidade.
+
+    </p>
+
+    <p>
+
+      Nesse tipo de movimento,
+      desprezamos a resistência do ar.
+
+    </p>
+
+    <p>
+
+      Todos os corpos possuem a mesma
+      aceleração gravitacional,
+      independentemente da massa.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       GRAVIDADE
+  ====================================================== -->
+  <h2>
+    2. Aceleração da Gravidade
+  </h2>
+
+  <div class="formula-layout">
+
+    <!-- CARD -->
+    <div class="card formula-card">
+
+      <p>
+
+        Na Terra, a aceleração da gravidade
+        é aproximadamente:
+
+      </p>
+
+      <div class="formula-box">
+
+        $$g = 9,8m/s^2$$
+
+      </div>
+
+      <p>
+
+        Em muitos exercícios escolares,
+        usamos:
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$g = 10m/s^2$$
+
+      </div>
+
+    </div>
+
+    <!-- LATERAL -->
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌍 IMPORTANTE
+        </h3>
+
+        <p>
+
+          A gravidade sempre aponta
+          para o centro da Terra.
+
+        </p>
+
+      </div>
+
+      <div class="info-box verde">
+
+        <h3>
+          ⚡ CONSEQUÊNCIA
+        </h3>
+
+        <p>
+
+          Objetos em queda aumentam
+          continuamente sua velocidade.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       VELOCIDADE
+  ====================================================== -->
+  <h2>
+    3. Velocidade na Queda Livre
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A velocidade varia uniformemente
+        devido à aceleração da gravidade.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V = V_0 + gt$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          <strong>V</strong>
+          → velocidade final
+        </li>
+
+        <li>
+          <strong>V₀</strong>
+          → velocidade inicial
+        </li>
+
+        <li>
+          <strong>g</strong>
+          → gravidade
+        </li>
+
+        <li>
+          <strong>t</strong>
+          → tempo
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⭐ EXEMPLO
+        </h3>
+
+        <div class="mini-formula">
+
+          $$V = 0 + 10 \cdot 3$$
+
+        </div>
+
+        <div class="mini-formula resultado">
+
+          $$V = 30m/s$$
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       POSIÇÃO
+  ====================================================== -->
+  <h2>
+    4. Altura na Queda Livre
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A posição do corpo pode ser
+        calculada usando:
+
+      </p>
+
+      <div class="formula-box">
+
+        $$S = S_0 + V_0t + \frac{gt^2}{2}$$
+
+      </div>
+
+      <p>
+
+        Essa fórmula mostra que a distância
+        cresce cada vez mais rapidamente.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          📈 OBSERVAÇÃO
+        </h3>
+
+        <p>
+
+          A trajetória da posição em função
+          do tempo forma uma parábola.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TORRICELLI
+  ====================================================== -->
+  <h2>
+    5. Equação de Torricelli
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Também podemos calcular
+        a velocidade sem usar o tempo.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V^2 = V_0^2 + 2g\Delta S$$
+
+      </div>
+
+      <p>
+
+        Muito utilizada em exercícios
+        de queda livre e lançamento vertical.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🚨 CUIDADO
+        </h3>
+
+        <p>
+
+          O sinal da gravidade depende
+          do referencial adotado.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       LANÇAMENTO VERTICAL
+  ====================================================== -->
+  <h2>
+    6. Lançamento Vertical
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Quando um corpo é lançado para cima,
+      a gravidade atua reduzindo sua velocidade.
+
+    </p>
+
+    <p>
+
+      No ponto mais alto da trajetória,
+      a velocidade instantânea é igual a zero.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$V = 0m/s$$
+
+    </div>
+
+    <p>
+
+      Depois disso, o corpo inicia
+      a descida em queda livre.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       GRÁFICO
+  ====================================================== -->
+  <h2>
+    7. Gráfico Velocidade × Tempo
+  </h2>
+
+  <div class="grafico-box">
+
+    <div class="grafico-eixos">
+
+      <div class="eixo-y">
+        Velocidade
+      </div>
+
+      <div class="eixo-x">
+        Tempo
+      </div>
+
+      <div class="reta-queda"></div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    8. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um objeto é abandonado do repouso
+        durante 4 segundos.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$V = 0 + 10 \cdot 4$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$V = 40m/s$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🏆 RESULTADO
+        </h3>
+
+        <p>
+
+          O objeto atinge grande velocidade
+          devido à aceleração gravitacional.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    9. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🍎
+      <span>Queda de objetos</span>
+    </div>
+
+    <div class="area-card">
+      🪂
+      <span>Paraquedismo</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Lançamentos</span>
+    </div>
+
+    <div class="area-card">
+      🌍
+      <span>Satélites</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    10. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações de queda livre
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarQueda('maca')">
+        🍎 Maçã
+      </button>
+
+      <button onclick="analisarQueda('paraquedas')">
+        🪂 Paraquedas
+      </button>
+
+      <button onclick="analisarQueda('meteoro')">
+        ☄️ Meteoro
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoQueda"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    11. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +400 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./queda-livre.js"
+></script>
+
+</body>
+</html>

@@ -13,7 +13,7 @@
 >
 
 <title>
-  Física • 1º Ano
+  Física • 3º Ano
 </title>
 
 <!-- =====================================================
@@ -24,6 +24,13 @@
   href="../../biblioteca.css"
 >
 
+<!-- =====================================================
+     CSS FRENTE AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../core/frente-aula.css"
+>
 
 <style>
 
@@ -55,8 +62,8 @@
     linear-gradient(
       135deg,
       #020617 0%,
-      #0f172a 45%,
-      #1d4ed8 100%
+      #111827 45%,
+      #dc2626 100%
     );
 
   color:#ffffff;
@@ -72,9 +79,9 @@
 
   position:absolute;
 
-  width:420px;
+  width:450px;
 
-  height:420px;
+  height:450px;
 
   border-radius:50%;
 
@@ -85,48 +92,11 @@
       transparent 70%
     );
 
-  top:-180px;
+  top:-200px;
 
   right:-100px;
 
 }
-
-.hero-serie h1{
-
-  font-size:4.5rem;
-
-  line-height:1.05;
-
-  color:#ffffff;
-
-  border:none;
-
-  padding:0;
-
-  margin:0 0 22px 0;
-
-}
-
-.hero-serie p{
-
-  width:100%;
-
-  max-width:900px;
-
-  margin:0 auto;
-
-  font-size:1.2rem;
-
-  line-height:1.9;
-
-  color:
-    rgba(255,255,255,0.84);
-
-}
-
-/* =====================================================
-   CONTEÚDO HERO
-===================================================== */
 
 /* =====================================================
    CONTEÚDO HERO
@@ -182,6 +152,39 @@
 
 }
 
+.hero-serie h1{
+
+  font-size:4.5rem;
+
+  line-height:1.05;
+
+  color:#ffffff;
+
+  border:none;
+
+  padding:0;
+
+  margin:0 0 22px 0;
+
+}
+
+.hero-serie p{
+
+  width:100%;
+
+  max-width:920px;
+
+  margin:0 auto;
+
+  font-size:1.2rem;
+
+  line-height:1.9;
+
+  color:
+    rgba(255,255,255,0.84);
+
+}
+
 /* =====================================================
    GRID
 ===================================================== */
@@ -231,10 +234,10 @@
 
   transform:translateY(-6px);
 
-  border-color:#2563eb;
+  border-color:#dc2626;
 
   box-shadow:
-    0 22px 50px rgba(37,99,235,0.15);
+    0 22px 50px rgba(220,38,38,0.18);
 
 }
 
@@ -254,8 +257,8 @@
   background:
     linear-gradient(
       135deg,
-      #0f172a,
-      #1d4ed8
+      #111827,
+      #dc2626
     );
 
   color:#ffffff;
@@ -311,7 +314,7 @@
 
   font-weight:700;
 
-  margin-bottom:14px;
+  margin-bottom:12px;
 
 }
 
@@ -329,9 +332,8 @@
 
   padding:0;
 
-  margin-bottom:10px;
-
   margin-top:0;
+  margin-bottom:10px;
 
 }
 
@@ -439,8 +441,8 @@
   background:
     linear-gradient(
       90deg,
-      #38bdf8,
-      #4ade80
+      #f97316,
+      #ef4444
     );
 
 }
@@ -534,30 +536,32 @@
 
   <section class="hero-serie">
 
-  <div class="hero-conteudo">
+    <div class="hero-conteudo">
 
-    <span class="hero-badge">
+      <span class="hero-badge">
 
-      ⚛️ Física • 1º Ano
+        🚀 Física • 3º Ano
 
-    </span>
+      </span>
 
-    <h1>
+      <h1>
 
-      Física • 1º Ano
+        Física • 3º Ano
 
-    </h1>
+      </h1>
 
-    <p>
+      <p>
 
-      Explore os conteúdos fundamentais da Física
-      através de aulas interativas.
+        Aprofunde seus conhecimentos em
+        eletromagnetismo, física moderna,
+        revisões avançadas e preparação
+        intensiva para ENEM e vestibulares.
 
-    </p>
+      </p>
 
-  </div>
+    </div>
 
-</section>
+  </section>
 
   <!-- =====================================================
        GRID DAS AULAS
@@ -594,7 +598,7 @@ import {
 
 import {
 
-  renderizarFisica1Ano
+  renderizarFisica3Ano
 
 } from "../../core/frente-cards.js";
 
@@ -611,7 +615,7 @@ onAuthStateChanged(
     /*
       Aguarda login
     */
-    await renderizarFisica1Ano();
+    await renderizarFisica3Ano();
 
   }
 

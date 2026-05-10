@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Força Elástica
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./forca-elastica.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🌀 Dinâmica • Física
+      </span>
+
+      <h1>
+        Força Elástica
+      </h1>
+
+      <p>
+
+        Aprenda como molas e elásticos
+        armazenam energia, descubra
+        a Lei de Hooke e entenda
+        a relação entre força e deformação.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🪀
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Força Elástica?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força elástica surge quando
+      um corpo elástico sofre deformação,
+      como molas, elásticos e amortecedores.
+
+    </p>
+
+    <p>
+
+      Essa força tenta restaurar
+      o objeto ao seu estado original.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       LEI DE HOOKE
+  ====================================================== -->
+  <h2>
+    2. Lei de Hooke
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A força elástica é proporcional
+        à deformação sofrida pela mola.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$F = k \cdot x$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          F = força elástica
+        </li>
+
+        <li>
+          k = constante elástica
+        </li>
+
+        <li>
+          x = deformação
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🌀 LEI DE HOOKE
+        </h3>
+
+        <p>
+
+          Quanto maior a deformação,
+          maior a força elástica.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONSTANTE ELASTICA
+  ====================================================== -->
+  <h2>
+    3. Constante Elástica
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A constante elástica indica
+      o quão rígida é a mola.
+
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🪶
+        <span>Mola macia</span>
+      </div>
+
+      <div class="area-card">
+        ⚙️
+        <span>Mola rígida</span>
+      </div>
+
+      <div class="area-card">
+        📈
+        <span>Maior k = maior força</span>
+      </div>
+
+      <div class="area-card">
+        📉
+        <span>Menor k = mola flexível</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DEFORMAÇÃO
+  ====================================================== -->
+  <h2>
+    4. Tipos de Deformação
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ↔️
+      <span>Alongamento</span>
+    </div>
+
+    <div class="area-card">
+      ↕️
+      <span>Compressão</span>
+    </div>
+
+    <div class="area-card">
+      🌀
+      <span>Torção</span>
+    </div>
+
+    <div class="area-card">
+      ⚡
+      <span>Elasticidade</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação da Mola
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        A mola sofre deformação
+        quando uma força é aplicada.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="parede"></div>
+
+        <div class="mola"></div>
+
+        <div class="bloco"></div>
+
+        <div class="seta-forca"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          A mola se alonga.
+        </li>
+
+        <li>
+          Surge força restauradora.
+        </li>
+
+        <li>
+          A força tenta recuperar
+          o equilíbrio.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    6. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Uma mola possui:
+
+      </p>
+
+      <ul class="formula-lista">
+
+        <li>
+          k = 200N/m
+        </li>
+
+        <li>
+          x = 0,1m
+        </li>
+
+      </ul>
+
+      <div class="mini-formula">
+
+        $$F = k \cdot x$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$F = 200 \cdot 0,1$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$F = 20N$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          A força elástica
+          vale 20N.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ENERGIA
+  ====================================================== -->
+  <h2>
+    7. Energia Potencial Elástica
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Molas armazenam energia
+        quando deformadas.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$E = \frac{kx^2}{2}$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⚡ ENERGIA
+        </h3>
+
+        <p>
+
+          Quanto maior a deformação,
+          maior a energia armazenada.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Suspensão de carros</span>
+    </div>
+
+    <div class="area-card">
+      🛏️
+      <span>Colchões</span>
+    </div>
+
+    <div class="area-card">
+      🪀
+      <span>Brinquedos</span>
+    </div>
+
+    <div class="area-card">
+      🏹
+      <span>Arcos e flechas</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações elásticas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarElastica('mola')">
+        🌀 Mola
+      </button>
+
+      <button onclick="analisarElastica('carro')">
+        🚗 Suspensão
+      </button>
+
+      <button onclick="analisarElastica('arco')">
+        🏹 Arco
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoElastica"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +900 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./forca-elastica.js"
+></script>
+
+</body>
+</html>

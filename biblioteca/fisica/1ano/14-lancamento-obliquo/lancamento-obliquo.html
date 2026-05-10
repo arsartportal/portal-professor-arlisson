@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Lançamento Oblíquo
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./lancamento-obliquo.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🎯 Cinemática • Física
+      </span>
+
+      <h1>
+        Lançamento Oblíquo
+      </h1>
+
+      <p>
+
+        Aprenda como funciona o movimento
+        de projéteis, decomposição de vetores,
+        alcance horizontal, altura máxima
+        e trajetória parabólica.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ⚽
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Lançamento Oblíquo?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O lançamento oblíquo ocorre quando
+      um corpo é lançado formando um ângulo
+      com a horizontal.
+
+    </p>
+
+    <p>
+
+      Nesse movimento, o objeto realiza
+      simultaneamente dois movimentos:
+
+    </p>
+
+    <ul class="formula-lista">
+
+      <li>
+        Movimento horizontal uniforme (MU)
+      </li>
+
+      <li>
+        Movimento vertical uniformemente variado (MUV)
+      </li>
+
+    </ul>
+
+    <p>
+
+      A combinação desses movimentos
+      produz uma trajetória parabólica.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       DECOMPOSIÇÃO
+  ====================================================== -->
+  <h2>
+    2. Decomposição da Velocidade
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A velocidade inicial pode ser dividida
+        em duas componentes.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V_x = V_0 \cdot cos\theta$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$V_y = V_0 \cdot sen\theta$$
+
+      </div>
+
+      <p>
+
+        A componente horizontal permanece constante,
+        enquanto a vertical sofre ação da gravidade.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          📌 IMPORTANTE
+        </h3>
+
+        <p>
+
+          O movimento horizontal não possui
+          aceleração quando o atrito do ar
+          é desprezado.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       MOVIMENTO HORIZONTAL
+  ====================================================== -->
+  <h2>
+    3. Movimento Horizontal
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Na horizontal, o movimento é uniforme.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$x = V_x \cdot t$$
+
+      </div>
+
+      <p>
+
+        A velocidade horizontal permanece constante
+        durante todo o movimento.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ MU
+        </h3>
+
+        <p>
+
+          O movimento horizontal é um MU,
+          pois não existe aceleração horizontal.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       MOVIMENTO VERTICAL
+  ====================================================== -->
+  <h2>
+    4. Movimento Vertical
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Na vertical ocorre um MUV
+        devido à gravidade.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V_y = V_{0y} - gt$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$y = V_{0y}t - \frac{gt^2}{2}$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🌍 GRAVIDADE
+        </h3>
+
+        <p>
+
+          A gravidade reduz a velocidade
+          na subida e aumenta na descida.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ALTURA MÁXIMA
+  ====================================================== -->
+  <h2>
+    5. Altura Máxima
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$H_{max} = \frac{V_{0y}^2}{2g}$$
+
+      </div>
+
+      <p>
+
+        No ponto mais alto da trajetória,
+        a velocidade vertical é igual a zero.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⭐ TOPO
+        </h3>
+
+        <p>
+
+          O projétil continua se movendo
+          horizontalmente mesmo no ponto mais alto.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ALCANCE
+  ====================================================== -->
+  <h2>
+    6. Alcance Horizontal
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$A = \frac{V_0^2 \cdot sen(2\theta)}{g}$$
+
+      </div>
+
+      <p>
+
+        O alcance depende da velocidade inicial,
+        do ângulo e da gravidade.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🚨 CURIOSIDADE
+        </h3>
+
+        <p>
+
+          O alcance máximo ocorre
+          aproximadamente em 45°.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TRAJETÓRIA
+  ====================================================== -->
+  <h2>
+    7. Trajetória Parabólica
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        A união do movimento horizontal
+        com o vertical forma uma parábola.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="eixo-x-label">
+          Distância
+        </div>
+
+        <div class="eixo-y-label">
+          Altura
+        </div>
+
+        <div class="parabola-obliqua"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          A subida é retardada.
+        </li>
+
+        <li>
+          A descida é acelerada.
+        </li>
+
+        <li>
+          O movimento horizontal
+          permanece uniforme.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    8. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Uma bola é lançada com
+        velocidade de 20 m/s
+        formando ângulo de 30°.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$V_y = 20 \cdot sen30°$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$V_y = 10m/s$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🏆 RESULTADO
+        </h3>
+
+        <p>
+
+          A componente vertical determina
+          a altura máxima do projétil.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    9. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ⚽
+      <span>Futebol</span>
+    </div>
+
+    <div class="area-card">
+      🏀
+      <span>Basquete</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Projéteis</span>
+    </div>
+
+    <div class="area-card">
+      🎯
+      <span>Lançamentos</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    10. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise exemplos de lançamento oblíquo
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarObliquo('futebol')">
+        ⚽ Futebol
+      </button>
+
+      <button onclick="analisarObliquo('basquete')">
+        🏀 Basquete
+      </button>
+
+      <button onclick="analisarObliquo('foguete')">
+        🚀 Foguete
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoObliquo"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    11. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./lancamento-obliquo.js"
+></script>
+
+</body>
+</html>

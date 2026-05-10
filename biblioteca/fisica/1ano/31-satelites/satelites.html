@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Satélites Artificiais
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./satelites.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🛰️ Espaço • Física
+      </span>
+
+      <h1>
+        Satélites Artificiais
+      </h1>
+
+      <p>
+
+        Descubra como os satélites
+        permanecem em órbita,
+        entenda aplicações espaciais
+        modernas e explore a Física
+        por trás das telecomunicações,
+        GPS e observação da Terra.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌍
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que são Satélites Artificiais?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Satélites artificiais são objetos
+      construídos pelo ser humano
+      e colocados em órbita ao redor da Terra
+      ou de outros corpos celestes.
+
+    </p>
+
+    <p>
+
+      Eles utilizam a gravidade
+      para permanecer em movimento orbital.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🛰️ Movimento orbital controlado
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FUNCIONAMENTO
+  ====================================================== -->
+  <h2>
+    2. Como um Satélite Permanece em Órbita?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O satélite possui velocidade tangencial,
+      enquanto a gravidade o atrai para a Terra.
+
+    </p>
+
+    <p>
+
+      O resultado é um movimento contínuo
+      ao redor do planeta.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       FORCA CENTRIPETA
+  ====================================================== -->
+  <h2>
+    3. Gravidade como Força Centrípeta
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$F_g = F_c$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$G\frac{Mm}{r^2}=\frac{mv^2}{r}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          A gravidade mantém o satélite em órbita.
+        </li>
+
+        <li>
+          A força gravitacional atua como centrípeta.
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌍 ÓRBITA
+        </h3>
+
+        <p>
+
+          Sem gravidade,
+          o satélite seguiria em linha reta.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TIPOS
+  ====================================================== -->
+  <h2>
+    4. Tipos de Satélites
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      📡
+      <span>Comunicação</span>
+    </div>
+
+    <div class="area-card">
+      🌦️
+      <span>Meteorológicos</span>
+    </div>
+
+    <div class="area-card">
+      🛰️
+      <span>GPS</span>
+    </div>
+
+    <div class="area-card">
+      🔭
+      <span>Pesquisa espacial</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação Orbital
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        O satélite permanece
+        em movimento contínuo
+        ao redor da Terra.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="espaco"></div>
+
+        <div class="terra"></div>
+
+        <div class="orbita"></div>
+
+        <div class="satelite"></div>
+
+        <div class="seta-movimento"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Gravidade mantém a órbita.
+        </li>
+
+        <li>
+          A velocidade impede a queda direta.
+        </li>
+
+        <li>
+          O movimento orbital é contínuo.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GEOSTACIONARIO
+  ====================================================== -->
+  <h2>
+    6. Satélite Geoestacionário
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Satélites geoestacionários
+      acompanham a rotação da Terra,
+      permanecendo aparentemente fixos.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🌍 ↺ 🛰️
+
+    </div>
+
+    <p>
+
+      São muito usados
+      em telecomunicações.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       VELOCIDADE
+  ====================================================== -->
+  <h2>
+    7. Velocidade Orbital
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Quanto mais próximo da Terra,
+      maior deve ser a velocidade orbital.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$v=\sqrt{\frac{GM}{r}}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações dos Satélites
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      📱
+      <span>Internet</span>
+    </div>
+
+    <div class="area-card">
+      🗺️
+      <span>GPS</span>
+    </div>
+
+    <div class="area-card">
+      🌦️
+      <span>Previsão do tempo</span>
+    </div>
+
+    <div class="area-card">
+      📺
+      <span>Telecomunicações</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações orbitais
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarSatelite('baixa')">
+        🌍 Órbita baixa
+      </button>
+
+      <button onclick="analisarSatelite('geo')">
+        🛰️ Geoestacionário
+      </button>
+
+      <button onclick="analisarSatelite('distante')">
+        🌌 Órbita distante
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSatelite"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1350 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./satelites.js"
+></script>
+
+</body>
+</html>

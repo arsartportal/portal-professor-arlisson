@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Conservação da Energia Mecânica
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./conservacao-energia.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚡ Energia • Física
+      </span>
+
+      <h1>
+        Conservação da Energia Mecânica
+      </h1>
+
+      <p>
+
+        Entenda como a energia
+        se transforma sem desaparecer,
+        descubra a relação entre
+        energia cinética e potencial
+        e aprenda um dos princípios
+        mais importantes da Física.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ♻️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Conservação da Energia?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A energia não pode ser criada
+      nem destruída.
+
+    </p>
+
+    <p>
+
+      Ela apenas se transforma
+      entre diferentes formas.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      ♻️ Energia total constante
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ENERGIA MECANICA
+  ====================================================== -->
+  <h2>
+    2. Energia Mecânica
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$E_m = E_c + E_p$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          Em = energia mecânica
+        </li>
+
+        <li>
+          Ec = energia cinética
+        </li>
+
+        <li>
+          Ep = energia potencial
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ⚡ ENERGIA TOTAL
+        </h3>
+
+        <p>
+
+          A soma das energias
+          permanece constante
+          quando não há perdas.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TRANSFORMAÇÕES
+  ====================================================== -->
+  <h2>
+    3. Transformações de Energia
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🏔️
+      <span>Energia potencial</span>
+    </div>
+
+    <div class="area-card">
+      ⬇️
+      <span>Queda</span>
+    </div>
+
+    <div class="area-card">
+      🏎️
+      <span>Energia cinética</span>
+    </div>
+
+    <div class="area-card">
+      ⚡
+      <span>Conversão de energia</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       QUEDA LIVRE
+  ====================================================== -->
+  <h2>
+    4. Conservação na Queda Livre
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Durante a queda:
+
+    </p>
+
+    <ul class="formula-lista">
+
+      <li>
+        A energia potencial diminui.
+      </li>
+
+      <li>
+        A energia cinética aumenta.
+      </li>
+
+      <li>
+        A energia mecânica permanece constante.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação da Conservação
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        A energia potencial
+        transforma-se em energia cinética
+        durante a queda.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="torre"></div>
+
+        <div class="bola-topo"></div>
+
+        <div class="bola-meio"></div>
+
+        <div class="bola-baixo"></div>
+
+        <div class="solo"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          No topo: Ep máxima.
+        </li>
+
+        <li>
+          Durante a queda: transformação.
+        </li>
+
+        <li>
+          Embaixo: Ec máxima.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    6. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um corpo possui:
+
+      </p>
+
+      <ul class="formula-lista">
+
+        <li>
+          Ec = 300J
+        </li>
+
+        <li>
+          Ep = 700J
+        </li>
+
+      </ul>
+
+      <div class="mini-formula">
+
+        $$E_m = E_c + E_p$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$E_m = 300 + 700$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$E_m = 1000J$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          A energia mecânica total
+          vale 1000 Joules.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ATRITO
+  ====================================================== -->
+  <h2>
+    7. Influência do Atrito
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O atrito transforma parte
+      da energia mecânica em calor.
+
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🛞
+        <span>Atrito</span>
+      </div>
+
+      <div class="area-card">
+        🔥
+        <span>Calor</span>
+      </div>
+
+      <div class="area-card">
+        ⚡
+        <span>Perda mecânica</span>
+      </div>
+
+      <div class="area-card">
+        ♻️
+        <span>Transformação</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🎢
+      <span>Montanhas-russas</span>
+    </div>
+
+    <div class="area-card">
+      ⚽
+      <span>Esportes</span>
+    </div>
+
+    <div class="area-card">
+      🚗
+      <span>Transportes</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise transformações de energia
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarEnergia('topo')">
+        🏔️ Topo
+      </button>
+
+      <button onclick="analisarEnergia('queda')">
+        ⬇️ Queda
+      </button>
+
+      <button onclick="analisarEnergia('solo')">
+        🏎️ Solo
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoEnergia"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1200 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./conservacao-energia.js"
+></script>
+
+</body>
+</html>

@@ -5,6 +5,25 @@
 
 import {
 
+  doc,
+  getDoc,
+  updateDoc
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+import {
+
+  db
+
+}
+
+from "../../js/firebase.js";
+
+import {
+
   AULAS_FISICA_1ANO,
   AULAS_MAT_1ANO,
   AULAS_QUIMICA_1ANO
@@ -24,7 +43,8 @@ import {
 export async function renderizarCards({
 
   containerId,
-  aulas
+  aulas,
+  extraCardHtml = null
 
 }){
 
@@ -158,186 +178,198 @@ const status =
       `./${aula.pasta}/${aula.arquivo}`;
 
     /* =========================================
-       CARD
-    ========================================= */
+   CARD
+========================================= */
 
-    html += `
+html += `
 
-      <a
-        href="${link}"
-        class="aula-card"
-      >
+  <div class="card-wrapper">
 
-        <!-- =================================
-             TOPO
-        ================================== -->
+    <a
+      href="${link}"
+      class="aula-card"
+    >
 
-        <div class="aula-topo">
+      <!-- =================================
+           TOPO
+      ================================== -->
 
-          <span class="aula-badge">
+      <div class="aula-topo">
 
-            ${aula.icone}
-            ${aula.disciplina}
+        <span class="aula-badge">
 
-          </span>
+          ${aula.icone}
+          ${aula.disciplina}
 
-          <h2>
+        </span>
 
-            ${aula.titulo}
+        <h2>
 
-          </h2>
+          ${aula.titulo}
 
-          <p>
+        </h2>
 
-            ${aula.descricao}
+        <p>
 
-          </p>
+          ${aula.descricao}
+
+        </p>
+
+      </div>
+
+      <!-- =================================
+           CORPO
+      ================================== -->
+
+      <div class="aula-body">
+
+        <!-- =============================
+             STATUS
+        ============================== -->
+
+        <div class="status-aula">
+
+          <div
+            class="
+              status-pill
+              ${statusClasse}
+            "
+          >
+
+            ${statusTexto}
+
+          </div>
+
+          <strong>
+
+            ${porcentagem}%
+
+          </strong>
 
         </div>
 
-        <!-- =================================
-             CORPO
-        ================================== -->
+        <!-- =============================
+             BARRA
+        ============================== -->
 
-        <div class="aula-body">
+        <div class="barra-aula">
 
-          <!-- =============================
-               STATUS
-          ============================== -->
+          <div
+            class="barra-fill-aula"
+            style="
+              width:${porcentagem}%;
+            "
+          ></div>
 
-          <div class="status-aula">
+        </div>
 
-            <div
-              class="
-                status-pill
-                ${statusClasse}
-              "
-            >
+        <!-- =============================
+             ESTATÍSTICAS
+        ============================== -->
 
-              ${statusTexto}
+        <div class="stats-aula">
 
-            </div>
+          <div class="stat-item">
+
+            <span>
+              Respondidas
+            </span>
 
             <strong>
 
-              ${porcentagem}%
+              ${respondidas}/${totalQuestoes}
 
             </strong>
 
           </div>
 
-          <!-- =============================
-               BARRA
-          ============================== -->
+          <div class="stat-item">
 
-          <div class="barra-aula">
+            <span>
+              Acertos
+            </span>
 
-            <div
-              class="barra-fill-aula"
-              style="
-                width:${porcentagem}%;
-              "
-            ></div>
+            <strong>
 
-          </div>
+              ${acertos}
 
-          <!-- =============================
-               ESTATÍSTICAS
-          ============================== -->
-
-          <div class="stats-aula">
-
-            <div class="stat-item">
-
-              <span>
-                Respondidas
-              </span>
-
-              <strong>
-
-                ${respondidas}/${totalQuestoes}
-
-              </strong>
-
-            </div>
-
-            <div class="stat-item">
-
-              <span>
-                Acertos
-              </span>
-
-              <strong>
-
-                ${acertos}
-
-              </strong>
-
-            </div>
-
-            <div class="stat-item">
-
-              <span>
-                Erros finais
-              </span>
-
-              <strong>
-
-                ${erros}
-
-              </strong>
-
-            </div>
+            </strong>
 
           </div>
 
-          <!-- =============================
-               INFOS
-          ============================== -->
+          <div class="stat-item">
 
-          <div class="aula-infos">
+            <span>
+              Erros finais
+            </span>
 
-            <div class="info-box">
+            <strong>
 
-              <span>
+              ${erros}
 
-                Questões
-
-              </span>
-
-              <strong>
-
-                ${totalQuestoes}
-
-              </strong>
-
-            </div>
-
-            <div class="info-box">
-
-              <span>
-
-                XP
-
-              </span>
-
-              <strong>
-
-                ${aula.xp}
-
-              </strong>
-
-            </div>
+            </strong>
 
           </div>
 
         </div>
 
-      </a>
+        <!-- =============================
+             INFOS
+        ============================== -->
 
-    `;
+        <div class="aula-infos">
 
-  });
+          <div class="info-box">
+
+            <span>
+
+              Questões
+
+            </span>
+
+            <strong>
+
+              ${totalQuestoes}
+
+            </strong>
+
+          </div>
+
+          <div class="info-box">
+
+            <span>
+
+              XP
+
+            </span>
+
+            <strong>
+
+              ${aula.xp}
+
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </a>
+
+    ${extraCardHtml
+
+      ? extraCardHtml(aula)
+
+      : ""
+
+    }
+
+  </div>
+
+`;
+
+});
 
   /* =========================================
      RENDERIZA
@@ -347,21 +379,194 @@ const status =
 
 }
 
+
 /* =====================================================
    HELPERS
 ===================================================== */
 
 export async function renderizarFisica1Ano(){
 
+  /*
+    CONTAINER
+  */
+  const container =
+
+    document.getElementById(
+      "listaAulas"
+    );
+
+  /*
+    CONFIG FIRESTORE
+  */
+  const configRef =
+
+    doc(
+
+      db,
+
+      "configuracoesbiblioteca",
+
+      "fisica-1ano"
+
+    );
+
+  /*
+    BUSCA CONFIGURAÇÕES
+  */
+  const configSnap =
+
+    await getDoc(
+      configRef
+    );
+
+  /*
+    VISIBILIDADE
+  */
+  const visibilidade =
+
+    configSnap.exists()
+
+      ? configSnap.data()
+
+      : {};
+
+  /*
+    USUÁRIO
+  */
+  const tipoUsuario =
+
+  localStorage.getItem(
+    "usuario"
+  );
+
+  /*
+    PROFESSOR?
+  */
+  const ehProfessor =
+
+  tipoUsuario ===
+    "professor";
+    
+  /*
+    FILTRA AULAS
+  */
+  const aulasFiltradas =
+
+  ehProfessor
+
+    ? AULAS_FISICA_1ANO
+
+    : AULAS_FISICA_1ANO.filter(
+
+        aula => {
+
+          return visibilidade[
+            aula.pasta
+          ] !== false;
+
+        }
+
+      );
+
+  /*
+    RENDERIZA CARDS
+  */
   await renderizarCards({
 
     containerId:
       "listaAulas",
 
     aulas:
-      AULAS_FISICA_1ANO
+      aulasFiltradas,
+
+    extraCardHtml:
+
+      ehProfessor
+
+        ? (aula) => `
+
+          <button
+            class="btn-visibilidade"
+            data-pasta="${aula.pasta}"
+          >
+
+            ${
+              visibilidade[
+                aula.pasta
+              ] === false
+
+                ? "👁️ Mostrar"
+
+                : "🙈 Ocultar"
+            }
+
+          </button>
+
+        `
+
+        : null
 
   });
+
+  /*
+    BOTÕES
+  */
+  if(ehProfessor){
+
+    const botoes =
+
+      container.querySelectorAll(
+        ".btn-visibilidade"
+      );
+
+    botoes.forEach(botao => {
+
+      botao.addEventListener(
+
+        "click",
+
+        async () => {
+
+          const pasta =
+
+            botao.dataset.pasta;
+
+          /*
+            VALOR ATUAL
+          */
+          const ativo =
+
+            visibilidade[
+              pasta
+            ] !== false;
+
+          /*
+            ATUALIZA FIRESTORE
+          */
+          await updateDoc(
+
+            configRef,
+
+            {
+
+              [pasta]: !ativo
+
+            }
+
+          );
+
+          /*
+            RECARREGA
+          */
+          location.reload();
+
+        }
+
+      );
+
+    });
+
+  }
 
 }
 

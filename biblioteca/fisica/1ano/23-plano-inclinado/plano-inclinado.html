@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Plano Inclinado
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./plano-inclinado.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⛰️ Dinâmica • Física
+      </span>
+
+      <h1>
+        Plano Inclinado
+      </h1>
+
+      <p>
+
+        Entenda como as forças atuam
+        em rampas inclinadas, aprenda
+        a decompor o peso e descubra
+        por que o plano inclinado facilita movimentos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      📐
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Plano Inclinado?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O plano inclinado é uma superfície
+      que forma um ângulo com a horizontal.
+
+    </p>
+
+    <p>
+
+      Ele facilita o movimento
+      de objetos reduzindo
+      a força necessária para elevá-los.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       FORÇAS
+  ====================================================== -->
+  <h2>
+    2. Forças no Plano Inclinado
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🌍
+      <span>Força Peso</span>
+    </div>
+
+    <div class="area-card">
+      ⬆️
+      <span>Força Normal</span>
+    </div>
+
+    <div class="area-card">
+      🛞
+      <span>Atrito</span>
+    </div>
+
+    <div class="area-card">
+      📐
+      <span>Componentes do Peso</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DECOMPOSIÇÃO
+  ====================================================== -->
+  <h2>
+    3. Decomposição da Força Peso
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        O peso pode ser dividido
+        em duas componentes:
+
+      </p>
+
+      <div class="formula-box">
+
+        $$P_x = P \cdot sen(\theta)$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$P_y = P \cdot cos(\theta)$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          Px → paralelo à rampa
+        </li>
+
+        <li>
+          Py → perpendicular à rampa
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          📐 COMPONENTES
+        </h3>
+
+        <p>
+
+          A decomposição facilita
+          a análise das forças.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       NORMAL
+  ====================================================== -->
+  <h2>
+    4. Força Normal
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força normal é perpendicular
+      ao plano inclinado.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$N = P \cdot cos(\theta)$$
+
+    </div>
+
+    <p>
+
+      Quanto maior o ângulo,
+      menor será a normal.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação no Plano Inclinado
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        Observe as forças atuando
+        em um corpo sobre uma rampa.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="rampa"></div>
+
+        <div class="bloco"></div>
+
+        <div class="seta-peso"></div>
+
+        <div class="seta-normal"></div>
+
+        <div class="seta-paralela"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Peso aponta para baixo.
+        </li>
+
+        <li>
+          Normal é perpendicular.
+        </li>
+
+        <li>
+          Px movimenta o bloco.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    6. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um bloco possui:
+
+      </p>
+
+      <ul class="formula-lista">
+
+        <li>
+          P = 100N
+        </li>
+
+        <li>
+          θ = 30°
+        </li>
+
+      </ul>
+
+      <div class="mini-formula">
+
+        $$P_x = P \cdot sen(\theta)$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$P_x = 100 \cdot 0,5$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$P_x = 50N$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          A componente paralela
+          vale 50N.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       VANTAGENS
+  ====================================================== -->
+  <h2>
+    7. Vantagens do Plano Inclinado
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🏗️
+      <span>Facilita elevação</span>
+    </div>
+
+    <div class="area-card">
+      🚚
+      <span>Rampas de carga</span>
+    </div>
+
+    <div class="area-card">
+      ♿
+      <span>Acessibilidade</span>
+    </div>
+
+    <div class="area-card">
+      🛹
+      <span>Pistas inclinadas</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações em rampas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarPlano('leve')">
+        📐 Pequeno Ângulo
+      </button>
+
+      <button onclick="analisarPlano('medio')">
+        ⛰️ Médio Ângulo
+      </button>
+
+      <button onclick="analisarPlano('grande')">
+        🧗 Grande Ângulo
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoPlano"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +950 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./plano-inclinado.js"
+></script>
+
+</body>
+</html>

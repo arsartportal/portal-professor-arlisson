@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Força Peso
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./forca-peso.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🌍 Dinâmica • Física
+      </span>
+
+      <h1>
+        Força Peso
+      </h1>
+
+      <p>
+
+        Entenda como a gravidade atua
+        sobre os corpos, aprenda a calcular
+        o peso e descubra a diferença
+        entre massa e peso.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🍎
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Força Peso?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força peso é a força gravitacional
+      exercida pela Terra sobre um corpo.
+
+    </p>
+
+    <p>
+
+      Todo objeto próximo da Terra
+      sofre atração gravitacional
+      em direção ao centro do planeta.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$P = m \cdot g$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       MASSA X PESO
+  ====================================================== -->
+  <h2>
+    2. Diferença entre Massa e Peso
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ⚖️
+      <span>Massa = quantidade de matéria</span>
+    </div>
+
+    <div class="area-card">
+      🌍
+      <span>Peso = força gravitacional</span>
+    </div>
+
+    <div class="area-card">
+      📦
+      <span>Massa em kg</span>
+    </div>
+
+    <div class="area-card">
+      💪
+      <span>Peso em Newton</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FORMULA
+  ====================================================== -->
+  <h2>
+    3. Fórmula da Força Peso
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$P = m \cdot g$$
+
+      </div>
+
+      <p>
+
+        Onde:
+
+      </p>
+
+      <ul class="formula-lista">
+
+        <li>
+          P = peso (N)
+        </li>
+
+        <li>
+          m = massa (kg)
+        </li>
+
+        <li>
+          g = gravidade (m/s²)
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌎 GRAVIDADE
+        </h3>
+
+        <p>
+
+          Na Terra:
+          g ≈ 9,8m/s²
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DIREÇÃO
+  ====================================================== -->
+  <h2>
+    4. Direção e Sentido
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força peso possui:
+
+    </p>
+
+    <ul class="formula-lista">
+
+      <li>
+        Direção vertical
+      </li>
+
+      <li>
+        Sentido para baixo
+      </li>
+
+      <li>
+        Aponta para o centro da Terra
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação da Força Peso
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        A força peso é representada
+        por uma seta apontando
+        para baixo.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="terra"></div>
+
+        <div class="bloco"></div>
+
+        <div class="seta-peso"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          A gravidade atrai o corpo.
+        </li>
+
+        <li>
+          O peso aponta para baixo.
+        </li>
+
+        <li>
+          Quanto maior a massa,
+          maior o peso.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    6. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um corpo possui massa de 8kg.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$P = m \cdot g$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$P = 8 \cdot 10$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$P = 80N$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          O peso do corpo
+          é igual a 80N.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       LUA
+  ====================================================== -->
+  <h2>
+    7. Peso em Outros Planetas
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A massa de um corpo
+      não muda de planeta para planeta.
+
+    </p>
+
+    <p>
+
+      Porém o peso muda,
+      porque a gravidade é diferente.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🌕 Lua → gravidade menor
+
+    </div>
+
+    <div class="mini-formula resultado">
+
+      ⚖️ Peso menor na Lua
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+    <div class="area-card">
+      ⚖️
+      <span>Balanças</span>
+    </div>
+
+    <div class="area-card">
+      🪂
+      <span>Paraquedas</span>
+    </div>
+
+    <div class="area-card">
+      🛰️
+      <span>Satélites</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações gravitacionais
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarPeso('terra')">
+        🌍 Terra
+      </button>
+
+      <button onclick="analisarPeso('lua')">
+        🌕 Lua
+      </button>
+
+      <button onclick="analisarPeso('jupiter')">
+        🪐 Júpiter
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoPeso"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +800 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./forca-peso.js"
+></script>
+
+</body>
+</html>

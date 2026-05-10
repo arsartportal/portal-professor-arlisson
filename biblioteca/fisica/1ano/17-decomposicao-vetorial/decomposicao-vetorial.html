@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Decomposição Vetorial
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./decomposicao-vetorial.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🧭 Vetores • Física
+      </span>
+
+      <h1>
+        Decomposição Vetorial
+      </h1>
+
+      <p>
+
+        Aprenda como dividir vetores em
+        componentes horizontais e verticais
+        usando seno, cosseno e trigonometria.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      📐
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Decomposição Vetorial?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Decompor um vetor significa dividir
+      esse vetor em componentes menores,
+      normalmente horizontal e vertical.
+
+    </p>
+
+    <p>
+
+      Essas componentes facilitam
+      cálculos em Física e Matemática.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       COMPONENTES
+  ====================================================== -->
+  <h2>
+    2. Componentes Vetoriais
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ↔️
+      <span>Componente Horizontal</span>
+    </div>
+
+    <div class="area-card">
+      ↕️
+      <span>Componente Vertical</span>
+    </div>
+
+    <div class="area-card">
+      📐
+      <span>Ângulo</span>
+    </div>
+
+    <div class="area-card">
+      ➡️
+      <span>Vetor Original</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TRIGONOMETRIA
+  ====================================================== -->
+  <h2>
+    3. Relações Trigonométricas
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Utilizamos seno e cosseno
+        para encontrar as componentes.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V_x = V \cdot cos\theta$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$V_y = V \cdot sen\theta$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          💡 DICA
+        </h3>
+
+        <p>
+
+          O cosseno normalmente está ligado
+          ao eixo horizontal.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       INTERPRETAÇÃO
+  ====================================================== -->
+  <h2>
+    4. Interpretação Geométrica
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        O vetor original funciona
+        como a hipotenusa de um triângulo.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="eixo-horizontal"></div>
+
+        <div class="eixo-vertical"></div>
+
+        <div class="vetor-diagonal"></div>
+
+        <div class="componente-x"></div>
+
+        <div class="componente-y"></div>
+
+        <div class="angulo"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 ANÁLISE
+      </h3>
+
+      <ul>
+
+        <li>
+          Vetor diagonal é o original.
+        </li>
+
+        <li>
+          Linha horizontal é Vx.
+        </li>
+
+        <li>
+          Linha vertical é Vy.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       COMPONENTE X
+  ====================================================== -->
+  <h2>
+    5. Componente Horizontal
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$V_x = V \cdot cos\theta$$
+
+      </div>
+
+      <p>
+
+        A componente horizontal
+        mede quanto do vetor atua
+        na horizontal.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ➡️ HORIZONTAL
+        </h3>
+
+        <p>
+
+          Muito usada em lançamentos
+          oblíquos e movimentos.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       COMPONENTE Y
+  ====================================================== -->
+  <h2>
+    6. Componente Vertical
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$V_y = V \cdot sen\theta$$
+
+      </div>
+
+      <p>
+
+        A componente vertical mede
+        quanto do vetor atua
+        na vertical.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          ⬆️ VERTICAL
+        </h3>
+
+        <p>
+
+          Importante em gravidade
+          e movimentos verticais.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    7. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um vetor de 20 forma ângulo de 30°.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$V_x = 20 \cdot cos30°$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$V_y = 20 \cdot sen30°$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$V_y = 10$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⭐ OBSERVAÇÃO
+        </h3>
+
+        <p>
+
+          Cada componente representa
+          uma parte do vetor original.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PITÁGORAS
+  ====================================================== -->
+  <h2>
+    8. Reconstrução do Vetor
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Podemos reconstruir o vetor
+        usando Pitágoras.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V = \sqrt{V_x^2 + V_y^2}$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          📐 RELAÇÃO
+        </h3>
+
+        <p>
+
+          As componentes formam
+          um triângulo retângulo.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    9. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+    <div class="area-card">
+      ✈️
+      <span>Aviões</span>
+    </div>
+
+    <div class="area-card">
+      ⚽
+      <span>Lançamentos</span>
+    </div>
+
+    <div class="area-card">
+      🌪️
+      <span>Ventos</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    10. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise exemplos vetoriais
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarDecomposicao('futebol')">
+        ⚽ Futebol
+      </button>
+
+      <button onclick="analisarDecomposicao('aviao')">
+        ✈️ Avião
+      </button>
+
+      <button onclick="analisarDecomposicao('foguete')">
+        🚀 Foguete
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoDecomposicao"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    11. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +650 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./decomposicao-vetorial.js"
+></script>
+
+</body>
+</html>

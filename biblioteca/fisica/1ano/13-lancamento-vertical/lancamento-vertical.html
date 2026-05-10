@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Lançamento Vertical
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./lancamento-vertical.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🚀 Cinemática • Física
+      </span>
+
+      <h1>
+        Lançamento Vertical
+      </h1>
+
+      <p>
+
+        Aprenda como funciona o movimento
+        de subida e descida dos corpos,
+        domine gravidade, altura máxima,
+        tempo de subida e gráficos do
+        lançamento vertical.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🏀
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <!-- RESPONDIDAS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ACERTOS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ERROS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Lançamento Vertical?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O lançamento vertical ocorre quando
+      um corpo é lançado para cima
+      ou para baixo sob ação exclusiva
+      da gravidade.
+
+    </p>
+
+    <p>
+
+      Durante a subida, a gravidade reduz
+      a velocidade do corpo.
+
+    </p>
+
+    <p>
+
+      Durante a descida, a gravidade
+      aumenta novamente sua velocidade.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       VELOCIDADE
+  ====================================================== -->
+  <h2>
+    2. Equação da Velocidade
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A velocidade varia uniformemente
+        devido à aceleração gravitacional.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V = V_0 - gt$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          <strong>V</strong>
+          → velocidade final
+        </li>
+
+        <li>
+          <strong>V₀</strong>
+          → velocidade inicial
+        </li>
+
+        <li>
+          <strong>g</strong>
+          → gravidade
+        </li>
+
+        <li>
+          <strong>t</strong>
+          → tempo
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          💡 IMPORTANTE
+        </h3>
+
+        <p>
+
+          O sinal negativo aparece porque
+          a gravidade atua contra
+          o movimento de subida.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ALTURA
+  ====================================================== -->
+  <h2>
+    3. Equação da Altura
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A posição do corpo pode ser calculada
+        usando a função horária.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$S = S_0 + V_0t - \frac{gt^2}{2}$$
+
+      </div>
+
+      <p>
+
+        Durante a subida a velocidade diminui,
+        mas a altura continua aumentando.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          📈 OBSERVAÇÃO
+        </h3>
+
+        <p>
+
+          O gráfico posição × tempo
+          forma uma parábola.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ALTURA MÁXIMA
+  ====================================================== -->
+  <h2>
+    4. Altura Máxima
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        No ponto mais alto,
+        a velocidade instantânea é zero.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$V = 0m/s$$
+
+      </div>
+
+      <p>
+
+        Isso permite calcular
+        a altura máxima atingida.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$H_{max} = \frac{V_0^2}{2g}$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🏆 PONTO MAIS ALTO
+        </h3>
+
+        <p>
+
+          Nesse instante o corpo para
+          momentaneamente antes de cair.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TEMPO DE SUBIDA
+  ====================================================== -->
+  <h2>
+    5. Tempo de Subida
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        O tempo até atingir a altura máxima
+        pode ser calculado usando:
+
+      </p>
+
+      <div class="formula-box">
+
+        $$t = \frac{V_0}{g}$$
+
+      </div>
+
+      <p>
+
+        Quanto maior a velocidade inicial,
+        maior será o tempo de subida.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⭐ DICA
+        </h3>
+
+        <p>
+
+          Em movimentos simétricos,
+          o tempo de subida é igual
+          ao tempo de descida.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TORRICELLI
+  ====================================================== -->
+  <h2>
+    6. Equação de Torricelli
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$V^2 = V_0^2 - 2g\Delta S$$
+
+      </div>
+
+      <p>
+
+        Muito utilizada quando
+        o tempo não aparece no exercício.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🚨 ATENÇÃO
+        </h3>
+
+        <p>
+
+          O sinal da gravidade depende
+          do referencial adotado.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRÁFICO
+  ====================================================== -->
+  <h2>
+    7. Gráfico Velocidade × Tempo
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        Durante a subida,
+        a velocidade diminui linearmente
+        até atingir zero.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="eixo-y-label">
+          Velocidade
+        </div>
+
+        <div class="eixo-x-label">
+          Tempo
+        </div>
+
+        <div class="linha-horizontal linha-top"></div>
+
+        <div class="linha-vertical linha-right"></div>
+
+        <div class="reta-descendo"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📊 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Inclinação negativa indica
+          ação da gravidade.
+        </li>
+
+        <li>
+          A velocidade diminui
+          constantemente.
+        </li>
+
+        <li>
+          No topo:
+          <strong>V = 0</strong>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    8. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Uma bola é lançada verticalmente
+        para cima com velocidade
+        de 30 m/s.
+
+      </p>
+
+      <p>
+
+        Determine o tempo até atingir
+        a altura máxima.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$t = \frac{30}{10}$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$t = 3s$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          A bola levará 3 segundos
+          para atingir o ponto mais alto.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    9. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🏀
+      <span>Bola lançada</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+    <div class="area-card">
+      🎾
+      <span>Esportes</span>
+    </div>
+
+    <div class="area-card">
+      🌋
+      <span>Erupções</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    10. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise exemplos de lançamento vertical
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarLancamento('bola')">
+        🏀 Bola
+      </button>
+
+      <button onclick="analisarLancamento('foguete')">
+        🚀 Foguete
+      </button>
+
+      <button onclick="analisarLancamento('tenis')">
+        🎾 Tênis
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoLancamento"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    11. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +450 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./lancamento-vertical.js"
+></script>
+
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Soma Vetorial
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./soma-vetorial.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ➕ Vetores • Física
+      </span>
+
+      <h1>
+        Soma Vetorial
+      </h1>
+
+      <p>
+
+        Aprenda métodos gráficos e matemáticos
+        para somar vetores, calcular resultantes
+        e resolver problemas reais de Física.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ↗️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Soma Vetorial?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A soma vetorial consiste em combinar
+      dois ou mais vetores para obter
+      um único vetor resultante.
+
+    </p>
+
+    <p>
+
+      Esse vetor resultante representa
+      o efeito total produzido pelos vetores.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       RESULTANTE
+  ====================================================== -->
+  <h2>
+    2. Vetor Resultante
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$\vec{R} = \vec{A} + \vec{B}$$
+
+      </div>
+
+      <p>
+
+        O vetor resultante depende
+        do módulo, direção e sentido
+        dos vetores envolvidos.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          💡 IDEIA PRINCIPAL
+        </h3>
+
+        <p>
+
+          O vetor resultante substitui
+          todos os vetores originais.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       MÉTODO GRÁFICO
+  ====================================================== -->
+  <h2>
+    3. Método Ponta com Cauda
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        No método gráfico,
+        colocamos a ponta de um vetor
+        na cauda do outro.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="vetor-a"></div>
+
+        <div class="vetor-b"></div>
+
+        <div class="vetor-r"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Vetor A inicia o movimento.
+        </li>
+
+        <li>
+          Vetor B continua o deslocamento.
+        </li>
+
+        <li>
+          Vetor R liga início ao final.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SOMA MESMA DIREÇÃO
+  ====================================================== -->
+  <h2>
+    4. Vetores na Mesma Direção
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Quando possuem mesma direção e sentido,
+        os módulos são somados.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$R = A + B$$
+
+      </div>
+
+      <p>
+
+        Se os sentidos forem opostos,
+        fazemos a diferença.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$R = A - B$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ REGRA
+        </h3>
+
+        <p>
+
+          O maior vetor determina
+          o sentido da resultante.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PERPENDICULARES
+  ====================================================== -->
+  <h2>
+    5. Vetores Perpendiculares
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Para vetores formando 90°,
+        usamos Pitágoras.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$R = \sqrt{A^2 + B^2}$$
+
+      </div>
+
+      <p>
+
+        Muito comum em problemas
+        de deslocamento e velocidade.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          📐 IMPORTANTE
+        </h3>
+
+        <p>
+
+          Essa fórmula só funciona
+          em vetores perpendiculares.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DECOMPOSIÇÃO
+  ====================================================== -->
+  <h2>
+    6. Soma por Componentes
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Podemos somar separadamente
+        as componentes horizontal e vertical.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$R_x = A_x + B_x$$
+
+      </div>
+
+      <div class="formula-box">
+
+        $$R_y = A_y + B_y$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🚀 MUITO USADO
+        </h3>
+
+        <p>
+
+          Método utilizado em Física,
+          Engenharia e programação.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    7. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Dois vetores perpendiculares
+        possuem módulos 3 e 4.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$R = \sqrt{3^2 + 4^2}$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$R = 5$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🏆 RESULTADO
+        </h3>
+
+        <p>
+
+          O módulo da resultante
+          é igual a 5.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Movimento</span>
+    </div>
+
+    <div class="area-card">
+      ✈️
+      <span>Aeronáutica</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+    <div class="area-card">
+      🌊
+      <span>Correntes</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações vetoriais
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarSoma('carro')">
+        🚗 Carro
+      </button>
+
+      <button onclick="analisarSoma('vento')">
+        🌪️ Vento
+      </button>
+
+      <button onclick="analisarSoma('barco')">
+        🚤 Barco
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSoma"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +600 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./soma-vetorial.js"
+></script>
+
+</body>
+</html>

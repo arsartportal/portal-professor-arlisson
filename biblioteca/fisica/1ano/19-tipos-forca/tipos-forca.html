@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Tipos de Força
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./tipos-forca.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        💪 Dinâmica • Física
+      </span>
+
+      <h1>
+        Tipos de Força
+      </h1>
+
+      <p>
+
+        Conheça as principais forças da Física,
+        como peso, normal, atrito, tração e força
+        elástica, entendendo suas aplicações
+        no cotidiano e nos movimentos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ⚡
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BARRA -->
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Força?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Força é toda interação capaz
+      de alterar o estado de movimento
+      de um corpo ou provocar deformações.
+
+    </p>
+
+    <p>
+
+      A força é uma grandeza vetorial,
+      possuindo módulo, direção e sentido.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$F = m \cdot a$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FORÇA PESO
+  ====================================================== -->
+  <h2>
+    2. Força Peso
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A força peso é causada
+        pela atração gravitacional
+        da Terra sobre os corpos.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$P = m \cdot g$$
+
+      </div>
+
+      <p>
+
+        Sua direção é vertical
+        e o sentido é para baixo.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌍 GRAVIDADE
+        </h3>
+
+        <p>
+
+          Na Terra:
+          g ≈ 9,8m/s²
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FORÇA NORMAL
+  ====================================================== -->
+  <h2>
+    3. Força Normal
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A força normal surge
+        quando uma superfície
+        reage ao peso do corpo.
+
+      </p>
+
+      <p>
+
+        Ela sempre é perpendicular
+        à superfície de contato.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ⬆️ REAÇÃO
+        </h3>
+
+        <p>
+
+          A força normal impede
+          que o corpo atravesse
+          a superfície.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FORÇA DE ATRITO
+  ====================================================== -->
+  <h2>
+    4. Força de Atrito
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        O atrito é uma força
+        que se opõe ao movimento.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$F_{at} = \mu \cdot N$$
+
+      </div>
+
+      <p>
+
+        Quanto mais rugosa a superfície,
+        maior o atrito.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          🛞 ATRITO
+        </h3>
+
+        <p>
+
+          Fundamental para caminharmos
+          e para os carros frearem.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TRAÇÃO
+  ====================================================== -->
+  <h2>
+    5. Força de Tração
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        A tração aparece em cordas,
+        fios e cabos esticados.
+
+      </p>
+
+      <p>
+
+        Atua puxando os corpos
+        ligados pela corda.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🪢 CABOS
+        </h3>
+
+        <p>
+
+          Elevadores e guindastes
+          usam forças de tração.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FORÇA ELÁSTICA
+  ====================================================== -->
+  <h2>
+    6. Força Elástica
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Surge quando molas
+        ou elásticos são deformados.
+
+      </p>
+
+      <div class="formula-box">
+
+        $$F = k \cdot x$$
+
+      </div>
+
+      <p>
+
+        Quanto maior a deformação,
+        maior a força elástica.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🌀 LEI DE HOOKE
+        </h3>
+
+        <p>
+
+          A força elástica tenta
+          restaurar o equilíbrio.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRÁFICO
+  ====================================================== -->
+  <h2>
+    7. Diagrama de Forças
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        Em Física usamos diagramas
+        para representar todas
+        as forças atuando em um corpo.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="bloco"></div>
+
+        <div class="seta-peso"></div>
+
+        <div class="seta-normal"></div>
+
+        <div class="seta-atrito"></div>
+
+        <div class="seta-tracao"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 ANÁLISE
+      </h3>
+
+      <ul>
+
+        <li>
+          Peso aponta para baixo.
+        </li>
+
+        <li>
+          Normal aponta para cima.
+        </li>
+
+        <li>
+          Atrito se opõe ao movimento.
+        </li>
+
+        <li>
+          Tração puxa o corpo.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    8. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um corpo de massa 5kg
+        está na Terra.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$P = m \cdot g$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$P = 5 \cdot 10$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$P = 50N$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          O peso do corpo
+          é igual a 50N.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    9. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Freios</span>
+    </div>
+
+    <div class="area-card">
+      🪂
+      <span>Paraquedas</span>
+    </div>
+
+    <div class="area-card">
+      🏗️
+      <span>Guindastes</span>
+    </div>
+
+    <div class="area-card">
+      🛝
+      <span>Mol as</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    10. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações envolvendo forças
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarForca('peso')">
+        🌍 Peso
+      </button>
+
+      <button onclick="analisarForca('atrito')">
+        🛞 Atrito
+      </button>
+
+      <button onclick="analisarForca('mola')">
+        🌀 Mola
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoForca"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    11. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +750 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./tipos-forca.js"
+></script>
+
+</body>
+</html>

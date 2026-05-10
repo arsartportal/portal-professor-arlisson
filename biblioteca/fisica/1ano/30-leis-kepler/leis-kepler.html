@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Leis de Kepler
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./leis-kepler.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🌌 Astronomia • Física
+      </span>
+
+      <h1>
+        Leis de Kepler
+      </h1>
+
+      <p>
+
+        Descubra como os planetas
+        se movem no Sistema Solar,
+        entenda as três leis de Kepler
+        e explore os movimentos orbitais
+        que revolucionaram a Astronomia.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ☀️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. Quem foi Johannes Kepler?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Johannes Kepler foi um astrônomo
+      que estudou o movimento dos planetas
+      utilizando observações astronômicas
+      extremamente precisas.
+
+    </p>
+
+    <p>
+
+      Suas leis ajudaram a explicar
+      o funcionamento do Sistema Solar.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🌌 Movimento planetário explicado matematicamente
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PRIMEIRA LEI
+  ====================================================== -->
+  <h2>
+    2. Primeira Lei de Kepler
+  </h2>
+
+  <div class="card">
+
+    <h3>
+      🪐 Lei das Órbitas
+    </h3>
+
+    <p>
+
+      Os planetas descrevem órbitas elípticas
+      ao redor do Sol.
+
+    </p>
+
+    <p>
+
+      O Sol ocupa um dos focos da elipse.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       SEGUNDA LEI
+  ====================================================== -->
+  <h2>
+    3. Segunda Lei de Kepler
+  </h2>
+
+  <div class="card">
+
+    <h3>
+      ⚡ Lei das Áreas
+    </h3>
+
+    <p>
+
+      O segmento que liga o planeta ao Sol
+      varre áreas iguais em tempos iguais.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$A_1 = A_2$$
+
+    </div>
+
+    <p>
+
+      Isso significa que o planeta
+      move-se mais rápido quando está
+      próximo do Sol.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       TERCEIRA LEI
+  ====================================================== -->
+  <h2>
+    4. Terceira Lei de Kepler
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <h3>
+        🛰️ Lei dos Períodos
+      </h3>
+
+      <div class="formula-box">
+
+        $$\frac{T^2}{R^3}=k$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          T = período orbital
+        </li>
+
+        <li>
+          R = raio médio da órbita
+        </li>
+
+        <li>
+          k = constante
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ⏳ INTERPRETAÇÃO
+        </h3>
+
+        <p>
+
+          Planetas mais distantes
+          demoram mais para completar
+          suas órbitas.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    5. Representação das Órbitas
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        As órbitas planetárias
+        possuem formato elíptico.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="espaco"></div>
+
+        <div class="sol"></div>
+
+        <div class="orbita"></div>
+
+        <div class="planeta"></div>
+
+        <div class="seta-orbita"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          O Sol ocupa um foco da elipse.
+        </li>
+
+        <li>
+          Órbitas não são círculos perfeitos.
+        </li>
+
+        <li>
+          A velocidade orbital varia.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       VELOCIDADE
+  ====================================================== -->
+  <h2>
+    6. Velocidade Orbital
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Os planetas movem-se
+      mais rapidamente quando estão
+      próximos do Sol.
+
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        ☀️
+        <span>Perto do Sol</span>
+      </div>
+
+      <div class="area-card">
+        ⚡
+        <span>Maior velocidade</span>
+      </div>
+
+      <div class="area-card">
+        🌌
+        <span>Longe do Sol</span>
+      </div>
+
+      <div class="area-card">
+        🐢
+        <span>Menor velocidade</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       IMPORTANCIA
+  ====================================================== -->
+  <h2>
+    7. Importância das Leis de Kepler
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      As leis de Kepler ajudaram Newton
+      a formular a Lei da Gravitação Universal.
+
+    </p>
+
+    <p>
+
+      Elas também são fundamentais
+      para a Astronomia moderna.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🛰️
+      <span>Satélites</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Missões espaciais</span>
+    </div>
+
+    <div class="area-card">
+      🌍
+      <span>Movimento planetário</span>
+    </div>
+
+    <div class="area-card">
+      🌌
+      <span>Astronomia</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações orbitais
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarKepler('proximo')">
+        ☀️ Próximo do Sol
+      </button>
+
+      <button onclick="analisarKepler('distante')">
+        🌌 Distante do Sol
+      </button>
+
+      <button onclick="analisarKepler('orbita')">
+        🛰️ Órbita elíptica
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoKepler"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1300 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./leis-kepler.js"
+></script>
+
+</body>
+</html>

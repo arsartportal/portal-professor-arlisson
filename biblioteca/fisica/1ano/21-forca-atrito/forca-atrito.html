@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Força de Atrito
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./forca-atrito.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🛞 Dinâmica • Física
+      </span>
+
+      <h1>
+        Força de Atrito
+      </h1>
+
+      <p>
+
+        Descubra como o atrito atua
+        nos movimentos, aprenda os tipos
+        de atrito e entenda por que ele
+        é essencial no cotidiano.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🚗
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Atrito?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força de atrito é uma força
+      que surge quando duas superfícies
+      entram em contato.
+
+    </p>
+
+    <p>
+
+      Ela atua contrária ao movimento
+      ou à tentativa de movimento.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$F_{at} = \mu \cdot N$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TIPOS
+  ====================================================== -->
+  <h2>
+    2. Tipos de Atrito
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🧱
+      <span>Atrito Estático</span>
+    </div>
+
+    <div class="area-card">
+      🚗
+      <span>Atrito Dinâmico</span>
+    </div>
+
+    <div class="area-card">
+      🧊
+      <span>Superfícies lisas</span>
+    </div>
+
+    <div class="area-card">
+      🪨
+      <span>Superfícies rugosas</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ATRITO ESTATICO
+  ====================================================== -->
+  <h2>
+    3. Atrito Estático
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        O atrito estático atua
+        quando o corpo ainda
+        não entrou em movimento.
+
+      </p>
+
+      <p>
+
+        Ele impede o início
+        do deslizamento.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🧍 PARADO
+        </h3>
+
+        <p>
+
+          Mantém objetos
+          em repouso.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ATRITO DINAMICO
+  ====================================================== -->
+  <h2>
+    4. Atrito Dinâmico
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        O atrito dinâmico atua
+        quando o corpo já está
+        em movimento.
+
+      </p>
+
+      <p>
+
+        Geralmente é menor
+        que o atrito estático.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          🚘 MOVIMENTO
+        </h3>
+
+        <p>
+
+          Ocorre durante
+          o deslizamento.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FORMULA
+  ====================================================== -->
+  <h2>
+    5. Fórmula do Atrito
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$F_{at} = \mu \cdot N$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          Fat = força de atrito
+        </li>
+
+        <li>
+          μ = coeficiente de atrito
+        </li>
+
+        <li>
+          N = força normal
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box amarelo">
+
+        <h3>
+          ⚙️ COEFICIENTE
+        </h3>
+
+        <p>
+
+          Quanto maior o coeficiente,
+          maior o atrito.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    6. Representação do Atrito
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        O atrito atua sempre
+        contrário ao movimento.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="solo"></div>
+
+        <div class="bloco"></div>
+
+        <div class="seta-movimento"></div>
+
+        <div class="seta-atrito"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Movimento para direita.
+        </li>
+
+        <li>
+          Atrito para esquerda.
+        </li>
+
+        <li>
+          O atrito reduz velocidade.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    7. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um corpo possui:
+
+      </p>
+
+      <ul class="formula-lista">
+
+        <li>
+          μ = 0,4
+        </li>
+
+        <li>
+          N = 100N
+        </li>
+
+      </ul>
+
+      <div class="mini-formula">
+
+        $$F_{at} = \mu \cdot N$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$F_{at}=0,4 \cdot 100$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$F_{at}=40N$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          A força de atrito
+          vale 40N.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       VANTAGENS
+  ====================================================== -->
+  <h2>
+    8. Vantagens e Desvantagens
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      👟
+      <span>Permite caminhar</span>
+    </div>
+
+    <div class="area-card">
+      🚗
+      <span>Ajuda na frenagem</span>
+    </div>
+
+    <div class="area-card">
+      🔥
+      <span>Produz calor</span>
+    </div>
+
+    <div class="area-card">
+      ⚙️
+      <span>Desgasta peças</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações com atrito
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarAtrito('gelo')">
+        🧊 Gelo
+      </button>
+
+      <button onclick="analisarAtrito('asfalto')">
+        🛣️ Asfalto
+      </button>
+
+      <button onclick="analisarAtrito('freio')">
+        🚗 Freio
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoAtrito"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCICIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +850 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./forca-atrito.js"
+></script>
+
+</body>
+</html>

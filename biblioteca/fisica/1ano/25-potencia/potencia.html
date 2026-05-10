@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Potência Mecânica
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./potencia.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚡ Energia • Física
+      </span>
+
+      <h1>
+        Potência Mecânica
+      </h1>
+
+      <p>
+
+        Descubra como medir a rapidez
+        com que energia é transferida,
+        aprenda a calcular potência
+        e entenda aplicações em motores,
+        máquinas e equipamentos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🚀
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Potência?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Potência representa
+      a rapidez com que
+      um trabalho é realizado
+      ou uma energia é transferida.
+
+    </p>
+
+    <p>
+
+      Dois motores podem realizar
+      o mesmo trabalho, mas o mais potente
+      faz isso em menos tempo.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       FORMULA
+  ====================================================== -->
+  <h2>
+    2. Fórmula da Potência
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$P = \frac{\tau}{\Delta t}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          P = potência
+        </li>
+
+        <li>
+          τ = trabalho
+        </li>
+
+        <li>
+          Δt = intervalo de tempo
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ⚡ UNIDADE
+        </h3>
+
+        <p>
+
+          A unidade da potência
+          é o Watt (W).
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       INTERPRETAÇÃO
+  ====================================================== -->
+  <h2>
+    3. Interpretando a Potência
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🐢
+      <span>Baixa potência</span>
+    </div>
+
+    <div class="area-card">
+      🚗
+      <span>Alta potência</span>
+    </div>
+
+    <div class="area-card">
+      ⚙️
+      <span>Maior rapidez</span>
+    </div>
+
+    <div class="area-card">
+      🔋
+      <span>Transferência de energia</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       POTENCIA MEDIA
+  ====================================================== -->
+  <h2>
+    4. Potência Média
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A potência média considera
+      o trabalho realizado
+      durante um intervalo de tempo.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$P_m = \frac{\tau}{\Delta t}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       POTENCIA INSTANTANEA
+  ====================================================== -->
+  <h2>
+    5. Potência Instantânea
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Em movimentos, a potência
+      instantânea pode ser calculada por:
+
+    </p>
+
+    <div class="formula-box">
+
+      $$P = F \cdot v$$
+
+    </div>
+
+    <p>
+
+      Quanto maior a velocidade
+      ou a força, maior será a potência.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    6. Representação da Potência
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        Motores mais potentes
+        realizam trabalho
+        mais rapidamente.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="solo"></div>
+
+        <div class="carro"></div>
+
+        <div class="seta-forca"></div>
+
+        <div class="seta-velocidade"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info azul">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Força produz movimento.
+        </li>
+
+        <li>
+          Velocidade influencia potência.
+        </li>
+
+        <li>
+          Motores potentes aceleram mais rápido.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    7. Exemplo Resolvido
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <p>
+
+        Um motor realiza
+        1200J em 6s.
+
+      </p>
+
+      <div class="mini-formula">
+
+        $$P = \frac{\tau}{\Delta t}$$
+
+      </div>
+
+      <div class="mini-formula">
+
+        $$P = \frac{1200}{6}$$
+
+      </div>
+
+      <div class="mini-formula resultado">
+
+        $$P = 200W$$
+
+      </div>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ✅ RESULTADO
+        </h3>
+
+        <p>
+
+          A potência do motor
+          vale 200 Watts.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações da Potência
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Motores automotivos</span>
+    </div>
+
+    <div class="area-card">
+      ⚡
+      <span>Eletrodomésticos</span>
+    </div>
+
+    <div class="area-card">
+      🚀
+      <span>Foguetes</span>
+    </div>
+
+    <div class="area-card">
+      🏭
+      <span>Máquinas industriais</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Compare níveis de potência
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarPotencia('baixa')">
+        🐢 Baixa
+      </button>
+
+      <button onclick="analisarPotencia('media')">
+        🚗 Média
+      </button>
+
+      <button onclick="analisarPotencia('alta')">
+        🚀 Alta
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoPotencia"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1050 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./potencia.js"
+></script>
+
+</body>
+</html>
