@@ -1,0 +1,730 @@
+/* =====================================================
+   DASHBOARD PROFESSOR — LIGHT MINIMAL
+===================================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+
+  --bg:#f5f7fb;
+
+  --card:#ffffff;
+
+  --border:#e8ebf2;
+
+  --text:#1f2937;
+  --text-light:#6b7280;
+
+  --blue:#4f7cff;
+  --blue-soft:#eef3ff;
+
+  --green:#22c55e;
+  --green-soft:#eafcf1;
+
+  --orange:#ff9f43;
+  --orange-soft:#fff4e8;
+
+  --red:#ef4444;
+  --red-soft:#feecec;
+
+  --purple:#9b6dff;
+  --purple-soft:#f4efff;
+
+  --cyan:#38bdf8;
+  --cyan-soft:#ebf9ff;
+
+  --shadow:
+  0 10px 30px rgba(15,23,42,0.05);
+
+}
+
+body{
+
+  font-family:'Inter',sans-serif;
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  padding:30px;
+
+}
+
+
+
+/* =====================================================
+   BARRA SUPERIOR
+===================================================== */
+
+.barra-superior{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:30px;
+
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.btn-voltar,
+.btn-exportar{
+
+  border:none;
+
+  background:white;
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  padding:14px 22px;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  transition:0.25s ease;
+
+  box-shadow:var(--shadow);
+
+}
+
+.btn-voltar:hover,
+.btn-exportar:hover{
+
+  transform:translateY(-2px);
+
+  background:var(--blue);
+
+  color:white;
+
+}
+
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topo{
+
+  margin-bottom:30px;
+
+}
+
+.topo h1{
+
+  font-size:2.2rem;
+  font-weight:700;
+
+}
+
+
+
+/* =====================================================
+   CARDS RESUMO
+===================================================== */
+
+.cards-resumo{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
+  gap:24px;
+
+  margin-bottom:30px;
+
+}
+
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:28px;
+
+  padding:28px;
+
+  min-height:140px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  gap:10px;
+
+  box-shadow:var(--shadow);
+
+  transition:0.25s ease;
+
+}
+
+.card:hover{
+
+  transform:translateY(-5px);
+
+}
+
+.card span{
+
+  font-size:2rem;
+  font-weight:700;
+
+}
+
+.card small{
+
+  color:var(--text-light);
+
+  font-size:0.95rem;
+
+}
+
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros{
+
+  display:flex;
+
+  gap:18px;
+
+  margin-bottom:30px;
+
+  flex-wrap:wrap;
+
+}
+
+
+
+/* =====================================================
+   SELECTS
+===================================================== */
+
+.filtros select{
+
+  background:white;
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  padding:14px 18px;
+
+  min-width:220px;
+
+  font-size:0.95rem;
+
+  color:var(--text);
+
+  outline:none;
+
+  cursor:pointer;
+
+  transition:0.25s ease;
+
+  box-shadow:var(--shadow);
+
+}
+
+.filtros select:focus{
+
+  border-color:var(--blue);
+
+}
+
+
+
+/* =====================================================
+   TABELA CONTAINER
+===================================================== */
+
+.tabela-container{
+
+  background:white;
+
+  border-radius:30px;
+
+  border:1px solid var(--border);
+
+  overflow-x:auto;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+.tabela-dashboard{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:1500px;
+
+}
+
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.tabela-dashboard thead{
+
+  background:#fafbff;
+
+}
+
+.tabela-dashboard th{
+
+  padding:18px;
+
+  text-align:center;
+
+  font-size:0.85rem;
+  font-weight:700;
+
+  color:var(--text-light);
+
+  border-bottom:1px solid var(--border);
+
+  white-space:nowrap;
+
+  text-transform:uppercase;
+
+  letter-spacing:0.5px;
+
+}
+
+
+
+/* =====================================================
+   LINHAS
+===================================================== */
+
+.tabela-dashboard td{
+
+  padding:18px;
+
+  border-top:1px solid #f1f3f7;
+
+  font-size:0.93rem;
+
+  text-align:center;
+
+  vertical-align:middle;
+
+  white-space:nowrap;
+
+}
+
+.tabela-dashboard tbody tr{
+
+  transition:0.2s ease;
+
+}
+
+.tabela-dashboard tbody tr:hover{
+
+  background:#fafcff;
+
+}
+
+
+
+/* =====================================================
+   COLUNAS FIXAS
+===================================================== */
+
+.tabela-dashboard td:first-child,
+.tabela-dashboard th:first-child{
+
+  position:sticky;
+
+  left:0;
+
+  background:white;
+
+  z-index:2;
+
+}
+
+.tabela-dashboard td:nth-child(2),
+.tabela-dashboard th:nth-child(2){
+
+  position:sticky;
+
+  left:50px;
+
+  background:white;
+
+  z-index:2;
+
+  text-align:left;
+
+  padding-left:18px;
+
+}
+
+.tabela-dashboard td:nth-child(3),
+.tabela-dashboard th:nth-child(3){
+
+  text-align:left;
+
+}
+
+
+
+/* =====================================================
+   PATENTES
+===================================================== */
+
+.coluna-patente{
+
+  text-align:center;
+
+}
+
+.icone-patente{
+
+  width:34px;
+  height:34px;
+
+}
+
+
+
+/* =====================================================
+   XP TOTAL
+===================================================== */
+
+.xp-total-box{
+
+  background:var(--green-soft);
+
+  color:var(--green);
+
+  border-radius:10px;
+
+  padding:6px 10px;
+
+  display:inline-block;
+
+  font-weight:700;
+
+}
+
+
+
+/* =====================================================
+   CORES COLUNAS
+===================================================== */
+
+td:nth-child(8){
+
+  color:var(--green);
+
+  font-weight:700;
+
+}
+
+td:nth-child(11){
+
+  color:var(--purple);
+
+  font-weight:700;
+
+}
+
+td:nth-child(12){
+
+  color:var(--cyan);
+
+  font-weight:700;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-ativo{
+
+  color:var(--green);
+
+  font-weight:700;
+
+}
+
+.status-regular{
+
+  color:var(--orange);
+
+  font-weight:700;
+
+}
+
+.status-inativo{
+
+  color:var(--red);
+
+  font-weight:700;
+
+}
+
+
+
+/* =====================================================
+   BOTÕES AÇÕES
+===================================================== */
+
+.coluna-acoes{
+
+  text-align:center;
+
+}
+
+.btn-bonus,
+.btn-science,
+.btn-reset-bonus{
+
+  border:none;
+
+  padding:10px 14px;
+
+  border-radius:14px;
+
+  font-size:0.85rem;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.25s ease;
+
+  margin:2px;
+
+}
+
+
+
+/* XP */
+
+.btn-bonus{
+
+  background:var(--blue-soft);
+
+  color:var(--blue);
+
+}
+
+.btn-bonus:hover{
+
+  background:var(--blue);
+
+  color:white;
+
+}
+
+
+
+/* SP */
+
+.btn-science{
+
+  background:var(--purple-soft);
+
+  color:var(--purple);
+
+}
+
+.btn-science:hover{
+
+  background:var(--purple);
+
+  color:white;
+
+}
+
+
+
+/* RESET */
+
+.btn-reset-bonus{
+
+  background:var(--red-soft);
+
+  color:var(--red);
+
+}
+
+.btn-reset-bonus:hover{
+
+  background:var(--red);
+
+  color:white;
+
+}
+
+
+
+/* =====================================================
+   SCROLL CUSTOM
+===================================================== */
+
+::-webkit-scrollbar{
+
+  height:10px;
+  width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:#d7ddea;
+
+  border-radius:999px;
+
+}
+
+::-webkit-scrollbar-track{
+
+  background:transparent;
+
+}
+
+
+
+/* =====================================================
+   ORDENAÇÃO
+===================================================== */
+
+th[data-sort]{
+
+  cursor:pointer;
+
+  transition:0.2s ease;
+
+}
+
+th[data-sort]:hover{
+
+  color:var(--blue);
+
+}
+
+th[data-sort]::after{
+
+  content:" ⬍";
+
+  opacity:0.35;
+
+  font-size:11px;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:1200px){
+
+  th:nth-child(7),
+  td:nth-child(7){
+
+    display:none;
+
+  }
+
+  th:nth-child(12),
+  td:nth-child(12){
+
+    display:none;
+
+  }
+
+}
+
+@media(max-width:900px){
+
+  body{
+
+    padding:20px;
+
+  }
+
+  .barra-superior{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+  }
+
+  .btn-voltar,
+  .btn-exportar{
+
+    width:100%;
+
+  }
+
+  .cards-resumo{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .filtros{
+
+    flex-direction:column;
+
+  }
+
+  .filtros select{
+
+    width:100%;
+
+  }
+
+  .topo h1{
+
+    font-size:1.8rem;
+
+  }
+
+}

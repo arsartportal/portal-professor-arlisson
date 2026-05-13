@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Escalas Termométricas
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./escalas-termometricas.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🌡️ Termologia • Física
+      </span>
+
+      <h1>
+        Escalas Termométricas
+      </h1>
+
+      <p>
+
+        Aprenda como funcionam as escalas Celsius,
+        Fahrenheit e Kelvin, entenda as conversões
+        de temperatura e descubra aplicações práticas
+        no cotidiano e na ciência.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌡️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que são escalas termométricas?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Escalas termométricas são sistemas
+      utilizados para medir temperaturas.
+
+    </p>
+
+    <p>
+
+      Cada escala possui pontos fixos
+      e divisões específicas.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🌡️ Temperatura = medida da agitação térmica
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CELSIUS
+  ====================================================== -->
+  <h2>
+    2. Escala Celsius
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A escala Celsius é amplamente usada
+      em diversos países.
+
+    </p>
+
+    <p>
+
+      Seus principais pontos fixos são:
+
+    </p>
+
+    <ul class="lista-premium">
+
+      <li>
+        0°C → congelamento da água
+      </li>
+
+      <li>
+        100°C → ebulição da água
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- =====================================================
+       KELVIN
+  ====================================================== -->
+  <h2>
+    3. Escala Kelvin
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$K = °C + 273$$
+
+      </div>
+
+      <p>
+
+        Kelvin é a escala absoluta utilizada
+        oficialmente pelo Sistema Internacional.
+
+      </p>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ❄️ ZERO ABSOLUTO
+        </h3>
+
+        <p>
+
+          O zero absoluto corresponde
+          à menor temperatura teoricamente possível.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FAHRENHEIT
+  ====================================================== -->
+  <h2>
+    4. Escala Fahrenheit
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$F = \frac{9}{5}C + 32$$
+
+    </div>
+
+    <p>
+
+      A escala Fahrenheit é muito utilizada
+      nos Estados Unidos.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       COMPARAÇÃO
+  ====================================================== -->
+  <h2>
+    5. Comparação das Escalas
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🌡️
+      <span>Celsius</span>
+    </div>
+
+    <div class="area-card">
+      ❄️
+      <span>Kelvin</span>
+    </div>
+
+    <div class="area-card">
+      🔥
+      <span>Fahrenheit</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    6. Conversão entre Escalas
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <div class="grafico-escalas">
+
+        <div class="escala">
+
+          <span>0°C</span>
+
+          <div class="linha-escala"></div>
+
+          <span>273K</span>
+
+        </div>
+
+        <div class="escala">
+
+          <span>100°C</span>
+
+          <div class="linha-escala quente"></div>
+
+          <span>373K</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info vermelho">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Celsius e Kelvin possuem mesma variação.
+        </li>
+
+        <li>
+          Fahrenheit possui divisão diferente.
+        </li>
+
+        <li>
+          Kelvin não usa símbolo de grau.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       RELAÇÃO GERAL
+  ====================================================== -->
+  <h2>
+    7. Relação Geral
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$\frac{C}{5} = \frac{F - 32}{9} = \frac{K - 273}{5}$$
+
+    </div>
+
+    <p>
+
+      Essa relação permite converter
+      qualquer escala termométrica.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    8. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🧪
+      <span>Laboratórios</span>
+    </div>
+
+    <div class="area-card">
+      🌎
+      <span>Climatologia</span>
+    </div>
+
+    <div class="area-card">
+      🏥
+      <span>Medicina</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Conversão de Temperaturas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="converterEscala('celsius')">
+        🌡️ Celsius
+      </button>
+
+      <button onclick="converterEscala('kelvin')">
+        ❄️ Kelvin
+      </button>
+
+      <button onclick="converterEscala('fahrenheit')">
+        🔥 Fahrenheit
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha uma escala acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1300 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./escalas-termometricas.js"
+></script>
+
+</body>
+</html>

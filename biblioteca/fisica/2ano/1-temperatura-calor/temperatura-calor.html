@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Temperatura e Calor
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./temperatura-calor.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🌡️ Termologia • Física
+      </span>
+
+      <h1>
+        Temperatura e Calor
+      </h1>
+
+      <p>
+
+        Aprenda a diferença entre calor e temperatura,
+        entenda o equilíbrio térmico,
+        os modos de propagação do calor
+        e descubra como a energia térmica
+        se comporta nos corpos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🔥
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       TEMPERATURA
+  ====================================================== -->
+  <h2>
+    1. O que é Temperatura?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Temperatura é a grandeza física
+      associada ao grau de agitação
+      das partículas de um corpo.
+
+    </p>
+
+    <p>
+
+      Quanto maior a movimentação molecular,
+      maior será a temperatura observada.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🌡️ Maior agitação → Maior temperatura
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CALOR
+  ====================================================== -->
+  <h2>
+    2. O que é Calor?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Calor é a energia térmica
+      transferida entre corpos
+      devido à diferença de temperatura.
+
+    </p>
+
+    <p>
+
+      O calor sempre flui
+      do corpo mais quente
+      para o mais frio.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       FORMULA
+  ====================================================== -->
+  <h2>
+    3. Quantidade de Calor
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$Q = m \cdot c \cdot \Delta T$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(Q\) → quantidade de calor
+        </li>
+
+        <li>
+          \(m\) → massa
+        </li>
+
+        <li>
+          \(c\) → calor específico
+        </li>
+
+        <li>
+          \(\Delta T\) → variação de temperatura
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🔥 CALOR
+        </h3>
+
+        <p>
+
+          O calor depende da massa,
+          do material e da variação
+          de temperatura.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EQUILIBRIO
+  ====================================================== -->
+  <h2>
+    4. Equilíbrio Térmico
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Dois corpos entram em equilíbrio térmico
+      quando atingem a mesma temperatura.
+
+    </p>
+
+    <p>
+
+      Nesse instante,
+      as trocas de calor cessam.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ⚖️ Temperaturas iguais
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ESCALAS
+  ====================================================== -->
+  <h2>
+    5. Escalas Termométricas
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🌡️
+      <span>Celsius</span>
+    </div>
+
+    <div class="area-card">
+      ❄️
+      <span>Kelvin</span>
+    </div>
+
+    <div class="area-card">
+      🔥
+      <span>Fahrenheit</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PROPAGACAO
+  ====================================================== -->
+  <h2>
+    6. Modos de Propagação do Calor
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🧱
+      <span>Condução</span>
+    </div>
+
+    <div class="area-card">
+      🌬️
+      <span>Convecção</span>
+    </div>
+
+    <div class="area-card">
+      ☀️
+      <span>Irradiação</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       GRAFICO
+  ====================================================== -->
+  <h2>
+    7. Transferência Térmica
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <p>
+
+        O calor sempre se transfere
+        espontaneamente
+        do corpo mais quente
+        para o mais frio.
+
+      </p>
+
+      <div class="grafico-real">
+
+        <div class="corpo-quente"></div>
+
+        <div class="seta-calor"></div>
+
+        <div class="corpo-frio"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info vermelho">
+
+      <h3>
+        📈 INTERPRETAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          O calor é energia em trânsito.
+        </li>
+
+        <li>
+          A transferência depende da diferença térmica.
+        </li>
+
+        <li>
+          O processo termina no equilíbrio térmico.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CALOR ESPECIFICO
+  ====================================================== -->
+  <h2>
+    8. Calor Específico
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O calor específico representa
+      a quantidade de calor necessária
+      para variar a temperatura
+      de uma unidade de massa.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$c = \frac{Q}{m \cdot \Delta T}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise situações térmicas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="simularCalor('quente')">
+        🔥 Corpo quente
+      </button>
+
+      <button onclick="simularCalor('frio')">
+        ❄️ Corpo frio
+      </button>
+
+      <button onclick="simularCalor('equilibrio')">
+        ⚖️ Equilíbrio
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um exemplo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1200 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./temperatura-calor.js"
+></script>
+
+</body>
+</html>

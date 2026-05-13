@@ -1,92 +1,421 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Cadastrar Alunos • Portal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="cadastrar-alunosv2.css">
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>
+    Cadastrar Alunos • Portal
+  </title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <link
+    rel="stylesheet"
+    href="cadastrar-alunosv2.css"
+  >
+
 </head>
+
 <body>
 
 <main class="container">
 
-  <h1>Cadastrar aluno</h1>
-  <p class="subtitle">Adicione novos alunos ao sistema</p>
+  <!-- HERO -->
 
-  <form id="formCadastrarAluno">
+  <section class="hero">
 
-    <!-- NOME -->
-    <div class="input-group">
-      <label>Nome</label>
-      <input type="text" id="nome" placeholder="Nome completo" required>
+    <div
+      class="avatar-preview"
+      id="avatarPreview"
+    >
+      AL
     </div>
 
-    <!-- LOGIN INTELIGENTE -->
-    <div class="input-group">
-      <label>Login</label>
-      <input type="text" id="loginPreview" readonly>
-      <small id="loginStatus"></small>
+    <div>
+
+      <h1>
+        Cadastrar aluno
+      </h1>
+
+      <p class="subtitle">
+        Adicione novos alunos ao sistema
+      </p>
+
     </div>
 
-    <!-- SENHA -->
-    <div class="input-group">
-      <label>Senha</label>
+  </section>
 
-      <div class="password-box">
-        <input type="password" id="senha" required minlength="6">
+  <!-- CARD -->
 
-        <button type="button" id="toggleSenha">👁</button>
-        <button type="button" id="gerarSenha">⚡</button>
+  <section class="card">
+
+    <form id="formCadastrarAluno">
+
+      <!-- =========================
+      PROFESSOR RESPONSÁVEL
+      ========================== -->
+
+      <div class="section-title">
+        👨‍🏫 Professor responsável
       </div>
 
-      <small id="senhaTipo" class="senha-badge ok">
-        Senha definida manualmente
-      </small>
-    </div>
+      <div class="professor-card">
 
-    <!-- ESCOLA -->
-    <div class="input-group">
-      <label>Escola</label>
-      <select id="escola" required>
-        <option value="">Selecione</option>
-        <option value="boto-de-menezes">Boto de Menezes</option>
-        <option value="audiocomunicacao">Audiocomunicação</option>
-        <option value="maria-geny">Maria Geny</option>
-      </select>
-    </div>
+        <div class="professor-avatar"
+          id="professorAvatar">
+          PR
+        </div>
 
-    <!-- SÉRIE / TURMA -->
-    <div class="row">
+        <div class="professor-info">
+
+          <span class="professor-label">
+            Cadastro realizado por
+          </span>
+
+          <strong id="professorNome">
+            Carregando professor...
+          </strong>
+
+          <small id="professorEmail">
+            ...
+          </small>
+
+        </div>
+
+      </div>
+
+      <!-- INPUTS OCULTOS -->
+
+      <input
+        type="hidden"
+        id="professorId"
+      >
+
+      <input
+        type="hidden"
+        id="professorNomeHidden"
+      >
+
+      <!-- =========================
+      DADOS PESSOAIS
+      ========================== -->
+
+      <div class="section-title">
+        👤 Dados pessoais
+      </div>
+
+      <!-- NOME -->
+
       <div class="input-group">
-        <label>Série</label>
-        <select id="serie">
-          <option value="">Selecione</option>
-          <option value="1ano">1º Ano</option>
-          <option value="2ano">2º Ano</option>
-          <option value="3ano">3º Ano</option>
-          <option value="eja">EJA</option>
+
+        <label for="nome">
+          Nome completo
+        </label>
+
+        <input
+          type="text"
+          id="nome"
+          placeholder="Digite o nome do aluno"
+          required
+        >
+
+      </div>
+
+      <!-- LOGIN -->
+
+      <div class="input-group">
+
+        <label for="loginPreview">
+          Login do aluno
+        </label>
+
+        <div class="login-preview">
+
+          <input
+            type="text"
+            id="loginPreview"
+            readonly
+          >
+
+          <span class="login-badge">
+            automático
+          </span>
+
+        </div>
+
+        <small id="loginStatus"></small>
+
+      </div>
+
+      <!-- PREVIEW -->
+
+      <div class="preview-card">
+
+        <div class="preview-item">
+
+          <span>👤</span>
+
+          <strong id="previewNome">
+            Nome do aluno
+          </strong>
+
+        </div>
+
+        <div class="preview-item">
+
+          <span>🏫</span>
+
+          <strong id="previewEscola">
+            Escola
+          </strong>
+
+        </div>
+
+        <div class="preview-item">
+
+          <span>📚</span>
+
+          <strong id="previewSerie">
+            Série/Turma
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- =========================
+      SEGURANÇA
+      ========================== -->
+
+      <div class="section-title">
+        🔐 Segurança
+      </div>
+
+      <!-- SENHA -->
+
+      <div class="input-group">
+
+        <label for="senha">
+          Senha temporária
+        </label>
+
+        <div class="password-box">
+
+          <input
+            type="password"
+            id="senha"
+            required
+            minlength="6"
+            placeholder="Digite ou gere uma senha"
+          >
+
+          <button
+            type="button"
+            id="toggleSenha"
+            class="icon-btn"
+          >
+            👁
+          </button>
+
+          <button
+            type="button"
+            id="gerarSenha"
+            class="icon-btn gerar"
+          >
+            ⚡
+          </button>
+
+        </div>
+
+        <!-- FORÇA -->
+
+        <div class="forca-wrapper">
+
+          <div id="barraForca"></div>
+
+        </div>
+
+        <small
+          id="textoForca"
+          class="forca-texto"
+        >
+          Segurança da senha
+        </small>
+
+        <!-- BADGE -->
+
+        <small
+          id="senhaTipo"
+          class="senha-badge ok"
+        >
+          Senha definida manualmente
+        </small>
+
+      </div>
+
+      <!-- SWITCH -->
+
+      <div class="switch-wrapper">
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            id="trocarSenha"
+            checked
+          >
+
+          <span class="slider"></span>
+
+        </label>
+
+        <div>
+
+          <strong>
+            Obrigar troca de senha
+          </strong>
+
+          <p>
+            O aluno precisará criar
+            uma nova senha no primeiro login
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- =========================
+      DADOS ESCOLARES
+      ========================== -->
+
+      <div class="section-title">
+        🏫 Dados escolares
+      </div>
+
+      <!-- ESCOLA -->
+
+      <div class="input-group">
+
+        <label for="escola">
+          Escola
+        </label>
+
+        <select
+          id="escola"
+          required
+        >
+
+          <option value="">
+            Selecione
+          </option>
+
+          <option value="boto-de-menezes">
+            Boto de Menezes
+          </option>
+
+          <option value="audiocomunicacao">
+            Audiocomunicação
+          </option>
+
+          <option value="maria-geny">
+            Maria Geny
+          </option>
+
         </select>
+
       </div>
 
-      <div class="input-group">
-        <label>Turma</label>
-        <input type="text" id="turma" placeholder="A, B...">
+      <!-- ROW -->
+
+      <div class="row">
+
+        <!-- SÉRIE -->
+
+        <div class="input-group">
+
+          <label for="serie">
+            Série
+          </label>
+
+          <select id="serie">
+
+            <option value="">
+              Selecione
+            </option>
+
+            <option value="1ano">
+              1º Ano
+            </option>
+
+            <option value="2ano">
+              2º Ano
+            </option>
+
+            <option value="3ano">
+              3º Ano
+            </option>
+
+            <option value="eja">
+              EJA
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- TURMA -->
+
+        <div class="input-group">
+
+          <label for="turma">
+            Turma
+          </label>
+
+          <input
+            type="text"
+            id="turma"
+            placeholder="A, B..."
+          >
+
+        </div>
+
       </div>
-    </div>
 
-    <button type="submit" id="btnCadastrar">
-      <span class="text">Cadastrar aluno</span>
-      <span class="loader"></span>
-    </button>
+      <!-- BOTÃO -->
 
-  </form>
+      <button
+        type="submit"
+        id="btnCadastrar"
+      >
 
-  <div id="msg"></div>
+        <span class="text">
+          Cadastrar aluno
+        </span>
+
+        <span class="loader"></span>
+
+      </button>
+
+    </form>
+
+    <!-- MENSAGEM -->
+
+    <div id="msg"></div>
+
+  </section>
 
 </main>
 
-<script type="module" src="cadastrar-alunosv2.js"></script>
+<script
+  type="module"
+  src="cadastrar-alunosv2.js"
+></script>
 
 </body>
+
 </html>

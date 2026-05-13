@@ -1,46 +1,210 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Atualizar senha • Portal</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    rel="stylesheet"
+    href="trocar-senha.css"
+  >
 
-  <link rel="stylesheet" href="trocar-senha.css">
 </head>
+
 <body>
 
-<main class="container">
+  <main class="container">
 
-  <h1>Atualize sua senha</h1>
-  <p class="subtitle">
-    Por segurança, você precisa definir uma nova senha para continuar
-  </p>
+    <!-- LOGO -->
+    <div class="logo-area">
 
-  <form id="formTroca">
+      <div class="logo">
+        🔐
+      </div>
 
-    <div class="input-group">
-      <label>Nova senha</label>
-      <input type="password" id="novaSenha" required minlength="6">
+      <h1>
+        Atualize sua senha
+      </h1>
+
+      <p class="subtitle">
+        Por segurança, defina uma nova senha
+        para continuar usando o portal
+      </p>
+
     </div>
 
-    <div class="input-group">
-      <label>Confirmar senha</label>
-      <input type="password" id="confirmarSenha" required minlength="6">
-    </div>
+    <!-- CARD -->
+    <section class="card">
 
-    <button type="submit" id="btnTrocar">
-      <span class="text">Atualizar senha</span>
-      <span class="loader"></span>
-    </button>
+      <form id="formTroca">
 
-  </form>
+        <!-- SENHA ATUAL -->
 
-  <div id="msg"></div>
+        <div class="input-group">
 
-</main>
+          <label for="senhaAtual">
+            Senha atual
+          </label>
 
-<script type="module" src="trocar-senha.js"></script>
+          <div class="password-box">
+
+            <input
+              type="password"
+              id="senhaAtual"
+              placeholder="Digite sua senha atual"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="senhaAtual"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- NOVA SENHA -->
+
+        <div class="input-group">
+
+          <label for="novaSenha">
+            Nova senha
+          </label>
+
+          <div class="password-box">
+
+            <input
+              type="password"
+              id="novaSenha"
+              placeholder="Digite sua nova senha"
+              required
+              minlength="6"
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="novaSenha"
+            >
+              👁️
+            </button>
+
+          </div>
+
+          <!-- FORÇA -->
+
+          <div class="forca-wrapper">
+
+            <div id="barraForca"></div>
+
+          </div>
+
+          <small id="textoForca">
+            Segurança da senha
+          </small>
+
+        </div>
+
+        <!-- CONFIRMAR -->
+
+        <div class="input-group">
+
+          <label for="confirmarSenha">
+            Confirmar nova senha
+          </label>
+
+          <div class="password-box">
+
+            <input
+              type="password"
+              id="confirmarSenha"
+              placeholder="Confirme sua nova senha"
+              required
+              minlength="6"
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="confirmarSenha"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- BOTÃO -->
+
+        <button
+          type="submit"
+          id="btnTrocar"
+        >
+
+          <span class="text">
+            Atualizar senha
+          </span>
+
+          <span class="loader"></span>
+
+        </button>
+
+      </form>
+
+      <!-- MENSAGEM -->
+
+      <div id="msg"></div>
+
+    </section>
+
+  </main>
+
+  <!-- SCRIPT -->
+
+  <script type="module" src="trocar-senha.js"></script>
+
+  <!-- MOSTRAR / ESCONDER SENHA -->
+
+  <script>
+
+    const toggles =
+      document.querySelectorAll(
+        ".toggle-password"
+      );
+
+    toggles.forEach((btn) => {
+
+      btn.addEventListener("click", () => {
+
+        const input =
+          document.getElementById(
+            btn.dataset.target
+          );
+
+        input.type =
+          input.type === "password"
+          ? "text"
+          : "password";
+
+      });
+
+    });
+
+  </script>
 
 </body>
+
 </html>

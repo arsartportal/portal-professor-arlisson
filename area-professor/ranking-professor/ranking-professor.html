@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<!-- =====================================================
+     META CONFIG
+===================================================== -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>📊 Dashboard do Professor</title>
+
+<!-- CSS PRINCIPAL -->
+<link rel="stylesheet" href="ranking-professor.css">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     BARRA SUPERIOR
+===================================================== -->
+
+<div class="barra-superior">
+
+  <!-- Botão voltar -->
+  <button class="btn-voltar" onclick="voltar()">
+    ⬅ Voltar
+  </button>
+
+  <!-- Exportação CSV -->
+  <button id="exportar-csv" class="btn-exportar">
+    📥 Exportar CSV
+  </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOPO DO DASHBOARD
+===================================================== -->
+
+<header class="topo">
+
+  <h1>
+    📊 Dashboard do Professor
+  </h1>
+
+</header>
+
+
+
+<!-- =====================================================
+     CARDS RESUMO
+===================================================== -->
+
+<section class="cards-resumo">
+
+  <!-- TOTAL DE ALUNOS -->
+  <div class="card">
+
+    👥 <span id="total-alunos">0</span>
+    <small>Total de Alunos</small>
+
+  </div>
+
+
+  <!-- ATIVOS -->
+  <div class="card">
+
+    🔥 <span id="ativos">0</span>
+    <small>Ativos (até 3 dias)</small>
+
+  </div>
+
+
+  <!-- REGULARES -->
+  <div class="card">
+
+    ⚠️ <span id="regulares">0</span>
+    <small>Regulares (até 10 dias)</small>
+
+  </div>
+
+
+  <!-- MAIOR XP -->
+  <div class="card">
+
+    🏆 <span id="maior-xp-nome">---</span>
+    <small>
+      <span id="maior-xp-valor">0</span> XP
+    </small>
+
+  </div>
+
+
+  <!-- MÉDIA XP -->
+  <div class="card">
+
+    📈 <span id="media-xp">0</span>
+    <small>Média de XP</small>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FILTROS DO DASHBOARD
+===================================================== -->
+
+<section class="filtros">
+
+  <!-- FILTRO ESCOLA -->
+  <select id="filtro-escola">
+
+    <option value="todas">
+      Todas as escolas
+    </option>
+
+  </select>
+
+
+  <!-- FILTRO SÉRIE -->
+  <select id="filtro-serie">
+
+    <option value="todas">
+      Todas as séries
+    </option>
+
+  </select>
+
+
+  <!-- FILTRO TURMA -->
+  <select id="filtro-turma">
+
+    <option value="todas">
+      Todas as turmas
+    </option>
+
+  </select>
+
+</section>
+
+
+
+<!-- =====================================================
+     TABELA PRINCIPAL DE RANKING
+===================================================== -->
+
+<section class="tabela-container">
+
+<table class="tabela-dashboard">
+
+<thead>
+
+<tr>
+
+  <!-- POSIÇÃO (RESETA O RANKING) -->
+  <th data-sort="posicao">#</th>
+
+  <!-- NOME -->
+  <th data-sort="nome">Aluno</th>
+
+  <!-- ESCOLA -->
+  <th data-sort="escola">Escola</th>
+
+  <!-- SÉRIE -->
+  <th data-sort="serie">Série</th>
+
+  <!-- TURMA -->
+  <th data-sort="turma">Turma</th>
+
+  <!-- XP ATUAL -->
+  <th data-sort="xp">XP</th>
+
+  <!-- XP TOTAL -->
+  <th data-sort="xpTotal">XP Total</th>
+
+  <!-- XP SEMANA -->
+  <th data-sort="xpSemana">📅 XP Semana</th>
+
+  <!-- STREAK -->
+  <th data-sort="streakAtual">🔥 Streak</th>
+
+  <!-- MAIOR STREAK -->
+  <th data-sort="maiorStreak">🏆 Maior Streak</th>
+
+  <!-- SP -->
+  <th data-sort="sciencePoints">🔬 SciencePoints</th>
+
+  <!-- SP GERADOS -->
+  <th data-sort="totalSPGerados">🌍 SP Gerados</th>
+
+  <!-- BÔNUS -->
+  <th data-sort="bonusProvaDisponivel">🎯 Bônus Prova</th>
+
+  <!-- PATENTE -->
+  <th class="coluna-patente">
+    🎖️ Patente
+  </th>
+
+  <!-- STATUS -->
+  <th data-sort="status">Status</th>
+
+  <!-- ÚLTIMO LOGIN -->
+  <th data-sort="ultimoLogin">Último acesso</th>
+
+  <!-- AÇÕES -->
+  <th class="coluna-acoes">
+    Ações
+  </th>
+
+</tr>
+
+</thead>
+
+
+<!-- =====================================================
+     LISTA DINÂMICA DE ALUNOS
+     (preenchida pelo dashboard.js)
+===================================================== -->
+
+<tbody id="lista-alunos">
+
+</tbody>
+
+</table>
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+===================================================== -->
+
+<script type="module" src="ranking-professor.js"></script>
+
+
+</body>
+</html>

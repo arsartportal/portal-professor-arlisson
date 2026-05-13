@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Calorimetria
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./calorimetria.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🔥 Termologia • Física
+      </span>
+
+      <h1>
+        Calorimetria
+      </h1>
+
+      <p>
+
+        Aprenda como ocorre a troca
+        de calor entre os corpos,
+        compreenda calor sensível,
+        calor latente e aplicações
+        importantes da calorimetria.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌡️
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Calorimetria?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A calorimetria é a área da Física
+      que estuda as trocas de calor
+      entre corpos e sistemas térmicos.
+
+    </p>
+
+    <p>
+
+      Quando dois corpos possuem
+      temperaturas diferentes,
+      ocorre transferência de energia.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🔥 Calor flui do corpo quente para o frio
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CALOR SENSÍVEL
+  ====================================================== -->
+  <h2>
+    2. Calor Sensível
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$Q = m \cdot c \cdot \Delta T$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(Q\) → quantidade de calor
+        </li>
+
+        <li>
+          \(m\) → massa
+        </li>
+
+        <li>
+          \(c\) → calor específico
+        </li>
+
+        <li>
+          \(\Delta T\) → variação térmica
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🌡️ CALOR
+        </h3>
+
+        <p>
+
+          O calor sensível altera
+          a temperatura do corpo
+          sem mudar seu estado físico.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CALOR ESPECÍFICO
+  ====================================================== -->
+  <h2>
+    3. Calor Específico
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O calor específico indica
+      a quantidade de calor necessária
+      para variar a temperatura
+      de uma substância.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$c = \frac{Q}{m \cdot \Delta T}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CALOR LATENTE
+  ====================================================== -->
+  <h2>
+    4. Calor Latente
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$Q = m \cdot L$$
+
+    </div>
+
+    <p>
+
+      O calor latente provoca
+      mudança de estado físico
+      sem alterar a temperatura.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       MUDANÇAS DE ESTADO
+  ====================================================== -->
+  <h2>
+    5. Mudanças de Estado
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🧊
+      <span>Fusão</span>
+    </div>
+
+    <div class="area-card">
+      💨
+      <span>Vaporização</span>
+    </div>
+
+    <div class="area-card">
+      ❄️
+      <span>Solidificação</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TROCAS DE CALOR
+  ====================================================== -->
+  <h2>
+    6. Trocas de Calor
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <div class="grafico-dilatacao">
+
+        <div class="barra-quente"></div>
+
+        <div class="seta-aumento"></div>
+
+        <div class="barra-fria"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info vermelho">
+
+      <h3>
+        ⚖️ EQUILÍBRIO
+      </h3>
+
+      <ul>
+
+        <li>
+          O corpo quente perde calor.
+        </li>
+
+        <li>
+          O corpo frio recebe calor.
+        </li>
+
+        <li>
+          O sistema tende ao equilíbrio térmico.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EQUILÍBRIO TÉRMICO
+  ====================================================== -->
+  <h2>
+    7. Equilíbrio Térmico
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Em um sistema isolado,
+      a soma das trocas de calor
+      é igual a zero.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$Q_{cedido} + Q_{recebido} = 0$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    8. Exemplo Resolvido
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Um corpo de massa 200 g
+      recebe 4000 cal.
+      Sabendo que o calor específico
+      é 0,2 cal/g°C,
+      determine a variação térmica.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$4000 = 200 \cdot 0,2 \cdot \Delta T$$
+
+    </div>
+
+    <div class="mini-formula resultado">
+
+      🌡️ \(\Delta T = 100^\circ C\)
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise processos térmicos
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarCalor('sensivel')">
+        🔥 Sensível
+      </button>
+
+      <button onclick="analisarCalor('latente')">
+        🧊 Latente
+      </button>
+
+      <button onclick="analisarCalor('equilibrio')">
+        ⚖️ Equilíbrio
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um tipo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1400 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./calorimetria.js"
+></script>
+
+</body>
+</html>

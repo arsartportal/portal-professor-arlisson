@@ -1,71 +1,449 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #f5f5f7, #e9ecf1);
+/* =========================
+RESET
+========================= */
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 420px;
-  margin: 80px auto;
-  padding: 30px;
+/* =========================
+BODY
+========================= */
 
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(10px);
+body {
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5f7fa,
+      #e4e9f2
+    );
+
+  color: #111;
+
+}
+
+/* =========================
+CONTAINER
+========================= */
+
+.container {
+
+  width: 100%;
+  max-width: 450px;
+
+}
+
+/* =========================
+LOGO
+========================= */
+
+.logo-area {
+
+  text-align: center;
+
+  margin-bottom: 25px;
+
+}
+
+.logo {
+
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 18px;
 
   border-radius: 20px;
 
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-  text-align: center;
+  background:
+    linear-gradient(
+      135deg,
+      #0071e3,
+      #42a5ff
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+
+  color: white;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,113,227,0.25);
+
 }
 
 h1 {
-  margin-bottom: 8px;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  margin-bottom: 10px;
+
 }
 
 .subtitle {
-  font-size: 14px;
+
+  font-size: 15px;
+  line-height: 1.5;
+
   color: #666;
-  margin-bottom: 25px;
+
 }
+
+/* =========================
+CARD
+========================= */
+
+.card {
+
+  background:
+    rgba(255,255,255,0.88);
+
+  backdrop-filter: blur(14px);
+
+  border-radius: 28px;
+
+  padding: 30px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,0.08);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.6);
+
+}
+
+/* =========================
+FORM
+========================= */
+
+form {
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+}
+
+/* =========================
+INPUT GROUP
+========================= */
 
 .input-group {
-  margin-bottom: 15px;
+
   text-align: left;
+
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+.input-group label {
+
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
+  color: #222;
+
 }
 
-button {
+/* =========================
+PASSWORD BOX
+========================= */
+
+.password-box {
+
+  position: relative;
+
+}
+
+.password-box input {
+
   width: 100%;
-  padding: 14px;
-  border-radius: 12px;
+
+  padding:
+    14px
+    50px
+    14px
+    14px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid #d9dde5;
+
+  background: white;
+
+  font-size: 15px;
+
+  transition: 0.25s;
+
+  outline: none;
+
+}
+
+.password-box input:focus {
+
+  border-color: #0071e3;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(0,113,227,0.12);
+
+}
+
+/* =========================
+TOGGLE
+========================= */
+
+.toggle-password {
+
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  background: transparent;
   border: none;
-  background: #0071e3;
-  color: white;
+
   cursor: pointer;
+
+  font-size: 18px;
+
+  width: auto;
+  padding: 0;
+
 }
+
+/* =========================
+FORÇA SENHA
+========================= */
+
+.forca-wrapper {
+
+  width: 100%;
+  height: 8px;
+
+  border-radius: 20px;
+
+  background: #e5e7eb;
+
+  margin-top: 12px;
+
+  overflow: hidden;
+
+}
+
+#barraForca {
+
+  height: 100%;
+  width: 0%;
+
+  border-radius: 20px;
+
+  transition: 0.3s;
+
+  background: #ff4d4f;
+
+}
+
+#textoForca {
+
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 13px;
+
+  color: #666;
+
+}
+
+/* =========================
+BOTÃO
+========================= */
+
+#btnTrocar {
+
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0071e3,
+      #339cff
+    );
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+#btnTrocar:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,113,227,0.25);
+
+}
+
+#btnTrocar:disabled {
+
+  opacity: 0.7;
+  cursor: not-allowed;
+
+}
+
+/* =========================
+LOADER
+========================= */
 
 .loader {
+
   display: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid white;
-  border-top: transparent;
+
+  width: 22px;
+  height: 22px;
+
+  border:
+    2px solid rgba(255,255,255,0.4);
+
+  border-top: 2px solid white;
+
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+
+  animation: spin .8s linear infinite;
+
   margin: auto;
+
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+
+  to {
+
+    transform: rotate(360deg);
+
+  }
+
 }
 
+/* =========================
+MENSAGEM
+========================= */
+
 #msg {
-  margin-top: 15px;
+
+  margin-top: 18px;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
   font-size: 14px;
+  font-weight: 500;
+
+  text-align: center;
+
+  display: none;
+
+}
+
+/* SUCESSO */
+
+#msg.sucesso {
+
+  display: block;
+
+  background:
+    rgba(52,199,89,0.12);
+
+  color: #1c7c38;
+
+  border:
+    1px solid
+    rgba(52,199,89,0.2);
+
+}
+
+/* ERRO */
+
+#msg.erro {
+
+  display: block;
+
+  background:
+    rgba(255,59,48,0.12);
+
+  color: #c62828;
+
+  border:
+    1px solid
+    rgba(255,59,48,0.2);
+
+}
+
+/* =========================
+RESPONSIVO
+========================= */
+
+@media (max-width: 500px) {
+
+  .card {
+
+    padding: 24px;
+
+    border-radius: 24px;
+
+  }
+
+  h1 {
+
+    font-size: 26px;
+
+  }
+
 }

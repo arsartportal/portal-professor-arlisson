@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Mudanças de Estado Físico
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./mudancas-estado.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🧊 Termologia • Física
+      </span>
+
+      <h1>
+        Mudanças de Estado Físico
+      </h1>
+
+      <p>
+
+        Aprenda como as substâncias
+        mudam entre os estados sólido,
+        líquido e gasoso, compreendendo
+        os processos térmicos envolvidos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      💨
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. Estados Físicos da Matéria
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A matéria pode existir
+      nos estados sólido,
+      líquido e gasoso.
+
+    </p>
+
+    <p>
+
+      As mudanças de estado
+      acontecem devido à troca
+      de calor com o ambiente.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🌡️ Calor pode provocar transformações físicas
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FUSÃO
+  ====================================================== -->
+  <h2>
+    2. Fusão
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$Sólido \rightarrow Líquido$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          Ocorre com aquecimento
+        </li>
+
+        <li>
+          Exemplo: gelo derretendo
+        </li>
+
+        <li>
+          Recebe calor
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🧊 FUSÃO
+        </h3>
+
+        <p>
+
+          Durante a fusão,
+          a substância passa
+          do estado sólido
+          para o líquido.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       VAPORIZAÇÃO
+  ====================================================== -->
+  <h2>
+    3. Vaporização
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$Líquido \rightarrow Gasoso$$
+
+    </div>
+
+    <p>
+
+      Pode ocorrer por evaporação,
+      ebulição ou calefação.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       CONDENSAÇÃO
+  ====================================================== -->
+  <h2>
+    4. Condensação
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$Gasoso \rightarrow Líquido$$
+
+    </div>
+
+    <p>
+
+      Ocorre quando o gás perde calor
+      e retorna ao estado líquido.
+
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       SOLIDIFICAÇÃO
+  ====================================================== -->
+  <h2>
+    5. Solidificação
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ❄️
+      <span>Solidificação</span>
+    </div>
+
+    <div class="area-card">
+      💧
+      <span>Condensação</span>
+    </div>
+
+    <div class="area-card">
+      🔥
+      <span>Vaporização</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SUBLIMAÇÃO
+  ====================================================== -->
+  <h2>
+    6. Sublimação
+  </h2>
+
+  <div class="grafico-premium">
+
+    <div class="grafico-conteudo">
+
+      <div class="grafico-dilatacao">
+
+        <div class="barra-fria"></div>
+
+        <div class="seta-aumento"></div>
+
+        <div class="barra-quente"></div>
+
+      </div>
+
+    </div>
+
+    <div class="grafico-info vermelho">
+
+      <h3>
+        💨 SUBLIMAÇÃO
+      </h3>
+
+      <ul>
+
+        <li>
+          Passagem direta do sólido para o gás.
+        </li>
+
+        <li>
+          Exemplo: gelo seco.
+        </li>
+
+        <li>
+          Pode ocorrer também no sentido inverso.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CALOR LATENTE
+  ====================================================== -->
+  <h2>
+    7. Calor Latente
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Durante as mudanças
+      de estado físico,
+      a temperatura permanece constante.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$Q = m \cdot L$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLO
+  ====================================================== -->
+  <h2>
+    8. Exemplo do Cotidiano
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A água fervendo em uma panela
+      sofre vaporização devido
+      ao aumento da temperatura.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🍲 Líquido → Vapor
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    9. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Analise mudanças físicas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarEstado('fusao')">
+        🧊 Fusão
+      </button>
+
+      <button onclick="analisarEstado('vaporizacao')">
+        💨 Vaporização
+      </button>
+
+      <button onclick="analisarEstado('condensacao')">
+        💧 Condensação
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um processo acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    10. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1400 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./mudancas-estado.js"
+></script>
+
+</body>
+</html>
