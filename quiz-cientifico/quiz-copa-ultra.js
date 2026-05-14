@@ -814,7 +814,7 @@ async function finalizar(){
     const ref = doc(db,"usuarios",user.uid);
 
     // 🏅 RECOMPENSA POR FASE
-    const recompensas = [3, 5, 10, 20];
+    const recompensas = [3, 5, 10, 20, 35];
     const sp = recompensas[faseAtual] || 0;
 
     await adicionarSP(sp);
