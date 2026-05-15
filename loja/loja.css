@@ -3030,5 +3030,581 @@ body{
   to { transform: rotate(360deg); }
 }
 
+/* =====================================================
+   MARCOS DA META GLOBAL
+===================================================== */
+
+.barra-meta-wrapper{
+  position: relative;
+  margin: 18px 0 45px;
+}
+
+.barra-meta{
+  position: relative;
+  height: 12px;
+  background: #1e293b;
+  border-radius: 999px;
+  overflow: visible;
+}
+
+.barra-fill{
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#22c55e,#38bdf8);
+  transition: width 1s ease;
+}
+
+/* =====================================================
+   MARCOS
+===================================================== */
+
+.marco-meta{
+
+  position: absolute;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 5;
+
+  width: 30px;
+  height: 30px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 10k de 25k = 40% */
+.marco-1{
+  left: 40%;
+}
+
+/* 15k de 25k = 60% */
+.marco-2{
+  left: 60%;
+}
+
+/* =====================================================
+   PINO
+===================================================== */
+
+.pino{
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #0f172a;
+
+  border: 3px solid #38bdf8;
+
+  box-shadow:
+    0 0 12px rgba(56,189,248,.7);
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.marco-card{
+
+  position: absolute;
+
+  top: 32px;
+  left: 50%;
+
+  min-width: 150px;
+
+  padding: 10px 12px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15,23,42,.98),
+      rgba(30,41,59,.95)
+    );
+
+  border: 1px solid rgba(56,189,248,.25);
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-align: center;
+
+  box-shadow:
+    0 12px 25px rgba(0,0,0,.35);
+
+  backdrop-filter: blur(10px);
+
+  /* 🔥 ESCONDIDO */
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translateX(-50%)
+    translateY(10px)
+    scale(.95);
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+/* =====================================================
+   TEXTO INTERNO
+===================================================== */
+
+.marco-card span{
+
+  display: block;
+
+  margin-top: 6px;
+
+  color: #38bdf8;
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+/* =====================================================
+   SETA
+===================================================== */
+
+.marco-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:-8px;
+
+  width:14px;
+  height:14px;
+
+  background:#1e293b;
+
+  transform:
+    translateX(-50%)
+    rotate(45deg);
+
+  border-left:
+    1px solid rgba(56,189,248,.25);
+
+  border-top:
+    1px solid rgba(56,189,248,.25);
+}
+
+/* =====================================================
+   HOVER DESKTOP
+===================================================== */
+
+.marco-meta:hover .marco-card{
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transform:
+    translateX(-50%)
+    translateY(0)
+    scale(1);
+}
+
+/* =====================================================
+   TOUCH MOBILE
+===================================================== */
+
+.marco-meta:active .marco-card{
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transform:
+    translateX(-50%)
+    translateY(0)
+    scale(1);
+}
+
+/* =====================================================
+   BOLINHA REATIVA
+===================================================== */
+
+.marco-meta:hover .pino,
+.marco-meta:active .pino{
+
+  transform: scale(1.2);
+}
+
+/* =====================================================
+   ESTADOS DOS MARCOS
+===================================================== */
+
+/* FUTURO / BLOQUEADO */
+
+.marco-meta.locked .pino{
+
+  border-color: #475569;
+
+  background: #0f172a;
+
+  box-shadow: none;
+}
+
+.marco-meta.locked .marco-card{
+
+  border-color:
+    rgba(255,255,255,.08);
+}
+
+.marco-meta.locked .marco-card::before{
+
+  content: "🔒";
+
+  position: absolute;
+
+  top: -10px;
+  right: -10px;
+
+  width: 28px;
+  height: 28px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#0f172a;
+
+  border:
+    1px solid rgba(255,255,255,.1);
+
+  font-size:14px;
+}
+
+/* =====================================================
+   DESBLOQUEADO
+===================================================== */
+
+.marco-meta.unlocked .pino{
+
+  border-color:#22c55e;
+
+  background:#22c55e;
+
+  box-shadow:
+    0 0 12px rgba(34,197,94,.8),
+    0 0 30px rgba(34,197,94,.5);
+
+  animation:
+    pulseMarco 1.5s infinite;
+}
+
+.marco-meta.unlocked .marco-card{
+
+  border-color:
+    rgba(34,197,94,.4);
+
+  box-shadow:
+    0 0 20px rgba(34,197,94,.18),
+    0 10px 30px rgba(0,0,0,.4);
+}
+
+/* =====================================================
+   DESBLOQUEIO
+===================================================== */
+
+.marco-meta.unlock-animation .pino{
+
+  animation:
+    explosaoMarco .7s ease,
+    pulseMarco 1.5s infinite .7s;
+}
+
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
+
+@keyframes explosaoMarco{
+
+  0%{
+    transform:scale(.5);
+    opacity:.5;
+  }
+
+  50%{
+    transform:scale(1.8);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+@keyframes pulseMarco{
+
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.15);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+/* =====================================================
+   CONFETE
+===================================================== */
+
+.confete{
+
+  position: fixed;
+
+  top: -20px;
+
+  width: 10px;
+  height: 18px;
+
+  border-radius: 3px;
+
+  z-index: 99999;
+
+  animation:
+    cairConfete linear forwards;
+}
+
+@keyframes cairConfete{
+
+  0%{
+
+    transform:
+      translateY(-20px)
+      rotate(0deg);
+
+    opacity:1;
+  }
+
+  100%{
+
+    transform:
+      translateY(110vh)
+      rotate(720deg);
+
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   EVENTO GLOBAL
+===================================================== */
+
+.card-sp-global.evento-ativo{
+
+  animation:
+    glowEvento 2s infinite alternate;
+
+  border-color:
+    rgba(34,197,94,.4);
+
+  box-shadow:
+    0 0 30px rgba(34,197,94,.15),
+    0 0 80px rgba(34,197,94,.08);
+}
+
+@keyframes glowEvento{
+
+  from{
+
+    box-shadow:
+      0 0 20px rgba(34,197,94,.12),
+      0 0 60px rgba(34,197,94,.05);
+  }
+
+  to{
+
+    box-shadow:
+      0 0 40px rgba(34,197,94,.25),
+      0 0 100px rgba(34,197,94,.12);
+  }
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:700px){
+
+  .marco-card{
+
+    min-width: 120px;
+
+    font-size: 11px;
+
+    padding: 8px;
+  }
+
+  .pino{
+
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* =====================================================
+   TOPO COMUNIDADE
+===================================================== */
+
+.topo-comunidade{
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:24px;
+}
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.evento-badge{
+
+  padding:8px 16px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249,115,22,.18),
+      rgba(239,68,68,.12)
+    );
+
+  border:
+    1px solid rgba(249,115,22,.25);
+
+  color:#fdba74;
+
+  font-size:13px;
+  font-weight:800;
+
+  letter-spacing:.5px;
+
+  text-transform:uppercase;
+
+  box-shadow:
+    0 0 20px rgba(249,115,22,.08);
+}
+
+/* =====================================================
+   VALOR
+===================================================== */
+
+.valor-comunidade{
+
+  display:flex;
+  align-items:flex-end;
+
+  gap:8px;
+}
+
+.valor-comunidade span{
+
+  font-size:64px;
+  font-weight:900;
+
+  line-height:1;
+
+  color:#38bdf8;
+
+  text-shadow:
+    0 0 25px rgba(56,189,248,.45);
+}
+
+.valor-comunidade small{
+
+  font-size:20px;
+  font-weight:800;
+
+  color:#7dd3fc;
+
+  margin-bottom:8px;
+}
+
+/* =====================================================
+   SUBTEXTO
+===================================================== */
+
+.subtexto-comunidade{
+
+  color:#94a3b8;
+
+  font-size:15px;
+
+  font-weight:500;
+}
+
+/* =====================================================
+   META TEXTO
+===================================================== */
+
+.meta-texto{
+
+  color:#cbd5e1;
+
+  font-size:14px;
+
+  font-weight:700;
+}
+
+.meta-texto span{
+
+  color:#38bdf8;
+
+  font-weight:900;
+}
+
+/* =====================================================
+   INFO DA BARRA
+===================================================== */
+
+.meta-info{
+
+  margin-bottom:16px;
+
+  text-align:center;
+
+  color:white;
+
+  font-size:32px;
+  font-weight:900;
+
+  letter-spacing:.5px;
+}
 
 

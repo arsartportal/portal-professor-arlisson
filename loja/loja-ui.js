@@ -170,9 +170,12 @@ const agora = getAgora();
     if (item.id === "chaveiro-univers3d") { tipo = "padrao"; }
 
     // 🔥 Unifica prova + revanche
-    if (tipo === "prova" || tipo === "revanche") {
-      tipo = "beneficios";
-    }
+    if (
+  tipo === "prova" ||
+  tipo === "prova-extra"
+) {
+  tipo = "beneficios";
+}
 
     if (!grupos[tipo]) grupos[tipo] = [];
     grupos[tipo].push(item);
@@ -424,3 +427,4 @@ function encontrarMelhorItem(itens, tipo) {
   // 🎯 sempre o lendário (inclusive ranking)
   return itens.find(item => item.raridade === "lendario");
 }
+

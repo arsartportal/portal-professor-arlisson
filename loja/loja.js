@@ -18,7 +18,6 @@ import {
   iniciarEventos,
   carregarSPTempoReal,
   carregarHistorico,
-  carregarSPGlobal,
   carregarMetaGlobal,
   carregarRankingGasto,
   carregarEstoque,
@@ -73,7 +72,6 @@ auth.onAuthStateChanged(async (user) => {
     });
 
     carregarHistorico();
-    carregarSPGlobal();
     carregarMetaGlobal();
     carregarRankingGasto();
 

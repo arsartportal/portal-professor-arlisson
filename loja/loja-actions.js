@@ -80,48 +80,139 @@
   }
 
 
-  // ======================================================
-  // 🌍 META GLOBAL
-  // ======================================================
+// ======================================================
+// 🌍 META GLOBAL
+// ======================================================
 
-  export function carregarSPGlobal() {
+let meta10kLiberada = false;
+let meta15kLiberada = false;
 
-    const ref = doc(db, "config", "lojaStats");
+export function carregarMetaGlobal() {
 
-    onSnapshot(ref, snap => {
+  const ref = doc(db, "config", "lojaStats");
 
-      if (!snap.exists()) return;
+  onSnapshot(ref, snap => {
 
-      const total = snap.data().totalSPGasto || 0;
-      const el = document.getElementById("sp-global");
+    if (!snap.exists()) return;
 
-      if (el) el.innerText = total.toLocaleString("pt-BR");
-    });
-  }
+    const d = snap.data();
 
-  export function carregarMetaGlobal() {
+    const total = d.totalSPGasto || 0;
+    // 🔥 TOTAL DA COMUNIDADE
+const spGlobal =
+  document.getElementById("sp-global");
 
-    const ref = doc(db, "config", "lojaStats");
+if (spGlobal){
+  spGlobal.innerText =
+    total.toLocaleString("pt-BR");
+}
+    const meta = d.meta || 25000;
 
-    onSnapshot(ref, snap => {
+    const porcentagem =
+      Math.min((total / meta) * 100, 100);
 
-      if (!snap.exists()) return;
+    // ==================================================
+    // UI BASE
+    // ==================================================
 
-      const d = snap.data();
+    document.getElementById("barra-meta-fill").style.width =
+      porcentagem + "%";
 
-      const total = d.totalSPGasto || 0;
-      const meta = d.meta || 10000;
+    // ==================================================
+    // 🎯 MARCOS
+    // ==================================================
 
-      const porcentagem = Math.min((total / meta) * 100, 100);
+    const marco1 =
+      document.querySelector(".marco-1");
 
-      document.getElementById("meta-valor").innerText = total.toLocaleString("pt-BR");
-      document.getElementById("meta-max").innerText = meta.toLocaleString("pt-BR");
+    const marco2 =
+      document.querySelector(".marco-2");
 
-      document.getElementById("barra-meta-fill").style.width = porcentagem + "%";
-    });
-  }
+    const meta1 = 10000;
+    const meta2 = 15000;
 
+    // RESET
 
+    marco1?.classList.remove(
+      "locked",
+      "unlocked"
+    );
+
+    marco2?.classList.remove(
+      "locked",
+      "unlocked"
+    );
+
+    // ==================================================
+    // 🟢 META 10K
+    // ==================================================
+
+    if (total >= meta1){
+
+      marco1?.classList.add("unlocked");
+
+      if (!meta10kLiberada){
+
+        meta10kLiberada = true;
+
+        marco1?.classList.add(
+          "unlock-animation"
+        );
+
+        ativarEventoGlobal();
+        soltarConfete();
+
+        setTimeout(() => {
+
+          marco1?.classList.remove(
+            "unlock-animation"
+          );
+
+        }, 1500);
+      }
+
+    } else {
+
+      marco1?.classList.add("locked");
+    }
+
+    // ==================================================
+    // 🟢 META 15K
+    // ==================================================
+
+    if (total >= meta2){
+
+      marco2?.classList.add("unlocked");
+
+      if (!meta15kLiberada){
+
+        meta15kLiberada = true;
+
+        marco2?.classList.add(
+          "unlock-animation"
+        );
+
+        ativarEventoGlobal();
+        soltarConfete();
+
+        setTimeout(() => {
+
+          marco2?.classList.remove(
+            "unlock-animation"
+          );
+
+        }, 1500);
+      }
+
+    } else {
+
+      marco2?.classList.add("locked");
+    }
+
+  });
+}
+
+  
   // ======================================================
   // 🏆 RANKING (TOP 10 ORGANIZADO)
   // ======================================================
@@ -616,8 +707,8 @@ if (item.tipo === "prova") {
           xp: increment(item.xp)
         });
 
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         modalXP(item.xp);
       }
@@ -632,8 +723,8 @@ if (item.tipo === "prova") {
           fichasLab: increment(item.fichas)
         });
 
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         modalRecompensa({
           titulo: "🎟️ Fichas recebidas",
@@ -652,8 +743,8 @@ if (item.tipo === "prova") {
           bonusProvaDisponivel: increment(item.valor)
         });
 
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         modalRecompensa({
           titulo: "🎯 Bônus de prova",
@@ -672,8 +763,8 @@ if (item.tipo === "prova") {
           rankingFichas: increment(item.quantidade)
         });
 
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         modalRecompensa({
           titulo: "🏆 Fichas de ranking",
@@ -692,8 +783,8 @@ if (item.tipo === "prova") {
           provaExtraDisponivel: increment(1)
         });
 
-          await atualizarMetaGlobal(item.preco);
-          await atualizarRankingGasto(item.preco);
+          await atualizarSPGlobal(item.preco);
+          await atualizarRankingUsuario(item.preco);
 
         modalLendario({
           titulo: "🔁 Revanche Acadêmica",
@@ -711,8 +802,8 @@ if (item.tipo === "prova") {
           [`tools.${item.tool}`]: true
         });
 
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         modalLendario({
           titulo: "🧰 Ferramenta desbloqueada",
@@ -729,8 +820,8 @@ if (item.tipo === "prova") {
           sciencePoints: spDepois
         });
 
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         await abrirCaixa(item);
       }
@@ -744,8 +835,8 @@ if (item.tipo === "prova") {
           sciencePoints: spDepois
         });
 
-          await atualizarMetaGlobal(item.preco);
-          await atualizarRankingGasto(item.preco);
+          await atualizarSPGlobal(item.preco);
+          await atualizarRankingUsuario(item.preco);
 
         await abrirRoleta();
       }
@@ -760,8 +851,8 @@ if (item.tipo === "prova") {
           premioSolicitado: true
         });
         
-        await atualizarMetaGlobal(item.preco);
-        await atualizarRankingGasto(item.preco);
+        await atualizarSPGlobal(item.preco);
+        await atualizarRankingUsuario(item.preco);
 
         modalLendario({
           titulo: "🔑 Prêmio solicitado",
@@ -813,7 +904,7 @@ if (
     }
   }
 
-  async function atualizarMetaGlobal(valor) {
+  async function atualizarSPGlobal(valor) {
     const statsRef = doc(db, "config", "lojaStats");
 
     await updateDoc(statsRef, {
@@ -913,7 +1004,7 @@ export function atualizarContadores() {
 // 🏆 ATUALIZAR RANKING DE GASTO
 // ======================================================
 
-async function atualizarRankingGasto(valor) {
+async function atualizarRankingUsuario(valor) {
 
   const user = auth.currentUser;
   if (!user) return;
@@ -930,4 +1021,61 @@ async function atualizarRankingGasto(valor) {
   } catch (erro) {
     console.error("Erro ao atualizar ranking:", erro);
   }
+}
+
+// ======================================================
+// 🎉 CONFETE
+// ======================================================
+
+function soltarConfete(){
+
+  const cores = [
+    "#22c55e",
+    "#38bdf8",
+    "#facc15",
+    "#ec4899",
+    "#ffffff"
+  ];
+
+  for(let i = 0; i < 120; i++){
+
+    const confete =
+      document.createElement("div");
+
+    confete.className = "confete";
+
+    confete.style.left =
+      Math.random() * 100 + "vw";
+
+    confete.style.background =
+      cores[
+        Math.floor(
+          Math.random() * cores.length
+        )
+      ];
+
+    confete.style.animationDuration =
+      (Math.random() * 3 + 2) + "s";
+
+    confete.style.opacity =
+      Math.random();
+
+    document.body.appendChild(confete);
+
+    setTimeout(() => {
+      confete.remove();
+    }, 5000);
+  }
+}
+
+// ======================================================
+// 🌍 EVENTO GLOBAL
+// ======================================================
+
+function ativarEventoGlobal(){
+
+  const card =
+    document.querySelector(".card-sp-global");
+
+  card?.classList.add("evento-ativo");
 }
