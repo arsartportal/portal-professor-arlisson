@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Avatar Preview</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0f172a;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+    color:white;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.preview-container{
+    background:#111827;
+    padding:40px;
+    border-radius:25px;
+    width:420px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+.sub{
+    text-align:center;
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+/* =========================================
+   AVATAR
+========================================= */
+
+.avatar-box{
+    width:300px;
+    height:300px;
+    margin:auto;
+    position:relative;
+    background:#1e293b;
+    border-radius:20px;
+    overflow:hidden;
+    border:3px solid #334155;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* =========================================
+   CAMADAS
+========================================= */
+
+.layer{
+
+    position:absolute;
+
+    transform-origin:center center;
+
+    cursor:grab;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    transition:
+    outline 0.2s ease,
+    filter 0.2s ease;
+
+}
+
+/* HOVER */
+
+.layer:hover{
+
+    filter:brightness(1.05);
+
+}
+
+/* SELECIONADA */
+
+.layer.active{
+
+    outline:2px dashed #3b82f6;
+
+    filter:brightness(1.1);
+
+}
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+.controls{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.control-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+label{
+    font-size:14px;
+    color:#cbd5e1;
+}
+
+select{
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#1e293b;
+    color:white;
+    font-size:15px;
+    outline:none;
+    transition:0.2s;
+}
+
+select:focus{
+    border:2px solid #3b82f6;
+}
+
+/* =========================================
+   INFO BOX
+========================================= */
+
+.info-box{
+
+    margin-top:25px;
+
+    background:#0f172a;
+
+    border:1px solid #334155;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    font-size:13px;
+
+    color:#94a3b8;
+
+    line-height:1.6;
+
+}
+
+.info-box strong{
+
+    color:white;
+
+}
+
+/* =========================================
+   SCROLL HINT
+========================================= */
+
+.scroll-hint{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#64748b;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="preview-container">
+
+    <h1>🎮 Avatar Preview</h1>
+
+    <!-- AVATAR -->
+
+    <div class="avatar-box">
+
+        <!-- BASE -->
+        <img 
+            id="base-layer"
+            class="layer"
+            src="/assets/avatares/bases/masculino-1.png"
+        >
+
+        <!-- ROUPA -->
+        <img 
+            id="roupa-layer"
+            class="layer"
+            src="/assets/avatares/roupas/roupa-1.png"
+        >
+
+        <!-- CABELO -->
+        <img 
+            id="cabelo-layer"
+            class="layer"
+            src="/assets/avatares/cabelos/cabelo-1.png"
+        >
+
+        <!-- ACESSÓRIO -->
+        <img 
+            id="acessorio-layer"
+            class="layer"
+            src="/assets/avatares/acessorios/oculos-1.png"
+        >
+
+    </div>
+
+    <!-- CONTROLES -->
+
+    <div class="controls">
+
+        <!-- BASE -->
+
+        <div class="control-group">
+
+            <label>Base</label>
+
+            <select id="base-select">
+
+                <option value="masculino-1.png">
+                    Masculino 1
+                </option>
+
+                <option value="feminino-1.png">
+                    Feminino 1
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- CABELO -->
+
+        <div class="control-group">
+
+            <label>Cabelo</label>
+
+            <select id="cabelo-select">
+
+                <option value="cabelo-1.png">
+                    Cabelo 1
+                </option>
+
+                <option value="cabelo-2.png">
+                    Cabelo 2
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- ROUPA -->
+
+        <div class="control-group">
+
+            <label>Roupa</label>
+
+            <select id="roupa-select">
+
+                <option value="roupa-1.png">
+                    Roupa 1
+                </option>
+
+                <option value="roupa-2.png">
+                    Roupa 2
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- ACESSÓRIO -->
+
+        <div class="control-group">
+
+            <label>Acessório</label>
+
+            <select id="acessorio-select">
+
+                <option value="oculos-1.png">
+                    Óculos
+                </option>
+
+                <option value="bone-1.png">
+                    Boné
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const layers = {
+
+    base: document.getElementById("base-layer"),
+
+    roupa: document.getElementById("roupa-layer"),
+
+    cabelo: document.getElementById("cabelo-layer"),
+
+    acessorio: document.getElementById("acessorio-layer")
+
+};
+
+/* =========================================
+   CONFIG
+========================================= */
+
+const avatarConfig = {
+
+    base: {
+        x: 0,
+        y: 18,
+        scale: 0.92,
+        z: 1
+    },
+
+    roupa: {
+        x: 0,
+        y: 42,
+        scale: 0.88,
+        z: 2
+    },
+
+    cabelo: {
+        x: 0,
+        y: -42,
+        scale: 0.74,
+        z: 3
+    },
+
+    acessorio: {
+        x: 0,
+        y: -2,
+        scale: 0.28,
+        z: 4
+    }
+
+};
+
+/* =========================================
+   APPLY
+========================================= */
+
+function applyLayer(name){
+
+    const layer = layers[name];
+
+    const config = avatarConfig[name];
+
+    layer.style.position = "absolute";
+
+    layer.style.left = "50%";
+
+    layer.style.top = "50%";
+
+    layer.style.zIndex = config.z;
+
+    layer.style.cursor = "grab";
+
+    layer.style.userSelect = "none";
+
+    layer.style.transform =
+    `
+    translate(
+        calc(-50% + ${config.x}px),
+        calc(-50% + ${config.y}px)
+    )
+    scale(${config.scale})
+    `;
+
+}
+
+/* =========================================
+   INIT
+========================================= */
+
+Object.keys(layers).forEach(applyLayer);
+
+/* =========================================
+   DRAG
+========================================= */
+
+let currentLayer = null;
+
+let startMouseX = 0;
+let startMouseY = 0;
+
+let startX = 0;
+let startY = 0;
+
+/* =========================================
+   MOUSEDOWN
+========================================= */
+
+Object.entries(layers).forEach(([name, layer]) => {
+
+    layer.addEventListener("mousedown", (e) => {
+
+        e.preventDefault();
+
+        currentLayer = name;
+
+        startMouseX = e.clientX;
+        startMouseY = e.clientY;
+
+        startX = avatarConfig[name].x;
+        startY = avatarConfig[name].y;
+
+        layer.style.cursor = "grabbing";
+
+    });
+
+});
+
+/* =========================================
+   MOUSEMOVE
+========================================= */
+
+document.addEventListener("mousemove", (e) => {
+
+    if(!currentLayer) return;
+
+    const dx =
+    e.clientX - startMouseX;
+
+    const dy =
+    e.clientY - startMouseY;
+
+    avatarConfig[currentLayer].x =
+    startX + dx;
+
+    avatarConfig[currentLayer].y =
+    startY + dy;
+
+    applyLayer(currentLayer);
+
+});
+
+/* =========================================
+   MOUSEUP
+========================================= */
+
+document.addEventListener("mouseup", () => {
+
+    if(!currentLayer) return;
+
+    layers[currentLayer].style.cursor =
+    "grab";
+
+    console.clear();
+
+    console.log(
+        JSON.stringify(
+            avatarConfig,
+            null,
+            4
+        )
+    );
+
+    currentLayer = null;
+
+});
+
+/* =========================================
+   SCALE COM SCROLL
+========================================= */
+
+Object.entries(layers).forEach(([name, layer]) => {
+
+    layer.addEventListener("wheel", (e) => {
+
+        e.preventDefault();
+
+        if(e.deltaY < 0){
+
+            avatarConfig[name].scale += 0.02;
+
+        } else {
+
+            avatarConfig[name].scale -= 0.02;
+
+        }
+
+        if(avatarConfig[name].scale < 0.05){
+
+            avatarConfig[name].scale = 0.05;
+
+        }
+
+        applyLayer(name);
+
+        console.clear();
+
+        console.log(
+            JSON.stringify(
+                avatarConfig,
+                null,
+                4
+            )
+        );
+
+    });
+
+});
+
+/* =========================================
+   SELECTS
+========================================= */
+
+const baseSelect =
+document.getElementById("base-select");
+
+const cabeloSelect =
+document.getElementById("cabelo-select");
+
+const roupaSelect =
+document.getElementById("roupa-select");
+
+const acessorioSelect =
+document.getElementById("acessorio-select");
+
+/* =========================================
+   TROCAR IMAGENS
+========================================= */
+
+baseSelect.addEventListener("change", () => {
+
+    layers.base.src =
+    `/assets/avatares/bases/${baseSelect.value}`;
+
+});
+
+cabeloSelect.addEventListener("change", () => {
+
+    layers.cabelo.src =
+    `/assets/avatares/cabelos/${cabeloSelect.value}`;
+
+});
+
+roupaSelect.addEventListener("change", () => {
+
+    layers.roupa.src =
+    `/assets/avatares/roupas/${roupaSelect.value}`;
+
+});
+
+acessorioSelect.addEventListener("change", () => {
+
+    layers.acessorio.src =
+    `/assets/avatares/acessorios/${acessorioSelect.value}`;
+
+});
+
+</script>
+
+</body>
+</html>
