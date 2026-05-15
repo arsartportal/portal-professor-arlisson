@@ -1,0 +1,851 @@
+/* =========================================
+RESET
+========================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+
+  --bg:#f4f7fb;
+
+  --sidebar:#0f172a;
+  --sidebar-hover:#1e293b;
+
+  --card:#ffffff;
+  --border:#e2e8f0;
+
+  --text:#0f172a;
+  --text2:#64748b;
+
+  --primary:#0ea5e9;
+  --primary2:#0284c7;
+
+  --success:#22c55e;
+  --danger:#ef4444;
+  --warning:#f59e0b;
+
+  --shadow:
+    0 10px 30px rgba(15,23,42,0.06);
+
+  --radius:24px;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* =========================================
+LAYOUT
+========================================= */
+
+.layout{
+  display:flex;
+  min-height:100vh;
+}
+
+/* =========================================
+SIDEBAR
+========================================= */
+
+.sidebar{
+
+  width:260px;
+
+  background:var(--sidebar);
+
+  color:white;
+
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+
+  padding:30px 20px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  z-index:1000;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:40px;
+}
+
+.sidebar-nav{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.sidebar-nav a{
+
+  text-decoration:none;
+  color:#cbd5e1;
+
+  padding:14px 18px;
+
+  border-radius:16px;
+
+  transition:.25s ease;
+
+  font-weight:600;
+}
+
+.sidebar-nav a:hover{
+  background:var(--sidebar-hover);
+  color:white;
+}
+
+.sidebar-nav a.active{
+  background:linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+
+  color:white;
+}
+
+.sidebar-footer{
+  margin-top:20px;
+}
+
+.sp-box{
+
+  background:#111827;
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  padding:14px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  font-weight:700;
+}
+
+/* =========================================
+CONTEÚDO
+========================================= */
+
+.conteudo{
+
+  margin-left:260px;
+
+  width:100%;
+
+  padding:40px;
+}
+
+/* =========================================
+TOPBAR
+========================================= */
+
+.topbar{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:30px;
+}
+
+.titulo-page{
+  font-size:36px;
+  font-weight:800;
+}
+
+.subtitulo-page{
+  margin-top:5px;
+  color:var(--text2);
+}
+
+.btn-voltar{
+
+  border:none;
+
+  background:white;
+
+  padding:12px 18px;
+
+  border-radius:16px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  box-shadow:var(--shadow);
+
+  transition:.2s;
+}
+
+.btn-voltar:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================================
+GRID
+========================================= */
+
+.dashboard-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    2fr 1fr;
+
+  gap:25px;
+}
+
+.coluna-principal,
+.coluna-lateral{
+
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+/* =========================================
+CARDS
+========================================= */
+
+.card{
+
+  background:var(--card);
+
+  border-radius:var(--radius);
+
+  padding:30px;
+
+  box-shadow:var(--shadow);
+
+  border:1px solid var(--border);
+
+  transition:.25s ease;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card h2{
+  font-size:24px;
+  margin-bottom:12px;
+}
+
+.card-text{
+  color:var(--text2);
+  line-height:1.6;
+}
+
+/* =========================================
+TOPO INFO
+========================================= */
+
+.top-info{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:20px;
+}
+
+.badge-materia{
+
+  background:#eff6ff;
+  color:#2563eb;
+
+  padding:10px 14px;
+
+  border-radius:999px;
+
+  font-size:14px;
+  font-weight:700;
+}
+
+.xp-badge{
+
+  background:#ecfeff;
+  color:#0891b2;
+
+  padding:10px 14px;
+
+  border-radius:999px;
+
+  font-size:14px;
+  font-weight:700;
+}
+
+/* =========================================
+BADGE DESAFIO
+========================================= */
+
+.badge-desafio{
+
+  display:inline-flex;
+  align-items:center;
+
+  margin-bottom:25px;
+
+  background:linear-gradient(
+    135deg,
+    #f97316,
+    #ef4444
+  );
+
+  color:white;
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  font-size:14px;
+  font-weight:700;
+}
+
+/* =========================================
+PERGUNTA
+========================================= */
+
+.pergunta{
+
+  font-size:28px;
+  font-weight:700;
+
+  line-height:1.5;
+
+  margin-bottom:25px;
+}
+
+/* =========================================
+OPÇÕES
+========================================= */
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.options button{
+
+  width:100%;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  border:1px solid var(--border);
+
+  background:white;
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  font-size:15px;
+  font-weight:600;
+
+  transition:.25s ease;
+
+  text-align:left;
+}
+
+.options button:hover{
+
+  border-color:#bae6fd;
+
+  background:#f0f9ff;
+
+  transform:translateY(-2px);
+}
+
+.options button.selected{
+
+  background:linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+
+  color:white;
+
+  border:none;
+
+  box-shadow:
+    0 10px 20px rgba(14,165,233,0.25);
+}
+
+.correct{
+
+  background:linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  ) !important;
+
+  color:white !important;
+  border:none !important;
+}
+
+.wrong{
+
+  background:linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  ) !important;
+
+  color:white !important;
+  border:none !important;
+}
+
+/* =========================================
+BOTÕES
+========================================= */
+
+.btn-primary,
+#btnResponder,
+#btnColetarReward,
+#btnColetarMissao{
+
+  width:100%;
+
+  border:none;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  cursor:pointer;
+
+  font-weight:700;
+  font-size:15px;
+
+  background:linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+
+  color:white;
+
+  transition:.25s ease;
+
+  margin-top:20px;
+}
+
+.btn-primary:hover,
+#btnResponder:hover,
+#btnColetarReward:hover,
+#btnColetarMissao:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(14,165,233,0.25);
+}
+
+#btnResponder:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+/* =========================================
+STATUS
+========================================= */
+
+.status{
+  margin-top:15px;
+  font-weight:600;
+}
+
+/* =========================================
+FEEDBACK
+========================================= */
+
+.feedback-visual{
+
+  margin-top:20px;
+
+  font-size:28px;
+  font-weight:800;
+
+  text-align:center;
+}
+
+.acertou{
+  color:var(--success);
+}
+
+.errou{
+  color:var(--danger);
+}
+
+/* =========================================
+TIMER
+========================================= */
+
+.next-question-box{
+
+  margin-top:20px;
+
+  padding:16px;
+
+  background:#fff7ed;
+
+  border:1px solid #fed7aa;
+
+  color:#c2410c;
+
+  border-radius:18px;
+
+  font-weight:700;
+}
+
+/* =========================================
+STREAK
+========================================= */
+
+.streak-box{
+  margin-top:10px;
+}
+
+#streakValor{
+
+  display:block;
+
+  font-size:36px;
+  font-weight:800;
+
+  margin-bottom:15px;
+
+  color:#f97316;
+}
+
+.streak-bar{
+
+  width:100%;
+  height:14px;
+
+  background:#e2e8f0;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+#streakFill{
+
+  width:40%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    #f97316,
+    #ef4444
+  );
+
+  border-radius:999px;
+}
+
+/* =========================================
+MISSÃO
+========================================= */
+
+.progresso-missao-wrap{
+  margin-top:20px;
+}
+
+.progresso-missao-texto{
+
+  font-weight:700;
+
+  margin-bottom:10px;
+}
+
+.progresso-missao-barra{
+
+  width:100%;
+  height:14px;
+
+  background:#e2e8f0;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.progresso-missao-preenchimento{
+
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    #22c55e,
+    #0ea5e9
+  );
+
+  transition:.4s ease;
+}
+
+.recompensa-missao{
+
+  margin-top:18px;
+
+  font-weight:700;
+
+  color:#ca8a04;
+}
+
+/* =========================================
+REWARD DIÁRIO
+========================================= */
+
+.reward-days{
+
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+
+  margin:25px 0;
+}
+
+.reward-day{
+
+  width:52px;
+  height:52px;
+
+  border-radius:16px;
+
+  background:#f1f5f9;
+
+  border:1px solid #e2e8f0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:700;
+
+  transition:.25s ease;
+
+  position:relative;
+}
+
+.reward-day.active{
+
+  background:linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+
+  color:white;
+  border:none;
+}
+
+.reward-day.special{
+
+  background:linear-gradient(
+    135deg,
+    #facc15,
+    #f97316
+  );
+
+  color:white;
+  border:none;
+}
+
+.reward-day.collected{
+
+  background:#e2e8f0;
+}
+
+.reward-day.collected::after{
+
+  content:"✓";
+
+  position:absolute;
+
+  top:-5px;
+  right:-5px;
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  color:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
+  font-weight:800;
+}
+
+.reward-info{
+
+  font-size:18px;
+  font-weight:700;
+
+  color:#ca8a04;
+}
+
+.reward-msg{
+
+  margin-top:12px;
+
+  color:#ef4444;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+/* =========================================
+XP FLOAT
+========================================= */
+
+.xp-float{
+
+  position:fixed;
+
+  top:50%;
+  left:50%;
+
+  transform:translate(-50%,-50%);
+
+  font-size:34px;
+  font-weight:800;
+
+  color:#22c55e;
+
+  opacity:0;
+
+  z-index:9999;
+
+  pointer-events:none;
+}
+
+.xp-float.show{
+  animation:xpPop 1.2s ease forwards;
+}
+
+@keyframes xpPop{
+
+  0%{
+    opacity:0;
+    transform:translate(-50%,-20%) scale(.6);
+  }
+
+  50%{
+    opacity:1;
+    transform:translate(-50%,-80%) scale(1.15);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-140%) scale(1);
+  }
+}
+
+/* =========================================
+BOTÃO LOJA
+========================================= */
+
+.btn-loja-float{
+
+  position:fixed;
+
+  bottom:20px;
+  right:20px;
+
+  border:none;
+
+  padding:14px 18px;
+
+  border-radius:999px;
+
+  background:linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+
+  color:white;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  box-shadow:
+    0 15px 30px rgba(14,165,233,0.3);
+
+  z-index:999;
+
+  transition:.25s ease;
+}
+
+.btn-loja-float:hover{
+  transform:translateY(-3px);
+}
+
+.spUsuario{
+  font-weight:800;
+}
+
+/* =========================================
+RESPONSIVO
+========================================= */
+
+@media(max-width:1100px){
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:900px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .conteudo{
+    margin-left:0;
+    padding:20px;
+  }
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+  }
+
+  .titulo-page{
+    font-size:28px;
+  }
+
+  .pergunta{
+    font-size:22px;
+  }
+}

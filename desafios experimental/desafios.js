@@ -2,7 +2,7 @@
   IMPORTS
   ========================= */
 
-  import { auth, db } from "./firebase.js";
+  import { auth, db } from "../js/firebase.js";
   import {
     doc, getDoc, setDoc, updateDoc,
   serverTimestamp, increment
@@ -12,15 +12,15 @@
   "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
   import { runTransaction } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-  import { adicionarXPImediato } from "./xp.js";
-  import { adicionarSP } from "./science-points.js";
+  import { adicionarXPImediato } from "../js/xp.js";
+  import { adicionarSP } from "../js/science-points.js";
 
   import {
     atualizarMissao,
     atualizarBotaoMissao,
     garantirMissaoSemanalAtual,
     coletarRecompensaMissao
-  } from "./missoes.js";
+  } from "../js/missoes.js";
 
   /* =========================
   BANCO DE QUESTÕES (mantido)
