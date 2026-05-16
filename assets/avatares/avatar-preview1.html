@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Avatar Preview</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0f172a;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+    color:white;
+    padding:40px;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.preview-container{
+    background:#111827;
+    padding:30px;
+    border-radius:25px;
+    width:1200px;
+    max-width:100%;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+.sub{
+    text-align:center;
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:30px;
+}
+
+/* =========================================
+   LAYOUT
+========================================= */
+
+.editor-layout{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:30px;
+}
+
+/* =========================================
+   INVENTÁRIO
+========================================= */
+
+.inventory-panel{
+    background:#0f172a;
+    border:1px solid #334155;
+    border-radius:20px;
+    padding:20px;
+    height:750px;
+    overflow:auto;
+}
+
+.inventory-panel h2{
+    margin-bottom:20px;
+    font-size:22px;
+}
+
+.inventory-category{
+    margin-bottom:30px;
+}
+
+.inventory-category h3{
+    margin-bottom:15px;
+    color:#cbd5e1;
+    font-size:16px;
+}
+
+/* GRID */
+
+.inventory-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+/* ITEM */
+
+.inventory-item{
+
+    width:100%;
+
+    background:#1e293b;
+
+    border:2px solid transparent;
+
+    border-radius:16px;
+
+    padding:10px;
+
+    cursor:grab;
+
+    transition:0.2s;
+
+}
+
+.inventory-item:hover{
+
+    border-color:#3b82f6;
+
+    transform:scale(1.03);
+
+    background:#334155;
+
+}
+
+.inventory-item:active{
+
+    cursor:grabbing;
+
+}
+
+/* =========================================
+   AVATAR SIDE
+========================================= */
+
+.avatar-side{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* =========================================
+   AVATAR
+========================================= */
+
+.avatar-box{
+
+    width:500px;
+    height:500px;
+
+    position:relative;
+
+    background:#1e293b;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    border:3px solid #334155;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+/* =========================================
+   CAMADAS
+========================================= */
+
+.layer{
+
+    position:absolute;
+
+    transform-origin:center center;
+
+    cursor:grab;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    transition:
+    outline 0.2s ease,
+    filter 0.2s ease;
+
+}
+
+/* HOVER */
+
+.layer:hover{
+
+    filter:brightness(1.05);
+
+}
+
+/* SELECIONADA */
+
+.layer.active{
+
+    outline:2px dashed #3b82f6;
+
+    filter:brightness(1.1);
+
+}
+
+/* =========================================
+   CONTROLES DAS LAYERS
+========================================= */
+
+.layer-controls{
+
+    width:500px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.layer-controls button{
+
+    background:#1e293b;
+
+    border:none;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:0.2s;
+
+}
+
+.layer-controls button:hover{
+
+    background:#334155;
+
+}
+
+.layer-controls button.locked{
+
+    background:#991b1b;
+
+}
+
+/* =========================================
+   INFO BOX
+========================================= */
+
+.info-box{
+
+    width:500px;
+
+    margin-top:20px;
+
+    background:#0f172a;
+
+    border:1px solid #334155;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    font-size:14px;
+
+    color:#94a3b8;
+
+    line-height:1.8;
+
+}
+
+.info-box strong{
+
+    color:white;
+
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.inventory-panel::-webkit-scrollbar{
+    width:8px;
+}
+
+.inventory-panel::-webkit-scrollbar-thumb{
+    background:#334155;
+    border-radius:10px;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media(max-width:1100px){
+
+    .editor-layout{
+        grid-template-columns:1fr;
+    }
+
+    .inventory-panel{
+        height:auto;
+    }
+
+    .avatar-box,
+    .layer-controls,
+    .info-box{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+<div class="preview-container">
+
+    <h1>🎮 Avatar Editor</h1>
+
+    <p class="sub">
+        Arraste os itens para o avatar e ajuste livremente
+    </p>
+
+    <!-- =========================================
+         ÁREA PRINCIPAL
+    ========================================== -->
+
+    <div class="editor-layout">
+
+        <!-- =========================================
+             INVENTÁRIO
+        ========================================== -->
+
+        <div class="inventory-panel">
+
+            <h2>🎒 Itens</h2>
+
+            <!-- BASES -->
+
+            <div class="inventory-category">
+
+                <h3>Bases</h3>
+
+                <div class="inventory-grid">
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="base"
+                        data-src="/assets/avatares/bases/masculino-1.png"
+                        src="/assets/avatares/bases/masculino-1.png"
+                    >
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="base"
+                        data-src="/assets/avatares/bases/feminino-1.png"
+                        src="/assets/avatares/bases/feminino-1.png"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- CABELOS -->
+
+            <div class="inventory-category">
+
+                <h3>Cabelos</h3>
+
+                <div class="inventory-grid">
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="cabelo"
+                        data-src="/assets/avatares/cabelos/cabelo-1.png"
+                        src="/assets/avatares/cabelos/cabelo-1.png"
+                    >
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="cabelo"
+                        data-src="/assets/avatares/cabelos/cabelo-2.png"
+                        src="/assets/avatares/cabelos/cabelo-2.png"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- ROUPAS -->
+
+            <div class="inventory-category">
+
+                <h3>Roupas</h3>
+
+                <div class="inventory-grid">
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="roupa"
+                        data-src="/assets/avatares/roupas/roupa-1.png"
+                        src="/assets/avatares/roupas/roupa-1.png"
+                    >
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="roupa"
+                        data-src="/assets/avatares/roupas/roupa-2.png"
+                        src="/assets/avatares/roupas/roupa-2.png"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- ACESSÓRIOS -->
+
+            <div class="inventory-category">
+
+                <h3>Acessórios</h3>
+
+                <div class="inventory-grid">
+
+                    <img
+                        draggable="true"
+                        class="inventory-item"
+                        data-type="acessorio"
+                        data-src="/assets/avatares/acessorios/oculos-1.png"
+                        src="/assets/avatares/acessorios/oculos-1.png"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================================
+             ÁREA DO AVATAR
+        ========================================== -->
+
+        <div class="avatar-side">
+
+            <div class="avatar-box" id="avatar-box">
+
+                <!-- BASE -->
+                <img
+                    id="base-layer"
+                    class="layer"
+                    src="/assets/avatares/bases/masculino-1.png"
+                >
+
+                <!-- ROUPA -->
+                <img
+                    id="roupa-layer"
+                    class="layer"
+                    src="/assets/avatares/roupas/roupa-1.png"
+                >
+
+                <!-- CABELO -->
+                <img
+                    id="cabelo-layer"
+                    class="layer"
+                    src="/assets/avatares/cabelos/cabelo-1.png"
+                >
+
+                <!-- ACESSÓRIO -->
+                <img
+                    id="acessorio-layer"
+                    class="layer"
+                    src="/assets/avatares/acessorios/oculos-1.png"
+                >
+
+            </div>
+
+            <!-- =========================================
+                 CONTROLES DAS LAYERS
+            ========================================== -->
+
+            <div class="layer-controls">
+
+                <button data-layer="base">
+                    🔒 Base
+                </button>
+
+                <button data-layer="roupa">
+                    🔓 Roupa
+                </button>
+
+                <button data-layer="cabelo">
+                    🔓 Cabelo
+                </button>
+
+                <button data-layer="acessorio">
+                    🔓 Óculos
+                </button>
+
+            </div>
+
+            <!-- INFO -->
+
+            <div class="info-box">
+
+                <strong>🎮 Controles:</strong>
+
+                <br><br>
+
+                🖱 Arraste para mover
+
+                <br>
+
+                🎡 Scroll para redimensionar
+
+                <br>
+
+                🔒 Trave layers para evitar mover sem querer
+
+                <br>
+
+                📦 Arraste itens do inventário para o avatar
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================================
+   LAYERS
+========================================= */
+
+const layers = {
+
+    base:
+    document.getElementById("base-layer"),
+
+    roupa:
+    document.getElementById("roupa-layer"),
+
+    cabelo:
+    document.getElementById("cabelo-layer"),
+
+    acessorio:
+    document.getElementById("acessorio-layer")
+
+};
+
+/* =========================================
+   CONFIG
+========================================= */
+
+const avatarConfig = {
+
+    base: {
+        x:0,
+        y:20,
+        scale:0.9,
+        z:1
+    },
+
+    roupa: {
+        x:0,
+        y:40,
+        scale:0.9,
+        z:2
+    },
+
+    cabelo: {
+        x:0,
+        y:-40,
+        scale:0.75,
+        z:3
+    },
+
+    acessorio: {
+        x:0,
+        y:-5,
+        scale:0.3,
+        z:4
+    }
+
+};
+
+/* =========================================
+   LOCKS
+========================================= */
+
+const lockedLayers = {
+
+    base:false,
+    roupa:false,
+    cabelo:false,
+    acessorio:false
+
+};
+
+/* =========================================
+   APPLY LAYER
+========================================= */
+
+function applyLayer(name){
+
+    const layer =
+    layers[name];
+
+    const config =
+    avatarConfig[name];
+
+    layer.style.left = "50%";
+
+    layer.style.top = "50%";
+
+    layer.style.zIndex = config.z;
+
+    layer.style.transform =
+    `
+    translate(
+        calc(-50% + ${config.x}px),
+        calc(-50% + ${config.y}px)
+    )
+    scale(${config.scale})
+    `;
+
+}
+
+/* =========================================
+   INIT
+========================================= */
+
+Object.keys(layers)
+.forEach(applyLayer);
+
+/* =========================================
+   DRAG SYSTEM
+========================================= */
+
+let selectedLayer = null;
+
+let startMouseX = 0;
+let startMouseY = 0;
+
+let startX = 0;
+let startY = 0;
+
+/* =========================================
+   SELECT LAYER
+========================================= */
+
+Object.entries(layers)
+.forEach(([name, layer]) => {
+
+    layer.addEventListener("mousedown", e => {
+
+        if(lockedLayers[name]) return;
+
+        e.preventDefault();
+
+        selectedLayer = name;
+
+        startMouseX = e.clientX;
+        startMouseY = e.clientY;
+
+        startX =
+        avatarConfig[name].x;
+
+        startY =
+        avatarConfig[name].y;
+
+        document
+        .querySelectorAll(".layer")
+        .forEach(el => {
+
+            el.classList.remove("active");
+
+        });
+
+        layer.classList.add("active");
+
+    });
+
+});
+
+/* =========================================
+   MOVE
+========================================= */
+
+document.addEventListener("mousemove", e => {
+
+    if(!selectedLayer) return;
+
+    const dx =
+    e.clientX - startMouseX;
+
+    const dy =
+    e.clientY - startMouseY;
+
+    avatarConfig[selectedLayer].x =
+    startX + dx;
+
+    avatarConfig[selectedLayer].y =
+    startY + dy;
+
+    applyLayer(selectedLayer);
+
+});
+
+/* =========================================
+   STOP
+========================================= */
+
+document.addEventListener("mouseup", () => {
+
+    selectedLayer = null;
+
+});
+
+/* =========================================
+   SCALE
+========================================= */
+
+Object.entries(layers)
+.forEach(([name, layer]) => {
+
+    layer.addEventListener("wheel", e => {
+
+        e.preventDefault();
+
+        if(e.deltaY < 0){
+
+            avatarConfig[name].scale += 0.01;
+
+        } else {
+
+            avatarConfig[name].scale -= 0.01;
+
+        }
+
+        /* LIMITES */
+
+        if(
+            avatarConfig[name].scale < 0.05
+        ){
+            avatarConfig[name].scale = 0.05;
+        }
+
+        if(
+            avatarConfig[name].scale > 3
+        ){
+            avatarConfig[name].scale = 3;
+        }
+
+        applyLayer(name);
+
+    });
+
+});
+
+/* =========================================
+   LOCK BUTTONS
+========================================= */
+
+document
+.querySelectorAll(".layer-controls button")
+
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const layer =
+        button.dataset.layer;
+
+        lockedLayers[layer] =
+        !lockedLayers[layer];
+
+        if(lockedLayers[layer]){
+
+            button.classList.add("locked");
+
+            button.innerHTML =
+            "🔒 " + layer;
+
+        } else {
+
+            button.classList.remove("locked");
+
+            button.innerHTML =
+            "🔓 " + layer;
+
+        }
+
+    });
+
+});
+
+/* =========================================
+   INVENTORY DRAG
+========================================= */
+
+document
+.querySelectorAll(".inventory-item")
+
+.forEach(item => {
+
+    item.addEventListener("dragstart", e => {
+
+        e.dataTransfer.setData(
+            "type",
+            item.dataset.type
+        );
+
+        e.dataTransfer.setData(
+            "src",
+            item.dataset.src
+        );
+
+    });
+
+});
+
+/* =========================================
+   DROP AREA
+========================================= */
+
+const avatarBox =
+document.getElementById("avatar-box");
+
+avatarBox.addEventListener("dragover", e => {
+
+    e.preventDefault();
+
+});
+
+avatarBox.addEventListener("drop", e => {
+
+    e.preventDefault();
+
+    const type =
+    e.dataTransfer.getData("type");
+
+    const src =
+    e.dataTransfer.getData("src");
+
+    if(layers[type]){
+
+        layers[type].src = src;
+
+    }
+
+});
+
+/* =========================================
+   CONSOLE EXPORT
+========================================= */
+
+window.addEventListener("keydown", e => {
+
+    if(e.key === "p"){
+
+        console.clear();
+
+        console.log(
+            JSON.stringify(
+                avatarConfig,
+                null,
+                4
+            )
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
