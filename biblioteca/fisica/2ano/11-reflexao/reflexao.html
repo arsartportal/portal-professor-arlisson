@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Reflexão do Som
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./reflexao.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🔊 Ondulatória • Física
+      </span>
+
+      <h1>
+        Reflexão do Som
+      </h1>
+
+      <p>
+
+        Aprenda como as ondas sonoras
+        se refletem em superfícies,
+        produzindo fenômenos como
+        eco, reverberação e reforço sonoro.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🪞
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Reflexão do Som?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A reflexão do som ocorre
+      quando a onda sonora
+      atinge uma superfície
+      e retorna ao meio de origem.
+
+    </p>
+
+    <p>
+
+      Esse fenômeno é responsável
+      pelo eco e pela reverberação.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🔊 → 🪞 → 🔊
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ECO
+  ====================================================== -->
+  <h2>
+    2. Eco
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$d = \frac{v \cdot t}{2}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(d\) → distância
+        </li>
+
+        <li>
+          \(v\) → velocidade do som
+        </li>
+
+        <li>
+          \(t\) → tempo do eco
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box roxo">
+
+        <h3>
+          🪞 ECO
+        </h3>
+
+        <p>
+
+          O eco ocorre quando
+          o som refletido retorna
+          após um intervalo
+          perceptível pelo ouvido.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       REVERBERAÇÃO
+  ====================================================== -->
+  <h2>
+    3. Reverberação
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A reverberação acontece
+      quando múltiplas reflexões
+      sonoras chegam rapidamente
+      ao ouvido.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🎵 Persistência sonora
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SUPERFÍCIES
+  ====================================================== -->
+  <h2>
+    4. Reflexão em Superfícies
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🧱
+      <span>Parede</span>
+    </div>
+
+    <div class="area-card">
+      🏔️
+      <span>Montanhas</span>
+    </div>
+
+    <div class="area-card">
+      🏛️
+      <span>Auditórios</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ABSORÇÃO SONORA
+  ====================================================== -->
+  <h2>
+    5. Absorção Sonora
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Materiais macios
+      absorvem parte das ondas sonoras,
+      diminuindo a reflexão.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🧽 Menos reflexão sonora
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    6. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🎤
+      <span>Teatros</span>
+    </div>
+
+    <div class="area-card">
+      🔊
+      <span>Caixas acústicas</span>
+    </div>
+
+    <div class="area-card">
+      🦇
+      <span>Ecolocalização</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EFEITO ACÚSTICO
+  ====================================================== -->
+  <h2>
+    7. Acústica dos Ambientes
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O controle da reflexão sonora
+      é fundamental para garantir
+      boa qualidade acústica
+      em ambientes fechados.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🏛️ Som limpo e equilibrado
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore fenômenos acústicos
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarReflexao('eco')">
+        🪞 Eco
+      </button>
+
+      <button onclick="analisarReflexao('reverberacao')">
+        🎵 Reverberação
+      </button>
+
+      <button onclick="analisarReflexao('absorcao')">
+        🧽 Absorção
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./reflexao.js"
+></script>
+
+</body>
+</html>

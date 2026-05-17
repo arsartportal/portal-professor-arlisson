@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔬 Banco de Pesquisas | Portal do Professor</title>
+
+<link rel="stylesheet" href="./banco-pesquisas.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================
+  HEADER
+  ===================================== -->
+
+  <header class="hero">
+
+  <button class="btn-voltar">
+
+  ⬅ Voltar
+
+</button>
+
+  <div>
+
+    <span class="mini-badge">
+      🔬 Portal do Professor
+    </span>
+
+    <h1>
+      Banco de Pesquisas
+    </h1>
+
+    <p class="sub">
+      Perguntas científicas para atividades, debates e pesquisas em sala de aula.
+    </p>
+
+  </div>
+
+</header>
+
+  <!-- =====================================
+  TOPO
+  ===================================== -->
+
+  <section class="topo">
+
+    <input
+      id="busca"
+      type="text"
+      placeholder="🔎 Buscar pesquisa..."
+    >
+
+    <div class="topo-acoes">
+
+      <button class="btn-random"
+              onclick="pesquisaAleatoria()">
+
+        🎲 Pesquisa da Aula
+
+      </button>
+
+      <button class="btn-aula"
+              onclick="curiosidadeAula()">
+
+        🧠 Curiosidade da Aula
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =====================================
+  FILTROS
+  ===================================== -->
+
+  <section class="filtros">
+
+    <button class="filtro ativo"
+            onclick="filtrar('todas',this)">
+
+      Todas
+
+    </button>
+
+    <button class="filtro"
+            onclick="filtrar('1ano',this)">
+
+      1º Ano
+
+    </button>
+
+    <button class="filtro"
+            onclick="filtrar('2ano',this)">
+
+      2º Ano
+
+    </button>
+
+    <button class="filtro"
+            onclick="filtrar('3ano',this)">
+
+      3º Ano
+
+    </button>
+
+    <button class="filtro"
+            onclick="filtrar('eja',this)">
+
+      EJA
+
+    </button>
+
+  </section>
+
+  <!-- =====================================
+  GRID
+  ===================================== -->
+
+  <section class="grid"
+           id="grid"></section>
+
+</div>
+
+<!-- =====================================
+MODAL
+===================================== -->
+
+<div id="modal"
+     class="modal">
+
+  <div class="modal-box">
+
+    <span class="modal-badge">
+      🔬 Pesquisa selecionada
+    </span>
+
+    <h2 id="modalPergunta"></h2>
+
+    <div id="modalResposta"
+         class="modal-resposta"></div>
+
+    <div class="modal-actions">
+
+      <button class="btn-modal-primary"
+              onclick="mostrarResposta()">
+
+        👁 Mostrar resposta
+
+      </button>
+
+      <button class="btn-modal-close"
+              onclick="fecharModal()">
+
+        Fechar
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =====================================
+SCRIPTS
+===================================== -->
+
+<script src="./banco-pesquisas.js"></script>
+<script src="./banco-pesquisas-ui.js"></script>
+
+</body>
+</html>

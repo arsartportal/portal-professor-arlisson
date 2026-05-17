@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Lei de Coulomb
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./lei-coulomb.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚡ Eletrostática • Física
+      </span>
+
+      <h1>
+        Lei de Coulomb
+      </h1>
+
+      <p>
+
+        Entenda como ocorre
+        a força elétrica entre
+        cargas elétricas e como
+        calcular a intensidade
+        dessa interação.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ⚡
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é a Lei de Coulomb?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A Lei de Coulomb descreve
+      a força elétrica existente
+      entre duas cargas elétricas.
+
+    </p>
+
+    <p>
+
+      Essa força pode ser
+      de atração ou repulsão,
+      dependendo dos sinais
+      das cargas.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      ⚡ ↔️ ⚡
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FÓRMULA
+  ====================================================== -->
+  <h2>
+    2. Fórmula da Lei de Coulomb
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$F =
+        k \cdot
+        \frac{|q_1 q_2|}{d^2}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(F\) → força elétrica
+        </li>
+
+        <li>
+          \(k\) → constante eletrostática
+        </li>
+
+        <li>
+          \(q_1\) e \(q_2\) → cargas
+        </li>
+
+        <li>
+          \(d\) → distância
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ⚡ COULOMB
+        </h3>
+
+        <p>
+
+          Quanto maior forem
+          as cargas elétricas,
+          maior será a força
+          de interação entre elas.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ATRAÇÃO
+  ====================================================== -->
+  <h2>
+    3. Força de Atração
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Cargas de sinais opostos
+      se atraem devido à força elétrica.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ➕ ❤️ ➖
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       REPULSÃO
+  ====================================================== -->
+  <h2>
+    4. Força de Repulsão
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Cargas de mesmo sinal
+      se repelem devido
+      à interação elétrica.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ➕ ↔️ ➕
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       DISTÂNCIA
+  ====================================================== -->
+  <h2>
+    5. Influência da Distância
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A força elétrica diminui
+      quando a distância
+      entre as cargas aumenta.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$F \propto \frac{1}{d^2}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    6. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      ⚡
+      <span>Eletrostática</span>
+    </div>
+
+    <div class="area-card">
+      🔬
+      <span>Física Atômica</span>
+    </div>
+
+    <div class="area-card">
+      🧲
+      <span>Eletricidade</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONSTANTE
+  ====================================================== -->
+  <h2>
+    7. Constante Eletrostática
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      No vácuo, a constante
+      eletrostática possui valor:
+
+    </p>
+
+    <div class="formula-box">
+
+      $$k =
+      9 \times 10^9
+      \ \text{N·m}^2/\text{C}^2$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore a interação
+      entre cargas elétricas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarCoulomb('atracao')">
+        ❤️ Atração
+      </button>
+
+      <button onclick="analisarCoulomb('repulsao')">
+        ↔️ Repulsão
+      </button>
+
+      <button onclick="analisarCoulomb('distancia')">
+        📏 Distância
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./lei-coulomb.js"
+></script>
+
+</body>
+</html>

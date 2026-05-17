@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Lentes Esféricas
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./lentes.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🔍 Óptica • Física
+      </span>
+
+      <h1>
+        Lentes Esféricas
+      </h1>
+
+      <p>
+
+        Aprenda como as lentes
+        desviam os raios luminosos,
+        formam imagens
+        e corrigem problemas
+        de visão.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      👓
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que são Lentes?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Lentes são dispositivos ópticos
+      transparentes capazes
+      de desviar os raios luminosos
+      por meio da refração.
+
+    </p>
+
+    <p>
+
+      Elas podem formar imagens
+      ampliadas, reduzidas,
+      reais ou virtuais.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🔍 Desvio da luz
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TIPOS DE LENTES
+  ====================================================== -->
+  <h2>
+    2. Tipos de Lentes
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$\frac{1}{f} =
+        \frac{1}{p} +
+        \frac{1}{p'}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(f\) → distância focal
+        </li>
+
+        <li>
+          \(p\) → posição do objeto
+        </li>
+
+        <li>
+          \(p'\) → posição da imagem
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          👓 LENTES
+        </h3>
+
+        <p>
+
+          As lentes podem ser
+          convergentes ou divergentes,
+          dependendo do desvio
+          causado nos raios luminosos.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       LENTES CONVERGENTES
+  ====================================================== -->
+  <h2>
+    3. Lentes Convergentes
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      As lentes convergentes
+      aproximam os raios luminosos
+      para um ponto chamado foco.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ↘️ 🔍 ↙️ → 🎯
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       LENTES DIVERGENTES
+  ====================================================== -->
+  <h2>
+    4. Lentes Divergentes
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      As lentes divergentes
+      afastam os raios luminosos,
+      espalhando-os após a refração.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🎯 → ↖️ 🔍 ↗️
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       AUMENTO LINEAR
+  ====================================================== -->
+  <h2>
+    5. Aumento Linear
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O aumento linear indica
+      a relação entre o tamanho
+      da imagem e o tamanho
+      do objeto.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$A =
+      \frac{i}{o} =
+      \frac{p'}{p}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    6. Aplicações das Lentes
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      👓
+      <span>Óculos</span>
+    </div>
+
+    <div class="area-card">
+      🔬
+      <span>Microscópios</span>
+    </div>
+
+    <div class="area-card">
+      📷
+      <span>Câmeras</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       VISÃO HUMANA
+  ====================================================== -->
+  <h2>
+    7. Correção da Visão
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Lentes são utilizadas
+      para corrigir problemas
+      de visão como miopia
+      e hipermetropia.
+
+    </p>
+
+    <div class="mini-formula">
+
+      👁️ Correção óptica
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore as lentes esféricas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarLente('convergente')">
+        🔍 Convergente
+      </button>
+
+      <button onclick="analisarLente('divergente')">
+        ↔️ Divergente
+      </button>
+
+      <button onclick="analisarLente('visao')">
+        👁️ Visão
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./lentes.js"
+></script>
+
+</body>
+</html>

@@ -12,183 +12,227 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
 <!-- =====================================
-LAYOUT
+BACKGROUND FX
+===================================== -->
+
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-grid"></div>
+
+<!-- =====================================
+APP
 ===================================== -->
 
 <div class="layout">
 
-  <!-- =====================================
-  SIDEBAR
-  ===================================== -->
-
-  <aside class="sidebar">
-
-    <div class="logo">
-      🔥 Portal
-    </div>
-
-    <nav class="sidebar-nav">
-
-      <a href="../area-professor.html">
-        🏠 Dashboard
-      </a>
-
-      <a href="#" class="active">
-        🎯 Desafios
-      </a>
-
-      <a href="../ranking-professor/ranking-professor.html">
-        🏆 Ranking
-      </a>
-
-      <a href="../biblioteca/biblioteca.html">
-        📚 Biblioteca
-      </a>
-
-      <a href="../mapas-mentais/mapas-mentais.html">
-        🧠 Mapas Mentais
-      </a>
-
-      <a href="./loja.html">
-        🛒 Loja
-      </a>
-
-    </nav>
-
-    <div class="sidebar-footer">
-
-      <div class="sp-box">
-        🔬 <span class="spUsuario">0</span> SP
-      </div>
-
-    </div>
-
-  </aside>
-
-  <!-- =====================================
-  CONTEÚDO
-  ===================================== -->
-
   <main class="conteudo">
 
-    <!-- TOPBAR -->
+    <!-- =====================================
+    HERO
+    ===================================== -->
 
     <header class="topbar">
 
-      <div>
+      <div class="hero-textos">
+
+        <span class="hero-badge">
+          ⚡ Sistema de Desafios
+        </span>
 
         <h1 class="titulo-page">
           🔥 Desafio Diário
         </h1>
 
         <p class="subtitulo-page">
-          Responda diariamente e mantenha sua sequência ativa.
+          Ganhe XP, mantenha sua sequência e evolua no ranking resolvendo desafios todos os dias.
         </p>
 
       </div>
 
-      <button class="btn-voltar" onclick="history.back()">
-        ⬅ Voltar
-      </button>
+      <div class="hero-actions">
+
+        <button class="btn-topo glass-btn">
+          🏆 Ranking
+        </button>
+
+        <button class="btn-voltar" onclick="history.back()">
+          ⬅ Voltar
+        </button>
+
+      </div>
 
     </header>
 
-    <!-- GRID -->
+    <!-- =====================================
+    STATS
+    ===================================== -->
 
-    <div class="dashboard-grid">
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🔥
+        </div>
+
+        <div>
+
+          <span class="stat-label">
+            Sequência
+          </span>
+
+          <h3 id="streakValor">
+            0 dias
+          </h3>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          ⚡
+        </div>
+
+        <div>
+
+          <span class="stat-label">
+            XP Diário
+          </span>
+
+          <h3 id="xpReward">
+            +20 XP
+          </h3>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🔬
+        </div>
+
+        <div>
+
+          <span class="stat-label">
+            Seus SP
+          </span>
+
+          <h3>
+            <span class="spUsuario">0</span> SP
+          </h3>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================
+    GRID
+    ===================================== -->
+
+    <section class="dashboard-grid">
 
       <!-- =====================================
-      COLUNA ESQUERDA
+      DESAFIO
       ===================================== -->
 
       <div class="coluna-principal">
 
-        <!-- CARD DESAFIO -->
+        <section class="card desafio-card">
 
-        <section class="card">
-
-          <!-- INFO -->
-
-          <div class="top-info">
+          <div class="desafio-topo">
 
             <span class="badge-materia" id="materia">
               📘 Matemática
             </span>
 
-            <span class="xp-badge" id="xpReward">
-              ⚡ +20 XP
+            <span class="badge-desafio">
+              🔥 Valendo XP hoje
             </span>
 
           </div>
 
-          <!-- BADGE -->
+          <div class="desafio-conteudo">
 
-          <div class="badge-desafio">
-            🔥 Valendo XP hoje
-          </div>
+            <h2 class="titulo-desafio">
+              Pergunta do dia
+            </h2>
 
-          <!-- PERGUNTA -->
+            <p id="pergunta" class="pergunta"></p>
 
-          <p id="pergunta" class="pergunta"></p>
+            <div id="opcoes" class="options"></div>
 
-          <!-- OPÇÕES -->
+            <button id="btnResponder" class="btn-primary">
+              ⚡ Responder desafio
+            </button>
 
-          <div id="opcoes" class="options"></div>
+            <p id="status" class="status"></p>
 
-          <!-- BOTÃO -->
+            <div id="feedbackVisual"
+                 class="feedback-visual"></div>
 
-          <button id="btnResponder" class="btn-primary">
-            Responder
-          </button>
+            <div id="nextQuestionBox"
+                 class="next-question-box"
+                 style="display:none;">
 
-          <!-- STATUS -->
+              ⏳ Próxima pergunta em:
+              <span id="nextTimer">--:--</span>
 
-          <p id="status" class="status"></p>
-
-          <!-- FEEDBACK -->
-
-          <div id="feedbackVisual" class="feedback-visual"></div>
-
-          <!-- TIMER -->
-
-          <div id="nextQuestionBox"
-               class="next-question-box"
-               style="display:none;">
-
-            ⏳ Próxima pergunta em:
-            <span id="nextTimer">--:--</span>
+            </div>
 
           </div>
 
         </section>
 
-        <!-- MISSÃO -->
+        <!-- =====================================
+        MISSÃO
+        ===================================== -->
 
-        <section class="card">
+        <section class="card missao-card">
 
           <div class="card-header">
 
-            <h2>
-              🏆 Missão Semanal
-            </h2>
+            <div>
+
+              <span class="mini-tag">
+                🏆 Missão semanal
+              </span>
+
+              <h2>
+                Complete 5 desafios
+              </h2>
+
+            </div>
+
+            <div class="reward-highlight">
+              +100 XP
+            </div>
 
           </div>
 
           <p class="card-text">
-            Complete 5 desafios ao longo da semana para desbloquear sua recompensa especial.
+            Mantenha consistência durante a semana para desbloquear sua recompensa especial.
           </p>
 
           <div class="progresso-missao-wrap">
 
-            <div class="progresso-missao-texto" id="textoMissao">
+            <div class="progresso-missao-texto"
+                 id="textoMissao">
+
               0 / 5
+
             </div>
 
             <div class="progresso-missao-barra">
@@ -198,10 +242,6 @@ LAYOUT
 
             </div>
 
-          </div>
-
-          <div class="recompensa-missao">
-            🎁 Recompensa: 100 XP
           </div>
 
           <button id="btnColetarMissao"
@@ -217,48 +257,37 @@ LAYOUT
       </div>
 
       <!-- =====================================
-      COLUNA DIREITA
+      LATERAL
       ===================================== -->
 
-      <div class="coluna-lateral">
+      <aside class="coluna-lateral">
 
-        <!-- STREAK -->
+        <!-- DAILY REWARD -->
 
         <section class="card">
 
-          <h2>
-            🔥 Sequência
-          </h2>
+          <div class="card-header">
 
-          <div class="streak-box">
+            <div>
 
-            <span id="streakValor">
-              🔥 0
-            </span>
+              <span class="mini-tag">
+                🎁 Login diário
+              </span>
 
-            <div class="streak-bar">
-
-              <div id="streakFill"></div>
+              <h2>
+                Recompensa Diária
+              </h2>
 
             </div>
 
           </div>
 
-        </section>
-
-        <!-- REWARD -->
-
-        <section class="card">
-
-          <h2>
-            🎁 Recompensa Diária
-          </h2>
-
           <p class="card-text">
-            Entre todos os dias para coletar bônus.
+            Entre diariamente para manter sua sequência de bônus.
           </p>
 
-          <div class="reward-days" id="rewardDays"></div>
+          <div class="reward-days"
+               id="rewardDays"></div>
 
           <div class="reward-info">
 
@@ -281,9 +310,81 @@ LAYOUT
 
         </section>
 
-      </div>
+        <!-- PROGRESS -->
 
-    </div>
+        <section class="card progresso-card">
+
+          <div class="card-header">
+
+            <div>
+
+              <span class="mini-tag">
+                📈 Evolução
+              </span>
+
+              <h2>
+                Seu progresso
+              </h2>
+
+            </div>
+
+          </div>
+
+          <div class="progress-box">
+
+            <div class="progress-info">
+
+              <span>
+                Sequência atual
+              </span>
+
+              <strong>
+                🔥 0
+              </strong>
+
+            </div>
+
+            <div class="streak-bar">
+
+              <div id="streakFill"></div>
+
+            </div>
+
+          </div>
+
+          <div class="meta-box">
+
+            <div class="meta-item">
+
+              <span>
+                Meta semanal
+              </span>
+
+              <strong>
+                5 desafios
+              </strong>
+
+            </div>
+
+            <div class="meta-item">
+
+              <span>
+                Próxima recompensa
+              </span>
+
+              <strong>
+                🎁 100 XP
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </aside>
+
+    </section>
 
   </main>
 
@@ -295,22 +396,30 @@ EFEITOS
 
 <div id="fx-layer"></div>
 
-<div id="xp-float" class="xp-float"></div>
+<div id="xp-float"
+     class="xp-float"></div>
 
-<!-- BOTÃO FLUTUANTE -->
+<!-- =====================================
+BOTÃO FLUTUANTE
+===================================== -->
 
 <button id="btnLojaFloat"
         class="btn-loja-float">
 
-  🛒 🔬 <span class="spUsuario">0</span>
+  🛒 Loja • 🔬
+  <span class="spUsuario">0</span>
 
 </button>
 
-<!-- LIBS -->
+<!-- =====================================
+LIBS
+===================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<!-- SCRIPT -->
+<!-- =====================================
+SCRIPT
+===================================== -->
 
 <script type="module" src="./desafios.js"></script>
 

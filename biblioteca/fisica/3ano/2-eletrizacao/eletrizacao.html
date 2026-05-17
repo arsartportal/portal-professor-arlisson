@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Eletrização
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./eletrizacao.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚡ Eletrostática • Física
+      </span>
+
+      <h1>
+        Eletrização
+      </h1>
+
+      <p>
+
+        Aprenda como os corpos
+        podem ganhar ou perder
+        elétrons através do atrito,
+        contato e indução elétrica.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ⚡
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Eletrização?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Eletrização é o processo
+      no qual um corpo ganha
+      ou perde elétrons,
+      ficando eletricamente carregado.
+
+    </p>
+
+    <p>
+
+      Esse fenômeno ocorre
+      devido à transferência
+      de cargas elétricas.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      ⚡ Transferência de elétrons
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ELETRIZAÇÃO POR ATRITO
+  ====================================================== -->
+  <h2>
+    2. Eletrização por Atrito
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$Q = n \cdot e$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(Q\) → carga elétrica
+        </li>
+
+        <li>
+          \(n\) → número de elétrons
+        </li>
+
+        <li>
+          \(e\) → carga elementar
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ✋ ATRITO
+        </h3>
+
+        <p>
+
+          Ao esfregar dois corpos,
+          elétrons podem ser transferidos
+          de um material para outro.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONTATO
+  ====================================================== -->
+  <h2>
+    3. Eletrização por Contato
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Quando um corpo eletrizado
+      encosta em outro corpo,
+      ocorre transferência de cargas.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ⚡ 🤝 ⚪
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       INDUÇÃO
+  ====================================================== -->
+  <h2>
+    4. Eletrização por Indução
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Na indução elétrica,
+      um corpo eletrizado
+      provoca separação de cargas
+      em outro corpo sem contato direto.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ⚡ ➡️ ⚪
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONSERVAÇÃO
+  ====================================================== -->
+  <h2>
+    5. Conservação das Cargas
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Durante os processos
+      de eletrização,
+      a carga total do sistema
+      permanece constante.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$Q_{antes} = Q_{depois}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONDUTORES
+  ====================================================== -->
+  <h2>
+    6. Condutores e Isolantes
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🔌
+      <span>Condutores</span>
+    </div>
+
+    <div class="area-card">
+      🚫
+      <span>Isolantes</span>
+    </div>
+
+    <div class="area-card">
+      ⚡
+      <span>Eletrização</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLOS
+  ====================================================== -->
+  <h2>
+    7. Exemplos do Cotidiano
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Choques elétricos,
+      roupas grudando
+      e cabelos arrepiados
+      são exemplos de eletrização.
+
+    </p>
+
+    <div class="mini-formula">
+
+      💥⚡🧥
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore os processos
+      de eletrização
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarEletrizacao('atrito')">
+        ✋ Atrito
+      </button>
+
+      <button onclick="analisarEletrizacao('contato')">
+        🤝 Contato
+      </button>
+
+      <button onclick="analisarEletrizacao('inducao')">
+        ⚡ Indução
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./eletrizacao.js"
+></script>
+
+</body>
+</html>

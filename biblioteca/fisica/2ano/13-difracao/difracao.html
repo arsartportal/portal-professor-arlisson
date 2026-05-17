@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Difração do Som
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./difracao.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🔊 Ondulatória • Física
+      </span>
+
+      <h1>
+        Difração do Som
+      </h1>
+
+      <p>
+
+        Descubra como as ondas sonoras
+        conseguem contornar obstáculos
+        e atravessar pequenas aberturas,
+        espalhando-se pelo ambiente.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌊
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Difração?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A difração é o fenômeno
+      em que as ondas sonoras
+      conseguem contornar obstáculos
+      ou atravessar aberturas.
+
+    </p>
+
+    <p>
+
+      Esse efeito permite ouvir sons
+      mesmo sem enxergar
+      a fonte sonora.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🔊 ↪️ Contorno de obstáculos
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PROPAGAÇÃO
+  ====================================================== -->
+  <h2>
+    2. Propagação das Ondas Sonoras
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$v = \lambda \cdot f$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(v\) → velocidade da onda
+        </li>
+
+        <li>
+          \(\lambda\) → comprimento de onda
+        </li>
+
+        <li>
+          \(f\) → frequência
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          🌊 DIFRAÇÃO
+        </h3>
+
+        <p>
+
+          Quanto maior o comprimento
+          de onda, maior a capacidade
+          de contornar obstáculos.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLOS
+  ====================================================== -->
+  <h2>
+    3. Exemplos de Difração
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚪
+      <span>Portas</span>
+    </div>
+
+    <div class="area-card">
+      🧱
+      <span>Paredes</span>
+    </div>
+
+    <div class="area-card">
+      🌆
+      <span>Esquinas</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FREQUÊNCIA
+  ====================================================== -->
+  <h2>
+    4. Frequência e Difração
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Sons graves sofrem
+      maior difração que
+      sons agudos devido
+      ao maior comprimento de onda.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🎵 Graves → maior difração
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       OBSTÁCULOS
+  ====================================================== -->
+  <h2>
+    5. Obstáculos e Aberturas
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A difração é mais intensa
+      quando o tamanho da abertura
+      é comparável ao comprimento
+      de onda sonora.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$\lambda \approx abertura$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       APLICAÇÕES
+  ====================================================== -->
+  <h2>
+    6. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🎤
+      <span>Acústica</span>
+    </div>
+
+    <div class="area-card">
+      🏛️
+      <span>Auditórios</span>
+    </div>
+
+    <div class="area-card">
+      📡
+      <span>Ondas de rádio</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SOM NO COTIDIANO
+  ====================================================== -->
+  <h2>
+    7. Difração no Cotidiano
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A difração explica por que
+      conseguimos ouvir alguém
+      falando atrás de uma porta
+      ou em outra sala.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🚪 Som ultrapassa barreiras
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore a difração sonora
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarDifracao('graves')">
+        🎵 Graves
+      </button>
+
+      <button onclick="analisarDifracao('obstaculos')">
+        🧱 Obstáculos
+      </button>
+
+      <button onclick="analisarDifracao('aberturas')">
+        🚪 Aberturas
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./difracao.js"
+></script>
+
+</body>
+</html>

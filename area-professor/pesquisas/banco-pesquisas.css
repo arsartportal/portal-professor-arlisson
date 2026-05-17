@@ -1,0 +1,580 @@
+/* ========================================
+RESET
+======================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+
+  --bg:#f8fafc;
+  --card:#ffffff;
+
+  --text:#0f172a;
+  --text2:#64748b;
+
+  --border:#e2e8f0;
+
+  --primary:#2563eb;
+  --primary2:#1d4ed8;
+
+  --purple:#7c3aed;
+  --orange:#ea580c;
+
+  --success:#16a34a;
+
+  --radius:24px;
+
+  --shadow:
+    0 10px 30px rgba(15,23,42,.06);
+}
+
+body{
+
+  font-family:'Inter',sans-serif;
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  padding:40px 20px;
+}
+
+/* ========================================
+LAYOUT
+======================================== */
+
+.container{
+
+  width:min(1300px,100%);
+
+  margin:auto;
+}
+
+/* ========================================
+HEADER
+======================================== */
+
+.hero{
+
+  margin-bottom:35px;
+}
+
+.mini-badge{
+
+  display:inline-flex;
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  background:#eff6ff;
+
+  color:var(--primary);
+
+  font-size:13px;
+  font-weight:700;
+
+  margin-bottom:18px;
+}
+
+.hero h1{
+
+  font-size:46px;
+  font-weight:800;
+
+  margin-bottom:10px;
+
+  letter-spacing:-1px;
+}
+
+.sub{
+
+  color:var(--text2);
+
+  line-height:1.7;
+
+  max-width:700px;
+}
+
+/* ========================================
+TOPO
+======================================== */
+
+.topo{
+
+  display:flex;
+  gap:18px;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  flex-wrap:wrap;
+
+  margin-bottom:28px;
+}
+
+.topo-acoes{
+
+  display:flex;
+  gap:12px;
+
+  flex-wrap:wrap;
+}
+
+/* ========================================
+INPUT
+======================================== */
+
+input{
+
+  flex:1;
+
+  min-width:280px;
+
+  border:1px solid var(--border);
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:16px 18px;
+
+  font-size:15px;
+
+  transition:.2s ease;
+
+  box-shadow:var(--shadow);
+}
+
+input:focus{
+
+  outline:none;
+
+  border-color:#93c5fd;
+
+  box-shadow:
+    0 0 0 4px rgba(59,130,246,.12);
+}
+
+/* ========================================
+BOTÕES
+======================================== */
+
+button{
+
+  border:none;
+
+  border-radius:18px;
+
+  padding:14px 18px;
+
+  cursor:pointer;
+
+  font-size:14px;
+  font-weight:700;
+
+  transition:.2s ease;
+}
+
+button:hover{
+
+  transform:translateY(-2px);
+}
+
+.btn-random{
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      #6d28d9
+    );
+
+  color:white;
+}
+
+.btn-aula{
+
+  background:
+    linear-gradient(
+      135deg,
+      #fb923c,
+      var(--orange)
+    );
+
+  color:white;
+}
+
+/* ========================================
+FILTROS
+======================================== */
+
+.filtros{
+
+  display:flex;
+  gap:12px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:32px;
+}
+
+.filtro{
+
+  background:white;
+
+  border:1px solid var(--border);
+
+  color:var(--text);
+}
+
+.filtro.ativo{
+
+  background:var(--primary);
+
+  color:white;
+
+  border-color:var(--primary);
+}
+
+/* ========================================
+GRID
+======================================== */
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(340px,1fr));
+
+  gap:24px;
+}
+
+/* ========================================
+CARD
+======================================== */
+
+.card{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  padding:24px;
+
+  box-shadow:var(--shadow);
+
+  transition:.25s ease;
+
+  position:relative;
+}
+
+.card:hover{
+
+  transform:translateY(-4px);
+}
+
+.usado{
+
+  border:2px solid #fde68a;
+}
+
+/* ========================================
+TAG
+======================================== */
+
+.serie{
+
+  display:inline-flex;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  background:#eff6ff;
+
+  color:var(--primary);
+
+  font-size:12px;
+  font-weight:800;
+
+  margin-bottom:18px;
+}
+
+/* ========================================
+PERGUNTA
+======================================== */
+
+.pergunta{
+
+  font-size:18px;
+  font-weight:600;
+
+  line-height:1.6;
+
+  margin-bottom:18px;
+}
+
+/* ========================================
+AÇÕES
+======================================== */
+
+.acoes{
+
+  display:flex;
+  gap:10px;
+
+  flex-wrap:wrap;
+}
+
+.copiar{
+
+  background:#dcfce7;
+
+  color:var(--success);
+}
+
+.ver{
+
+  background:#e2e8f0;
+
+  color:#334155;
+}
+
+.xp{
+
+  background:#fef3c7;
+
+  color:#92400e;
+}
+
+/* ========================================
+RESPOSTA
+======================================== */
+
+.resposta{
+
+  display:none;
+
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:#f8fafc;
+
+  border:1px solid #e2e8f0;
+
+  line-height:1.7;
+
+  color:#475569;
+}
+
+/* ========================================
+MODAL
+======================================== */
+
+.modal{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(15,23,42,.45);
+
+  backdrop-filter:blur(8px);
+
+  z-index:999;
+
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+}
+
+.modal-box{
+
+  width:min(700px,100%);
+
+  background:white;
+
+  border-radius:32px;
+
+  padding:34px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.18);
+
+  animation:popup .25s ease;
+}
+
+@keyframes popup{
+
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.modal-badge{
+
+  display:inline-flex;
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  background:#eff6ff;
+
+  color:var(--primary);
+
+  font-size:13px;
+  font-weight:700;
+
+  margin-bottom:18px;
+}
+
+.modal-box h2{
+
+  font-size:28px;
+  line-height:1.5;
+
+  margin-bottom:20px;
+}
+
+.modal-resposta{
+
+  display:none;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:#f8fafc;
+
+  border:1px solid var(--border);
+
+  line-height:1.7;
+
+  color:#475569;
+}
+
+.modal-actions{
+
+  display:flex;
+  gap:12px;
+
+  margin-top:24px;
+}
+
+.btn-modal-primary{
+
+  background:var(--primary);
+
+  color:white;
+}
+
+.btn-modal-close{
+
+  background:#e2e8f0;
+
+  color:#334155;
+}
+
+/* ========================================
+RESPONSIVO
+======================================== */
+
+@media(max-width:768px){
+
+  body{
+    padding:20px 14px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .topo{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .topo-acoes{
+    width:100%;
+  }
+
+  .topo-acoes button{
+    flex:1;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .modal-actions{
+    flex-direction:column;
+  }
+}
+
+/* ========================================
+BOTÃO VOLTAR
+======================================== */
+
+.btn-voltar{
+
+  border:none;
+
+  background:white;
+
+  border:1px solid var(--border);
+
+  padding:12px 16px;
+
+  border-radius:16px;
+
+  cursor:pointer;
+
+  font-size:14px;
+  font-weight:700;
+
+  color:var(--text);
+
+  margin-bottom:24px;
+
+  box-shadow:var(--shadow);
+
+  transition:.2s ease;
+}
+
+.btn-voltar:hover{
+
+  transform:translateY(-2px);
+
+  background:#f8fafc;
+}
+
+.hero{
+
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+
+  margin-bottom:35px;
+}

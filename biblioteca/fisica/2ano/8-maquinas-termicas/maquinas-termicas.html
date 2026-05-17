@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Máquinas Térmicas
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./maquinas-termicas.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🔥 Termodinâmica • Física
+      </span>
+
+      <h1>
+        Máquinas Térmicas
+      </h1>
+
+      <p>
+
+        Entenda como motores,
+        usinas e refrigeradores
+        transformam calor em trabalho
+        através dos princípios
+        da Termodinâmica.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🚗
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que são Máquinas Térmicas?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Máquinas térmicas são dispositivos
+      capazes de transformar energia térmica
+      em energia mecânica.
+
+    </p>
+
+    <p>
+
+      Elas funcionam através
+      da troca de calor entre
+      fontes quentes e frias.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🔥 Calor → ⚙️ Trabalho
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       FUNCIONAMENTO
+  ====================================================== -->
+  <h2>
+    2. Funcionamento Básico
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$Q_{quente} = \tau + Q_{frio}$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(Q_{quente}\) → calor recebido
+        </li>
+
+        <li>
+          \(\tau\) → trabalho realizado
+        </li>
+
+        <li>
+          \(Q_{frio}\) → calor rejeitado
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box vermelho">
+
+        <h3>
+          🔥 FLUXO DE ENERGIA
+        </h3>
+
+        <p>
+
+          Parte do calor recebido
+          é transformado em trabalho,
+          enquanto outra parte
+          é perdida para a fonte fria.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       RENDIMENTO
+  ====================================================== -->
+  <h2>
+    3. Rendimento
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$\eta = \frac{\tau}{Q_{quente}}$$
+
+    </div>
+
+    <p>
+
+      O rendimento indica
+      a eficiência da máquina térmica.
+
+    </p>
+
+    <div class="mini-formula">
+
+      📈 Quanto maior o rendimento,
+      melhor a máquina.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CICLO TÉRMICO
+  ====================================================== -->
+  <h2>
+    4. Ciclo Térmico
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Uma máquina térmica opera
+      em ciclos repetitivos,
+      realizando sucessivas
+      transformações gasosas.
+
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        🔥
+        <span>Aquecimento</span>
+      </div>
+
+      <div class="area-card">
+        ⚙️
+        <span>Expansão</span>
+      </div>
+
+      <div class="area-card">
+        ❄️
+        <span>Resfriamento</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       MÁQUINA DE CARNOT
+  ====================================================== -->
+  <h2>
+    5. Máquina de Carnot
+  </h2>
+
+  <div class="card">
+
+    <div class="formula-box">
+
+      $$\eta = 1 - \frac{T_f}{T_q}$$
+
+    </div>
+
+    <p>
+
+      A Máquina de Carnot
+      representa a máquina térmica
+      ideal, com rendimento máximo teórico.
+
+    </p>
+
+    <div class="info-box azul">
+
+      <h3>
+        📘 IMPORTANTE
+      </h3>
+
+      <p>
+
+        As temperaturas devem
+        estar em Kelvin.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLOS
+  ====================================================== -->
+  <h2>
+    6. Aplicações
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🚗
+      <span>Motor de carro</span>
+    </div>
+
+    <div class="area-card">
+      ✈️
+      <span>Turbinas</span>
+    </div>
+
+    <div class="area-card">
+      ⚡
+      <span>Usinas</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    7. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore máquinas térmicas
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarMaquina('motor')">
+        🚗 Motor
+      </button>
+
+      <button onclick="analisarMaquina('rendimento')">
+        📈 Rendimento
+      </button>
+
+      <button onclick="analisarMaquina('carnot')">
+        🔥 Carnot
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    8. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1400 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./maquinas-termicas.js"
+></script>
+
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Interferência do Som
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./interferencia.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        🔊 Ondulatória • Física
+      </span>
+
+      <h1>
+        Interferência do Som
+      </h1>
+
+      <p>
+
+        Aprenda como ondas sonoras
+        interagem entre si,
+        produzindo reforço,
+        cancelamento e batimentos.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      🌊
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Interferência?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A interferência ocorre
+      quando duas ou mais
+      ondas sonoras se encontram
+      no mesmo ponto do espaço.
+
+    </p>
+
+    <p>
+
+      As amplitudes das ondas
+      se combinam, podendo
+      reforçar ou cancelar o som.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      🔊 + 🔊 = nova onda
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       INTERFERÊNCIA CONSTRUTIVA
+  ====================================================== -->
+  <h2>
+    2. Interferência Construtiva
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$A_{resultante} = A_1 + A_2$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          Ondas em fase
+        </li>
+
+        <li>
+          Reforço da amplitude
+        </li>
+
+        <li>
+          Som mais intenso
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box verde">
+
+        <h3>
+          ➕ REFORÇO SONORO
+        </h3>
+
+        <p>
+
+          Quando as cristas
+          das ondas coincidem,
+          ocorre aumento da intensidade.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       INTERFERÊNCIA DESTRUTIVA
+  ====================================================== -->
+  <h2>
+    3. Interferência Destrutiva
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Na interferência destrutiva,
+      ondas em oposição de fase
+      reduzem ou cancelam o som.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🔊 + 🔇 = cancelamento
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       BATIMENTOS
+  ====================================================== -->
+  <h2>
+    4. Batimentos
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Batimentos ocorrem quando
+      ondas com frequências
+      próximas interferem,
+      produzindo variações periódicas
+      na intensidade sonora.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$f_b = |f_1 - f_2|$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXEMPLOS
+  ====================================================== -->
+  <h2>
+    5. Exemplos de Interferência
+  </h2>
+
+  <div class="areas-grid">
+
+    <div class="area-card">
+      🎧
+      <span>Fones antirruído</span>
+    </div>
+
+    <div class="area-card">
+      🎸
+      <span>Afinação musical</span>
+    </div>
+
+    <div class="area-card">
+      🔊
+      <span>Caixas de som</span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CANCELAMENTO DE RUÍDO
+  ====================================================== -->
+  <h2>
+    6. Cancelamento de Ruído
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Fones com cancelamento ativo
+      produzem ondas em oposição
+      de fase para reduzir
+      ruídos externos.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🎧 Oposição de fase
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SOM E MÚSICA
+  ====================================================== -->
+  <h2>
+    7. Interferência na Música
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Músicos utilizam batimentos
+      para ajustar instrumentos
+      e realizar afinações precisas.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🎼 Ajuste de frequências
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore a interferência sonora
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarInterferencia('construtiva')">
+        ➕ Construtiva
+      </button>
+
+      <button onclick="analisarInterferencia('destrutiva')">
+        ➖ Destrutiva
+      </button>
+
+      <button onclick="analisarInterferencia('batimentos')">
+        🎵 Batimentos
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./interferencia.js"
+></script>
+
+</body>
+</html>

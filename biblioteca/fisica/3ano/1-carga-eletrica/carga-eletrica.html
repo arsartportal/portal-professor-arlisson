@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- =====================================================
+     CONFIGURAÇÕES
+====================================================== -->
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  Carga Elétrica
+</title>
+
+<!-- =====================================================
+     CSS GLOBAL
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../biblioteca.css"
+>
+
+<!-- =====================================================
+     CSS DA AULA
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="./carga-eletrica.css"
+>
+
+<!-- =====================================================
+     CSS PROGRESSO
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="../../../core/progresso.css"
+>
+
+<!-- =====================================================
+     KATEX
+====================================================== -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="hero-fisica">
+
+    <div class="hero-texto">
+
+      <span class="badge-fisica">
+        ⚡ Eletrostática • Física
+      </span>
+
+      <h1>
+        Carga Elétrica
+      </h1>
+
+      <p>
+
+        Entenda como surgem
+        as cargas elétricas,
+        os processos de eletrização
+        e as interações
+        entre corpos carregados.
+
+      </p>
+
+    </div>
+
+    <div class="hero-emoji">
+      ⚡
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       STATUS LOGIN
+  ====================================================== -->
+  <div
+    class="loading-box"
+    id="statusLogin"
+  >
+
+    Carregando progresso...
+
+  </div>
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+  <section class="progress-container">
+
+    <h2 class="progress-title">
+      Seu Progresso
+    </h2>
+
+    <div class="progress-grid">
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-blue">
+          📘
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Respondidas
+          </span>
+
+          <strong
+            class="progress-value"
+            id="respondidas"
+          >
+            0/30
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-green">
+          ✅
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Acertos
+          </span>
+
+          <strong
+            class="progress-value"
+            id="acertos"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-red">
+          ❌
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Erros finais
+          </span>
+
+          <strong
+            class="progress-value"
+            id="erros"
+          >
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="progress-card">
+
+        <div class="progress-icon icon-purple">
+          🏆
+        </div>
+
+        <div class="progress-info">
+
+          <span class="progress-label">
+            Status
+          </span>
+
+          <strong
+            class="progress-value"
+            id="status"
+          >
+            Não iniciada
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <p
+      class="progress-text"
+      id="porcentagem"
+    >
+
+      Progresso: 0%
+
+    </p>
+
+  </section>
+
+  <!-- =====================================================
+       INTRODUÇÃO
+  ====================================================== -->
+  <h2>
+    1. O que é Carga Elétrica?
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      A carga elétrica é
+      uma propriedade física
+      responsável pelas interações
+      elétricas entre partículas.
+
+    </p>
+
+    <p>
+
+      Existem dois tipos
+      de carga elétrica:
+      positiva e negativa.
+
+    </p>
+
+    <div class="mini-formula resultado">
+
+      ⚡ Interação elétrica
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       TIPOS DE CARGA
+  ====================================================== -->
+  <h2>
+    2. Tipos de Carga
+  </h2>
+
+  <div class="formula-layout">
+
+    <div class="card formula-card">
+
+      <div class="formula-box">
+
+        $$Q = n \cdot e$$
+
+      </div>
+
+      <ul class="formula-lista">
+
+        <li>
+          \(Q\) → carga elétrica
+        </li>
+
+        <li>
+          \(n\) → número de elétrons
+        </li>
+
+        <li>
+          \(e\) → carga elementar
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="formula-side">
+
+      <div class="info-box azul">
+
+        <h3>
+          ⚡ CARGAS
+        </h3>
+
+        <p>
+
+          Corpos podem ficar
+          eletrizados ao ganhar
+          ou perder elétrons.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ATRAÇÃO E REPULSÃO
+  ====================================================== -->
+  <h2>
+    3. Interações Elétricas
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Cargas de sinais iguais
+      se repelem, enquanto
+      cargas de sinais opostos
+      se atraem.
+
+    </p>
+
+    <div class="mini-formula">
+
+      ➕ ↔️ ➕ = Repulsão
+
+      <br><br>
+
+      ➕ ❤️ ➖ = Atração
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PROCESSOS DE ELETRIZAÇÃO
+  ====================================================== -->
+  <h2>
+    4. Processos de Eletrização
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Um corpo pode ser
+      eletrizado por atrito,
+      contato ou indução.
+
+    </p>
+
+    <div class="areas-grid">
+
+      <div class="area-card">
+        ✋
+        <span>Atrito</span>
+      </div>
+
+      <div class="area-card">
+        🤝
+        <span>Contato</span>
+      </div>
+
+      <div class="area-card">
+        ⚡
+        <span>Indução</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONDUTORES E ISOLANTES
+  ====================================================== -->
+  <h2>
+    5. Condutores e Isolantes
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Materiais condutores
+      permitem movimentação
+      de cargas elétricas.
+
+    </p>
+
+    <p>
+
+      Materiais isolantes
+      dificultam esse movimento.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🔌 Condutor | 🚫 Isolante
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       PRINCÍPIO DA CONSERVAÇÃO
+  ====================================================== -->
+  <h2>
+    6. Conservação da Carga
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      Em um sistema isolado,
+      a soma das cargas elétricas
+      permanece constante.
+
+    </p>
+
+    <div class="formula-box">
+
+      $$Q_{antes} = Q_{depois}$$
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       ELETROSCÓPIO
+  ====================================================== -->
+  <h2>
+    7. Eletroscópio
+  </h2>
+
+  <div class="card">
+
+    <p>
+
+      O eletroscópio é utilizado
+      para detectar a presença
+      de cargas elétricas.
+
+    </p>
+
+    <div class="mini-formula">
+
+      🍃⚡ Detecção elétrica
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SIMULADOR
+  ====================================================== -->
+  <h2>
+    8. Simulador
+  </h2>
+
+  <div class="simulador">
+
+    <h3>
+      Explore os conceitos
+      de carga elétrica
+    </h3>
+
+    <div class="botoes-simulador">
+
+      <button onclick="analisarCarga('positiva')">
+        ➕ Positiva
+      </button>
+
+      <button onclick="analisarCarga('negativa')">
+        ➖ Negativa
+      </button>
+
+      <button onclick="analisarCarga('eletrizacao')">
+        ⚡ Eletrização
+      </button>
+
+    </div>
+
+    <div
+      class="resultado-simulador"
+      id="resultadoSimulador"
+    >
+
+      Escolha um conceito acima.
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXERCÍCIOS
+  ====================================================== -->
+  <h2>
+    9. Exercícios
+  </h2>
+
+  <div id="exercicios"></div>
+
+</div>
+
+<!-- =====================================================
+     EFEITO XP
+====================================================== -->
+<div
+  class="efeito-xp"
+  id="efeitoXp"
+>
+
+  <div
+    class="efeito-xp-card"
+    id="efeitoXpCard"
+  >
+
+    <div class="efeito-xp-emoji">
+      🎉
+    </div>
+
+    <h2>
+      Recompensa recebida!
+    </h2>
+
+    <p id="efeitoXpTexto">
+      +1500 XP
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
+<script
+  type="module"
+  src="./carga-eletrica.js"
+></script>
+
+</body>
+</html>
