@@ -19,7 +19,7 @@ import {
 // =============================
 function calcularDepositoScienceBank(dados){
   const nivel = dados.nivel || 0;
-  return Math.max(nivel * 2, 2);
+  return Math.max(nivel * 5, 5);
 }
 
 
