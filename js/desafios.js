@@ -1092,7 +1092,7 @@ async function atualizarStreak(user, resultado){
     if(!btn) return;
 
     btn.addEventListener("click", ()=>{
-      window.location.href = "loja\\loja.html";
+      window.location.href = "loja/loja.html";
     });
   }
 
