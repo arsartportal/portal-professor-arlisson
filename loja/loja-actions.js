@@ -1013,10 +1013,15 @@ async function atualizarRankingUsuario(valor) {
 
   try {
 
-    await setDoc(ref, {
-      nome: user.displayName || user.email,
-      totalGasto: increment(valor)
-    }, { merge: true });
+    const nomeUsuario =
+  user.displayName ||
+  user.email?.split("@")[0] ||
+  "Usuário";
+
+await setDoc(ref, {
+  nome: nomeUsuario,
+  totalGasto: increment(valor)
+}, { merge: true });
 
   } catch (erro) {
     console.error("Erro ao atualizar ranking:", erro);
