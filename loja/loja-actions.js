@@ -586,7 +586,7 @@ setTimeout(async () => {
     // 🎟️ FICHAS
     // ==================================================
     if (item.fichas) {
-      return `Resgatou ${item.fichas} fichas`;
+      return `Resgatou ${item.fichas} ingressos`;
     }
 
     // ==================================================
@@ -727,8 +727,8 @@ if (item.tipo === "prova") {
         await atualizarRankingUsuario(item.preco);
 
         modalRecompensa({
-          titulo: "🎟️ Fichas recebidas",
-          descricao: `+${item.fichas} fichas`,
+          titulo: "🎟️ Ingressos recebidas",
+          descricao: `+${item.fichas} ingressos`,
           raridade: item.raridade
         });
       }

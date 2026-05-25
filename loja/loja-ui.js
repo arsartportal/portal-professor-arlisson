@@ -306,55 +306,81 @@ itensOrdenados.forEach(item => {
     }
 
     // ======================================================
-    // 🎯 DEMAIS SEÇÕES
-    // ======================================================
+// 🎯 DEMAIS SEÇÕES
+// ======================================================
 
-    else {
+else {
 
-      const grid = document.createElement("div");
-      grid.className = "grid-raridade";
+  const grid = document.createElement("div");
+  grid.className = "grid-raridade";
 
-      const itensOrdenados = itensDoTipo.sort(
-        (a, b) => (a.ordem || 999) - (b.ordem || 999)
-      );
-
-      // 🚫 ranking não tem recomendado
-      const melhorItem =
-        tipo === "ranking"
-          ? null
-          : encontrarMelhorItem(itensOrdenados, spAtual, tipo);
-
-      
-itensOrdenados.forEach(item => {
-
-  const tipoItem = getTipoItem(item);
-  const data = datasLiberacao[tipoItem];
-  const estoque = getEstoqueChaveiro();
-
-  const bloqueado =
-    data && agora < data && !item.id.startsWith("xp");
-
-  const semEstoque =
-    item.id === "chaveiro-univers3d" && estoque <= 0;
-
-  const podeComprar =
-    !bloqueado && !semEstoque && spAtual >= item.preco;
-
-  const recomendado =
-    melhorItem && item.id === melhorItem.id;
-
-  grid.innerHTML += criarCard(
-    item,
-    item.raridade || "comum",
-    bloqueado,
-    podeComprar,
-    recomendado
+  const itensOrdenados = itensDoTipo.sort(
+    (a, b) => (a.ordem || 999) - (b.ordem || 999)
   );
-});
 
+  // 🚫 ranking não tem recomendado
+  const melhorItem =
+    tipo === "ranking"
+      ? null
+      : encontrarMelhorItem(itensOrdenados, spAtual, tipo);
 
-      secao.appendChild(grid);
-    }
+  // ======================================================
+  // ⚽ BANNER TEMPORÁRIO QUIZ DA COPA
+  // ======================================================
+
+  if (tipo === "fichas") {
+
+    const destaque = document.createElement("div");
+
+    destaque.className = "banner-copa";
+
+    destaque.innerHTML = `
+      <div class="banner-copa-conteudo">
+
+        <div class="titulo-banner-copa">
+          ⚽ QUIZ DA COPA LIBERADO!
+        </div>
+
+        <div class="texto-banner-copa">
+          Garanta seus ingressos e participe
+          dos desafios especiais da Copa.
+        </div>
+
+      </div>
+    `;
+
+    secao.appendChild(destaque);
+  }
+
+  itensOrdenados.forEach(item => {
+
+    const tipoItem = getTipoItem(item);
+    const data = datasLiberacao[tipoItem];
+    const estoque = getEstoqueChaveiro();
+
+    const bloqueado =
+      data && agora < data && !item.id.startsWith("xp");
+
+    const semEstoque =
+      item.id === "chaveiro-univers3d" && estoque <= 0;
+
+    const podeComprar =
+      !bloqueado && !semEstoque && spAtual >= item.preco;
+
+    const recomendado =
+      melhorItem && item.id === melhorItem.id;
+
+    grid.innerHTML += criarCard(
+      item,
+      item.raridade || "comum",
+      bloqueado,
+      podeComprar,
+      recomendado
+    );
+  });
+
+  secao.appendChild(grid);
+}
 
     loja.appendChild(secao);
   });
