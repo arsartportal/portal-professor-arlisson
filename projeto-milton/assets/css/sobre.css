@@ -1,0 +1,441 @@
+/* ===================================================== */
+/* SOBRE PAGE */
+/* ===================================================== */
+
+/* ===================================================== */
+/* PAGE HERO */
+/* ===================================================== */
+
+.page-hero{
+  position: relative;
+
+  padding:
+    180px 0 120px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #F8FBFF 0%,
+      #FFFFFF 100%
+    );
+
+  overflow: hidden;
+}
+
+.page-hero::before{
+  content: '';
+
+  position: absolute;
+
+  top: -200px;
+  right: -200px;
+
+  width: 500px;
+  height: 500px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(15,61,94,0.08),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+.page-hero-container{
+  position: relative;
+  z-index: 2;
+
+  max-width: 850px;
+
+  text-align: center;
+
+  margin: 0 auto;
+}
+
+.page-hero h1{
+  font-size: 4rem;
+  line-height: 1.1;
+
+  color: var(--text);
+
+  margin:
+    24px 0;
+}
+
+.page-hero p{
+  font-size: 1.15rem;
+  line-height: 1.9;
+
+  color: var(--text-light);
+}
+
+/* ===================================================== */
+/* ABOUT PAGE */
+/* ===================================================== */
+
+.about-page{
+  padding: 120px 0;
+}
+
+.about-page-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ===================================================== */
+/* IMAGE */
+/* ===================================================== */
+
+.about-page-image{
+  position: relative;
+}
+
+.about-page-image::before{
+  content: '';
+
+  position: absolute;
+
+  inset: -20px;
+
+  border-radius: 40px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15,61,94,0.10),
+      rgba(27,94,143,0.04)
+    );
+
+  z-index: -1;
+}
+
+.about-page-image img{
+  width: 100%;
+
+  border-radius: 32px;
+
+  object-fit: cover;
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.10);
+}
+
+/* ===================================================== */
+/* CONTENT */
+/* ===================================================== */
+
+.about-page-content h2{
+  font-size: 3rem;
+  line-height: 1.2;
+
+  color: var(--text);
+
+  margin:
+    24px 0 28px;
+}
+
+.about-page-content p{
+  color: var(--text-light);
+
+  line-height: 1.9;
+
+  margin-bottom: 24px;
+}
+
+/* ===================================================== */
+/* INFO GRID */
+/* ===================================================== */
+
+.about-info-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  margin-top: 50px;
+}
+
+.about-info-card{
+  padding: 28px;
+
+  border-radius: 24px;
+
+  background:
+    #FFFFFF;
+
+  border:
+    1px solid rgba(0,0,0,0.06);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.04);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.about-info-card:hover{
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.08);
+}
+
+.about-info-card h3{
+  font-size: 1.1rem;
+
+  color: var(--primary);
+
+  margin-bottom: 12px;
+}
+
+.about-info-card p{
+  margin-bottom: 0;
+}
+
+/* ===================================================== */
+/* EXPERIENCE */
+/* ===================================================== */
+
+.experience{
+  padding: 120px 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #FFFFFF 0%,
+      #F8FBFF 100%
+    );
+}
+
+.experience-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+
+  margin-top: 70px;
+}
+
+/* ===================================================== */
+/* EXPERIENCE CARD */
+/* ===================================================== */
+
+.experience-card{
+  padding: 40px;
+
+  border-radius: 32px;
+
+  background:
+    #FFFFFF;
+
+  border:
+    1px solid rgba(0,0,0,0.06);
+
+  text-align: center;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.experience-card:hover{
+  transform: translateY(-10px);
+
+  box-shadow:
+    0 25px 50px rgba(0,0,0,0.08);
+}
+
+.experience-icon{
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin:
+    0 auto 28px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0F3D5E,
+      #1B5E8F
+    );
+
+  color: #FFFFFF;
+
+  font-size: 1.8rem;
+
+  box-shadow:
+    0 15px 35px rgba(15,61,94,0.18);
+}
+
+.experience-card h3{
+  font-size: 1.35rem;
+
+  margin-bottom: 18px;
+
+  color: var(--text);
+}
+
+.experience-card p{
+  color: var(--text-light);
+
+  line-height: 1.8;
+}
+
+/* ===================================================== */
+/* VALUES */
+/* ===================================================== */
+
+.values{
+  padding: 120px 0;
+}
+
+.values-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+
+  margin-top: 70px;
+}
+
+/* ===================================================== */
+/* VALUE CARD */
+/* ===================================================== */
+
+.value-card{
+  position: relative;
+
+  padding: 42px;
+
+  border-radius: 32px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #FFFFFF,
+      #F9FBFD
+    );
+
+  border:
+    1px solid rgba(0,0,0,0.05);
+
+  overflow: hidden;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.value-card::before{
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0F3D5E,
+      #1B5E8F
+    );
+}
+
+.value-card:hover{
+  transform: translateY(-10px);
+
+  box-shadow:
+    0 25px 50px rgba(0,0,0,0.08);
+}
+
+.value-card h3{
+  font-size: 1.35rem;
+
+  color: var(--text);
+
+  margin-bottom: 18px;
+}
+
+.value-card p{
+  color: var(--text-light);
+
+  line-height: 1.9;
+}
+
+/* ===================================================== */
+/* RESPONSIVE */
+/* ===================================================== */
+
+@media (max-width: 1100px){
+
+  .about-page-container{
+    grid-template-columns: 1fr;
+  }
+
+  .experience-grid,
+  .values-grid{
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 768px){
+
+  .page-hero{
+    padding:
+      160px 0 90px;
+  }
+
+  .page-hero h1{
+    font-size: 2.8rem;
+  }
+
+  .about-page,
+  .experience,
+  .values{
+    padding: 90px 0;
+  }
+
+  .about-page-content h2{
+    font-size: 2.3rem;
+  }
+
+  .about-info-grid{
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 576px){
+
+  .page-hero h1{
+    font-size: 2.2rem;
+  }
+
+  .page-hero p{
+    font-size: 1rem;
+  }
+
+  .about-page-content h2{
+    font-size: 2rem;
+  }
+
+  .experience-card,
+  .value-card,
+  .about-info-card{
+    padding: 32px 26px;
+  }
+
+}

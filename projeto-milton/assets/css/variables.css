@@ -1,0 +1,135 @@
+/* ===================================================== */
+/* VARIABLES */
+/* ===================================================== */
+
+:root{
+
+  /* ======================================== */
+  /* COLORS */
+  /* ======================================== */
+
+  --primary: #0F3D5E;
+  --primary-light: #1B5E8F;
+  --primary-dark: #08273D;
+
+  --secondary: #F4F7FA;
+  --background: #FFFFFF;
+
+  --text: #1A1A1A;
+  --text-light: #5F6B76;
+  --text-soft: #8A94A0;
+
+  --white: #FFFFFF;
+
+  --border: #E5E7EB;
+  --border-light: #F1F3F5;
+
+  --success: #16A34A;
+  --warning: #F59E0B;
+  --danger: #DC2626;
+
+  /* ======================================== */
+  /* GRADIENTS */
+  /* ======================================== */
+
+  --gradient-primary:
+    linear-gradient(
+      135deg,
+      #0F3D5E 0%,
+      #1B5E8F 100%
+    );
+
+  --gradient-light:
+    linear-gradient(
+      180deg,
+      #FFFFFF 0%,
+      #F7FAFC 100%
+    );
+
+  /* ======================================== */
+  /* SHADOWS */
+  /* ======================================== */
+
+  --shadow-sm:
+    0 4px 10px rgba(0,0,0,0.04);
+
+  --shadow-md:
+    0 10px 30px rgba(0,0,0,0.06);
+
+  --shadow-lg:
+    0 20px 50px rgba(0,0,0,0.10);
+
+  --shadow-xl:
+    0 30px 70px rgba(0,0,0,0.14);
+
+  /* ======================================== */
+  /* BORDER RADIUS */
+  /* ======================================== */
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-full: 999px;
+
+  /* ======================================== */
+  /* TRANSITIONS */
+  /* ======================================== */
+
+  --transition-fast: .2s ease;
+  --transition-normal: .3s ease;
+  --transition-slow: .5s ease;
+
+  /* ======================================== */
+  /* CONTAINER */
+  /* ======================================== */
+
+  --container-width: 1240px;
+
+  /* ======================================== */
+  /* HEADER */
+  /* ======================================== */
+
+  --header-height: 90px;
+
+  /* ======================================== */
+  /* Z-INDEX */
+  /* ======================================== */
+
+  --z-menu: 100;
+  --z-header: 999;
+  --z-modal: 2000;
+  --z-loader: 3000;
+
+  /* ======================================== */
+  /* TYPOGRAPHY */
+  /* ======================================== */
+
+  --font-primary: 'Inter', sans-serif;
+
+  --fs-xs: .75rem;
+  --fs-sm: .875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+
+  --fs-title-sm: 1.8rem;
+  --fs-title-md: 2.5rem;
+  --fs-title-lg: 3.5rem;
+  --fs-title-xl: 4.5rem;
+
+  --line-height-base: 1.7;
+  --line-height-title: 1.2;
+
+  /* ======================================== */
+  /* SPACING */
+  /* ======================================== */
+
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 60px;
+  --space-2xl: 100px;
+
+}
