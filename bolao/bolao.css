@@ -1,220 +1,635 @@
-/* ===============================
+/* ===================================================
    RESET
-=============================== */
+=================================================== */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  background:
+    radial-gradient(circle at top, rgba(56,189,248,0.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(99,102,241,0.12), transparent 25%),
+    linear-gradient(180deg, #020617, #0f172a);
+
   color:#e2e8f0;
+
   min-height:100vh;
+
+  overflow-x:hidden;
 }
 
-/* ===============================
+/* ===================================================
+   SCROLLBAR
+=================================================== */
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#020617;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#334155;
+  border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#475569;
+}
+
+/* ===================================================
    CONTAINER
-=============================== */
+=================================================== */
 .container{
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
-  padding:20px;
+  padding:25px;
 }
 
-/* ===============================
+/* ===================================================
    HEADER
-=============================== */
+=================================================== */
 .topo{
+  position:relative;
+
   text-align:center;
-  margin-bottom:30px;
+
+  margin-bottom:35px;
+
+  padding:40px 20px;
+
+  border-radius:24px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15,23,42,0.95),
+      rgba(30,41,59,0.92)
+    );
+
+  border:1px solid rgba(148,163,184,0.12);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.topo::before{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(circle at top left,
+    rgba(56,189,248,0.18),
+    transparent 35%);
+
+  pointer-events:none;
 }
 
 .topo h1{
-  font-size:2.2rem;
+  position:relative;
+
+  font-size:2.8rem;
+
+  font-weight:800;
+
+  letter-spacing:1px;
+
   color:#38bdf8;
+
+  text-shadow:
+    0 0 15px rgba(56,189,248,0.4);
 }
 
 .topo .sub{
+  position:relative;
+
+  margin-top:12px;
+
   color:#94a3b8;
-  margin-top:5px;
+
+  font-size:1rem;
 }
 
-/* ===============================
-   CARDS
-=============================== */
-.card{
-  background:#0f172a;
-  border:1px solid #1e293b;
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:20px;
+/* ===================================================
+   RESUMO
+=================================================== */
+.resumo{
+  display:grid;
 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  transition:0.3s;
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px,1fr));
+
+  gap:18px;
+
+  margin-bottom:30px;
+}
+
+/* ===================================================
+   CARDS
+=================================================== */
+.card{
+  position:relative;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15,23,42,0.96),
+      rgba(15,23,42,0.85)
+    );
+
+  border:1px solid rgba(148,163,184,0.08);
+
+  border-radius:22px;
+
+  padding:24px;
+
+  overflow:hidden;
+
+  backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.25s ease,
+    border 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card::before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(56,189,248,0.4),
+      transparent
+    );
 }
 
 .card:hover{
-  transform: translateY(-3px);
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(56,189,248,0.25);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.35),
+    0 0 18px rgba(56,189,248,0.08);
 }
 
-/* ===============================
-   RESUMO
-=============================== */
-.resumo{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap:15px;
-  margin-bottom:25px;
+.card h2{
+  margin-bottom:18px;
+
+  font-size:1.2rem;
+
+  color:#f8fafc;
 }
 
 .card h3{
-  font-size:0.9rem;
   color:#94a3b8;
+
+  font-size:0.9rem;
+
+  font-weight:600;
 }
 
 .card p{
-  font-size:1.6rem;
-  margin-top:8px;
-  font-weight:bold;
+  margin-top:10px;
+
+  font-size:1.9rem;
+
+  font-weight:800;
+
+  color:#f8fafc;
 }
 
-/* ===============================
+/* ===================================================
+   CARD DESTAQUE
+=================================================== */
+.card.destaque{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(14,116,144,0.25),
+      rgba(99,102,241,0.18)
+    );
+
+  border-color:
+    rgba(56,189,248,0.25);
+}
+
+/* ===================================================
    TABS
-=============================== */
+=================================================== */
 .tabs{
   display:flex;
-  gap:10px;
-  margin-bottom:20px;
+
+  gap:12px;
+
+  margin-bottom:25px;
 }
 
 .tab{
   flex:1;
-  padding:10px;
+
+  padding:14px;
+
   border:none;
-  border-radius:10px;
-  background:#1e293b;
-  color:#cbd5f5;
+
+  border-radius:16px;
+
+  background:
+    rgba(30,41,59,0.9);
+
+  color:#cbd5e1;
+
+  font-size:0.95rem;
+
+  font-weight:600;
+
   cursor:pointer;
-  transition:0.2s;
+
+  transition:0.25s;
+
+  border:1px solid transparent;
 }
 
 .tab:hover{
+  transform:translateY(-2px);
+
   background:#334155;
 }
 
 .tab.active{
-  background:#38bdf8;
-  color:#020617;
-  font-weight:bold;
+  background:
+    linear-gradient(
+      135deg,
+      #38bdf8,
+      #6366f1
+    );
+
+  color:white;
+
+  border-color:
+    rgba(255,255,255,0.12);
+
+  box-shadow:
+    0 0 18px rgba(56,189,248,0.35);
 }
 
-/* ===============================
+/* ===================================================
    ABAS
-=============================== */
+=================================================== */
 .aba{
   display:none;
+
+  animation:fade 0.3s ease;
 }
 
 .aba.ativa{
   display:block;
 }
 
-/* ===============================
-   FORM
-=============================== */
-label{
-  display:block;
-  margin-top:15px;
-  margin-bottom:5px;
-  color:#94a3b8;
-  font-size:0.9rem;
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-select, input{
+/* ===================================================
+   FORMULÁRIO
+=================================================== */
+label{
+  display:block;
+
+  margin-top:18px;
+  margin-bottom:8px;
+
+  font-size:0.9rem;
+
+  font-weight:600;
+
+  color:#cbd5e1;
+}
+
+select,
+input{
   width:100%;
-  padding:10px;
-  border-radius:10px;
-  border:none;
+
+  padding:14px;
+
+  border-radius:14px;
+
   outline:none;
 
-  background:#020617;
-  color:#e2e8f0;
-  border:1px solid #1e293b;
+  background:
+    rgba(2,6,23,0.85);
+
+  color:#f8fafc;
+
+  border:1px solid rgba(148,163,184,0.12);
+
+  transition:0.25s;
+}
+
+select:focus,
+input:focus{
+  border-color:#38bdf8;
+
+  box-shadow:
+    0 0 0 4px rgba(56,189,248,0.12);
 }
 
 input::placeholder{
   color:#64748b;
 }
 
-/* ===============================
-   BUTTON
-=============================== */
+/* ===================================================
+   BOTÃO
+=================================================== */
 .btn{
-  margin-top:15px;
   width:100%;
-  padding:12px;
-  border:none;
-  border-radius:12px;
 
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  margin-top:22px;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #38bdf8,
+      #6366f1
+    );
+
   color:white;
-  font-weight:bold;
+
+  font-size:1rem;
+
+  font-weight:700;
+
   cursor:pointer;
 
   transition:0.3s;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.btn::before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-120%;
+
+  width:100%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.25),
+      transparent
+    );
+
+  transition:0.5s;
+}
+
+.btn:hover::before{
+  left:120%;
 }
 
 .btn:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 15px rgba(56,189,248,0.5);
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(56,189,248,0.35);
 }
 
-/* ===============================
+.btn:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+/* ===================================================
+   STATUS
+=================================================== */
+#statusAposta{
+  margin-top:14px;
+
+  font-size:0.95rem;
+
+  font-weight:600;
+
+  color:#22c55e;
+}
+
+#simulacaoGanho{
+  margin-top:15px;
+
+  font-size:0.95rem;
+
+  font-weight:700;
+}
+
+/* ===================================================
    LISTAS
-=============================== */
-ul, ol{
-  margin-top:10px;
-  padding-left:20px;
+=================================================== */
+ul,
+ol{
+  margin-top:12px;
+
+  padding-left:22px;
 }
 
 li{
-  margin-bottom:8px;
+  margin-bottom:10px;
+
+  padding:10px 14px;
+
+  border-radius:12px;
+
+  background:
+    rgba(15,23,42,0.65);
+
+  border:1px solid rgba(148,163,184,0.06);
+
+  transition:0.2s;
 }
 
-/* ===============================
-   STATUS
-=============================== */
-#statusAposta{
-  margin-top:10px;
-  color:#22c55e;
-  font-size:0.9rem;
+li:hover{
+  transform:translateX(4px);
+
+  background:
+    rgba(30,41,59,0.75);
 }
 
-/* ===============================
+/* ===================================================
    GRÁFICOS
-=============================== */
-canvas{
-  margin-top:15px;
-  max-height:300px;
+=================================================== */
+.grafico-wrapper{
+  position:relative;
+
+  width:100%;
+
+  min-height:320px;
 }
 
-/* ===============================
+canvas{
+  margin-top:10px;
+
+  max-height:320px !important;
+}
+
+/* ===================================================
+   MODAL
+=================================================== */
+.modal{
+  position:fixed;
+
+  inset:0;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    rgba(2,6,23,0.75);
+
+  backdrop-filter:blur(6px);
+
+  z-index:999;
+}
+
+.modal-content{
+  width:90%;
+  max-width:420px;
+
+  padding:30px;
+
+  border-radius:24px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0f172a,
+      #111827
+    );
+
+  border:1px solid rgba(56,189,248,0.2);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.45);
+}
+
+.modal-content h2{
+  color:#38bdf8;
+
+  margin-bottom:15px;
+}
+
+.modal-content p{
+  font-size:1rem;
+
+  color:#cbd5e1;
+
+  margin-bottom:20px;
+}
+
+/* ===================================================
    RESPONSIVO
-=============================== */
+=================================================== */
 @media (max-width:768px){
 
+  .container{
+    padding:16px;
+  }
+
+  .topo{
+    padding:30px 18px;
+  }
+
   .topo h1{
-    font-size:1.6rem;
+    font-size:2rem;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .card p{
+    font-size:1.5rem;
+  }
+
+  .tabs{
+    flex-direction:column;
+  }
+
+  .tab{
+    width:100%;
+  }
+
+  .btn{
+    padding:14px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .topo h1{
+    font-size:1.7rem;
+  }
+
+  .topo .sub{
+    font-size:0.9rem;
   }
 
   .card p{
     font-size:1.3rem;
   }
 
-  .tabs{
-    flex-direction:column;
+  select,
+  input{
+    padding:12px;
   }
 
 }

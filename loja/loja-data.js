@@ -184,7 +184,7 @@
   export const datasLiberacao = {
     caixas: new Date("2026-04-25T10:00:00"),
     ranking: new Date("2026-04-30T10:00:00"),
-    roleta: new Date("2026-05-30T12:00:00"),
+    roleta: new Date("2026-06-30T12:00:00"),
     chaveiro: new Date("2026-11-17T13:30:00"), // 🔥 corrigido
     prova: new Date("2026-04-10T08:00:00"),
     fichas: new Date("2026-05-25T08:30:00")

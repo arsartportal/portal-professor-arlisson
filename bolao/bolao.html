@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Bolão da Copa • Portal do Professor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- 📊 Biblioteca de gráficos -->
+  <!-- 📊 Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- 🎨 Estilo -->
-  <link rel="stylesheet" href="bolao.css">
+  <!-- 🎨 CSS -->
+  <link rel="stylesheet" href="bolao.css" />
 </head>
 
 <body>
@@ -18,16 +18,23 @@
 
     <!-- ================= HEADER ================= -->
     <header class="topo">
+
+      <div class="efeito-copa"></div>
+
       <h1>🏆 Bolão da Copa</h1>
-      <p class="sub">Aposte seus SciencePoints e concorra ao prêmio!</p>
+
+      <p class="sub">
+        Aposte seus <strong>SP</strong> e concorra ao grande prêmio!
+      </p>
+
     </header>
 
     <!-- ================= RESUMO ================= -->
-    <section class="resumo">
+    <section class="resumo" aria-label="Resumo do bolão">
 
-      <div class="card">
+      <div class="card destaque">
         <h3>💰 Prêmio acumulado</h3>
-        <p id="premioTotal">0 XP</p>
+        <p id="premioTotal">0 SP</p>
       </div>
 
       <div class="card">
@@ -43,96 +50,129 @@
     </section>
 
     <!-- ================= TABS ================= -->
-    <!-- ⚠️ SEM onclick → controlado pelo bolao.js -->
     <nav class="tabs">
-      <button class="tab active" data-aba="apostar">Apostar</button>
-      <button class="tab" data-aba="estatisticas">Estatísticas</button>
-      <button class="tab" data-aba="ranking">Ranking</button>
+
+      <button class="tab active" data-aba="apostar">
+        🎯 Apostar
+      </button>
+
+      <button class="tab" data-aba="estatisticas">
+        📊 Estatísticas
+      </button>
+
+      <button class="tab" data-aba="ranking">
+        🏆 Ranking
+      </button>
+
     </nav>
 
     <!-- ================= APOSTAR ================= -->
     <section id="apostar" class="aba ativa">
 
+      <!-- CARD APOSTA -->
       <div class="card">
+
         <h2>🎯 Fazer aposta</h2>
 
-        <label>Seleção</label>
+        <label for="selecao">Seleção</label>
+
         <select id="selecao">
 
-  <!-- 🇦🇷 CONMEBOL -->
-  <option>Brasil</option>
-  <option>Argentina</option>
-  <option>Uruguai</option>
-  <option>Colômbia</option>
-  <option>Chile</option>
-  <option>Peru</option>
+  <!-- 🇺🇸 ANFITRIÕES -->
+  <option value="Estados Unidos">🇺🇸 Estados Unidos</option>
+  <option value="México">🇲🇽 México</option>
+  <option value="Canadá">🇨🇦 Canadá</option>
+
+  <!-- 🌎 CONMEBOL -->
+  <option value="Brasil">🇧🇷 Brasil</option>
+  <option value="Argentina">🇦🇷 Argentina</option>
+  <option value="Uruguai">🇺🇾 Uruguai</option>
+  <option value="Colômbia">🇨🇴 Colômbia</option>
+  <option value="Equador">🇪🇨 Equador</option>
+  <option value="Paraguai">🇵🇾 Paraguai</option>
 
   <!-- 🇪🇺 UEFA -->
-  <option>França</option>
-  <option>Inglaterra</option>
-  <option>Espanha</option>
-  <option>Alemanha</option>
-  <option>Portugal</option>
-  <option>Itália</option>
-  <option>Holanda</option>
-  <option>Bélgica</option>
-  <option>Croácia</option>
-  <option>Dinamarca</option>
-  <option>Suíça</option>
-  <option>Polônia</option>
-  <option>Áustria</option>
-  <option>Suécia</option>
-  <option>Turquia</option>
-  <option>Ucrânia</option>
+  <option value="Alemanha">🇩🇪 Alemanha</option>
+  <option value="Áustria">🇦🇹 Áustria</option>
+  <option value="Bélgica">🇧🇪 Bélgica</option>
+  <option value="Bósnia e Herzegovina">🇧🇦 Bósnia e Herzegovina</option>
+  <option value="Croácia">🇭🇷 Croácia</option>
+  <option value="Escócia">🏴 Escócia</option>
+  <option value="Espanha">🇪🇸 Espanha</option>
+  <option value="França">🇫🇷 França</option>
+  <option value="Holanda">🇳🇱 Holanda</option>
+  <option value="Inglaterra">🏴 Inglaterra</option>
+  <option value="Noruega">🇳🇴 Noruega</option>
+  <option value="Portugal">🇵🇹 Portugal</option>
+  <option value="Suécia">🇸🇪 Suécia</option>
+  <option value="Suíça">🇨🇭 Suíça</option>
+  <option value="Tchéquia">🇨🇿 Tchéquia</option>
+  <option value="Turquia">🇹🇷 Turquia</option>
+
+  <!-- 🌍 ÁFRICA -->
+  <option value="África do Sul">🇿🇦 África do Sul</option>
+  <option value="Argélia">🇩🇿 Argélia</option>
+  <option value="Cabo Verde">🇨🇻 Cabo Verde</option>
+  <option value="Costa do Marfim">🇨🇮 Costa do Marfim</option>
+  <option value="Egito">🇪🇬 Egito</option>
+  <option value="Gana">🇬🇭 Gana</option>
+  <option value="Marrocos">🇲🇦 Marrocos</option>
+  <option value="RD do Congo">🇨🇩 RD do Congo</option>
+  <option value="Senegal">🇸🇳 Senegal</option>
+  <option value="Tunísia">🇹🇳 Tunísia</option>
+
+  <!-- 🌏 ÁSIA -->
+  <option value="Arábia Saudita">🇸🇦 Arábia Saudita</option>
+  <option value="Austrália">🇦🇺 Austrália</option>
+  <option value="Catar">🇶🇦 Catar</option>
+  <option value="Coreia do Sul">🇰🇷 Coreia do Sul</option>
+  <option value="Iraque">🇮🇶 Iraque</option>
+  <option value="Irã">🇮🇷 Irã</option>
+  <option value="Japão">🇯🇵 Japão</option>
+  <option value="Jordânia">🇯🇴 Jordânia</option>
+  <option value="Uzbequistão">🇺🇿 Uzbequistão</option>
 
   <!-- 🌎 CONCACAF -->
-  <option>Estados Unidos</option>
-  <option>México</option>
-  <option>Canadá</option>
-  <option>Costa Rica</option>
-  <option>Panamá</option>
-  <option>Honduras</option>
+  <option value="Curaçao">🇨🇼 Curaçao</option>
+  <option value="Haiti">🇭🇹 Haiti</option>
+  <option value="Panamá">🇵🇦 Panamá</option>
 
-  <!-- 🌍 CAF -->
-  <option>Marrocos</option>
-  <option>Senegal</option>
-  <option>Nigéria</option>
-  <option>Egito</option>
-  <option>Argélia</option>
-  <option>Camarões</option>
-  <option>Gana</option>
-  <option>Costa do Marfim</option>
-  <option>Tunísia</option>
-
-  <!-- 🌏 AFC -->
-  <option>Japão</option>
-  <option>Coreia do Sul</option>
-  <option>Irã</option>
-  <option>Arábia Saudita</option>
-  <option>Austrália</option>
-  <option>Catar</option>
-  <option>Emirados Árabes Unidos</option>
-  <option>Iraque</option>
-
-  <!-- 🌐 EXTRA (disputa / possíveis vagas) -->
-  <option>Nova Zelândia</option>
+  <!-- 🌊 OCEANIA -->
+  <option value="Nova Zelândia">🇳🇿 Nova Zelândia</option>
 
 </select>
 
-        <label>SciencePoints</label>
-        <input type="number" id="pontos" placeholder="Ex: 50">
+        <label for="pontos">Quantidade de SP</label>
 
-        <!-- ⚠️ SEM onclick -->
-        <button class="btn">Apostar</button>
+        <input
+          type="number"
+          id="pontos"
+          min="1"
+          max="100000"
+          placeholder="Ex: 50"
+        />
 
-        <p id="simulacaoGanho"></p>
+        <button class="btn" id="btnApostar">
+          🚀 Confirmar palpite
+        </button>
 
-        <p id="statusAposta"></p>
+        <div class="info-aposta">
+
+          <p id="simulacaoGanho"></p>
+
+          <p id="statusAposta"></p>
+
+        </div>
+
       </div>
 
+      <!-- CARD MINHAS APOSTAS -->
       <div class="card">
-        <h2>📌 Suas apostas</h2>
+
+        <h2>📌 Seus palpites</h2>
+
         <ul id="listaApostas"></ul>
+
       </div>
 
     </section>
@@ -141,13 +181,23 @@
     <section id="estatisticas" class="aba">
 
       <div class="card">
-        <h2>📊 Distribuição de apostas</h2>
-        <canvas id="graficoPizza"></canvas>
+
+        <h2>📊 Distribuição de palpites</h2>
+
+        <div class="grafico-wrapper">
+          <canvas id="graficoPizza"></canvas>
+        </div>
+
       </div>
 
       <div class="card">
+
         <h2>📈 Evolução do prêmio</h2>
-        <canvas id="graficoLinha"></canvas>
+
+        <div class="grafico-wrapper">
+          <canvas id="graficoLinha"></canvas>
+        </div>
+
       </div>
 
     </section>
@@ -156,16 +206,35 @@
     <section id="ranking" class="aba">
 
       <div class="card">
-        <h2>🏆 Ranking de apostadores</h2>
+
+        <h2>🏆 Ranking de palpiteiros</h2>
+
         <ol id="rankingLista"></ol>
+
       </div>
 
     </section>
 
   </div>
 
-  <!-- ================= SCRIPT PRINCIPAL ================= -->
-  <!-- ⚠️ Tudo acontece dentro do bolao.js -->
+  <!-- ================= MODAL ================= -->
+  <div class="modal" id="modalAposta">
+
+    <div class="modal-content">
+
+      <h2>🎉 Palpite realizado!</h2>
+
+      <p id="modalTexto"></p>
+
+      <button id="fecharModal" class="btn">
+        Fechar
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ================= JS ================= -->
   <script type="module" src="bolao.js"></script>
 
 </body>

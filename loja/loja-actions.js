@@ -483,26 +483,62 @@ setTimeout(async () => {
 
   async function abrirRoleta() {
 
-    const premios = [100, 200, 300, 500, 800];
-    const ganho = premios[Math.floor(Math.random() * premios.length)];
+    const premios = [
+  { tipo: "xp", valor: 100 },
+  { tipo: "xp", valor: 200 },
+  { tipo: "xp", valor: 300 },
+  { tipo: "xp", valor: 500 },
+  { tipo: "xp", valor: 800 },
+
+  // 🔥 prêmio raro
+  { tipo: "sp", valor: 50 }
+];
+
+const ganho =
+  premios[Math.floor(Math.random() * premios.length)];
 
     modalLoading("Girando roleta...");
 
 
 setTimeout(async () => {
 
+  if (ganho.tipo === "xp") {
+
   await updateDoc(userRef, {
-    xp: increment(ganho)
+    xp: increment(ganho.valor)
   });
+
+} else if (ganho.tipo === "sp") {
+
+  await updateDoc(userRef, {
+    sciencePoints: increment(ganho.valor)
+  });
+
+}
 
   const texto = gerarTextoHistorico(
     { id: "roleta-cientifica", nome: "Roleta" },
-    { ganho }
+    {
+  ganho: ganho.valor,
+  tipo: ganho.tipo
+}
   );
 
   await registrarCompra(texto);
 
-  modalXP(ganho);
+  if (ganho.tipo === "xp") {
+
+  modalXP(ganho.valor);
+
+} else {
+
+  modalRecompensa({
+    titulo: "🔬 SP BÔNUS!",
+    descricao: `Você ganhou +${ganho.valor} SP`,
+    raridade: "lendario"
+  });
+
+}
 
 }, 2000);
 
@@ -564,16 +600,23 @@ setTimeout(async () => {
     }
 
     // ==================================================
-    // 🎡 ROLETA (COM RESULTADO)
-    // ==================================================
-    if (item.id === "roleta-cientifica") {
+// 🎡 ROLETA (COM RESULTADO)
+// ==================================================
+if (item.id === "roleta-cientifica") {
 
-      if (extra.ganho) {
-        return `Girou a roleta científica e ganhou +${extra.ganho} XP`;
-      }
+  if (extra.ganho) {
 
-      return `Girou a roleta científica`;
+    // 🔬 prêmio SP
+    if (extra.tipo === "sp") {
+      return `Girou a roleta científica e ganhou +${extra.ganho} SP`;
     }
+
+    // ⚡ prêmio XP
+    return `Girou a roleta científica e ganhou +${extra.ganho} XP`;
+  }
+
+  return `Girou a roleta científica`;
+}
 
     // ==================================================
     // ⚡ XP

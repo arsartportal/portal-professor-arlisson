@@ -1,17 +1,28 @@
 /* =====================================================
-   BOLAO.JS - VERSÃO FINAL PROFISSIONAL
+   BOLAO.JS — PORTAL DO PROFESSOR
    ✔ Firebase integrado
-   ✔ Eventos 100% via JS
-   ✔ Estatísticas + gráfico
-   ✔ Ranking
-   ✔ Simulação de ganho em tempo real
+   ✔ Sistema de SP
+   ✔ Odds dinâmicas
+   ✔ Ranking em tempo real
+   ✔ Estatísticas
+   ✔ Modal
+   ✔ Cache local
 ===================================================== */
 
 import { db, auth } from "../js/firebase.js";
 
 import {
-  collection, addDoc, getDocs, doc, updateDoc,
-  increment, query, onSnapshot, where, getDoc
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  increment,
+  query,
+  onSnapshot,
+  where,
+  getDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
@@ -23,15 +34,14 @@ import {
 ===================================================== */
 
 let alunoUid = null;
+
 let graficoPizza = null;
 
-/* =====================================================
-   CACHE EM TEMPO REAL (🔥 PERFORMANCE)
-   Guarda dados do Firestore localmente
-===================================================== */
+let cacheApostas = [];
+let historicoPremio = [];
+let cachePremio = 0;
+let graficoLinha = null;
 
-let cacheApostas = [];   // todas as apostas
-let cachePremio = 0;     // prêmio acumulado
 /* =====================================================
    INIT
 ===================================================== */
@@ -40,8 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
   configurarEventos();
 });
 
-onAuthStateChanged(auth, async (user)=>{
-  if(!user){
+/* =====================================================
+   LOGIN
+===================================================== */
+
+onAuthStateChanged(auth, async (user) => {
+
+  if (!user) {
     alert("Faça login para usar o bolão");
     return;
   }
@@ -50,160 +65,249 @@ onAuthStateChanged(auth, async (user)=>{
 
   await carregarResumo();
   await carregarMinhasApostas();
+  await carregarEstatisticas();
   await carregarRanking();
 
   iniciarTempoReal();
+
 });
 
 /* =====================================================
    EVENTOS
 ===================================================== */
 
-function configurarEventos(){
+function configurarEventos() {
 
   // BOTÃO APOSTAR
-  document.querySelector(".btn")
+  document
+    .getElementById("btnApostar")
     .addEventListener("click", apostar);
+
+  // FECHAR MODAL
+  document
+    .getElementById("fecharModal")
+    .addEventListener("click", () => {
+
+      document.getElementById("modalAposta")
+        .style.display = "none";
+
+    });
 
   // TABS
   document.querySelectorAll(".tab").forEach(btn => {
+
     btn.addEventListener("click", () => {
+
       const aba = btn.dataset.aba;
+
       trocarAba(aba, btn);
+
     });
+
   });
 
-  // 🔥 SIMULAÇÃO EM TEMPO REAL
-  document.getElementById("selecao")
+  // SIMULAÇÃO
+  document
+    .getElementById("selecao")
     .addEventListener("change", atualizarSimulacao);
 
-  document.getElementById("pontos")
+  document
+    .getElementById("pontos")
     .addEventListener("input", atualizarSimulacao);
+
 }
 
 /* =====================================================
    ABAS
 ===================================================== */
 
-function trocarAba(nome, botao){
+function trocarAba(nome, botao) {
 
   document.querySelectorAll(".aba")
     .forEach(a => a.classList.remove("ativa"));
 
-  document.getElementById(nome).classList.add("ativa");
+  document.getElementById(nome)
+    .classList.add("ativa");
 
   document.querySelectorAll(".tab")
     .forEach(t => t.classList.remove("active"));
 
   botao.classList.add("active");
+
 }
 
 /* =====================================================
    APOSTAR
 ===================================================== */
 
-async function apostar(){
+async function apostar() {
 
-  const btn = document.querySelector(".btn");
+  const btn = document.getElementById("btnApostar");
+
   const status = document.getElementById("statusAposta");
 
   btn.disabled = true;
 
   try {
 
-    const selecao = document.getElementById("selecao").value;
-    const pontos = Number(document.getElementById("pontos").value);
+    const selecao =
+      document.getElementById("selecao").value;
 
-    // 🧪 validação básica
-    if(!pontos || pontos <= 0){
+    const pontos =
+      Number(document.getElementById("pontos").value);
+
+    /* ================= VALIDAÇÃO ================= */
+
+    if (!pontos || pontos <= 0) {
+
       status.innerText = "⚠️ Valor inválido";
+
       return;
     }
 
-    // 🔒 LIMITE (igual à rule)
-    if(pontos > 500){
-      status.innerText = "⚠️ Máximo permitido: 500 SP";
+    if (pontos > 500) {
+
+      status.innerText =
+        "⚠️ Máximo permitido: 500 SP";
+
       return;
     }
+
+    /* ================= SALDO ================= */
 
     const saldo = await getSP(alunoUid);
 
-    // 💰 saldo suficiente?
-    if(pontos > saldo){
-      status.innerText = "❌ SP insuficiente";
+    if (pontos > saldo) {
+
+      status.innerText =
+        "❌ SP insuficiente";
+
       return;
     }
 
-    // ✅ PASSO 1 — salva aposta primeiro
-    await addDoc(collection(db, "apostasCopa"), {
-      alunoUid,
-      selecao,
-      pontosInvestidos: pontos,
-      data: new Date().toISOString()
-    });
+    /* ================= SALVA APOSTA ================= */
 
-    // ✅ PASSO 2 — remove SP (só depois de garantir aposta)
+    const usuarioSnap =
+  await getDoc(doc(db, "usuarios", alunoUid));
+
+const usuarioData =
+  usuarioSnap.data();
+
+await addDoc(collection(db, "apostasCopa"), {
+
+  alunoUid,
+
+  nome:
+    usuarioData?.nome ||
+    usuarioData?.nomeCompleto ||
+    "Aluno",
+
+  selecao,
+
+  pontosInvestidos: pontos,
+
+  data: serverTimestamp()
+
+});
+
+    /* ================= REMOVE SP ================= */
+
     await removerSP(alunoUid, pontos);
 
-    // ✅ PASSO 3 — atualiza prêmio
-    await updateDoc(doc(db, "bolaoCopa", "principal"), {
-      premioTotal: increment(pontos),
-      totalApostas: increment(1)
-    });
+    /* ================= ATUALIZA PRÊMIO ================= */
 
-    // 🎉 sucesso
-    status.innerText = "✅ Aposta realizada!";
+    await updateDoc(
+      doc(db, "bolaoCopa", "principal"),
+      {
+        premioTotal: increment(pontos),
+        totalApostas: increment(1)
+      }
+    );
 
-    // 🔄 atualizações
-    carregarResumo();
-    carregarMinhasApostas();
-    carregarEstatisticas();
-    carregarRanking();
+    /* ================= SUCESSO ================= */
 
-    // 🧹 limpa campo
+    status.innerText =
+      "✅ Aposta realizada!";
+
+    /* ================= MODAL ================= */
+
+    const modal =
+      document.getElementById("modalAposta");
+
+    const modalTexto =
+      document.getElementById("modalTexto");
+
+    modalTexto.innerText =
+      `Você apostou ${pontos} SP em ${selecao}!`;
+
+    modal.style.display = "flex";
+
+    /* ================= ATUALIZAÇÕES ================= */
+
+    await carregarResumo();
+    await carregarMinhasApostas();
+    await carregarEstatisticas();
+    await carregarRanking();
+
+    /* ================= LIMPA ================= */
+
     document.getElementById("pontos").value = "";
+
     atualizarSimulacao();
 
-  } catch(e){
+  } catch (e) {
 
     console.error(e);
 
-    // ⚠️ feedback melhorado
-    if(e.code === "permission-denied"){
-      status.innerText = "❌ Aposta não permitida (limite ou regra)";
+    if (e.code === "permission-denied") {
+
+      status.innerText =
+        "❌ Aposta não permitida";
+
     } else {
-      status.innerText = "❌ Erro ao apostar";
+
+      status.innerText =
+        "❌ Erro ao apostar";
+
     }
 
   } finally {
+
     btn.disabled = false;
+
   }
+
 }
 
 /* =====================================================
    RESUMO
 ===================================================== */
 
-async function carregarResumo(){
+async function carregarResumo() {
 
-  const snap = await getDoc(doc(db, "bolaoCopa", "principal"));
+  const snap = await getDoc(
+    doc(db, "bolaoCopa", "principal")
+  );
 
-  if(!snap.exists()) return;
+  if (!snap.exists()) return;
 
   const data = snap.data();
 
-  document.getElementById("premioTotal").innerText =
-    (data.premioTotal || 0) + " XP";
+  document.getElementById("premioTotal")
+    .innerText =
+    (data.premioTotal || 0) + " SP";
 
-  document.getElementById("totalApostas").innerText =
+  document.getElementById("totalApostas")
+    .innerText =
     data.totalApostas || 0;
+
 }
 
 /* =====================================================
    MINHAS APOSTAS
 ===================================================== */
 
-async function carregarMinhasApostas(){
+async function carregarMinhasApostas() {
 
   const q = query(
     collection(db, "apostasCopa"),
@@ -212,37 +316,51 @@ async function carregarMinhasApostas(){
 
   const snap = await getDocs(q);
 
-  const lista = document.getElementById("listaApostas");
+  const lista =
+    document.getElementById("listaApostas");
+
   lista.innerHTML = "";
 
   snap.forEach(docSnap => {
+
     const a = docSnap.data();
 
     const li = document.createElement("li");
-    li.innerText = `${a.selecao} — ${a.pontosInvestidos} XP`;
+
+    li.innerText =
+      `${a.selecao} — ${a.pontosInvestidos} SP`;
 
     lista.appendChild(li);
+
   });
+
 }
 
 /* =====================================================
    ESTATÍSTICAS
 ===================================================== */
 
-async function carregarEstatisticas(){
+async function carregarEstatisticas() {
 
-  const snap = await getDocs(collection(db, "apostasCopa"));
+  const snap = await getDocs(
+    collection(db, "apostasCopa")
+  );
 
   let estatisticas = {};
 
   snap.forEach(docSnap => {
+
     const a = docSnap.data();
 
-    if(!estatisticas[a.selecao]){
+    if (!estatisticas[a.selecao]) {
+
       estatisticas[a.selecao] = 0;
+
     }
 
-    estatisticas[a.selecao] += a.pontosInvestidos;
+    estatisticas[a.selecao] +=
+      a.pontosInvestidos;
+
   });
 
   renderGrafico(
@@ -251,240 +369,525 @@ async function carregarEstatisticas(){
   );
 
   atualizarTopSelecao(estatisticas);
+
 }
 
 /* =====================================================
    TOP SELEÇÃO
 ===================================================== */
 
-function atualizarTopSelecao(est){
+function atualizarTopSelecao(est) {
 
   let top = null;
+
   let maior = 0;
 
-  for(const sel in est){
-    if(est[sel] > maior){
+  for (const sel in est) {
+
+    if (est[sel] > maior) {
+
       maior = est[sel];
+
       top = sel;
+
     }
+
   }
 
-  if(top){
-    document.getElementById("topSelecao").innerText = top;
+  if (top) {
+
+    document.getElementById("topSelecao")
+      .innerText = top;
+
   }
+
 }
 
 /* =====================================================
    GRÁFICO
 ===================================================== */
 
-function renderGrafico(labels, valores){
+function renderGrafico(labels, valores) {
 
-  const ctx = document.getElementById("graficoPizza");
+  const ctx =
+    document.getElementById("graficoPizza");
 
-  if(graficoPizza){
+  if (graficoPizza) {
+
     graficoPizza.destroy();
+
   }
 
   graficoPizza = new Chart(ctx, {
+
     type: "pie",
+
     data: {
+
       labels: labels,
+
       datasets: [{
+
         data: valores
+
       }]
+
     },
+
     options: {
+
+      responsive: true,
+
       plugins: {
+
         legend: {
+
           labels: {
+
             color: "#e2e8f0"
+
           }
+
         }
+
       }
+
     }
+
   });
+
 }
 
 /* =====================================================
    RANKING
 ===================================================== */
 
-async function carregarRanking(){
+async function carregarRanking() {
 
-  const snap = await getDocs(collection(db, "apostasCopa"));
+  const snap = await getDocs(
+    collection(db, "apostasCopa")
+  );
 
   let ranking = {};
 
   snap.forEach(docSnap => {
+
     const a = docSnap.data();
 
-    if(!ranking[a.alunoUid]){
-      ranking[a.alunoUid] = 0;
+    // cria usuário
+    if (!ranking[a.alunoUid]) {
+
+      ranking[a.alunoUid] = {
+
+        nome:
+          a.nome ||
+          "Aluno",
+
+        total: 0
+
+      };
+
     }
 
-    ranking[a.alunoUid] += a.pontosInvestidos;
+    // soma SP
+    ranking[a.alunoUid].total +=
+      a.pontosInvestidos;
+
   });
 
-  const lista = document.getElementById("rankingLista");
-  lista.innerHTML = "";
+  atualizarRankingTempoReal(ranking);
 
-  Object.entries(ranking)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0,10)
-    .forEach(([uid, total], i) => {
-
-      const li = document.createElement("li");
-      li.innerText = `#${i+1} — ${total} XP`;
-
-      lista.appendChild(li);
-    });
 }
 
 /* =====================================================
-   SIMULAÇÃO DE GANHO (VERSÃO OTIMIZADA)
-   Usa cache → rápido e escalável
+   RENDER RANKING
 ===================================================== */
-
-async function atualizarSimulacao(){
-
-  const selecao = document.getElementById("selecao")?.value;
-  const pontos = Number(document.getElementById("pontos")?.value);
-  const el = document.getElementById("simulacaoGanho");
-
-  // segurança
-  if(!el) return;
-
-  if(!pontos || pontos <= 0){
-    el.innerText = "";
-    return;
-  }
-
-  let totalSelecao = 0;
-  let apostasAluno = 0;
-
-  // 🔥 usa dados locais (rápido)
-  cacheApostas.forEach(a => {
-
-    if(a.selecao === selecao){
-      totalSelecao += a.pontosInvestidos;
-    }
-
-    if(a.alunoUid === alunoUid){
-      apostasAluno++;
-    }
-
-  });
-
-  const novoTotal = totalSelecao + pontos;
-
-  if(novoTotal === 0) return;
-
-  // 🎯 cálculo de odds
-  const odds = (cachePremio + pontos) / novoTotal;
-
-  // 🎯 ganho base
-  let ganho = pontos * odds;
-
-  // ⚖️ penalidade
-  const penalidade = calcularPenalidade(apostasAluno);
-  ganho *= penalidade;
-
-  el.innerText =
-    `💰 ~${Math.floor(ganho)} XP | Odds: ${odds.toFixed(2)}x`;
-
-  // 🎨 feedback visual
-  if(odds > 3){
-    el.style.color = "#22c55e"; // alto retorno
-  } else if(odds > 1.5){
-    el.style.color = "#facc15"; // médio
-  } else {
-    el.style.color = "#ef4444"; // baixo
-  }
-
-  // 🧠 aviso inteligente
-  if(apostasAluno >= 3){
-    el.innerText += " ⚠️ Penalidade alta!";
-  }
-}
-
-function calcularPenalidade(qtd){
-
-  if(qtd <= 1) return 1;
-  if(qtd === 2) return 0.9;
-  if(qtd === 3) return 0.75;
-  return 0.6;
-}
-
-
-
-/* =====================================================
-   TEMPO REAL (🔥 CORE DO SISTEMA)
-   Atualiza dados automaticamente sem refresh
-===================================================== */
-
-function iniciarTempoReal(){
-
-  // 📊 ouvir todas as apostas
-  onSnapshot(collection(db, "apostasCopa"), (snap)=>{
-
-    cacheApostas = [];
-
-    snap.forEach(docSnap => {
-      cacheApostas.push(docSnap.data());
-    });
-
-    atualizarSimulacao(); // 🔥 recalcula automaticamente
-  });
-
-  // 💰 ouvir prêmio total
-  onSnapshot(doc(db, "bolaoCopa", "principal"), (snap)=>{
-
-    cachePremio = snap.data()?.premioTotal || 0;
-
-    atualizarSimulacao(); // 🔥 recalcula automaticamente
-  });
-}
 
 function atualizarRankingTempoReal(ranking){
 
-  const lista = document.getElementById("rankingLista");
+  const lista =
+    document.getElementById("rankingLista");
+
   lista.innerHTML = "";
 
-  Object.entries(ranking)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0,10)
-    .forEach(([uid, total], i) => {
+  Object.values(ranking)
 
-      const li = document.createElement("li");
-      li.innerText = `#${i+1} — ${total} XP`;
+    .sort((a,b)=> b.total - a.total)
+
+    .slice(0,10)
+
+    .forEach((user, i)=>{
+
+      const li =
+        document.createElement("li");
+
+      let medalha = "";
+
+      if(i === 0) medalha = "🥇";
+      else if(i === 1) medalha = "🥈";
+      else if(i === 2) medalha = "🥉";
+
+      li.innerHTML = `
+        <strong>${medalha} ${user.nome}</strong>
+        <span>${user.total} SP</span>
+      `;
+
+      li.style.display = "flex";
+      li.style.justifyContent = "space-between";
+      li.style.alignItems = "center";
 
       lista.appendChild(li);
+
     });
+
+}
+
+/* =====================================================
+   SIMULAÇÃO
+===================================================== */
+
+async function atualizarSimulacao() {
+
+  const selecao =
+    document.getElementById("selecao")?.value;
+
+  const pontos =
+    Number(document.getElementById("pontos")?.value);
+
+  const el =
+    document.getElementById("simulacaoGanho");
+
+  if (!el) return;
+
+  if (!pontos || pontos <= 0) {
+
+    el.innerText = "";
+
+    return;
+
+  }
+
+  let totalSelecao = 0;
+
+  let apostasAluno = 0;
+
+  cacheApostas.forEach(a => {
+
+    if (a.selecao === selecao) {
+
+      totalSelecao +=
+        a.pontosInvestidos;
+
+    }
+
+    if (a.alunoUid === alunoUid) {
+
+      apostasAluno++;
+
+    }
+
+  });
+
+  const novoTotal =
+    totalSelecao + pontos;
+
+  if (novoTotal === 0) return;
+
+  const odds =
+    (cachePremio + pontos) / novoTotal;
+
+  let ganho =
+    pontos * odds;
+
+  const penalidade =
+    calcularPenalidade(apostasAluno);
+
+  ganho *= penalidade;
+
+  el.innerText =
+    `💰 ~${Math.floor(ganho)} SP | Odds: ${odds.toFixed(2)}x`;
+
+  if (odds > 3) {
+
+    el.style.color = "#22c55e";
+
+  } else if (odds > 1.5) {
+
+    el.style.color = "#facc15";
+
+  } else {
+
+    el.style.color = "#ef4444";
+
+  }
+
+  if (apostasAluno >= 3) {
+
+    el.innerText +=
+      " ⚠️ Penalidade alta!";
+
+  }
+
+}
+
+/* =====================================================
+   PENALIDADE
+===================================================== */
+
+function calcularPenalidade(qtd) {
+
+  if (qtd <= 1) return 1;
+
+  if (qtd === 2) return 0.9;
+
+  if (qtd === 3) return 0.75;
+
+  return 0.6;
+
+}
+
+/* =====================================================
+   TEMPO REAL
+===================================================== */
+
+function iniciarTempoReal() {
+
+  // APOSTAS
+  onSnapshot(
+    collection(db, "apostasCopa"),
+    (snap) => {
+
+      cacheApostas = [];
+
+      let ranking = {};
+
+      let estatisticas = {};
+
+      snap.forEach(docSnap => {
+
+        const a = docSnap.data();
+
+        cacheApostas.push(a);
+
+        // ranking
+        if (!ranking[a.alunoUid]) {
+
+  ranking[a.alunoUid] = {
+
+    nome: a.nome || "Aluno",
+    total: 0
+
+  };
+
+}
+
+ranking[a.alunoUid].total +=
+  a.pontosInvestidos;
+        // estatísticas
+        if (!estatisticas[a.selecao]) {
+
+          estatisticas[a.selecao] = 0;
+
+        }
+
+        estatisticas[a.selecao] +=
+          a.pontosInvestidos;
+
+      });
+
+      atualizarRankingTempoReal(ranking);
+
+      renderGrafico(
+        Object.keys(estatisticas),
+        Object.values(estatisticas)
+      );
+
+      atualizarTopSelecao(estatisticas);
+
+      atualizarSimulacao();
+
+      carregarMinhasApostas();
+
+    }
+  );
+
+  // PRÊMIO
+  onSnapshot(
+  doc(db, "bolaoCopa", "principal"),
+  (snap) => {
+
+    cachePremio =
+      snap.data()?.premioTotal || 0;
+
+    // 🔥 histórico do prêmio
+    historicoPremio.push({
+
+      valor: cachePremio,
+
+      hora: new Date()
+        .toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit"
+        })
+
+    });
+
+    // evita crescimento infinito
+    if(historicoPremio.length > 15){
+
+      historicoPremio.shift();
+
+    }
+
+    // 💰 prêmio total
+    document.getElementById("premioTotal")
+      .innerText =
+      cachePremio + " SP";
+
+    // 👥 total apostas
+    document.getElementById("totalApostas")
+      .innerText =
+      snap.data()?.totalApostas || 0;
+
+    // 📈 atualiza gráfico
+    renderGraficoLinha();
+
+    // 🎯 recalcula odds
+    atualizarSimulacao();
+
+  }
+);
+
+}
+
+function renderGraficoLinha(){
+
+  const ctx =
+    document.getElementById("graficoLinha");
+
+  if(!ctx) return;
+
+  if(graficoLinha){
+
+    graficoLinha.destroy();
+
+  }
+
+  graficoLinha = new Chart(ctx, {
+
+    type: "line",
+
+    data: {
+
+      labels:
+        historicoPremio.map(h => h.hora),
+
+      datasets: [{
+
+        label: "Prêmio acumulado",
+
+        data:
+          historicoPremio.map(h => h.valor),
+
+        tension: 0.35,
+
+        fill: true
+
+      }]
+
+    },
+
+    options: {
+
+      responsive: true,
+
+      plugins: {
+
+        legend: {
+
+          labels: {
+
+            color: "#e2e8f0"
+
+          }
+
+        }
+
+      },
+
+      scales: {
+
+        x: {
+
+          ticks: {
+
+            color: "#94a3b8"
+
+          }
+
+        },
+
+        y: {
+
+          ticks: {
+
+            color: "#94a3b8"
+
+          }
+
+        }
+
+      }
+
+    }
+
+  });
+
 }
 
 /* =====================================================
    SP
 ===================================================== */
 
-async function getSP(uid){
-  const snap = await getDoc(doc(db, "usuarios", uid));
+async function getSP(uid) {
+
+  const snap =
+    await getDoc(doc(db, "usuarios", uid));
+
   return snap.data()?.sciencePoints || 0;
+
 }
 
-async function removerSP(uid, valor){
-  await updateDoc(doc(db, "usuarios", uid), {
-    sciencePoints: increment(-valor)
-  });
+async function removerSP(uid, valor) {
+
+  await updateDoc(
+    doc(db, "usuarios", uid),
+    {
+      sciencePoints: increment(-valor)
+    }
+  );
+
 }
 
 /* =====================================================
    TRAVAMENTO
 ===================================================== */
 
-const dataLimite = new Date("2026-06-11");
+const dataLimite =
+  new Date("2026-06-11");
 
-if(new Date() > dataLimite){
-  const btn = document.querySelector(".btn");
-  if(btn) btn.disabled = true;
+if (new Date() > dataLimite) {
+
+  const btn =
+    document.getElementById("btnApostar");
+
+  if (btn) {
+
+    btn.disabled = true;
+
+    btn.innerText =
+      "⛔ Bolão encerrado";
+
+  }
+
 }
