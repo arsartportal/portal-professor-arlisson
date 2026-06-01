@@ -3,7 +3,7 @@
 // ======================================================
 
 import { recompensas, datasLiberacao, getTipoItem } from "./loja-data.js";
-import { getEstoqueChaveiro, getAgora } from "./loja-actions.js";
+import { getEstoque, getAgora } from "./loja-actions.js";
 
 
 // ======================================================
@@ -20,13 +20,17 @@ let serverTimeOffset = 0;
 // ======================================================
 
 export function atualizarSPNaTela(sp, bonus = 0) {
-  spAtual = sp;
+  spAtual = Number(sp) || 0;
   bonusAtual = bonus;
 
   const el = document.getElementById("sp");
   if (!el) return;
 
-  el.innerText = sp + (bonus > 0 ? ` • 🎯 +${bonus}` : "");
+  el.innerText =
+  `${Number(sp).toLocaleString("pt-BR")} SP` +
+  (bonus > 0
+    ? ` • 🎯 +${bonus.toFixed(1)}`
+    : "");
 }
 
 export function setServerTimeOffset(offset) {
@@ -79,7 +83,7 @@ function descricao(item){
 function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
 
   const tipo = getTipoItem(item);
-  const estoque = getEstoqueChaveiro();
+  const estoque = getEstoque(item.id);
 
   return `
     <div class="card raridade-${raridade} tipo-${tipo} ${recomendado ? "recomendado" : ""}">
@@ -111,12 +115,12 @@ function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
       }
 
       ${
-        item.id === "chaveiro-univers3d"
-          ? `<div class="estoque-baixo">
-               🔥 Restam ${estoque} unidades
-             </div>`
-          : ""
-      }
+  item.usaEstoque
+    ? `<div class="estoque-baixo">
+         🔥 Restam ${estoque} unidades
+       </div>`
+    : ""
+}
 
       <div class="preco">🔬 ${item.preco} SP</div>
 
@@ -125,14 +129,14 @@ function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
         onclick="${bloqueado ? "" : `comprar('${item.id}')`}"
       >
         ${
-          bloqueado
-            ? "Em breve"
-            : item.id === "chaveiro-univers3d" && estoque <= 0
-            ? "Esgotado"
-            : podeComprar
-            ? "Resgatar"
-            : "SP insuficiente"
-        }
+  bloqueado
+    ? "Em breve"
+    : item.usaEstoque && estoque <= 0
+    ? "Esgotado"
+    : podeComprar
+    ? "Resgatar"
+    : "SP insuficiente"
+}
       </button>
 
     </div>
@@ -275,18 +279,20 @@ itensOrdenados.forEach(item => {
 
   const tipoItem = getTipoItem(item);
   const data = datasLiberacao[tipoItem];
-  const estoque = getEstoqueChaveiro();
+  const estoque = getEstoque(item.id);
 
   // 🔒 bloqueio por data
   const bloqueado =
     data && agora < data && !item.id.startsWith("xp");
 
   // 📦 bloqueio por estoque (só chaveiro)
-  const semEstoque =
-    item.id === "chaveiro-univers3d" && estoque <= 0;
+const semEstoque =
+  item.usaEstoque && estoque <= 0;
 
-  const podeComprar =
-    !bloqueado && !semEstoque && spAtual >= item.preco;
+const podeComprar =
+  !bloqueado &&
+  !semEstoque &&
+  Number(spAtual) >= Number(item.preco);
 
   const recomendado = item.id === melhorItem?.id;
 
@@ -356,7 +362,7 @@ else {
 
     const tipoItem = getTipoItem(item);
     const data = datasLiberacao[tipoItem];
-    const estoque = getEstoqueChaveiro();
+    const estoque = getEstoque(item.id);
 
     const bloqueado =
       data && agora < data && !item.id.startsWith("xp");

@@ -737,6 +737,8 @@ if (item.tipo === "prova") {
       }
 
       const spDepois = d.sciencePoints - item.preco;
+      const estoqueRef =
+  doc(db, "loja", item.id);
 
       // 📝 HISTÓRICO
       
@@ -761,20 +763,30 @@ if (item.tipo === "prova") {
       // ==================================================
       else if (item.fichas) {
 
-        await updateDoc(userRef, {
-          sciencePoints: spDepois,
-          fichasLab: increment(item.fichas)
-        });
+  // 🎟️ adiciona ingressos
+  await updateDoc(userRef, {
+    sciencePoints: spDepois,
+    fichasLab: increment(item.fichas)
+  });
 
-        await atualizarSPGlobal(item.preco);
-        await atualizarRankingUsuario(item.preco);
+  // 📦 desconta estoque
+  if (item.usaEstoque) {
 
-        modalRecompensa({
-          titulo: "🎟️ Ingressos recebidas",
-          descricao: `+${item.fichas} ingressos`,
-          raridade: item.raridade
-        });
-      }
+    await updateDoc(estoqueRef, {
+      estoque: increment(-1)
+    });
+
+  }
+
+  await atualizarSPGlobal(item.preco);
+  await atualizarRankingUsuario(item.preco);
+
+  modalRecompensa({
+    titulo: "🎟️ Ingressos recebidos",
+    descricao: `+${item.fichas} ingressos`,
+    raridade: item.raridade
+  });
+}
 
       // ==================================================
       // 🎯 BÔNUS PROVA
@@ -957,24 +969,44 @@ if (
 
 
 // ======================================================
-// 📦 ESTOQUE
+// 📦 ESTOQUE GLOBAL
 // ======================================================
 
-let estoqueChaveiro = 0;
+let estoques = {};
 
-export function getEstoqueChaveiro() {
-  return estoqueChaveiro;
+// ======================================================
+// 📦 GET ESTOQUE
+// ======================================================
+
+export function getEstoque(id) {
+  return estoques[id]?.estoque || 0;
 }
 
-export function carregarEstoque() {
-  const ref = doc(db, "loja", "chaveiro-univers3d");
+// ======================================================
+// 📦 GET DADOS COMPLETOS
+// ======================================================
+
+export function getDadosEstoque(id) {
+  return estoques[id] || {};
+}
+
+// ======================================================
+// 📦 CARREGAR ESTOQUE
+// ======================================================
+
+export function carregarEstoque(id) {
+
+  const ref = doc(db, "loja", id);
 
   onSnapshot(ref, (snap) => {
+
     if (!snap.exists()) return;
 
-    estoqueChaveiro = snap.data().estoque || 0;
+    // 🔥 salva dados completos
+    estoques[id] = snap.data();
 
-    renderLoja(); // 🔥 re-render automático
+    // 🔄 atualiza loja em tempo real
+    renderLoja();
   });
 }
 

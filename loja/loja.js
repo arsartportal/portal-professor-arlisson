@@ -76,10 +76,15 @@ auth.onAuthStateChanged(async (user) => {
     carregarRankingGasto();
 
     // ==================================================
-    // 📦 ESTOQUE
-    // ==================================================
+// 📦 ESTOQUES
+// ==================================================
 
-    await carregarEstoque();
+carregarEstoque("chaveiro-univers3d");
+
+carregarEstoque("ingresso-1");
+carregarEstoque("ingresso-3");
+carregarEstoque("ingresso-7");
+carregarEstoque("ingresso-15");
 
     // ==================================================
     // 🎨 RENDER INICIAL

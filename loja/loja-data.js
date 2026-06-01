@@ -14,12 +14,52 @@
 
 
     // ======================================================
-    // 🎟️ FICHAS QUIZ
-    // ======================================================
-    { id: "ficha1", nome: "🎟️ 1 Ingresso", preco: 5, fichas: 1, raridade: "comum", ordem: 1, descricao: "Acesso a 1 partida do Quiz - Copa do Mundo." },
-    { id: "ficha3", nome: "🎟️ 3 Ingressos", preco: 12, fichas: 3, raridade: "raro", ordem: 2, descricao: "Acesso a 3 partidas do Quiz - Copa do Mundo." },
-    { id: "ficha7", nome: "🎟️ 7 Ingressos", preco: 25, fichas: 7, raridade: "epico", ordem: 3, descricao: "Acesso a 7 partidas do Quiz - Copa do Mundo." },
-    { id: "ficha15", nome: "🎟️ 15 Ingressos", preco: 45, fichas: 15, raridade: "lendario", ordem: 4, descricao: "Acesso a 15 partidas do Quiz - Copa do Mundo." },
+// 🎟️ FICHAS QUIZ
+// ======================================================
+
+{
+  id: "ingresso-1",
+  nome: "🎟️ 1 Ingresso",
+  preco: 5,
+  fichas: 1,
+  usaEstoque: true,
+  raridade: "comum",
+  ordem: 1,
+  descricao: "Acesso a 1 partida do Quiz - Copa do Mundo."
+},
+
+{
+  id: "ingresso-3",
+  nome: "🎟️ 3 Ingressos",
+  preco: 12,
+  fichas: 3,
+  usaEstoque: true,
+  raridade: "raro",
+  ordem: 2,
+  descricao: "Acesso a 3 partidas do Quiz - Copa do Mundo."
+},
+
+{
+  id: "ingresso-7",
+  nome: "🎟️ 7 Ingressos",
+  preco: 25,
+  fichas: 7,
+  usaEstoque: true,
+  raridade: "epico",
+  ordem: 3,
+  descricao: "Acesso a 7 partidas do Quiz - Copa do Mundo."
+},
+
+{
+  id: "ingresso-15",
+  nome: "🎟️ 15 Ingressos",
+  preco: 45,
+  fichas: 15,
+  usaEstoque: true,
+  raridade: "lendario",
+  ordem: 4,
+  descricao: "Acesso a 15 partidas do Quiz - Copa do Mundo."
+},
 
 
     // ======================================================

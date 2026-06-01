@@ -48,6 +48,46 @@ const perguntas = [
 
 { pergunta:"Um gol contra é validado quando:", opcoes:["Sempre","Nunca","Somente se não houver impedimento","Se o árbitro quiser"], correta:2 },
 
+{ pergunta:"Quantos cartões amarelos geralmente resultam em expulsão?", opcoes:["1","2","3","4"], correta:1 },
+
+{ pergunta:"O tiro de meta é cobrado por:", opcoes:["Atacante","Qualquer jogador","Time defensor","Árbitro"], correta:2 },
+
+{ pergunta:"Quando ocorre um lateral?", opcoes:["Bola sai pela lateral","Gol","Falta","Escanteio"], correta:0 },
+
+{ pergunta:"No lateral, o jogador deve:", opcoes:["Usar uma mão","Usar os pés","Usar as duas mãos","Cobrar com o pé"], correta:2 },
+
+{ pergunta:"Se a bola bater no árbitro e entrar no gol:", opcoes:["Gol válido","Jogo segue","Gol anulado","Escanteio"], correta:2 },
+
+{ pergunta:"O VAR serve para:", opcoes:["Cronometrar","Substituir árbitro","Revisar lances importantes","Marcar faltas leves"], correta:2 },
+
+{ pergunta:"O goleiro pode segurar a bola com as mãos por até:", opcoes:["4 segundos","6 segundos","8 segundos","10 segundos"], correta:1 },
+
+{ pergunta:"Qual destas situações NÃO gera impedimento?", opcoes:["Passe normal","Passe de lateral","Passe em profundidade","Rebote"], correta:1 },
+
+{ pergunta:"Um jogador expulso pode ser substituído?", opcoes:["Sim","Não","Só no intervalo","Só com autorização"], correta:1 },
+
+{ pergunta:"Se a bola estourar durante a jogada:", opcoes:["Gol vale","Jogo continua","Árbitro paralisa","Escanteio"], correta:2 },
+
+{ pergunta:"Quem autoriza o início da partida?", opcoes:["Capitão","Técnico","Árbitro","Bandeirinha"], correta:2 },
+
+{ pergunta:"Quantos tempos possui uma partida oficial?", opcoes:["1","2","3","4"], correta:1 },
+
+{ pergunta:"O cartão amarelo representa:", opcoes:["Expulsão","Advertência","Fim do jogo","Pênalti"], correta:1 },
+
+{ pergunta:"O escanteio é cobrado de qual local?", opcoes:["Centro","Lateral","Área","Canto do campo"], correta:3 },
+
+{ pergunta:"Um jogador pode marcar gol direto do escanteio?", opcoes:["Não","Só com desvio","Sim","Só na prorrogação"], correta:2 },
+
+{ pergunta:"A linha faz parte do campo?", opcoes:["Não","Só lateral","Sim","Depende do árbitro"], correta:2 },
+
+{ pergunta:"Se a bola tocar na mão sem intenção:", opcoes:["Sempre é falta","Nunca é falta","Depende da jogada","É cartão"], correta:2 },
+
+{ pergunta:"O impedimento é avaliado no momento:", opcoes:["Do chute","Do domínio","Do passe","Do gol"], correta:2 },
+
+{ pergunta:"Na disputa de pênaltis, quantas cobranças iniciais cada time possui?", opcoes:["3","4","5","6"], correta:2 },
+
+{ pergunta:"Um goleiro pode fazer gol?", opcoes:["Não","Só de pênalti","Sim","Só contra"], correta:2 },
+
 /* =========================
 🌍 HISTÓRIA DAS COPAS
 ========================= */
@@ -70,6 +110,58 @@ const perguntas = [
 
 { pergunta:"Quem foi o vice-campeão da Copa de 2018?", opcoes:["Croácia","França","Argentina","Alemanha"], correta:0 },
 
+{ pergunta:"Qual seleção venceu a primeira Copa do Mundo?", opcoes:["Brasil","Argentina","Uruguai","Itália"], correta:2 },
+
+{ pergunta:"A Copa de 1958 marcou o primeiro título de:", opcoes:["Alemanha","Brasil","Argentina","França"], correta:1 },
+
+{ pergunta:"Em que país foi realizada a Copa de 2014?", opcoes:["África do Sul","Brasil","Rússia","Alemanha"], correta:1 },
+
+{ pergunta:"Qual seleção venceu a Copa de 2006?", opcoes:["França","Brasil","Itália","Alemanha"], correta:2 },
+
+{ pergunta:"Quem eliminou o Brasil na Copa de 2010?", opcoes:["Holanda","Alemanha","França","Argentina"], correta:0 },
+
+{ pergunta:"Qual seleção foi vice-campeã em 2014?", opcoes:["Brasil","Alemanha","Argentina","Holanda"], correta:2 },
+
+{ pergunta:"A famosa 'Mão de Deus' aconteceu em qual Copa?", opcoes:["1978","1982","1986","1990"], correta:2 },
+
+{ pergunta:"Quem marcou os dois gols do Brasil na final de 2002?", opcoes:["Ronaldinho","Rivaldo","Romário","Ronaldo"], correta:3 },
+
+{ pergunta:"Qual seleção sediou a Copa de 2018?", opcoes:["Qatar","Alemanha","Rússia","Japão"], correta:2 },
+
+{ pergunta:"A final da Copa de 2022 foi entre:", opcoes:["Brasil x França","Argentina x França","Argentina x Croácia","França x Inglaterra"], correta:1 },
+
+{ pergunta:"Quem foi campeão da Copa de 1994?", opcoes:["Brasil","Itália","Alemanha","Argentina"], correta:0 },
+
+{ pergunta:"Qual seleção venceu a Copa de 1970?", opcoes:["Brasil","Itália","Alemanha","Uruguai"], correta:0 },
+
+{ pergunta:"A Alemanha venceu o Brasil por 7x1 em qual fase?", opcoes:["Quartas","Final","Semifinal","Oitavas"], correta:2 },
+
+{ pergunta:"Quem foi o artilheiro da Copa de 2002?", opcoes:["Klose","Ronaldo","Rivaldo","Ronaldinho"], correta:1 },
+
+{ pergunta:"Qual país sediou a Copa de 2022?", opcoes:["Qatar","Emirados Árabes","Japão","China"], correta:0 },
+
+{ pergunta:"Qual seleção venceu a Copa de 1998?", opcoes:["Brasil","Alemanha","França","Argentina"], correta:2 },
+
+{ pergunta:"A Copa de 2010 aconteceu em qual continente?", opcoes:["Europa","Ásia","África","América"], correta:2 },
+
+{ pergunta:"Quem venceu a Copa de 1962?", opcoes:["Brasil","Chile","Uruguai","Itália"], correta:0 },
+
+{ pergunta:"Qual jogador é conhecido como 'Fenômeno'?", opcoes:["Ronaldinho","Neymar","Ronaldo","Romário"], correta:2 },
+
+{ pergunta:"A Itália conquistou sua quarta Copa em:", opcoes:["1998","2002","2006","2010"], correta:2 },
+
+{ pergunta:"Qual seleção nunca venceu uma Copa?", opcoes:["Espanha","Holanda","França","Inglaterra"], correta:1 },
+
+{ pergunta:"Qual foi a primeira seleção africana a chegar em uma semifinal?", opcoes:["Nigéria","Camarões","Marrocos","Gana"], correta:2 },
+
+{ pergunta:"Qual seleção ficou famosa pelo 'Carrossel Holandês'?", opcoes:["Alemanha","Holanda","Brasil","Croácia"], correta:1 },
+
+{ pergunta:"Quem fez o gol do título da Alemanha em 2014?", opcoes:["Klose","Müller","Götze","Özil"], correta:2 },
+
+{ pergunta:"Qual jogador fez a 'Mão de Deus'?", opcoes:["Pelé","Messi","Maradona","Zidane"], correta:2 },
+
+{ pergunta:"Qual seleção ganhou a Copa sem perder nenhum jogo em 2002?", opcoes:["Brasil","Alemanha","Argentina","França"], correta:0 },
+
 
 /* =========================
 📍 SEDES DAS COPAS
@@ -86,6 +178,46 @@ const perguntas = [
 { pergunta:"Onde foi a Copa de 1986?", opcoes:["México","Brasil","Argentina","Espanha"], correta:0 },
 { pergunta:"Quantos países sediarão a Copa de 2026?", opcoes:["1","2","3","4"], correta:2 },
 
+{ pergunta:"Onde aconteceu a primeira Copa do Mundo?", opcoes:["Brasil","Uruguai","França","Argentina"], correta:1 },
+
+{ pergunta:"Qual país sediou a Copa de 1950?", opcoes:["Uruguai","Brasil","Chile","México"], correta:1 },
+
+{ pergunta:"Onde foi realizada a Copa de 1970?", opcoes:["México","Espanha","Itália","Argentina"], correta:0 },
+
+{ pergunta:"Qual país sediou a Copa de 1978?", opcoes:["Argentina","Brasil","Alemanha","França"], correta:0 },
+
+{ pergunta:"Onde aconteceu a Copa de 1982?", opcoes:["Portugal","Espanha","México","França"], correta:1 },
+
+{ pergunta:"Qual país sediou a Copa de 1990?", opcoes:["Alemanha","Itália","França","Inglaterra"], correta:1 },
+
+{ pergunta:"Onde foi a Copa de 2002?", opcoes:["China","Japão e Coreia do Sul","Austrália","Qatar"], correta:1 },
+
+{ pergunta:"A Copa de 2002 foi a primeira realizada em:", opcoes:["Dois países","Três países","África","América"], correta:0 },
+
+{ pergunta:"Qual continente sediou a Copa de 2010?", opcoes:["Europa","Ásia","África","América"], correta:2 },
+
+{ pergunta:"Qual país sediará a final da Copa de 2026?", opcoes:["Canadá","México","EUA","Ainda não definido"], correta:2 },
+
+{ pergunta:"A Copa de 2026 será disputada em:", opcoes:["América do Sul","Europa","América do Norte","Ásia"], correta:2 },
+
+{ pergunta:"Qual país sediou a Copa de 1974?", opcoes:["Alemanha Ocidental","França","Holanda","Brasil"], correta:0 },
+
+{ pergunta:"Onde foi realizada a Copa de 1934?", opcoes:["França","Itália","Uruguai","Alemanha"], correta:1 },
+
+{ pergunta:"Qual país sediou a Copa de 1938?", opcoes:["Brasil","França","Inglaterra","Argentina"], correta:1 },
+
+{ pergunta:"Qual dessas Copas aconteceu na Ásia?", opcoes:["1994","2002","2010","2014"], correta:1 },
+
+{ pergunta:"Qual dessas Copas aconteceu na África?", opcoes:["2006","2010","2014","2018"], correta:1 },
+
+{ pergunta:"Qual país sediou duas Copas do Mundo?", opcoes:["Qatar","África do Sul","México","Portugal"], correta:2 },
+
+{ pergunta:"Qual país sediou a Copa antes do Brasil em 2014?", opcoes:["África do Sul","Alemanha","Rússia","França"], correta:0 },
+
+{ pergunta:"Qual país europeu sediou a Copa de 2018?", opcoes:["França","Alemanha","Rússia","Holanda"], correta:2 },
+
+{ pergunta:"A Copa de 2022 aconteceu em qual continente?", opcoes:["Europa","África","Ásia","América"], correta:2 },
+
 /* =========================
 ⭐ JOGADORES HISTÓRICOS
 ========================= */
@@ -100,6 +232,56 @@ const perguntas = [
 { pergunta:"Neymar estreou em Copas em:", opcoes:["2010","2014","2018","2022"], correta:1 },
 { pergunta:"Mbappé brilhou em qual Copa?", opcoes:["2010","2014","2018","2006"], correta:2 },
 { pergunta:"Goleiro destaque da Alemanha em 2014:", opcoes:["Buffon","Neuer","Casillas","Alisson"], correta:1 },
+
+{ pergunta:"Qual jogador é conhecido como Rei do Futebol?", opcoes:["Maradona","Pelé","Messi","Ronaldo"], correta:1 },
+
+{ pergunta:"Quem marcou dois gols na final da Copa de 2002?", opcoes:["Ronaldinho","Rivaldo","Ronaldo","Romário"], correta:2 },
+
+{ pergunta:"Qual jogador argentino ficou famoso pela 'Mão de Deus'?", opcoes:["Messi","Batistuta","Maradona","Di María"], correta:2 },
+
+{ pergunta:"Quem foi o camisa 10 do Brasil na Copa de 1970?", opcoes:["Zico","Pelé","Rivelino","Tostão"], correta:1 },
+
+{ pergunta:"Qual jogador francês deu uma cabeçada em Materazzi em 2006?", opcoes:["Henry","Mbappé","Zidane","Griezmann"], correta:2 },
+
+{ pergunta:"Quem foi o artilheiro da Copa de 2014?", opcoes:["Messi","Neymar","James Rodríguez","Müller"], correta:2 },
+
+{ pergunta:"Qual jogador marcou o gol do título da Alemanha em 2014?", opcoes:["Klose","Müller","Götze","Özil"], correta:2 },
+
+{ pergunta:"Qual goleiro italiano foi campeão mundial em 2006?", opcoes:["Buffon","Donnarumma","Neuer","Casillas"], correta:0 },
+
+{ pergunta:"Qual jogador português é conhecido como CR7?", opcoes:["Pepe","Cristiano Ronaldo","Figo","Bruno Fernandes"], correta:1 },
+
+{ pergunta:"Quem foi o capitão do Brasil na Copa de 2002?", opcoes:["Ronaldo","Cafu","Ronaldinho","Roberto Carlos"], correta:1 },
+
+{ pergunta:"Qual jogador brasileiro ficou famoso pelos dribles elásticos e sorriso?", opcoes:["Kaká","Ronaldinho","Romário","Zico"], correta:1 },
+
+{ pergunta:"Qual jogador marcou o gol da final de 2010?", opcoes:["Villa","Iniesta","Xavi","Torres"], correta:1 },
+
+{ pergunta:"Quem foi eleito melhor jogador da Copa de 2018?", opcoes:["Mbappé","Messi","Modrić","Neymar"], correta:2 },
+
+{ pergunta:"Qual jogador brasileiro é conhecido como Fenômeno?", opcoes:["Romário","Ronaldinho","Ronaldo","Kaká"], correta:2 },
+
+{ pergunta:"Qual jogador francês brilhou na Copa de 1998?", opcoes:["Mbappé","Henry","Zidane","Griezmann"], correta:2 },
+
+{ pergunta:"Quem foi o goleiro campeão pela Espanha em 2010?", opcoes:["Casillas","Buffon","Neuer","Valdés"], correta:0 },
+
+{ pergunta:"Qual jogador croata foi destaque na Copa de 2018?", opcoes:["Rakitić","Modrić","Mandžukić","Perišić"], correta:1 },
+
+{ pergunta:"Quem é conhecido como 'Baixinho' no futebol brasileiro?", opcoes:["Romário","Pelé","Zico","Ronaldo"], correta:0 },
+
+{ pergunta:"Qual jogador marcou o gol conhecido como 'Gol do Século' em 1986?", opcoes:["Pelé","Maradona","Messi","Ronaldo"], correta:1 },
+
+{ pergunta:"Qual brasileiro ganhou a Bola de Ouro em 2007?", opcoes:["Ronaldinho","Kaká","Neymar","Rivaldo"], correta:1 },
+
+{ pergunta:"Quem perdeu um pênalti decisivo na final de 1994?", opcoes:["Baggio","Maldini","Romário","Bebeto"], correta:0 },
+
+{ pergunta:"Qual jogador fez um hat-trick na final da Copa de 2022?", opcoes:["Messi","Mbappé","Di María","Giroud"], correta:1 },
+
+{ pergunta:"Qual jogador alemão ultrapassou Ronaldo como maior artilheiro das Copas?", opcoes:["Müller","Klose","Kroos","Podolski"], correta:1 },
+
+{ pergunta:"Qual jogador brasileiro ficou famoso pelo chute de folha seca?", opcoes:["Pelé","Zico","Didi","Rivelino"], correta:2 },
+
+{ pergunta:"Quem foi o camisa 10 da Argentina campeã em 2022?", opcoes:["Di María","Messi","Álvarez","Enzo Fernández"], correta:1 },
 
 /* =========================
 🏆 CURIOSIDADES
@@ -124,6 +306,56 @@ const perguntas = [
 
 { pergunta:"Copas do Mundo costumam ter jogos:", opcoes:["Previsíveis","Equilibrados","Sem emoção","Sempre iguais"], correta:1 },
 
+{ pergunta:"Qual foi a primeira Copa com VAR?", opcoes:["2010","2014","2018","2022"], correta:2 },
+
+{ pergunta:"Qual seleção participou de todas as Copas do Mundo?", opcoes:["Alemanha","Argentina","Brasil","Itália"], correta:2 },
+
+{ pergunta:"Qual foi a Copa com mais gols da história?", opcoes:["1954","1970","1998","2014"], correta:0 },
+
+{ pergunta:"Quem marcou o gol mais rápido da história das Copas?", opcoes:["Ronaldo","Hakan Şükür","Pelé","Klose"], correta:1 },
+
+{ pergunta:"Em quantos segundos saiu o gol mais rápido das Copas?", opcoes:["11","15","9","20"], correta:0 },
+
+{ pergunta:"Qual seleção ficou famosa pelo 'tiki-taka'?", opcoes:["Brasil","Alemanha","Espanha","França"], correta:2 },
+
+{ pergunta:"Qual bola foi usada na Copa de 2014?", opcoes:["Jabulani","Telstar","Brazuca","Al Rihla"], correta:2 },
+
+{ pergunta:"A bola da Copa de 2022 se chamava:", opcoes:["Brazuca","Al Rihla","Jabulani","Telstar"], correta:1 },
+
+{ pergunta:"Qual país sediou a Copa mais quente da história?", opcoes:["Brasil","Qatar","México","África do Sul"], correta:1 },
+
+{ pergunta:"Qual seleção ficou conhecida pelo 'Carrossel Holandês'?", opcoes:["Brasil","Alemanha","Holanda","Croácia"], correta:2 },
+
+{ pergunta:"Qual seleção venceu a Copa de 2010 sem perder nenhum jogo?", opcoes:["Brasil","Espanha","Holanda","Alemanha"], correta:1 },
+
+{ pergunta:"Qual Copa teve o famoso polvo Paul fazendo previsões?", opcoes:["2002","2006","2010","2014"], correta:2 },
+
+{ pergunta:"Qual seleção foi campeã invicta em 2002?", opcoes:["Brasil","Argentina","Alemanha","França"], correta:0 },
+
+{ pergunta:"Qual país sediou a Copa em apenas uma cidade?", opcoes:["Qatar","Brasil","França","México"], correta:0 },
+
+{ pergunta:"Qual seleção foi campeã mundial pela primeira vez em 2010?", opcoes:["França","Croácia","Espanha","Portugal"], correta:2 },
+
+{ pergunta:"Quem foi eleito o melhor jogador jovem da Copa de 2018?", opcoes:["Mbappé","Vinicius Jr","Haaland","Bellingham"], correta:0 },
+
+{ pergunta:"Qual seleção eliminou o Brasil em 1998?", opcoes:["Alemanha","França","Argentina","Holanda"], correta:1 },
+
+{ pergunta:"Qual seleção perdeu três finais seguidas entre 1986 e 2014?", opcoes:["Holanda","Argentina","Alemanha","Brasil"], correta:1 },
+
+{ pergunta:"A Copa de 2026 terá quantos grupos?", opcoes:["8","10","12","16"], correta:2 },
+
+{ pergunta:"Qual país venceu a primeira disputa de pênaltis em Copas?", opcoes:["Brasil","Alemanha","Suécia","Argentina"], correta:1 },
+
+{ pergunta:"Qual animal ficou famoso por prever resultados da Copa de 2010?", opcoes:["Gato","Papagaio","Polvo","Cachorro"], correta:2 },
+
+{ pergunta:"Qual seleção tomou o famoso 7x1?", opcoes:["Argentina","Brasil","França","Holanda"], correta:1 },
+
+{ pergunta:"Qual jogador ficou famoso por morder adversários?", opcoes:["Messi","Suárez","Ronaldo","Rooney"], correta:1 },
+
+{ pergunta:"Qual técnico ficou conhecido por usar um agasalho azul na Copa de 1994?", opcoes:["Parreira","Felipão","Zagallo","Tite"], correta:0 },
+
+{ pergunta:"Qual seleção ficou famosa pela 'zebra' contra o Brasil em 1982?", opcoes:["Itália","Argentina","França","Alemanha"], correta:0 },
+
 /* =========================
 🇧🇷 BRASIL NAS COPAS
 ========================= */
@@ -139,6 +371,57 @@ const perguntas = [
 { pergunta:"Brasil perdeu 2014 por:", opcoes:["7x1","5x0","6x1","4x0"], correta:0 },
 { pergunta:"Maior rival do Brasil:", opcoes:["EUA","Argentina","França","Japão"], correta:1 },
 
+{ pergunta:"Quem marcou os dois gols do Brasil na final de 2002?", opcoes:["Ronaldinho","Rivaldo","Ronaldo","Cafu"], correta:2 },
+
+{ pergunta:"Qual seleção o Brasil venceu na final de 1958?", opcoes:["Alemanha","Itália","Suécia","Argentina"], correta:2 },
+
+{ pergunta:"Quem foi o grande destaque do Brasil em 1958?", opcoes:["Pelé","Zico","Romário","Neymar"], correta:0 },
+
+{ pergunta:"Qual jogador brasileiro é conhecido como 'Fenômeno'?", opcoes:["Kaká","Ronaldinho","Ronaldo","Romário"], correta:2 },
+
+{ pergunta:"O Brasil venceu a Copa de 1970 contra:", opcoes:["Alemanha","Argentina","Itália","Uruguai"], correta:2 },
+
+{ pergunta:"Quem era o camisa 10 do Brasil em 1970?", opcoes:["Pelé","Rivelino","Tostão","Zico"], correta:0 },
+
+{ pergunta:"Qual goleiro era titular do Brasil em 2002?", opcoes:["Dida","Marcos","Taffarel","Alisson"], correta:1 },
+
+{ pergunta:"Quem fez o gol do tetra na disputa de pênaltis em 1994?", opcoes:["Romário","Dunga","Bebeto","Branco"], correta:1 },
+
+{ pergunta:"Quem eliminou o Brasil na Copa de 2006?", opcoes:["França","Alemanha","Holanda","Argentina"], correta:0 },
+
+{ pergunta:"Quem eliminou o Brasil em 2010?", opcoes:["Croácia","Holanda","Alemanha","França"], correta:1 },
+
+{ pergunta:"Qual jogador brasileiro chorou após a lesão em 2014?", opcoes:["Fred","Neymar","Oscar","David Luiz"], correta:1 },
+
+{ pergunta:"Quem marcou o gol do Brasil no 7x1?", opcoes:["Oscar","Fred","Neymar","Hulk"], correta:0 },
+
+{ pergunta:"Quem era o técnico do Brasil em 1994?", opcoes:["Felipão","Parreira","Tite","Zagallo"], correta:1 },
+
+{ pergunta:"Qual seleção eliminou o Brasil em 2022?", opcoes:["França","Croácia","Argentina","Holanda"], correta:1 },
+
+{ pergunta:"Quem foi o artilheiro do Brasil na Copa de 2002?", opcoes:["Rivaldo","Ronaldinho","Ronaldo","Kaká"], correta:2 },
+
+{ pergunta:"Qual jogador brasileiro participou de mais Copas?", opcoes:["Pelé","Cafu","Ronaldo","Dunga"], correta:1 },
+
+{ pergunta:"Qual Copa marcou o pentacampeonato do Brasil?", opcoes:["1998","2002","2006","1994"], correta:1 },
+
+{ pergunta:"Quem foi o capitão do tetra em 1994?", opcoes:["Romário","Dunga","Bebeto","Taffarel"], correta:1 },
+
+{ pergunta:"Qual jogador marcou de voleio na final de 1958?", opcoes:["Pelé","Garrincha","Vavá","Zagallo"], correta:0 },
+
+{ pergunta:"Qual técnico comandou o Brasil no 7x1?", opcoes:["Dunga","Felipão","Tite","Parreira"], correta:1 },
+
+{ pergunta:"Quem foi o goleiro do Brasil no tetra em 1994?", opcoes:["Marcos","Taffarel","Dida","Gilmar"], correta:1 },
+
+{ pergunta:"Qual jogador brasileiro perdeu a final de 1998 após convulsão antes do jogo?", opcoes:["Romário","Ronaldo","Rivaldo","Bebeto"], correta:1 },
+
+{ pergunta:"Quem foi chamado de 'Anjo das Pernas Tortas'?", opcoes:["Pelé","Garrincha","Romário","Zico"], correta:1 },
+
+{ pergunta:"Qual jogador brasileiro fez 8 gols na Copa de 2002?", opcoes:["Ronaldo","Ronaldinho","Rivaldo","Kaká"], correta:0 },
+
+{ pergunta:"Quem era o camisa 9 do Brasil em 1994?", opcoes:["Romário","Bebeto","Careca","Ronaldo"], correta:0 },
+
+
 /* =========================
 ⚽ EXTRA
 ========================= */
@@ -152,7 +435,47 @@ const perguntas = [
 { pergunta:"FIFA organiza:", opcoes:["NBA","Copa do Mundo","Olimpíadas","Tênis"], correta:1 },
 { pergunta:"Cartão amarelo indica:", opcoes:["Expulsão","Advertência","Gol","Falta leve"], correta:1 },
 { pergunta:"Gol contra é:", opcoes:["Gol válido","Não vale","Anulado","Replay"], correta:0 },
-{ pergunta:"A final da Copa 2026 será em quantos países?", opcoes:["1","2","3","4"], correta:0 }
+{ pergunta:"A final da Copa 2026 será em quantos países?", opcoes:["1","2","3","4"], correta:0 },
+
+{ pergunta:"Quantos jogadores iniciam uma partida em campo somando os dois times?", opcoes:["18","20","22","24"], correta:2 },
+
+{ pergunta:"Qual parte do corpo NÃO pode tocar na bola no futebol?", opcoes:["Cabeça","Pé","Mão","Peito"], correta:2 },
+
+{ pergunta:"O futebol é jogado principalmente com:", opcoes:["Mãos","Cabeça","Pés","Ombros"], correta:2 },
+
+{ pergunta:"Quem protege o gol?", opcoes:["Atacante","Zagueiro","Goleiro","Técnico"], correta:2 },
+
+{ pergunta:"Qual é o objetivo do futebol?", opcoes:["Tomar cartões","Fazer gols","Segurar a bola","Correr"], correta:1 },
+
+{ pergunta:"Qual cor normalmente identifica o goleiro?", opcoes:["Mesma cor do time","Uniforme diferente","Sem camisa","Roupa preta"], correta:1 },
+
+{ pergunta:"O futebol é disputado entre quantos times?", opcoes:["1","2","3","4"], correta:1 },
+
+{ pergunta:"O início da partida acontece no:", opcoes:["Escanteio","Centro do campo","Área","Lateral"], correta:1 },
+
+{ pergunta:"Quem marca as regras durante o jogo?", opcoes:["Técnico","Capitão","Árbitro","Torcida"], correta:2 },
+
+{ pergunta:"Quando a bola entra totalmente no gol:", opcoes:["Lateral","Escanteio","Gol","Falta"], correta:2 },
+
+{ pergunta:"Qual item o árbitro usa para parar o jogo?", opcoes:["Bandeira","Cartão","Apito","Relógio"], correta:2 },
+
+{ pergunta:"O futebol é considerado o esporte mais:", opcoes:["Difícil","Violento","Popular","Novo"], correta:2 },
+
+{ pergunta:"Qual jogador geralmente usa luvas?", opcoes:["Atacante","Meia","Goleiro","Zagueiro"], correta:2 },
+
+{ pergunta:"O intervalo oficial dura aproximadamente:", opcoes:["5 min","10 min","15 min","20 min"], correta:2 },
+
+{ pergunta:"Qual destas ações é permitida no futebol?", opcoes:["Segurar com a mão","Empurrar","Cabecear","Agarrar"], correta:2 },
+
+{ pergunta:"A rede fica localizada:", opcoes:["No meio campo","No gol","Na lateral","Na arquibancada"], correta:1 },
+
+{ pergunta:"O futebol profissional normalmente é jogado em:", opcoes:["Areia","Quadra","Campo gramado","Piscina"], correta:2 },
+
+{ pergunta:"Qual destes NÃO é um jogador de linha?", opcoes:["Atacante","Meia","Goleiro","Zagueiro"], correta:2 },
+
+{ pergunta:"Qual objeto é usado para marcar o tempo da partida?", opcoes:["Bandeira","Apito","Cronômetro","Rede"], correta:2 },
+
+{ pergunta:"Antes do jogo começar, os capitães normalmente fazem:", opcoes:["Pênalti","Cara ou coroa","Escanteio","Substituição"], correta:1 }
 
 ];
 
