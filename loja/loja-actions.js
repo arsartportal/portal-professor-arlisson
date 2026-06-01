@@ -106,7 +106,7 @@ if (spGlobal){
   spGlobal.innerText =
     total.toLocaleString("pt-BR");
 }
-    const meta = d.meta || 25000;
+    const meta = d.meta || 100000;
 
     const porcentagem =
       Math.min((total / meta) * 100, 100);

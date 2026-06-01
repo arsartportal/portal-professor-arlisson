@@ -3079,14 +3079,14 @@ body{
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 10k de 25k = 40% */
+/* 10k de 100k = 10% */
 .marco-1{
-  left: 40%;
+  left: 10%;
 }
 
-/* 15k de 25k = 60% */
+/* 15k de 100k = 15% */
 .marco-2{
-  left: 60%;
+  left: 15%;
 }
 
 /* =====================================================

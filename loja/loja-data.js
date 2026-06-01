@@ -11,6 +11,7 @@
     { id: "xp50", nome: "⚡ +50 XP", preco: 2, xp: 50, raridade: "raro", ordem: 2, descricao: "Bônus médio de experiência." },
     { id: "xp100", nome: "⚡ +100 XP", preco: 3, xp: 100, raridade: "epico", ordem: 3, descricao: "Grande avanço científico." },
     { id: "xp1000", nome: "⚡ +1000 XP", preco: 25, xp: 1000, raridade: "lendario", ordem: 4, descricao: "Salto massivo de experiência." },
+    { id: "xp10000", nome: "⚡ +10000 XP", preco: 200, xp: 10000, raridade: "lendario", ordem: 5, descricao: "Salto colossal de experiência." },
 
 
     // ======================================================
