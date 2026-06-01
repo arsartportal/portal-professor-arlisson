@@ -633,3 +633,102 @@ canvas{
   }
 
 }
+
+/* =========================
+   SELECT DAS SELEÇÕES
+========================= */
+
+#selecao {
+
+  width: 100%;
+  padding: 14px 16px;
+
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+
+  background: rgba(20,20,30,0.95);
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  outline: none;
+
+  backdrop-filter: blur(10px);
+
+  transition: 0.25s;
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.25);
+
+}
+
+/* Hover */
+
+#selecao:hover {
+
+  border-color: #00c3ff;
+
+  box-shadow:
+    0 0 12px rgba(0,195,255,0.4);
+
+}
+
+/* Focus */
+
+#selecao:focus {
+
+  border-color: #00e0ff;
+
+  box-shadow:
+    0 0 18px rgba(0,224,255,0.45);
+
+}
+
+/* Grupos */
+
+#selecao optgroup {
+
+  background: #101827;
+  color: #00d9ff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+}
+
+/* Opções */
+
+#selecao option {
+
+  background: #111827;
+  color: white;
+
+  padding: 10px;
+
+  font-weight: 500;
+
+}
+
+/* Opção selecionada */
+
+#selecao option:checked {
+
+  background: #00bfff;
+  color: black;
+
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  #selecao {
+
+    font-size: 15px;
+    padding: 12px;
+
+  }
+
+}

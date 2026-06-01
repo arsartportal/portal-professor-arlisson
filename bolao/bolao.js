@@ -22,7 +22,8 @@ import {
   onSnapshot,
   where,
   getDoc,
-  serverTimestamp
+  serverTimestamp,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
@@ -223,6 +224,24 @@ await addDoc(collection(db, "apostasCopa"), {
         totalApostas: increment(1)
       }
     );
+
+    // ================= HISTÓRICO =================
+
+// 🔥 pega valor REAL atualizado
+const premioSnap = await getDoc(
+  doc(db, "bolaoCopa", "principal")
+);
+
+const premioAtualizado =
+  premioSnap.data()?.premioTotal || 0;
+
+await addDoc(
+  collection(db, "historicoBolao"),
+  {
+    valor: premioAtualizado,
+    data: serverTimestamp()
+  }
+);
 
     /* ================= SUCESSO ================= */
 
@@ -712,32 +731,13 @@ ranking[a.alunoUid].total +=
   );
 
   // PRÊMIO
-  onSnapshot(
+onSnapshot(
   doc(db, "bolaoCopa", "principal"),
+
   (snap) => {
 
     cachePremio =
       snap.data()?.premioTotal || 0;
-
-    // 🔥 histórico do prêmio
-    historicoPremio.push({
-
-      valor: cachePremio,
-
-      hora: new Date()
-        .toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit"
-        })
-
-    });
-
-    // evita crescimento infinito
-    if(historicoPremio.length > 15){
-
-      historicoPremio.shift();
-
-    }
 
     // 💰 prêmio total
     document.getElementById("premioTotal")
@@ -756,6 +756,50 @@ ranking[a.alunoUid].total +=
     atualizarSimulacao();
 
   }
+);
+
+
+
+// ======================================
+// 📈 HISTÓRICO REAL
+// ======================================
+
+onSnapshot(
+
+  query(
+    collection(db, "historicoBolao"),
+    orderBy("data")
+  ),
+
+  (snap) => {
+
+    historicoPremio = [];
+
+    snap.forEach(docSnap => {
+
+      const h = docSnap.data();
+
+      historicoPremio.push({
+
+        valor: h.valor || 0,
+
+        hora:
+          h.data?.toDate()
+          ?.toLocaleTimeString("pt-BR", {
+
+            hour: "2-digit",
+            minute: "2-digit"
+
+          }) || "--:--"
+
+      });
+
+    });
+
+    renderGraficoLinha();
+
+  }
+
 );
 
 }
