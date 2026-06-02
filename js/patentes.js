@@ -169,3 +169,24 @@ function esconderOverlay(el) {
 }
 
 window.mostrarAnimacaoMudancaPatente = mostrarAnimacaoMudancaPatente;
+
+/* =========================================================
+   GATILHO MANUAL DE PATENTE
+========================================================= */
+
+window.dispararOverlayPatente =
+function(nivelAntigo, nivelNovo) {
+
+  nivelAntigo =
+    Number(nivelAntigo) || 0;
+
+  nivelNovo =
+    Number(nivelNovo) || 0;
+
+  if (nivelNovo <= nivelAntigo) return;
+
+  mostrarAnimacaoMudancaPatente(
+    nivelAntigo,
+    nivelNovo
+  );
+};

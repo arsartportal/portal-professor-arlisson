@@ -85,6 +85,7 @@ carregarEstoque("ingresso-1");
 carregarEstoque("ingresso-3");
 carregarEstoque("ingresso-7");
 carregarEstoque("ingresso-15");
+carregarEstoque("xp1000000");
 
     // ==================================================
     // 🎨 RENDER INICIAL

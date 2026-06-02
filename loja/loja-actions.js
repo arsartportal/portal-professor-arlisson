@@ -17,6 +17,9 @@
   } from "./loja-ui.js";
 
   import { obterPatentePorNivel } from "../js/patentes.js";
+  import {
+  adicionarXPManualProfessor
+} from "../js/xp.js";
 
 
   // ======================================================
@@ -232,7 +235,7 @@ if (spGlobal){
       el.innerHTML = "";
 
       const medalhas = ["🥇", "🥈", "🥉"];
-      const bonus = [1000, 500, 300];
+      
 
       snap.docs.forEach((docSnap, i) => {
 
@@ -246,11 +249,7 @@ if (spGlobal){
               <span class="pos">${pos}</span>
               <span class="nome">${d.nome}</span>
 
-              ${
-                i < 3
-                  ? `<span class="xp">+${bonus[i]} XP</span>`
-                  : ""
-              }
+              
             </div>
 
             <div class="right">
@@ -621,9 +620,17 @@ if (item.id === "roleta-cientifica") {
     // ==================================================
     // ⚡ XP
     // ==================================================
-    if (item.xp) {
-      return `Resgatou +${item.xp} XP`;
-    }
+    if (item.id === "xp1000000") {
+  return "💎 Ascendeu ao nível DIVINO (+1.000.000 XP)";
+}
+
+if (item.id === "xp100000") {
+  return "⚡ Resgatou +100.000 XP";
+}
+
+if (item.xp) {
+  return `Resgatou +${item.xp} XP`;
+}
 
     // ==================================================
     // 🎟️ FICHAS
@@ -649,11 +656,18 @@ if (item.tipo === "prova") {
     }
 
     // ==================================================
-    // 🔁 REVANCHE
-    // ==================================================
-    if (item.tipo === "prova-extra") {
-      return `Resgatou uma revanche acadêmica`;
-    }
+// ✨ BENEFÍCIOS ACADÊMICOS
+// ==================================================
+
+if (item.subtipo === "prova-extra") {
+
+  return "✨ Resgatou Reescrita do Destino";
+}
+
+if (item.subtipo === "streak") {
+
+  return "🔥 Restaurou sua sequência diária";
+}
 
     // ==================================================
     // 🧰 FERRAMENTA
@@ -742,21 +756,51 @@ if (item.tipo === "prova") {
 
       // 📝 HISTÓRICO
       
-      // ==================================================
-      // ⚡ XP
-      // ==================================================
-      if (item.xp) {
+// ==================================================
+// ⚡ XP
+// ==================================================
+if (item.xp) {
 
-        await updateDoc(userRef, {
-          sciencePoints: spDepois,
-          xp: increment(item.xp)
-        });
+  const nivelAntigo =
+    d.nivel || 0;
 
-        await atualizarSPGlobal(item.preco);
-        await atualizarRankingUsuario(item.preco);
+  // 💰 desconta SP
+  await updateDoc(userRef, {
+    sciencePoints: spDepois
+  });
 
-        modalXP(item.xp);
-      }
+  // 🧠 usa o sistema OFICIAL
+  const resultado =
+    await adicionarXPManualProfessor(
+      auth.currentUser.uid,
+      item.xp
+    );
+
+  // 🌍 estatísticas globais
+await atualizarSPGlobal(item.preco);
+await atualizarRankingUsuario(item.preco);
+
+// 🎬 modal XP
+modalXP(
+
+  item.xp,
+
+  () => {
+
+    // 🎉 overlay patente
+    if (
+      resultado?.subiuNivel &&
+      window.dispararOverlayPatente
+    ) {
+
+      window.dispararOverlayPatente(
+        nivelAntigo,
+        resultado.nivel
+      );
+    }
+  }
+);
+}
 
       // ==================================================
       // 🎟️ FICHAS
@@ -828,24 +872,68 @@ if (item.tipo === "prova") {
         });
       }
 
-      // ==================================================
-      // 🔁 REVANCHE
-      // ==================================================
-      else if (item.tipo === "prova-extra") {
+// ==================================================
+// ✨ REESCRITA DO DESTINO
+// ==================================================
+else if (item.subtipo === "prova-extra") {
 
-        await updateDoc(userRef, {
-          sciencePoints: spDepois,
-          provaExtraDisponivel: increment(1)
-        });
+  await updateDoc(userRef, {
+    sciencePoints: spDepois,
+    provaExtraDisponivel: increment(1)
+  });
 
-          await atualizarSPGlobal(item.preco);
-          await atualizarRankingUsuario(item.preco);
+  await atualizarSPGlobal(item.preco);
+  await atualizarRankingUsuario(item.preco);
 
-        modalLendario({
-          titulo: "🔁 Revanche Acadêmica",
-          descricao: "Você pode refazer uma prova!"
-        });
-      }
+  modalLendario({
+
+    titulo: "✨ Reescrita do Destino",
+
+    descricao:
+      "Você recebeu uma nova tentativa!"
+  });
+}
+
+// ==================================================
+// 🔥 CHAMA DA PERSISTÊNCIA
+// ==================================================
+else if (item.subtipo === "streak") {
+
+  const maior =
+    d.maiorStreak || 0;
+
+  if (maior <= 0) {
+
+    modalRecompensa({
+      titulo: "🔥 Sem sequência salva",
+
+      descricao:
+        "Você ainda não possui um streak para restaurar.",
+
+      raridade: "comum"
+    });
+
+    return;
+  }
+
+  await updateDoc(userRef, {
+
+    sciencePoints: spDepois,
+
+    streakAtual: maior
+  });
+
+  await atualizarSPGlobal(item.preco);
+  await atualizarRankingUsuario(item.preco);
+
+  modalLendario({
+
+    titulo: "🔥 Chama da Persistência",
+
+    descricao:
+      `Seu streak foi restaurado para ${maior} dias!`
+  });
+}
 
       // ==================================================
       // 🧰 FERRAMENTA

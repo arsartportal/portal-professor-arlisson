@@ -3701,4 +3701,580 @@ body{
   }
 }
 
+/* ======================================================
+💎 ITEM DIVINO — 1 MILHÃO XP
+====================================================== */
+
+.card.item-divino {
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.12), transparent 60%),
+    linear-gradient(135deg,
+      #12001f 0%,
+      #240046 25%,
+      #3c096c 50%,
+      #5a189a 75%,
+      #7b2cbf 100%
+    );
+
+  border: 2px solid rgba(255,255,255,.18);
+
+  box-shadow:
+    0 0 20px rgba(123,44,191,.45),
+    0 0 40px rgba(90,24,154,.35),
+    0 0 80px rgba(157,78,221,.25);
+
+  animation:
+    brilhoDivino 4s linear infinite,
+    floatDivino 3s ease-in-out infinite;
+
+  transform-style: preserve-3d;
+  backdrop-filter: blur(10px);
+}
+
+/* ======================================================
+✨ AURA
+====================================================== */
+
+.card.item-divino::before {
+
+  content: "";
+
+  position: absolute;
+  inset: -2px;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.15) 20%,
+      transparent 40%,
+      rgba(255,255,255,.08) 60%,
+      transparent 100%
+    );
+
+  animation: auraDivina 6s linear infinite;
+
+  pointer-events: none;
+}
+
+/* ======================================================
+🌌 PARTÍCULAS
+====================================================== */
+
+.card.item-divino::after {
+
+  content: "✦ ✦ ✦";
+
+  position: absolute;
+
+  top: 10px;
+  right: 14px;
+
+  font-size: 12px;
+  letter-spacing: 8px;
+
+  color: rgba(255,255,255,.8);
+
+  animation: estrelasDivinas 2s ease-in-out infinite;
+}
+
+/* ======================================================
+🏷️ LABEL
+====================================================== */
+
+.card.item-divino .raridade-label {
+
+  background: linear-gradient(
+    90deg,
+    #ffd166,
+    #fff3b0,
+    #ffd166
+  );
+
+  color: #2b0040;
+
+  font-weight: 900;
+  letter-spacing: 2px;
+
+  box-shadow:
+    0 0 10px rgba(255,209,102,.7),
+    0 0 20px rgba(255,209,102,.4);
+}
+
+/* ======================================================
+💎 TÍTULO
+====================================================== */
+
+.card.item-divino .titulo-card {
+
+  font-size: 1.15rem;
+  font-weight: 900;
+
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,.7),
+    0 0 25px rgba(200,160,255,.6);
+}
+
+/* ======================================================
+🔥 PREÇO
+====================================================== */
+
+.card.item-divino .preco {
+
+  font-size: 1.2rem;
+  font-weight: 900;
+
+  color: #ffe066;
+
+  text-shadow:
+    0 0 10px rgba(255,224,102,.6);
+}
+
+/* ======================================================
+🎟️ ESTOQUE
+====================================================== */
+
+.card.item-divino .estoque-baixo {
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+
+  padding: 6px 12px;
+
+  margin-top: 10px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.10);
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  color: #fff;
+
+  font-size: .82rem;
+  font-weight: 800;
+
+  backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 0 10px rgba(255,255,255,.08);
+
+  animation: pulseEstoque 1.5s infinite;
+}
+
+/* ======================================================
+🚀 BOTÃO
+====================================================== */
+
+.card.item-divino button {
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff006e,
+      #8338ec,
+      #3a86ff
+    );
+
+  border: none;
+
+  color: white;
+
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  box-shadow:
+    0 0 15px rgba(131,56,236,.5);
+
+  transition: .25s;
+}
+
+.card.item-divino button:hover {
+
+  transform: scale(1.04);
+
+  box-shadow:
+    0 0 25px rgba(131,56,236,.8),
+    0 0 40px rgba(58,134,255,.5);
+}
+
+/* ======================================================
+✨ ANIMAÇÕES
+====================================================== */
+
+@keyframes brilhoDivino {
+
+  0% {
+    box-shadow:
+      0 0 20px rgba(123,44,191,.45),
+      0 0 40px rgba(90,24,154,.35);
+  }
+
+  50% {
+    box-shadow:
+      0 0 35px rgba(157,78,221,.7),
+      0 0 70px rgba(90,24,154,.5);
+  }
+
+  100% {
+    box-shadow:
+      0 0 20px rgba(123,44,191,.45),
+      0 0 40px rgba(90,24,154,.35);
+  }
+}
+
+@keyframes auraDivina {
+
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes estrelasDivinas {
+
+  0%, 100% {
+    opacity: .4;
+    transform: translateY(0px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes floatDivino {
+
+  0%, 100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pulseEstoque {
+
+  0%, 100% {
+    opacity: .8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ======================================================
+🔑 CHAVEIRO 3D — NÉBULA ARCANA
+====================================================== */
+
+.card.item-premio-fisico {
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.14),
+      transparent 60%
+    ),
+
+    radial-gradient(
+      circle at bottom right,
+      rgba(255,183,77,.22),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      135deg,
+      #14001f 0%,
+      #240046 18%,
+      #3c096c 38%,
+      #6d28d9 62%,
+      #ff9f1c 82%,
+      #ffd166 100%
+    );
+
+  border: 2px solid rgba(255,255,255,.16);
+
+  box-shadow:
+    0 0 25px rgba(168,85,247,.45),
+    0 0 60px rgba(255,159,28,.28),
+    0 0 100px rgba(255,209,102,.18);
+
+  animation:
+    brilhoPremio 4s linear infinite,
+    floatPremio 3s ease-in-out infinite;
+
+  transform-style: preserve-3d;
+
+  backdrop-filter: blur(12px);
+}
+
+/* ======================================================
+✨ AURA ENERGÉTICA
+====================================================== */
+
+.card.item-premio-fisico::before {
+
+  content: "";
+
+  position: absolute;
+  inset: -8%;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.18) 18%,
+      transparent 38%,
+      rgba(255,209,102,.12) 58%,
+      transparent 100%
+    );
+
+  animation:
+    auraPremio 5s linear infinite;
+
+  pointer-events: none;
+}
+
+/* ======================================================
+🌌 PARTÍCULAS
+====================================================== */
+
+.card.item-premio-fisico::after {
+
+  content: "✦ ✦ ✦";
+
+  position: absolute;
+
+  top: 10px;
+  right: 14px;
+
+  font-size: 12px;
+  letter-spacing: 8px;
+
+  color: rgba(255,255,255,.85);
+
+  animation:
+    estrelasPremio 2s ease-in-out infinite;
+}
+
+/* ======================================================
+🏷️ LABEL
+====================================================== */
+
+.card.item-premio-fisico .raridade-label {
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffd166,
+      #ff9f1c,
+      #c77dff
+    );
+
+  color: #2b0040;
+
+  font-weight: 900;
+  letter-spacing: 2px;
+
+  box-shadow:
+    0 0 12px rgba(255,209,102,.65),
+    0 0 24px rgba(199,125,255,.35);
+}
+
+/* ======================================================
+🔑 TÍTULO
+====================================================== */
+
+.card.item-premio-fisico .titulo-card {
+
+  font-size: 1.15rem;
+  font-weight: 900;
+
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,.7),
+    0 0 30px rgba(255,159,28,.45);
+}
+
+/* ======================================================
+🔥 PREÇO
+====================================================== */
+
+.card.item-premio-fisico .preco {
+
+  font-size: 1.2rem;
+  font-weight: 900;
+
+  color: #fff0b3;
+
+  text-shadow:
+    0 0 12px rgba(255,209,102,.7);
+}
+
+/* ======================================================
+🎟️ ESTOQUE
+====================================================== */
+
+.card.item-premio-fisico .estoque-baixo {
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 12px;
+
+  margin-top: 10px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.10);
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  color: #fff;
+
+  font-size: .82rem;
+  font-weight: 800;
+
+  backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,.08);
+
+  animation:
+    pulseEstoque 1.5s infinite;
+}
+
+/* ======================================================
+🚀 BOTÃO
+====================================================== */
+
+.card.item-premio-fisico button {
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff9f1c,
+      #ff4d6d,
+      #7b2cbf
+    );
+
+  border: none;
+
+  color: white;
+
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  box-shadow:
+    0 0 18px rgba(255,77,109,.45);
+
+  transition: .25s;
+}
+
+.card.item-premio-fisico button:hover {
+
+  transform: scale(1.04);
+
+  box-shadow:
+    0 0 28px rgba(255,159,28,.65),
+    0 0 50px rgba(123,44,191,.45);
+}
+
+/* ======================================================
+✨ ANIMAÇÕES
+====================================================== */
+
+@keyframes brilhoPremio {
+
+  0% {
+
+    box-shadow:
+      0 0 25px rgba(168,85,247,.35),
+      0 0 60px rgba(255,159,28,.20);
+
+  }
+
+  50% {
+
+    box-shadow:
+      0 0 40px rgba(255,209,102,.45),
+      0 0 85px rgba(123,44,191,.35);
+
+  }
+
+  100% {
+
+    box-shadow:
+      0 0 25px rgba(168,85,247,.35),
+      0 0 60px rgba(255,159,28,.20);
+
+  }
+}
+
+@keyframes auraPremio {
+
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes estrelasPremio {
+
+  0%, 100% {
+    opacity: .4;
+    transform: translateY(0px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes floatPremio {
+
+  0%, 100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pulseEstoque {
+
+  0%, 100% {
+    opacity: .8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
 

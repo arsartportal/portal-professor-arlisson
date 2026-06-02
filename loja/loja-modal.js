@@ -178,19 +178,45 @@ export function modalRecompensa({ titulo, descricao, raridade = "comum" }) {
 // ⚡ XP
 // ======================================================
 
-export function modalXP(valor) {
+export function modalXP(
+  valor,
+  aoFechar = null
+) {
 
   let raridade = "comum";
-  if (valor >= 1000) raridade = "lendario";
-  else if (valor >= 100) raridade = "epico";
+
+  if (valor >= 1000)
+    raridade = "lendario";
+
+  else if (valor >= 100)
+    raridade = "epico";
 
   abrirModal({
     icon: "⚡",
+
     titulo: `+${valor} XP`,
-    descricao: "Seu conhecimento evoluiu!",
+
+    descricao:
+      "Seu conhecimento evoluiu!",
+
     raridade,
-    htmlExtra: `<div class="xp-destaque">+${valor}</div>`,
-    acoes: [{ texto: "Continuar" }],
+
+    htmlExtra: `
+      <div class="xp-destaque">
+        +${valor}
+      </div>
+    `,
+
+    acoes: [
+      {
+        texto: "Continuar",
+
+        onClick: () => {
+          aoFechar?.();
+        }
+      }
+    ],
+
     replace: true
   });
 }

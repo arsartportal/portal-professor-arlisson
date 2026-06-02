@@ -5,13 +5,31 @@
   export const recompensas = [
 
     // ======================================================
-    // ⚡ XP
-    // ======================================================
-    { id: "xp20", nome: "⚡ +20 XP", preco: 1, xp: 20, raridade: "comum", ordem: 1, descricao: "Pequeno ganho de experiência." },
-    { id: "xp50", nome: "⚡ +50 XP", preco: 2, xp: 50, raridade: "raro", ordem: 2, descricao: "Bônus médio de experiência." },
-    { id: "xp100", nome: "⚡ +100 XP", preco: 3, xp: 100, raridade: "epico", ordem: 3, descricao: "Grande avanço científico." },
-    { id: "xp1000", nome: "⚡ +1000 XP", preco: 25, xp: 1000, raridade: "lendario", ordem: 4, descricao: "Salto massivo de experiência." },
-    { id: "xp10000", nome: "⚡ +10000 XP", preco: 200, xp: 10000, raridade: "lendario", ordem: 5, descricao: "Salto colossal de experiência." },
+// ⚡ XP
+// ======================================================
+
+{ id: "xp20", nome: "⚡ +20 XP", preco: 1, xp: 20, raridade: "comum", ordem: 1, descricao: "Pequeno ganho de experiência." },
+
+{ id: "xp50", nome: "⚡ +50 XP", preco: 2, xp: 50, raridade: "comum", ordem: 2, descricao: "Bônus médio de experiência." },
+
+{ id: "xp100", nome: "⚡ +100 XP", preco: 3, xp: 100, raridade: "raro", ordem: 3, descricao: "Grande avanço científico." },
+
+{ id: "xp1000", nome: "⚡ +1.000 XP", preco: 25, xp: 1000, raridade: "raro", ordem: 4, descricao: "Salto massivo de experiência." },
+
+{ id: "xp10000", nome: "⚡ +10.000 XP", preco: 200, xp: 10000, raridade: "epico", ordem: 5, descricao: "Salto colossal de experiência." },
+
+{ id: "xp100000", nome: "⚡ +100.000 XP", preco: 1900, xp: 100000, raridade: "lendario", ordem: 6, descricao: "Explosão extrema de experiência científica." },
+
+{
+  id: "xp1000000",
+  nome: "⚡ +1.000.000 XP",
+  preco: 15000,
+  xp: 1000000,
+  usaEstoque: true,
+  raridade: "divino",
+  ordem: 7,
+  descricao: "Ascensão absoluta no ranking científico."
+},
 
 
     // ======================================================
@@ -154,20 +172,47 @@
       `
     },
 
+// ======================================================
+// 🔁 BENEFÍCIOS ACADÊMICOS
+// ======================================================
 
-    // ======================================================
-    // 🔁 PROVA EXTRA
-    // ======================================================
-    {
-      id: "revanche-academica",
-      nome: "Revanche Acadêmica",
-      preco: 120,
-      tipo: "prova-extra",
-      subtipo: "oportunidade",
-      raridade: "lendario",
-      ordem: 15,
-      descricao: "Permite refazer uma prova para melhorar sua nota."
-    },
+{
+  id: "reescrita-destino",
+
+  nome: " Reescrita do Destino",
+
+  preco: 120,
+
+  tipo: "beneficio",
+
+  subtipo: "prova-extra",
+
+  raridade: "lendario",
+
+  ordem: 15,
+
+  descricao:
+    "Permite realizar uma nova tentativa para melhorar sua nota."
+},
+
+{
+  id: "chama-persistencia",
+
+  nome: " Chama da Persistência",
+
+  preco: 200,
+
+  tipo: "beneficio",
+
+  subtipo: "streak",
+
+  raridade: "lendario",
+
+  ordem: 16,
+
+  descricao:
+    "Restaura sua maior sequência perdida no desafio diário."
+},
 
 
     // ======================================================
@@ -201,18 +246,20 @@
     { id: "tool-estatistica", nome: "Estatística", preco: 160, tipo: "ferramenta", tool: "estatistica", raridade: "lendario", ordem: 93, descricao: "Gráficos e análises estatísticas." },
 
 
-    // ======================================================
-    // 🔑 PRÊMIO
-    // ======================================================
-    {
-      id: "chaveiro-univers3d",
-      nome: "🔑 Chaveiro Univers3D",
-      preco: 1500,
-      lendario: true,
-      raridade: "lendario",
-      ordem: 50,
-      descricao: "Prêmio físico exclusivo da plataforma."
-    }
+// ======================================================
+// 🔑 PRÊMIO
+// ======================================================
+
+{
+  id: "chaveiro-univers3d",
+  nome: "🔑 Chaveiro Univers3D",
+  preco: 1500,
+  usaEstoque: false, // 🔥 SEM ESTOQUE
+  lendario: true,
+  raridade: "divino",
+  ordem: 50,
+  descricao: "Prêmio físico exclusivo da plataforma."
+}
 
   ];
 
@@ -249,11 +296,11 @@
     return "chaveiro";
 
   if (
-    item.tipo === "prova" ||
-    item.tipo === "prova-extra"
-  ){
-    return "beneficios";
-  }
+  item.tipo === "prova" ||
+  item.tipo === "beneficio"
+){
+  return "beneficios";
+}
 
   if (item.tipo === "ferramenta")
     return "ferramenta";

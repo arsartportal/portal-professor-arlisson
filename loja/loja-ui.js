@@ -43,12 +43,29 @@ export function setServerTimeOffset(offset) {
 // ======================================================
 
 function badge(item) {
-  if (item.id.includes("caixa")) return "🎁";
-  if (item.id === "roleta-cientifica") return "🎡";
-  if (item.tipo === "ranking-fichas") return "🏆";
-  if (item.tipo === "prova") return "🎯";
-  if (item.tipo === "prova-extra") return "🔁";
-  if (item.tipo === "ferramenta") return "🧰";
+
+  if (item.id.includes("caixa"))
+    return "🎁";
+
+  if (item.id === "roleta-cientifica")
+    return "🎡";
+
+  if (item.tipo === "ranking-fichas")
+    return "🏆";
+
+  if (item.tipo === "prova")
+    return "🎯";
+
+  // ✨ benefícios acadêmicos
+  if (item.subtipo === "prova-extra")
+    return "✨";
+
+  if (item.subtipo === "streak")
+    return "🔥";
+
+  if (item.tipo === "ferramenta")
+    return "🧰";
+
   return "";
 }
 
@@ -86,7 +103,13 @@ function criarCard(item, raridade, bloqueado, podeComprar, recomendado = false){
   const estoque = getEstoque(item.id);
 
   return `
-    <div class="card raridade-${raridade} tipo-${tipo} ${recomendado ? "recomendado" : ""}">
+    <div class="card
+  raridade-${raridade}
+  tipo-${tipo}
+  ${recomendado ? "recomendado" : ""}
+  ${item.id === "xp1000000" ? "item-divino" : ""}
+${item.id === "chaveiro-univers3d" ? "item-premio-fisico" : ""}
+">
 
       <div class="card-header">
         <h3 class="titulo-card">
@@ -173,10 +196,10 @@ const agora = getAgora();
     
     if (item.id === "chaveiro-univers3d") { tipo = "padrao"; }
 
-    // 🔥 Unifica prova + revanche
-    if (
+    // 🔥 Unifica benefícios acadêmicos
+if (
   tipo === "prova" ||
-  tipo === "prova-extra"
+  tipo === "beneficio"
 ) {
   tipo = "beneficios";
 }
@@ -203,14 +226,30 @@ const ordemTipos = [
 
 
 const nomesTipos = {
-  caixas: "📦 Caixas",
-  xp: "⚡ Experiência",
-  fichas: "🎟️ Ingressos",
-  beneficios: "🎯 Benefícios",
-  ranking: "🏆 Ranking",
-  roleta: "🎡 Roleta",
-  ferramenta: "🧰 Ferramentas",
-  padrao: "📦 Outros"
+
+  caixas:
+    "📦 Caixas",
+
+  xp:
+    "⚡ Experiência",
+
+  fichas:
+    "🎟️ Ingressos",
+
+  beneficios:
+    "🎓 Benefícios Acadêmicos",
+
+  ranking:
+    "🏆 Ranking",
+
+  roleta:
+    "🎡 Roleta",
+
+  ferramenta:
+    "🧰 Ferramentas",
+
+  padrao:
+    "📦 Outros"
 };
 
 
@@ -241,19 +280,35 @@ const nomesTipos = {
     if (tipo === "beneficios") {
 
       const subgrupos = {
-        bonus: [],
-        oportunidade: []
-      };
 
-      itensDoTipo.forEach(item => {
-        if (item.subtipo === "bonus") subgrupos.bonus.push(item);
-        else subgrupos.oportunidade.push(item);
-      });
+  bonus: [],
 
-      const nomesSub = {
-        bonus: "🎯 Bonificação na Prova",
-        oportunidade: "🔁 Oportunidades Acadêmicas"
-      };
+  oportunidades: []
+};
+
+itensDoTipo.forEach(item => {
+
+  // 🎯 bônus na prova
+  if (item.tipo === "prova") {
+
+    subgrupos.bonus.push(item);
+  }
+
+  // ✨ oportunidades acadêmicas
+  else if (item.tipo === "beneficio") {
+
+    subgrupos.oportunidades.push(item);
+  }
+});
+
+const nomesSub = {
+
+  bonus:
+    "🎯 Bonificação na Prova",
+
+  oportunidades:
+    "✨ Oportunidades Acadêmicas"
+};
 
       Object.keys(subgrupos).forEach(sub => {
 
@@ -368,7 +423,7 @@ else {
       data && agora < data && !item.id.startsWith("xp");
 
     const semEstoque =
-      item.id === "chaveiro-univers3d" && estoque <= 0;
+  item.usaEstoque && estoque <= 0;
 
     const podeComprar =
       !bloqueado && !semEstoque && spAtual >= item.preco;
@@ -429,20 +484,32 @@ export function iniciarMenuAtivo() {
   detectar();
 }
 
-// ======================================================
-// 🧠 SCORE INTELIGENTE (CUSTO-BENEFÍCIO REAL)
+/// ======================================================
+// 🧠 SCORE INTELIGENTE
 // ======================================================
 
 function calcularScore(item) {
 
   let valor = 0;
 
-  if (item.xp) valor += item.xp;
-  if (item.fichas) valor += item.fichas * 50;
+  if (item.xp)
+    valor += item.xp;
 
-  if (item.tipo === "prova") valor += item.valor * 200;
-  if (item.tipo === "prova-extra") valor += 500;
-  if (item.tipo === "ferramenta") valor += 300;
+  if (item.fichas)
+    valor += item.fichas * 50;
+
+  if (item.tipo === "prova")
+    valor += item.valor * 200;
+
+  // ✨ benefícios acadêmicos
+  if (item.subtipo === "prova-extra")
+    valor += 500;
+
+  if (item.subtipo === "streak")
+    valor += 700;
+
+  if (item.tipo === "ferramenta")
+    valor += 300;
 
   return valor / item.preco;
 }
