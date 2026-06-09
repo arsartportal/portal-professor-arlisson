@@ -1,0 +1,389 @@
+/* ==========================================================
+   ÁLBUM NOBEL DA FÍSICA
+   LAYOUT RESPONSIVO POR PORCENTAGEM
+========================================================== */
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ==========================================================
+   BODY
+========================================================== */
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:#07111f;
+
+    overflow:auto;
+}
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+========================================================== */
+
+.album-container{
+
+    position:relative;
+
+    width:min(1600px, 100%);
+
+    margin:auto;
+}
+
+/* ==========================================================
+   IMAGEM BASE
+========================================================== */
+
+.album-base{
+
+    width:100%;
+
+    display:block;
+
+    user-select:none;
+    pointer-events:none;
+}
+
+/* ==========================================================
+   PROGRESSO
+========================================================== */
+
+.progresso{
+
+    position:absolute;
+
+    top:11.5%;
+    right:6.8%;
+
+    width:16%;
+
+    height:10%;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    z-index:50;
+}
+
+.progresso-total{
+
+    font-size:clamp(
+        1rem,
+        2vw,
+        3rem
+    );
+
+    font-weight:700;
+
+    line-height:1;
+
+    color:#f5e5b3;
+
+    text-shadow:
+        0 2px 6px rgba(0,0,0,.30);
+}
+
+.progresso-percentual{
+
+    margin-top:4px;
+
+    font-size:clamp(
+        .7rem,
+        .8vw,
+        1.1rem
+    );
+
+    font-weight:600;
+
+    color:#f5e5b3;
+}
+
+/* ==========================================================
+   FIGURINHAS
+========================================================== */
+
+.slot{
+
+    position:absolute;
+
+    width:14%;
+
+    aspect-ratio:220 / 315;
+
+    cursor:pointer;
+
+    z-index:10;
+}
+
+.slot:hover{
+
+    z-index:100;
+}
+
+.figurinha{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
+
+    filter:
+        drop-shadow(
+            0 12px 18px rgba(0,0,0,.25)
+        );
+}
+
+.slot:hover .figurinha{
+
+    transform:scale(1.05);
+
+    filter:
+        drop-shadow(
+            0 16px 24px rgba(0,0,0,.35)
+        );
+}
+
+/* ==========================================================
+   TOOLTIP
+========================================================== */
+
+.tooltip{
+
+    position:absolute;
+
+    left:50%;
+    bottom:105%;
+
+    transform:
+        translateX(-50%)
+        translateY(10px);
+
+    width:260px;
+
+    max-width:320px;
+
+    padding:18px;
+
+    background:#efe4c9;
+
+    border-radius:18px;
+
+    border:
+        2px solid rgba(
+            180,
+            150,
+            90,
+            .25
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.18);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.25s ease;
+
+    z-index:200;
+}
+
+/* ==========================================================
+   TOOLTIP VISÍVEL
+========================================================== */
+
+.slot:hover .tooltip,
+.slot.ativo .tooltip{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.tooltip h3{
+
+    margin-bottom:8px;
+
+    color:#0d2344;
+
+    font-size:1.3rem;
+
+    font-weight:700;
+}
+
+/* ==========================================================
+   SUBTÍTULO
+========================================================== */
+
+.tooltip span{
+
+    display:block;
+
+    margin-bottom:12px;
+
+    color:#8a6520;
+
+    font-weight:700;
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.tooltip p{
+
+    margin-bottom:8px;
+
+    color:#3a2f20;
+
+    line-height:1.55;
+
+    font-size:.95rem;
+}
+
+/* ==========================================================
+   SLOT VAZIO
+========================================================== */
+
+.slot.vazio{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:3px dashed
+        rgba(120,120,120,.25);
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+.interrogacao{
+
+    font-size:4rem;
+
+    color:
+        rgba(0,0,0,.12);
+
+    font-weight:bold;
+
+    user-select:none;
+}
+
+/* ==========================================================
+   POSIÇÕES DAS FIGURINHAS
+========================================================== */
+
+/* ------------------------------------------
+   MARIE CURIE
+------------------------------------------ */
+
+#slot-curie{
+
+    top:40%;
+    left:7%;
+
+    transform:rotate(-4deg);
+}
+
+/* ------------------------------------------
+   MAX PLANCK
+------------------------------------------ */
+
+#slot-planck{
+
+    top:50%;
+    left:30%;
+
+    transform:rotate(3deg);
+}
+
+/* ------------------------------------------
+   ALBERT EINSTEIN
+------------------------------------------ */
+
+#slot-einstein{
+
+    top:50%;
+    left:55%;
+
+    transform:rotate(-3deg);
+}
+
+/* ------------------------------------------
+   NIELS BOHR
+------------------------------------------ */
+
+#slot-bohr{
+
+    top:40%;
+    left:78%;
+
+    transform:rotate(3deg);
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width:768px){
+
+    .tooltip{
+
+        width:220px;
+    }
+}
+
+/* ==========================================================
+   TOUCH DEVICES
+========================================================== */
+
+@media (hover:none){
+
+    .slot:hover .tooltip{
+
+        opacity:0;
+        visibility:hidden;
+    }
+
+    .slot.ativo .tooltip{
+
+        opacity:1;
+        visibility:visible;
+    }
+}
