@@ -57,8 +57,7 @@ const paginasPublicas = [
 /* troca de senha */
 
 const paginaTrocaSenha =
-  "cadastraralunos/trocar-senha.html";
-
+  "/area-professor/cadastraralunos/trocar-senha.html";
 /* dashboard principal */
 
 const paginaDashboard =
