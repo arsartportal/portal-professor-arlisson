@@ -34,29 +34,32 @@
     </p>
   </section>
 
+  <!-- ===================================================== -->
+  <!-- MÉTRICAS DINÂMICAS                                    -->
+  <!-- ===================================================== -->
   <section class="metricas">
 
-  <div class="card">
-    <h2>100+</h2>
-    <span>Atividades e Desafios</span>
-  </div>
+    <div class="card">
+      <h2 id="contador-alunos">0</h2>
+      <span>Alunos ativos</span>
+    </div>
 
-  <div class="card">
-    <h2>50+</h2>
-    <span>Horas de Conteúdo</span>
-  </div>
+    <div class="card">
+      <h2 id="contador-xp">0</h2>
+      <span>XP gerado</span>
+    </div>
 
-  <div class="card sp">
-    <h2>∞</h2>
-    <span>Possibilidades de Evolução</span>
-  </div>
+    <div class="card sp">
+  <h2 id="total-sp">0</h2>
+  <span>Science Points gerados</span>
+</div>
 
   <div class="card media">
-    <h2>EM + EJA</h2>
-    <span>Público Atendido</span>
-  </div>
+  <h2 id="total-desafios">0</h2>
+  <span>Desafios concluídos</span>
+</div>
 
-</section>
+  </section>
 
  
 <!-- ===================================================== -->
@@ -262,6 +265,12 @@
 <!-- ===================================================== -->
 <script type="module">
 
+/* =========================
+IMPORTS FIREBASE
+========================= */
+import { db } from "../js/firebase.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
 import { iniciarSuperHeader } from "../../components/superheader.js";
 
 /* =========================
@@ -272,9 +281,10 @@ async function carregarComponente(id, arquivo) {
   const html = await resp.text();
   document.getElementById(id).innerHTML = html;
 
+  // 🔥 SE FOR HEADER → INICIALIZA TUDO
   if (id === "header-container") {
     controlarHUD();
-    iniciarSuperHeader();
+    iniciarSuperHeader(); // 👈 ESSA LINHA É A CHAVE
   }
 }
 
@@ -294,15 +304,79 @@ function controlarHUD() {
 /* =========================
 INICIALIZA COMPONENTES
 ========================= */
-carregarComponente(
-  "header-container",
-  "../../components/superheader.html"
-);
+carregarComponente("header-container", "../../components/superheader.html");
+carregarComponente("footer-container", "../../components/superfooter.html");
 
-carregarComponente(
-  "footer-container",
-  "../../components/superfooter.html"
-);
+/* =========================
+ANIMAÇÃO SUAVE DE CONTADOR
+========================= */
+function animarContador(id, valorFinal) {
+  const el = document.getElementById(id);
+  const duracao = 1200;
+  const inicio = performance.now();
+
+  function frame(tempo) {
+    const progresso = Math.min((tempo - inicio) / duracao, 1);
+    const valor = Math.floor(progresso * valorFinal);
+
+    el.innerText = valor.toLocaleString("pt-BR");
+
+    if (progresso < 1) {
+      requestAnimationFrame(frame);
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+/* =========================
+🔥 BUSCAR MÉTRICAS DO FIRESTORE
+========================= */
+async function carregarMetricas() {
+  try {
+    const snapshot = await getDocs(collection(db, "usuarios"));
+
+    let totalAlunos = 0;
+    let totalXP = 0;
+    let totalDesafios = 0;
+    let totalSP = 0; // 🆕 NOVO
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      // 👥 alunos
+      totalAlunos++;
+
+      // ⚡ XP
+      const xp = Number(data.xpTotal ?? data.xp ?? 0);
+      totalXP += xp;
+
+      // 🎯 desafios
+      const desafios = Number(data.totalDesafiosConcluidos ?? 0);
+      totalDesafios += desafios;
+
+      // 🔬 SP (Science Points)
+      const sp = Number(data.totalSPGerados ?? 0);
+      totalSP += sp;
+    });
+
+    // 🔥 UI
+    animarContador("contador-alunos", totalAlunos);
+    animarContador("contador-xp", totalXP);
+    animarContador("total-desafios", totalDesafios);
+    animarContador("total-sp", totalSP); // 🆕
+
+  } catch (erro) {
+    console.error("Erro ao carregar métricas:", erro);
+
+    animarContador("contador-alunos", 0);
+    animarContador("contador-xp", 0);
+    animarContador("total-desafios", 0);
+    animarContador("total-sp", 0); // 🆕
+  }
+}
+
+carregarMetricas();
 
 </script>
 
