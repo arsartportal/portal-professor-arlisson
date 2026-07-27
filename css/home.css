@@ -2670,3 +2670,191 @@ CONTEÚDO
   max-width: 320px; /* controla largura do texto */
   margin-bottom: 20px;
 }
+
+/* =====================================================
+🎨 BANNER INFOGRÁFICOS
+===================================================== */
+
+.banner-infograficos{
+  /* mesmo tamanho da biblioteca */
+  background: linear-gradient(135deg,#4c1d95,#6d28d9,#8b5cf6);
+}
+
+/* brilho ao passar o mouse */
+.banner-infograficos:hover{
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.5),
+    0 0 35px rgba(168,85,247,.55);
+
+}
+
+/* palavras do fundo */
+.banner-infograficos .biblioteca-bg span{
+
+  color:rgba(255,255,255,.10);
+
+}
+
+/* botão */
+
+.btn-infograficos{
+
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  margin-top:18px;
+
+  padding:12px 22px;
+
+  border-radius:12px;
+
+  background:#ffffff22;
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+
+  border:1px solid rgba(255,255,255,.18);
+
+  transition:.3s;
+
+}
+
+.btn-infograficos:hover{
+
+  background:#fff;
+  color:#6d28d9;
+
+  transform:translateY(-2px);
+
+}
+
+/* ícone */
+
+.banner-infograficos .banner-icon{
+
+  font-size:4.8rem;
+
+  filter:drop-shadow(0 0 18px rgba(255,255,255,.35));
+
+}
+
+/* selo */
+
+.badge-infografico{
+
+  position:absolute;
+
+  top:18px;
+  right:18px;
+
+  padding:6px 14px;
+
+  border-radius:999px;
+
+  background:#ffffff22;
+
+  backdrop-filter:blur(10px);
+
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:1px;
+
+  z-index:5;
+
+}
+
+/* ==========================================
+   BADGE PREMIUM
+========================================== */
+
+.badge-infografico{
+
+    position:absolute;
+
+    top:18px;
+    right:18px;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f472b6,
+            #8b5cf6
+        );
+
+    color:#fff;
+
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+
+    box-shadow:
+        0 8px 18px rgba(168,85,247,.45),
+        inset 0 1px 1px rgba(255,255,255,.35);
+
+    overflow:hidden;
+
+    z-index:20;
+
+    animation:pulseBadge 2.5s infinite;
+}
+
+/* brilho passando */
+
+.badge-infografico::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:45%;
+    height:100%;
+
+    background:rgba(255,255,255,.55);
+
+    transform:skewX(-25deg);
+
+    animation:shineBadge 3.5s infinite;
+
+}
+
+
+
+@keyframes shineBadge{
+
+    0%{
+        left:-120%;
+    }
+
+    30%{
+        left:140%;
+    }
+
+    100%{
+        left:140%;
+    }
+
+}
+
+@keyframes pulseBadge{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.06);
+    }
+
+}
